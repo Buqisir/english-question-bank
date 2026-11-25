@@ -1,0 +1,292 @@
+{
+  "entryId": "w:make-ones-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make one’s way"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      {
+        "slot": "one's"
+      },
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        {
+          "slot": "one's"
+        },
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made way",
+      "tags": []
+    },
+    {
+      "form": "make way",
+      "tags": []
+    },
+    {
+      "form": "making way",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make one's way",
+  "senses": [
+    {
+      "senseId": "w:make-ones-way#s1",
+      "pos": "短语",
+      "glossZh": "朝某处前进；设法到达某处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s29"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-ones-way#e-d84d84662ed3c231",
+          "text": "The authorities closed access to the bridge and tens of thousands of people made their way back to land.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 90
+          },
+          "parts": [
+            [
+              76,
+              80
+            ],
+            [
+              87,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              80
+            ],
+            [
+              87,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ones-way#e-90f251a76b77c6dd",
+          "text": "Ella made her way to her seat, put down her backpack and looked at the empty space beside her.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              9
+            ],
+            [
+              14,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              9
+            ],
+            [
+              14,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ones-way#e-a514e9b48050e603",
+          "text": "To avoid curious eyes, I quickly made my way down the row of desks and sank into my seat.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              37
+            ],
+            [
+              41,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              37
+            ],
+            [
+              41,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:make-ones-way#s2",
+      "pos": "短语",
+      "glossZh": "逐渐进入；逐渐融入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-ones-way#e-0a1e4c3cacfe6f03",
+          "text": "Meanwhile, this heartwarming story of a unique friendship has made its way to the big screen.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 74
+          },
+          "parts": [
+            [
+              62,
+              66
+            ],
+            [
+              71,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              66
+            ],
+            [
+              71,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ones-way#e-3cc7e01587f7b13b",
+          "text": "They make their way into the traditions we pick up along the journeys of our lives.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 19
+          },
+          "parts": [
+            [
+              5,
+              9
+            ],
+            [
+              16,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              9
+            ],
+            [
+              16,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make its/their way into sth，主语可以是事物。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 268
+    "mock": 72
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 57,
-        "mock": 0
+        "mock": 190
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -155,12 +155,12 @@
       "pos": "n.",
       "glossZh": "藏书室",
       "pronunciationId": "w:library#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -183,6 +183,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

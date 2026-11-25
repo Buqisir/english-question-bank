@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 206
+    "mock": 32
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 140
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -195,12 +195,12 @@
       "pos": "n.",
       "glossZh": "脑海中的形象",
       "pronunciationId": "w:image#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 8
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -212,7 +212,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -264,6 +264,6 @@
       "reason": "衍生词或行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

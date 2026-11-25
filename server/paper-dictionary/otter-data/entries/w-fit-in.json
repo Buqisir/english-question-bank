@@ -1,0 +1,356 @@
+{
+  "entryId": "w:fit-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fit",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fit",
+        "in"
+      ],
+      [
+        "fits",
+        "in"
+      ],
+      [
+        "fitted",
+        "in"
+      ],
+      [
+        "fitting",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fitting in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fit in",
+  "senses": [
+    {
+      "senseId": "w:fit-in#s1",
+      "pos": "短语",
+      "glossZh": "融入；合群",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fit#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fit-in#e-c5d433ec22788043",
+          "text": "It also evolved as a survival trait: fitting in with a group helps people gain support and avoid danger.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-d:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 47
+          },
+          "parts": [
+            [
+              37,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-in#e-29b801491107ba11",
+          "text": "When Marie Benton first moved to London in 2008, joining a choir (合唱团) helped her fit in the new environment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 88
+          },
+          "parts": [
+            [
+              82,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-in#e-dd25fefc62155fe5",
+          "text": "Should he hide who he is to fit in, or can he find a way to live openly without fear?",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          },
+          "parts": [
+            [
+              28,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:fit-in#s2",
+      "pos": "短语",
+      "glossZh": "腾出时间或空间安排进去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fit-in#e-9323712c0e5a313c",
+          "text": "To fit in more classes.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          },
+          "parts": [
+            [
+              3,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-in#e-ddbab007a0aa806a",
+          "text": "Turnbull also sets a goal for each run by asking himself, “What am I going for?” Whether it’s seeing how fast he can get to the bottom, fitting in a certain number of turns, which jump to hit, whether to dip into a set of trees – the terrain（地形）is familiar, yet new.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 146
+          },
+          "parts": [
+            [
+              136,
+              146
+            ]
+          ],
+          "highlightRanges": [
+            [
+              136,
+              146
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fit-in#s3",
+      "pos": "短语",
+      "glossZh": "与整体相协调；相符",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fit-in#e-1cdea27565212101",
+          "text": "Important: Departure times can be flexible to fit in with your schedule and our availability.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 52
+          },
+          "parts": [
+            [
+              46,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-in#e-3815dd9542a124e2",
+          "text": "“Are there no other jobs in the company where I might fit in?” I asked.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 60
+          },
+          "parts": [
+            [
+              54,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-in#e-521701dd440e6774",
+          "text": "Which of the following examples can best fit in the second paragraph?",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-shanxi-taiyuan-2026-04-second:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          },
+          "parts": [
+            [
+              41,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "常用 fit in with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

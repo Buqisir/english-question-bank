@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 56
+    "mock": 11
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -245,12 +245,12 @@
       "pos": "n.",
       "glossZh": "遥控器",
       "pronunciationId": "w:remote#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -260,6 +260,6 @@
       "reason": "计算机术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

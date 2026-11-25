@@ -1,0 +1,169 @@
+{
+  "entryId": "w:would-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "would",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "would",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "would like",
+  "senses": [
+    {
+      "senseId": "w:would-like#s1",
+      "pos": "短语",
+      "glossZh": "想要；想做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:would#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:would-like#e-7bd71b4cd5bc9f01",
+          "text": "Think about the exercises you would like to do with your workout partner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "seven-choices-3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:would-like#e-676f6d20a759b73b",
+          "text": "Who would like to make small talk according to the speaker?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:would-like#e-9327c4fcb5dd30a8",
+          "text": "It is recently reported that the number of those sticking to a traditional diet is slowly declining and around half of Britain’s consumers would like to change or improve their cooking in some way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 149
+          },
+          "parts": [
+            [
+              139,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              139,
+              149
+            ]
+          ]
+        }
+      ],
+      "note": "礼貌表达意愿，可接名词或 to do。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:would-like#s2",
+      "pos": "短语",
+      "glossZh": "你想要……吗？你愿意……吗？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "Would you like ...? 用于礼貌地提供东西或发出邀请。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

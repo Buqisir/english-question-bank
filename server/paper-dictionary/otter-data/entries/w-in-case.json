@@ -1,0 +1,203 @@
+{
+  "entryId": "w:in-case",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "case"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "case"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in case",
+  "senses": [
+    {
+      "senseId": "w:in-case#s1",
+      "pos": "短语",
+      "glossZh": "以防；以备万一",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:case#s2",
+        "w:in#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-case#e-89c0d8d5c296a75a",
+          "text": "in case",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:52#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-case#e-657a90f2d690d789",
+          "text": "I must keep a close eye on them in case they forget their way back or get into trouble!”",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          },
+          "parts": [
+            [
+              32,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-case#e-14471e122d6bb6e2",
+          "text": "And if you can’t remember the spelling of the word “mnemonics”, use this one “Mike never eats meat or nuts in case he’s sick”!",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 114
+          },
+          "parts": [
+            [
+              107,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              114
+            ]
+          ]
+        }
+      ],
+      "note": "可接从句，也可单独使用。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:in-case#s2",
+      "pos": "短语",
+      "glossZh": "如果碰巧……；倘若……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-case#e-34dbe62a878498fe",
+          "text": "In case there is anyone unfamiliar with this game, it is played on a 3×3 grid (网格), with players taking turns to add their symbol – an X or an O – in one of the spaces.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "可引出补充说明所针对的情况。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

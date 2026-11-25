@@ -1,0 +1,125 @@
+{
+  "entryId": "w:hard-copy",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hard",
+      "copy"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hard",
+        "copy"
+      ],
+      [
+        "hard",
+        "copies"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hard copy",
+  "senses": [
+    {
+      "senseId": "w:hard-copy#s1",
+      "pos": "短语",
+      "glossZh": "纸质副本；打印件",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hard-copy#e-1b48352a4e2cc9b0",
+          "text": "PLUS hard copy of teacher’s comments on draft",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hard-copy#e-6717785298acd862",
+          "text": "to teacher (hard copy)",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

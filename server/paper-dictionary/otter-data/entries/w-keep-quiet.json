@@ -1,0 +1,153 @@
+{
+  "entryId": "w:keep-quiet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "quiet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "quiet"
+      ],
+      [
+        "keeping",
+        "quiet"
+      ],
+      [
+        "keeps",
+        "quiet"
+      ],
+      [
+        "kept",
+        "quiet"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keeping quiet",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep quiet",
+  "senses": [
+    {
+      "senseId": "w:keep-quiet#s1",
+      "pos": "短语",
+      "glossZh": "保持安静；不作声",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-quiet#e-7a924a60f1190365",
+          "text": "A late reply can feel like “They don’t like me,” and a serious face may seem like “They’re upset with me.” Because of this fear, they try to protect themselves by avoiding eye contact, keeping quiet, or pulling away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 198
+          },
+          "parts": [
+            [
+              185,
+              198
+            ]
+          ],
+          "highlightRanges": [
+            [
+              185,
+              198
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-quiet#s2",
+      "pos": "短语",
+      "glossZh": "守口如瓶；不把某事说出去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-quiet#e-4224ea86c175c6f1",
+          "text": "He promised to keep quiet, but I could tell he found it funny.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation:6",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "常接 about sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

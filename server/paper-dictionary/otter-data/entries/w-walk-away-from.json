@@ -1,0 +1,247 @@
+{
+  "entryId": "w:walk-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking away from"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "away",
+        "from"
+      ],
+      [
+        "walking",
+        "away",
+        "from"
+      ],
+      [
+        "walked",
+        "away",
+        "from"
+      ],
+      [
+        "walks",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked away from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk away from",
+  "senses": [
+    {
+      "senseId": "w:walk-away-from#s1",
+      "pos": "短语",
+      "glossZh": "走开；离开（某人、某地或现场）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-away-from#e-0dea10516628720d",
+          "text": "Have you ever walked away from a conversation with the sinking feeling that you said too much?",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 30
+          },
+          "parts": [
+            [
+              14,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-away-from#e-59c1c1fa0119d2fb",
+          "text": "Walking away from Kitchener Road, I thought of a different Kitchener: the legendary Trinidadian calypso musician.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:walk-away-from#s2",
+      "pos": "短语",
+      "glossZh": "主动退出；放弃；撒手不管",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-away-from#e-29c255473606950c",
+          "text": "The kindhearted fisherman knew that he could not simply walk away from the poor penguin.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 70
+          },
+          "parts": [
+            [
+              56,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-away-from#e-0087c407b454968d",
+          "text": "Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 128
+          },
+          "parts": [
+            [
+              114,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              128
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:walk-away-from#s3",
+      "pos": "短语",
+      "glossZh": "从（事故等）中安然脱身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-away-from#s4",
+      "pos": "短语",
+      "glossZh": "轻松甩开（对手）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

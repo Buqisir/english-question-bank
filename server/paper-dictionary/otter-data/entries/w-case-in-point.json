@@ -1,0 +1,97 @@
+{
+  "entryId": "w:case-in-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "case",
+      "in",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "case",
+        "in",
+        "point"
+      ],
+      [
+        "cases",
+        "in",
+        "point"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "case in point",
+  "senses": [
+    {
+      "senseId": "w:case-in-point#s1",
+      "pos": "短语",
+      "glossZh": "恰好说明所谈观点的例子",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:case-in-point#e-8270272b7f637084",
+          "text": "Good things never come easy – an 18-year-old Chinese-American Audrey Lo is a case in point.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 90
+          },
+          "parts": [
+            [
+              77,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

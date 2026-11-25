@@ -1,0 +1,123 @@
+{
+  "entryId": "w:dear-sir",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "dear Sir"
+  ],
+  "pattern": {
+    "tokens": [
+      "dear",
+      "sir"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dear",
+        "sir"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dear sir",
+  "senses": [
+    {
+      "senseId": "w:dear-sir#s1",
+      "pos": "短语",
+      "glossZh": "尊敬的先生（正式信函开头用语）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dear-sir#e-149e2a31e0dfe4ec",
+          "text": "Dear Sir or Madam,",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dear-sir#e-308a562f4b88b179",
+          "text": "Dear Sir/ Madam,",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

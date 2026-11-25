@@ -1,0 +1,105 @@
+{
+  "entryId": "w:way-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "way",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "way",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "way back",
+  "senses": [
+    {
+      "senseId": "w:way-back#s1",
+      "pos": "短语",
+      "glossZh": "很久以前；可追溯到很久以前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:way-back#e-11b5f96df6bc2c21",
+          "text": "On models specially customized by fashion designer Jason Wu, you’ll see from qipao of the 1960s way back to the robes（长袍） of the Qing Dynasty in a vivid display of colour, patterns and excellent craftsmanship.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 104
+          },
+          "parts": [
+            [
+              96,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              104
+            ]
+          ]
+        }
+      ],
+      "note": "go way back 可指关系或历史由来已久。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:way-back#s2",
+      "pos": "短语",
+      "glossZh": "车厢最后部；车内最后一排",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作名词时常用 the way back。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,68 @@
+{
+  "entryId": "w:on-ones-side",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on sb’s side"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      {
+        "slot": "one's"
+      },
+      "side"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        {
+          "slot": "one's"
+        },
+        "side"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on one's side",
+  "senses": [
+    {
+      "senseId": "w:on-ones-side#s1",
+      "pos": "短语",
+      "glossZh": "支持某人；站在某人一边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:on#s15"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

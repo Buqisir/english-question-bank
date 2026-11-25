@@ -59,8 +59,8 @@
     "mock": 272
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 272
+    "gaokao": 7,
+    "mock": 85
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 46,
-        "mock": 0
+        "mock": 168
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -206,35 +206,105 @@
       ]
     },
     {
-      "senseId": "w:park#s3",
-      "pos": "短语",
-      "glossZh": "停车场",
+      "senseId": "w:park#s4",
+      "pos": "v.",
+      "glossZh": "把人或物暂时安置在某处",
       "pronunciationId": "w:park#p-main",
-      "note": "car park。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:park#e-d96b0ed0478aa241",
-          "text": "Start Point: Deerpark Car Park",
+          "exampleId": "w:park#e-2bceb10332b70f31",
+          "text": "So I parked the elephant in the garage and left my car out on the street.",
           "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
             "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:11",
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:park#s5",
+      "pos": "n.",
+      "glossZh": "园区；特定用途的场区",
+      "pronunciationId": "w:park#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:park#e-9f5fea5f1ae5369e",
+          "text": "What’s the man’s attitude towards the industrial park?",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 30
+            "start": 49,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:park#e-b2abf8faf90ad2cc",
+          "text": "At the Beijing World of Robots, located in the robotics industrial park in Beijing’s Yizhuang, the vision of an intelligent future is coming to reality with all kinds of robots.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:park#e-5d4bc94fba34453a",
+          "text": "To address this, the park invited villagers to raise their sheep under the solar panels.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
           }
         }
       ]
@@ -246,6 +316,11 @@
       "reason": "地名或部门专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:walk-in-the-park"
+  ]
 }

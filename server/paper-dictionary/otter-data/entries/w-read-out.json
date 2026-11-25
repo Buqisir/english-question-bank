@@ -1,0 +1,130 @@
+{
+  "entryId": "w:read-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "read",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "read",
+        "out"
+      ],
+      [
+        "reading",
+        "out"
+      ],
+      [
+        "reads",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "read out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "read sth out",
+  "senses": [
+    {
+      "senseId": "w:read-out#s1",
+      "pos": "短语",
+      "glossZh": "把文字大声念出来；朗读给别人听",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:read-out#e-0083028d598b235f",
+          "text": "Read out the speech draft.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:read-out#s2",
+      "pos": "短语",
+      "glossZh": "读出设备中的数据或测量结果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:read-out#s3",
+      "pos": "短语",
+      "glossZh": "通过解释使法律条文中的某部分失去效力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

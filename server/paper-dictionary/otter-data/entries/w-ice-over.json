@@ -1,0 +1,70 @@
+{
+  "entryId": "w:ice-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ice",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ice",
+        "over"
+      ],
+      [
+        "iced",
+        "over"
+      ],
+      [
+        "ices",
+        "over"
+      ],
+      [
+        "icing",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ice over",
+  "senses": [
+    {
+      "senseId": "w:ice-over#s1",
+      "pos": "短语",
+      "glossZh": "（水面等）结上一层冰",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

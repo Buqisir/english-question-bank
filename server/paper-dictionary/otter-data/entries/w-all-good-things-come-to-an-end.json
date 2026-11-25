@@ -1,0 +1,100 @@
+{
+  "entryId": "w:all-good-things-come-to-an-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "good",
+      "things",
+      "come",
+      "to",
+      "an",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "good",
+        "things",
+        "come",
+        "to",
+        "an",
+        "end"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all good things come to an end",
+  "senses": [
+    {
+      "senseId": "w:all-good-things-come-to-an-end#s1",
+      "pos": "短语",
+      "glossZh": "美好的事物终会结束；天下没有不散的筵席",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-good-things-come-to-an-end#e-cf54434c293bd6f6",
+          "text": "But “all good things come to an end”, and MacColl got divorced after 13 years of marriage.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 35
+          },
+          "parts": [
+            [
+              5,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,100 @@
+{
+  "entryId": "w:along-the-lines-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "along",
+      "the",
+      "lines",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "along",
+        "the",
+        "lines",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "along the lines of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "along the lines of sth",
+  "senses": [
+    {
+      "senseId": "w:along-the-lines-of#s1",
+      "pos": "短语",
+      "glossZh": "大致类似于……；大意是……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:along-the-lines-of#e-d666b20284e6195b",
+          "text": "Of course, I get some complaints from my wife, Jocasta, along the lines of “I was using that light to read a book” or “Why didn’t you save my work before turning off my computer,” but I think she is grateful for my assistance.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 74
+          },
+          "parts": [
+            [
+              56,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              74
+            ]
+          ]
+        }
+      ],
+      "note": "可用于概述原话或说明某个想法、方案的大致方向。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

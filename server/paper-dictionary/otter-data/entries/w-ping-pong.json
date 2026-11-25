@@ -37,7 +37,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 2
+    "mock": 0
   },
   "senses": [
     {
@@ -72,6 +72,19 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:ping-pong#s2",
+      "pos": "int.",
+      "glossZh": "乒乒乓乓（拟声）",
+      "pronunciationId": "w:ping-pong#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -80,6 +93,6 @@
       "reason": "模仿击球声，非运动名称用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

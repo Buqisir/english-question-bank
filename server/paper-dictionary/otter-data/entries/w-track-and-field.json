@@ -1,0 +1,92 @@
+{
+  "entryId": "w:track-and-field",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "track",
+      "and",
+      "field"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "track",
+        "and",
+        "field"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "track and field",
+  "senses": [
+    {
+      "senseId": "w:track-and-field#s1",
+      "pos": "短语",
+      "glossZh": "田径运动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:track-and-field#e-f57d4f1a49a21f11",
+          "text": "In fact, most of the students on my campus are Chinese, and I interact with them daily through shared coursework and extracurricular activities, like sporting events, including an annual track and field meet and regular football matches.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 187,
+            "end": 202
+          },
+          "parts": [
+            [
+              187,
+              202
+            ]
+          ],
+          "highlightRanges": [
+            [
+              187,
+              202
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

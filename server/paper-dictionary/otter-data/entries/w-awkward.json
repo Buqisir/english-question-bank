@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 38
+    "mock": 20
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -216,6 +216,6 @@
       "reason": "罕见名词用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

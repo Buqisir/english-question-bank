@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 236
+    "mock": 36
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 78
       },
       "folded": false,
       "examples": [
@@ -258,12 +258,12 @@
       "pos": "adv.",
       "glossZh": "在内部",
       "pronunciationId": "w:within#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -273,6 +273,9 @@
       "reason": "法律文件中的少见形容词用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:fall-within-a-category"
+  ]
 }

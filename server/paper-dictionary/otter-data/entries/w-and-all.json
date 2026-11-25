@@ -1,0 +1,73 @@
+{
+  "entryId": "w:and-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "and",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "and",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "and all",
+  "senses": [
+    {
+      "senseId": "w:and-all#s1",
+      "pos": "短语",
+      "glossZh": "连同相关的一切；也一并算上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常放在所补充的内容之后。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:and-all#s2",
+      "pos": "短语",
+      "glossZh": "还；也",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "部分英式口语用法，放在句末。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,380 @@
+{
+  "entryId": "w:come-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came up",
+    "comes up",
+    "coming up"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "up"
+      ],
+      [
+        "came",
+        "up"
+      ],
+      [
+        "comes",
+        "up"
+      ],
+      [
+        "coming",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come up",
+  "senses": [
+    {
+      "senseId": "w:come-up#s1",
+      "pos": "短语",
+      "glossZh": "被提到；（问题、话题等）出现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s83"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-up#e-cacb12a6e857aaeb",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up#e-850848215351b9a9",
+          "text": "But when that content performs well (or gets copied), one question keeps coming up: who actually owns it?",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 82
+          },
+          "parts": [
+            [
+              73,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up#e-fb44c4917689b530",
+          "text": "You probably haven’t thought of that memory in years, but now it comes up repeatedly.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 73
+          },
+          "parts": [
+            [
+              65,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:come-up#s2",
+      "pos": "短语",
+      "glossZh": "走近；走过来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-up#e-30ae81d74d1eb962",
+          "text": "Paragraph 2: When John saw me, he came up smiling, eager to tell me what had happened.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up#e-a53865d4e0ae6c4a",
+          "text": "Then, through the thick snow, I saw the lights of that car coming up behind us.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          },
+          "parts": [
+            [
+              59,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-up#s3",
+      "pos": "短语",
+      "glossZh": "（活动、日期等）临近；即将到来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-up#e-0ca6ca328d388d1a",
+          "text": "If you’ve got a house move coming up, then you’ll know that it can be a stressful experience.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up#e-12dddec6427bf742",
+          "text": "A fashion show is coming up, too.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:come-up#s4",
+      "pos": "短语",
+      "glossZh": "（太阳等）升起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-up#e-9b4387447b62ef59",
+          "text": "I saw it that day, and I just thought, ‘Well, look, there is a girl who doesn’t have a whole lot of prospects, but the sun’s coming up anyway, and she’s got another chance at it.’ So, I think that gave me some sort of feeling that I, too, am a person and get another chance every day the sun comes up.”",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 134
+          },
+          "parts": [
+            [
+              125,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-up#s5",
+      "pos": "短语",
+      "glossZh": "从低处上来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

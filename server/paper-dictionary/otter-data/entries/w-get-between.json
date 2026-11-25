@@ -1,0 +1,109 @@
+{
+  "entryId": "w:get-between",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting between"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "between"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "between"
+      ],
+      [
+        "getting",
+        "between"
+      ],
+      [
+        "gets",
+        "between"
+      ],
+      [
+        "got",
+        "between"
+      ],
+      [
+        "gotten",
+        "between"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get between",
+  "senses": [
+    {
+      "senseId": "w:get-between#s1",
+      "pos": "短语",
+      "glossZh": "介入双方之间；妨碍双方直接接触",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-between#e-f7b35e37f6a0e554",
+          "text": "Many e-commerce websites are indignant at the idea of an AI agent getting between them and their customers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 81
+          },
+          "parts": [
+            [
+              66,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              81
+            ]
+          ]
+        }
+      ],
+      "note": "get between A and B，可指插手双方的关系，引起隔阂。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

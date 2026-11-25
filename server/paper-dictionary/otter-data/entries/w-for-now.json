@@ -1,0 +1,154 @@
+{
+  "entryId": "w:for-now",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "now"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "now"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for now",
+  "senses": [
+    {
+      "senseId": "w:for-now#s1",
+      "pos": "短语",
+      "glossZh": "暂时；目前",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:now#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-now#e-b134d4cd33d4aae9",
+          "text": "It was time to say goodbye for now at least.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          },
+          "parts": [
+            [
+              27,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-now#e-d4d93d1c3a7a1eb9",
+          "text": "For now, grizzlies remain listed.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-now#e-5fdbe17df6050b22",
+          "text": "For now, at least, all but one of the species in deep freeze still have flesh-and-blood members.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

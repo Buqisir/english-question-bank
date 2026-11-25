@@ -57,8 +57,8 @@
     "mock": 328
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 328
+    "gaokao": 13,
+    "mock": 187
   },
   "senses": [
     {
@@ -69,7 +69,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 134
       },
       "folded": false,
       "examples": [
@@ -133,355 +133,6 @@
       ]
     },
     {
-      "senseId": "w:let#s2",
-      "pos": "短语",
-      "glossZh": "来……吧（提出建议）",
-      "pronunciationId": "w:let#p-main",
-      "note": "let us，常缩为 let’s。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-16bb4aa822d39355",
-          "text": "Let us get them out and let them play.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s3",
-      "pos": "短语",
-      "glossZh": "请让我……",
-      "pronunciationId": "w:let#p-main",
-      "note": "let me。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-bfa78900de4c8644",
-          "text": "Let me try to explain.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s4",
-      "pos": "短语",
-      "glossZh": "放走",
-      "pronunciationId": "w:let#p-main",
-      "note": "let go。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-bad41c9b99731173",
-          "text": "Nutria were brought there from Argentina by fur farmers and let go into the wild.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 63
-          }
-        },
-        {
-          "exampleId": "w:let#e-0f46616ec981a1b3",
-          "text": "More research taught us how much to feed him, how to estimate his age, how and when to wean (断奶) him, and that we should let him go as soon as he could survive on his own.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 121,
-            "end": 124
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s5",
-      "pos": "短语",
-      "glossZh": "让……出去",
-      "pronunciationId": "w:let#p-main",
-      "note": "let sb/sth out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-af4211413fa674b1",
-          "text": "I am down there in my wheelchair in the morning letting the hens out and down there again at night to see they’ve gone to bed.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "reading-c-4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:let#e-acf9f7a957561584",
-          "text": "Inserting the correct “key” would let out the nut.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s6",
-      "pos": "短语",
-      "glossZh": "发出（声音）",
-      "pronunciationId": "w:let#p-main",
-      "note": "let out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-90f2c6b419dfc2f3",
-          "text": "Suddenly, Ziyad let out a sharp cry.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:let#e-e8d39ec392b2a5ac",
-          "text": "She again looked directly into my eyes, then let out a squeaking call and was gone.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:6",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 48
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s7",
-      "pos": "短语",
-      "glossZh": "让……失望",
-      "pronunciationId": "w:let#p-main",
-      "note": "let sb down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-a121803dfe259ce0",
-          "text": ", teaching Jacky to swim means he has to __48__ that, when he’s swimming in the big pool, I’ll come to his rescue if his doggy paddle lets him down.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 140,
-            "end": 144
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s8",
-      "pos": "短语",
-      "glossZh": "更不用说",
-      "pronunciationId": "w:let#p-main",
-      "note": "let alone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-cf1c45bc4af0575f",
-          "text": "All the different hallways and rooms were too much to think about, let alone commit to memory.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:let#s9",
-      "pos": "短语",
-      "glossZh": "告诉；使知晓",
-      "pronunciationId": "w:let#p-main",
-      "note": "let sb know。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:let#e-68c85f13b8af037b",
-          "text": "He was __44__, and his crying let the whole campground know it.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "cloze-2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:let#e-848b4de0f289b5e1",
-          "text": "Let their teacher know.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
-            "locator": {
-              "question": 20,
-              "questionId": "question:listening:20",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:let#s10",
       "pos": "v.",
       "glossZh": "出租（房屋）",
@@ -493,6 +144,120 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:let#s11",
+      "pos": "v.",
+      "glossZh": "让某人知道内情（let sb in on sth）",
+      "pronunciationId": "w:let#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:let#s12",
+      "pos": "v.",
+      "glossZh": "放开拘束；尽情发挥（let loose / let oneself go）",
+      "pronunciationId": "w:let#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:let#e-f8f4b520cd8d3f18",
+          "text": "Really let yourself go in thinking of different approaches to the subject.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:let#s13",
+      "pos": "v.",
+      "glossZh": "对某人敞开心扉（let sb in）",
+      "pronunciationId": "w:let#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:let#e-e8ab4f565ed311bd",
+          "text": "The best way to calm an overthinking mind is to let someone else in.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zaozhuang-2026-05-third-mock:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:let#s14",
+      "pos": "v.",
+      "glossZh": "放松警惕（let one’s guard down）",
+      "pronunciationId": "w:let#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:let#e-b16d0acc69930e67",
+          "text": "People may let their guard down, thinking the robots understand more than they do.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zibo-2026-03-first:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -501,6 +266,21 @@
       "reason": "专门或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:let-alone",
+    "w:let-down-ones-guard",
+    "w:let-go",
+    "w:let-in",
+    "w:let-it-be",
+    "w:let-nature-take-its-course",
+    "w:let-sb-down",
+    "w:let-sb-know",
+    "w:let-sb-sth-out",
+    "w:let-sth-slide",
+    "w:let-up"
+  ]
 }

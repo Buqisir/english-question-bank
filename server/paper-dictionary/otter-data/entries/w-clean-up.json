@@ -1,0 +1,262 @@
+{
+  "entryId": "w:clean-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clean",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "clean",
+        "up"
+      ],
+      [
+        "clean",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "cleaned",
+        "up"
+      ],
+      [
+        "cleaning",
+        "up"
+      ],
+      [
+        "cleans",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cleaned up",
+      "tags": []
+    },
+    {
+      "form": "cleaning up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clean up",
+  "senses": [
+    {
+      "senseId": "w:clean-up#s1",
+      "pos": "短语",
+      "glossZh": "收拾干净；清除垃圾、污物或污染",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s44"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:clean-up#e-c17c693e173dbc6e",
+          "text": "With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 85
+          },
+          "parts": [
+            [
+              77,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clean-up#e-c07583b99287fe69",
+          "text": "Jenna told Jeff to clean it up so they could continue to cook the rest of the porridge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              24
+            ],
+            [
+              28,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              24
+            ],
+            [
+              28,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clean-up#e-c7293e0f8096e155",
+          "text": "He cleaned up his house.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 26
+      }
+    },
+    {
+      "senseId": "w:clean-up#s2",
+      "pos": "短语",
+      "glossZh": "把自己收拾得干净体面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clean-up#e-dceb766e90efda0e",
+          "text": "Cleaning up with water, adding soap if possible, on a regular basis is one of the most convenient ways to stop viruses like the flu from spreading.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:clean-up#s3",
+      "pos": "短语",
+      "glossZh": "整顿；清除不良做法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clean-up#s4",
+      "pos": "短语",
+      "glossZh": "大赚一笔；赢得很多钱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

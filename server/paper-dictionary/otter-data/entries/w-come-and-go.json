@@ -1,0 +1,125 @@
+{
+  "entryId": "w:come-and-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "and",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "and",
+        "go"
+      ],
+      [
+        "came",
+        "and",
+        "went"
+      ],
+      [
+        "come",
+        "and",
+        "gone"
+      ],
+      [
+        "comes",
+        "and",
+        "goes"
+      ],
+      [
+        "coming",
+        "and",
+        "going"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come and go",
+  "senses": [
+    {
+      "senseId": "w:come-and-go#s1",
+      "pos": "短语",
+      "glossZh": "来来去去；陆续到来又离开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-and-go#e-377a679a3ffa5acc",
+          "text": "People come and go.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-and-go#s2",
+      "pos": "短语",
+      "glossZh": "（症状、感觉等）时有时无",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

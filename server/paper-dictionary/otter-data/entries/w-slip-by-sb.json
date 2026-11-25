@@ -1,0 +1,110 @@
+{
+  "entryId": "w:slip-by-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "slip by somebody"
+  ],
+  "pattern": {
+    "tokens": [
+      "slip",
+      "by",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "slip",
+        "by",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "slip",
+        "by",
+        "somebody"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "slips by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "slip by sb",
+  "senses": [
+    {
+      "senseId": "w:slip-by-sb#s1",
+      "pos": "短语",
+      "glossZh": "未被某人察觉；被某人忽略",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:slip#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:slip-by-sb#e-1e264360be9e25e9",
+          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 119
+          },
+          "parts": [
+            [
+              111,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              119
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

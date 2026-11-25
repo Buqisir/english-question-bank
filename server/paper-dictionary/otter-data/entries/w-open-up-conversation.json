@@ -1,0 +1,99 @@
+{
+  "entryId": "w:open-up-conversation",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "open",
+      "up",
+      "conversation"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "open",
+        "up",
+        "conversation"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "opens up conversation",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "open up conversation",
+  "senses": [
+    {
+      "senseId": "w:open-up-conversation#s1",
+      "pos": "短语",
+      "glossZh": "引出话题；促成交流",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s41"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:open-up-conversation#e-50eab67eb2e25b65",
+          "text": "It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 29
+          },
+          "parts": [
+            [
+              8,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

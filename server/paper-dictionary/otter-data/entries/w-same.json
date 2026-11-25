@@ -48,8 +48,8 @@
     "mock": 425
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 424
+    "gaokao": 13,
+    "mock": 240
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 37,
-        "mock": 0
+        "mock": 75
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -202,7 +202,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -273,7 +273,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -337,112 +337,6 @@
       ]
     },
     {
-      "senseId": "w:same#s5",
-      "pos": "短语",
-      "glossZh": "同时",
-      "pronunciationId": "w:same#p-main",
-      "note": "at the same time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 12,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:same#e-9d9ffb9dab98d48c",
-          "text": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 136,
-            "end": 140
-          }
-        },
-        {
-          "exampleId": "w:same#e-86b53e204ae6438e",
-          "text": "Can a small group of drones（无人机）guarantee the safety and reliability of railways and, at the same time, help railway operators save billions of euros each year?",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 97
-          }
-        },
-        {
-          "exampleId": "w:same#e-ba421532c8c822d2",
-          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:same#s6",
-      "pos": "短语",
-      "glossZh": "意见一致",
-      "pronunciationId": "w:same#p-main",
-      "note": "on the same page。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:same#e-acf5e6b207a17a2a",
-          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 122,
-            "end": 126
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:same#s7",
       "pos": "adv.",
       "glossZh": "同样地",
@@ -450,7 +344,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -482,6 +376,15 @@
       "reason": "同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-the-same",
+    "w:at-the-same-time",
+    "w:in-the-same-boat",
+    "w:on-the-same-page",
+    "w:same-here"
+  ]
 }

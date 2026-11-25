@@ -1,0 +1,71 @@
+{
+  "entryId": "w:push-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "it"
+      ],
+      [
+        "pushed",
+        "it"
+      ],
+      [
+        "pushes",
+        "it"
+      ],
+      [
+        "pushing",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push it",
+  "senses": [
+    {
+      "senseId": "w:push-it#s1",
+      "pos": "短语",
+      "glossZh": "做得太过分；冒险试探限度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 Don't push it. 劝人适可而止。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

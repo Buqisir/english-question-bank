@@ -1,0 +1,107 @@
+{
+  "entryId": "w:serve-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "serve",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "serve",
+        "time"
+      ],
+      [
+        "served",
+        "time"
+      ],
+      [
+        "serves",
+        "time"
+      ],
+      [
+        "serving",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "served time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "serve time",
+  "senses": [
+    {
+      "senseId": "w:serve-time#s1",
+      "pos": "短语",
+      "glossZh": "服刑；坐牢",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:serve-time#e-e778b34bf09f0216",
+          "text": "“I struggled with addiction and served time in prison.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

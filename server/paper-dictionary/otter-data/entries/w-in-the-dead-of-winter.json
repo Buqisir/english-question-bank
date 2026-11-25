@@ -1,0 +1,66 @@
+{
+  "entryId": "w:in-the-dead-of-winter",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "dead",
+      "of",
+      "winter"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "dead",
+        "of",
+        "winter"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the dead of winter",
+  "senses": [
+    {
+      "senseId": "w:in-the-dead-of-winter#s1",
+      "pos": "短语",
+      "glossZh": "在隆冬最寒冷的时候",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:dead#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,166 @@
+{
+  "entryId": "w:stay-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "staying out"
+  ],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "out"
+      ],
+      [
+        "staying",
+        "out"
+      ],
+      [
+        "stayed",
+        "out"
+      ],
+      [
+        "stays",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay out",
+  "senses": [
+    {
+      "senseId": "w:stay-out#s1",
+      "pos": "短语",
+      "glossZh": "在外逗留；待在外面不回家",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stay#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stay-out#e-66b569aa64c6e5dd",
+          "text": "I was unwilling talk with him and often disobeyed his rule of not stay out with my friends too late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-a:writing-short-error-correction:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 74
+          },
+          "parts": [
+            [
+              66,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-out#e-ff60e712f69f76af",
+          "text": "In my twenties, I threw myself into city life: sampling Mediterranean restaurants, navigating around on the Tube, and staying out late with friends.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 129
+          },
+          "parts": [
+            [
+              118,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              129
+            ]
+          ]
+        }
+      ],
+      "note": "常用 stay out late 表示在外待到很晚。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stay-out#s2",
+      "pos": "短语",
+      "glossZh": "不进入；不介入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 stay out of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stay-out#s3",
+      "pos": "短语",
+      "glossZh": "比别人待得更久",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

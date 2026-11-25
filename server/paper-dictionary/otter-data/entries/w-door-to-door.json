@@ -1,0 +1,107 @@
+{
+  "entryId": "w:door-to-door",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "door",
+      "to",
+      "door"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "door",
+        "to",
+        "door"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "door to door",
+  "senses": [
+    {
+      "senseId": "w:door-to-door#s1",
+      "pos": "短语",
+      "glossZh": "挨家挨户地；逐户上门",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:door-to-door#e-19bb9c5b63a98228",
+          "text": "She raised money door to door.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 29
+          },
+          "parts": [
+            [
+              17,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:door-to-door#s2",
+      "pos": "短语",
+      "glossZh": "从出发地到最终目的地全程；门到门",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用于计算全程耗时，也可指从发货地点取货并送到收货地点。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

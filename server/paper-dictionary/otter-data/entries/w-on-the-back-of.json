@@ -1,0 +1,75 @@
+{
+  "entryId": "w:on-the-back-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "back",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "back",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the back of",
+  "senses": [
+    {
+      "senseId": "w:on-the-back-of#s1",
+      "pos": "短语",
+      "glossZh": "凭借……；因……而随之发生",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:on-the-back-of#s2",
+      "pos": "短语",
+      "glossZh": "靠利用或剥削……获利",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

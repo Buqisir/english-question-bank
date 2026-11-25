@@ -42,8 +42,8 @@
     "mock": 193
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 190
+    "gaokao": 4,
+    "mock": 33
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 139
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -254,138 +254,14 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:office#s5",
-      "pos": "短语",
-      "glossZh": "邮局",
-      "pronunciationId": "w:office#p-main",
-      "note": "post office。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:office#e-80e47c68c473aabd",
-          "text": "In the post office.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:office#e-f94bbc071339a7a1",
-          "text": "In a post office.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.short-dialogue",
-            "locator": {
-              "question": 5,
-              "questionId": "question:listening:5",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 10,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:office#s6",
-      "pos": "短语",
-      "glossZh": "售票处",
-      "pronunciationId": "w:office#p-main",
-      "note": "box office、ticket office。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:office#e-af9e3d1ea282adf3",
-          "text": "Checking information at the box office.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:office#e-888508f212ca102c",
-          "text": "Walking into Dryden Theater, I felt as if I had stepped into a time machine – the traditional, old-timey box office, tons of old-style movie posters on the walls.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 109,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:office#e-f31dbe71e5e30c15",
-          "text": "At a ticket office.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:listening.short-dialogue",
-            "locator": {
-              "question": 2,
-              "questionId": "question:listening:2",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 12,
-            "end": 18
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:corner-office"
+  ]
 }

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 145
+    "mock": 15
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -269,7 +269,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -301,6 +301,6 @@
       "reason": "生物信息学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,83 @@
+{
+  "entryId": "w:pay-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "back"
+      ],
+      [
+        "paid",
+        "back"
+      ],
+      [
+        "paying",
+        "back"
+      ],
+      [
+        "pays",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:pay-back#s1",
+      "pos": "短语",
+      "glossZh": "还钱；偿还借款",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pay-back#s2",
+      "pos": "短语",
+      "glossZh": "报复；还以颜色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

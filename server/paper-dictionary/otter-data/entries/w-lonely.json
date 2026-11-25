@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 48
+    "mock": 10
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -164,7 +164,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -210,6 +210,6 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

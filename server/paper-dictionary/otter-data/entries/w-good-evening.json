@@ -1,0 +1,152 @@
+{
+  "entryId": "w:good-evening",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "evening"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "evening"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good evening",
+  "senses": [
+    {
+      "senseId": "w:good-evening#s1",
+      "pos": "短语",
+      "glossZh": "晚上好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:good-evening#e-82b09cdf1eca62d5",
+          "text": "Good evening, dear friends!",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-evening#e-578645534f5261ba",
+          "text": "Good evening, everyone!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-application",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-application:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-evening#e-e270a18a9f034f90",
+          "text": "“Good evening.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 13
+          },
+          "parts": [
+            [
+              1,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,74 @@
+{
+  "entryId": "w:run-across",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran across",
+    "running across",
+    "runs across"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "across"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "across"
+      ],
+      [
+        "ran",
+        "across"
+      ],
+      [
+        "running",
+        "across"
+      ],
+      [
+        "runs",
+        "across"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run across sb/sth",
+  "senses": [
+    {
+      "senseId": "w:run-across#s1",
+      "pos": "短语",
+      "glossZh": "偶然遇见；无意中发现",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

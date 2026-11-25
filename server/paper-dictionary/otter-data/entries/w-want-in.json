@@ -1,0 +1,83 @@
+{
+  "entryId": "w:want-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "want",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "want",
+        "in"
+      ],
+      [
+        "wanted",
+        "in"
+      ],
+      [
+        "wanting",
+        "in"
+      ],
+      [
+        "wants",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "want in",
+  "senses": [
+    {
+      "senseId": "w:want-in#s1",
+      "pos": "短语",
+      "glossZh": "想进去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:want-in#s2",
+      "pos": "短语",
+      "glossZh": "想加入；想参与",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

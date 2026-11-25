@@ -1,0 +1,158 @@
+{
+  "entryId": "w:the-first-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "first",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "first",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the first time",
+  "senses": [
+    {
+      "senseId": "w:the-first-time#s1",
+      "pos": "短语",
+      "glossZh": "第一次；头一回",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:first#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-first-time#e-129af65e65b0f50e",
+          "text": "Too many writers try to get their drafts right the first time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-ii:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 61
+          },
+          "parts": [
+            [
+              47,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-first-time#e-0dcd276056ddb779",
+          "text": "“I remember the first time I saw a humpback whale; it just rose out of the water like some prehistoric creature and I thought it was smiling at us.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-first-time#e-c76926d7d2ba15b2",
+          "text": "The first time I went to Germany with my boyfriend, I was very young and hadn’t been to many places.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "也可直接接从句，表示“第一次……时”。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 23
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 83
+    "mock": 4
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 58
       },
       "folded": false,
       "examples": [
@@ -246,12 +246,12 @@
       "pos": "adj.",
       "glossZh": "味道浓厚的",
       "pronunciationId": "w:rich#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -259,12 +259,12 @@
       "pos": "adj.",
       "glossZh": "肥沃的",
       "pronunciationId": "w:rich#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -331,6 +331,19 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:rich#s8",
+      "pos": "adj.",
+      "glossZh": "（声音）饱满的；浑厚的",
+      "pronunciationId": "w:rich#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -343,6 +356,6 @@
       "reason": "技术专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

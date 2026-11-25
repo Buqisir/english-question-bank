@@ -1,0 +1,93 @@
+{
+  "entryId": "w:little-old-me",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "little",
+      "old",
+      "me"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "little",
+        "old",
+        "me"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "little old me",
+  "senses": [
+    {
+      "senseId": "w:little-old-me#s1",
+      "pos": "短语",
+      "glossZh": "我这个小人物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:little-old-me#e-7990c37ab73155d3",
+          "text": "I started picturing six couples, enjoying a Mongolian sunset… and then little old me.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 84
+          },
+          "parts": [
+            [
+              71,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              84
+            ]
+          ]
+        }
+      ],
+      "note": "常带自嘲或故作谦虚的语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

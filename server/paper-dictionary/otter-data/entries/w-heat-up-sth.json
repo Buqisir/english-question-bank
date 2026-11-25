@@ -1,0 +1,170 @@
+{
+  "entryId": "w:heat-up-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heat",
+      "up",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heat",
+        "up",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "heat up",
+      "tags": []
+    },
+    {
+      "form": "heating up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heat up sth",
+  "senses": [
+    {
+      "senseId": "w:heat-up-sth#s1",
+      "pos": "短语",
+      "glossZh": "加热；使升温",
+      "note": "也可用 heat sth up。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:heat-up-sth#e-b00029bb41965209",
+          "text": "Next, Jeff turned on the second stove（炉）burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:writing-continuation:material-2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          },
+          "parts": [
+            [
+              50,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:heat-up-sth#e-cf28094cd269fbe0",
+          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          },
+          "parts": [
+            [
+              48,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:heat-up-sth#e-1ebebe6c8b31e366",
+          "text": "“Emissions are heating up the ocean, resulting in a sharper temperature differential that is dividing the ocean into a shallower warm layer and deeper cold layer,” Robbins explained, “This prevents the transfer of nutrients from the ocean depths to surface waters where phytoplankton live,” he explained.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

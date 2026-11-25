@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 127
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -281,12 +281,12 @@
       "pos": "n.",
       "glossZh": "等级",
       "pronunciationId": "w:grade#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -335,6 +335,6 @@
       "reason": "角度单位名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

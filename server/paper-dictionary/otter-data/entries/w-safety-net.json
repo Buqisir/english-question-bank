@@ -1,0 +1,176 @@
+{
+  "entryId": "w:safety-net",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "safety",
+      "net"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "safety",
+        "net"
+      ],
+      [
+        "safety",
+        "nets"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "safety nets",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "safety net",
+  "senses": [
+    {
+      "senseId": "w:safety-net#s1",
+      "pos": "短语",
+      "glossZh": "安全保障；兜底措施",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:net#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:safety-net#e-ad8c0d5621c55aac",
+          "text": "Procrastination had become a safety net; staying still meant avoiding being seen and possibly found lacking.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:safety-net#e-50fe44b26db5ae66",
+          "text": "During tough times – whether personal struggles or global crises – nostalgia acts like an emotional safety net.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 110
+          },
+          "parts": [
+            [
+              100,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:safety-net#e-10dbc55a9958ce40",
+          "text": "Later US generations also face financial insecurity, while Europe’s stronger safety nets protect its middle-aged population.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:safety-net#s2",
+      "pos": "短语",
+      "glossZh": "防坠安全网",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

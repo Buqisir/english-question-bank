@@ -1,0 +1,60 @@
+{
+  "entryId": "w:scarf-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "scarf",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "scarf",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "scarf sth down",
+  "senses": [
+    {
+      "senseId": "w:scarf-down#s1",
+      "pos": "短语",
+      "glossZh": "狼吞虎咽地吃下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:scarf#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,187 @@
+{
+  "entryId": "w:stand-the-test-of-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stands the test of time"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "the",
+      "test",
+      "of",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "the",
+        "test",
+        "of",
+        "time"
+      ],
+      [
+        "stands",
+        "the",
+        "test",
+        "of",
+        "time"
+      ],
+      [
+        "standing",
+        "the",
+        "test",
+        "of",
+        "time"
+      ],
+      [
+        "stood",
+        "the",
+        "test",
+        "of",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stood the test of time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand the test of time",
+  "senses": [
+    {
+      "senseId": "w:stand-the-test-of-time#s1",
+      "pos": "短语",
+      "glossZh": "经得起时间的考验",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-the-test-of-time#e-7e658099fd8b2319",
+          "text": "Gain insight into the unique materials that have stood the test of time.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 71
+          },
+          "parts": [
+            [
+              49,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-the-test-of-time#e-8df5582bf1975a17",
+          "text": "Anne of Green Gables stands the test of time for several reasons.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 44
+          },
+          "parts": [
+            [
+              21,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-the-test-of-time#e-c019c0937f024b9f",
+          "text": "It stands the test of time.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 26
+          },
+          "parts": [
+            [
+              3,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

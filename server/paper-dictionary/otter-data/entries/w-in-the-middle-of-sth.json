@@ -1,0 +1,248 @@
+{
+  "entryId": "w:in-the-middle-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in the middle of"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "middle",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "middle",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "in",
+        "the",
+        "middle",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the middle of sth",
+  "senses": [
+    {
+      "senseId": "w:in-the-middle-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "在……的中央；在……之中",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-middle-of-sth#e-e8f0d51d334adda2",
+          "text": "We were stuck in the middle of the lake with a dead motor.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 30
+          },
+          "parts": [
+            [
+              14,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-middle-of-sth#e-52df9eaa1e4f17d5",
+          "text": "We often imagine conservation unfolding in wild, remote landscapes, not in the middle of bustling cities.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 88
+          },
+          "parts": [
+            [
+              72,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:in-the-middle-of-sth#s2",
+      "pos": "短语",
+      "glossZh": "在……进行过程中；正忙于或经历……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:middle#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-middle-of-sth#e-cbe45f5ae49d93b4",
+          "text": "You wouldn’t wanna get stepped on by members of the track team in the middle of your beauty sleep, right?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 79
+          },
+          "parts": [
+            [
+              63,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-middle-of-sth#e-fc92272ee80505ec",
+          "text": "In the middle of all this, I realized that Mike, who was supposed to help with the setup, was nowhere to be found.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-middle-of-sth#e-9714b3b388cbb709",
+          "text": "This suggests our species is in the middle of a great evolutionary transition.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 45
+          },
+          "parts": [
+            [
+              29,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

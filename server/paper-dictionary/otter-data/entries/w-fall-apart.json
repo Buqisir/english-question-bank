@@ -1,0 +1,297 @@
+{
+  "entryId": "w:fall-apart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell apart"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "apart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "apart"
+      ],
+      [
+        "fell",
+        "apart"
+      ],
+      [
+        "fallen",
+        "apart"
+      ],
+      [
+        "falling",
+        "apart"
+      ],
+      [
+        "falls",
+        "apart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "falling apart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall apart",
+  "senses": [
+    {
+      "senseId": "w:fall-apart#s1",
+      "pos": "短语",
+      "glossZh": "散架；碎裂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-apart#e-ca853dad3c566313",
+          "text": "Without a few rivets, a plane can still fly, but if you take too many out, the plane will fall apart and crash.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 100
+          },
+          "parts": [
+            [
+              90,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-apart#e-0ed9dc4d4f590225",
+          "text": "The dragon head fell, the body fell apart, and the tail hit a pile of chairs, making all the decorations crash loudly onto the floor.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-apart#e-ccdf4154beccba69",
+          "text": "Walls falling apart.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:25#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:fall-apart#s2",
+      "pos": "短语",
+      "glossZh": "（关系、计划或局势）瓦解；失控",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-apart#e-a79eeb225a8d0ef7",
+          "text": "You leave an hour of online surfing with the sense that the world is falling apart.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 82
+          },
+          "parts": [
+            [
+              69,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-apart#e-23257a4a5f5d329e",
+          "text": "Her perspective is not limited to the “internal battle” of the individual; she demonstrates the urgent role that hope plays in society, “offering us purpose when things fall apart.” Hope is tied, here, to resiliency (韧性), which is “about growing, learning, and unlearning how to show up” – all hopeful acts.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 169,
+            "end": 179
+          },
+          "parts": [
+            [
+              169,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              169,
+              179
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fall-apart#s3",
+      "pos": "短语",
+      "glossZh": "（人、信心等）崩溃；彻底垮掉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-apart#e-e617d2a16b505cb7",
+          "text": "Yet the letter’s cold judgment crushed her: “Looks seemingly flawless(完美的), yet lacks artistic expression, depth and meaning.” In that moment, her confidence fell apart, the phoenix’s fire fading as sharply as her own spirit.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 168
+          },
+          "parts": [
+            [
+              158,
+              168
+            ]
+          ],
+          "highlightRanges": [
+            [
+              158,
+              168
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

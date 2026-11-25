@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 5
+    "mock": 4
   },
   "senses": [
     {
@@ -171,26 +171,12 @@
       "pos": "v.",
       "glossZh": "（因情绪激动）哽咽",
       "pronunciationId": "w:choke#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:choke#s4",
-      "pos": "短语",
-      "glossZh": "强忍住（眼泪等）",
-      "pronunciationId": "w:choke#p-main",
-      "note": "choke back",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -213,6 +199,11 @@
       "reason": "机械、电子或工程专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:choke-back"
+  ]
 }

@@ -1,0 +1,126 @@
+{
+  "entryId": "w:draw-near",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "near"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "near"
+      ],
+      [
+        "drawing",
+        "near"
+      ],
+      [
+        "drawn",
+        "near"
+      ],
+      [
+        "draws",
+        "near"
+      ],
+      [
+        "drew",
+        "near"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draws near",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw near",
+  "senses": [
+    {
+      "senseId": "w:draw-near#s1",
+      "pos": "短语",
+      "glossZh": "（时节、日期或事件）临近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:draw#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-near#e-b1cdab1fd5c17e25",
+          "text": "As a freezing cold winter draws near, the winter blues often sets in – a low mood marked by feeling sadder, less energized or less interested in activities than usual.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 36
+          },
+          "parts": [
+            [
+              26,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:draw-near#s2",
+      "pos": "短语",
+      "glossZh": "（人或物）逐渐靠近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

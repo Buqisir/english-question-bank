@@ -59,8 +59,8 @@
     "mock": 125
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 122
+    "gaokao": 1,
+    "mock": 13
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -277,60 +277,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:supply#s4",
-      "pos": "短语",
-      "glossZh": "供应链",
-      "pronunciationId": "w:supply#p-main",
-      "note": "supply chain。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:supply#e-7d78ee1cb73fb2b5",
-          "text": "Food waste is a growing concern in the restaurant, supermarket, and supply chain industries.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 68,
-            "end": 74
-          }
-        },
-        {
-          "exampleId": "w:supply#e-df22fd2b8fb40dcc",
-          "text": "Preserving food in supply chains.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
-            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-d",
-            "locator": {
-              "question": 35,
-              "questionId": "question:paper-mock-guangdong-guangzhou-2026-04-second:35",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -339,6 +285,8 @@
       "reason": "制度用语、不同词源或少见义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,72 @@
+{
+  "entryId": "w:draw-sb-out-of-their-shell",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      {
+        "slot": "sb"
+      },
+      "out",
+      "of",
+      "their",
+      "shell"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        {
+          "slot": "sb"
+        },
+        "out",
+        "of",
+        "their",
+        "shell"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw sb out of their shell",
+  "senses": [
+    {
+      "senseId": "w:draw-sb-out-of-their-shell#s1",
+      "pos": "短语",
+      "glossZh": "让某人放下拘谨，愿意与人交流",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shell#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

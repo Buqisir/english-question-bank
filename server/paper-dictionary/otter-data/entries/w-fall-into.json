@@ -1,0 +1,433 @@
+{
+  "entryId": "w:fall-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falling into",
+    "falls into",
+    "fell into"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "into"
+      ],
+      [
+        "falling",
+        "into"
+      ],
+      [
+        "falls",
+        "into"
+      ],
+      [
+        "fell",
+        "into"
+      ],
+      [
+        "fallen",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall into",
+  "senses": [
+    {
+      "senseId": "w:fall-into#s1",
+      "pos": "短语",
+      "glossZh": "归入；属于（某类）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-into#e-36b42c2c106610fb",
+          "text": "I think my home falls into that category.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-a8ea261c9f0b00b8",
+          "text": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 51
+          },
+          "parts": [
+            [
+              42,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-366e74951bf1e9bb",
+          "text": "Which situation falls into the “5 minutes” frostbite zone?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-sixth:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:fall-into#s2",
+      "pos": "短语",
+      "glossZh": "陷入（某种状态、处境或习惯）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-into#e-442ac78b8607abbc",
+          "text": "It might help ground individuals likely to fall into harmful cycles of negative thinking.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 52
+          },
+          "parts": [
+            [
+              43,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-3733a1fed5761997",
+          "text": "Dionta White, 28, grew up in Englewood, fell into street life, and went to jail.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          },
+          "parts": [
+            [
+              40,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-e3117675f56b1742",
+          "text": "Sam proudly held up every weed as if it were a captured enemy flag, while Mike fell into a rhythm of quiet determination.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 88
+          },
+          "parts": [
+            [
+              79,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 17
+      }
+    },
+    {
+      "senseId": "w:fall-into#s3",
+      "pos": "短语",
+      "glossZh": "掉进；落入（某处）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-into#e-b6bf6fc7d16db59a",
+          "text": "When drops fall into a stainless-steel cup, wires carry the built-up charge into a current.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-b8ef89c1436b19be",
+          "text": "I remembered falling into bed one night and saying to my husband, “Is it us?” His answer: “No. It’s those lights.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-into#e-aafe2208f47ec6bb",
+          "text": "Before Alex knew what was happening, Ben fell into the stream with a cry and got pulled downstream by the current.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:fall-into#s4",
+      "pos": "短语",
+      "glossZh": "偶然从事（某种工作）；无意中进入（某个行业）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-into#e-79e88d9531972d01",
+          "text": "He says, “As I found joy in running with others, my miles slowly mounted, and I fell into marathon training, which sparked a drive to do even more.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 89
+          },
+          "parts": [
+            [
+              80,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

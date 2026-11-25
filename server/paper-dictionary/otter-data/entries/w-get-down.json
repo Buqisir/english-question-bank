@@ -1,0 +1,213 @@
+{
+  "entryId": "w:get-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting down"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "down"
+      ],
+      [
+        "getting",
+        "down"
+      ],
+      [
+        "gets",
+        "down"
+      ],
+      [
+        "got",
+        "down"
+      ],
+      [
+        "gotten",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:get-down#s1",
+      "pos": "短语",
+      "glossZh": "蹲下；跪下；趴下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s38"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-down#e-31701a30034e1ac4",
+          "text": "He got down on his hands and knees and searched under the desks, his face pale with worry.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-down#e-3c5f5c5f20735aad",
+          "text": "So, while all the windows and doors in the house were shut, I mixed ammonia（氨水）and bleach（漂白剂）, got down on my hands and knees, and scrubbed（擦洗）away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 104
+          },
+          "parts": [
+            [
+              96,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              104
+            ]
+          ]
+        }
+      ],
+      "note": "get down on one's hands and knees 指跪在地上、用双手撑地。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:get-down#s2",
+      "pos": "短语",
+      "glossZh": "从高处下来；把某人或某物弄下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-down#s3",
+      "pos": "短语",
+      "glossZh": "吞下；咽下（药物、食物等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-down#s4",
+      "pos": "短语",
+      "glossZh": "使某人沮丧；使某人泄气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-down#s5",
+      "pos": "短语",
+      "glossZh": "记下；写下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-down#s6",
+      "pos": "短语",
+      "glossZh": "尽情跳舞或玩乐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

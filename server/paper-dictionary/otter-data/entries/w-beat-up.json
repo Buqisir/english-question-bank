@@ -1,0 +1,148 @@
+{
+  "entryId": "w:beat-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beat",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "beat",
+        "up"
+      ],
+      [
+        "beaten",
+        "up"
+      ],
+      [
+        "beating",
+        "up"
+      ],
+      [
+        "beats",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "beat up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beat (sb) up",
+  "senses": [
+    {
+      "senseId": "w:beat-up#s1",
+      "pos": "短语",
+      "glossZh": "备受打击；身心受到摧残",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:beat-up#e-19a481f698367a15",
+          "text": "“Emotionally, fishermen around the world are beat up and beat down,” Jenkins says.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:beat-up#s2",
+      "pos": "短语",
+      "glossZh": "狠打某人一顿；痛殴",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:beat-up#s3",
+      "pos": "短语",
+      "glossZh": "破旧不堪的；伤痕累累的",
+      "note": "作定语时通常写作 beat-up。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:beat-up#s4",
+      "pos": "短语",
+      "glossZh": "反复责怪自己",
+      "note": "用作 beat oneself up，常接 over 或 about。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

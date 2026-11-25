@@ -1,0 +1,158 @@
+{
+  "entryId": "w:space-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "space",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "space",
+        "out"
+      ],
+      [
+        "spaced",
+        "out"
+      ],
+      [
+        "spaces",
+        "out"
+      ],
+      [
+        "spacing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "space out",
+      "tags": []
+    },
+    {
+      "form": "spacing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "space (sth) out",
+  "senses": [
+    {
+      "senseId": "w:space-out#s1",
+      "pos": "短语",
+      "glossZh": "按间隔安排；拉开时间或空间上的距离",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:space-out#e-8f7456b3b9629241",
+          "text": "Strategy 2: Space out your study sessions",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:space-out#e-71fd95d8fd8bd04f",
+          "text": "When you’re cramming for a test, spacing out sessions where you’re reviewing foreign language vocabulary or memorizing flashcards can help your brain store memories more efficiently.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:space-out#s2",
+      "pos": "短语",
+      "glossZh": "走神；发呆",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:space#s8"
+      ],
+      "examples": [],
+      "note": "非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,96 @@
+{
+  "entryId": "w:come-under-fire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "under",
+      "fire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "under",
+        "fire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come under fire",
+  "senses": [
+    {
+      "senseId": "w:come-under-fire#s1",
+      "pos": "短语",
+      "glossZh": "遭到猛烈批评",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s23",
+        "w:fire#s8",
+        "w:under#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-under-fire#e-c3abbf2fb86dcb53",
+          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 111
+          },
+          "parts": [
+            [
+              96,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              111
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

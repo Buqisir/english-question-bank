@@ -1,0 +1,195 @@
+{
+  "entryId": "w:play-a-role",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "plays a role"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "a",
+      "role"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "a",
+        "role"
+      ],
+      [
+        "plays",
+        "a",
+        "role"
+      ],
+      [
+        "played",
+        "a",
+        "role"
+      ],
+      [
+        "playing",
+        "a",
+        "role"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "played a role",
+      "tags": []
+    },
+    {
+      "form": "playing a role",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play a role",
+  "senses": [
+    {
+      "senseId": "w:play-a-role#s1",
+      "pos": "短语",
+      "glossZh": "发挥作用；在某事中承担一定职责",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:play#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:play-a-role#e-c682ad3f40bf32cc",
+          "text": "Yet the researchers suggest that single parents still may play a role in teaching the benefits of persistence, which is an avenue of future research.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:play-a-role#e-510b8f3a38c3ab08",
+          "text": "Climate change and rising carbon dioxide levels also play a role in lowering nutrient content.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 64
+          },
+          "parts": [
+            [
+              53,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:play-a-role#e-886af1c1c97ecc87",
+          "text": "Biology plays a role, too, since age and genetics influence stress responses.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 20
+          },
+          "parts": [
+            [
+              8,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:play-a-role#s2",
+      "pos": "短语",
+      "glossZh": "（在戏剧、影视等作品中）扮演角色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

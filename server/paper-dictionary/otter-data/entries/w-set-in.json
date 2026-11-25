@@ -1,0 +1,166 @@
+{
+  "entryId": "w:set-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sets in",
+    "setting in"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "in"
+      ],
+      [
+        "sets",
+        "in"
+      ],
+      [
+        "setting",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set in",
+  "senses": [
+    {
+      "senseId": "w:set-in#s1",
+      "pos": "短语",
+      "glossZh": "（尤指不好的情况）开始出现并持续",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s71",
+        "w:set#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-in#e-b5f791082f7332ca",
+          "text": "As night fell, panic set in.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 27
+          },
+          "parts": [
+            [
+              21,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-in#e-5885756a2768d903",
+          "text": "Soon, the sinking feeling sets in as you revisit your draft, realizing the hard part has just begun.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          },
+          "parts": [
+            [
+              26,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-in#e-1d24c75512ed6fd4",
+          "text": "Tiredness set in, and the other climbers had all overtaken me, leaving me completely alone.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          },
+          "parts": [
+            [
+              10,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

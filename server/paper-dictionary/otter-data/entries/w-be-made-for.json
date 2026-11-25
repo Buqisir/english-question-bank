@@ -1,0 +1,214 @@
+{
+  "entryId": "w:be-made-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "made",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "made",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are made for",
+      "tags": []
+    },
+    {
+      "form": "been made for",
+      "tags": []
+    },
+    {
+      "form": "was made for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be made for",
+  "senses": [
+    {
+      "senseId": "w:be-made-for#s1",
+      "pos": "短语",
+      "glossZh": "天生适合（某角色、工作等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s33"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-made-for#e-5e0ecfdd99114efd",
+          "text": "It wasn’t until 1980 — 32 years into his career – that he landed the role it would seem he was made for in Airplane!",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 103
+          },
+          "parts": [
+            [
+              91,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:be-made-for#s2",
+      "pos": "短语",
+      "glossZh": "专为……设计或制作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-made-for#e-15789b06d87b5722",
+          "text": "The doctors there ordered a plastic body cast (全身石膏) to be made for me.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 67
+          },
+          "parts": [
+            [
+              56,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-made-for#e-a02950898ef6a40c",
+          "text": "Small tags send signals at a higher frequency, but most of the current tools that receive these signals are made for bigger tags that use lower frequencies.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 116
+          },
+          "parts": [
+            [
+              104,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-made-for#e-5c92374f5ae691b7",
+          "text": "None of this was what he had been made for.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

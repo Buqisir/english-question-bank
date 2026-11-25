@@ -1,0 +1,158 @@
+{
+  "entryId": "w:at-a-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "a",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "a",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at a time",
+  "senses": [
+    {
+      "senseId": "w:at-a-time#s1",
+      "pos": "短语",
+      "glossZh": "一次；每次",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-a-time#e-c5f6813e6c341d09",
+          "text": "· If you decide that you need to read the whole book, decide how much you can read at a time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 92
+          },
+          "parts": [
+            [
+              83,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-time#e-6201b961a6c8ac60",
+          "text": "You could take out two books at a time and two only.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-time#e-f8695968f98f6bdc",
+          "text": "Do one department at a time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常和数量连用，如 one at a time。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

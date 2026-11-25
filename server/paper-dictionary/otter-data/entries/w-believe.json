@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 302
+    "mock": 119
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 155
       },
       "folded": false,
       "examples": [
@@ -206,43 +206,16 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:believe#s3",
-      "pos": "短语",
-      "glossZh": "相信……的存在、价值或能力",
-      "pronunciationId": "w:believe#p-main",
-      "note": "believe in sb/sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:believe#e-d09d8e5bc9e318a1",
-          "text": "But Ms. White reassured her, saying she believed in her ability and encouraged her to think it over and let her know her decision after school.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 40,
-            "end": 48
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:believe-in-sb-sth",
+    "w:believe-it-or-not",
+    "w:believe-me"
+  ]
 }

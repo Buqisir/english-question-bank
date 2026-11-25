@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 236
+    "mock": 84
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -270,7 +270,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -342,7 +342,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -377,7 +377,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -451,7 +451,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -485,7 +485,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -519,7 +519,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -569,9 +569,124 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:pick#s12",
+      "pos": "n.",
+      "glossZh": "选择；选中的人或物",
+      "pronunciationId": "w:pick#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pick#e-af7161e85a5873a7",
+          "text": "“You always got first pick,” Jack snapped; Sam shot back, “At least I’m not letting it rot.” Doors slammed, and they’d not spoken since.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:pick#e-c1b111c81fa63415",
+          "text": "Living in someone else’s space builds a unique closeness – admiring their bookshelf picks, the way they arrange potted plants, or family photos on the fridge turns virtual strangers into familiar faces.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:pick#e-47dd68f37e9b7966",
+          "text": "Chimps stick to their first pick as the apple appears.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:34",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick#s13",
+      "pos": "v.",
+      "glossZh": "帮助某人振作起来（pick sb up）",
+      "pronunciationId": "w:pick#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pick#e-257b68c9798c1b10",
+          "text": "At times when life threw screwballs at Johnson, McElroy was there to pick her up.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:pick-at",
+    "w:pick-on",
+    "w:pick-out",
+    "w:pick-up",
+    "w:pick-up-on",
+    "w:pick-up-speed",
+    "w:pick-up-the-phone",
+    "w:pick-up-the-pieces"
+  ]
 }

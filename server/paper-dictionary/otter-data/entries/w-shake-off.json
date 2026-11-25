@@ -1,0 +1,98 @@
+{
+  "entryId": "w:shake-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shake",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shake",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shake off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shake sth off",
+  "senses": [
+    {
+      "senseId": "w:shake-off#s1",
+      "pos": "短语",
+      "glossZh": "摆脱（困扰、负面情绪等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shake#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shake-off#e-680a69ae0d48d3ea",
+          "text": "Yet he couldn’t shake off an empty feeling.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-weifang-2026-04-second-mock:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

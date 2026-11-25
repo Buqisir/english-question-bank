@@ -1,0 +1,109 @@
+{
+  "entryId": "w:go-strong",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going strong"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "strong"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "strong"
+      ],
+      [
+        "going",
+        "strong"
+      ],
+      [
+        "goes",
+        "strong"
+      ],
+      [
+        "gone",
+        "strong"
+      ],
+      [
+        "went",
+        "strong"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go strong",
+  "senses": [
+    {
+      "senseId": "w:go-strong#s1",
+      "pos": "短语",
+      "glossZh": "势头依然良好；仍然活跃",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-strong#e-c682b5376c1c319a",
+          "text": "Going strong for five years now, the dads train in freestyle skiing, which essentially turns a mountain into a skate park: large-scale jumps, boxes and other obstacles.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be still going strong。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -35,8 +35,8 @@
     "mock": 224
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 224
+    "gaokao": 5,
+    "mock": 74
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 150
       },
       "folded": false,
       "examples": [
@@ -109,78 +109,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:until#s2",
-      "pos": "短语",
-      "glossZh": "直到……才",
-      "pronunciationId": "w:until#p-main",
-      "note": "not … until …。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:until#e-e02a6e5d57bea406",
-          "text": "It wasn’t until 1980 — 32 years into his career – that he landed the role it would seem he was made for in Airplane!",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:until#e-2a20c854c7fe0949",
-          "text": "It wasn’t until a couple of hours later that we opened the doors and began serving dinner.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:until#e-a707e3ed4823c9ea",
-          "text": "The other half did the same exercise but not until four hours after they had been tested.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 50
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -189,6 +117,12 @@
       "reason": "现代英语通常用 to"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-until",
+    "w:up-until"
+  ]
 }

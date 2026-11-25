@@ -1,0 +1,222 @@
+{
+  "entryId": "w:draw-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "drawing up"
+  ],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "up"
+      ],
+      [
+        "drawing",
+        "up"
+      ],
+      [
+        "drawn",
+        "up"
+      ],
+      [
+        "draws",
+        "up"
+      ],
+      [
+        "drew",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draw up",
+      "tags": []
+    },
+    {
+      "form": "draws up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw (sth) up",
+  "senses": [
+    {
+      "senseId": "w:draw-up#s1",
+      "pos": "短语",
+      "glossZh": "起草（文件）；拟订（计划等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:draw#s5",
+        "w:up#s65"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-up#e-f5a85ceffae009f1",
+          "text": "We started to meet regularly to draw up our plans.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:14",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 39
+          },
+          "parts": [
+            [
+              32,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-up#e-9a985945d25f93da",
+          "text": "Then draw up a schedule of your art exposure journey, and gradually weave the arts into your everyday life.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-up#e-d48e8fbe3488841a",
+          "text": "So Shah wrote one herself, drawing up the blueprints for such a company.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:draw-up#s2",
+      "pos": "短语",
+      "glossZh": "列队；使排成队形",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:draw-up#s3",
+      "pos": "短语",
+      "glossZh": "（车辆等）停下；使停住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:draw-up#s4",
+      "pos": "短语",
+      "glossZh": "向上拉起（帷幕等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧或文学用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:as-always",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "always"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "always"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as always",
+  "senses": [
+    {
+      "senseId": "w:as-always#s1",
+      "pos": "固定短语",
+      "glossZh": "像往常一样；一如既往",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-always#e-537fc1632d1d17bf",
+          "text": "As always",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "question": 42,
+              "questionId": "question:paper-gaokao-2024-national-a:42#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-always#e-a77f41b82896c5a1",
+          "text": "I said yes, as always.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

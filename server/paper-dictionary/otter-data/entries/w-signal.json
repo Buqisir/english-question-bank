@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 171
+    "mock": 14
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -228,7 +228,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 91
       },
       "folded": false,
       "examples": [
@@ -313,7 +313,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -346,7 +346,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -398,7 +398,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -482,6 +482,6 @@
       "reason": "计算机专门用法，可归入传递信息的信号。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

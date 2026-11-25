@@ -1,0 +1,155 @@
+{
+  "entryId": "w:regardless-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "regardless",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "regardless",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "regardless of",
+  "senses": [
+    {
+      "senseId": "w:regardless-of#s1",
+      "pos": "短语",
+      "glossZh": "不管；无论",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:regardless#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:regardless-of#e-18acb31208f11a63",
+          "text": "Regardless of how much they like a playmate, they may still grab his toys, refuse to share, and get bossy.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:regardless-of#e-3700b4559a82cf84",
+          "text": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 121
+          },
+          "parts": [
+            [
+              108,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              121
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:regardless-of#e-19b87805cbc9bba9",
+          "text": "Regardless of that",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "question": 53,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:53#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 21
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

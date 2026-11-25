@@ -1,0 +1,125 @@
+{
+  "entryId": "w:not-a-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "a",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "a",
+        "chance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not a chance",
+  "senses": [
+    {
+      "senseId": "w:not-a-chance#s1",
+      "pos": "短语",
+      "glossZh": "绝无可能；想都别想",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:chance#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-a-chance#e-1af2a71a82f470d0",
+          "text": "His reply came as a surprise – a shock, actually: “Not a chance.” Clearly, he was unhappy over the way we had parted.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-a-chance#e-7e44e94736060164",
+          "text": "At dinnertime, if I’m anywhere near my favourite restaurant, there’s not a chance you can talk me into going somewhere else – I want to eat at China Fun.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 81
+          },
+          "parts": [
+            [
+              69,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

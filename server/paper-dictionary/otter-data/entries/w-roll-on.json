@@ -1,0 +1,110 @@
+{
+  "entryId": "w:roll-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "on"
+      ],
+      [
+        "rolled",
+        "on"
+      ],
+      [
+        "rolling",
+        "on"
+      ],
+      [
+        "rolls",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll on",
+  "senses": [
+    {
+      "senseId": "w:roll-on#s1",
+      "pos": "短语",
+      "glossZh": "（时间）不断流逝；（事情）继续进行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-on#s2",
+      "pos": "短语",
+      "glossZh": "盼……快点到来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 Roll on Friday!，多用于英式口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-on#s3",
+      "pos": "短语",
+      "glossZh": "用滚珠或滚筒涂上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-on#s4",
+      "pos": "短语",
+      "glossZh": "告密；供出同伙（俚语）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

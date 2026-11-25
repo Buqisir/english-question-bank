@@ -1,0 +1,156 @@
+{
+  "entryId": "w:the-great-outdoors",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "great",
+      "outdoors"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "great",
+        "outdoors"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the great outdoors",
+  "senses": [
+    {
+      "senseId": "w:the-great-outdoors#s1",
+      "pos": "短语",
+      "glossZh": "户外的大自然",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:great#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-great-outdoors#e-6158f0c4f78a4618",
+          "text": "Emmanuel Chappard, an experienced guide, has a passion for making the great outdoors accessible to all.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 84
+          },
+          "parts": [
+            [
+              66,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-great-outdoors#e-72755426cb092e80",
+          "text": "His first few visits to the great outdoors were funny.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 42
+          },
+          "parts": [
+            [
+              24,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-great-outdoors#e-44d3e7eac673a170",
+          "text": "Here are some common ways that he is using the great outdoors to improve their patients’ health.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:seven-choices:1",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 61
+          },
+          "parts": [
+            [
+              43,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

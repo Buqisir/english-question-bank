@@ -1,0 +1,71 @@
+{
+  "entryId": "w:egg-sb-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "egg",
+      {
+        "slot": "sb"
+      },
+      "on"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "egg",
+        {
+          "slot": "sb"
+        },
+        "on"
+      ],
+      [
+        "egg",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "egg sb on",
+  "senses": [
+    {
+      "senseId": "w:egg-sb-on#s1",
+      "pos": "短语",
+      "glossZh": "怂恿某人做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:egg#s3"
+      ],
+      "examples": [],
+      "note": "常指怂恿别人做不明智或冒险的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-the-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "end"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the end",
+  "senses": [
+    {
+      "senseId": "w:in-the-end#s1",
+      "pos": "短语",
+      "glossZh": "最后；最终",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:end#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-end#e-e84222501799d15a",
+          "text": "In the end, these strategies work because your personality is simply your usual way of thinking and acting.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-end#e-be2a9b64100ae338",
+          "text": "In the end, I spoke carefully, “Everyone wears a school uniform in Jamaica.”",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-end#e-95d114b834415113",
+          "text": "But this wasn't enough.” In the end, she felt she had no choice but to write a second book, one in which she would try to distill(浓",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 35
+          },
+          "parts": [
+            [
+              25,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 42
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

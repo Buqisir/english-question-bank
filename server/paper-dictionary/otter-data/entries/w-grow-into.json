@@ -1,0 +1,212 @@
+{
+  "entryId": "w:grow-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "grew into",
+    "growing into"
+  ],
+  "pattern": {
+    "tokens": [
+      "grow",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "grow",
+        "into"
+      ],
+      [
+        "grew",
+        "into"
+      ],
+      [
+        "growing",
+        "into"
+      ],
+      [
+        "grown",
+        "into"
+      ],
+      [
+        "grows",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "grow into",
+      "tags": []
+    },
+    {
+      "form": "grown into",
+      "tags": []
+    },
+    {
+      "form": "grows into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "grow into sth",
+  "senses": [
+    {
+      "senseId": "w:grow-into#s1",
+      "pos": "短语",
+      "glossZh": "长成；逐渐发展成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:grow#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:grow-into#e-119e619afc9f6bb3",
+          "text": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 120
+          },
+          "parts": [
+            [
+              111,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:grow-into#e-30c027a4d2b61dc3",
+          "text": "After being cleaned, explants grow into complete plants in a room with a controlled environment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:grow-into#e-b548dd1631d38b4e",
+          "text": "Today, pottery workshops have grown into a popular highlight of Jingdezhen’s cultural tourism.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:grow-into#s2",
+      "pos": "短语",
+      "glossZh": "逐渐适应并胜任（角色、职责等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:grow-into#s3",
+      "pos": "短语",
+      "glossZh": "长大后能穿下（原先偏大的衣物）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

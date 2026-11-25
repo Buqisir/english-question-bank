@@ -41,8 +41,8 @@
     "mock": 87
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 86
+    "gaokao": 1,
+    "mock": 0
   },
   "senses": [
     {
@@ -53,7 +53,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -124,7 +124,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -219,40 +219,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:third#s4",
-      "pos": "短语",
-      "glossZh": "第三人称",
-      "pronunciationId": "w:third#p-main",
-      "note": "third person。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:third#e-33aaef554332f5ec",
-          "text": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 17,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 102,
-            "end": 107
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -261,6 +227,11 @@
       "reason": "具体领域专称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:third-person"
+  ]
 }

@@ -1,0 +1,203 @@
+{
+  "entryId": "w:drive-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drive",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drive",
+        "away"
+      ],
+      [
+        "driven",
+        "away"
+      ],
+      [
+        "drives",
+        "away"
+      ],
+      [
+        "driving",
+        "away"
+      ],
+      [
+        "drove",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drive away",
+      "tags": []
+    },
+    {
+      "form": "drove away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drive (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:drive-away#s1",
+      "pos": "短语",
+      "glossZh": "开车离开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drive-away#e-e42950cf0c3f15dc",
+          "text": "The old lady thanked me, and I drove away as fast as I could.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drive-away#e-87de8a8144a1b88b",
+          "text": "She thanked me, and I drove away as fast as I could.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 32
+          },
+          "parts": [
+            [
+              22,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drive-away#e-171666d2acb6fdfd",
+          "text": "Then we drove away.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:cloze:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:drive-away#s2",
+      "pos": "短语",
+      "glossZh": "把（车辆）开走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:drive-away#s3",
+      "pos": "短语",
+      "glossZh": "赶走；驱离",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

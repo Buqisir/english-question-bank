@@ -1,0 +1,107 @@
+{
+  "entryId": "w:laugh-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "laugh",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "laugh",
+        "off"
+      ],
+      [
+        "laughed",
+        "off"
+      ],
+      [
+        "laughing",
+        "off"
+      ],
+      [
+        "laughs",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "laugh off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "laugh (sth) off",
+  "senses": [
+    {
+      "senseId": "w:laugh-off#s1",
+      "pos": "短语",
+      "glossZh": "一笑置之；用玩笑淡化或化解",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:laugh-off#e-a59ed2561e863533",
+          "text": "Today, some people already treat AI as family and argue it deserves rights and respect, while others laugh off the idea as nothing more than “projecting human feelings onto machines”.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 110
+          },
+          "parts": [
+            [
+              101,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              110
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

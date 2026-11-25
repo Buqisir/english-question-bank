@@ -1,0 +1,98 @@
+{
+  "entryId": "w:for-a-rainy-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "a",
+      "rainy",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "a",
+        "rainy",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for a rainy day",
+  "senses": [
+    {
+      "senseId": "w:for-a-rainy-day#s1",
+      "pos": "短语",
+      "glossZh": "以备将来遇到困难；以备不时之需",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rainy#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-a-rainy-day#e-f8e83056ee8db3e6",
+          "text": "Always prepare for a rainy day.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 30
+          },
+          "parts": [
+            [
+              15,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常与 save、set aside、prepare 等连用。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

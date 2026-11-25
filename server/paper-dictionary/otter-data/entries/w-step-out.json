@@ -1,0 +1,276 @@
+{
+  "entryId": "w:step-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "out"
+      ],
+      [
+        "stepped",
+        "out"
+      ],
+      [
+        "stepping",
+        "out"
+      ],
+      [
+        "steps",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stepped out",
+      "tags": []
+    },
+    {
+      "form": "stepping out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step out",
+  "senses": [
+    {
+      "senseId": "w:step-out#s1",
+      "pos": "短语",
+      "glossZh": "走出去；出去一下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-out#e-6a7a91d2895f5d65",
+          "text": "Ashley slowly raised the camera just as the bittern stepped out into a gap in the grass.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 63
+          },
+          "parts": [
+            [
+              52,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-out#e-a7ea6f2d17e1ce7b",
+          "text": "Paragraph 2: As Mario stepped out, he spotted Mr. Harper down at the port.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-out#e-c8cac30fb89bc7c0",
+          "text": "Desperate to run away from my own failure, I picked up my jacket and a small sketchbook, stepping out to wander the city streets with no plan at all.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 101
+          },
+          "parts": [
+            [
+              89,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:step-out#s2",
+      "pos": "短语",
+      "glossZh": "迈出一步；敢于走到台前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-out#e-fe8bc0dbb4d4afbc",
+          "text": "Step out, or your words remain trapped on paper.” Her words hurt but they were true.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-out#e-772b5fa71c73a2df",
+          "text": "Paragraph 1: These words just struck me and I decided to step out.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          },
+          "parts": [
+            [
+              57,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:step-out#s3",
+      "pos": "短语",
+      "glossZh": "迈开大步走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-out#s4",
+      "pos": "短语",
+      "glossZh": "与某人约会；交往",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式用法，常用 step out with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

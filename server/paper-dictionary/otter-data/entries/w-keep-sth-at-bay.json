@@ -1,0 +1,114 @@
+{
+  "entryId": "w:keep-sth-at-bay",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      {
+        "slot": "sth"
+      },
+      "at",
+      "bay"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        {
+          "slot": "sth"
+        },
+        "at",
+        "bay"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep at bay",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep sth at bay",
+  "senses": [
+    {
+      "senseId": "w:keep-sth-at-bay#s1",
+      "pos": "短语",
+      "glossZh": "挡住威胁；防止有害事物侵扰",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bay#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-sth-at-bay#e-86cea4d9c7061af5",
+          "text": "Keep Skin Cancer At Bay",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 23
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              17,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              17,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "可用于疾病、危险等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

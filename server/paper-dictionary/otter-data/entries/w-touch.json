@@ -62,8 +62,8 @@
     "mock": 176
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 169
+    "gaokao": 6,
+    "mock": 34
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -317,126 +317,19 @@
       "pos": "n.",
       "glossZh": "一点儿",
       "pronunciationId": "w:touch#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:touch#s6",
-      "pos": "短语",
-      "glossZh": "降落",
+      "senseId": "w:touch#s9",
+      "pos": "v.",
+      "glossZh": "影响；波及",
       "pronunciationId": "w:touch#p-main",
-      "note": "touch down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:touch#e-3378aa61cae3407d",
-          "text": "I touched down in Vienna just 30 minutes before the departure of the last bus to Prague.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:touch#s7",
-      "pos": "短语",
-      "glossZh": "联系",
-      "pronunciationId": "w:touch#p-main",
-      "note": "get 或 keep in touch with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:touch#e-e12c7d228509fd2f",
-          "text": "My wife suggested I get in touch with my brother, but I resisted, thinking he should call first.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:touch#e-490f1546380564a2",
-          "text": "Plus, you will probably only get the numbers of the handful of students you'll actually keep in touch with.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:15",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 96,
-            "end": 101
-          }
-        },
-        {
-          "exampleId": "w:touch#e-01fc6a9a9d43aefe",
-          "text": "It may be hard to keep in touch in difficult times, but social support networks matter greatly especially in tough times.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 26,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:touch#s8",
-      "pos": "短语",
-      "glossZh": "略微谈及",
-      "pronunciationId": "w:touch#p-main",
-      "note": "touch on 或 touch upon。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -445,41 +338,122 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:touch#e-f4ddc138dd619cf7",
-          "text": "Ultimately, it touches upon time itself – how to balance the preservation of historical identity with the need for change.",
+          "exampleId": "w:touch#e-922c29b67d1dd7a7",
+          "text": "Writing it down achieves the same effect as it moves the intention into an external record that the location-updating process can’t touch.",
           "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
-              "sentence": 5
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:5",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 15,
-            "end": 22
+            "start": 132,
+            "end": 137
           }
-        },
+        }
+      ]
+    },
+    {
+      "senseId": "w:touch#s10",
+      "pos": "n.",
+      "glossZh": "触碰；接触",
+      "pronunciationId": "w:touch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
         {
-          "exampleId": "w:touch#e-021418bd99c45029",
-          "text": "The researchers touched on this in their article published in Scientific American, in which they advise avoiding procrastination and pre-crastination by decomposing your large tasks into smaller ones.",
+          "exampleId": "w:touch#e-de9641f086d591e6",
+          "text": "Ticklishness (怕痒), a universal yet puzzling human response characterized by laughter or squirming upon light touch, has long intrigued scientists.",
           "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:4",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d:1",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 16,
-            "end": 23
+            "start": 109,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:touch#s11",
+      "pos": "n.",
+      "glossZh": "处理方式；手法",
+      "pronunciationId": "w:touch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:touch#e-baef894a09b3c269",
+          "text": "Prized for toughness, daffodils require a light touch in care.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:touch#s12",
+      "pos": "v.",
+      "glossZh": "着手处理（问题）",
+      "pronunciationId": "w:touch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:touch#e-e213891ce06a599d",
+          "text": "And while governments have tried to patch things up with stopgap measures, like air filters during haze season, those fixes don’t touch the root problem.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 135
           }
         }
       ]
@@ -491,6 +465,19 @@
       "reason": "专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-touch",
+    "w:get-in-touch",
+    "w:get-in-touch-with",
+    "w:keep-in-touch-with",
+    "w:lose-touch",
+    "w:touch-down",
+    "w:touch-on",
+    "w:touch-up",
+    "w:touch-upon"
+  ]
 }

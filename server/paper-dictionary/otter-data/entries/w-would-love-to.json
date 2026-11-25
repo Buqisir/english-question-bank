@@ -1,0 +1,156 @@
+{
+  "entryId": "w:would-love-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "would",
+      "love",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "would",
+        "love",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "would love to",
+  "senses": [
+    {
+      "senseId": "w:would-love-to#s1",
+      "pos": "短语",
+      "glossZh": "很想做；非常乐意做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:love#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:would-love-to#e-74e2c90b0e784b2c",
+          "text": "I would love to see a trend toward zoos’ phasing out species that",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 15
+          },
+          "parts": [
+            [
+              2,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:would-love-to#e-99642bd2d8dd614a",
+          "text": "“We would love to do more,” says Matt Pestronk, the president of a development company, “but unfortunately, almost all capital seeks a return.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:would-love-to#e-7d7698783421a678",
+          "text": "She once mentioned to her family that if someone did, she would love to meet them – maybe even walk together on the very beach where it landed.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 71
+          },
+          "parts": [
+            [
+              58,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

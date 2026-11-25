@@ -1,0 +1,330 @@
+{
+  "entryId": "w:pick-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "out"
+      ],
+      [
+        "picked",
+        "out"
+      ],
+      [
+        "picking",
+        "out"
+      ],
+      [
+        "picks",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pick out",
+      "tags": []
+    },
+    {
+      "form": "picked out",
+      "tags": []
+    },
+    {
+      "form": "picking out",
+      "tags": []
+    },
+    {
+      "form": "picks out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:pick-out#s1",
+      "pos": "短语",
+      "glossZh": "挑选；选出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-out#e-b56d994be38b4349",
+          "text": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-out#e-116fc6f92ea7281a",
+          "text": "However, the three bears managed to pick out the bigger number of dots even in pairs of patterns where fewer dots took up a larger area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-out#e-ca2fd56c7cc97f00",
+          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          },
+          "parts": [
+            [
+              85,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:pick-out#s2",
+      "pos": "短语",
+      "glossZh": "辨认出；从中分辨出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-out#e-71162b105acfa1e6",
+          "text": "Pick out diseased plants in the forest.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-out#e-fed987cce07f0967",
+          "text": "Time after time, the labrador picks out the cancer, standing still and staring at the correct pot to show she has found it.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-out#e-d6fa51041b6351b3",
+          "text": "The dog smells four pots of urine（尿液）samples, and then correctly picks out the sample belonging to an NHS (National Health Service) patient with bladder（膀胱）cancer.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 74
+          },
+          "parts": [
+            [
+              65,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:pick-out#s3",
+      "pos": "短语",
+      "glossZh": "用不同颜色勾勒或突出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pick-out#s4",
+      "pos": "短语",
+      "glossZh": "一个音一个音地弹出（曲调）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pick-out#s5",
+      "pos": "短语",
+      "glossZh": "准确传球给（选定的队友）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

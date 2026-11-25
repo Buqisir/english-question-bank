@@ -1,0 +1,138 @@
+{
+  "entryId": "w:you-are-welcome",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "are",
+      "welcome"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "are",
+        "welcome"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you are welcome",
+  "senses": [
+    {
+      "senseId": "w:you-are-welcome#s1",
+      "pos": "短语",
+      "glossZh": "欢迎你做某事；你尽可以做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:you-are-welcome#e-3bbb82bf2afefc17",
+          "text": "The class ends at 8:30 pm, though you are welcome to stay until 9:00 pm.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 49
+          },
+          "parts": [
+            [
+              34,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:you-are-welcome#e-5a4dcfb006b2b518",
+          "text": "You are welcome to mix tasks from different quests.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "后接 to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:you-are-welcome#s2",
+      "pos": "短语",
+      "glossZh": "不客气；不用谢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于回应道谢。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

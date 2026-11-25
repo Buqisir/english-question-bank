@@ -1,0 +1,392 @@
+{
+  "entryId": "w:deal-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "dealing with",
+    "deals with"
+  ],
+  "pattern": {
+    "tokens": [
+      "deal",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "deal",
+        "with"
+      ],
+      [
+        "dealing",
+        "with"
+      ],
+      [
+        "deals",
+        "with"
+      ],
+      [
+        "dealt",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dealt with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "deal with",
+  "senses": [
+    {
+      "senseId": "w:deal-with#s1",
+      "pos": "短语",
+      "glossZh": "处理；应对",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deal#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:deal-with#e-26a9cadf1af57891",
+          "text": "How does the author deal with the challenge as a landscape photographer in the Midwest?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2023-national-b:24",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-6b7957e5dbe1d48c",
+          "text": "Paragraph 2: Eva decided to use the same trick to deal with the school building.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 59
+          },
+          "parts": [
+            [
+              50,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-e828700443471a4a",
+          "text": "I was back teaching after an absence of 15 years, dealing with the various kinds of “forbidden fruit” that come out of book bags.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 11,
+        "mock": 87
+      }
+    },
+    {
+      "senseId": "w:deal-with#s2",
+      "pos": "短语",
+      "glossZh": "与……打交道；应对（某人）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:deal-with#e-da2fbdec320cae17",
+          "text": "How to deal with artists.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-06ac48e74f5760fd",
+          "text": "AI companions that never criticize are poor preparation for dealing with imperfect humans.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 72
+          },
+          "parts": [
+            [
+              60,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-33e750524040c490",
+          "text": "Dealing with teenagers can be challenging at times, but he’ll take them over a bunch of lawyers and judges any day.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:deal-with#s3",
+      "pos": "短语",
+      "glossZh": "涉及；论述",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deal#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:deal-with#e-f36072e3aa8d8cd2",
+          "text": "The themes of traditional fables often deal with simple truths about everyday life.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 48
+          },
+          "parts": [
+            [
+              39,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-809d90bbaaa3b949",
+          "text": "They deal with serious topics in a more engaging manner and literally show me what was going on.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deal-with#e-605447c83e8420a6",
+          "text": "Batchelor’s scaling, on the other hand, deals with how small-scale turbulence behaves.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        }
+      ],
+      "note": "主语常为文章、书籍或演讲。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 100
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

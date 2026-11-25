@@ -1,0 +1,153 @@
+{
+  "entryId": "w:a-few",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "few"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "few"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a few",
+  "senses": [
+    {
+      "senseId": "w:a-few#s1",
+      "pos": "短语",
+      "glossZh": "几个；少量的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-few#e-4e18a476fb3a159d",
+          "text": "The curtains are about to open, and in a few minutes the action and dialogue will tell you the story.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          },
+          "parts": [
+            [
+              39,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-few#e-a106c26443d54d04",
+          "text": "He was facing health issues and his wife of thirty-five years had passed away a few months earlier.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 83
+          },
+          "parts": [
+            [
+              78,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-few#e-8b4a3ce24373bb54",
+          "text": "A few minutes later, when I landed the trick, my friends beat their boards loud, shouting: “Safe!",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 11
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          },
+          "parts": [
+            [
+              0,
+              5
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              5
+            ]
+          ]
+        }
+      ],
+      "note": "修饰复数可数名词，也可单用或接 of。",
+      "counts": {
+        "gaokao": 53,
+        "mock": 197
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 53,
+    "mock": 197
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

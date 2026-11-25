@@ -1,0 +1,76 @@
+{
+  "entryId": "w:take-seriously",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "seriously"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "seriously"
+      ],
+      [
+        "taken",
+        "seriously"
+      ],
+      [
+        "takes",
+        "seriously"
+      ],
+      [
+        "taking",
+        "seriously"
+      ],
+      [
+        "took",
+        "seriously"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sb/sth seriously",
+  "senses": [
+    {
+      "senseId": "w:take-seriously#s1",
+      "pos": "短语",
+      "glossZh": "认真对待某人或某事；把……当回事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:take#s29"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

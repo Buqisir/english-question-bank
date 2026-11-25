@@ -1,0 +1,75 @@
+{
+  "entryId": "w:play-the-game",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "the",
+      "game"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "the",
+        "game"
+      ],
+      [
+        "played",
+        "the",
+        "game"
+      ],
+      [
+        "playing",
+        "the",
+        "game"
+      ],
+      [
+        "plays",
+        "the",
+        "game"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play the game",
+  "senses": [
+    {
+      "senseId": "w:play-the-game#s1",
+      "pos": "短语",
+      "glossZh": "按规则行事；公平竞争",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

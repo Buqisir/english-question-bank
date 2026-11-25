@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-response-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "response",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "response",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in response to",
+  "senses": [
+    {
+      "senseId": "w:in-response-to#s1",
+      "pos": "短语",
+      "glossZh": "作为对……的回应或反应",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s16",
+        "w:response#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-response-to#e-893ff9018b90b555",
+          "text": "Since the effects were small, this may suggest that our creative thinking does not differ that much in response to total silence and 85 decibels of background noise.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 114
+          },
+          "parts": [
+            [
+              100,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              114
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-response-to#e-c4078f1bf83225e8",
+          "text": "These measures were introduced in response to accidents involving youth.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 45
+          },
+          "parts": [
+            [
+              31,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-response-to#e-4686d47e6d13dd9d",
+          "text": "What did Governor Greg Abbott do in response to the disaster?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 47
+          },
+          "parts": [
+            [
+              33,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

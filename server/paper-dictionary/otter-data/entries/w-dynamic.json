@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 51
+    "mock": 4
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -211,7 +211,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -273,6 +273,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:dynamic#s4",
+      "pos": "n.",
+      "glossZh": "（dynamics）动力学",
+      "pronunciationId": "w:dynamic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dynamic#e-7ed774c71b25d1c7",
+          "text": "The patterns in The Starry Night correspond to two important principles in fluid dynamics: Kolmogorov’s law and Batchelor’s scaling.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 89
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -281,6 +314,6 @@
       "reason": "音乐或语法专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

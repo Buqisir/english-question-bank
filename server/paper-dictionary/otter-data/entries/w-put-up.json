@@ -1,0 +1,415 @@
+{
+  "entryId": "w:put-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting up"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "up"
+      ],
+      [
+        "putting",
+        "up"
+      ],
+      [
+        "puts",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put up",
+  "senses": [
+    {
+      "senseId": "w:put-up#s1",
+      "pos": "短语",
+      "glossZh": "搭建；竖起；安装",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s19",
+        "w:up#s67"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-up#e-978352104445446a",
+          "text": "A statue commemorating Shakespeare and Tang was put up at Shakespeare’s Birthplace Garden in 2017.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          },
+          "parts": [
+            [
+              48,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-up#e-347c307c9b4bb67a",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 21
+          },
+          "parts": [
+            [
+              11,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-up#e-c137a111c9d63864",
+          "text": "Solar developers want to put up panels as quickly and cheaply as possible, so they haven't given much thought to what they put under them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          },
+          "parts": [
+            [
+              25,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:put-up#s2",
+      "pos": "短语",
+      "glossZh": "挂起（画等）；张贴（告示等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s20",
+        "w:up#s68"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-up#e-801049a28dcc0e53",
+          "text": "She adds: “I’ve moved house many times and I always like to personalise my room and put up pictures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 90
+          },
+          "parts": [
+            [
+              84,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-up#e-e35905d2afcba9f1",
+          "text": "To put up a notice.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:25#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          },
+          "parts": [
+            [
+              3,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-up#e-1d10ded8a673eccf",
+          "text": "Put up a sign.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:put-up#s3",
+      "pos": "短语",
+      "glossZh": "表现出；进行（抵抗、争斗等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-up#e-33f1d932bf2f6c65",
+          "text": "“They want to please you, and they won’t put up a lot of friction in the way that people in the real world might.” If users get used to this, “when you encounter friction in real world interactions, you’re going to be less prepared,” Robb said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          },
+          "parts": [
+            [
+              41,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "常接 resistance 或 a fight。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:put-up#s4",
+      "pos": "短语",
+      "glossZh": "留宿某人；给某人提供临时住宿",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s5",
+      "pos": "短语",
+      "glossZh": "投宿；过夜",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s6",
+      "pos": "短语",
+      "glossZh": "出资；提供资金",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s7",
+      "pos": "短语",
+      "glossZh": "拿出来出售或竞拍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s8",
+      "pos": "短语",
+      "glossZh": "把头发盘起或扎起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s9",
+      "pos": "短语",
+      "glossZh": "怂恿某人做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "put sb up to sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-up#s10",
+      "pos": "短语",
+      "glossZh": "（体育比赛中）拿下（分数）；打出（数据）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

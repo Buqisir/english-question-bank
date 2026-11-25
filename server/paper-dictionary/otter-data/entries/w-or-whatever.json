@@ -1,0 +1,93 @@
+{
+  "entryId": "w:or-whatever",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "or",
+      "whatever"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "or",
+        "whatever"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "or whatever",
+  "senses": [
+    {
+      "senseId": "w:or-whatever#s1",
+      "pos": "短语",
+      "glossZh": "或诸如此类的事物；或者别的什么",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:whatever#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:or-whatever#e-70ee3f1f1ca2498e",
+          "text": "Maybe you say “go,” or turn on a certain song, or whatever.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        }
+      ],
+      "note": "口语中常置于举例或列举之后。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

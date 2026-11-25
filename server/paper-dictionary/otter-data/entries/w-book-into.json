@@ -1,0 +1,72 @@
+{
+  "entryId": "w:book-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "books into"
+  ],
+  "pattern": {
+    "tokens": [
+      "book",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "book",
+        "into"
+      ],
+      [
+        "books",
+        "into"
+      ],
+      [
+        "booked",
+        "into"
+      ],
+      [
+        "booking",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "book (sb) into sth",
+  "senses": [
+    {
+      "senseId": "w:book-into#s1",
+      "pos": "短语",
+      "glossZh": "预订入住某处；为某人预订并安排入住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

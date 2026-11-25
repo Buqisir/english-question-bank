@@ -1,0 +1,98 @@
+{
+  "entryId": "w:compare-notes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "compare",
+      "notes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "compare",
+        "notes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "compared notes",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "compare notes",
+  "senses": [
+    {
+      "senseId": "w:compare-notes#s1",
+      "pos": "短语",
+      "glossZh": "交流各自的看法或经历",
+      "note": "可用 compare notes with sb on sth。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:compare#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:compare-notes#e-4be7b0a9be642dd7",
+          "text": "Some laughed easily, exchanging jokes with their new friends, while others eagerly compared notes on their travel experiences.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 97
+          },
+          "parts": [
+            [
+              83,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              97
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

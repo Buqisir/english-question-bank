@@ -1,0 +1,111 @@
+{
+  "entryId": "w:nine-to-five",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nine",
+      "to",
+      "five"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nine",
+        "to",
+        "five"
+      ],
+      [
+        "nine",
+        "to",
+        "fives"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nine to five",
+  "senses": [
+    {
+      "senseId": "w:nine-to-five#s1",
+      "pos": "短语",
+      "glossZh": "朝九晚五；从上午九点到下午五点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nine-to-five#e-adb9f86c07aea1c4",
+          "text": "And yet, “It’s not like we’ve seen any presidential candidates run on school being nine to five.”",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 95
+          },
+          "parts": [
+            [
+              83,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              95
+            ]
+          ]
+        }
+      ],
+      "note": "常用来表示固定的日间作息。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:nine-to-five#s2",
+      "pos": "短语",
+      "glossZh": "朝九晚五的工作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

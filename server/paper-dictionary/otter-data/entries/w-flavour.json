@@ -85,7 +85,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 29
+    "mock": 1
   },
   "senses": [
     {
@@ -97,7 +97,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -239,7 +239,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -349,6 +349,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:flavour#s6",
+      "pos": "n.",
+      "glossZh": "调味剂",
+      "pronunciationId": "w:flavour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:flavour#e-a1a52dd823fdc6c8",
+          "text": "Apart from the deliciousness of those snacks, the majority of other UPFs, such as ready-to-eat meals and instant mixes, contain artificial flavors and preservatives.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 146
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -357,6 +390,6 @@
       "reason": "物理专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

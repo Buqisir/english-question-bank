@@ -62,8 +62,8 @@
     "mock": 39
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 34
+    "gaokao": 5,
+    "mock": 7
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -191,78 +191,6 @@
       ]
     },
     {
-      "senseId": "w:guess#s3",
-      "pos": "短语",
-      "glossZh": "我想",
-      "pronunciationId": "w:guess#p-main",
-      "note": "I guess，口语。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:guess#e-9901009a601767c9",
-          "text": "“I guess this is it,” he said.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:guess#e-1b1b659bbdfe3803",
-          "text": "But that’s progress, I guess.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:guess#e-7c9514d2c042dc9b",
-          "text": "I guess our different childhood background is what makes my grandmother such an amazing person to __59__ to: her stories always make my history textbooks __60__.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:guess#s4",
       "pos": "n.",
       "glossZh": "猜测",
@@ -270,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -340,6 +268,12 @@
       "reason": "罕见用法，语料未见"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:guess-what",
+    "w:i-guess"
+  ]
 }

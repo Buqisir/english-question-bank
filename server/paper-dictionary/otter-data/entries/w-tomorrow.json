@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 60
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -223,6 +223,9 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:here-today-gone-tomorrow"
+  ]
 }

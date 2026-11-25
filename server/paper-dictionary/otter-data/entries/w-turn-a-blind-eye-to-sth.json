@@ -1,0 +1,146 @@
+{
+  "entryId": "w:turn-a-blind-eye-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "a",
+      "blind",
+      "eye",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "a",
+        "blind",
+        "eye",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn a blind eye to",
+      "tags": []
+    },
+    {
+      "form": "turns a blind eye to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn a blind eye to sth",
+  "senses": [
+    {
+      "senseId": "w:turn-a-blind-eye-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "对……视而不见；故意忽视",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blind#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-a-blind-eye-to-sth#e-3e6fa2b9dab26ac2",
+          "text": "A woman turns a blind eye to her credit card bills.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 28
+          },
+          "parts": [
+            [
+              8,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-a-blind-eye-to-sth#e-eebcb21f2e66cd2e",
+          "text": "They turn a blind eye to the relevant durations.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 24
+          },
+          "parts": [
+            [
+              5,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

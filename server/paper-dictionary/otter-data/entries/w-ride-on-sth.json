@@ -1,0 +1,89 @@
+{
+  "entryId": "w:ride-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ride on"
+  ],
+  "pattern": {
+    "tokens": [
+      "ride",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ride",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "ride",
+        "on"
+      ],
+      [
+        "ridden",
+        "on"
+      ],
+      [
+        "rides",
+        "on"
+      ],
+      [
+        "riding",
+        "on"
+      ],
+      [
+        "rode",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ride on sth",
+  "senses": [
+    {
+      "senseId": "w:ride-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "取决于……；有赖于……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:ride#s9"
+      ],
+      "examples": [],
+      "note": "主语常为成败、结果或前途等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,196 @@
+{
+  "entryId": "w:take-a-picture",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a picture",
+    "took a picture"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "picture"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "picture"
+      ],
+      [
+        "taking",
+        "a",
+        "picture"
+      ],
+      [
+        "took",
+        "a",
+        "picture"
+      ],
+      [
+        "taken",
+        "a",
+        "picture"
+      ],
+      [
+        "takes",
+        "a",
+        "picture"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken a picture",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a picture",
+  "senses": [
+    {
+      "senseId": "w:take-a-picture#s1",
+      "pos": "短语",
+      "glossZh": "拍照；拍一张照片",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-picture#e-5e47cd0c0e58d72f",
+          "text": "I took a picture of the vase and posted it online, for $10.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 16
+          },
+          "parts": [
+            [
+              2,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-picture#e-a3767d005ad116f4",
+          "text": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 154,
+            "end": 168
+          },
+          "parts": [
+            [
+              154,
+              168
+            ]
+          ],
+          "highlightRanges": [
+            [
+              154,
+              168
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-picture#e-b549b094f127ab22",
+          "text": "I had long dreamed of taking a picture of a polar bear while it waited beside a breathing hole, hoping to grab a seal.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 38
+          },
+          "parts": [
+            [
+              22,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              38
+            ]
+          ]
+        }
+      ],
+      "note": "take a picture of sb/sth 表示给某人或某物拍照。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:take-a-picture#s2",
+      "pos": "短语",
+      "glossZh": "别盯着看了（用“拍张照吧”来讽刺）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

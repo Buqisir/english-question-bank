@@ -1,0 +1,94 @@
+{
+  "entryId": "w:just-in-case",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "in",
+      "case"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "in",
+        "case"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just in case",
+  "senses": [
+    {
+      "senseId": "w:just-in-case#s1",
+      "pos": "短语",
+      "glossZh": "以防万一",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:just#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:just-in-case#e-14d4a1927f8f3caf",
+          "text": "(Preferably a couple of days before the deadline, just in case.)",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

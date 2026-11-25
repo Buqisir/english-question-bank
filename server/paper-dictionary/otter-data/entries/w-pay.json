@@ -69,8 +69,8 @@
     "mock": 381
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 380
+    "gaokao": 14,
+    "mock": 225
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 145
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -278,7 +278,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -322,223 +322,20 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:pay#s5",
-      "pos": "短语",
-      "glossZh": "取得成效",
-      "pronunciationId": "w:pay#p-main",
-      "note": "pay off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pay#e-b99075a086e5b3de",
-          "text": "Hard work pays off.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2020-i:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:pay#e-dbabca3fb6f5fe65",
-          "text": "Many would say the Internet is a place for people who have given up on the traditional postal service, but Paulo’s hunch（直觉）paid off.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 124,
-            "end": 128
-          }
-        },
-        {
-          "exampleId": "w:pay#e-689cb778bfaf168d",
-          "text": "Paragraph 2: Slowly but surely, my efforts to adjust to the new routine paid off.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 72,
-            "end": 76
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:pay#s6",
-      "pos": "短语",
-      "glossZh": "注意；留心",
-      "pronunciationId": "w:pay#p-main",
-      "note": "pay attention。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pay#e-5ee0eee31f993267",
-          "text": "What should you pay most attention to when taking notes?",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
-            "locator": {
-              "question": 18,
-              "questionId": "question:listening:18",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:pay#e-3b85496cb5376f56",
-          "text": "We pay little attention to food waste.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2022-i:24",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:pay#e-2d5dec721cfce9f3",
-          "text": "Thus, you go back and reread, not because you did not understand, but because you were not paying attention.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 98,
-            "end": 104
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:pay#s7",
-      "pos": "短语",
-      "glossZh": "拜访；参观",
-      "pronunciationId": "w:pay#p-main",
-      "note": "pay a visit。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pay#e-34f1eff3700e4087",
-          "text": "Be sure to pay a visit as part of your stay in the city.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:15",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:pay#s8",
-      "pos": "短语",
-      "glossZh": "为过失付出代价",
-      "pronunciationId": "w:pay#p-main",
-      "note": "pay for。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pay#e-ad13caa72389ccf3",
-          "text": "When a technology’s strengths are easy to praise and its weaknesses easy to ignore, who should pay for its mistakes?",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 95,
-            "end": 98
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:pay-a-visit",
+    "w:pay-attention",
+    "w:pay-back",
+    "w:pay-for",
+    "w:pay-it-forward",
+    "w:pay-off",
+    "w:pay-out-of-pocket"
+  ]
 }

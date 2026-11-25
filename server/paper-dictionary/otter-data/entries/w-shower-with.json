@@ -1,0 +1,83 @@
+{
+  "entryId": "w:shower-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shower",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shower",
+        "with"
+      ],
+      [
+        "showered",
+        "with"
+      ],
+      [
+        "showering",
+        "with"
+      ],
+      [
+        "showers",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shower sb/sth with sth",
+  "senses": [
+    {
+      "senseId": "w:shower-with#s1",
+      "pos": "短语",
+      "glossZh": "向……大量洒落或抛撒（雨水、花瓣等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shower-with#s2",
+      "pos": "短语",
+      "glossZh": "大量给予（礼物、赞扬等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

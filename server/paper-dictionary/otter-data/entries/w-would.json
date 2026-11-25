@@ -35,8 +35,8 @@
     "mock": 982
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 981
+    "gaokao": 6,
+    "mock": 795
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 59,
-        "mock": 0
+        "mock": 106
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 56,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 31,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -325,146 +325,6 @@
       ]
     },
     {
-      "senseId": "w:would#s5",
-      "pos": "短语",
-      "glossZh": "想要",
-      "pronunciationId": "w:would#p-main",
-      "note": "would like。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:would#e-fe6e0148df85c980",
-          "text": "Who would like to make small talk according to the speaker?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 17,
-              "questionId": "question:listening:17",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:would#e-a57f9462f8d0999b",
-          "text": "Think about the exercises you would like to do with your workout partner.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "seven-choices-3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:would#e-0e89facc63ab1292",
-          "text": "It is recently reported that the number of those sticking to a traditional diet is slowly declining and around half of Britain’s consumers would like to change or improve their cooking in some way.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 139,
-            "end": 144
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:would#s6",
-      "pos": "短语",
-      "glossZh": "宁愿",
-      "pronunciationId": "w:would#p-main",
-      "note": "would rather。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:would#e-5db8154258d8f0c5",
-          "text": "Neither participant can claim they would rather have the other person’s share.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 42,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:would#s7",
-      "pos": "短语",
-      "glossZh": "碰巧",
-      "pronunciationId": "w:would#p-main",
-      "note": "as fate would have it。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:would#e-cbdd92e1ebadd51d",
-          "text": "As fate（命运） would have it, Dr. Henderson very deliberately matched everyone in class and announced that I would be working with the one person in class I wanted to avoid.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:would#s8",
       "pos": "modal v.",
       "glossZh": "用于委婉地作判断或推测",
@@ -473,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -545,7 +405,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -577,6 +437,19 @@
       "reason": "俚语或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-fate-would-have-it",
+    "w:as-luck-would-have-it",
+    "w:what-would-you-like",
+    "w:would-like",
+    "w:would-love-to",
+    "w:would-rather",
+    "w:would-sooner",
+    "w:would-sooner-do-sth",
+    "w:you-would-think"
+  ]
 }

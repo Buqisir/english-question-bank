@@ -1,0 +1,212 @@
+{
+  "entryId": "w:pay-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "paid for",
+      "tags": []
+    },
+    {
+      "form": "paying for",
+      "tags": []
+    },
+    {
+      "form": "pays for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay for",
+  "senses": [
+    {
+      "senseId": "w:pay-for#s1",
+      "pos": "短语",
+      "glossZh": "为……付款；支付……的费用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pay-for#e-1894c05719b03cd8",
+          "text": "After graduation, she worked to help her sisters and brothers pay for their schooling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 69
+          },
+          "parts": [
+            [
+              62,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-for#e-744debff4006a680",
+          "text": "When almost everyone has a mobile phone, why are more than half of Australian homes still paying for a landline（座机）?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 100
+          },
+          "parts": [
+            [
+              90,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-for#e-11c6d89878f940c7",
+          "text": "How much do you pay for renting a bike with hand brake and three gears for two days?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2023-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 14,
+        "mock": 60
+      }
+    },
+    {
+      "senseId": "w:pay-for#s2",
+      "pos": "短语",
+      "glossZh": "为（过失等）付出代价",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pay#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pay-for#e-1bc7b4e3e971b193",
+          "text": "When a technology’s strengths are easy to praise and its weaknesses easy to ignore, who should pay for its mistakes?",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 102
+          },
+          "parts": [
+            [
+              95,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              102
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

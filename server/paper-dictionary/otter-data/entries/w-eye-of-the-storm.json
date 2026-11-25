@@ -1,0 +1,118 @@
+{
+  "entryId": "w:eye-of-the-storm",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "eye",
+      "of",
+      "the",
+      "storm"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eye",
+        "of",
+        "the",
+        "storm"
+      ],
+      [
+        "eyes",
+        "of",
+        "storms"
+      ],
+      [
+        "eyes",
+        "of",
+        "the",
+        "storms"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eye of the storm",
+  "senses": [
+    {
+      "senseId": "w:eye-of-the-storm#s1",
+      "pos": "短语",
+      "glossZh": "风暴眼；风暴中心相对平静的区域",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:eye-of-the-storm#e-bd8aec3d9bdbb1c3",
+          "text": "She remembers going outside and standing in the eye of the storm.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 64
+          },
+          "parts": [
+            [
+              48,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:eye-of-the-storm#s2",
+      "pos": "短语",
+      "glossZh": "动荡或危机中的暂时平静",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

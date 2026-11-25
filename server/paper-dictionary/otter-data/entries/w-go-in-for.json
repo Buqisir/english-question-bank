@@ -1,0 +1,146 @@
+{
+  "entryId": "w:go-in-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "in",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "in",
+        "for"
+      ],
+      [
+        "goes",
+        "in",
+        "for"
+      ],
+      [
+        "going",
+        "in",
+        "for"
+      ],
+      [
+        "gone",
+        "in",
+        "for"
+      ],
+      [
+        "went",
+        "in",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go in for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go in for sth",
+  "senses": [
+    {
+      "senseId": "w:go-in-for#s1",
+      "pos": "短语",
+      "glossZh": "报名参加比赛或考试",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-in-for#e-5e2c712e700b8227",
+          "text": "Go in for a competition.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-in-for#s2",
+      "pos": "短语",
+      "glossZh": "喜欢；热衷于",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-in-for#s3",
+      "pos": "短语",
+      "glossZh": "从事；投入某项活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

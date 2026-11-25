@@ -1,0 +1,85 @@
+{
+  "entryId": "w:beat-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beat",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "beat",
+        "it"
+      ],
+      [
+        "beaten",
+        "it"
+      ],
+      [
+        "beating",
+        "it"
+      ],
+      [
+        "beats",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beat it",
+  "senses": [
+    {
+      "senseId": "w:beat-it#s1",
+      "pos": "短语",
+      "glossZh": "赶快走开；滚开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常作语气粗鲁的命令。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:beat-it#s2",
+      "pos": "短语",
+      "glossZh": "（男性）手淫",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "北美粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

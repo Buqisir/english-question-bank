@@ -1,0 +1,155 @@
+{
+  "entryId": "w:power-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "power",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "power",
+        "up"
+      ],
+      [
+        "powered",
+        "up"
+      ],
+      [
+        "powering",
+        "up"
+      ],
+      [
+        "powers",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "power up",
+      "tags": []
+    },
+    {
+      "form": "powering up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "power (sth) up",
+  "senses": [
+    {
+      "senseId": "w:power-up#s1",
+      "pos": "短语",
+      "glossZh": "给设备通电；开启设备",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:power-up#e-d498e03203b0afe7",
+          "text": "enough energy to power up a small lamp for three hours following just 30 minutes of play.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:power-up#e-3bd249a8363bc5bc",
+          "text": "No dad powering up the leaf blower outside the window.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:power-up#s2",
+      "pos": "短语",
+      "glossZh": "（设备）通电启动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

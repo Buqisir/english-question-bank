@@ -72,8 +72,8 @@
     "mock": 327
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 323
+    "gaokao": 9,
+    "mock": 167
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -228,7 +228,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -285,238 +285,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:far#s5",
-      "pos": "短语",
-      "glossZh": "到目前为止",
-      "pronunciationId": "w:far#p-main",
-      "note": "so far。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:far#e-553ad1b1d25aa529",
-          "text": "For the biggest stadiums in the world, we have used data supplied by the World Atlas list so far, which ranks them by their stated permanent capacity, as well as updated information from official stadium websites.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 96
-          }
-        },
-        {
-          "exampleId": "w:far#e-be1dd4e219cb7ab4",
-          "text": "So far, Mr. Lewis is pleased with the results of his experiment.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:grammar-fill:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:far#e-0aa3d6d07930d171",
-          "text": "So far, it has raised more than £ 100,000 for Guide Dogs charity and sponsored 11 dogs in training.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:far#s6",
-      "pos": "短语",
-      "glossZh": "远非",
-      "pronunciationId": "w:far#p-main",
-      "note": "far from sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:far#e-601143eb1f13cbd8",
-          "text": "The results were far from satisfactory.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:29",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:far#s7",
-      "pos": "短语",
-      "glossZh": "进展到何种程度",
-      "pronunciationId": "w:far#p-main",
-      "note": "how far sb has come。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:far#e-9a5f88a1eca9390a",
-          "text": "You’ll want to look back on your journey to see how far you’ve come.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:far#e-a6ee070a2f575cc7",
-          "text": "He now looks at old photos with disbelief and pride, knowing how far he’s come.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:far#s8",
-      "pos": "短语",
-      "glossZh": "就……而言",
-      "pronunciationId": "w:far#p-main",
-      "note": "as far as 或 in so far as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:far#e-85b7427ff6cddd9a",
-          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 96
-          }
-        },
-        {
-          "exampleId": "w:far#e-bebbdec80ec99c16",
-          "text": "As far as I can remember, I’ve always been a night owl.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:far#e-c9a9e3d4ac37ff0a",
-          "text": "“As far as we know, our early prototype (原型) is the first piece of interconnected wood-like tissue ever produced from cell culture,” says Tom Clement at start-up New Dawn Bio.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 4,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -525,6 +293,23 @@
       "reason": "古旧同形名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-far-as",
+    "w:far-and-away",
+    "w:far-and-wide",
+    "w:far-away",
+    "w:far-cry",
+    "w:far-from-sth",
+    "w:from-near-and-far",
+    "w:go-far",
+    "w:go-too-far",
+    "w:how-far",
+    "w:how-far-sb-has-come",
+    "w:in-so-far-as",
+    "w:so-far"
+  ]
 }

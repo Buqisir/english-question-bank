@@ -59,8 +59,8 @@
     "mock": 108
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 101
+    "gaokao": 1,
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -318,7 +318,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -386,12 +386,12 @@
       "pos": "v.",
       "glossZh": "调味",
       "pronunciationId": "w:season#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -403,7 +403,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -427,41 +427,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:season#s8",
-      "pos": "短语",
-      "glossZh": "正当时令",
-      "pronunciationId": "w:season#p-main",
-      "note": "in season。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:season#e-7778c5efb2d717bb",
-          "text": "in season",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:cloze",
-            "locator": {
-              "question": 58,
-              "questionId": "question:paper-gaokao-2023-national-a:58",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -470,6 +435,12 @@
       "reason": "行业特定用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:high-season",
+    "w:in-season"
+  ]
 }

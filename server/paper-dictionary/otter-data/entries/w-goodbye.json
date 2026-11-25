@@ -42,8 +42,8 @@
     "mock": 31
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 30
+    "gaokao": 3,
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -149,43 +149,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:goodbye#s3",
-      "pos": "短语",
-      "glossZh": "放弃",
-      "pronunciationId": "w:goodbye#p-main",
-      "note": "say goodbye to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:goodbye#e-835bd48956006063",
-          "text": "But it doesn’t mean saying goodbye to the foods you love.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:say-goodbye-to-sth"
+  ]
 }

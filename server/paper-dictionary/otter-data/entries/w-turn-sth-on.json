@@ -1,0 +1,189 @@
+{
+  "entryId": "w:turn-sth-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turn on",
+    "turned on",
+    "turning on",
+    "turns on"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      {
+        "slot": "sth"
+      },
+      "on"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "turn",
+        {
+          "slot": "sth"
+        },
+        "on"
+      ],
+      [
+        "turn",
+        "on"
+      ],
+      [
+        "turn",
+        {
+          "slot": "sb/sth"
+        },
+        "on"
+      ],
+      [
+        "turning",
+        "on"
+      ],
+      [
+        "turns",
+        "on"
+      ],
+      [
+        "turned",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn sth on",
+  "senses": [
+    {
+      "senseId": "w:turn-sth-on#s1",
+      "pos": "短语",
+      "glossZh": "打开（灯、设备、水龙头等）；开启（供应）；播放（音乐等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s11",
+        "w:on#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-on#e-dc5f80e6e2949573",
+          "text": "When we turn on a light or switch on a TV or a computer we use energy and we need water to produce this energy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          },
+          "parts": [
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-on#e-b00029bb41965209",
+          "text": "Next, Jeff turned on the second stove（炉）burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:writing-continuation:material-2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-on#e-cf28094cd269fbe0",
+          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

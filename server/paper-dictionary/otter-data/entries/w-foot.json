@@ -60,8 +60,8 @@
     "mock": 155
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 154
+    "gaokao": 8,
+    "mock": 27
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 91
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -260,113 +260,6 @@
       ]
     },
     {
-      "senseId": "w:foot#s4",
-      "pos": "短语",
-      "glossZh": "步行",
-      "pronunciationId": "w:foot#p-main",
-      "note": "on foot。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:foot#e-b04e501290271ae7",
-          "text": "On foot",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:listening.short-dialogue",
-            "locator": {
-              "question": 2,
-              "questionId": "question:listening:2",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:foot#e-2462d65c684bc178",
-          "text": "As we came to a heavily traveled street, we saw an unusual procession approaching: a bony, wild-eyed cow followed by many cars, and boys on bicycles and on foot.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 156,
-            "end": 160
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:foot#s5",
-      "pos": "短语",
-      "glossZh": "踏上",
-      "pronunciationId": "w:foot#p-main",
-      "note": "set foot on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:foot#e-f6e91aa467cf20e9",
-          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:foot#e-c06cf3b238205f58",
-          "text": "The cave appears reachable from an open pit (深坑) in the Mare Tranquillitatis, where the Apollo 11 astronauts Neil Armstrong and Buzz Aldrin first set foot on the moon.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
-            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 150,
-            "end": 154
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:foot#s6",
       "pos": "v.",
       "glossZh": "支付",
@@ -389,7 +282,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -413,6 +306,77 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:foot#s8",
+      "pos": "n.",
+      "glossZh": "立足点；脚下的稳固程度",
+      "pronunciationId": "w:foot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:foot#e-6b8c07c9e652700a",
+          "text": "Then trail running, where roots and rocks demand full attention to footing rather than speed, became my new pursuit.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:foot#e-675dd406100166ab",
+          "text": "Screaming, Martha and Sarah struggled to find footing on rocks underwater.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:foot#e-743e106ff959fe92",
+          "text": "Mr. Thompson, our outdoor education teacher, kept reminding us: “Drink water, watch your footing, and remember – every scratch here could become a life lesson.”",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -421,6 +385,14 @@
       "reason": "韵律术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-foot",
+    "w:set-foot",
+    "w:set-foot-on",
+    "w:step-foot"
+  ]
 }

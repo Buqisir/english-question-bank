@@ -1,0 +1,68 @@
+{
+  "entryId": "w:refresh-ones-memory",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "refresh sb’s memory"
+  ],
+  "pattern": {
+    "tokens": [
+      "refresh",
+      {
+        "slot": "one's"
+      },
+      "memory"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "refresh",
+        {
+          "slot": "one's"
+        },
+        "memory"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "refresh one's memory",
+  "senses": [
+    {
+      "senseId": "w:refresh-ones-memory#s1",
+      "pos": "短语",
+      "glossZh": "唤起某人的记忆；帮助某人回想起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:refresh#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

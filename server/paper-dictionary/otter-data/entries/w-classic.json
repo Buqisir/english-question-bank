@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 51
+    "mock": 3
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -170,7 +170,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -222,7 +222,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -265,6 +265,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:classic#s5",
+      "pos": "n.",
+      "glossZh": "经典款；经典菜式",
+      "pronunciationId": "w:classic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:classic#e-532f9a020c839218",
+          "text": "The menu also rotates through European-inspired classics, such as hearty pasta dishes and roasted chicken.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -273,6 +306,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

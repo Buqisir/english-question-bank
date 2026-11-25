@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 224
+    "mock": 46
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 148
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -206,12 +206,12 @@
       "pos": "n.",
       "glossZh": "表演节目",
       "pronunciationId": "w:routine#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -219,12 +219,12 @@
       "pos": "n.",
       "glossZh": "一套体操动作",
       "pronunciationId": "w:routine#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -234,6 +234,6 @@
       "reason": "计算机专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

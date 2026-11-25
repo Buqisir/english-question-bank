@@ -1,0 +1,116 @@
+{
+  "entryId": "w:take-a-risk",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a risk"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "risk"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "risk"
+      ],
+      [
+        "taking",
+        "a",
+        "risk"
+      ],
+      [
+        "taken",
+        "a",
+        "risk"
+      ],
+      [
+        "takes",
+        "a",
+        "risk"
+      ],
+      [
+        "took",
+        "a",
+        "risk"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a risk",
+  "senses": [
+    {
+      "senseId": "w:take-a-risk#s1",
+      "pos": "短语",
+      "glossZh": "冒险；甘冒风险去做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s46"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-risk#e-b2be49cfc9850f1e",
+          "text": "Authentic interactivity with others requires taking a risk.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 58
+          },
+          "parts": [
+            [
+              45,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

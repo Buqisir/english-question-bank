@@ -1,0 +1,119 @@
+{
+  "entryId": "w:get-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "up",
+        "to"
+      ],
+      [
+        "gets",
+        "up",
+        "to"
+      ],
+      [
+        "getting",
+        "up",
+        "to"
+      ],
+      [
+        "got",
+        "up",
+        "to"
+      ],
+      [
+        "gotten",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get up to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get up to sth",
+  "senses": [
+    {
+      "senseId": "w:get-up-to#s1",
+      "pos": "短语",
+      "glossZh": "做；搞（某项活动，尤指淘气或不当的事）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-up-to#e-ed1d8cdd452287b8",
+          "text": "Every course is unique as we tailor each one to the team and the weather, but this should give a flavour of what you might get up to.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 132
+          },
+          "parts": [
+            [
+              123,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              132
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

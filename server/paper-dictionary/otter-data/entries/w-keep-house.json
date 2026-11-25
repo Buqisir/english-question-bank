@@ -1,0 +1,84 @@
+{
+  "entryId": "w:keep-house",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "house"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "house"
+      ],
+      [
+        "keeping",
+        "house"
+      ],
+      [
+        "keeps",
+        "house"
+      ],
+      [
+        "kept",
+        "house"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep house",
+  "senses": [
+    {
+      "senseId": "w:keep-house#s1",
+      "pos": "短语",
+      "glossZh": "料理家务；操持家务",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-house#s2",
+      "pos": "短语",
+      "glossZh": "闭门躲债",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

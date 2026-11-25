@@ -1,0 +1,195 @@
+{
+  "entryId": "w:come-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "comes after",
+    "coming after"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "after"
+      ],
+      [
+        "comes",
+        "after"
+      ],
+      [
+        "coming",
+        "after"
+      ],
+      [
+        "came",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come after",
+  "senses": [
+    {
+      "senseId": "w:come-after#s2",
+      "pos": "短语",
+      "glossZh": "接在……之后；继……之后出现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-after#e-443c8f048235df1b",
+          "text": "It comes after more than half of soft drinks sold in shops have had their sugar levels cut by manufacturers（制",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-after#e-13f2ac61e97ec047",
+          "text": "happiness comes after goal completion",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-05-second-adaptability:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 21
+          },
+          "parts": [
+            [
+              10,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-after#e-6df379a63c043011",
+          "text": "Inspiration comes after waiting.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-fj-2026-m1-v2:26#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-after#s1",
+      "pos": "短语",
+      "glossZh": "追赶；追上去找某人的麻烦",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-after#s3",
+      "pos": "短语",
+      "glossZh": "接替某人的职位",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

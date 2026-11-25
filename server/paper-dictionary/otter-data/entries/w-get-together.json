@@ -1,0 +1,204 @@
+{
+  "entryId": "w:get-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "together"
+      ],
+      [
+        "gets",
+        "together"
+      ],
+      [
+        "getting",
+        "together"
+      ],
+      [
+        "got",
+        "together"
+      ],
+      [
+        "gotten",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get together",
+  "senses": [
+    {
+      "senseId": "w:get-together#s1",
+      "pos": "短语",
+      "glossZh": "聚在一起；见面；聚会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s18",
+        "w:together#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-together#e-0e57ea72d28c44d2",
+          "text": "The best housewarming parties encourage old friends to get together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-iii:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-together#e-04d5c3d673cf3ae2",
+          "text": "Instead of following the polished versions of one another’s lives, they could get together in person",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 90
+          },
+          "parts": [
+            [
+              78,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-together#e-12e5a17bcd828433",
+          "text": "When will the speakers get together?",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:get-together#s2",
+      "pos": "短语",
+      "glossZh": "收集；凑齐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get sth together。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-together#s3",
+      "pos": "短语",
+      "glossZh": "开始谈恋爱；成为情侣",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

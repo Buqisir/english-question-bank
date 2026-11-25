@@ -1,0 +1,155 @@
+{
+  "entryId": "w:by-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "chance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by chance",
+  "senses": [
+    {
+      "senseId": "w:by-chance#s1",
+      "pos": "短语",
+      "glossZh": "偶然地；碰巧；凭运气",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-chance#e-5dc5e86c6080353b",
+          "text": "by chance",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-gaokao-2020-national-iii:52#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-chance#e-f177e6f4ced72bf0",
+          "text": "To prove it doesn’t happen by chance, Rosie’s trainers keep changing the order of the pots around.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-chance#e-5b7a2b9372e211a4",
+          "text": "These results were slightly higher than would be expected by chance, which suggests this group may actually have remembered.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          },
+          "parts": [
+            [
+              58,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

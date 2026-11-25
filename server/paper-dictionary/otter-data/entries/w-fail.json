@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 211
+    "mock": 34
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 101
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -269,7 +269,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -299,12 +299,12 @@
       "pos": "v.",
       "glossZh": "辜负",
       "pronunciationId": "w:fail#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -325,13 +325,46 @@
       "pos": "v.",
       "glossZh": "衰退",
       "pronunciationId": "w:fail#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:fail#s8",
+      "pos": "短语",
+      "glossZh": "毫无例外地（without fail）",
+      "pronunciationId": "w:fail#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fail#e-3ee359be4544c015",
+          "text": "One of the book’s most valuable insights is that what matters is not “intense practice every day”, but “practise every day, without fail”.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 136
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -340,6 +373,6 @@
       "reason": "同形罕见名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

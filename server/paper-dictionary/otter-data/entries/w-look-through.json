@@ -1,0 +1,188 @@
+{
+  "entryId": "w:look-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking through"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "through"
+      ],
+      [
+        "looking",
+        "through"
+      ],
+      [
+        "looked",
+        "through"
+      ],
+      [
+        "looks",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look through sb/sth",
+  "senses": [
+    {
+      "senseId": "w:look-through#s1",
+      "pos": "短语",
+      "glossZh": "浏览；翻看（有时为查找信息）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s13",
+        "w:through#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-through#e-5843a5ab9bdf6fbf",
+          "text": "Spend a few minutes looking through the book.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 35
+          },
+          "parts": [
+            [
+              20,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-through#e-1377c8276b9c8f33",
+          "text": "Yet when 2 a.m. hits, you’re still wide awake, mindlessly looking through social media, trapped in the control of jet lag.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 73
+          },
+          "parts": [
+            [
+              58,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-through#e-5577e8fd45906cb2",
+          "text": "“Not only is less waste ending up in landfills, but we’ve got kids who prefer digging in soil over looking through phones,” he added.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 114
+          },
+          "parts": [
+            [
+              99,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              114
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:look-through#s2",
+      "pos": "短语",
+      "glossZh": "对某人视而不见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

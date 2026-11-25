@@ -1,0 +1,135 @@
+{
+  "entryId": "w:fall-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falling down",
+    "fell down"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "down"
+      ],
+      [
+        "falling",
+        "down"
+      ],
+      [
+        "fell",
+        "down"
+      ],
+      [
+        "fallen",
+        "down"
+      ],
+      [
+        "falls",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall down",
+  "senses": [
+    {
+      "senseId": "w:fall-down#s1",
+      "pos": "短语",
+      "glossZh": "跌倒；倒下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-down#e-f2bda9cdd6bd0bf0",
+          "text": "She fell down, trying to fix a bucket(桶).",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:cloze:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          },
+          "parts": [
+            [
+              4,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-down#s2",
+      "pos": "短语",
+      "glossZh": "（建筑、墙等）倒塌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-down#s3",
+      "pos": "短语",
+      "glossZh": "（计划等）出问题；（论证等）站不住脚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

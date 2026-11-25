@@ -35,8 +35,8 @@
     "mock": 501
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 497
+    "gaokao": 4,
+    "mock": 325
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 89
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -191,7 +191,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -243,7 +243,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -276,7 +276,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -348,7 +348,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -420,7 +420,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -459,158 +459,80 @@
       "examples": []
     },
     {
-      "senseId": "w:away#s9",
+      "senseId": "w:away#s13",
       "pos": "短语",
-      "glossZh": "立刻；马上",
+      "glossZh": "使大为震撼；使惊讶不已（blow away）",
       "pronunciationId": "w:away#p-main",
-      "note": "right away。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:away#s14",
+      "pos": "短语",
+      "glossZh": "使惊叹不已（take one’s breath away）",
+      "pronunciationId": "w:away#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:away#e-2ba1f0a27d4652e3",
-          "text": "However, it’s important to remember that there are hidden dangers that many young people may not notice right away.",
+          "exampleId": "w:away#e-f082ddcb7d209d88",
+          "text": "The medical staff took my breath away with how hard they worked.",
           "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-b",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:1",
-              "sentence": 2
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-b:1",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 110,
-            "end": 114
+            "start": 33,
+            "end": 37
           }
-        },
+        }
+      ]
+    },
+    {
+      "senseId": "w:away#s15",
+      "pos": "短语",
+      "glossZh": "从……中获得启示或得出结论（take away from）",
+      "pronunciationId": "w:away#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
         {
-          "exampleId": "w:away#e-e3abfa6cba12b6e2",
-          "text": "Sign up right away.",
+          "exampleId": "w:away#e-1271e7fb21e50ce4",
+          "text": "Certainly, there are boundaries on what we can take away from this study.",
           "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:listening.long-form",
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
             "locator": {
-              "question": 13,
-              "questionId": "question:listening:13",
-              "option": "B",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:3",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:away#s10",
-      "pos": "短语",
-      "glossZh": "去世",
-      "pronunciationId": "w:away#p-main",
-      "note": "pass away。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:away#e-0ac1ff96ec2d755c",
-          "text": "He was facing health issues and his wife of thirty-five years had passed away a few months earlier.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 73,
-            "end": 77
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:away#s11",
-      "pos": "短语",
-      "glossZh": "逃脱惩罚；做错事却未受罚",
-      "pronunciationId": "w:away#p-main",
-      "note": "get away with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:away#e-265b75f29f61f683",
-          "text": "Thinking that the man might get away with whatever he wanted before the police arrived, Kevin decided to do something.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:away#s12",
-      "pos": "短语",
-      "glossZh": "着迷；得意忘形；失去控制",
-      "pronunciationId": "w:away#p-main",
-      "note": "be carried away。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:away#e-8ac748b90b92c924",
-          "text": "Readers are often carried away by character.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2024-national-a:33",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 30
+            "start": 52,
+            "end": 56
           }
         }
       ]
@@ -622,6 +544,57 @@
       "reason": "体育术语或误拼。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-carried-away",
+    "w:blow-sb-away",
+    "w:break-away",
+    "w:carry-away",
+    "w:chat-away",
+    "w:clear-away",
+    "w:die-away",
+    "w:do-away-with-sth",
+    "w:drive-away",
+    "w:eat-away",
+    "w:eat-away-at-sth",
+    "w:fall-away",
+    "w:far-and-away",
+    "w:far-away",
+    "w:get-away-with",
+    "w:get-sth-away",
+    "w:give-away",
+    "w:go-away",
+    "w:hide-away",
+    "w:keep-away",
+    "w:keep-away-from",
+    "w:look-away",
+    "w:move-away",
+    "w:pass-away",
+    "w:pull-away",
+    "w:push-away",
+    "w:put-away",
+    "w:right-away",
+    "w:run-away",
+    "w:run-away-from",
+    "w:scare-away",
+    "w:shy-away-from",
+    "w:slip-away",
+    "w:spirit-away",
+    "w:stay-away",
+    "w:step-away-from",
+    "w:store-away",
+    "w:straight-away",
+    "w:take-away",
+    "w:take-away-from",
+    "w:throw-away",
+    "w:turn-away",
+    "w:turn-away-from-sth",
+    "w:walk-away",
+    "w:walk-away-from",
+    "w:walk-away-with",
+    "w:while-sth-away"
+  ]
 }

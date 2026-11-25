@@ -42,8 +42,8 @@
     "mock": 103
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 98
+    "gaokao": 5,
+    "mock": 7
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -119,60 +119,6 @@
       ]
     },
     {
-      "senseId": "w:solar#s2",
-      "pos": "短语",
-      "glossZh": "太阳能",
-      "pronunciationId": "w:solar#p-main",
-      "note": "solar energy。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:solar#e-dd139bfba07b895a",
-          "text": "But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 106,
-            "end": 111
-          }
-        },
-        {
-          "exampleId": "w:solar#e-64e5820cf16eff5d",
-          "text": "Promote the use of solar energy in rural areas.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2023-zhejiang-jan:33",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:solar#s3",
       "pos": "adj.",
       "glossZh": "太阳的",
@@ -180,7 +126,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -252,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -302,12 +248,12 @@
       "glossZh": "依据太阳运行计算的",
       "pronunciationId": "w:solar#p-main",
       "note": "如 solar calendar。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -317,6 +263,8 @@
       "reason": "占星说法或历史建筑义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,65 @@
+{
+  "entryId": "w:no-such-thing-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "such",
+      "thing",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "such",
+        "thing",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no such thing as",
+  "senses": [
+    {
+      "senseId": "w:no-such-thing-as#s1",
+      "pos": "短语",
+      "glossZh": "根本没有……这种事物；没有……这回事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:thing#s7"
+      ],
+      "examples": [],
+      "note": "常用 there is no such thing as ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

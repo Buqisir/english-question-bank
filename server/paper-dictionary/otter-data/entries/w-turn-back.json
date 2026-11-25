@@ -1,0 +1,245 @@
+{
+  "entryId": "w:turn-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turned back",
+    "turning back"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "back"
+      ],
+      [
+        "turned",
+        "back"
+      ],
+      [
+        "turning",
+        "back"
+      ],
+      [
+        "turns",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:turn-back#s1",
+      "pos": "短语",
+      "glossZh": "调头；折返",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-back#e-4b92a1883d760dae",
+          "text": "I jumped off with my suitcase, turning back to say something, but the doors were already closing.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-back#e-20840da65a3bf628",
+          "text": "Occupied with such guesses, I turned back to look for the old lady.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 41
+          },
+          "parts": [
+            [
+              30,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-back#e-5367b6122ced0095",
+          "text": "I told Sarah, one of the organizers, that I needed to turn back.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 63
+          },
+          "parts": [
+            [
+              54,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:turn-back#s3",
+      "pos": "短语",
+      "glossZh": "把时钟拨回；向后调",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-back#e-1641717ad2363c8b",
+          "text": "“We’re never going to turn back the clock 100 years.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 31
+          },
+          "parts": [
+            [
+              22,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:turn-back#s2",
+      "pos": "短语",
+      "glossZh": "拦住并使其折返",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-back#s4",
+      "pos": "短语",
+      "glossZh": "向后翻折",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

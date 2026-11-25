@@ -1,0 +1,96 @@
+{
+  "entryId": "w:he-said-she-said",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "he",
+      "said",
+      ",",
+      "she",
+      "said"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "he",
+        "said",
+        ",",
+        "she",
+        "said"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "he said, she said",
+  "senses": [
+    {
+      "senseId": "w:he-said-she-said#s1",
+      "pos": "短语",
+      "glossZh": "双方各执一词、缺乏证据的争议",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:he-said-she-said#e-69cb77bf2bdbe588",
+          "text": "There is no more, ‘he said, she said’.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 36
+          },
+          "parts": [
+            [
+              19,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

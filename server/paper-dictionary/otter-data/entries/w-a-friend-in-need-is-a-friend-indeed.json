@@ -1,0 +1,103 @@
+{
+  "entryId": "w:a-friend-in-need-is-a-friend-indeed",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "friend",
+      "in",
+      "need",
+      "is",
+      "a",
+      "friend",
+      "indeed"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "friend",
+        "in",
+        "need",
+        "is",
+        "a",
+        "friend",
+        "indeed"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a friend in need is a friend indeed",
+  "senses": [
+    {
+      "senseId": "w:a-friend-in-need-is-a-friend-indeed#s1",
+      "pos": "短语",
+      "glossZh": "患难见真情；在你有难时伸出援手的才是真朋友",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-friend-in-need-is-a-friend-indeed#e-c69a2659f7a1c0c7",
+          "text": "A friend in need is a friend indeed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 35
+          },
+          "parts": [
+            [
+              0,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

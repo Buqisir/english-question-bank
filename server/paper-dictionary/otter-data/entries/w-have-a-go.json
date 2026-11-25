@@ -1,0 +1,206 @@
+{
+  "entryId": "w:have-a-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "having a go"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "go"
+      ],
+      [
+        "having",
+        "a",
+        "go"
+      ],
+      [
+        "had",
+        "a",
+        "go"
+      ],
+      [
+        "has",
+        "a",
+        "go"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had a go",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a go",
+  "senses": [
+    {
+      "senseId": "w:have-a-go#s1",
+      "pos": "短语",
+      "glossZh": "试一试；尝试做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-a-go#e-74864dea8d8caa9e",
+          "text": "They might even like to have a go at doing the exercise.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-a-go#e-18bbbda5707369e1",
+          "text": "You may have had a go in the past, visit a climbing wall occasionally, or equally, it could be your first time.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-a-go#e-0f905fe9c1ea7598",
+          "text": "Have a go!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "have a go at sth/doing sth。",
+      "counts": {
+        "gaokao": 6,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:have-a-go#s2",
+      "pos": "短语",
+      "glossZh": "责骂；猛烈批评",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "have a go at sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-a-go#s3",
+      "pos": "短语",
+      "glossZh": "动手攻击某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "have a go at sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 131
+    "mock": 19
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -290,7 +290,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -361,7 +361,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -413,7 +413,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -518,7 +518,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -544,17 +544,49 @@
       ]
     },
     {
-      "senseId": "w:ride#s9",
+      "senseId": "w:ride#s10",
       "pos": "短语",
-      "glossZh": "取决于",
+      "glossZh": "继续下去（ride on）",
       "pronunciationId": "w:ride#p-main",
-      "note": "ride on sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-044d631adadd32af",
+          "text": "Now, with a family of my own, that passion rides on.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s11",
+      "pos": "n.",
+      "glossZh": "由人背着走的一程",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -564,6 +596,14 @@
       "reason": "医学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:ride-along",
+    "w:ride-off",
+    "w:ride-on-sth",
+    "w:ride-up"
+  ]
 }

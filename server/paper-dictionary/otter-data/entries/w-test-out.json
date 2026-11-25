@@ -1,0 +1,135 @@
+{
+  "entryId": "w:test-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "test",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "test",
+        "out"
+      ],
+      [
+        "tested",
+        "out"
+      ],
+      [
+        "testing",
+        "out"
+      ],
+      [
+        "tests",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "test out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "test (sth) out",
+  "senses": [
+    {
+      "senseId": "w:test-out#s1",
+      "pos": "短语",
+      "glossZh": "实际试用；试验以检验效果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:test-out#e-0cc9e40bf19311a1",
+          "text": "Test out different things and rank them in order of what your dog likes best.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:test-out#s2",
+      "pos": "短语",
+      "glossZh": "通过水平测试而获准免修",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 test out of a course。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:test-out#s3",
+      "pos": "短语",
+      "glossZh": "经测试显示出某种结果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 test out well。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

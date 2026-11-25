@@ -1,0 +1,96 @@
+{
+  "entryId": "w:what-date-is-it-today",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what",
+      "date",
+      "is",
+      "it",
+      "today"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "date",
+        "is",
+        "it",
+        "today"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what date is it today",
+  "senses": [
+    {
+      "senseId": "w:what-date-is-it-today#s1",
+      "pos": "短语",
+      "glossZh": "今天是几月几日？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-date-is-it-today#e-965a340e9c1c0c84",
+          "text": "What date is it today?",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

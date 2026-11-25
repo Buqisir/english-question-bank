@@ -1,0 +1,95 @@
+{
+  "entryId": "w:chicken-and-egg",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "chicken",
+      "and",
+      "egg"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chicken",
+        "and",
+        "egg"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chicken and egg",
+  "senses": [
+    {
+      "senseId": "w:chicken-and-egg#s1",
+      "pos": "短语",
+      "glossZh": "鸡和蛋的问题；难以分清两件事孰先孰后、谁是原因",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:chicken#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:chicken-and-egg#e-c671320165e978e5",
+          "text": "And it’s really crucial to study these issues further so the chicken and egg problem can be solved.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 76
+          },
+          "parts": [
+            [
+              61,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              76
+            ]
+          ]
+        }
+      ],
+      "note": "常修饰 problem、situation。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

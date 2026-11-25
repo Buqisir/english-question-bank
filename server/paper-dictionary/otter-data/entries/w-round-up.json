@@ -1,0 +1,199 @@
+{
+  "entryId": "w:round-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "round",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "round",
+        "up"
+      ],
+      [
+        "rounded",
+        "up"
+      ],
+      [
+        "rounding",
+        "up"
+      ],
+      [
+        "rounds",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rounded up",
+      "tags": []
+    },
+    {
+      "form": "rounding up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "round (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:round-up#s1",
+      "pos": "短语",
+      "glossZh": "把分散的人、动物或事物集中起来；搜集",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:round-up#e-f8924b7547fd9cdf",
+          "text": "To help you make this shift, we’ve rounded up the simplest, most science-backed micro-habits.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:round-up#e-94d1d85f3f9d9bd9",
+          "text": "One cool autumn morning, while rounding up yaks near a stream, Tashi suddenly froze.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:round-up#e-97d94aeea8efea2e",
+          "text": "In celebration of PulseNet’s milestone birthday, we rounded up stories illustrating the enormous impact the network has had on disease monitoring and outbreak detection.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:round-up#s2",
+      "pos": "短语",
+      "glossZh": "搜捕并集中拘押",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:round-up#s3",
+      "pos": "短语",
+      "glossZh": "向上取整",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

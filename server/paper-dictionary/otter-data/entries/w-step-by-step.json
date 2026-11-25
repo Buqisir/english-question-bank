@@ -1,0 +1,154 @@
+{
+  "entryId": "w:step-by-step",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "by",
+      "step"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "by",
+        "step"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step by step",
+  "senses": [
+    {
+      "senseId": "w:step-by-step#s1",
+      "pos": "短语",
+      "glossZh": "一步一步地；按步骤逐步进行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-by-step#e-a689b857bf1173da",
+          "text": "Faced with endless daily tests and heavy learning tasks, he spared no effort to make progress step by step.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 106
+          },
+          "parts": [
+            [
+              94,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-by-step#e-8f6466097ca34a26",
+          "text": "Step by step, he taught the confused elderly man to tap and type.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-by-step#e-ad1c48727a039fbc",
+          "text": "The anchoring effect works in two main ways: the process of adjusting one’s thoughts step by step and the influence of early information on later thinking.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 97
+          },
+          "parts": [
+            [
+              85,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              97
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

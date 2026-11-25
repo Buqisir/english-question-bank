@@ -1,0 +1,187 @@
+{
+  "entryId": "w:burn-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "burn",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "burn",
+        "up"
+      ],
+      [
+        "burned",
+        "up"
+      ],
+      [
+        "burning",
+        "up"
+      ],
+      [
+        "burns",
+        "up"
+      ],
+      [
+        "burnt",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "burn up",
+      "tags": []
+    },
+    {
+      "form": "burned up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "burn (sth) up",
+  "senses": [
+    {
+      "senseId": "w:burn-up#s1",
+      "pos": "短语",
+      "glossZh": "烧尽；烧掉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:burn-up#e-e939733792828e1d",
+          "text": "Specific metals, such as magnesium (Mg) and nickel (Ni), glow with characteristic colors as they burn up.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 104
+          },
+          "parts": [
+            [
+              97,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:burn-up#s2",
+      "pos": "短语",
+      "glossZh": "耗尽（精力、能量等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:burn-up#e-6e5b2cb5c2c9f6cd",
+          "text": "Keeping up with his requests burned up all my energy.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:burn-up#s3",
+      "pos": "短语",
+      "glossZh": "热得难受；身体烫得厉害",
+      "note": "常用 be burning up，也可指发高烧。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-up#s4",
+      "pos": "短语",
+      "glossZh": "大为恼火；使某人非常生气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

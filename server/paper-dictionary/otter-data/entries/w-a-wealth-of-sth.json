@@ -1,0 +1,168 @@
+{
+  "entryId": "w:a-wealth-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "wealth",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "wealth",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "a wealth of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a wealth of sth",
+  "senses": [
+    {
+      "senseId": "w:a-wealth-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "大量的；丰富的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wealth#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-wealth-of-sth#e-49e0b39d2435432b",
+          "text": "Events this year feature a wealth of exciting programs that are well worth looking forward to.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-wealth-of-sth#e-f0a22d2eabe9e247",
+          "text": "When Appa passed away, he left behind a wealth of memories.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-wealth-of-sth#e-1dc412f4cf3f2ac7",
+          "text": "These provide a wealth of places to engage with art.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

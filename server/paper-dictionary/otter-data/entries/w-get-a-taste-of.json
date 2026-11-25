@@ -1,0 +1,101 @@
+{
+  "entryId": "w:get-a-taste-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "a",
+      "taste",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "a",
+        "taste",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gets a taste of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get a taste of",
+  "senses": [
+    {
+      "senseId": "w:get-a-taste-of#s1",
+      "pos": "短语",
+      "glossZh": "初步体验；领略一下……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s41"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-a-taste-of#e-9f5d0ebb81dd0631",
+          "text": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 106
+          },
+          "parts": [
+            [
+              91,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

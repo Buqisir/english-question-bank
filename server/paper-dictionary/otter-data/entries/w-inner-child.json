@@ -1,0 +1,154 @@
+{
+  "entryId": "w:inner-child",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "inner",
+      "child"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "inner",
+        "child"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "inner child",
+  "senses": [
+    {
+      "senseId": "w:inner-child#s1",
+      "pos": "短语",
+      "glossZh": "内在小孩（保有童年感受的那部分自我）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:child#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:inner-child#e-14962847f1226a31",
+          "text": "They bring joy to the inner child within me,” the lady in her 20s told Xinhua.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:inner-child#e-21e6d93140247fb4",
+          "text": "This inner child has helped bring her to the peak of her career.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:inner-child#e-7e129a40172dd292",
+          "text": "“Everyone has a child inside,” says Cai Gao, the celebrated 79-year-old picture book artist who has spent decades nurturing her inner child and her work.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 139
+          },
+          "parts": [
+            [
+              128,
+              139
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              139
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

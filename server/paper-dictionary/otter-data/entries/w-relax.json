@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 116
+    "mock": 22
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -248,7 +248,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -350,16 +350,49 @@
       "pos": "v.",
       "glossZh": "放宽（规定等）",
       "pronunciationId": "w:relax#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:relax#s7",
+      "pos": "adj.",
+      "glossZh": "自然舒展的",
+      "pronunciationId": "w:relax#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:relax#e-e45fa9f4a338d661",
+          "text": "One is its relaxed, lantern-like form; the other is a pressed, spinning-top-like shape.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

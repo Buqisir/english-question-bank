@@ -61,8 +61,8 @@
     "mock": 512
   },
   "unassignedCounts": {
-    "gaokao": 45,
-    "mock": 511
+    "gaokao": 54,
+    "mock": 347
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -209,73 +209,106 @@
       ]
     },
     {
-      "senseId": "w:used#s3",
-      "pos": "短语",
-      "glossZh": "过去常常",
-      "pronunciationId": "w:used#p-main",
-      "note": "used to do sth，否定和疑问句中常用 use to。",
-      "origin": "gaokao",
+      "senseId": "w:used#s4",
+      "pos": "v.",
+      "glossZh": "使用；利用",
+      "pronunciationId": "w:used#p-secondhand",
+      "origin": "mock",
       "counts": {
-        "gaokao": 9,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 150
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:used#e-09a88b5eaea721f9",
-          "text": "\"There’s something about me,\" he thought – and it took him a few seconds but he finally remembered what she used to look like.",
+          "exampleId": "w:used#e-f4f97dcaa6499c0f",
+          "text": "Palantir’s products have recently been used in airstrikes on Gaza.",
           "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-d",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
-              "sentence": 2
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-d:2",
+              "sentence": 5
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 108,
-            "end": 112
+            "start": 39,
+            "end": 43
           }
         },
         {
-          "exampleId": "w:used#e-e73ea6b7c2ec146b",
-          "text": "She said: “I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.”",
+          "exampleId": "w:used#e-fe3943573f605aa2",
+          "text": "They also carry mechanical energy that can be used for free.",
           "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "reading-c-3",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:1",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 13,
-            "end": 17
+            "start": 46,
+            "end": 50
           }
         },
         {
-          "exampleId": "w:used#e-9efa43400bcc8919",
-          "text": "My parents used to live here and my father’s watch was here,” he explained, trying to lift a floorboard.",
+          "exampleId": "w:used#e-e4bc1aacd9285a76",
+          "text": "These insects, usually found in dry foods like grains and spices, are also drawn to the glue used in old books.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
-              "sentence": 4
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d:1",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 11,
-            "end": 15
+            "start": 93,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:used#s5",
+      "pos": "adj.",
+      "glossZh": "已经用过的",
+      "pronunciationId": "w:used#p-secondhand",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:used#e-afd4ac9f8a8be1b5",
+          "text": "Put used cards face down on Drop Here.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:23",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 8
           }
         }
       ]
@@ -287,6 +320,14 @@
       "reason": "屈折形式归 use"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-used-to",
+    "w:get-used-to",
+    "w:used-to",
+    "w:used-to-do"
+  ]
 }

@@ -71,8 +71,8 @@
     "mock": 60
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 53
+    "gaokao": 3,
+    "mock": 15
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -135,7 +135,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -206,7 +206,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -271,7 +271,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -324,7 +324,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -377,91 +377,50 @@
       "examples": []
     },
     {
-      "senseId": "w:beat#s9",
-      "pos": "短语",
-      "glossZh": "过分自责；责怪自己",
+      "senseId": "w:beat#s11",
+      "pos": "adj.",
+      "glossZh": "常走的；惯常的",
       "pronunciationId": "w:beat#p-main",
-      "note": "beat oneself up。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:beat#e-6a8e79b681381a78",
-          "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them.",
+          "exampleId": "w:beat#e-d81b2500fdd314a4",
+          "text": "Step off the beaten path and discover Boston’s nightlife through the eyes of a local.",
           "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a:13",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 65,
-            "end": 69
-          }
-        },
-        {
-          "exampleId": "w:beat#e-7405b5273e00bb3a",
-          "text": "If you’re among the groups of people who are enjoying the mental and physical health benefits of surrounding yourself with plants, don’t beat yourself up if one (or a few!) doesn’t make it.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 137,
-            "end": 141
+            "start": 13,
+            "end": 19
           }
         }
       ]
     },
     {
-      "senseId": "w:beat#s10",
-      "pos": "短语",
-      "glossZh": "稍停片刻",
+      "senseId": "w:beat#s12",
+      "pos": "v.",
+      "glossZh": "避开（排队、拥堵等）",
       "pronunciationId": "w:beat#p-main",
-      "note": "take a beat。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:beat#e-73e59927c9f05586",
-          "text": "Kathleen Grace, head of Vermillio, said: “We can all win if we just take a beat and figure out a way to share and track content.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
-            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
-            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 75,
-            "end": 79
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -470,6 +429,15 @@
       "reason": "专业、历史或俚语用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:beat-down",
+    "w:beat-it",
+    "w:beat-oneself-up",
+    "w:beat-up",
+    "w:take-a-beat"
+  ]
 }

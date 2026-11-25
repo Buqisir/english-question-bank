@@ -42,8 +42,8 @@
     "mock": 300
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 297
+    "gaokao": 3,
+    "mock": 110
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 160
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -241,36 +241,53 @@
       ]
     },
     {
-      "senseId": "w:purpose#s4",
-      "pos": "短语",
-      "glossZh": "故意地",
+      "senseId": "w:purpose#s5",
+      "pos": "n.",
+      "glossZh": "决心；坚定的意志",
       "pronunciationId": "w:purpose#p-main",
-      "note": "on purpose。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 4
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:purpose#e-6582d429c4b7618c",
-          "text": "Communicating messages on purpose.",
+          "exampleId": "w:purpose#e-e3a0bf63157ea39c",
+          "text": "I’ve always cared about birds and have written about them as a science writer, but the moment I decided with purpose to devote time and energy to bird-watching marked my transformation into a birder.",
           "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
             "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
-              "option": "D",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b:2",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 33
+            "start": 109,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-6091848d5ebf68d5",
+          "text": "Walk down a street decades ago, and chances were good that you’d come across a vision of the Spielbergian sort: groups of school-age children charging down the block on bikes, full of purpose and without protective headwear.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 184,
+            "end": 191
           }
         }
       ]
@@ -282,6 +299,12 @@
       "reason": "罕见的旧式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fit-for-purpose",
+    "w:on-purpose"
+  ]
 }

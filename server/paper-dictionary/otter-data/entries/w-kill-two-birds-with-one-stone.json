@@ -1,0 +1,140 @@
+{
+  "entryId": "w:kill-two-birds-with-one-stone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kill",
+      "two",
+      "birds",
+      "with",
+      "one",
+      "stone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kill",
+        "two",
+        "birds",
+        "with",
+        "one",
+        "stone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "killing two birds with one stone",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kill two birds with one stone",
+  "senses": [
+    {
+      "senseId": "w:kill-two-birds-with-one-stone#s1",
+      "pos": "短语",
+      "glossZh": "一举两得；一石二鸟",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bird#s2",
+        "w:kill#s5",
+        "w:stone#s10",
+        "w:two#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:kill-two-birds-with-one-stone#e-a915ba67ee0bf7d2",
+          "text": "killing two birds with one stone",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 32
+          },
+          "parts": [
+            [
+              0,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kill-two-birds-with-one-stone#e-3d8e780ea729d57c",
+          "text": "But she argues that these projects still matter, “It does kill two birds with one stone, in terms of providing some housing supply.”",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 87
+          },
+          "parts": [
+            [
+              58,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

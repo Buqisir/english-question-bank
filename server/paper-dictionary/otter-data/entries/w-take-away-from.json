@@ -1,0 +1,80 @@
+{
+  "entryId": "w:take-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "away",
+        "from"
+      ],
+      [
+        "taken",
+        "away",
+        "from"
+      ],
+      [
+        "takes",
+        "away",
+        "from"
+      ],
+      [
+        "taking",
+        "away",
+        "from"
+      ],
+      [
+        "took",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take away from sth",
+  "senses": [
+    {
+      "senseId": "w:take-away-from#s1",
+      "pos": "短语",
+      "glossZh": "减损……的价值或效果；使……逊色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

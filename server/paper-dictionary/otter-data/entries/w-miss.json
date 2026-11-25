@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 6,
-    "mock": 185
+    "mock": 47
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -170,7 +170,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -241,7 +241,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -312,7 +312,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -383,7 +383,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -428,30 +428,16 @@
       ]
     },
     {
-      "senseId": "w:miss#s7",
-      "pos": "短语",
-      "glossZh": "错过参加或享受某事的机会",
-      "pronunciationId": "w:miss#p-main",
-      "note": "miss out (on sth)。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:miss#s8",
       "pos": "v.",
       "glossZh": "未击中",
       "pronunciationId": "w:miss#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -462,7 +448,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -486,6 +472,73 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:miss#s10",
+      "pos": "v.",
+      "glossZh": "答错（题目）",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-011ac70804ba8871",
+          "text": "He missed easy questions.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s11",
+      "pos": "v.",
+      "glossZh": "没踩着；踩空",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-823e24c869a0469e",
+          "text": "Around 9 PM, while carrying a stack of books down the stairs, I missed a step and tumbled to the bottom.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -494,6 +547,16 @@
       "reason": "缩写或专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:miss-out",
+    "w:miss-out-on-sth",
+    "w:miss-the-bus",
+    "w:miss-the-mark",
+    "w:miss-the-point",
+    "w:near-miss"
+  ]
 }

@@ -1,0 +1,180 @@
+{
+  "entryId": "w:big-picture",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bigger picture"
+  ],
+  "pattern": {
+    "tokens": [
+      "big",
+      "picture"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "big",
+        "picture"
+      ],
+      [
+        "bigger",
+        "picture"
+      ],
+      [
+        "big",
+        "pictures"
+      ],
+      [
+        "bigger",
+        "pictures"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "big picture",
+  "senses": [
+    {
+      "senseId": "w:big-picture#s1",
+      "pos": "短语",
+      "glossZh": "全局；整体情况",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:big-picture#e-a4afe2f2ca421c09",
+          "text": "“We need to monitor for long periods to understand the big picture,” says freshwater ecologist Simpson Cardoso.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 66
+          },
+          "parts": [
+            [
+              55,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:big-picture#e-a68d256130d79240",
+          "text": "After overcoming culture shock, you start to adjust and see the bigger picture.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 78
+          },
+          "parts": [
+            [
+              64,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:big-picture#e-6a8e1face362a5af",
+          "text": "Debbie had told us, “Don’t think of it as part of a bigger picture.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:big-picture#s2",
+      "pos": "短语",
+      "glossZh": "双片连映中的主片",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英国和爱尔兰旧时的电影放映用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

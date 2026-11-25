@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 57
+    "mock": 13
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -231,7 +231,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -280,12 +280,12 @@
       "pos": "v.",
       "glossZh": "蹦蹦跳跳",
       "pronunciationId": "w:skip#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -296,7 +296,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -329,7 +329,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -367,6 +367,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:skip#s9",
+      "pos": "n.",
+      "glossZh": "一次跳跃（如跳绳时）",
+      "pronunciationId": "w:skip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:skip#e-492a8acf61fc29a9",
+          "text": "When time was up, the counter showed 201 skips.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:skip#s10",
+      "pos": "v.",
+      "glossZh": "用（石子）打水漂",
+      "pronunciationId": "w:skip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:skip#e-69195632af5b888f",
+          "text": "Feeling incompetent, Alex scanned the ground for rocks to skip.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -375,6 +441,6 @@
       "reason": "行业或地区义、专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

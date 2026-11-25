@@ -1,0 +1,94 @@
+{
+  "entryId": "w:nice-to-meet-you",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nice",
+      "to",
+      "meet",
+      "you"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nice",
+        "to",
+        "meet",
+        "you"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nice to meet you",
+  "senses": [
+    {
+      "senseId": "w:nice-to-meet-you#s1",
+      "pos": "短语",
+      "glossZh": "很高兴认识你（初次见面时的问候）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nice-to-meet-you#e-cc83c22bb7a255b9",
+          "text": "Nice to meet you!”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

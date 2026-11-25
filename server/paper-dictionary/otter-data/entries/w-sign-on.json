@@ -1,0 +1,112 @@
+{
+  "entryId": "w:sign-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "signs on"
+  ],
+  "pattern": {
+    "tokens": [
+      "sign",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sign",
+        "on"
+      ],
+      [
+        "signs",
+        "on"
+      ],
+      [
+        "signed",
+        "on"
+      ],
+      [
+        "signing",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sign on",
+  "senses": [
+    {
+      "senseId": "w:sign-on#s1",
+      "pos": "短语",
+      "glossZh": "签约加入；答应参与",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sign-on#s2",
+      "pos": "短语",
+      "glossZh": "登录系统；接入通信设备",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sign-on#s3",
+      "pos": "短语",
+      "glossZh": "（广播电台或电视台）开始播送",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sign-on#s4",
+      "pos": "短语",
+      "glossZh": "登记申领失业救济",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

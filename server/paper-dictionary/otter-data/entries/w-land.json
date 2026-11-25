@@ -59,8 +59,8 @@
     "mock": 197
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 194
+    "gaokao": 2,
+    "mock": 8
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 94
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -356,7 +356,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -427,7 +427,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -472,35 +472,67 @@
       ]
     },
     {
-      "senseId": "w:land#s7",
-      "pos": "短语",
-      "glossZh": "漂亮地收尾",
+      "senseId": "w:land#s8",
+      "pos": "v.",
+      "glossZh": "（想法）突然浮现",
       "pronunciationId": "w:land#p-main",
-      "note": "stick the landing，源于体操等项目。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:land#e-99c3262f2dad9968",
-          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+          "exampleId": "w:land#e-a8e54f3a59588cad",
+          "text": "The best ideas can land when you least expect them – but there are things you can do to help them along, and that’s where walking comes in.",
           "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
-              "sentence": 2
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:2",
+              "sentence": 4
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 115,
-            "end": 122
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:land#s9",
+      "pos": "v.",
+      "glossZh": "（笑话等）达到预期效果",
+      "pronunciationId": "w:land#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:land#e-00cc54a641350895",
+          "text": "The researchers noted that the apes even paused to watch for the adult’s reaction, much like a child waiting to see if their joke landed.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 136
           }
         }
       ]
@@ -512,6 +544,12 @@
       "reason": "行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:land-on",
+    "w:native-land"
+  ]
 }

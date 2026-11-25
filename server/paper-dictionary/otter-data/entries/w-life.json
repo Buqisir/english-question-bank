@@ -42,8 +42,8 @@
     "mock": 1237
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 1232
+    "gaokao": 13,
+    "mock": 1057
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 84,
-        "mock": 0
+        "mock": 151
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -363,336 +363,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:life#s6",
-      "pos": "短语",
-      "glossZh": "静物画",
-      "pronunciationId": "w:life#p-main",
-      "note": "still life。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-e2a3efafab02e2d3",
-          "text": "They __57__ the other painting and learned that it was __58__ Paul Gauguin’s “Still Life of Fruit on a Table with a Small Dog.”",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 84,
-            "end": 88
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s7",
-      "pos": "短语",
-      "glossZh": "以实物为模特",
-      "pronunciationId": "w:life#p-main",
-      "note": "from life。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-596e227355a7b534",
-          "text": "●Paint often and paint from life.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s8",
-      "pos": "短语",
-      "glossZh": "一辈子",
-      "pronunciationId": "w:life#p-main",
-      "note": "for life。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-59017db571f17f57",
-          "text": "“There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 170,
-            "end": 174
-          }
-        },
-        {
-          "exampleId": "w:life#e-707001435a7a2d76",
-          "text": "NAHS provides scholarship opportunities for high school students, which can truly set them up for life in this field.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-a",
-            "locator": {
-              "paragraph": 19,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-a:19",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 98,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s9",
-      "pos": "短语",
-      "glossZh": "生命周期",
-      "pronunciationId": "w:life#p-main",
-      "note": "life cycle。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-c01604a2bc983530",
-          "text": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 118
-          }
-        },
-        {
-          "exampleId": "w:life#e-cd748c5e7b3e646f",
-          "text": "The life cycle of the butterflies.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2023-four-provinces-feb:31",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s10",
-      "pos": "短语",
-      "glossZh": "各行各业",
-      "pronunciationId": "w:life#p-main",
-      "note": "all walks of life。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-acbb6e221822d1ab",
-          "text": "Tan treated women from all walks of life.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:life#e-f1de27455db7fc9c",
-          "text": "In the course of a couple of hours, he __53__ me just how much one can gain from __54__ with an open mind, and a willingness to __55__ with locals from all walks of life.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 165,
-            "end": 169
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s11",
-      "pos": "短语",
-      "glossZh": "使生动起来",
-      "pronunciationId": "w:life#p-main",
-      "note": "bring sth to life。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-fc93c91d876ed488",
-          "text": "This produced stunning maps that brought Tharp’s findings to life in a way that no scientific paper could.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 61,
-            "end": 65
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s12",
-      "pos": "短语",
-      "glossZh": "使获得生命",
-      "pronunciationId": "w:life#p-main",
-      "note": "bring to life。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-cda1c35fcedfc628",
-          "text": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:life#s13",
-      "pos": "短语",
-      "glossZh": "生命维持",
-      "pronunciationId": "w:life#p-main",
-      "note": "life support。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:life#e-e66a43f452502583",
-          "text": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 51
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -701,6 +371,25 @@
       "reason": "行业或专名用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-walks-of-life",
+    "w:art-is-long-life-is-short",
+    "w:bring-sth-to-life",
+    "w:bring-to-life",
+    "w:circle-of-life",
+    "w:come-to-life",
+    "w:double-life",
+    "w:for-life",
+    "w:from-life",
+    "w:life-is-too-short",
+    "w:life-of-its-own",
+    "w:matter-of-life-and-death",
+    "w:still-life",
+    "w:this-is-the-life",
+    "w:walk-of-life"
+  ]
 }

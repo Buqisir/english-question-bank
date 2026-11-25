@@ -1,0 +1,157 @@
+{
+  "entryId": "w:price-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "price",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "price",
+        "out"
+      ],
+      [
+        "priced",
+        "out"
+      ],
+      [
+        "prices",
+        "out"
+      ],
+      [
+        "pricing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "priced out",
+      "tags": []
+    },
+    {
+      "form": "pricing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "price sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:price-out#s1",
+      "pos": "短语",
+      "glossZh": "因价格过高而使某人无力购买、租住或参与",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:price-out#e-327e114a256f7cde",
+          "text": "Artists, creatives, and technologists have been priced out of London and are pouring to Thanet, bringing new ideas and drive.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          },
+          "parts": [
+            [
+              48,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:price-out#e-b6881edd4207d5f2",
+          "text": "Housing: Pricing out the Young?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 20
+          },
+          "parts": [
+            [
+              9,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be priced out of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:price-out#s2",
+      "pos": "短语",
+      "glossZh": "核算某项购买、服务或工程的总价",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

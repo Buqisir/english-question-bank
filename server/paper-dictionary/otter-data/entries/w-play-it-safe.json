@@ -1,0 +1,112 @@
+{
+  "entryId": "w:play-it-safe",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "it",
+      "safe"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "it",
+        "safe"
+      ],
+      [
+        "played",
+        "it",
+        "safe"
+      ],
+      [
+        "playing",
+        "it",
+        "safe"
+      ],
+      [
+        "plays",
+        "it",
+        "safe"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "played it safe",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play it safe",
+  "senses": [
+    {
+      "senseId": "w:play-it-safe#s1",
+      "pos": "短语",
+      "glossZh": "采取稳妥做法；避免冒险",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-it-safe#e-e5372fda2d295393",
+          "text": "I first played it safe and stuck to the long and winding easy green run.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 22
+          },
+          "parts": [
+            [
+              8,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

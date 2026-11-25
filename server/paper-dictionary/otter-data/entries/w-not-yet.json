@@ -1,0 +1,156 @@
+{
+  "entryId": "w:not-yet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "yet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "yet"
+      ],
+      [
+        "not",
+        "yets"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not yet",
+  "senses": [
+    {
+      "senseId": "w:not-yet#s1",
+      "pos": "短语",
+      "glossZh": "还没有；尚未",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-yet#e-f0ff50aa6dd80c8a",
+          "text": "“We can print them at never-before-seen complexities, but they are not yet fully functional vessels.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-yet#e-de79ebe2104596d3",
+          "text": "By arriving before opening, you get your waiting out of the way when other activities are not yet open.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 97
+          },
+          "parts": [
+            [
+              90,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-yet#e-3fc0163683fe12eb",
+          "text": "We know that some animals live longer than others, but we do not yet fully understand why.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          },
+          "parts": [
+            [
+              61,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

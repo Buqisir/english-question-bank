@@ -1,0 +1,66 @@
+{
+  "entryId": "w:make-a-fool-of-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "a",
+      "fool",
+      "of",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "a",
+        "fool",
+        "of",
+        "oneself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make a fool of oneself",
+  "senses": [
+    {
+      "senseId": "w:make-a-fool-of-oneself#s1",
+      "pos": "短语",
+      "glossZh": "使自己出丑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fool#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

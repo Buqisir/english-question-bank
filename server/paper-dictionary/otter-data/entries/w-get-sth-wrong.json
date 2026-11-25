@@ -1,0 +1,219 @@
+{
+  "entryId": "w:get-sth-wrong",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get wrong"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      {
+        "slot": "sth"
+      },
+      "wrong"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        {
+          "slot": "sth"
+        },
+        "wrong"
+      ],
+      [
+        "get",
+        "wrong"
+      ],
+      [
+        "gets",
+        "wrong"
+      ],
+      [
+        "getting",
+        "wrong"
+      ],
+      [
+        "got",
+        "wrong"
+      ],
+      [
+        "gotten",
+        "wrong"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gets wrong",
+      "tags": []
+    },
+    {
+      "form": "getting wrong",
+      "tags": []
+    },
+    {
+      "form": "got wrong",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get sth wrong",
+  "senses": [
+    {
+      "senseId": "w:get-sth-wrong#s1",
+      "pos": "短语",
+      "glossZh": "把……弄错；答错或误解……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s42"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-wrong#e-0b91c3d721197d7f",
+          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 136
+          },
+          "parts": [
+            [
+              120,
+              123
+            ],
+            [
+              131,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              123
+            ],
+            [
+              131,
+              136
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-wrong#e-23bb9c99d65a0455",
+          "text": "My mind raced back to my first-aid class, but I drew a blank, afraid of getting it wrong.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 88
+          },
+          "parts": [
+            [
+              72,
+              79
+            ],
+            [
+              83,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              79
+            ],
+            [
+              83,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-wrong#e-f684a245c445e6ab",
+          "text": "Because the speed and efficiency of using AI to write code is balanced by the reality that it often gets things wrong.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 117
+          },
+          "parts": [
+            [
+              100,
+              104
+            ],
+            [
+              112,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              104
+            ],
+            [
+              112,
+              117
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

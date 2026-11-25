@@ -1,0 +1,125 @@
+{
+  "entryId": "w:take-the-plunge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "plunge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "plunge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the plunge",
+  "senses": [
+    {
+      "senseId": "w:take-the-plunge#s1",
+      "pos": "习语",
+      "glossZh": "终于下定决心去做；迈出关键一步",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s30"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-the-plunge#e-83bf087df3c470ab",
+          "text": "When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 111
+          },
+          "parts": [
+            [
+              96,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-plunge#e-215492e9f8b8bd77",
+          "text": "Which of the following best explains “take the plunge” underlined in paragraph 2?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-a:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 53
+          },
+          "parts": [
+            [
+              38,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

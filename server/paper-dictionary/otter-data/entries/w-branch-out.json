@@ -1,0 +1,154 @@
+{
+  "entryId": "w:branch-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "branch",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "branch",
+        "out"
+      ],
+      [
+        "branched",
+        "out"
+      ],
+      [
+        "branches",
+        "out"
+      ],
+      [
+        "branching",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "branched out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "branch out",
+  "senses": [
+    {
+      "senseId": "w:branch-out#s1",
+      "pos": "短语",
+      "glossZh": "尝试新的活动；拓展到新领域或业务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:branch#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:branch-out#e-af32152b5cdf7084",
+          "text": "When I'm alone, I'm more likely to branch out and talk to the locals and strangers, even if there's a language barrier.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:branch-out#e-46e0c892fde05e6e",
+          "text": "She branched out into TV commercials during the 70s and 80s, acting as “a housewife and mum, smiling with my product beside me...Folgers coffee, Jordache jeans...” She got married and had two children, even shooting one commercial three days after giving birth.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 16
+          },
+          "parts": [
+            [
+              4,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "常用 branch out into sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:branch-out#s2",
+      "pos": "短语",
+      "glossZh": "向外伸展并形成分支",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

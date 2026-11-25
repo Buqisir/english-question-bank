@@ -1,0 +1,155 @@
+{
+  "entryId": "w:for-sure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "sure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "sure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for sure",
+  "senses": [
+    {
+      "senseId": "w:for-sure#s1",
+      "pos": "短语",
+      "glossZh": "肯定；确实",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sure#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-sure#e-b641cbba09a92e33",
+          "text": "This was a loving home for sure, but 1,600 miles away.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-sure#e-26474b69411b4ffe",
+          "text": "“I’ll come in last for sure.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-sure#e-f75fd6c5a840236d",
+          "text": "He has big ears, a large head, huge feet, and a gentle personality – but we have no way of knowing for sure.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 107
+          },
+          "parts": [
+            [
+              99,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              107
+            ]
+          ]
+        }
+      ],
+      "note": "know for sure 表示确切知道。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

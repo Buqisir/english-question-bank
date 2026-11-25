@@ -1,0 +1,156 @@
+{
+  "entryId": "w:by-contrast",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "contrast"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "contrast"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by contrast",
+  "senses": [
+    {
+      "senseId": "w:by-contrast#s1",
+      "pos": "短语",
+      "glossZh": "相比之下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s16",
+        "w:contrast#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-contrast#e-365ecf0bcc6d5c1a",
+          "text": "In Maya’s Fog Harp, by contrast, water drops hit the wires and slowly combine into larger drops.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-contrast#e-be72e8b64cd64cc0",
+          "text": "By contrast, finishing things means struggling your way through the messy, imperfect reality.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-contrast#e-7001983f4b463852",
+          "text": "Type B, by contrast, is the relaxed, easygoing type who lets life unfold at its own pace.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 24
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

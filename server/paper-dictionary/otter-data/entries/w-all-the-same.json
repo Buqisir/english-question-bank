@@ -1,0 +1,74 @@
+{
+  "entryId": "w:all-the-same",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "the",
+      "same"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "the",
+        "same"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all the same",
+  "senses": [
+    {
+      "senseId": "w:all-the-same#s1",
+      "pos": "短语",
+      "glossZh": "尽管如此；仍然",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-the-same#s2",
+      "pos": "短语",
+      "glossZh": "都一样；没有区别",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be all the same to sb，表示各种选择对某人来说都无所谓。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

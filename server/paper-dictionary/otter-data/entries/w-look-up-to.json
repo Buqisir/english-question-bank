@@ -1,0 +1,151 @@
+{
+  "entryId": "w:look-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "look",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "up",
+        "to"
+      ],
+      [
+        "looked",
+        "up",
+        "to"
+      ],
+      [
+        "looking",
+        "up",
+        "to"
+      ],
+      [
+        "looks",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look up to",
+      "tags": []
+    },
+    {
+      "form": "looked up to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look up to sb",
+  "senses": [
+    {
+      "senseId": "w:look-up-to#s1",
+      "pos": "短语",
+      "glossZh": "敬佩；仰慕",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s15",
+        "w:up#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-up-to#e-48df493358b7101e",
+          "text": "They look up to great thinkers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2021-national-a:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-up-to#e-a5566cf55c98a2d7",
+          "text": "Oliver’s skills got better, but he still looked up to Peter.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

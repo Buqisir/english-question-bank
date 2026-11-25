@@ -1,0 +1,74 @@
+{
+  "entryId": "w:cheer-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cheer",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cheer",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cheer (sb) up",
+  "senses": [
+    {
+      "senseId": "w:cheer-up#s1",
+      "pos": "短语",
+      "glossZh": "使某人高兴起来；使某人振作起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cheer#s1",
+        "w:up#s39"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cheer-up#s2",
+      "pos": "短语",
+      "glossZh": "高兴起来；振作起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

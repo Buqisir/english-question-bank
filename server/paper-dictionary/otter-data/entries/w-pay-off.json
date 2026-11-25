@@ -1,0 +1,313 @@
+{
+  "entryId": "w:pay-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "paying off"
+  ],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "off"
+      ],
+      [
+        "paying",
+        "off"
+      ],
+      [
+        "paid",
+        "off"
+      ],
+      [
+        "pays",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "paid off",
+      "tags": []
+    },
+    {
+      "form": "pays off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay off",
+  "senses": [
+    {
+      "senseId": "w:pay-off#s1",
+      "pos": "短语",
+      "glossZh": "取得成效；得到回报",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s8",
+        "w:pay#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pay-off#e-42470fe62966fb03",
+          "text": "Paragraph 2: Slowly but surely, my efforts to adjust to the new routine paid off.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 80
+          },
+          "parts": [
+            [
+              72,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-off#e-96636563205a04ad",
+          "text": "Many would say the Internet is a place for people who have given up on the traditional postal service, but Paulo’s hunch（直觉）paid off.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 132
+          },
+          "parts": [
+            [
+              124,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              132
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-off#e-3ea8bc6beae1b81e",
+          "text": "Their promotional work paid off.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:grammar-fill:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:pay-off#s2",
+      "pos": "短语",
+      "glossZh": "还清（债务、贷款等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pay-off#e-ba64210417ab5f22",
+          "text": "What if AI could pay off its energy debts by saving carbon elsewhere?",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-off#e-a6579af104fb0fe9",
+          "text": "To pay off her student loan.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-off#e-b1f1ebc1e02699a6",
+          "text": "They paid off all debts.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:pay-off#s3",
+      "pos": "短语",
+      "glossZh": "花钱收买；贿赂",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pay-off#s4",
+      "pos": "短语",
+      "glossZh": "结清工资或补偿后解雇",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

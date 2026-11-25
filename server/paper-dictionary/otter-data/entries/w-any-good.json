@@ -1,0 +1,91 @@
+{
+  "entryId": "w:any-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "any",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "any",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "any good",
+  "senses": [
+    {
+      "senseId": "w:any-good#s1",
+      "pos": "短语",
+      "glossZh": "有用；管用；还算好",
+      "note": "常用于疑问、否定或 whether 从句，询问或评价质量、效果。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:any-good#e-2d6789e37a713118",
+          "text": "When you state your position, formulate（阐述）an argument for what you claim and honestly ask yourself whether your argument is any good.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 133
+          },
+          "parts": [
+            [
+              125,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              133
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

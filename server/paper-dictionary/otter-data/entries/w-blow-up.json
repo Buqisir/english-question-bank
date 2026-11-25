@@ -1,0 +1,245 @@
+{
+  "entryId": "w:blow-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "blow",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "blow",
+        "up"
+      ],
+      [
+        "blew",
+        "up"
+      ],
+      [
+        "blowing",
+        "up"
+      ],
+      [
+        "blown",
+        "up"
+      ],
+      [
+        "blows",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "blow up",
+      "tags": []
+    },
+    {
+      "form": "blowing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "blow (sth) up",
+  "senses": [
+    {
+      "senseId": "w:blow-up#s1",
+      "pos": "短语",
+      "glossZh": "迅速走红；突然爆火",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blow#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:blow-up#e-02ba55bb3b19e717",
+          "text": "Because of its unique focus, it is blowing up online now.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:blow-up#s2",
+      "pos": "短语",
+      "glossZh": "给……充气；吹胀",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blow#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:blow-up#e-72b694176ee705cf",
+          "text": "The entire way home, my grandma encouraged me to stay optimistic, reminding me we had balloons at home to blow up.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 113
+          },
+          "parts": [
+            [
+              106,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:blow-up#s3",
+      "pos": "短语",
+      "glossZh": "爆炸；炸毁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:blow#s12"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-up#s4",
+      "pos": "短语",
+      "glossZh": "放大（照片、图像等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-up#s5",
+      "pos": "短语",
+      "glossZh": "突然大发脾气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-up#s6",
+      "pos": "短语",
+      "glossZh": "（计划、交易等）突然告吹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-up#s7",
+      "pos": "短语",
+      "glossZh": "（风暴等）突然形成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-up#s8",
+      "pos": "短语",
+      "glossZh": "给某人的手机发大量消息或反复打电话",
+      "note": "常用 blow up sb's phone，也可说手机因消息涌入而 is blowing up。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

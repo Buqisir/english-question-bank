@@ -1,0 +1,107 @@
+{
+  "entryId": "w:bark-up-the-wrong-tree",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bark",
+      "up",
+      "the",
+      "wrong",
+      "tree"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bark",
+        "up",
+        "the",
+        "wrong",
+        "tree"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "barking up the wrong tree",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bark up the wrong tree",
+  "senses": [
+    {
+      "senseId": "w:bark-up-the-wrong-tree#s1",
+      "pos": "短语",
+      "glossZh": "找错对象；弄错方向",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bark#s5",
+        "w:tree#s2",
+        "w:up#s99",
+        "w:wrong#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bark-up-the-wrong-tree#e-8d9bd0e884b2eeb2",
+          "text": "barking up the wrong tree",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 25
+          },
+          "parts": [
+            [
+              0,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

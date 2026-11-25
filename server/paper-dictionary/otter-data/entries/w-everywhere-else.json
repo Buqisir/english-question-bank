@@ -1,0 +1,90 @@
+{
+  "entryId": "w:everywhere-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "everywhere",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "everywhere",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "everywhere else",
+  "senses": [
+    {
+      "senseId": "w:everywhere-else#s1",
+      "pos": "短语",
+      "glossZh": "除此之外的所有地方",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:everywhere-else#e-7bc8863b9f23af1d",
+          "text": "She sang in the shower and the ear and just about everywhere else, despite her struggles with high pitch (高音).",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 65
+          },
+          "parts": [
+            [
+              50,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

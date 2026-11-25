@@ -1,0 +1,109 @@
+{
+  "entryId": "w:leading-edge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "leading",
+      "edge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leading",
+        "edge"
+      ],
+      [
+        "leading",
+        "edges"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leading edge",
+  "senses": [
+    {
+      "senseId": "w:leading-edge#s1",
+      "pos": "短语",
+      "glossZh": "领域或发展趋势的前沿",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leading-edge#e-b97a88af87cf40ef",
+          "text": "and have our students be benefiting and being at the leading edge of that?”",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-c:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 65
+          },
+          "parts": [
+            [
+              53,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              65
+            ]
+          ]
+        }
+      ],
+      "note": "常用 at the leading edge of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:leading-edge#s2",
+      "pos": "短语",
+      "glossZh": "物体的前缘",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如飞机机翼迎着气流的一边。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

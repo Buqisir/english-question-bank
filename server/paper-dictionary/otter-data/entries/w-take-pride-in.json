@@ -1,0 +1,173 @@
+{
+  "entryId": "w:take-pride-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "pride",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "pride",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take pride in",
+      "tags": []
+    },
+    {
+      "form": "taken pride in",
+      "tags": []
+    },
+    {
+      "form": "takes pride in",
+      "tags": []
+    },
+    {
+      "form": "taking pride in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take pride in sb/sth",
+  "senses": [
+    {
+      "senseId": "w:take-pride-in#s1",
+      "pos": "短语",
+      "glossZh": "为……感到自豪；以……为荣",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s55"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-pride-in#e-6ad2a623250abe79",
+          "text": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 61
+          },
+          "parts": [
+            [
+              46,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-pride-in#e-a3de76b6d0b73f1b",
+          "text": "As he began sharing his progress with people online – James finally started to take pride in his accomplishment.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 92
+          },
+          "parts": [
+            [
+              79,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-pride-in#e-2dfc46c0c0c15cb9",
+          "text": "The librarians at Baton Rouge’s public libraries have always taken pride in answering every question, from recipes to football events.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 75
+          },
+          "parts": [
+            [
+              61,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

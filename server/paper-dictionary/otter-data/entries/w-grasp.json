@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 5
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -282,7 +282,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -306,6 +306,19 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:grasp#s6",
+      "pos": "n.",
+      "glossZh": "紧握；抓住",
+      "pronunciationId": "w:grasp#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -314,6 +327,6 @@
       "reason": "专业缩写 GRASP"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

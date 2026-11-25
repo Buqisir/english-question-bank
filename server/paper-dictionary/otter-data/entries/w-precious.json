@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 55
+    "mock": 6
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -174,6 +174,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:precious#s3",
+      "pos": "adv.",
+      "glossZh": "极其；非常（强调少）",
+      "pronunciationId": "w:precious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:precious#e-a2fd71738b882bfb",
+          "text": "That leaves precious little to transform back into light.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -186,6 +219,6 @@
       "reason": "旧式强调用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

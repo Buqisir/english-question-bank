@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 62
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -192,6 +192,10 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:have-the-pleasure",
+    "w:its-a-pleasure"
+  ]
 }

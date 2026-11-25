@@ -1,0 +1,165 @@
+{
+  "entryId": "w:over-there",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "over",
+      "there"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "over",
+        "there"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "over there",
+  "senses": [
+    {
+      "senseId": "w:over-there#s1",
+      "pos": "短语",
+      "glossZh": "在那边；那边的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:over-there#e-75447896d4e1ae7d",
+          "text": "The couple had both gone to work, so it was strange that someone was over there.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 79
+          },
+          "parts": [
+            [
+              69,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:over-there#e-d8e1c30d8c392c46",
+          "text": "Claiming “I’m not going to cut down that tree over there if you give me money” is not a carbon offset.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:over-there#e-5e9c6a9212f64c4a",
+          "text": "It’s right over there next to the thingamajig.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          },
+          "parts": [
+            [
+              11,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:over-there#s2",
+      "pos": "短语",
+      "glossZh": "到那边；往那边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

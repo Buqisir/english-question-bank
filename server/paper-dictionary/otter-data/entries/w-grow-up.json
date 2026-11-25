@@ -1,0 +1,210 @@
+{
+  "entryId": "w:grow-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "grew up",
+    "growing up"
+  ],
+  "pattern": {
+    "tokens": [
+      "grow",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "grow",
+        "up"
+      ],
+      [
+        "grew",
+        "up"
+      ],
+      [
+        "growing",
+        "up"
+      ],
+      [
+        "grown",
+        "up"
+      ],
+      [
+        "grows",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "grown up",
+      "tags": []
+    },
+    {
+      "form": "grows up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "grow up",
+  "senses": [
+    {
+      "senseId": "w:grow-up#s1",
+      "pos": "短语",
+      "glossZh": "长大；成长",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:grow#s7",
+        "w:up#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:grow-up#e-74d1f4c0cc270e64",
+          "text": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:grow-up#e-952aaa7ae1fe003f",
+          "text": "When he stood in front of the house where he grew up as a child, he saw a lady standing in the entrance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:grow-up#e-9fe9c21fb21b982b",
+          "text": "Dr. Jubilado first met the Bajau while growing up on Samal Island in the Philippines.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 49
+          },
+          "parts": [
+            [
+              39,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 10,
+        "mock": 82
+      }
+    },
+    {
+      "senseId": "w:grow-up#s2",
+      "pos": "短语",
+      "glossZh": "逐渐形成；发展起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:grow-up#s3",
+      "pos": "短语",
+      "glossZh": "成熟点；别孩子气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于祈使句，表示责备。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

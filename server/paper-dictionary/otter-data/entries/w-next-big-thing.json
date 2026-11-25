@@ -1,0 +1,97 @@
+{
+  "entryId": "w:next-big-thing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "next",
+      "big",
+      "thing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "next",
+        "big",
+        "thing"
+      ],
+      [
+        "next",
+        "big",
+        "things"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "next big thing",
+  "senses": [
+    {
+      "senseId": "w:next-big-thing#s1",
+      "pos": "短语",
+      "glossZh": "即将走红的新事物；下一个热门趋势",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:next-big-thing#e-a3fce5559eaac02c",
+          "text": "Glasses that track every blink (眨眼) might be the next big thing in health tech.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 63
+          },
+          "parts": [
+            [
+              49,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

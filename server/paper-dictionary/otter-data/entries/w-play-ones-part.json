@@ -1,0 +1,111 @@
+{
+  "entryId": "w:play-ones-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      {
+        "slot": "one's"
+      },
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        {
+          "slot": "one's"
+        },
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "playing part",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play one's part",
+  "senses": [
+    {
+      "senseId": "w:play-ones-part#s1",
+      "pos": "短语",
+      "glossZh": "尽自己的一份力；发挥应有的作用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:part#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:play-ones-part#e-76e3859c3ab2d5d7",
+          "text": "Helping the next generation to have a healthy and active childhood is of great importance, and the industry is playing its part.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 127
+          },
+          "parts": [
+            [
+              111,
+              118
+            ],
+            [
+              123,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              118
+            ],
+            [
+              123,
+              127
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

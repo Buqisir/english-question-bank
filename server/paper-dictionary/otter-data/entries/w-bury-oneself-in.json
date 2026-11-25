@@ -1,0 +1,62 @@
+{
+  "entryId": "w:bury-oneself-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bury",
+      "oneself",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bury",
+        "oneself",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bury oneself in sth",
+  "senses": [
+    {
+      "senseId": "w:bury-oneself-in#s1",
+      "pos": "短语",
+      "glossZh": "埋头于某事；专心投入某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bury#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

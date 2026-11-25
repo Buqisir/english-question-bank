@@ -1,0 +1,111 @@
+{
+  "entryId": "w:bite-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bit back"
+  ],
+  "pattern": {
+    "tokens": [
+      "bite",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bite",
+        "back"
+      ],
+      [
+        "bit",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bite (sth) back",
+  "senses": [
+    {
+      "senseId": "w:bite-back#s1",
+      "pos": "短语",
+      "glossZh": "强忍情绪；把要说的话咽回去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bite-back#e-df94a7acf9c665b3",
+          "text": "I bit back my frustration(懊恼).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 10
+          },
+          "parts": [
+            [
+              2,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bite-back#s2",
+      "pos": "短语",
+      "glossZh": "回咬；反咬一口",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

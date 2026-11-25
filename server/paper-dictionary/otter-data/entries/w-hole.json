@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 25
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -164,11 +164,10 @@
       "examples": []
     },
     {
-      "senseId": "w:hole#s4",
-      "pos": "短语",
-      "glossZh": "陷入不断深入的探索",
+      "senseId": "w:hole#s5",
+      "pos": "n.",
+      "glossZh": "（black hole）黑洞",
       "pronunciationId": "w:hole#p-main",
-      "note": "go down a rabbit hole。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -177,22 +176,55 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:hole#e-87c569c76d687e4c",
-          "text": "After a recent negative car rental experience, I found myself going down a familiar rabbit hole, scrolling (滚屏) through online reviews of the company.",
+          "exampleId": "w:hole#e-b2aab142ef6165ea",
+          "text": "Italian physicist Paola Verrucchi points to black holes.",
           "source": {
-            "paperId": "paper-mock-shandong-jiuwu-2026-final",
-            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
-            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-b",
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-b:1",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:4",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 91,
-            "end": 95
+            "start": 50,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hole#s6",
+      "pos": "n.",
+      "glossZh": "（black hole，比喻）吞噬时间或资源的事物",
+      "pronunciationId": "w:hole#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hole#e-4e32ebcb85b97f42",
+          "text": "Conducting a simple time audit（审计） helps you find these hidden black holes in your schedule, which might be taking precious moments away from more critical tasks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 74
           }
         }
       ]
@@ -204,6 +236,12 @@
       "reason": "行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-down-a-rabbit-hole",
+    "w:rabbit-hole"
+  ]
 }

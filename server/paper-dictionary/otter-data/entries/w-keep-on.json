@@ -1,0 +1,195 @@
+{
+  "entryId": "w:keep-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping on"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "on"
+      ],
+      [
+        "keeping",
+        "on"
+      ],
+      [
+        "keeps",
+        "on"
+      ],
+      [
+        "kept",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep on",
+  "senses": [
+    {
+      "senseId": "w:keep-on#s1",
+      "pos": "短语",
+      "glossZh": "继续做；一直做",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-on#e-97d5f794c5e2c336",
+          "text": "I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          },
+          "parts": [
+            [
+              83,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-on#e-37d8ee4811619a86",
+          "text": "Just get up and keep on going.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-on#e-48b71fa7bc20a628",
+          "text": "But the pressure to always keep trying new things ignores the satisfaction of finding our loves and keeping on loving them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 110
+          },
+          "parts": [
+            [
+              100,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              110
+            ]
+          ]
+        }
+      ],
+      "note": "常接动词 -ing 形式。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-on#s2",
+      "pos": "短语",
+      "glossZh": "留用某人；让某人继续任职",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 keep sb on。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-on#s3",
+      "pos": "短语",
+      "glossZh": "没完没了地念叨",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 keep on about sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

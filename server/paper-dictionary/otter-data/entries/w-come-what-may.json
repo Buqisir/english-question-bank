@@ -1,0 +1,92 @@
+{
+  "entryId": "w:come-what-may",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "what",
+      "may"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "what",
+        "may"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come what may",
+  "senses": [
+    {
+      "senseId": "w:come-what-may#s1",
+      "pos": "短语",
+      "glossZh": "无论发生什么；不管结果怎样",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-what-may#e-7cddb25bb9efc683",
+          "text": "While her publisher describes Come What May as a roadmap for resilience (韧性), the word is one Easthope dislikes.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 43
+          },
+          "parts": [
+            [
+              30,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,174 @@
+{
+  "entryId": "w:speak-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "spoke for"
+  ],
+  "pattern": {
+    "tokens": [
+      "speak",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speak",
+        "for"
+      ],
+      [
+        "spoke",
+        "for"
+      ],
+      [
+        "speaking",
+        "for"
+      ],
+      [
+        "speaks",
+        "for"
+      ],
+      [
+        "spoken",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "speak for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speak for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:speak-for#s1",
+      "pos": "短语",
+      "glossZh": "代表……发言；为……发声",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-for#e-becaea23d1dcea04",
+          "text": "A way to speak for the environment and society.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-05-second-mock:25#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          },
+          "parts": [
+            [
+              9,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:speak-for#s2",
+      "pos": "短语",
+      "glossZh": "本身就能说明问题",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-for#e-a581fad4a10ed829",
+          "text": "Now, 15 months later, the results speak for themselves.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        }
+      ],
+      "note": "用于 speak for itself 或 speak for themselves。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:speak-for#s3",
+      "pos": "短语",
+      "glossZh": "预订；预先占下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 be spoken for。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

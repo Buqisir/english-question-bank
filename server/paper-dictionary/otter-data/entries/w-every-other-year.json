@@ -1,0 +1,95 @@
+{
+  "entryId": "w:every-other-year",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "other",
+      "year"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "other",
+        "year"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every other year",
+  "senses": [
+    {
+      "senseId": "w:every-other-year#s1",
+      "pos": "短语",
+      "glossZh": "每隔一年；每两年一次",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:other#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:every-other-year#e-72cf1de376f2a48e",
+          "text": "Every other year.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

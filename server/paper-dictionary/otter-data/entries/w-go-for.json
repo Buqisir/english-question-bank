@@ -1,0 +1,498 @@
+{
+  "entryId": "w:go-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes for",
+    "going for",
+    "went for"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "for"
+      ],
+      [
+        "goes",
+        "for"
+      ],
+      [
+        "going",
+        "for"
+      ],
+      [
+        "went",
+        "for"
+      ],
+      [
+        "gone",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go for",
+  "senses": [
+    {
+      "senseId": "w:go-for#s1",
+      "pos": "短语",
+      "glossZh": "选择；选用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-for#e-95e42db6496671fb",
+          "text": "Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 95
+          },
+          "parts": [
+            [
+              86,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-2887570444b474d9",
+          "text": "So it seems most reasonable to go for the energy-saving models.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          },
+          "parts": [
+            [
+              31,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-356a2d8a7d632146",
+          "text": "A climate adaptive playground goes for smart rainwater handling, offers greenery, softens school ground, and creates opportunities to discover climate issues.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          },
+          "parts": [
+            [
+              30,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-for#s2",
+      "pos": "短语",
+      "glossZh": "去做某项活动；去吃喝",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-for#e-411e47bfa43e8a09",
+          "text": "Going for a coffee.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-0a32103b19de8ec4",
+          "text": "Go for a coffee.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-54394bf2c3b285ed",
+          "text": "Go for lunch.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 go for a walk、go for a coffee 或 go for lunch。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 20
+      }
+    },
+    {
+      "senseId": "w:go-for#s3",
+      "pos": "短语",
+      "glossZh": "努力争取（目标、成绩等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-for#e-f08799c852c4a254",
+          "text": "She took a quick look at the headline: Go for the City Marathon.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 45
+          },
+          "parts": [
+            [
+              39,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-ddbab007a0aa806a",
+          "text": "Turnbull also sets a goal for each run by asking himself, “What am I going for?” Whether it’s seeing how fast he can get to the bottom, fitting in a certain number of turns, which jump to hit, whether to dip into a set of trees – the terrain（地形）is familiar, yet new.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 78
+          },
+          "parts": [
+            [
+              69,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-for#s5",
+      "pos": "短语",
+      "glossZh": "同样适用于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-for#e-2ef855ded125fc4f",
+          "text": "The same goes for hunting for a vacant elevator in a big building or a busy mall.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          },
+          "parts": [
+            [
+              9,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-for#e-415305fd31f38d4a",
+          "text": "It went for Jiang specially.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-henan-four-cities-2026-01:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-for#s6",
+      "pos": "短语",
+      "glossZh": "以……价格售出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-for#e-127106aedc0a5811",
+          "text": "But what makes the stall even more remarkable in the heart of Camden is that payment is on the honor system – customers just throw coins into an old mailbox – and most of the items on offer are priced at £1 in a neighborhood where fresh food usually goes for much, much more.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 250,
+            "end": 258
+          },
+          "parts": [
+            [
+              250,
+              258
+            ]
+          ],
+          "highlightRanges": [
+            [
+              250,
+              258
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-for#s4",
+      "pos": "短语",
+      "glossZh": "扑向；攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

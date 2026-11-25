@@ -62,8 +62,8 @@
     "mock": 769
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 766
+    "gaokao": 7,
+    "mock": 582
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -147,7 +147,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 105
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -360,7 +360,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -431,7 +431,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -476,40 +476,6 @@
       ]
     },
     {
-      "senseId": "w:share#s7",
-      "pos": "短语",
-      "glossZh": "共同感受",
-      "pronunciationId": "w:share#p-main",
-      "note": "share in sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:share#e-b0628c6be263ec38",
-          "text": "On her day of discharge, we shared in her __50__ at her recovery.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:share#s8",
       "pos": "n.",
       "glossZh": "份额",
@@ -517,7 +483,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -547,12 +513,12 @@
       "pos": "n.",
       "glossZh": "股份",
       "pronunciationId": "w:share#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -560,13 +526,46 @@
       "pos": "n.",
       "glossZh": "转发",
       "pronunciationId": "w:share#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:share#s11",
+      "pos": "n.",
+      "glossZh": "共享使用",
+      "pronunciationId": "w:share#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:share#e-dc275c64d1797aa9",
+          "text": "Indego is the bike share system in Penn.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -575,6 +574,12 @@
       "reason": "农业器具专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fair-share",
+    "w:share-in-sth"
+  ]
 }

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 7,
-    "mock": 235
+    "mock": 59
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 75
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -180,7 +180,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -251,7 +251,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -350,40 +350,6 @@
       ]
     },
     {
-      "senseId": "w:demand#s6",
-      "pos": "短语",
-      "glossZh": "按需；一经要求",
-      "pronunciationId": "w:demand#p-main",
-      "note": "on demand。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:demand#e-f60b59807fb6913f",
-          "text": "Through modeling, the team predicted that moving ions could change a material’s melting point, allowing it to absorb heat on demand.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 125,
-            "end": 131
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:demand#s7",
       "pos": "n.",
       "glossZh": "所需付出的时间或精力",
@@ -391,7 +357,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -442,6 +408,12 @@
       "reason": "工程或法律专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-demand",
+    "w:on-demand"
+  ]
 }

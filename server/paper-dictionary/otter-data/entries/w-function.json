@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 212
+    "mock": 15
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 154
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -325,6 +325,6 @@
       "reason": "化学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

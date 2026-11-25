@@ -1,0 +1,195 @@
+{
+  "entryId": "w:start-sth-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "start off",
+    "start something off"
+  ],
+  "pattern": {
+    "tokens": [
+      "start",
+      {
+        "slot": "sth"
+      },
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "start",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "start",
+        "off"
+      ],
+      [
+        "started",
+        "off"
+      ],
+      [
+        "starting",
+        "off"
+      ],
+      [
+        "starts",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "started off",
+      "tags": []
+    },
+    {
+      "form": "starts off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "start sth off",
+  "senses": [
+    {
+      "senseId": "w:start-sth-off#s1",
+      "pos": "短语",
+      "glossZh": "使……开始；为……开个头",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:start#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:start-sth-off#e-49cbdec8f267e175",
+          "text": "Going to the cafe starts her day off good and gets her ready for class.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 36
+          },
+          "parts": [
+            [
+              18,
+              24
+            ],
+            [
+              33,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              24
+            ],
+            [
+              33,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:start-sth-off#s2",
+      "pos": "短语",
+      "glossZh": "开始时是……；起初以……开始",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:start-sth-off#e-0075f9f32acd7422",
+          "text": "What started off as something creative that I could share with friends turned into competition changed by feelings of incompetence.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "不及物，常用 start off as 或 start off with。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:start-sth-off#s3",
+      "pos": "短语",
+      "glossZh": "出发；动身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "不及物用法 start off。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

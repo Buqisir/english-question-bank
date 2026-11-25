@@ -1,0 +1,120 @@
+{
+  "entryId": "w:feel-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "for"
+      ],
+      [
+        "feeling",
+        "for"
+      ],
+      [
+        "feels",
+        "for"
+      ],
+      [
+        "felt",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "felt for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:feel-for#s1",
+      "pos": "短语",
+      "glossZh": "同情某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-for#e-456fc9239a83cedb",
+          "text": "I sighed, thinking how sorry I felt for him.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          },
+          "parts": [
+            [
+              31,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:feel-for#s2",
+      "pos": "短语",
+      "glossZh": "用手摸索寻找某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

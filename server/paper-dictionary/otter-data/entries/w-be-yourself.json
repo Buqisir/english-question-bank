@@ -1,0 +1,154 @@
+{
+  "entryId": "w:be-yourself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "yourself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "yourself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be yourself",
+  "senses": [
+    {
+      "senseId": "w:be-yourself#s1",
+      "pos": "短语",
+      "glossZh": "做真实的自己；表现出本来的样子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:yourself#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-yourself#e-be086df4bdb80691",
+          "text": "Talk directly to your audience, be yourself and make a connection.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-yourself#e-4c388e02684b62d1",
+          "text": "Just like Oscar Wilde has said, “Be yourself.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-yourself#e-8c919e9936274667",
+          "text": "And it’s okay to be yourself.” So he created the character of a monster truck named Elbow Grease who isn’t the best in any competition, but remains true to himself and always finishes what he sets out to do.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -66,8 +66,8 @@
     "mock": 517
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 510
+    "gaokao": 5,
+    "mock": 335
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -255,7 +255,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 1
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -327,7 +327,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -391,93 +391,10 @@
       ]
     },
     {
-      "senseId": "w:step#s6",
-      "pos": "短语",
-      "glossZh": "暂时离开",
+      "senseId": "w:step#s11",
+      "pos": "n.",
+      "glossZh": "步调；节奏",
       "pronunciationId": "w:step#p-main",
-      "note": "step away from。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:step#e-6998eacd6bb3fea5",
-          "text": "This process requires you to step away from optional online activities for thirty days.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:step#s7",
-      "pos": "短语",
-      "glossZh": "走出",
-      "pronunciationId": "w:step#p-main",
-      "note": "step out of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:step#e-3c6931e20fd03d5e",
-          "text": "Walking at night-time is a great way to step out of your comfort zone.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:step#s8",
-      "pos": "短语",
-      "glossZh": "让开",
-      "pronunciationId": "w:step#p-main",
-      "note": "step aside，也可表示退出职位。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
-    },
-    {
-      "senseId": "w:step#s9",
-      "pos": "短语",
-      "glossZh": "介入",
-      "pronunciationId": "w:step#p-main",
-      "note": "step in。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -486,39 +403,25 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:step#e-5a2a5a023652abc0",
-          "text": "That’s where Dec My Dorm stepped in.",
+          "exampleId": "w:step#e-df25ade11e1131d4",
+          "text": "I was born in 2010 in the countryside, which may be why I always felt a little out of step with the times.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:2",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-b:1",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 25,
-            "end": 32
+            "start": 86,
+            "end": 90
           }
         }
       ]
-    },
-    {
-      "senseId": "w:step#s10",
-      "pos": "短语",
-      "glossZh": "垫脚石",
-      "pronunciationId": "w:step#p-main",
-      "note": "stepping stone，也可比喻通往目标的一步。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -527,6 +430,26 @@
       "reason": "同形缩写或专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:baby-step",
+    "w:one-step-at-a-time",
+    "w:step-aside",
+    "w:step-away-from",
+    "w:step-back",
+    "w:step-by-step",
+    "w:step-foot",
+    "w:step-forward",
+    "w:step-in",
+    "w:step-into",
+    "w:step-off",
+    "w:step-on",
+    "w:step-out",
+    "w:step-out-of",
+    "w:step-up",
+    "w:take-a-step-back"
+  ]
 }

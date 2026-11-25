@@ -1,0 +1,125 @@
+{
+  "entryId": "w:at-the-moment",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "moment"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "moment"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the moment",
+  "senses": [
+    {
+      "senseId": "w:at-the-moment#s1",
+      "pos": "短语",
+      "glossZh": "此刻；目前；当时",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:moment#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-moment#e-3e7f0439cc68f421",
+          "text": "At the moment, Ethan was turning his old pen between his fingers.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-moment#e-cd93c52a307b097e",
+          "text": "What are the speakers probably doing at the moment?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 50
+          },
+          "parts": [
+            [
+              37,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

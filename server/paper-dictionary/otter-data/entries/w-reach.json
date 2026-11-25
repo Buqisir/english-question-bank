@@ -62,8 +62,8 @@
     "mock": 301
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 293
+    "gaokao": 6,
+    "mock": 154
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -281,161 +281,6 @@
       ]
     },
     {
-      "senseId": "w:reach#s4",
-      "pos": "短语",
-      "glossZh": "伸出手",
-      "pronunciationId": "w:reach#p-main",
-      "note": "reach out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reach#e-4902bfdac7913697",
-          "text": "As I read, he reaches out and pokes (戳) the page with his finger.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:reach#s5",
-      "pos": "短语",
-      "glossZh": "伸手去拿",
-      "pronunciationId": "w:reach#p-main",
-      "note": "reach for sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reach#e-6b5c2a1ab4022857",
-          "text": "In a panic, I reached down for my purse to grab my cell phone.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:8",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:reach#s6",
-      "pos": "短语",
-      "glossZh": "联系（某人或机构）",
-      "pronunciationId": "w:reach#p-main",
-      "note": "reach out to sb。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reach#e-befc7a12ebff96f4",
-          "text": "A typical work party starts at 8:30 a.m. and ends by 3:30 p.m. Location and date options will be provided after you reach out to WTA.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a:8",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 116,
-            "end": 121
-          }
-        },
-        {
-          "exampleId": "w:reach#e-7b0491e5ba846018",
-          "text": "Meyer reached out to conservation librarian Tessa Gadomski for help, who studied them with technology normally used to treat and care for rare books and papers.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:reach#s7",
-      "pos": "短语",
-      "glossZh": "重新求助于以往的办法",
-      "pronunciationId": "w:reach#p-main",
-      "note": "reach back to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reach#e-a6e230fefede8fc4",
-          "text": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 98
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:reach#s8",
       "pos": "n.",
       "glossZh": "可及范围",
@@ -443,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -473,13 +318,202 @@
       "pos": "n.",
       "glossZh": "河段",
       "pronunciationId": "w:reach#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:reach#s10",
+      "pos": "v.",
+      "glossZh": "达成（协议）；得出（结论）",
+      "pronunciationId": "w:reach#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reach#e-1bcc536d6bc3dc34",
+          "text": "What agreement has been reached between the speakers?",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:reach#e-64823daac0f9ade2",
+          "text": "When Claude itself is asked to reason, printing out its chain of thought to answer maths questions, the microscope suggests that the way the model says it reached a conclusion, and what it actually thought, might not always be the same.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 162
+          }
+        },
+        {
+          "exampleId": "w:reach#e-a1dc19f491589f44",
+          "text": "But they don’t, according to a paper published in BMC Biology, which finds that 246 ecologists analyzing the same data sets reached widely varying conclusions, with some finding effects in totally opposite directions.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 131
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reach#s11",
+      "pos": "v.",
+      "glossZh": "延伸；波及",
+      "pronunciationId": "w:reach#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reach#e-a11d62ae0b81a06e",
+          "text": "I saw tall glass buildings reaching toward the sky, impressive but cold.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:reach#e-c7b7b40b534de555",
+          "text": "But the authors say the issue reaches further.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reach#s12",
+      "pos": "v.",
+      "glossZh": "回应（他人的接触或示好）",
+      "pronunciationId": "w:reach#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reach#e-9537df1a2f996e6d",
+          "text": "Through it, I could see my boy, but I could never quite feel him reach back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reach#s13",
+      "pos": "v.",
+      "glossZh": "深入；触及（内心）",
+      "pronunciationId": "w:reach#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reach#e-f8678ee13700e873",
+          "text": "She knew how to reach into our minds and souls and make us think.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -492,6 +526,15 @@
       "reason": "大写同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:reach-back-to-sth",
+    "w:reach-for-sth",
+    "w:reach-for-the-moon",
+    "w:reach-out",
+    "w:reach-out-to-sb"
+  ]
 }

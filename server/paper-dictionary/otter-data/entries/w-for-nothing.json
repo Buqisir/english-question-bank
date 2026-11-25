@@ -1,0 +1,154 @@
+{
+  "entryId": "w:for-nothing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "nothing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "nothing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for nothing",
+  "senses": [
+    {
+      "senseId": "w:for-nothing#s1",
+      "pos": "短语",
+      "glossZh": "免费；无偿",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:for#s21",
+        "w:nothing#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-nothing#e-bb0dc190c97b4582",
+          "text": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:for-nothing#s2",
+      "pos": "短语",
+      "glossZh": "没有缘由；无缘无故",
+      "note": "not ... for nothing 表示做某事是有缘由的。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:for#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-nothing#e-88da08957b4eba85",
+          "text": "The visual arts are not called the visual arts for nothing.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:for-nothing#s3",
+      "pos": "短语",
+      "glossZh": "白费；徒劳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

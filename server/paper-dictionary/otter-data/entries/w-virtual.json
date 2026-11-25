@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 65
+    "mock": 2
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -184,6 +184,6 @@
       "reason": "计算机或物理专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

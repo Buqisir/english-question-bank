@@ -1,0 +1,169 @@
+{
+  "entryId": "w:as-such",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "such"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "such"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as such",
+  "senses": [
+    {
+      "senseId": "w:as-such#s1",
+      "pos": "短语",
+      "glossZh": "作为前面所说的那种人或事物；以该身份或名称",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-such#e-08c5982cb6b7b53f",
+          "text": "In sociology, these are known as our “weak ties”, referred to as such to differentiate them from our strong ties, like close friends and family members.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 69
+          },
+          "parts": [
+            [
+              62,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "referred to as such 表示按前文提到的名称来称呼。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:as-such#s2",
+      "pos": "短语",
+      "glossZh": "因此；所以",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:such#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-such#e-e67f00c6a238e28b",
+          "text": "As such, a target for subsequent studies should be integrating more naturalistic language patterns to gain deeper insights into cognitive health.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-such#e-02634b9aad75debe",
+          "text": "As such, the tendency to subjectively view resource distribution as zero-sum might have been the dominant strategy in our evolutionary past, giving individuals with higher zero-sum beliefs a relative advantage over others.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

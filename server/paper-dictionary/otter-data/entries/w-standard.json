@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 116
+    "mock": 13
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 2
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -202,7 +202,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -233,12 +233,12 @@
       "pos": "adj.",
       "glossZh": "公认权威的",
       "pronunciationId": "w:standard#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -248,6 +248,10 @@
       "reason": "专业义和地区简称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:double-standard",
+    "w:gold-standard"
+  ]
 }

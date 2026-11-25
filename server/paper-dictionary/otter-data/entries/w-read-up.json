@@ -1,0 +1,128 @@
+{
+  "entryId": "w:read-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "reading up"
+  ],
+  "pattern": {
+    "tokens": [
+      "read",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "read",
+        "up"
+      ],
+      [
+        "reading",
+        "up"
+      ],
+      [
+        "reads",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "read up",
+  "senses": [
+    {
+      "senseId": "w:read-up#s1",
+      "pos": "短语",
+      "glossZh": "查阅资料以了解某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:read-up#e-5e3fb53d3ce58001",
+          "text": "Read up and train to make it to the finish line.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "常用 read up on sth 指查阅某一主题的资料。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:read-up#s2",
+      "pos": "短语",
+      "glossZh": "通过阅读对某主题已有充分了解",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 be well read up on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:read-up#s3",
+      "pos": "短语",
+      "glossZh": "往上翻看聊天记录",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

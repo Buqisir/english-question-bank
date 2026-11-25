@@ -1,0 +1,77 @@
+{
+  "entryId": "w:get-straight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting straight"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "straight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "straight"
+      ],
+      [
+        "getting",
+        "straight"
+      ],
+      [
+        "gets",
+        "straight"
+      ],
+      [
+        "got",
+        "straight"
+      ],
+      [
+        "gotten",
+        "straight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get sth straight",
+  "senses": [
+    {
+      "senseId": "w:get-straight#s1",
+      "pos": "短语",
+      "glossZh": "把事情弄清楚；把话说清楚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 get the facts straight 或 let's get one thing straight。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

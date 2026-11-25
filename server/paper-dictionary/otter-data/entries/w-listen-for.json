@@ -1,0 +1,164 @@
+{
+  "entryId": "w:listen-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "listen",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "listen",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "listened for",
+      "tags": []
+    },
+    {
+      "form": "listening for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "listen for sth",
+  "senses": [
+    {
+      "senseId": "w:listen-for#s1",
+      "pos": "短语",
+      "glossZh": "留心听某种声音",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:listen#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:listen-for#e-c7b319f44fb2d703",
+          "text": "By listening for sounds.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-national-a:25#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 16
+          },
+          "parts": [
+            [
+              3,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-for#e-d56c7d4727cd581e",
+          "text": "They did not know that after each performance she returned to the bamboo grove, pressed her ear to the newest bamboo shoots, and listened for the next question the wind might ask.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 141
+          },
+          "parts": [
+            [
+              129,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              141
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-for#e-235cb865091a0ebe",
+          "text": "Once you do it enough, you stop being afraid.” Carrying safety ropes and tools, the team inspects the bridge section by section, listening for odd sounds that might signal hidden problems.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 142
+          },
+          "parts": [
+            [
+              129,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              142
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 424
+    "mock": 234
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 49,
-        "mock": 0
+        "mock": 158
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -236,40 +236,6 @@
       "examples": []
     },
     {
-      "senseId": "w:language#s5",
-      "pos": "短语",
-      "glossZh": "肢体语言",
-      "pronunciationId": "w:language#p-main",
-      "note": "body language。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:language#e-5541cfbcbb8dcd6e",
-          "text": "● Mind Your Words and Body Language",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:7",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 35
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:language#s6",
       "pos": "n.",
       "glossZh": "脏话",
@@ -290,6 +256,11 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bad-language"
+  ]
 }

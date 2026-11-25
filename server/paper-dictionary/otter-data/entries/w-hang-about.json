@@ -1,0 +1,131 @@
+{
+  "entryId": "w:hang-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "about"
+      ],
+      [
+        "hanging",
+        "about"
+      ],
+      [
+        "hangs",
+        "about"
+      ],
+      [
+        "hung",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang about",
+  "senses": [
+    {
+      "senseId": "w:hang-about#s1",
+      "pos": "短语",
+      "glossZh": "在某处闲逛；逗留",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hang-about#e-8a01f194a1362bc1",
+          "text": "Hang about at the night market.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hang-about#s2",
+      "pos": "短语",
+      "glossZh": "等一下；先别急",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "单独作呼语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-about#s3",
+      "pos": "短语",
+      "glossZh": "常和某人混在一起；一起消磨时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "hang about with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

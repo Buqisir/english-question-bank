@@ -1,0 +1,124 @@
+{
+  "entryId": "w:from-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from life",
+  "senses": [
+    {
+      "senseId": "w:from-life#s1",
+      "pos": "短语",
+      "glossZh": "对照真人、实物或实景（作画等）",
+      "note": "常用 paint 或 draw from life。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:life#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:from-life#e-37f1422e8f34affb",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-life#e-5ce2cd329d3ac0f6",
+          "text": "Paint often and paint from life.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 31
+          },
+          "parts": [
+            [
+              22,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

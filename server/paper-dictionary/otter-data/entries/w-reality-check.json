@@ -1,0 +1,107 @@
+{
+  "entryId": "w:reality-check",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "reality",
+      "check"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reality",
+        "check"
+      ],
+      [
+        "reality",
+        "checks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reality check",
+  "senses": [
+    {
+      "senseId": "w:reality-check#s1",
+      "pos": "短语",
+      "glossZh": "对照现实检验想法或计划是否可行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reality-check#e-d63aab1aa0f8248b",
+          "text": "I am not to discourage ambition, but it needs a reality check.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:reality-check#s2",
+      "pos": "短语",
+      "glossZh": "让人认清现实的提醒或经历",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

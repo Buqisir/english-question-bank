@@ -1,0 +1,105 @@
+{
+  "entryId": "w:first-thing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "first",
+      "thing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "first",
+        "thing"
+      ],
+      [
+        "first",
+        "things"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "first thing",
+  "senses": [
+    {
+      "senseId": "w:first-thing#s1",
+      "pos": "短语",
+      "glossZh": "一大早",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 first thing in the morning。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:first-thing#s2",
+      "pos": "短语",
+      "glossZh": "一有机会就；第一时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 first thing after lunch。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:first-thing#s3",
+      "pos": "短语",
+      "glossZh": "最起码的知识",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 not know the first thing about sth，表示对某事一窍不通。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:first-thing#s4",
+      "pos": "短语",
+      "glossZh": "突然发现；回过神来才发现",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于 the first thing I knew。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

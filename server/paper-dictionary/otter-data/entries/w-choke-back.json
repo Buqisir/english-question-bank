@@ -1,0 +1,60 @@
+{
+  "entryId": "w:choke-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "choke",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "choke",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "choke sth back",
+  "senses": [
+    {
+      "senseId": "w:choke-back#s1",
+      "pos": "短语",
+      "glossZh": "强忍住（泪水、哽咽等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:choke#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,127 @@
+{
+  "entryId": "w:turn-on-its-head",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turns on its head"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "on",
+      "its",
+      "head"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "on",
+        "its",
+        "head"
+      ],
+      [
+        "turns",
+        "on",
+        "its",
+        "head"
+      ],
+      [
+        "turned",
+        "on",
+        "its",
+        "head"
+      ],
+      [
+        "turning",
+        "on",
+        "its",
+        "head"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn sth on its head",
+  "senses": [
+    {
+      "senseId": "w:turn-on-its-head#s1",
+      "pos": "短语",
+      "glossZh": "彻底颠覆原有观念、做法或局面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-on-its-head#e-44b6f34dcc6d77f0",
+          "text": "Nassim Nicholas Taleb has written a modern classic that turns on its head what we believe about luck and skill.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 73
+          },
+          "parts": [
+            [
+              56,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-on-its-head#s2",
+      "pos": "短语",
+      "glossZh": "把某物翻转倒置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

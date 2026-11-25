@@ -83,8 +83,8 @@
     "mock": 113
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 110
+    "gaokao": 16,
+    "mock": 49
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -166,7 +166,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -237,7 +237,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -301,150 +301,6 @@
       ]
     },
     {
-      "senseId": "w:front#s4",
-      "pos": "短语",
-      "glossZh": "在……前面",
-      "pronunciationId": "w:front#p-main",
-      "note": "in front of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:front#e-6b0287c8841e53b4",
-          "text": "When he stood in front of the house where he grew up as a child, he saw a lady standing in the entrance.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:front#e-0a19ef25df220b47",
-          "text": "In front of me was an array of foods I couldn’t even name in my native language.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:front#e-e92d9077ccc99f82",
-          "text": "In front of the theater were a group of bikers – very big, tough-looking bikers.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:front#s5",
-      "pos": "短语",
-      "glossZh": "当着……的面",
-      "pronunciationId": "w:front#p-main",
-      "note": "in front of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:front#e-370aee090c01ed17",
-          "text": "Once in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 83,
-            "end": 88
-          }
-        },
-        {
-          "exampleId": "w:front#e-ef193224e87ce160",
-          "text": "Once, while reading a poem aloud in front of the class, I felt __42__, and the moment stayed with me for years.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:front#e-2d3da2669664f040",
-          "text": "As a very shy writer who had been sending out manuscripts (手稿) for years, I couldn’t decide what scared me more: never getting published, or finally getting published and having to talk about my book in front of people.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 203,
-            "end": 208
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:front#s6",
       "pos": "n.",
       "glossZh": "前线",
@@ -495,6 +351,52 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:front#s10",
+      "pos": "n.",
+      "glossZh": "领域；方面",
+      "pronunciationId": "w:front#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:front#e-62cc30b6de46cc2a",
+          "text": "On the technological front, solid-state batteries are viewed as a promising breakthrough.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:front#s11",
+      "pos": "phr.",
+      "glossZh": "处于显眼位置（front and center）",
+      "pronunciationId": "w:front#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -503,6 +405,11 @@
       "reason": "语音学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-front-of"
+  ]
 }

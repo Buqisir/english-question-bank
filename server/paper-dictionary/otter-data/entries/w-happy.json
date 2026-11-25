@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 159
+    "mock": 11
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 129
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -175,12 +175,12 @@
       "glossZh": "愿意的；乐意的",
       "pronunciationId": "w:happy#p-main",
       "note": "如 I’d be happy to help。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -192,7 +192,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -216,6 +216,19 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:happy#s5",
+      "pos": "短语",
+      "glossZh": "酒吧酒水优惠时段",
+      "pronunciationId": "w:happy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -224,6 +237,9 @@
       "reason": "常见于少量搭配，语料无清晰独立例证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:happy-birthday"
+  ]
 }

@@ -62,8 +62,8 @@
     "mock": 621
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 620
+    "gaokao": 7,
+    "mock": 435
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -322,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -389,7 +389,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -422,7 +422,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -486,40 +486,6 @@
       ]
     },
     {
-      "senseId": "w:move#s9",
-      "pos": "短语",
-      "glossZh": "继续进行下一项",
-      "pronunciationId": "w:move#p-main",
-      "note": "move on (to sth)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:move#e-89ebbee33aa967b3",
-          "text": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 200,
-            "end": 206
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:move#s10",
       "pos": "n.",
       "glossZh": "（棋）一步",
@@ -560,7 +526,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -597,6 +563,111 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:move#s13",
+      "pos": "n.",
+      "glossZh": "身体动作",
+      "pronunciationId": "w:move#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:move#e-fe9f77fd7a80b0de",
+          "text": "Cheerleading didn’t come naturally – every move demanded more than basketball ever had.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:move#e-1ae79b3c39a3a2e3",
+          "text": "And with the intimidating security guards watching your every move as you walk through the Jewel House, you won’t want to even try.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:move#e-185931bf682b82a2",
+          "text": "To perform dance moves.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:move#s14",
+      "pos": "v.",
+      "glossZh": "在某个圈子里交往",
+      "pronunciationId": "w:move#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:move#e-159d346213375cef",
+          "text": "For example, if you spoke about your job hunt to a group of close friends, they might only be aware of the same job opportunities as you because you move in the same circles.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 153
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -605,6 +676,25 @@
       "reason": "领域术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:move-about",
+    "w:move-along",
+    "w:move-away",
+    "w:move-forward",
+    "w:move-house",
+    "w:move-in",
+    "w:move-into",
+    "w:move-off",
+    "w:move-on",
+    "w:move-on-to-sth",
+    "w:move-out",
+    "w:move-over",
+    "w:move-the-needle",
+    "w:move-up",
+    "w:on-the-move"
+  ]
 }

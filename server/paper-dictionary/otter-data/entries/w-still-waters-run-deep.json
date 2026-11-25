@@ -1,0 +1,99 @@
+{
+  "entryId": "w:still-waters-run-deep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "run deep"
+  ],
+  "pattern": {
+    "tokens": [
+      "still",
+      "waters",
+      "run",
+      "deep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "still",
+        "waters",
+        "run",
+        "deep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "still waters run deep",
+  "senses": [
+    {
+      "senseId": "w:still-waters-run-deep#s1",
+      "pos": "短语",
+      "glossZh": "静水流深；寡言的人往往有深厚的思想或感情",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:water#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:still-waters-run-deep#e-756764928c1d405b",
+          "text": "Still waters run deep.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2025-i:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

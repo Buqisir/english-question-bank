@@ -1,0 +1,89 @@
+{
+  "entryId": "w:eat-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "eating in"
+  ],
+  "pattern": {
+    "tokens": [
+      "eat",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eat",
+        "in"
+      ],
+      [
+        "eating",
+        "in"
+      ],
+      [
+        "ate",
+        "in"
+      ],
+      [
+        "eaten",
+        "in"
+      ],
+      [
+        "eats",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eat in",
+  "senses": [
+    {
+      "senseId": "w:eat-in#s1",
+      "pos": "短语",
+      "glossZh": "在家吃饭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-in#s2",
+      "pos": "短语",
+      "glossZh": "在店内用餐；堂食",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

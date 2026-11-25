@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 83
+    "mock": 10
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -207,7 +207,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -278,7 +278,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -311,7 +311,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -350,35 +350,54 @@
       "examples": []
     },
     {
-      "senseId": "w:burn#s7",
-      "pos": "短语",
-      "glossZh": "耗尽精力；精疲力竭",
+      "senseId": "w:burn#s8",
+      "pos": "v.",
+      "glossZh": "（burn into memory）深深印在记忆里",
       "pronunciationId": "w:burn#p-main",
-      "note": "burn out",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:burn#e-4dd6b0a4bdf2b775",
-          "text": "Four years into the job, Stewart found himself burnt out, filled with guilt, and ready to quit.",
+          "exampleId": "w:burn#e-f1d37cfdb926469c",
+          "text": "It enables students to burn knowledge into their memories.",
           "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
-            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:seven-choices",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:2",
-              "sentence": 6
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:36",
+              "option": "F",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 47,
-            "end": 52
+            "start": 23,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:burn#e-d15cee08601e4539",
+          "text": "The sight of Jamie on the ground crying was burned into his memory.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
           }
         }
       ]
@@ -390,6 +409,14 @@
       "reason": "领域专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:burn-down",
+    "w:burn-out",
+    "w:burn-up",
+    "w:feel-the-burn"
+  ]
 }

@@ -84,8 +84,8 @@
     "mock": 563
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 558
+    "gaokao": 5,
+    "mock": 389
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -240,7 +240,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -293,7 +293,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -327,7 +327,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -361,7 +361,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -387,112 +387,6 @@
       ]
     },
     {
-      "senseId": "w:light#s7",
-      "pos": "短语",
-      "glossZh": "神情一下子变得高兴",
-      "pronunciationId": "w:light#p-main",
-      "note": "light up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:light#e-6c2043410fc068a6",
-          "text": "“I’ve seen those magic moments when children are talking to someone they are inspired by - their eyes are shining and their faces light up,” she said.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 130,
-            "end": 135
-          }
-        },
-        {
-          "exampleId": "w:light#e-8c1887866787d087",
-          "text": "His eyes lit up as I explained how scholarships, loans, and grants could make college possible, then invited him to join my advanced placement chemistry class next year.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:light#e-3e70a85636ac0b72",
-          "text": "Her eyes lit up as she showed me her amazing artwork.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:light#s8",
-      "pos": "短语",
-      "glossZh": "许可；放行",
-      "pronunciationId": "w:light#p-main",
-      "note": "get the green light。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:light#e-5e21d9d2c2eb2f23",
-          "text": "They __48__ at first, unwilling to take a risk, but I finally __49__ to get the green light,” she says.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 86,
-            "end": 91
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:light#s9",
       "pos": "adj.",
       "glossZh": "强度低的",
@@ -500,7 +394,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -571,7 +465,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -634,13 +528,132 @@
       "pos": "adj.",
       "glossZh": "颜色浅的",
       "pronunciationId": "w:light#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:light#s13",
+      "pos": "adj.",
+      "glossZh": "心情轻松的；无忧的",
+      "pronunciationId": "w:light#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:light#e-eb2052642f0f05d7",
+          "text": "Paragraph 2: With a light heart, Amy booked the earliest flight home.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:light#e-410b63f33f316dde",
+          "text": "You’ll likely feel lighter and more focused.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zaozhuang-2026-05-third-mock:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:light#s14",
+      "pos": "adj.",
+      "glossZh": "轻松的；不严肃的",
+      "pronunciationId": "w:light#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:light#e-b384956d5a484274",
+          "text": "Choosing light and positive topics like favorite things, funny stories or simple wishes is the key to keeping conversations flowing.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:light#s15",
+      "pos": "n.",
+      "glossZh": "热情；兴致（比喻）",
+      "pronunciationId": "w:light#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:light#e-3bfded6204d4a6da",
+          "text": "she lost what she calls the “knitting light” for a while.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -649,6 +662,24 @@
       "reason": "专门用法或同形旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cast-light-on",
+    "w:come-to-light",
+    "w:get-the-green-light",
+    "w:give-the-green-light",
+    "w:green-light",
+    "w:in-light-of",
+    "w:light-into",
+    "w:light-up",
+    "w:many-hands-make-light-work",
+    "w:ray-of-light",
+    "w:see-the-light",
+    "w:see-the-light-of-day",
+    "w:shine-a-light-on",
+    "w:throw-light-on"
+  ]
 }

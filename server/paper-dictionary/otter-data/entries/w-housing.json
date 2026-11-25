@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 53
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -131,6 +131,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:housing#s3",
+      "pos": "v.",
+      "glossZh": "容纳；安置（house 的 -ing 形式）",
+      "pronunciationId": "w:housing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:housing#e-c3bb475dafdda3fe",
+          "text": "The Dafo Temple is well-known for housing Asia’s largest reclining（侧卧）Buddha statue.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:housing#e-2349e129b7567f18",
+          "text": "The university health center will have all sorts of information about staying healthy on campus, in addition to housing the university’s best doctors.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 119
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -143,6 +195,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

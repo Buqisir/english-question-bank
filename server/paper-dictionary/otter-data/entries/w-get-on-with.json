@@ -1,0 +1,209 @@
+{
+  "entryId": "w:get-on-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "on",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "on",
+        "with"
+      ],
+      [
+        "gets",
+        "on",
+        "with"
+      ],
+      [
+        "getting",
+        "on",
+        "with"
+      ],
+      [
+        "got",
+        "on",
+        "with"
+      ],
+      [
+        "gotten",
+        "on",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get on with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get on with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-on-with#s1",
+      "pos": "短语",
+      "glossZh": "着手做；继续做下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-on-with#e-b8f60a1184675b04",
+          "text": "Jeanette Hodes, 92, offers an impatient “come on, get on with it,” and leans back in her chair.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on-with#e-a25e223b222ff9ab",
+          "text": "I soon found myself faced with a pile of thankless dishes in the sink, urging me to get on with it and deliver on my duty.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 95
+          },
+          "parts": [
+            [
+              84,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on-with#e-754797d2d89a11e5",
+          "text": "It’s unusual to read novels about women taking an active role in the resistance during World War II, especially those of Dutch women, who were expected to keep the home fires burning and let the men get on with the fighting.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 199,
+            "end": 210
+          },
+          "parts": [
+            [
+              199,
+              210
+            ]
+          ],
+          "highlightRanges": [
+            [
+              199,
+              210
+            ]
+          ]
+        }
+      ],
+      "note": "get on with it 可用来催促对方赶紧做。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-on-with#s2",
+      "pos": "短语",
+      "glossZh": "与……相处融洽",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:get#s17"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-on-with#s3",
+      "pos": "短语",
+      "glossZh": "用得惯；用得顺手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "宾语可为工具或设备。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

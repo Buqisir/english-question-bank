@@ -1,0 +1,98 @@
+{
+  "entryId": "w:bottom-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bottom",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bottom",
+        "out"
+      ],
+      [
+        "bottomed",
+        "out"
+      ],
+      [
+        "bottoming",
+        "out"
+      ],
+      [
+        "bottoms",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bottom out",
+  "senses": [
+    {
+      "senseId": "w:bottom-out#s1",
+      "pos": "短语",
+      "glossZh": "（数值、趋势等）跌至最低点；触底",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bottom#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bottom-out#s2",
+      "pos": "短语",
+      "glossZh": "（车辆或船只）底部碰到地面或水底",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bottom-out#s3",
+      "pos": "短语",
+      "glossZh": "（机械部件）压到行程下限",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

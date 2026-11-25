@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 401
+    "mock": 207
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 39,
-        "mock": 0
+        "mock": 133
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -297,12 +297,12 @@
       "pos": "n.",
       "glossZh": "福利金；救济金；保险给付",
       "pronunciationId": "w:benefit#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -326,6 +326,6 @@
       "reason": "旧式或罕见用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -59,8 +59,8 @@
     "mock": 220
   },
   "unassignedCounts": {
-    "gaokao": 13,
-    "mock": 213
+    "gaokao": 14,
+    "mock": 107
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -123,7 +123,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -155,12 +155,12 @@
       "glossZh": "目标",
       "pronunciationId": "w:mark#p-main",
       "note": "如 close to the mark，「接近事实」。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -171,7 +171,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -242,7 +242,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -275,7 +275,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -347,7 +347,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -397,54 +397,19 @@
       "pos": "v.",
       "glossZh": "给……评分",
       "pronunciationId": "w:mark#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:mark#s9",
-      "pos": "短语",
-      "glossZh": "接近事实",
+      "senseId": "w:mark#s11",
+      "pos": "adj.",
+      "glossZh": "明显的；显著的",
       "pronunciationId": "w:mark#p-main",
-      "note": "close to the mark。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mark#e-a37fc61f3ffdc1ae",
-          "text": "His predictions about slowing population growth, mobile phones and increasing height were close to the mark.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 103,
-            "end": 107
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:mark#s10",
-      "pos": "短语",
-      "glossZh": "留下自己的印记",
-      "pronunciationId": "w:mark#p-main",
-      "note": "make one’s mark。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -453,22 +418,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:mark#e-5f38c3471d390f2f",
-          "text": "Tharp, however, was determined to make her mark.",
+          "exampleId": "w:mark#e-05e4f73af9eb661e",
+          "text": "When Lila Martinez moved to Maple Street, she was struck by a marked contrast.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:1",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 43,
-            "end": 47
+            "start": 62,
+            "end": 68
           }
         }
       ]
@@ -480,6 +445,14 @@
       "reason": "真题人名留空，货币为历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:close-to-the-mark",
+    "w:make-ones-mark",
+    "w:mark-as",
+    "w:miss-the-mark"
+  ]
 }

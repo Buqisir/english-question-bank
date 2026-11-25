@@ -1,0 +1,124 @@
+{
+  "entryId": "w:rabbit-hole",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rabbit",
+      "hole"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rabbit",
+        "hole"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rabbit hole",
+  "senses": [
+    {
+      "senseId": "w:rabbit-hole#s1",
+      "pos": "短语",
+      "glossZh": "越探究越深陷其中、难以抽身的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rabbit#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:rabbit-hole#e-62b93605f6de77df",
+          "text": "rabbit hole and became fascinated by the idea of eating and living “clean.” Today, she likes to use chatbots to ask",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-b:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rabbit-hole#e-12bd3060e3ce6086",
+          "text": "After a recent negative car rental experience, I found myself going down a familiar rabbit hole, scrolling (滚屏) through online reviews of the company.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 95
+          },
+          "parts": [
+            [
+              84,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              95
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 go down a rabbit hole。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,116 @@
+{
+  "entryId": "w:whats-new",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what's",
+      "new"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what's",
+        "new"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what's new",
+  "senses": [
+    {
+      "senseId": "w:whats-new#s1",
+      "pos": "短语",
+      "glossZh": "有什么新消息；最新动态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:whats-new#e-bc486d041f63f985",
+          "text": "See what’s new on your social feeds?",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:whats-new#s2",
+      "pos": "短语",
+      "glossZh": "（问候）最近怎么样？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:whats-new#s3",
+      "pos": "短语",
+      "glossZh": "（反讽）这有什么新鲜的？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

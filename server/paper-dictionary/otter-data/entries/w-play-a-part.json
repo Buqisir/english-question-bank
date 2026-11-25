@@ -1,0 +1,141 @@
+{
+  "entryId": "w:play-a-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "a",
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "a",
+        "part"
+      ],
+      [
+        "played",
+        "a",
+        "part"
+      ],
+      [
+        "playing",
+        "a",
+        "part"
+      ],
+      [
+        "plays",
+        "a",
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play a part",
+  "senses": [
+    {
+      "senseId": "w:play-a-part#s1",
+      "pos": "短语",
+      "glossZh": "起作用；对事情的发展有贡献",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:play#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:play-a-part#e-753eddf859493802",
+          "text": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-b-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:play-a-part#e-9eaf38aac7beb6e7",
+          "text": "Burr admits that luck and patience play a part.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 46
+          },
+          "parts": [
+            [
+              35,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              46
+            ]
+          ]
+        }
+      ],
+      "note": "常用 play a part in sth 或 play a part in doing sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

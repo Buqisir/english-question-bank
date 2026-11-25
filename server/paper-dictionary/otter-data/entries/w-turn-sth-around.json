@@ -1,0 +1,354 @@
+{
+  "entryId": "w:turn-sth-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turn around",
+    "turning around"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      {
+        "slot": "sth"
+      },
+      "around"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "turn",
+        {
+          "slot": "sth"
+        },
+        "around"
+      ],
+      [
+        "turn",
+        "around"
+      ],
+      [
+        "turning",
+        "around"
+      ],
+      [
+        "turned",
+        "around"
+      ],
+      [
+        "turns",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned around",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn sth around",
+  "senses": [
+    {
+      "senseId": "w:turn-sth-around#s1",
+      "pos": "短语",
+      "glossZh": "把某物转过来；使改变朝向",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-around#e-5ff7aef02a799d91",
+          "text": "If you enter through the wrong access point, you’ll be turned around and redirected – so plan ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 68
+          },
+          "parts": [
+            [
+              55,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-around#e-0e37709ab4b6db03",
+          "text": "By turning the box around.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-national-a:24#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 25
+          },
+          "parts": [
+            [
+              3,
+              10
+            ],
+            [
+              19,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ],
+            [
+              19,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-around#e-6d33d1d2e2bf45d5",
+          "text": "When Reno turned his drawing around for his friend, they both burst into laughter.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 35
+          },
+          "parts": [
+            [
+              10,
+              16
+            ],
+            [
+              29,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              16
+            ],
+            [
+              29,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-sth-around#s2",
+      "pos": "短语",
+      "glossZh": "扭转不利局面；使情况好转",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:around#s10",
+        "w:turn#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-around#e-50004449df605bf0",
+          "text": "Pushing yourself to review and refine can help turn things around.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 65
+          },
+          "parts": [
+            [
+              47,
+              51
+            ],
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              51
+            ],
+            [
+              59,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-around#e-0d8d3838cbdf8faf",
+          "text": "For two whole years living in a foreign country, I was wrapped by a deep sense of loneliness, until a single afternoon turned my world around.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 141
+          },
+          "parts": [
+            [
+              119,
+              125
+            ],
+            [
+              135,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              125
+            ],
+            [
+              135,
+              141
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-around#e-dc1f44b6c7662a76",
+          "text": "Targeted actions help turn around negative trends.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:34#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:turn-sth-around#s3",
+      "pos": "短语",
+      "glossZh": "完成并交付（工作、订单等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常与表示完成所需时间的短语连用。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-sth-around#s4",
+      "pos": "短语",
+      "glossZh": "换个角度看（问题等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

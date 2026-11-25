@@ -1,0 +1,163 @@
+{
+  "entryId": "w:slip-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "slip",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "slip",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "slipped away",
+      "tags": []
+    },
+    {
+      "form": "slipping away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "slip away",
+  "senses": [
+    {
+      "senseId": "w:slip-away#s1",
+      "pos": "短语",
+      "glossZh": "（时间）悄悄流逝；（快乐等）逐渐消失",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:slip#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:slip-away#e-cc55e1f5068438d5",
+          "text": "Giving them my lunch meant I would have to wait again – maybe another line, maybe my break slipping away faster.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 104
+          },
+          "parts": [
+            [
+              91,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slip-away#e-d826fe20d40d3245",
+          "text": "The joy of the game was slipping away, drowned out by the constant noise of his friends.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 37
+          },
+          "parts": [
+            [
+              24,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slip-away#e-8f3708bc731bb8b1",
+          "text": "When she was old enough, Tom took her along, always encouraging her: “You can do it.” As she grew older, she stopped running, and those shared moments slipped away.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 163
+          },
+          "parts": [
+            [
+              151,
+              163
+            ]
+          ],
+          "highlightRanges": [
+            [
+              151,
+              163
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

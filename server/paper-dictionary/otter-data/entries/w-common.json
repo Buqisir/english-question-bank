@@ -60,8 +60,8 @@
     "mock": 292
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 291
+    "gaokao": 10,
+    "mock": 138
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 139
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -207,78 +207,6 @@
       ]
     },
     {
-      "senseId": "w:common#s3",
-      "pos": "短语",
-      "glossZh": "有……共同之处",
-      "pronunciationId": "w:common#p-main",
-      "note": "have something in common。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:common#e-046a0a0073f147ce",
-          "text": "What do chimps and humans have in common according to Dr Hobaiter?",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:common#e-0ee0a03a314e8642",
-          "text": "Here’s a riddle: What do traffic jams, long lines and waiting for a vacation to start all have in common?",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 98,
-            "end": 104
-          }
-        },
-        {
-          "exampleId": "w:common#e-48c705a5ef34cf83",
-          "text": "What do the four walks have in common?",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2024-ii:23",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:common#s4",
       "pos": "n.",
       "glossZh": "公地；公共用地",
@@ -318,6 +246,14 @@
       "reason": "法律或历史用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:common-ground",
+    "w:common-sense",
+    "w:have-sth-in-common",
+    "w:in-common"
+  ]
 }

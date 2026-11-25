@@ -1,0 +1,164 @@
+{
+  "entryId": "w:as-a-result-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "a",
+      "result",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "a",
+        "result",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "as a result of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as a result of sth",
+  "senses": [
+    {
+      "senseId": "w:as-a-result-of#s1",
+      "pos": "短语",
+      "glossZh": "由于；因为",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s18",
+        "w:result#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-a-result-of#e-f6f65a3fb2562e27",
+          "text": "There has been a very serious decline in the numbers of shallow-water fish as a result of overfishing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 89
+          },
+          "parts": [
+            [
+              75,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-result-of#e-8c6616e31ad16adf",
+          "text": "Program evaluations show that kids eat more vegetables as a result of the classes.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 69
+          },
+          "parts": [
+            [
+              55,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-result-of#e-b8133b2a139cfecc",
+          "text": "Short writings missed as a result of an excused absence will be accepted.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 36
+          },
+          "parts": [
+            [
+              22,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

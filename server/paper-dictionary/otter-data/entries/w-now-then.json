@@ -1,0 +1,116 @@
+{
+  "entryId": "w:now-then",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "now",
+      "then"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "now",
+        "then"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "now then",
+  "senses": [
+    {
+      "senseId": "w:now-then#s1",
+      "pos": "短语",
+      "glossZh": "好，那么……（用于引起注意或开启话题）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:now-then#e-531a580789f23358",
+          "text": "“Now then,” Grandpa began, “What’s this about your friends not writing...”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 9
+          },
+          "parts": [
+            [
+              1,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:now-then#s2",
+      "pos": "短语",
+      "glossZh": "好了，别这样（用于制止）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:now-then#s3",
+      "pos": "短语",
+      "glossZh": "嗨，你好（熟人间的招呼）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

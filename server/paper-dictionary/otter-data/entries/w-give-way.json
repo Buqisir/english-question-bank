@@ -1,0 +1,240 @@
+{
+  "entryId": "w:give-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gave way",
+    "gives way",
+    "giving way"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "way"
+      ],
+      [
+        "gave",
+        "way"
+      ],
+      [
+        "gives",
+        "way"
+      ],
+      [
+        "giving",
+        "way"
+      ],
+      [
+        "given",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give way",
+  "senses": [
+    {
+      "senseId": "w:give-way#s1",
+      "pos": "短语",
+      "glossZh": "（因承受不住压力而）断裂；塌陷",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-way#e-89c38572f0d5efc1",
+          "text": "Suddenly the ice gave way under their combined weight.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-way#e-156674b7106dbb64",
+          "text": "Suddenly, we saw one corner of the floor give way.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-way#e-d8f5bc7017189f2c",
+          "text": "The ice beneath her gave way.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          },
+          "parts": [
+            [
+              20,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:give-way#s2",
+      "pos": "短语",
+      "glossZh": "让步；屈服",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:give-way#s3",
+      "pos": "短语",
+      "glossZh": "让路；让行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:give-way#s4",
+      "pos": "短语",
+      "glossZh": "让位于；被……取代",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 give way to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:give-way#s5",
+      "pos": "短语",
+      "glossZh": "任由（悲伤、愤怒等情绪）流露",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 give way to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:give-way#s6",
+      "pos": "短语",
+      "glossZh": "让出发言机会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于正式辩论等场合。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

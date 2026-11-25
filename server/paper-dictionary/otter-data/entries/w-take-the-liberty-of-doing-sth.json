@@ -1,0 +1,71 @@
+{
+  "entryId": "w:take-the-liberty-of-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "liberty",
+      "of",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "liberty",
+        "of",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the liberty of doing sth",
+  "senses": [
+    {
+      "senseId": "w:take-the-liberty-of-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "擅自做某事；冒昧做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:liberty#s3"
+      ],
+      "examples": [],
+      "note": "常用于礼貌地说明自己未经对方同意就做了某事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

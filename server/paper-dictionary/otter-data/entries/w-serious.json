@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 115
+    "mock": 17
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -236,7 +236,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -279,9 +279,61 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:serious#s5",
+      "pos": "adj.",
+      "glossZh": "相当大的",
+      "pronunciationId": "w:serious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:serious#e-1cf39a232c17cb6c",
+          "text": "Anyone who has taken a standardized test knows that writing an essay in 20 minutes or less takes serious brain power.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:serious#e-3389bbd37ed28776",
+          "text": "But studies suggest if you resist that urge and let your mind wander instead, there could be some serious benefits.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 105
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

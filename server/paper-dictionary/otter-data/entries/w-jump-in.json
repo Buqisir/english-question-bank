@@ -1,0 +1,277 @@
+{
+  "entryId": "w:jump-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "in"
+      ],
+      [
+        "jumped",
+        "in"
+      ],
+      [
+        "jumping",
+        "in"
+      ],
+      [
+        "jumps",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "jumped in",
+      "tags": []
+    },
+    {
+      "form": "jumping in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump in",
+  "senses": [
+    {
+      "senseId": "w:jump-in#s1",
+      "pos": "短语",
+      "glossZh": "马上介入；立刻加入",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s73"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:jump-in#e-10b415be05cc0879",
+          "text": "When kids mess up, don’t jump in with a rescue mission.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-in#e-2c4dc98dde007694",
+          "text": "Everyone jumped in actively, while I struggled to speak up.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          },
+          "parts": [
+            [
+              9,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-in#e-1403bb7ecae72c2e",
+          "text": "Anne’s twin brother and her dad all jumped in to help.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 45
+          },
+          "parts": [
+            [
+              36,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:jump-in#s2",
+      "pos": "短语",
+      "glossZh": "跳进去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:jump-in#e-f479e2dd70d1ae23",
+          "text": "Finding nothing in the tank, she climbed out of the water just in time to see Katherine jumping in on the other side.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 98
+          },
+          "parts": [
+            [
+              88,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-in#e-e069a850a1ab9a14",
+          "text": "Grabbing a branch from a cut-down tree, he jumped in through the window.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 52
+          },
+          "parts": [
+            [
+              43,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:jump-in#s3",
+      "pos": "短语",
+      "glossZh": "插话；打断别人说话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:jump-in#s4",
+      "pos": "短语",
+      "glossZh": "迅速上车",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

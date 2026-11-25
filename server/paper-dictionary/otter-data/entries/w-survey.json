@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 104
+    "mock": 4
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -239,12 +239,12 @@
       "pos": "n.",
       "glossZh": "勘测",
       "pronunciationId": "w:survey#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -255,7 +255,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -336,12 +336,12 @@
       "pos": "v.",
       "glossZh": "勘测",
       "pronunciationId": "w:survey#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -351,6 +351,6 @@
       "reason": "历史或制度专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

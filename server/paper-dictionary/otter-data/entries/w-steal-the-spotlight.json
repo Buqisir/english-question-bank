@@ -1,0 +1,130 @@
+{
+  "entryId": "w:steal-the-spotlight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "steal",
+      "the",
+      "spotlight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "steal",
+        "the",
+        "spotlight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stealing the spotlight",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "steal the spotlight",
+  "senses": [
+    {
+      "senseId": "w:steal-the-spotlight#s1",
+      "pos": "短语",
+      "glossZh": "抢尽风头；成为关注的焦点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:steal#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:steal-the-spotlight#e-8efe9342bc685a0d",
+          "text": "While bioluminescence – the ability of living things to produce their own light – has long interested scientists, a lesser-known phenomenon called bio-fluorescence(生物荧光) is now stealing the spotlight.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 177,
+            "end": 199
+          },
+          "parts": [
+            [
+              177,
+              199
+            ]
+          ],
+          "highlightRanges": [
+            [
+              177,
+              199
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:steal-the-spotlight#e-4edc443a1012cd78",
+          "text": "While bioluminescence – the ability of living things to produce their own light – has long interested scientists, a lesser-known phenomenon called bio-fluorescence (生物荧光) is now stealing the spotlight.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 178,
+            "end": 200
+          },
+          "parts": [
+            [
+              178,
+              200
+            ]
+          ],
+          "highlightRanges": [
+            [
+              178,
+              200
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

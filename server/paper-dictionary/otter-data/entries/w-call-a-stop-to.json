@@ -1,0 +1,101 @@
+{
+  "entryId": "w:call-a-stop-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "call",
+      "a",
+      "stop",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "a",
+        "stop",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "calling a stop to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call a stop to",
+  "senses": [
+    {
+      "senseId": "w:call-a-stop-to#s1",
+      "pos": "短语",
+      "glossZh": "要求停止；叫停",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:call#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:call-a-stop-to#e-13e39112cae4f9de",
+          "text": "They include “debt-for-nature-swapping” agreements under which some donor countries and organisations reduce their debt repayment demands in return for calling a stop to destructive logging.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 169
+          },
+          "parts": [
+            [
+              152,
+              169
+            ]
+          ],
+          "highlightRanges": [
+            [
+              152,
+              169
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

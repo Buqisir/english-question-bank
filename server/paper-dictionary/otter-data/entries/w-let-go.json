@@ -1,0 +1,272 @@
+{
+  "entryId": "w:let-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lets go",
+    "letting go"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        "go"
+      ],
+      [
+        "lets",
+        "go"
+      ],
+      [
+        "letting",
+        "go"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let go",
+  "senses": [
+    {
+      "senseId": "w:let-go#s1",
+      "pos": "短语",
+      "glossZh": "放开；松手；放走",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s35",
+        "w:let#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-go#e-31ffff31adbe1558",
+          "text": "Nutria were brought there from Argentina by fur farmers and let go into the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          },
+          "parts": [
+            [
+              60,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:let-go#s2",
+      "pos": "短语",
+      "glossZh": "放下（烦恼、执念等）；不再纠结",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:let-go#e-8686b7a6c7ac2071",
+          "text": "So the next time you are struggling to master a new skill, let go of perfectionism and welcome mistakes.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          },
+          "parts": [
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-go#e-bfff8148681c6514",
+          "text": "To solve the puzzle, you must let go of that assumption – you must think outside the box!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          },
+          "parts": [
+            [
+              30,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-go#e-2a372eeabbff1953",
+          "text": "Let go of all your troubles and focus solely on how you feel and the colors around you.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "note": "可单用，或接 of。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 21
+      }
+    },
+    {
+      "senseId": "w:let-go#s3",
+      "pos": "短语",
+      "glossZh": "解雇；辞退",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:let-go#e-9c3e71a09f295877",
+          "text": "Ultimately, she was let go.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          },
+          "parts": [
+            [
+              20,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "let sb go",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:let-go#s4",
+      "pos": "短语",
+      "glossZh": "任由自己疏于打理或自我约束",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "let oneself go",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

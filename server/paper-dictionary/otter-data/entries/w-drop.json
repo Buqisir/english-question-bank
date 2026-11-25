@@ -62,8 +62,8 @@
     "mock": 179
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 170
+    "gaokao": 5,
+    "mock": 46
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -359,7 +359,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -404,100 +404,43 @@
       ]
     },
     {
-      "senseId": "w:drop#s6",
-      "pos": "短语",
-      "glossZh": "退出；退学",
+      "senseId": "w:drop#s9",
+      "pos": "n.",
+      "glossZh": "（drop zone）跳伞着陆区；空投区",
       "pronunciationId": "w:drop#p-main",
-      "note": "drop out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:drop#e-b20fc49dd9ede662",
-          "text": "dropped out",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:cloze",
-            "locator": {
-              "question": 47,
-              "questionId": "question:paper-gaokao-2023-national-b:47",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:drop#e-a76069d51abf29f8",
-          "text": "He dropped out of school.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-mock-cq-nankai-2025-09-first-quality-test:24",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:drop#s7",
-      "pos": "短语",
-      "glossZh": "顺道拜访",
-      "pronunciationId": "w:drop#p-main",
-      "note": "drop by 或 drop in。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:drop#e-c69915ce89b16e28",
-          "text": "My sister dropped by __44__ with her children.",
+          "exampleId": "w:drop#e-c747f1308526fb6a",
+          "text": "My family, parents and in-laws gathered down at the drop zone to witness the big event.",
           "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze",
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze:2",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:3",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 10,
-            "end": 17
+            "start": 52,
+            "end": 56
           }
         }
       ]
     },
     {
-      "senseId": "w:drop#s8",
-      "pos": "短语",
-      "glossZh": "顺路送下；投放到指定地点",
+      "senseId": "w:drop#s10",
+      "pos": "v.",
+      "glossZh": "花费（尤指大笔钱）",
       "pronunciationId": "w:drop#p-main",
-      "note": "drop off 还可表示「睡着」或「下降」。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -506,22 +449,155 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:drop#e-b2ad345de17b78e2",
-          "text": "Individuals should properly drop off e-waste at collection points, fix items rather than throw them away, and support brands with strong environmental commitments.",
+          "exampleId": "w:drop#e-b25699de430565a4",
+          "text": "While we wouldn’t recommend dropping $10,000 on a record player, we can’t ignore how good this turntable looks.",
           "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a",
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a:6",
-              "sentence": 3
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:12",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
             "start": 28,
-            "end": 32
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drop#s11",
+      "pos": "v.",
+      "glossZh": "给某人发（邮件）；给某人写（信）",
+      "pronunciationId": "w:drop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drop#e-d66f72c13d70b94a",
+          "text": "Please drop us an email to trips.support@eurail.com.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drop#s12",
+      "pos": "n.",
+      "glossZh": "陡降处；落差",
+      "pronunciationId": "w:drop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drop#e-873baccdf5bf230c",
+          "text": "Taroko Gorge Road in Chinese Taiwan is framed by rock on one side and sheer cliff drops on the other.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drop#s13",
+      "pos": "n.",
+      "glossZh": "（night drop）非营业时间的投递处",
+      "pronunciationId": "w:drop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drop#e-f51ed8626f7bc124",
+          "text": "She’ll not be allowed to use the night drop.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drop#s14",
+      "pos": "n.",
+      "glossZh": "（商品的）发售；发售的一批商品",
+      "pronunciationId": "w:drop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drop#e-af5e3ad8699c5990",
+          "text": "To keep the frenzy alive, brands are now adopting “micro-seasons”: four limited drops a year, each capped at 30,000 sets, with visible production codes sewn inside every skirt.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
           }
         }
       ]
@@ -533,6 +609,17 @@
       "reason": "各领域专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:drop-back",
+    "w:drop-by",
+    "w:drop-in",
+    "w:drop-in-the-ocean",
+    "w:drop-into",
+    "w:drop-off",
+    "w:drop-out"
+  ]
 }

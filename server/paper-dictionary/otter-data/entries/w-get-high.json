@@ -1,0 +1,91 @@
+{
+  "entryId": "w:get-high",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets high",
+    "got high"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "high"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "high"
+      ],
+      [
+        "gets",
+        "high"
+      ],
+      [
+        "got",
+        "high"
+      ],
+      [
+        "getting",
+        "high"
+      ],
+      [
+        "gotten",
+        "high"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get high",
+  "senses": [
+    {
+      "senseId": "w:get-high#s1",
+      "pos": "短语",
+      "glossZh": "吸毒后进入兴奋或恍惚状态",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-high#s2",
+      "pos": "短语",
+      "glossZh": "变得极度兴奋；兴奋得陶醉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 get high on 表示兴奋的来源。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

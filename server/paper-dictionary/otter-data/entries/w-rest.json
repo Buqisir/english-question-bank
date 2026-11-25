@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 167
+    "mock": 13
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -376,17 +376,101 @@
       "examples": []
     },
     {
-      "senseId": "w:rest#s7",
-      "pos": "短语",
-      "glossZh": "取决于",
+      "senseId": "w:rest#s8",
+      "pos": "v.",
+      "glossZh": "停留；处于稳定状态",
       "pronunciationId": "w:rest#p-main",
-      "note": "rest on sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rest#e-c8ea34c40458f73c",
+          "text": "Shadows rested beneath her eyes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:rest#e-72ee3a9e4cea3e29",
+          "text": "It is bistable – able to rest naturally in two stable shapes.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rest#s9",
+      "pos": "n.",
+      "glossZh": "静止",
+      "pronunciationId": "w:rest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rest#e-847185235a610899",
+          "text": "The guy’s body slid briefly along the third rail, coming to rest on the outer edge of the tracks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rest#s10",
+      "pos": "短语",
+      "glossZh": "使平息；让……成为过去（lay sth to rest）",
+      "pronunciationId": "w:rest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -400,6 +484,15 @@
       "reason": "金融专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-change-is-as-good-as-a-rest",
+    "w:come-to-rest",
+    "w:lay-sth-to-rest",
+    "w:rest-on-sth",
+    "w:take-a-rest"
+  ]
 }

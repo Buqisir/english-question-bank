@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 97
+    "mock": 6
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 78
       },
       "folded": false,
       "examples": [
@@ -139,12 +139,12 @@
       "pos": "v.",
       "glossZh": "变换（做法等）",
       "pronunciationId": "w:vary#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 14
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -154,6 +154,6 @@
       "reason": "固定物种名，g1 不表示随意变化的野兔"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

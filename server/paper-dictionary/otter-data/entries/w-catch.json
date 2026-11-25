@@ -62,8 +62,8 @@
     "mock": 187
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 179
+    "gaokao": 7,
+    "mock": 67
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -342,7 +342,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -376,7 +376,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -440,234 +440,6 @@
       ]
     },
     {
-      "senseId": "w:catch#s7",
-      "pos": "短语",
-      "glossZh": "追上；弥补；赶上进度",
-      "pronunciationId": "w:catch#p-main",
-      "note": "catch up",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:catch#e-cf9cef7edd2473d0",
-          "text": "He had to catch up with his study.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:catch#e-127e4ad5c186e2dd",
-          "text": "Other tools are starting to catch up, but it’s",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
-            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
-            "locator": {
-              "paragraph": 19,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:19",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:catch#s8",
-      "pos": "短语",
-      "glossZh": "喘口气；恢复正常呼吸",
-      "pronunciationId": "w:catch#p-main",
-      "note": "catch one's breath",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:catch#e-0dfe4daf8dcdb653",
-          "text": "When we paused to catch our __48__, Steve got down on one knee.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:catch#s9",
-      "pos": "短语",
-      "glossZh": "看见；瞥见",
-      "pronunciationId": "w:catch#p-main",
-      "note": "catch sight of 或 catch a glimpse of",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:catch#e-abcba61990091999",
-          "text": "I caught sight of myself in a cafe window the other day, bent over my phone, with my head down and shoulders tense near my ears.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:catch#e-c675cf2f940b8c41",
-          "text": "And then, through the wind, I caught a glimpse of distant glaciers (冰川), their edges glowing faintly even in the deep dark, a silent promise that the sunrise was on its way.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
-            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 36
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:catch#s10",
-      "pos": "短语",
-      "glossZh": "陷入；遇上",
-      "pronunciationId": "w:catch#p-main",
-      "note": "be caught in",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:catch#e-9bf38cc12c7c9324",
-          "text": "Lily’s heart jumped – she remembered that summer well: they’d gotten caught in the rain picking blueberries, then a rainbow curved over the field.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 69,
-            "end": 75
-          }
-        },
-        {
-          "exampleId": "w:catch#e-9f14b66db87028d9",
-          "text": "Getting caught in a flood is no one’s idea of a(n) __41__ day.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:catch#s11",
-      "pos": "短语",
-      "glossZh": "得到好运或机会",
-      "pronunciationId": "w:catch#p-main",
-      "note": "catch a break",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:catch#e-467ec7c19d913e42",
-          "text": "“I understand, from an environmental standpoint, that they’re wasteful, and I understand why producers, cost-wise and for other reasons, don’t want them,” said Julie Benko, a former understudy who caught a break and made it big.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 197,
-            "end": 203
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:catch#s12",
       "pos": "n.",
       "glossZh": "接住的动作",
@@ -675,7 +447,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -705,12 +477,12 @@
       "pos": "n.",
       "glossZh": "隐含的不利条件；圈套",
       "pronunciationId": "w:catch#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -744,12 +516,399 @@
       "pos": "n.",
       "glossZh": "捕获物；渔获量",
       "pronunciationId": "w:catch#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:catch#s17",
+      "pos": "v.",
+      "glossZh": "勾住；卡住",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-140e783f131495e0",
+          "text": "Just as he leaned forward to make a final adjustment, his foot caught on a garden water pipe.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:catch#e-5d11b030a91f2da6",
+          "text": "Moments later, we caught an edge I hadn’t noticed, and the canoe tipped, throwing us both into freezing water.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:catch#e-731fc69dcd85403b",
+          "text": "Suddenly his heart did a leap – as Ed lifted the rocket to place it on the launch pad, his fin（翼） had caught against something, pulling it away from the fuselage（机身） — not enough to break it off, just enough to loosen it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s18",
+      "pos": "v.",
+      "glossZh": "（使）呼吸一滞",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-3089e25d624ef061",
+          "text": "My breath caught, and tears, hot and uncontrollable, streamed down my face.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s19",
+      "pos": "v.",
+      "glossZh": "映出；反射（光线）",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-216523e1e3a40fd1",
+          "text": "She hesitated but followed me to a flower bed, where among the thick green leaves, something small and purple caught the morning light – a lavender（薰衣草）flower, half-hidden, still alive.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:catch#e-f71be202ff9634a8",
+          "text": "He scattered seeds from a crumpled paper bag, his silver hair catching the golden light.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s20",
+      "pos": "v.",
+      "glossZh": "流行起来；被广泛接受",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:catch#s21",
+      "pos": "v.",
+      "glossZh": "使深陷；使沉浸",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:catch#s22",
+      "pos": "v.",
+      "glossZh": "听出；把握（节拍）",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-4841d0f439abde98",
+          "text": "To push the birds to catch the beat.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-guangdong-shenzhen-2026-03-first:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s23",
+      "pos": "v.",
+      "glossZh": "趁年幼吸引或培养（某人）",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:catch#s24",
+      "pos": "v.",
+      "glossZh": "叙旧；互通近况",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-406fb58c32838e5e",
+          "text": "Taking time to catch up, joke around or show appreciation for someone feels good, and lowers stress and loneliness.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s25",
+      "pos": "v.",
+      "glossZh": "（光线）照到",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-5518689bcb49ec34",
+          "text": "On a sunny afternoon, golden light spilled across the yard, catching the edges of the bushes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s26",
+      "pos": "v.",
+      "glossZh": "使措手不及",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-7555bb93a9ec9f17",
+          "text": "Caught off guard, I gave a real answer.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s27",
+      "pos": "v.",
+      "glossZh": "击中；打到",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:catch#s28",
+      "pos": "v.",
+      "glossZh": "着火；燃起来",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:catch#e-1d6ed309a439cff8",
+          "text": "When heat sensors detect a flame, an electric motor drives a piston（活塞）to create infrasound, which travels through metal tubes on the roof, creating a “force field” to put out the fire and prevent the building catching another fire.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 210,
+            "end": 218
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:catch#s29",
+      "pos": "n.",
+      "glossZh": "抛接球游戏",
+      "pronunciationId": "w:catch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -759,6 +918,21 @@
       "reason": "历史、农业或音乐专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:catch-a-break",
+    "w:catch-a-cold",
+    "w:catch-a-glimpse-of",
+    "w:catch-fire",
+    "w:catch-on",
+    "w:catch-ones-breath",
+    "w:catch-ones-eye",
+    "w:catch-sb-off-guard",
+    "w:catch-sight-of",
+    "w:catch-the-bus",
+    "w:catch-up"
+  ]
 }

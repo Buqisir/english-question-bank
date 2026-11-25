@@ -1,0 +1,120 @@
+{
+  "entryId": "w:get-the-job-done",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets the job done"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "the",
+      "job",
+      "done"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "the",
+        "job",
+        "done"
+      ],
+      [
+        "gets",
+        "the",
+        "job",
+        "done"
+      ],
+      [
+        "getting",
+        "the",
+        "job",
+        "done"
+      ],
+      [
+        "got",
+        "the",
+        "job",
+        "done"
+      ],
+      [
+        "gotten",
+        "the",
+        "job",
+        "done"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get the job done",
+  "senses": [
+    {
+      "senseId": "w:get-the-job-done#s1",
+      "pos": "短语",
+      "glossZh": "把事情办成；达到预期效果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-the-job-done#e-b9daebf6a75f2e94",
+          "text": "It suits the audience and the purpose and gets the job done.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 59
+          },
+          "parts": [
+            [
+              42,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

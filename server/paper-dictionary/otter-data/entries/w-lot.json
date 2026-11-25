@@ -42,155 +42,10 @@
     "mock": 261
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 259
+    "gaokao": 56,
+    "mock": 255
   },
   "senses": [
-    {
-      "senseId": "w:lot#s1",
-      "pos": "短语",
-      "glossZh": "大量；许多",
-      "pronunciationId": "w:lot#p-main",
-      "note": "a lot of / lots of；数量或内容明确时也可单用。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 37,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lot#e-0db28c5efa59e3ae",
-          "text": "Many museums are lively places and they attract a lot of visitors.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:lot#e-695d64f3e5937c13",
-          "text": "“A lot of skills are needed for the job.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:lot#e-db0ddc21c667d989",
-          "text": "Walkers are sure to learn lots about the habitats and natural world of the Blackstairs.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lot#s2",
-      "pos": "短语",
-      "glossZh": "很；……得多",
-      "pronunciationId": "w:lot#p-main",
-      "note": "a lot 表程度。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lot#e-467b95787483fd8c",
-          "text": "“I like the project a lot.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "reading-c-4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:lot#e-b0c652f28f26bd55",
-          "text": "“And the reason they got so much stronger and fitter was that their hearts could now fill a lot better and pump (泵送) a lot more blood during exercise.” But the hearts of those who participated in less intense exercise didn’t change, he says.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 95
-          }
-        },
-        {
-          "exampleId": "w:lot#e-74ccb0bab3fb46e8",
-          "text": "Chances are the cost will be a lot less than the cost of one bedroom.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 34
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:lot#s3",
       "pos": "n.",
@@ -199,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -244,78 +99,6 @@
       ]
     },
     {
-      "senseId": "w:lot#s4",
-      "pos": "短语",
-      "glossZh": "停车场",
-      "pronunciationId": "w:lot#p-main",
-      "note": "parking lot。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lot#e-433e2d034d2322d6",
-          "text": "People who you swear got in other lines long after you are already checked out and off to the parking lot.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 102,
-            "end": 105
-          }
-        },
-        {
-          "exampleId": "w:lot#e-bcca0bfaa4db8252",
-          "text": "Stinson Beach Parking Lot",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 18,
-              "paragraphId": "cell:paper-gaokao-2024-i:reading-a:ocr-916a21169272a7ae:3:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:lot#e-f6ff5c3970696c23",
-          "text": "Purse in one hand, dinner leftovers in the other, we __41__ toward the parking lot and jumped into our car.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:cloze:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 79,
-            "end": 82
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:lot#s5",
       "pos": "n.",
       "glossZh": "拍卖品中的一批",
@@ -340,59 +123,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:lot#s7",
-      "pos": "短语",
-      "glossZh": "频繁地",
-      "pronunciationId": "w:lot#p-main",
-      "note": "a lot 表频率。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lot#e-d5b1d934ba99e46b",
-          "text": "But one question has been on my mind a lot lately: is it better to buy new eco-friendly products or used traditionally produced goods?",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:lot#e-c700b5fcf1c28a4d",
-          "text": "I got a good bike and rode a lot.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 32
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -401,6 +131,13 @@
       "reason": "专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-lot",
+    "w:a-lot-of",
+    "w:mean-a-lot-to-sb"
+  ]
 }

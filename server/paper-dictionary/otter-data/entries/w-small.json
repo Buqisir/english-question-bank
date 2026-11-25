@@ -54,8 +54,8 @@
     "mock": 789
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 789
+    "gaokao": 12,
+    "mock": 599
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 34,
-        "mock": 0
+        "mock": 84
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -279,7 +279,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -350,7 +350,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -402,7 +402,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -423,94 +423,6 @@
           "target": {
             "start": 7,
             "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:small#s7",
-      "pos": "短语",
-      "glossZh": "闲聊",
-      "pronunciationId": "w:small#p-main",
-      "note": "small talk。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:small#e-a4f8ad5d54b46d1d",
-          "text": "Why do people have small talk?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 18,
-              "questionId": "question:listening:18",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:small#e-318ef9da4d5e979b",
-          "text": "Making small talk interesting.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 20,
-              "questionId": "question:listening:20",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:small#s8",
-      "pos": "短语",
-      "glossZh": "无足轻重的事物",
-      "pronunciationId": "w:small#p-main",
-      "note": "small fry。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:small#e-4b776eb4f3dd74b7",
-          "text": "However, that was small fry compared with the city’s Circus Maximus, which accommodated around 250,000 people.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 23
           }
         }
       ]
@@ -548,6 +460,15 @@
       "reason": "专名或仅见于固定说法的少见名词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:small-change",
+    "w:small-fry",
+    "w:small-screen",
+    "w:small-stuff",
+    "w:small-talk"
+  ]
 }

@@ -1,0 +1,170 @@
+{
+  "entryId": "w:at-the-bottom-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "bottom",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "bottom",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the bottom of",
+  "senses": [
+    {
+      "senseId": "w:at-the-bottom-of#s1",
+      "pos": "短语",
+      "glossZh": "在……的底部或末尾；处于……的最低等级",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-the-bottom-of#e-92f9bfc7ba8fe9cd",
+          "text": "Finally, write a brief summary of the entire lesson at the bottom of the page.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 68
+          },
+          "parts": [
+            [
+              52,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-bottom-of#e-86e8b3df3a37c48c",
+          "text": "“When I joined, I was at the bottom of the ladder; choir was the start of climbing up, and, slowly but surely, I got to where I am today – a confident and outgoing person.” he says.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 38
+          },
+          "parts": [
+            [
+              22,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-bottom-of#e-8b5123f4c7427cfa",
+          "text": "I just thought I was prioritizing, but I now know that this is an example of pre-crastinating the easy tasks so that I could say I got them done, while procrastinating the more boring tasks I left at the bottom of my list.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 197,
+            "end": 213
+          },
+          "parts": [
+            [
+              197,
+              213
+            ]
+          ],
+          "highlightRanges": [
+            [
+              197,
+              213
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:at-the-bottom-of#s2",
+      "pos": "短语",
+      "glossZh": "是……的真正起因或幕后主使",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be at the bottom of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

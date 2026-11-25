@@ -1,0 +1,104 @@
+{
+  "entryId": "w:anywhere-near",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "anywhere",
+      "near"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "anywhere",
+        "near"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "anywhere near",
+  "senses": [
+    {
+      "senseId": "w:anywhere-near#s1",
+      "pos": "短语",
+      "glossZh": "在……附近任何地方；离……不太远",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:anywhere-near#e-7e44e94736060164",
+          "text": "At dinnertime, if I’m anywhere near my favourite restaurant, there’s not a chance you can talk me into going somewhere else – I want to eat at China Fun.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 35
+          },
+          "parts": [
+            [
+              22,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:anywhere-near#s2",
+      "pos": "短语",
+      "glossZh": "（程度上）哪怕稍微接近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于否定、疑问或条件句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 94
+    "mock": 21
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -169,79 +169,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:theory#s3",
-      "pos": "短语",
-      "glossZh": "理论上",
-      "pronunciationId": "w:theory#p-main",
-      "note": "in theory。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:theory#e-7716ada1fe310b42",
-          "text": "In theory, similar systems could also analyze other behaviors, such as the types of podcasts (播客) people listen to or the timing of their music consumption.",
-          "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
-            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:theory#e-79b720aae0f97fc4",
-          "text": "Sprinting sounds simple in theory – just run fast",
-          "source": {
-            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
-            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
-            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:theory#e-462b584ee62e9063",
-          "text": "Give a group of scientists the same data and the same research question, and they should come up with similar answers – in theory.",
-          "source": {
-            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 123,
-            "end": 129
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -250,6 +177,11 @@
       "reason": "专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-theory"
+  ]
 }

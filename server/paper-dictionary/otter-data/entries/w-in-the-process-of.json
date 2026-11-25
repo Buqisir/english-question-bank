@@ -1,0 +1,170 @@
+{
+  "entryId": "w:in-the-process-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "process",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "process",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the process of",
+  "senses": [
+    {
+      "senseId": "w:in-the-process-of#s1",
+      "pos": "短语",
+      "glossZh": "在……的过程中",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-process-of#e-bd0a5f3ae38737f0",
+          "text": "In the process of rebuilding the place, she finds her passion and discovers unconditional love.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-process-of#e-64e47d1906283e96",
+          "text": "The WebAward Competition is open to all organizations and individuals involved in the process of developing web sites.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 96
+          },
+          "parts": [
+            [
+              79,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-process-of#e-6948cf9320a21a88",
+          "text": "What is the scientists’ major role in the process of the farming system?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 52
+          },
+          "parts": [
+            [
+              35,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:in-the-process-of#s2",
+      "pos": "短语",
+      "glossZh": "正在做……，尚未完成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be in the process of doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 162
+    "mock": 17
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 111
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -206,12 +206,12 @@
       "glossZh": "服装",
       "pronunciationId": "w:wear#p-main",
       "note": "如 sportswear 或 casual wear。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -220,13 +220,46 @@
       "glossZh": "磨损",
       "pronunciationId": "w:wear#p-main",
       "note": "wear and tear 指正常耗损。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:wear#s5",
+      "pos": "v.",
+      "glossZh": "逐渐消耗体力；使疲惫（wear down）",
+      "pronunciationId": "w:wear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wear#e-af9751280418b8c0",
+          "text": "It is a necessary response to anything that wears the body down, from everyday stress to long-term exhaustion.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -235,6 +268,14 @@
       "reason": "旧拼法、航海用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:wear-down",
+    "w:wear-in",
+    "w:wear-off",
+    "w:wear-on",
+    "w:wear-out",
+    "w:worse-for-wear"
+  ]
 }

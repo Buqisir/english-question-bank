@@ -1,0 +1,174 @@
+{
+  "entryId": "w:stay-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "away"
+      ],
+      [
+        "stayed",
+        "away"
+      ],
+      [
+        "staying",
+        "away"
+      ],
+      [
+        "stays",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stayed away",
+      "tags": []
+    },
+    {
+      "form": "staying away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay away",
+  "senses": [
+    {
+      "senseId": "w:stay-away#s1",
+      "pos": "短语",
+      "glossZh": "远离；避开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stay-away#e-241342a56f2d45e2",
+          "text": "“Stay away from our flower bed,” one woman said, wagging her finger at me.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-away#e-b6a3891c614c2758",
+          "text": "But Emma, once eager to lead our dance, now stayed away from the group during practices, her movements slow, her eyes locked on the floor.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 55
+          },
+          "parts": [
+            [
+              44,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-away#e-89ccb1ef9cb0867f",
+          "text": "For weeks, they stayed away from each other.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常用 stay away from sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

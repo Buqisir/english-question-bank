@@ -1,0 +1,62 @@
+{
+  "entryId": "w:be-all-ears",
+  "headword": "be all ears",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "all",
+      "ears"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "all",
+        "ears"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:be-all-ears#s1",
+      "pos": "短语",
+      "glossZh": "洗耳恭听；全神贯注地听",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [
+        "w:ear#s4"
+      ],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

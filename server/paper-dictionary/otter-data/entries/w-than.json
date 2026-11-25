@@ -48,8 +48,8 @@
     "mock": 1379
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 1379
+    "gaokao": 63,
+    "mock": 1257
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 138,
-        "mock": 0
+        "mock": 102
       },
       "folded": false,
       "examples": [
@@ -124,251 +124,73 @@
       ]
     },
     {
-      "senseId": "w:than#s2",
-      "pos": "短语",
-      "glossZh": "超过",
-      "pronunciationId": "w:than#p-main",
-      "note": "more than。",
-      "origin": "gaokao",
+      "senseId": "w:than#s6",
+      "pos": "phr.",
+      "glossZh": "不只是；不仅仅（more than）",
+      "pronunciationId": "w:than#p-weak",
+      "origin": "mock",
       "counts": {
-        "gaokao": 39,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 20
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:than#e-f659dc8a609fa127",
-          "text": "Hunters bring in more than 300,000 nutria tails a year, so part of Mouton’s job these days is trying to promote fur.",
+          "exampleId": "w:than#e-5411b78a1b7fe356",
+          "text": "Driven by her love for pets and fellow humans, she started IronBark DogPark, which is more than a place for pets to play and serves as a career platform for the disabled individuals and at-risk youth.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:than#e-0a0d55a641c0493d",
-          "text": "More than 25 years ago, Saroo Brierley lived in rural（农村）India.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
-              "sentence": 1
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:1",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 5,
-            "end": 9
+            "start": 91,
+            "end": 95
           }
         },
         {
-          "exampleId": "w:than#e-9de6f575ed8c9a7c",
-          "text": "After more than three decades, Jim approached his final days on the job much like any other.",
+          "exampleId": "w:than#e-f0c8ff3a34461fc0",
+          "text": "Getting the most out of going to galleries involves more than just showing up.",
           "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:1",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:than#e-13bd55ea26810f9a",
+          "text": "It is more than a tool.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
           "target": {
             "start": 11,
             "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:than#s3",
-      "pos": "短语",
-      "glossZh": "少于",
-      "pronunciationId": "w:than#p-main",
-      "note": "less than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:than#e-1c560f525a4cb362",
-          "text": "There are two parks less than 10 minutes’ walk from home where neighborhood children gather to play.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:than#e-90ea72231c38747d",
-          "text": "However, data of the first six months showed it would make less than half this amount.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 68
-          }
-        },
-        {
-          "exampleId": "w:than#e-fb824a6520fbf665",
-          "text": "But in samples with less than 60 milligrams of calcium carbonate, boiling reduced the level of plastics by just 25 percent.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:than#s4",
-      "pos": "短语",
-      "glossZh": "而不是",
-      "pronunciationId": "w:than#p-main",
-      "note": "rather than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 18,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:than#e-ebea27c23e81b6e8",
-          "text": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:than#e-264681baee7243f5",
-          "text": "Generation Xers with young families, like my wife and me, can still find it convenient to have a home phone rather than providing a mobile phone for every family member.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 115,
-            "end": 119
-          }
-        },
-        {
-          "exampleId": "w:than#e-47ff97a0caa01373",
-          "text": "Eventually, my brother decided to leave rather than force the issue.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:than#s5",
-      "pos": "短语",
-      "glossZh": "除了",
-      "pronunciationId": "w:than#p-main",
-      "note": "other than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:than#e-c741e7f8d4310b97",
-          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
           }
         }
       ]
@@ -380,6 +202,23 @@
       "reason": "历史用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:better-late-than-never",
+    "w:better-safe-than-sorry",
+    "w:better-than-nothing",
+    "w:bite-off-more-than-one-can-chew",
+    "w:easier-said-than-done",
+    "w:little-more-than",
+    "w:more-often-than-not",
+    "w:more-than-ever",
+    "w:no-later-than",
+    "w:no-more-than",
+    "w:nothing-more-than",
+    "w:other-than",
+    "w:rather-than"
+  ]
 }

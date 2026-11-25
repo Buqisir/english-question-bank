@@ -48,8 +48,8 @@
     "mock": 65
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 61
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -122,78 +122,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:sudden#s2",
-      "pos": "短语",
-      "glossZh": "突然",
-      "pronunciationId": "w:sudden#p-main",
-      "note": "all of a sudden。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sudden#e-5029e8c343607c0b",
-          "text": "And then all of a sudden it clicks.”",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:sudden#e-e75d2d1027894547",
-          "text": "The gout（痛风）struck all of a sudden, but I took some medicine and it went away.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:sudden#e-654591b2276329e8",
-          "text": "All of a sudden, Mateo jumped up from where he was sitting on the kitchen floor.",
-          "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
-            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -202,6 +130,11 @@
       "reason": "少见或过时用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-of-a-sudden"
+  ]
 }

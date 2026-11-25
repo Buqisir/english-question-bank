@@ -1,0 +1,72 @@
+{
+  "entryId": "w:build-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "building in"
+  ],
+  "pattern": {
+    "tokens": [
+      "build",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "in"
+      ],
+      [
+        "building",
+        "in"
+      ],
+      [
+        "builds",
+        "in"
+      ],
+      [
+        "built",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build (sth) in",
+  "senses": [
+    {
+      "senseId": "w:build-in#s1",
+      "pos": "短语",
+      "glossZh": "把（功能或部件）内置；把……纳入设计",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

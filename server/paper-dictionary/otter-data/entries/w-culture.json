@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 272
+    "mock": 74
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 174
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -211,12 +211,12 @@
       "pos": "n.",
       "glossZh": "（细菌、细胞等的）培养；培养物",
       "pronunciationId": "w:culture#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -224,12 +224,12 @@
       "pos": "v.",
       "glossZh": "培养（细菌、细胞等）",
       "pronunciationId": "w:culture#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -239,6 +239,6 @@
       "reason": "地图学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

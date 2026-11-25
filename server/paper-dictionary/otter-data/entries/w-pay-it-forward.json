@@ -1,0 +1,139 @@
+{
+  "entryId": "w:pay-it-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "it",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "it",
+        "forward"
+      ],
+      [
+        "paid",
+        "it",
+        "forward"
+      ],
+      [
+        "paying",
+        "it",
+        "forward"
+      ],
+      [
+        "pays",
+        "it",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay it forward",
+  "senses": [
+    {
+      "senseId": "w:pay-it-forward#s1",
+      "pos": "短语",
+      "glossZh": "通过帮助他人把自己收到的善意传下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pay-it-forward#e-f8153a8b9f5cac11",
+          "text": "If you’re looking to tick off the final few names on your Christmas list, you could pay it forward as Theatre Tokens make the perfect present.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 98
+          },
+          "parts": [
+            [
+              84,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-it-forward#e-8e055fbe2cff07c4",
+          "text": "To pay it forward to other children.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-2026-03-senior-three-march-survey:25#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 17
+          },
+          "parts": [
+            [
+              3,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

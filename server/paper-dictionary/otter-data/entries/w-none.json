@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 7,
-    "mock": 46
+    "mock": 1
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -132,6 +132,6 @@
       "reason": "宗教或调查分类专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,136 @@
+{
+  "entryId": "w:close-at-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "at",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "at",
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close at hand",
+  "senses": [
+    {
+      "senseId": "w:close-at-hand#s1",
+      "pos": "短语",
+      "glossZh": "就在手边；随手可取",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-at-hand#e-bcf027b9a42a6fa1",
+          "text": "The pencils were always sharp, and the eraser and sharpener always close at hand.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 80
+          },
+          "parts": [
+            [
+              67,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-at-hand#e-6c426934d52b7a38",
+          "text": "Consequently, while we’re well-known for our strong exam scores, which remains a baseline we all strive to support, we should also be known as a school where kids keep guitars and basketballs close at hand, and where students form bands and teams to play on and off campus.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 192,
+            "end": 205
+          },
+          "parts": [
+            [
+              192,
+              205
+            ]
+          ],
+          "highlightRanges": [
+            [
+              192,
+              205
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:close-at-hand#s2",
+      "pos": "短语",
+      "glossZh": "（时间或事件）临近；即将到来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

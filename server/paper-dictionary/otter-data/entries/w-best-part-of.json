@@ -1,0 +1,61 @@
+{
+  "entryId": "w:best-part-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "best",
+      "part",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "best",
+        "part",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "best part of",
+  "senses": [
+    {
+      "senseId": "w:best-part-of#s1",
+      "pos": "短语",
+      "glossZh": "……的大部分；几乎整个……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 the best part of，尤用于表示接近某个时长。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

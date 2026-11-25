@@ -1,0 +1,120 @@
+{
+  "entryId": "w:part-ways",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "part",
+      "ways"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "part",
+        "ways"
+      ],
+      [
+        "parted",
+        "ways"
+      ],
+      [
+        "parting",
+        "ways"
+      ],
+      [
+        "parts",
+        "ways"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "parting ways",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "part ways",
+  "senses": [
+    {
+      "senseId": "w:part-ways#s1",
+      "pos": "短语",
+      "glossZh": "分道扬镳；结束关系或合作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:part-ways#e-9c08961333aa3c23",
+          "text": "Through thick and thin, Dion and Gobi survived together and had no intentions of parting ways at the finish line.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 93
+          },
+          "parts": [
+            [
+              81,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:part-ways#s2",
+      "pos": "短语",
+      "glossZh": "与同行者分开，各走各的路",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

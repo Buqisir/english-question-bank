@@ -1,0 +1,291 @@
+{
+  "entryId": "w:turn-off",
+  "headword": "turn (sb/sth) off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turn sth off",
+    "turning off"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "turn",
+        "off"
+      ],
+      [
+        "turn",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "turning",
+        "off"
+      ],
+      [
+        "turned",
+        "off"
+      ],
+      [
+        "turns",
+        "off"
+      ],
+      [
+        "turning",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "turned",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "turns",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn off",
+      "tags": []
+    },
+    {
+      "form": "turned off",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:turn-off#s1",
+      "pos": "短语",
+      "glossZh": "关掉；停止运转",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 32
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-off#e-2b6eb6477d334bfa",
+          "text": "Thankfully, Jeff stayed calm and turned off the gas quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-off#e-2254cf38b4de634f",
+          "text": "Turn it off for a while.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              8,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-off#e-21461453d93c1e9c",
+          "text": "As for my phone, even after turning off every notification I can find, calendar reminders still get through.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 39
+          },
+          "parts": [
+            [
+              28,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              39
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn-off#s2",
+      "pos": "短语",
+      "glossZh": "使反感；使失去兴趣",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-off#e-987c05c1a0edf182",
+          "text": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.” Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 135,
+            "end": 145
+          },
+          "parts": [
+            [
+              135,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              135,
+              145
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-off#e-d1c359f4e2bfc0bf",
+          "text": "That could weaken the perceived objectivity of these tools, and thus turn off shoppers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 77
+          },
+          "parts": [
+            [
+              69,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              77
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

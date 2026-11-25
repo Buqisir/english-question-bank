@@ -1,0 +1,166 @@
+{
+  "entryId": "w:go-the-way-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "go the way of"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "the",
+      "way",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "the",
+        "way",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "go",
+        "the",
+        "way",
+        "of"
+      ],
+      [
+        "goes",
+        "the",
+        "way",
+        "of"
+      ],
+      [
+        "going",
+        "the",
+        "way",
+        "of"
+      ],
+      [
+        "gone",
+        "the",
+        "way",
+        "of"
+      ],
+      [
+        "went",
+        "the",
+        "way",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go the way of sth",
+  "senses": [
+    {
+      "senseId": "w:go-the-way-of-sth#s1",
+      "pos": "习语",
+      "glossZh": "步……的后尘；遭遇同样的结局",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:way#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-the-way-of-sth#e-5be2075b2077b3dd",
+          "text": "How long until they go the way of gas street lamps and morning milk deliveries?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-the-way-of-sth#e-8055795b924507de",
+          "text": "to predict that in the coming years, more and more will go the way of the po‘ouli.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 69
+          },
+          "parts": [
+            [
+              56,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "常指像某事物一样衰落或消失。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

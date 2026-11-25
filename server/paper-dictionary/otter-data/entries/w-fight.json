@@ -62,8 +62,8 @@
     "mock": 123
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 119
+    "gaokao": 5,
+    "mock": 23
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -199,7 +199,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -336,7 +336,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -361,108 +361,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:fight#s7",
-      "pos": "短语",
-      "glossZh": "反击",
-      "pronunciationId": "w:fight#p-main",
-      "note": "fight back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fight#e-d225c680663301bd",
-          "text": "Some communities fought back.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:fight#s8",
-      "pos": "短语",
-      "glossZh": "忍住",
-      "pronunciationId": "w:fight#p-main",
-      "note": "fight back tears。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fight#e-123cc62c8cc78a7e",
-          "text": "“None,” I whispered, fighting back tears.",
-          "source": {
-            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
-            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
-            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 21,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:fight#s9",
-      "pos": "短语",
-      "glossZh": "尚有成功的机会",
-      "pronunciationId": "w:fight#p-main",
-      "note": "a fighting chance。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fight#e-0de7ea91715a4c81",
-          "text": "After some quick research, we concluded that the best way to give the squirrel a fighting chance was to care for him ourselves.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 89
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -471,6 +369,14 @@
       "reason": "历史军事义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fight-a-losing-battle",
+    "w:fight-back",
+    "w:fight-back-tears",
+    "w:fight-off"
+  ]
 }

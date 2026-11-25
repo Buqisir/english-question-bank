@@ -1,0 +1,125 @@
+{
+  "entryId": "w:nothing-more-than",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nothing",
+      "more",
+      "than"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nothing",
+        "more",
+        "than"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nothing more than",
+  "senses": [
+    {
+      "senseId": "w:nothing-more-than#s1",
+      "pos": "短语",
+      "glossZh": "只不过是；仅仅是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:nothing-more-than#e-2c7f703f00bd7675",
+          "text": "One is that it’s nothing more than a storm in a teacup.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 34
+          },
+          "parts": [
+            [
+              17,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-more-than#e-a59ed2561e863533",
+          "text": "Today, some people already treat AI as family and argue it deserves rights and respect, while others laugh off the idea as nothing more than “projecting human feelings onto machines”.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 140
+          },
+          "parts": [
+            [
+              123,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              140
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

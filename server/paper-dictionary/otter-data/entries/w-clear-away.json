@@ -1,0 +1,200 @@
+{
+  "entryId": "w:clear-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clear",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "clear",
+        "away"
+      ],
+      [
+        "cleared",
+        "away"
+      ],
+      [
+        "clearing",
+        "away"
+      ],
+      [
+        "clears",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "clear away",
+      "tags": []
+    },
+    {
+      "form": "clearing away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clear (sth) away",
+  "senses": [
+    {
+      "senseId": "w:clear-away#s1",
+      "pos": "短语",
+      "glossZh": "清理掉；把碍事的东西移走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clear-away#e-09a1c84bc59f49c1",
+          "text": "When the hedge was out, they kept clearing away bushes, plants and trees.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 47
+          },
+          "parts": [
+            [
+              34,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clear-away#e-466213353f6cb8a0",
+          "text": "He took up his pen and wrote a heartfelt letter to the principal (校长), earnestly requesting the school to clear away the bird nests so that students could study in peace.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 116
+          },
+          "parts": [
+            [
+              106,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clear-away#e-cc006b4da27ad587",
+          "text": "Clearing away green plants.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:clear-away#s2",
+      "pos": "短语",
+      "glossZh": "（云、雾等）散去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clear-away#s3",
+      "pos": "短语",
+      "glossZh": "消除（疑虑、阻力等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

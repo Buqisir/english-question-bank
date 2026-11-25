@@ -1,0 +1,134 @@
+{
+  "entryId": "w:pull-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "together"
+      ],
+      [
+        "pulled",
+        "together"
+      ],
+      [
+        "pulling",
+        "together"
+      ],
+      [
+        "pulls",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulling together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull together",
+  "senses": [
+    {
+      "senseId": "w:pull-together#s1",
+      "pos": "短语",
+      "glossZh": "汇集；整合（资料、研究等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-together#e-b9438cb45145bc8b",
+          "text": "A new review of nearly 200 studies, pulling together decades of research across psychology, ecology, and medicine, suggests it may be becoming more common.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 52
+          },
+          "parts": [
+            [
+              36,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pull-together#s2",
+      "pos": "短语",
+      "glossZh": "团结起来；齐心协力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pull-together#s3",
+      "pos": "短语",
+      "glossZh": "镇定下来；振作起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 pull oneself together。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

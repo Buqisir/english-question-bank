@@ -83,8 +83,8 @@
     "mock": 93
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 82
+    "gaokao": 5,
+    "mock": 10
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -159,59 +159,6 @@
       ]
     },
     {
-      "senseId": "w:fine#s2",
-      "pos": "短语",
-      "glossZh": "美术",
-      "pronunciationId": "w:fine#p-main",
-      "note": "fine art 或 fine arts。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fine#e-21c568438bbb9b1d",
-          "text": "There are four fantastic galleries to visit from fine art to interactive fun, so there’s something for everyone!",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
-            "locator": {
-              "paragraph": 13,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:fine#e-ecd0e6e5b8ba22fb",
-          "text": "Youth Fine Arts Course Jan.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:11",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fine#s3",
       "pos": "adj.",
       "glossZh": "可以接受的",
@@ -219,7 +166,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -291,7 +238,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -343,7 +290,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -395,7 +342,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -447,7 +394,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -507,7 +454,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -559,7 +506,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -591,6 +538,12 @@
       "reason": "旧时法律专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fine-line",
+    "w:im-fine"
+  ]
 }

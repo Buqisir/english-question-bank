@@ -1,0 +1,164 @@
+{
+  "entryId": "w:plan-ahead",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "plan",
+      "ahead"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plan",
+        "ahead"
+      ],
+      [
+        "planned",
+        "ahead"
+      ],
+      [
+        "planning",
+        "ahead"
+      ],
+      [
+        "plans",
+        "ahead"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plan ahead",
+  "senses": [
+    {
+      "senseId": "w:plan-ahead#s1",
+      "pos": "短语",
+      "glossZh": "提前规划；事先安排",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:plan-ahead#e-5ff7aef02a799d91",
+          "text": "If you enter through the wrong access point, you’ll be turned around and redirected – so plan ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 99
+          },
+          "parts": [
+            [
+              89,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plan-ahead#e-9025b0c3236ce658",
+          "text": "Plan ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plan-ahead#e-41d68c94d6243678",
+          "text": "With one of the best restaurant views in London and a modern British menu, it’s a simple way to plan ahead and get more from your visit.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 106
+          },
+          "parts": [
+            [
+              96,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

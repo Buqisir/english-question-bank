@@ -1,0 +1,120 @@
+{
+  "entryId": "w:first-love",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "first",
+      "love"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "first",
+        "love"
+      ],
+      [
+        "first",
+        "loves"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "first love",
+  "senses": [
+    {
+      "senseId": "w:first-love#s1",
+      "pos": "短语",
+      "glossZh": "最初钟爱的事物；最早的热爱",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:first-love#e-4ab77fa99cf845eb",
+          "text": "Soon he found himself working in restaurants and spending the remainder of his free time returning to his first love: drawing and writing comics.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 116
+          },
+          "parts": [
+            [
+              106,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              116
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:first-love#s2",
+      "pos": "短语",
+      "glossZh": "初恋；第一次体验到的爱情",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:first-love#s3",
+      "pos": "短语",
+      "glossZh": "初恋对象；第一个爱上的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

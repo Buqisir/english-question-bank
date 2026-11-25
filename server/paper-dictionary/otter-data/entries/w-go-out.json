@@ -1,0 +1,325 @@
+{
+  "entryId": "w:go-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going out",
+    "went out"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "out"
+      ],
+      [
+        "going",
+        "out"
+      ],
+      [
+        "went",
+        "out"
+      ],
+      [
+        "goes",
+        "out"
+      ],
+      [
+        "gone",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go out",
+  "senses": [
+    {
+      "senseId": "w:go-out#s1",
+      "pos": "短语",
+      "glossZh": "出去；外出活动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-out#e-cff49eb642bce005",
+          "text": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          },
+          "parts": [
+            [
+              74,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-out#e-e698aee04addbdd7",
+          "text": "Fishermen go out to sea daily and sell their fish in harbor-side markets.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          },
+          "parts": [
+            [
+              10,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-out#e-32d52a111fd7132a",
+          "text": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy.The little boy – his name was Bernard – had interested her very much.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:writing-continuation:material:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          },
+          "parts": [
+            [
+              74,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 30
+      }
+    },
+    {
+      "senseId": "w:go-out#s2",
+      "pos": "短语",
+      "glossZh": "（设备、供电等）停止运转；失灵",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s23",
+        "w:out#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-out#e-99062dde41e6c2b7",
+          "text": "In fact, a couple of weeks ago, our office air-conditioning went out.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s3",
+      "pos": "短语",
+      "glossZh": "（灯、火等）熄灭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s4",
+      "pos": "短语",
+      "glossZh": "约会；谈恋爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 go out with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s5",
+      "pos": "短语",
+      "glossZh": "（比赛中）被淘汰；出局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s6",
+      "pos": "短语",
+      "glossZh": "（潮水）退去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s7",
+      "pos": "短语",
+      "glossZh": "不再流行；过时",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s8",
+      "pos": "短语",
+      "glossZh": "（广播、电视节目）播出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s9",
+      "pos": "短语",
+      "glossZh": "（纸牌游戏中）出完手牌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-out#s10",
+      "pos": "短语",
+      "glossZh": "向某人致以同情或慰问",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 one's heart/thoughts go out to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

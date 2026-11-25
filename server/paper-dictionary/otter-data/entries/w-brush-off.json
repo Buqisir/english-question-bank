@@ -1,0 +1,164 @@
+{
+  "entryId": "w:brush-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "brush",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "brush",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brush off",
+      "tags": []
+    },
+    {
+      "form": "brushed off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "brush (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:brush-off#s1",
+      "pos": "短语",
+      "glossZh": "对……不予理会；敷衍打发",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:brush#s4",
+        "w:off#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:brush-off#e-f501d8f60be0507e",
+          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:brush-off#e-f7d94fe9ff2d936d",
+          "text": "When I brush off a mistake in the moment, I’m really giving myself a second chance to see beyond the error itself.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:brush-off#e-dd8e2bbb7491a389",
+          "text": "I brushed off his words as romantic wisdom until we ran a set of rapids.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 13
+          },
+          "parts": [
+            [
+              2,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

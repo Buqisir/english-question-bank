@@ -1,0 +1,126 @@
+{
+  "entryId": "w:best-of-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "best",
+      "of",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "best",
+        "of",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "best of all",
+  "senses": [
+    {
+      "senseId": "w:best-of-all#s1",
+      "pos": "短语",
+      "glossZh": "最棒的是；最妙的是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s7",
+        "w:best#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:best-of-all#e-a83ec21418baf00b",
+          "text": "Best of all, my passion for my hobbies seems to inspire them to be passionate about finding their own.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:best-of-all#e-203773ceadad1a48",
+          "text": "And best of all, you don’t have to be an innovator or entrepreneur to think outside the box.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

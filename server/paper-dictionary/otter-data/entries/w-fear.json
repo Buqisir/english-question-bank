@@ -59,8 +59,8 @@
     "mock": 254
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 254
+    "gaokao": 6,
+    "mock": 80
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 126
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -207,59 +207,6 @@
       ]
     },
     {
-      "senseId": "w:fear#s3",
-      "pos": "短语",
-      "glossZh": "生怕",
-      "pronunciationId": "w:fear#p-main",
-      "note": "for fear of sth 或 for fear that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fear#e-5820ec7640579ec3",
-          "text": "However, some high sugar brands, like Classic Coca Cola, have accepted the sugar tax and are refusing to change for fear of upsetting consumers.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 116,
-            "end": 120
-          }
-        },
-        {
-          "exampleId": "w:fear#e-d9aea5d697051fc6",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 142,
-            "end": 146
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fear#s4",
       "pos": "v.",
       "glossZh": "为……担忧",
@@ -294,6 +241,13 @@
       "reason": "俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-fear-of",
+    "w:for-fear-that",
+    "w:strike-fear-into-ones-heart"
+  ]
 }

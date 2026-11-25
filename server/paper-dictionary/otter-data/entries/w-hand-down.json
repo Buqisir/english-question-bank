@@ -1,0 +1,133 @@
+{
+  "entryId": "w:hand-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hand",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hand",
+        "down"
+      ],
+      [
+        "handed",
+        "down"
+      ],
+      [
+        "handing",
+        "down"
+      ],
+      [
+        "hands",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "handed down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hand (sth) down",
+  "senses": [
+    {
+      "senseId": "w:hand-down#s1",
+      "pos": "短语",
+      "glossZh": "把传统、知识等传给后代；代代相传",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hand-down#e-73a4a7ef834fe101",
+          "text": "In order to better understand this meaning, a few months ago I talked to López-Alt about the tradition of food and music and how it gets handed down through generations, evolving as it goes.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 148
+          },
+          "parts": [
+            [
+              137,
+              148
+            ]
+          ],
+          "highlightRanges": [
+            [
+              137,
+              148
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hand-down#s2",
+      "pos": "短语",
+      "glossZh": "把用过的物品传给晚辈或年幼者",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hand-down#s3",
+      "pos": "短语",
+      "glossZh": "（法院）正式宣布裁决或判刑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

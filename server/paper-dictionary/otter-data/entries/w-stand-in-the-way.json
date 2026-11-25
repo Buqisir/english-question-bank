@@ -1,0 +1,115 @@
+{
+  "entryId": "w:stand-in-the-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing in the way"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "in",
+      "the",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "standing",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "stands",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "stood",
+        "in",
+        "the",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand in the way",
+  "senses": [
+    {
+      "senseId": "w:stand-in-the-way#s1",
+      "pos": "短语",
+      "glossZh": "妨碍进展；阻碍目标实现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-in-the-way#e-97d3c12e82f4f1b5",
+          "text": "Two major practical difficulties stand in the way.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 49
+          },
+          "parts": [
+            [
+              33,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              49
+            ]
+          ]
+        }
+      ],
+      "note": "可接 of sb/sth 指明受阻的人或事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,64 @@
+{
+  "entryId": "w:give-the-green-light",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "give",
+      "the",
+      "green",
+      "light"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "the",
+        "green",
+        "light"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give the green light",
+  "senses": [
+    {
+      "senseId": "w:give-the-green-light#s1",
+      "pos": "短语",
+      "glossZh": "批准某事开始或继续；给某事开绿灯",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:green#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

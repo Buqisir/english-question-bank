@@ -1,0 +1,97 @@
+{
+  "entryId": "w:many-hands-make-light-work",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "many",
+      "hands",
+      "make",
+      "light",
+      "work"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "many",
+        "hands",
+        "make",
+        "light",
+        "work"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "many hands make light work",
+  "senses": [
+    {
+      "senseId": "w:many-hands-make-light-work#s1",
+      "pos": "短语",
+      "glossZh": "人多好办事；大家分担，事情就容易做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:many-hands-make-light-work#e-23ca01400683a046",
+          "text": "Many hands make light work.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-fujian-putian-2026-01-first-quality-test:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 26
+          },
+          "parts": [
+            [
+              0,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

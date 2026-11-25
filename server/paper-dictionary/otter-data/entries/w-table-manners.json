@@ -1,0 +1,125 @@
+{
+  "entryId": "w:table-manners",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "table",
+      "manners"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "table",
+        "manners"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "table manners",
+  "senses": [
+    {
+      "senseId": "w:table-manners#s1",
+      "pos": "短语",
+      "glossZh": "餐桌礼仪",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:table#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:table-manners#e-604d69148cec6f4d",
+          "text": "Table manners in the UK.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-national-b:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:table-manners#e-7e208b7e0a734407",
+          "text": "Learning table manners.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 22
+          },
+          "parts": [
+            [
+              9,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

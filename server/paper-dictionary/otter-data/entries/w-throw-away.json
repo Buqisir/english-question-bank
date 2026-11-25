@@ -1,0 +1,248 @@
+{
+  "entryId": "w:throw-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "throw",
+        "away"
+      ],
+      [
+        "throw",
+        {
+          "slot": "sb/sth"
+        },
+        "away"
+      ],
+      [
+        "threw",
+        "away"
+      ],
+      [
+        "throwing",
+        "away"
+      ],
+      [
+        "thrown",
+        "away"
+      ],
+      [
+        "throws",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "threw away",
+      "tags": []
+    },
+    {
+      "form": "throw away",
+      "tags": []
+    },
+    {
+      "form": "throwing away",
+      "tags": []
+    },
+    {
+      "form": "thrown away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw (sth) away",
+  "senses": [
+    {
+      "senseId": "w:throw-away#s1",
+      "pos": "短语",
+      "glossZh": "扔掉；丢弃",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:throw#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:throw-away#e-2b33d928cac4fafc",
+          "text": "Does your soul die a little every time you throw away unused food?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:throw-away#e-64715349d29981b2",
+          "text": "Don’t throw away your beginner art.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:throw-away#e-d5fefb9ae700986c",
+          "text": "It’s jaw-dropping how much perfectly good food is thrown away – from “ugly” (but quite eatable) vegetables rejected by grocers to large amounts of uneaten dishes thrown into restaurant garbage cans.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-b-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 29
+      }
+    },
+    {
+      "senseId": "w:throw-away#s2",
+      "pos": "短语",
+      "glossZh": "白白浪费（机会、金钱等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-away#e-02605a1ba0f91948",
+          "text": "Michael sensed the despair in the man’s voice, as if he were ready to throw his life away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation:8",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 89
+          },
+          "parts": [
+            [
+              70,
+              75
+            ],
+            [
+              85,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              75
+            ],
+            [
+              85,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

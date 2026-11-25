@@ -1,0 +1,103 @@
+{
+  "entryId": "w:fall-on-deaf-ears",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "on",
+      "deaf",
+      "ears"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "on",
+        "deaf",
+        "ears"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fell on deaf ears",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall on deaf ears",
+  "senses": [
+    {
+      "senseId": "w:fall-on-deaf-ears#s1",
+      "pos": "短语",
+      "glossZh": "（请求、劝告等）未获理会；被置之不理",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deaf#s2",
+        "w:ear#s3",
+        "w:fall#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-on-deaf-ears#e-f9a0c100434a2f8c",
+          "text": "My parents urged me to get out of this so-called unhealthy habit, but their repeated requests fell on deaf ears.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 111
+          },
+          "parts": [
+            [
+              94,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              111
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

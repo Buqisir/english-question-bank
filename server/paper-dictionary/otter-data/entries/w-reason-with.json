@@ -1,0 +1,142 @@
+{
+  "entryId": "w:reason-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "reason",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reason",
+        "with"
+      ],
+      [
+        "reasoned",
+        "with"
+      ],
+      [
+        "reasoning",
+        "with"
+      ],
+      [
+        "reasons",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reasoned with",
+      "tags": []
+    },
+    {
+      "form": "reasoning with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reason with sb",
+  "senses": [
+    {
+      "senseId": "w:reason-with#s1",
+      "pos": "短语",
+      "glossZh": "跟某人讲道理，试图说服对方",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reason-with#e-0a39e0c2eafc6de7",
+          "text": "She tried reasoning with her, but the more she talked, the more Grandma resisted.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 24
+          },
+          "parts": [
+            [
+              10,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reason-with#e-bc77a8711a37870f",
+          "text": "Yet, I reasoned with myself that maybe they would be helpful someday.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 20
+          },
+          "parts": [
+            [
+              7,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

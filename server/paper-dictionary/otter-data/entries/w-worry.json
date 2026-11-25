@@ -59,8 +59,8 @@
     "mock": 289
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 288
+    "gaokao": 8,
+    "mock": 98
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -177,7 +177,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -248,7 +248,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -297,44 +297,82 @@
       "pos": "n.",
       "glossZh": "让人发愁的事",
       "pronunciationId": "w:worry#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:worry#s6",
-      "pos": "短语",
-      "glossZh": "没关系；别担心",
+      "senseId": "w:worry#s7",
+      "pos": "adj.",
+      "glossZh": "令人担忧的",
       "pronunciationId": "w:worry#p-main",
-      "note": "no worries。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 9
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:worry#e-d240e4f604934efb",
-          "text": "No worries: He handed it to his wife, and she was gone in a flash down the road to buy a new tire iron.",
+          "exampleId": "w:worry#e-28f0172c4013eb24",
+          "text": "To raise awareness of a worrying trend.",
           "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
-              "sentence": 2
+              "question": 32,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:32",
+              "option": "C",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 3,
-            "end": 10
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:worry#e-8ee0c3cb0b87d5a0",
+          "text": "What was the most worrying finding about OpenClaw?",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:worry#e-3412d7a9d0a7fb1c",
+          "text": "The model calculation shows that worrying developments began as early as 1600 in the mid-latitudes (纬度).",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 41
           }
         }
       ]
@@ -346,6 +384,11 @@
       "reason": "少见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-to-worry"
+  ]
 }

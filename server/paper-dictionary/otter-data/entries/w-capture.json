@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 86
+    "mock": 8
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -212,7 +212,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -335,7 +335,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -359,6 +359,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:capture#s6",
+      "pos": "n.",
+      "glossZh": "拍摄；图像采集",
+      "pronunciationId": "w:capture#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:capture#e-96f4ac4b3d36c9a8",
+          "text": "Professor Robert Epstein from Harvard University’s Visual Cognition Lab notes, “When we take photos with a phone, our brain is in a ‘rapid capture’ mode; whereas with a film camera, it enters a ‘deliberate composition’ state.” Functional MRI（核磁共振）studies have shown that when using a smartphone, areas of the brain linked to quick decision-making are more active.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 146
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -367,6 +400,6 @@
       "reason": "计算机和棋类专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

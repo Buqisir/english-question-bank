@@ -1,0 +1,203 @@
+{
+  "entryId": "w:call-out",
+  "headword": "call (sth) out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "calling out",
+    "calls out"
+  ],
+  "pattern": {
+    "tokens": [
+      "call",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "call",
+        "out"
+      ],
+      [
+        "calling",
+        "out"
+      ],
+      [
+        "calls",
+        "out"
+      ],
+      [
+        "called",
+        "out"
+      ],
+      [
+        "call",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "calling",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "calls",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "called",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "called out",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:call-out#s1",
+      "pos": "短语",
+      "glossZh": "大声喊；喊出",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 17
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:call#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:call-out#e-4a3734538cb5ba27",
+          "text": "You must leave right now!” he called out, holding the branch with both hands.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:call-out#e-f50f042fd44b14e7",
+          "text": "After finishing an order, she calls out the name on the cup.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:call-out#e-9d4ac3375384efff",
+          "text": "You aren’t here on your own, are you?” Mrs. Cooper called out, her kind face filled with concern.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 61
+          },
+          "parts": [
+            [
+              51,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              61
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,111 @@
+{
+  "entryId": "w:have-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "on"
+      ],
+      [
+        "had",
+        "on"
+      ],
+      [
+        "has",
+        "on"
+      ],
+      [
+        "having",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have (sb/sth) on",
+  "senses": [
+    {
+      "senseId": "w:have-on#s1",
+      "pos": "短语",
+      "glossZh": "穿着；戴着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-on#s2",
+      "pos": "短语",
+      "glossZh": "开着（灯、电视等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-on#s3",
+      "pos": "短语",
+      "glossZh": "捉弄；逗骗（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-on#s4",
+      "pos": "短语",
+      "glossZh": "有活动或约会安排",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

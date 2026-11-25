@@ -62,8 +62,8 @@
     "mock": 1714
   },
   "unassignedCounts": {
-    "gaokao": 13,
-    "mock": 1714
+    "gaokao": 16,
+    "mock": 1516
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 198,
-        "mock": 0
+        "mock": 169
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -295,93 +295,6 @@
       ]
     },
     {
-      "senseId": "w:help#s5",
-      "pos": "短语",
-      "glossZh": "请自取（食物、饮料等）",
-      "pronunciationId": "w:help#p-main",
-      "note": "help oneself to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:help#e-d6834ce9df989aa5",
-          "text": "Before the film began, each woman was asked to help herself to a snack.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:help#s6",
-      "pos": "短语",
-      "glossZh": "忍不住",
-      "pronunciationId": "w:help#p-main",
-      "note": "can’t help doing sth；can’t help but do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:help#e-55fd58f8a793f58f",
-          "text": "As he writes in his new book, A Long Way Home, Brierley couldn’t help but wonder about his hometown back in India.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 69
-          }
-        },
-        {
-          "exampleId": "w:help#e-a65a5db56f55820b",
-          "text": "He is right, but I can’t help wishing they would keep those old ferries.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:help#s7",
       "pos": "interj.",
       "glossZh": "救命",
@@ -401,6 +314,21 @@
       "reason": "大写 HELP 是专门缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:call-for-help",
+    "w:can-you-help-me",
+    "w:cant-help",
+    "w:cant-help-but-do-sth",
+    "w:cant-help-doing-sth",
+    "w:couldnt-help-but",
+    "w:god-helps-those-who-help-themselves",
+    "w:help-oneself-to-sth",
+    "w:help-out",
+    "w:help-wanted",
+    "w:help-yourself"
+  ]
 }

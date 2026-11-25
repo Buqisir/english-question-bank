@@ -1,0 +1,270 @@
+{
+  "entryId": "w:shine-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shine",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shine",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shining through",
+      "tags": []
+    },
+    {
+      "form": "shone through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shine through",
+  "senses": [
+    {
+      "senseId": "w:shine-through#s1",
+      "pos": "短语",
+      "glossZh": "显露出来；清楚地表现出来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:through#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shine-through#e-e55f7e43a148ada3",
+          "text": "What does the underlined phrase “shine through” in paragraph 2 mean?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2024-i:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 46
+          },
+          "parts": [
+            [
+              33,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-through#e-8fcaf30db6dbd603",
+          "text": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 56
+          },
+          "parts": [
+            [
+              43,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-through#e-4b28c37cc1e446b1",
+          "text": "This allows the yellow and orange pigments to shine through, revealing the many beautiful colors of fall.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 59
+          },
+          "parts": [
+            [
+              46,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:shine-through#s2",
+      "pos": "短语",
+      "glossZh": "（光）透进来；透过去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shine-through#e-1f58fe16680a62fc",
+          "text": "He even reacted to sunlight shining through a window – the first time he had shown any response to light.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 43
+          },
+          "parts": [
+            [
+              28,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-through#e-dc0c2f459c735fdf",
+          "text": "But as he followed her gaze, the sun was shining through the branches, turning the red and yellow leaves into a sea of burning gold.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-nb-2026-m2:writing-continuation:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 56
+          },
+          "parts": [
+            [
+              41,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-through#e-b669bd292288dad0",
+          "text": "Moments later the clouds had parted and the light shone through.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 63
+          },
+          "parts": [
+            [
+              50,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

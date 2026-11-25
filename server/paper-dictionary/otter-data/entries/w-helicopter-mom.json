@@ -1,0 +1,155 @@
+{
+  "entryId": "w:helicopter-mom",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "helicopter",
+      "mom"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "helicopter",
+        "mom"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "helicopter mom",
+  "senses": [
+    {
+      "senseId": "w:helicopter-mom#s1",
+      "pos": "短语",
+      "glossZh": "对子女过度保护或干预的母亲",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:helicopter#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:helicopter-mom#e-4fbd79b7d7069309",
+          "text": "I became a helicopter mom, checking the backyard for anything dangerous before letting David out to play – under my strict supervision（监督）.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 25
+          },
+          "parts": [
+            [
+              11,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:helicopter-mom#e-c77743dbb36812b7",
+          "text": "From Helicopter Mom to Hands-off Parent",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 19
+          },
+          "parts": [
+            [
+              5,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:helicopter-mom#e-4b781ce7a2459c90",
+          "text": "As a textbook “helicopter mom,” I checked the backyard for hidden dangers before letting him play, carried a fully stocked emergency kit to his T-ball games, and flatly declined all concerts or crowded outings – fearing crushes, fires, or unforeseen disasters.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 29
+          },
+          "parts": [
+            [
+              15,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 105
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 102
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -188,6 +188,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:leader#s3",
+      "pos": "n.",
+      "glossZh": "亏本销售以招徕顾客的商品（loss leader）",
+      "pronunciationId": "w:leader#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leader#e-4aff6bfc595f8f55",
+          "text": "Chances are that customers are going to pick up other full-priced items in the store while buying that loss leader.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -196,6 +229,6 @@
       "reason": "专名或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:tens-of-thousands",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tens",
+      "of",
+      "thousands"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tens",
+        "of",
+        "thousands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tens of thousands",
+  "senses": [
+    {
+      "senseId": "w:tens-of-thousands#s1",
+      "pos": "短语",
+      "glossZh": "数万；数以万计",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ten#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tens-of-thousands#e-d84d84662ed3c231",
+          "text": "The authorities closed access to the bridge and tens of thousands of people made their way back to land.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 65
+          },
+          "parts": [
+            [
+              48,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tens-of-thousands#e-5b757e549ec6692c",
+          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 109
+          },
+          "parts": [
+            [
+              92,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tens-of-thousands#e-511a7fa15fdad5d7",
+          "text": "Supported by institutional policies, the industry now provides employment for tens of thousands.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 95
+          },
+          "parts": [
+            [
+              78,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              95
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

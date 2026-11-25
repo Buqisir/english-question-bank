@@ -1,0 +1,333 @@
+{
+  "entryId": "w:figure-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "figure",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "figure",
+        "out"
+      ],
+      [
+        "figured",
+        "out"
+      ],
+      [
+        "figures",
+        "out"
+      ],
+      [
+        "figuring",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "figure out",
+      "tags": []
+    },
+    {
+      "form": "figured out",
+      "tags": []
+    },
+    {
+      "form": "figuring out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "figure (sth) out",
+  "senses": [
+    {
+      "senseId": "w:figure-out#s1",
+      "pos": "短语",
+      "glossZh": "搞清楚；想明白",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:figure-out#e-4ef9e4c1b31d1109",
+          "text": "Figuring out different colours of dots.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:figure-out#e-ad31b8e339414caf",
+          "text": "Ultimately, I piece together the reasoning, try to empathize, and figure out why things happened that way.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 76
+          },
+          "parts": [
+            [
+              66,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:figure-out#e-7b2bfd02f2c3efc2",
+          "text": "Despite how common it is, scientists have struggled to figure out exactly what causes this loss of appetite.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 65
+          },
+          "parts": [
+            [
+              55,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 44
+      }
+    },
+    {
+      "senseId": "w:figure-out#s2",
+      "pos": "短语",
+      "glossZh": "想出（办法）；找到解决办法",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:figure-out#e-31f542a6c3758ff7",
+          "text": "In my everyday life, I am on an ongoing journey to figure out different ways to reduce my carbon footprint on the planet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          },
+          "parts": [
+            [
+              51,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:figure-out#e-9187cc2db60f017d",
+          "text": "The study showed the animals had figured out how to apply what they learned about human faces during training to new faces in the testing stage.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:figure-out#e-4a7085b5029588e8",
+          "text": "That’s why this issue (期) of Writer’s Digest aims to help you figure out how to write the best ending for whatever kind of writing you’re doing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:figure-out#s3",
+      "pos": "短语",
+      "glossZh": "算出（数值或费用）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:figure-out#e-9396a66a5c114ef3",
+          "text": "To figure out the F1-scores of different LLMs.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-zj-jinhua-2026-apr-m2:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

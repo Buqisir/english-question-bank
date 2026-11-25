@@ -1,0 +1,185 @@
+{
+  "entryId": "w:lose-control",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "losing control"
+  ],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "control"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "control"
+      ],
+      [
+        "losing",
+        "control"
+      ],
+      [
+        "loses",
+        "control"
+      ],
+      [
+        "lost",
+        "control"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lost control",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose control",
+  "senses": [
+    {
+      "senseId": "w:lose-control#s1",
+      "pos": "短语",
+      "glossZh": "失去对……的控制",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lose-control#e-285d682d016f2cc7",
+          "text": "A 2024 survey revealed that 62% of conservators fear losing control over digitized cultural heritage.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 67
+          },
+          "parts": [
+            [
+              53,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-control#e-854e3e84bf12b2a6",
+          "text": "Nearby, 20-year-old student Cameron Hollopeter suddenly lost control of his body and collapsed directly onto the tracks from a heart attack.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 68
+          },
+          "parts": [
+            [
+              56,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-control#e-e8ade0068558945d",
+          "text": "They tend to symbolize lost control or hidden insecurity.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常用 lose control of/over sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:lose-control#s2",
+      "pos": "短语",
+      "glossZh": "控制不住自己的情绪或行为",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

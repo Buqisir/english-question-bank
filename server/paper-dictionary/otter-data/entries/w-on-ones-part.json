@@ -1,0 +1,113 @@
+{
+  "entryId": "w:on-ones-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on sb’s part"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      {
+        "slot": "one's"
+      },
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        {
+          "slot": "one's"
+        },
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on part",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on one's part",
+  "senses": [
+    {
+      "senseId": "w:on-ones-part#s1",
+      "pos": "短语",
+      "glossZh": "就某人或某一方而言；在某一方这边",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:part#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-part#e-25c027e53523afaa",
+          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              9
+            ],
+            [
+              14,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              9
+            ],
+            [
+              14,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

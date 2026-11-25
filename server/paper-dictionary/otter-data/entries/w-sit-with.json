@@ -1,0 +1,232 @@
+{
+  "entryId": "w:sit-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting with"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "with"
+      ],
+      [
+        "sitting",
+        "with"
+      ],
+      [
+        "sat",
+        "with"
+      ],
+      [
+        "sits",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sit with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:sit-with#s1",
+      "pos": "短语",
+      "glossZh": "接纳并体会（情绪或不确定感）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-with#e-2469531b90c4f039",
+          "text": "If you seek reassurance, sit with uncertainty longer.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-with#e-d09966cf0134c2ee",
+          "text": "“That’s part of really sitting with something.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常指先允许这种感受存在，不急于排遣。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:sit-with#s2",
+      "pos": "短语",
+      "glossZh": "静下心来慢慢思考（问题、想法等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-with#e-f65822453d07206a",
+          "text": "“I sit with the piece and pay attention to how it settles in me – my throat, my stomach.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:sit-with#s3",
+      "pos": "短语",
+      "glossZh": "与……相合；让某人觉得可以接受",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-with#e-ad9a85aa8df1e53d",
+          "text": "I considered therapy（治疗）, but my cultural background does not sit with western techniques.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "常用 sit well with sb 或 not sit well with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

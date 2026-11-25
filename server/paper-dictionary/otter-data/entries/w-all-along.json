@@ -1,0 +1,168 @@
+{
+  "entryId": "w:all-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all along",
+  "senses": [
+    {
+      "senseId": "w:all-along#s1",
+      "pos": "短语",
+      "glossZh": "从一开始就；一直以来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s8",
+        "w:along#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-along#e-cdc3d550e4f17073",
+          "text": "If this is true, then my evolution as a reader of books has been in the right direction all along.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 97
+          },
+          "parts": [
+            [
+              88,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-along#e-6b0e530256c1657b",
+          "text": "She had been brushing the ocean floor with her feet all along, keeping us afloat while teaching me rhythm and trust.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-along#e-33f5cf8793217fb6",
+          "text": "Perhaps it was the very piece that I had failed to notice in my life all along.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 78
+          },
+          "parts": [
+            [
+              69,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:all-along#s2",
+      "pos": "短语",
+      "glossZh": "沿着……的全段；遍及……沿线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 175
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 150
       },
       "folded": false,
       "examples": [
@@ -122,12 +122,12 @@
       "pos": "n.",
       "glossZh": "咖啡豆；咖啡粉",
       "pronunciationId": "w:coffee#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 18
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -135,12 +135,12 @@
       "pos": "n.",
       "glossZh": "咖啡树",
       "pronunciationId": "w:coffee#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -150,6 +150,6 @@
       "reason": "专名或罕见动词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

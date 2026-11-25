@@ -1,0 +1,160 @@
+{
+  "entryId": "w:on-the-other-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "other",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "other",
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the other hand",
+  "senses": [
+    {
+      "senseId": "w:on-the-other-hand#s1",
+      "pos": "短语",
+      "glossZh": "另一方面；反过来看",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s10",
+        "w:on#s14",
+        "w:other#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-other-hand#e-09e47c007f84493a",
+          "text": "“On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 18
+          },
+          "parts": [
+            [
+              1,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-other-hand#e-e3e16f0ec514feae",
+          "text": "On the other hand, being young and old at the same time has its attractions.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-other-hand#e-f0343bc8b282d511",
+          "text": "A lengthy, positive review, on the other hand, was regarded as suspicious, and participants tended to trust writers that kept their glowing reviews short.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 45
+          },
+          "parts": [
+            [
+              28,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 18
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

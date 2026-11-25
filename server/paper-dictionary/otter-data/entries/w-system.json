@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 604
+    "mock": 415
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 43,
-        "mock": 0
+        "mock": 165
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -249,6 +249,9 @@
       "reason": "具体领域专称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:honor-system"
+  ]
 }

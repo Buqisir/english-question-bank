@@ -1,0 +1,137 @@
+{
+  "entryId": "w:any-number-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "any",
+      "number",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "any",
+        "number",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "any number of",
+  "senses": [
+    {
+      "senseId": "w:any-number-of#s1",
+      "pos": "固定短语",
+      "glossZh": "任意数量的；多少都可以",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:any-number-of#e-6f1a987c5ac4ddf1",
+          "text": "Your poem can be any format, any number of lines.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:any-number-of#s2",
+      "pos": "固定短语",
+      "glossZh": "许多；各种各样的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:any-number-of#e-a36f1bae73e05689",
+          "text": "Exposed to the very true saying that necessity is the mother of invention, farm kids witnessed parents who could perform a master class on figuring out a solution to any number of breakdowns on the fly.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 166,
+            "end": 179
+          },
+          "parts": [
+            [
+              166,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              166,
+              179
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

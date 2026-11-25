@@ -1,0 +1,101 @@
+{
+  "entryId": "w:on-the-strength-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "strength",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "strength",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on the strength of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the strength of sth",
+  "senses": [
+    {
+      "senseId": "w:on-the-strength-of#s1",
+      "pos": "短语",
+      "glossZh": "凭借……；以……为依据",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:strength#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-strength-of#e-0b897f755b79d9d4",
+          "text": "The United States rose to global power on the strength of its technology, and the lifeblood of that technology has long been electricity.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 57
+          },
+          "parts": [
+            [
+              39,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

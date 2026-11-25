@@ -1,0 +1,124 @@
+{
+  "entryId": "w:make-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making out"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "out"
+      ],
+      [
+        "making",
+        "out"
+      ],
+      [
+        "made",
+        "out"
+      ],
+      [
+        "makes",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:make-out#s1",
+      "pos": "短语",
+      "glossZh": "辨认出；听清；弄明白",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-out#s2",
+      "pos": "短语",
+      "glossZh": "填写；开具（支票、文件等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-out#s3",
+      "pos": "短语",
+      "glossZh": "应付；（事情）进展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-out#s4",
+      "pos": "短语",
+      "glossZh": "把……说成；声称",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-out#s5",
+      "pos": "短语",
+      "glossZh": "（美式口语）热烈接吻或爱抚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

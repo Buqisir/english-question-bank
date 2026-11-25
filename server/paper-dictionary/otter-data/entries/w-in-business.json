@@ -1,0 +1,137 @@
+{
+  "entryId": "w:in-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in business",
+  "senses": [
+    {
+      "senseId": "w:in-business#s1",
+      "pos": "短语",
+      "glossZh": "在营业；从事经营",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-business#e-f56f701b21c86fe2",
+          "text": "“They make me understand why Chinese people are successful in business, and why China has a successful economy.”",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-business#e-0bdec08007b2c5f7",
+          "text": "Financial returns matter most in business.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 41
+          },
+          "parts": [
+            [
+              30,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:in-business#s2",
+      "pos": "短语",
+      "glossZh": "准备就绪；可以开始或恢复运作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:business#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -51,7 +51,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 112
+    "mock": 6
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 100
       },
       "folded": false,
       "examples": [
@@ -134,7 +134,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -158,20 +158,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:neighbourhood#s3",
-      "pos": "短语",
-      "glossZh": "约为；大约值为",
-      "pronunciationId": "w:neighbourhood#p-main",
-      "note": "in the neighbourhood of。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -184,6 +170,11 @@
       "reason": "学校名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-neighbourhood-of"
+  ]
 }

@@ -35,8 +35,8 @@
     "mock": 880
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 880
+    "gaokao": 15,
+    "mock": 684
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 108,
-        "mock": 0
+        "mock": 149
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -284,166 +284,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:then#s5",
-      "pos": "短语",
-      "glossZh": "时不时",
-      "pronunciationId": "w:then#p-main",
-      "note": "now and then。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:then#e-4a46bbb773dbf0d4",
-          "text": "Stop to have a rest now and then.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:then#e-8e8cc67f36b51e32",
-          "text": "Age is naturally a factor（因素） – only 58 percent of Generation Ys still use landlines now and then, compared to 84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 97
-          }
-        },
-        {
-          "exampleId": "w:then#e-f7ca638898607b16",
-          "text": "To stay warm, she ran her engine for a few minutes every now and then.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
-              "sentence": 9
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 69
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:then#s6",
-      "pos": "短语",
-      "glossZh": "从那时起",
-      "pronunciationId": "w:then#p-main",
-      "note": "from then on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:then#e-c73257b79a45eee9",
-          "text": "From then on instead of coming to ask their possessions back, the students would say, “That’s okay.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:then#e-3190f089571a3b74",
-          "text": "From then on, if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:then#s7",
-      "pos": "短语",
-      "glossZh": "当场",
-      "pronunciationId": "w:then#p-main",
-      "note": "right then and there。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:then#e-a1ba253ed4dc2f72",
-          "text": "Right then and there, this total __49__ examined my engine, explaining as he worked that my spark plugs （火花塞） hadn’t been changed for so long that they were __50__ to function.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -452,6 +292,17 @@
       "reason": "姓氏"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:every-now-and-then",
+    "w:from-then-on",
+    "w:now-and-then",
+    "w:now-then",
+    "w:right-then-and-there",
+    "w:then-again",
+    "w:then-and-there"
+  ]
 }

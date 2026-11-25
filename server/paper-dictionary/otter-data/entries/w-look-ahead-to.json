@@ -1,0 +1,145 @@
+{
+  "entryId": "w:look-ahead-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking ahead to"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "ahead",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "ahead",
+        "to"
+      ],
+      [
+        "looking",
+        "ahead",
+        "to"
+      ],
+      [
+        "looked",
+        "ahead",
+        "to"
+      ],
+      [
+        "looks",
+        "ahead",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look ahead to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look ahead to sth",
+  "senses": [
+    {
+      "senseId": "w:look-ahead-to#s1",
+      "pos": "短语",
+      "glossZh": "展望；提前考虑将来的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-ahead-to#e-e1ecca7d90c7aa95",
+          "text": "By combining multiple units, the researchers are looking ahead to new shape-changing surfaces or structures.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 65
+          },
+          "parts": [
+            [
+              49,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-ahead-to#e-c7bce30041ca7485",
+          "text": "And Prof Mark advises people to look ahead to the end of the day and to consider how they might spend time then, such as relaxing on the sofa after completing their work.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 45
+          },
+          "parts": [
+            [
+              32,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

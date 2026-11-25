@@ -1,0 +1,204 @@
+{
+  "entryId": "w:cut-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cutting in"
+  ],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "in"
+      ],
+      [
+        "cutting",
+        "in"
+      ],
+      [
+        "cuts",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cuts in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut in",
+  "senses": [
+    {
+      "senseId": "w:cut-in#s1",
+      "pos": "短语",
+      "glossZh": "插嘴；打断别人的话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cut#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cut-in#e-d3f3ba6ec0cf0b76",
+          "text": "Rita cuts in: “We spoke more with Nick because I think it’s a big thing for Nick to live with his mother-in-law.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-in#e-4a6b4213bdf69bf4",
+          "text": "I gave them a thumbs-up and started the trimmer before anyone else could cut in.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 79
+          },
+          "parts": [
+            [
+              73,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-in#s2",
+      "pos": "短语",
+      "glossZh": "插队；突然并入别的车前面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-in#s3",
+      "pos": "短语",
+      "glossZh": "插播；打断正在播放的内容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-in#s4",
+      "pos": "短语",
+      "glossZh": "插进正在进行的活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-in#s5",
+      "pos": "短语",
+      "glossZh": "让某人加入或分得一份",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 cut sb in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-in#s6",
+      "pos": "短语",
+      "glossZh": "先用刷子给边角上漆",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

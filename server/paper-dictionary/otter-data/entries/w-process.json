@@ -59,8 +59,8 @@
     "mock": 442
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 440
+    "gaokao": 2,
+    "mock": 244
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -187,59 +187,6 @@
       ]
     },
     {
-      "senseId": "w:process#s3",
-      "pos": "短语",
-      "glossZh": "在这个过程中",
-      "pronunciationId": "w:process#p-main",
-      "note": "in the process。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:process#e-5c5c908b4f231331",
-          "text": "history, and he becomes part of that crowd in the process by decoding (解读) their messages and adding his own interpretation.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 57
-          }
-        },
-        {
-          "exampleId": "w:process#e-2f78a7681724f502",
-          "text": "And in the process, I’ve experienced things that really surprise me at times.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:grammar-fill",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:process#s4",
       "pos": "v.",
       "glossZh": "（按程序）处理",
@@ -247,7 +194,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -300,7 +247,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -405,7 +352,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -493,6 +440,12 @@
       "reason": "解剖学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-process",
+    "w:in-the-process-of"
+  ]
 }

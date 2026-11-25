@@ -35,8 +35,8 @@
     "mock": 237
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 235
+    "gaokao": 18,
+    "mock": 202
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -142,112 +142,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:rather#s3",
-      "pos": "短语",
-      "glossZh": "而不是",
-      "pronunciationId": "w:rather#p-main",
-      "note": "rather than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 18,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rather#e-3896497d681da694",
-          "text": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 83,
-            "end": 89
-          }
-        },
-        {
-          "exampleId": "w:rather#e-7eff3f9870be2e1c",
-          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:rather#e-f4a9aafb32cb1bfc",
-          "text": "Eventually, my brother decided to leave rather than force the issue.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:rather#s4",
-      "pos": "短语",
-      "glossZh": "宁愿",
-      "pronunciationId": "w:rather#p-main",
-      "note": "would rather。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rather#e-b08966127f049a4f",
-          "text": "Neither participant can claim they would rather have the other person’s share.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 48,
-            "end": 54
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -256,6 +150,12 @@
       "reason": "古旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:rather-than",
+    "w:would-rather"
+  ]
 }

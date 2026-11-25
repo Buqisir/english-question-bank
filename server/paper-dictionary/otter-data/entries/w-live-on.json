@@ -1,0 +1,225 @@
+{
+  "entryId": "w:live-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lives on",
+    "living on"
+  ],
+  "pattern": {
+    "tokens": [
+      "live",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "on"
+      ],
+      [
+        "lives",
+        "on"
+      ],
+      [
+        "living",
+        "on"
+      ],
+      [
+        "lived",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live on",
+  "senses": [
+    {
+      "senseId": "w:live-on#s1",
+      "pos": "短语",
+      "glossZh": "继续存在；延续；流传",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-on#e-4de86a123764858f",
+          "text": "Though the postal service is often disparaged now, the trust in local postal service lives on.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          },
+          "parts": [
+            [
+              85,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-on#e-a4a5b0f0db48e4f4",
+          "text": "Now, I see my children taking their children to the library and I love that the excitement of going to the library lives on from generation to generation.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 123
+          },
+          "parts": [
+            [
+              115,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-on#e-a74c0db7ffe9342f",
+          "text": "She was buried beside her gorilla friends like Digit, and her legacy lives on in these mountains.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 77
+          },
+          "parts": [
+            [
+              69,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:live-on#s2",
+      "pos": "短语",
+      "glossZh": "靠……为食；主要吃……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-on#e-32e296080f8ec285",
+          "text": "Leopold is a picky eater – he lives on chicken nuggets and yogurt – and can be hesitant to try new things.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          },
+          "parts": [
+            [
+              30,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:live-on#s3",
+      "pos": "短语",
+      "glossZh": "靠（某笔收入或资助）维持生活",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

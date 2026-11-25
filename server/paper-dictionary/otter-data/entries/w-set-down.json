@@ -1,0 +1,187 @@
+{
+  "entryId": "w:set-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "setting down"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "down"
+      ],
+      [
+        "setting",
+        "down"
+      ],
+      [
+        "sets",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:set-down#s1",
+      "pos": "短语",
+      "glossZh": "把某物放下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:set#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-down#e-0aaecf54b4b9fce9",
+          "text": "You’re smart and hard-working – you'll surely thrive in this field.” Sarah set down her fork, disappointment clouding her eyes.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 83
+          },
+          "parts": [
+            [
+              75,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-down#s2",
+      "pos": "短语",
+      "glossZh": "写下；记下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-down#s3",
+      "pos": "短语",
+      "glossZh": "正式规定；确立",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-down#s4",
+      "pos": "短语",
+      "glossZh": "让乘客下车或下船",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-down#s5",
+      "pos": "短语",
+      "glossZh": "（飞机）着陆",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-down#s6",
+      "pos": "短语",
+      "glossZh": "贬低；使难堪",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-down#s7",
+      "pos": "短语",
+      "glossZh": "把某人认定为某类人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "set sb down as ...",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

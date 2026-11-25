@@ -61,81 +61,9 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 4
   },
   "senses": [
-    {
-      "senseId": "w:civil#s1",
-      "pos": "短语",
-      "glossZh": "内战",
-      "pronunciationId": "w:civil#p-main",
-      "note": "civil war",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:civil#e-ecc486ce0354cb1b",
-          "text": "His most remarkable and politically charged work was “Guernica”, produced in response to the Spanish Civil War when the town suffered a horrifying bombing.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 101,
-            "end": 106
-          }
-        },
-        {
-          "exampleId": "w:civil#e-8a73620a69ab9a5f",
-          "text": "A new study conducted by the Max Planck Institute and published in the Proceedings of the National Academy of Sciences reveals that human-caused air pollution may cause civil wars within ant colonies.",
-          "source": {
-            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
-            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
-            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 169,
-            "end": 174
-          }
-        },
-        {
-          "exampleId": "w:civil#e-9978a67e937bf1d6",
-          "text": "From escaping Somalia’s civil war to stepping into the Olympic ring, she’s turned her own story of struggle into a powerful mission to uplift others.",
-          "source": {
-            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
-            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
-            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 24,
-            "end": 29
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:civil#s2",
       "pos": "adj.",
@@ -216,6 +144,8 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false
 }

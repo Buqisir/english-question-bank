@@ -1,0 +1,157 @@
+{
+  "entryId": "w:word-of-mouth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "word",
+      "of",
+      "mouth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "word",
+        "of",
+        "mouth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "word of mouth",
+  "senses": [
+    {
+      "senseId": "w:word-of-mouth#s1",
+      "pos": "短语",
+      "glossZh": "口耳相传；通过口头转告或推荐传播",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mouth#s7",
+        "w:word#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:word-of-mouth#e-3cbff3cd576baeaf",
+          "text": "Human beings have always loved reviews: word of mouth has long been regarded as one of the most valuable marketing tools available to a company.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 53
+          },
+          "parts": [
+            [
+              40,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:word-of-mouth#e-63609c1c38c1582e",
+          "text": "The father said they had simply heard through word of mouth that a church was giving out food and decided to come.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 59
+          },
+          "parts": [
+            [
+              46,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:word-of-mouth#e-62da2842386e15df",
+          "text": "I took this word of mouth as evidence that it might actually work.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 25
+          },
+          "parts": [
+            [
+              12,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

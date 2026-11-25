@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 12
+    "mock": 10
   },
   "senses": [
     {
@@ -67,7 +67,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -112,60 +112,6 @@
       ]
     },
     {
-      "senseId": "w:contrary#s2",
-      "pos": "短语",
-      "glossZh": "恰恰相反",
-      "pronunciationId": "w:contrary#p-main",
-      "note": "on the contrary。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:contrary#e-60162b5a9056121c",
-          "text": "On the contrary, they are running toward true living.",
-          "source": {
-            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
-            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
-            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:36",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:contrary#e-b1457cafca527284",
-          "text": "On the contrary, a fixed mindset sees these as inborn qualities that are fixed at birth and unchangeable.",
-          "source": {
-            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
-            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
-            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:contrary#s3",
       "pos": "n.",
       "glossZh": "相反的事物或情况",
@@ -199,6 +145,11 @@
       "reason": "罕见或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-the-contrary"
+  ]
 }

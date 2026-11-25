@@ -42,8 +42,8 @@
     "mock": 178
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 174
+    "gaokao": 28,
+    "mock": 141
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -203,156 +203,10 @@
       ]
     },
     {
-      "senseId": "w:least#s4",
-      "pos": "短语",
-      "glossZh": "不少于；至少",
+      "senseId": "w:least#s7",
+      "pos": "adv.",
+      "glossZh": "丝毫；一点儿（in the least，常用于否定句）",
       "pronunciationId": "w:least#p-main",
-      "note": "at least / at the very least。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:least#e-9d354388823ffc40",
-          "text": "At least 80 inches of rain a year is normal-and in some areas there may be as much as 430 inches of rain annually.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:least#e-091c87067c2f9870",
-          "text": "Registration must be made at least two weeks in advance.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:least#e-11013b7b940efccb",
-          "text": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 205,
-            "end": 210
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:least#s5",
-      "pos": "短语",
-      "glossZh": "起码；至少在某方面",
-      "pronunciationId": "w:least#p-main",
-      "note": "at least，表示限定或退一步说。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:least#e-7ebea29b69f82ef6",
-          "text": "Model Paige Morgan says,” To give people a guilt-free option that they can wear without someone throwing paint on them – I think that’s going to be a massive thing, at least here in New York.” Designer Jennifer Anderson admits it took her a while to come around to the opinion that using nutria fur for her creations is morally acceptable.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 168,
-            "end": 173
-          }
-        },
-        {
-          "exampleId": "w:least#e-10101e5520de7e36",
-          "text": "I wasn’t sure what it meant exactly, but at least we had a topic.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:least#e-ae166c8645f53155",
-          "text": "But it is always purposeful-or at least it should be.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jun:31",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:least#s6",
-      "pos": "短语",
-      "glossZh": "尤其是；特别是",
-      "pronunciationId": "w:least#p-main",
-      "note": "not least。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -361,28 +215,69 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:least#e-832c433c537706a7",
-          "text": "On a pre-shoot visit, it’s also important to work out __45__, not least because many sites are on private land.",
+          "exampleId": "w:least#e-987a3bdee5839862",
+          "text": "My mother’s parents did not care in the least about insects.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:cloze",
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:cloze:2",
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:least#s8",
+      "pos": "adv.",
+      "glossZh": "最后但同样重要的是（last but not least）",
+      "pronunciationId": "w:least#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:least#e-85bc7b221c8024ca",
+          "text": "Last but not the least, the amount of production, climate, crop health, and demand data and insights can help financial institutions and insurance companies estimate risks better to come up with better suggestions for farmers.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-a:4",
               "sentence": 4
             }
           },
           "tier": "mock",
           "target": {
-            "start": 66,
-            "end": 71
+            "start": 17,
+            "end": 22
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-least",
+    "w:at-the-very-least",
+    "w:not-least",
+    "w:to-say-the-least"
+  ]
 }

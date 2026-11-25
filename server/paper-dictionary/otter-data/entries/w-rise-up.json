@@ -1,0 +1,102 @@
+{
+  "entryId": "w:rise-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "rose up"
+  ],
+  "pattern": {
+    "tokens": [
+      "rise",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rise",
+        "up"
+      ],
+      [
+        "rose",
+        "up"
+      ],
+      [
+        "risen",
+        "up"
+      ],
+      [
+        "rises",
+        "up"
+      ],
+      [
+        "rising",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rise up",
+  "senses": [
+    {
+      "senseId": "w:rise-up#s1",
+      "pos": "短语",
+      "glossZh": "升起；从低处升到表面或上方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rise-up#s2",
+      "pos": "短语",
+      "glossZh": "奋起反抗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rise-up#s3",
+      "pos": "短语",
+      "glossZh": "站立起来；（动物）抬起前身直立",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

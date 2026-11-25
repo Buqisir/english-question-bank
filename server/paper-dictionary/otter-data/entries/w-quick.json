@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 127
+    "mock": 6
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -217,12 +217,12 @@
       "pos": "adj.",
       "glossZh": "反应敏捷的",
       "pronunciationId": "w:quick#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 32
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -234,7 +234,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -283,6 +283,9 @@
       "reason": "历史技术用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:quick-fix"
+  ]
 }

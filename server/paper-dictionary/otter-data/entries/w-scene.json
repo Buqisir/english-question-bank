@@ -42,8 +42,8 @@
     "mock": 99
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 94
+    "gaokao": 1,
+    "mock": 12
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -328,79 +328,6 @@
       ]
     },
     {
-      "senseId": "w:scene#s6",
-      "pos": "短语",
-      "glossZh": "在幕后",
-      "pronunciationId": "w:scene#p-main",
-      "note": "常用 behind the scenes。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:scene#e-551feac43452bc4e",
-          "text": "behind the scene",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
-            "locator": {
-              "question": 58,
-              "questionId": "question:paper-gaokao-2020-national-iii:58",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:scene#e-e7e33ca95efbcc91",
-          "text": "Tharp worked behind the scenes, receiving little recognition for her groundbreaking work.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 24,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:scene#e-1b769cfc04ebc508",
-          "text": "At the Weissman Preservation Center, students learn what happens behind the scenes when conservators step in to keep materials usable and preserve them for the future.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
-            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 76,
-            "end": 82
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:scene#s7",
       "pos": "n.",
       "glossZh": "舞台布景",
@@ -412,9 +339,44 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:scene#s8",
+      "pos": "n.",
+      "glossZh": "情形",
+      "pronunciationId": "w:scene#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:scene#e-dda0c9df25574b45",
+          "text": "I always expected the worst in any scenes – focusing on the 2% death rate of a 98% successful surgery and visualizing my son’s mild cough as a rare condition.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

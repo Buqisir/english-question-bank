@@ -1,0 +1,171 @@
+{
+  "entryId": "w:come-true",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came true",
+    "comes true",
+    "coming true"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "true"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "true"
+      ],
+      [
+        "came",
+        "true"
+      ],
+      [
+        "comes",
+        "true"
+      ],
+      [
+        "coming",
+        "true"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come true",
+  "senses": [
+    {
+      "senseId": "w:come-true#s1",
+      "pos": "短语",
+      "glossZh": "（愿望、预言等）成真；成为现实",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s13",
+        "w:true#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-true#e-343393d362c62a6b",
+          "text": "I just didn’t know what to say, because I never thought seeing my mother would ever come true.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 93
+          },
+          "parts": [
+            [
+              84,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-true#e-718b8db35168d112",
+          "text": "Olly Powell’s seventh birthday wish to become invisible came true a week later with the birth of his sister, Lily.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 65
+          },
+          "parts": [
+            [
+              56,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-true#e-49e12249ce5579a5",
+          "text": "I knew it would be a difficult photo to get, but here I could see it happening right in front of me, a dream very close to coming true.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 134
+          },
+          "parts": [
+            [
+              123,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

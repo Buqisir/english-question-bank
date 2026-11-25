@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 683
+    "mock": 490
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 108,
-        "mock": 0
+        "mock": 146
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -222,7 +222,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -295,7 +295,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -361,7 +361,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -414,7 +414,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -466,7 +466,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -499,7 +499,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -532,7 +532,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -620,6 +620,13 @@
       "reason": "俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:read-between-the-lines",
+    "w:read-in",
+    "w:read-out",
+    "w:read-over",
+    "w:read-up"
+  ]
 }

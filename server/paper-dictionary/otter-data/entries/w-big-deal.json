@@ -1,0 +1,89 @@
+{
+  "entryId": "w:big-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "big",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "big",
+        "deal"
+      ],
+      [
+        "big",
+        "deals"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "big deal",
+  "senses": [
+    {
+      "senseId": "w:big-deal#s1",
+      "pos": "短语",
+      "glossZh": "大事；了不起的成就",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:big-deal#s2",
+      "pos": "短语",
+      "glossZh": "大人物；有影响力的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:big-deal#s3",
+      "pos": "短语",
+      "glossZh": "有什么了不起！那又怎样！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "单独作感叹语，多含反讽。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

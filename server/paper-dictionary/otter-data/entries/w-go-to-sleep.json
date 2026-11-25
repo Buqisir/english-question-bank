@@ -1,0 +1,171 @@
+{
+  "entryId": "w:go-to-sleep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "sleep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "sleep"
+      ],
+      [
+        "goes",
+        "to",
+        "sleep"
+      ],
+      [
+        "going",
+        "to",
+        "sleep"
+      ],
+      [
+        "gone",
+        "to",
+        "sleep"
+      ],
+      [
+        "went",
+        "to",
+        "sleep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to sleep",
+  "senses": [
+    {
+      "senseId": "w:go-to-sleep#s1",
+      "pos": "动词短语",
+      "glossZh": "入睡；睡着",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-to-sleep#e-1d15d6fdc9018f8f",
+          "text": "Go to sleep.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-sleep#e-34d6941d3482e39a",
+          "text": "He will go to sleep.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-to-sleep#s2",
+      "pos": "动词短语",
+      "glossZh": "（手脚等）发麻；暂时失去知觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-to-sleep#s3",
+      "pos": "动词短语",
+      "glossZh": "（委婉说法）去世；长眠",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

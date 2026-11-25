@@ -1,0 +1,187 @@
+{
+  "entryId": "w:feel-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "feeling like",
+    "feels like"
+  ],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "like"
+      ],
+      [
+        "feeling",
+        "like"
+      ],
+      [
+        "feels",
+        "like"
+      ],
+      [
+        "felt",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "felt like",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel like",
+  "senses": [
+    {
+      "senseId": "w:feel-like#s1",
+      "pos": "短语",
+      "glossZh": "感觉像；觉得好像",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-like#e-7b4b1b4905335370",
+          "text": "With so many online posts featuring the same places, it’s easy to feel like you’re missing out.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 75
+          },
+          "parts": [
+            [
+              66,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like#e-cd7e0d1c01136b12",
+          "text": "Although my kindergarten experience feels like a century ago, the lessons I learned will stick in my mind forever.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          },
+          "parts": [
+            [
+              36,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like#e-740574aafe948dc9",
+          "text": "Yet, research has found that giving your time to community causes actually makes you feel like you have more of it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 94
+          },
+          "parts": [
+            [
+              85,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              94
+            ]
+          ]
+        }
+      ],
+      "note": "可接名词或从句，也可用来表达主观看法。",
+      "counts": {
+        "gaokao": 9,
+        "mock": 162
+      }
+    },
+    {
+      "senseId": "w:feel-like#s2",
+      "pos": "短语",
+      "glossZh": "想要；想做",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "后接名词或动名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 162
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

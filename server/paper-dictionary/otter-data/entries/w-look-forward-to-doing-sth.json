@@ -1,0 +1,176 @@
+{
+  "entryId": "w:look-forward-to-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "look",
+      "forward",
+      "to",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "forward",
+        "to",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look forward to",
+      "tags": []
+    },
+    {
+      "form": "looked forward to",
+      "tags": []
+    },
+    {
+      "form": "looking forward to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look forward to doing sth",
+  "senses": [
+    {
+      "senseId": "w:look-forward-to-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "期待做某事；盼望做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:forward#s3",
+        "w:look#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-forward-to-doing-sth#e-48c1a9ca7a4c0067",
+          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-forward-to-doing-sth#e-425bf9d3ef7b222c",
+          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 134
+          },
+          "parts": [
+            [
+              117,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              134
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-forward-to-doing-sth#e-8adc8e8e3d5f4972",
+          "text": "I was really looking forward to saying, ‘I am done.’ But you also know you’re going to miss this big time.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 31
+          },
+          "parts": [
+            [
+              13,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

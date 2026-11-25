@@ -1,0 +1,324 @@
+{
+  "entryId": "w:on-ones-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on one’s way"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      {
+        "slot": "one's"
+      },
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        {
+          "slot": "one's"
+        },
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on way",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on one's way",
+  "senses": [
+    {
+      "senseId": "w:on-ones-way#s1",
+      "pos": "短语",
+      "glossZh": "在路上；在去……的途中",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:on#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-way#e-9556fd4991dd960a",
+          "text": "He told me a helicopter was on its way, but it would be 30 minutes before it arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 38
+          },
+          "parts": [
+            [
+              28,
+              30
+            ],
+            [
+              35,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              30
+            ],
+            [
+              35,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-way#e-2d10907b3b5f1466",
+          "text": "Standing outside were Daniel and his wife Rachel, who noticed the stranded（被困的）vehicle on their way home and stopped to see if they could help.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 99
+          },
+          "parts": [
+            [
+              87,
+              89
+            ],
+            [
+              96,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              89
+            ],
+            [
+              96,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-way#e-9f5d0ebb81dd0631",
+          "text": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 76
+          },
+          "parts": [
+            [
+              66,
+              68
+            ],
+            [
+              73,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              68
+            ],
+            [
+              73,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 12
+      }
+    },
+    {
+      "senseId": "w:on-ones-way#s2",
+      "pos": "短语",
+      "glossZh": "正在逐步走向某种状态或结果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-way#e-2d45cc5f9eb79eec",
+          "text": "But if the majority of our food could be made fresher and less processed, we’d be on our way to a healthier world.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 92
+          },
+          "parts": [
+            [
+              82,
+              84
+            ],
+            [
+              89,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              84
+            ],
+            [
+              89,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-way#e-64f6e5249b504465",
+          "text": "“We are on our way to the ‘silent spring’ just like Rachel Carson predicted in 1962.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              10
+            ],
+            [
+              15,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              10
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-way#e-fa0df3f56f4bb8d2",
+          "text": "Lost in sadness, we need others on our way to healing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              34
+            ],
+            [
+              39,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              34
+            ],
+            [
+              39,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "常用 on one's way to sth/doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

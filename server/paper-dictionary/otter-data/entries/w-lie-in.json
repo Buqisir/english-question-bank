@@ -1,0 +1,231 @@
+{
+  "entryId": "w:lie-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lay in",
+    "lies in",
+    "lying in"
+  ],
+  "pattern": {
+    "tokens": [
+      "lie",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lie",
+        "in"
+      ],
+      [
+        "lay",
+        "in"
+      ],
+      [
+        "lies",
+        "in"
+      ],
+      [
+        "lying",
+        "in"
+      ],
+      [
+        "lain",
+        "in"
+      ],
+      [
+        "laid",
+        "in"
+      ],
+      [
+        "laying",
+        "in"
+      ],
+      [
+        "lays",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lie in",
+  "senses": [
+    {
+      "senseId": "w:lie-in#s1",
+      "pos": "短语",
+      "glossZh": "在于（说明原因、关键或本质）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-in#e-0e8be4ade75c550e",
+          "text": "\"To us, the most likely explanation appears to be that the basis lies in their living with humans, which gives them a lot of exposure to human facial expressions,\" and this exposure has provided them with many chances to learn to distinguish between them, Muller said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 72
+          },
+          "parts": [
+            [
+              65,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-in#e-57d992a5ec1d1f80",
+          "text": "While some criticize them as overly decorative, their value lies in serving the reader’s purpose.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          },
+          "parts": [
+            [
+              60,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-in#e-05136bfe07fbf268",
+          "text": "The core of this technology lies in the combination of AI and LiDAR (Light Detection and Ranging) remote sensing.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 53
+      }
+    },
+    {
+      "senseId": "w:lie-in#s2",
+      "pos": "短语",
+      "glossZh": "睡懒觉；比平常晚起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-in#e-cb345b3fd3b98824",
+          "text": "By lying in until lunchtime.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "英式英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,8 +62,8 @@
     "mock": 84
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 80
+    "gaokao": 1,
+    "mock": 24
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -138,60 +138,6 @@
       ]
     },
     {
-      "senseId": "w:sort#s2",
-      "pos": "短语",
-      "glossZh": "有点",
-      "pronunciationId": "w:sort#p-main",
-      "note": "sort of，口语。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sort#e-7665353692c80abd",
-          "text": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 73,
-            "end": 77
-          }
-        },
-        {
-          "exampleId": "w:sort#e-b6392835d1426b98",
-          "text": "Cooking is sort of a burden and fun.",
-          "source": {
-            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
-            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
-            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:36",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sort#s3",
       "pos": "v.",
       "glossZh": "分类",
@@ -199,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -267,26 +213,12 @@
       "pos": "v.",
       "glossZh": "排序",
       "pronunciationId": "w:sort#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:sort#s5",
-      "pos": "短语",
-      "glossZh": "解决",
-      "pronunciationId": "w:sort#p-main",
-      "note": "sort out。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -296,6 +228,13 @@
       "reason": "历史义、专门义或地区用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sort-of",
+    "w:sort-out",
+    "w:sort-through"
+  ]
 }

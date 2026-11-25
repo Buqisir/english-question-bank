@@ -1,0 +1,352 @@
+{
+  "entryId": "w:get-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets to",
+    "getting to",
+    "got to"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "to"
+      ],
+      [
+        "gets",
+        "to"
+      ],
+      [
+        "getting",
+        "to"
+      ],
+      [
+        "got",
+        "to"
+      ],
+      [
+        "gotten",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get to",
+  "senses": [
+    {
+      "senseId": "w:get-to#s1",
+      "pos": "短语",
+      "glossZh": "到达；抵达",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-to#e-f85bbad7abf29ae1",
+          "text": "Do you ever get to the train station and realize you forgot to bring something to read?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          },
+          "parts": [
+            [
+              12,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to#e-a60e542c625261c0",
+          "text": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to#e-424773addc5b6769",
+          "text": "That love for philosophy lasted until I got to college.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 46
+          },
+          "parts": [
+            [
+              40,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 37
+      }
+    },
+    {
+      "senseId": "w:get-to#s2",
+      "pos": "短语",
+      "glossZh": "有机会做；获准做",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-to#e-3da1b4e18f14bd78",
+          "text": "Younger plants are often cheaper than fully grown ones, and you get to care for them as they mature – which is part of the joy of owning plants.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 70
+          },
+          "parts": [
+            [
+              64,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to#e-44c876cd7368b724",
+          "text": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 104
+          },
+          "parts": [
+            [
+              98,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to#e-d903373973e327bb",
+          "text": "With generative AI, typically only big companies get to make decisions about how the models work.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          },
+          "parts": [
+            [
+              49,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              55
+            ]
+          ]
+        }
+      ],
+      "note": "get to do sth。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 19
+      }
+    },
+    {
+      "senseId": "w:get-to#s4",
+      "pos": "短语",
+      "glossZh": "开始着手处理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-to#e-b893e6ae4153c774",
+          "text": "To avoid these feelings, he often procrastinated (拖延) on projects, telling himself he’d get to them when he was in the “right” headspace.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 94
+          },
+          "parts": [
+            [
+              88,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              94
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-to#s3",
+      "pos": "短语",
+      "glossZh": "使心烦；使难受",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-to#s5",
+      "pos": "短语",
+      "glossZh": "设法威胁或收买（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

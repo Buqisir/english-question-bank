@@ -1,0 +1,154 @@
+{
+  "entryId": "w:not-the-case",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "the",
+      "case"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "the",
+        "case"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not the case",
+  "senses": [
+    {
+      "senseId": "w:not-the-case#s1",
+      "pos": "短语",
+      "glossZh": "并非如此；情况并不是这样",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-the-case#e-6c1c436649664a91",
+          "text": "The truth is that we are lucky enough to have clean water whenever we want, but this is not the case for many people around the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 100
+          },
+          "parts": [
+            [
+              88,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-the-case#e-e6f05c8909cf56a8",
+          "text": "It was not the case that participants always switched opinion to support the majority view.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-the-case#e-ce9f9a294e097d41",
+          "text": "This is not the case.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 20
+          },
+          "parts": [
+            [
+              8,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

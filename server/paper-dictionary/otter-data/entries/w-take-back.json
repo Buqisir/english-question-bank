@@ -1,0 +1,519 @@
+{
+  "entryId": "w:take-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking back"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "back"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "taking",
+        "back"
+      ],
+      [
+        "taken",
+        "back"
+      ],
+      [
+        "takes",
+        "back"
+      ],
+      [
+        "took",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take back",
+      "tags": []
+    },
+    {
+      "form": "taken back",
+      "tags": []
+    },
+    {
+      "form": "takes back",
+      "tags": []
+    },
+    {
+      "form": "took back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:take-back#s1",
+      "pos": "短语",
+      "glossZh": "把……带回原处；归还",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s51"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-back#e-ee88b85fd917cfcb",
+          "text": "You could not take back a book to the library on the same day you’d taken it out; it made no difference to her that you’d read every word in it and needed another to start.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-back#e-0e9ec59dac6e94c8",
+          "text": "RRS Discovery, a polar research ship, will soon be here and take some researchers back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 86
+          },
+          "parts": [
+            [
+              60,
+              64
+            ],
+            [
+              82,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              64
+            ],
+            [
+              82,
+              86
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-back#e-77dfbd2476e53983",
+          "text": "Determined to adopt Gobi and take her back to his home in Scotland, Dion launched a crowdfunding campaign that proved wildly successful.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              33
+            ],
+            [
+              38,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              33
+            ],
+            [
+              38,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:take-back#s2",
+      "pos": "短语",
+      "glossZh": "拿回；夺回",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-back#e-2203f888f3bd4f76",
+          "text": "In their new book Movement: How to Take Back Our Streets and Transform Our Lives, they call for a rethink of our streets and the role they play in our lives.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          },
+          "parts": [
+            [
+              35,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-back#e-b6857f33fb89b24c",
+          "text": "I’d taken back my life with God as my parachute, and that might be the best change MS has offered me so far.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-back#e-158baf2e78d4dca4",
+          "text": "Here’s how the experts say you can take it back.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              39
+            ],
+            [
+              43,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              39
+            ],
+            [
+              43,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:take-back#s3",
+      "pos": "短语",
+      "glossZh": "收回先前说过的话或主张",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-back#e-8428ffa0f83824bc",
+          "text": "Taking back an earlier claim.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-back#s4",
+      "pos": "短语",
+      "glossZh": "重新接纳某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-back#e-8969fc94782a67c3",
+          "text": "The author’s family refused to take Jane back.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:25#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 45
+          },
+          "parts": [
+            [
+              31,
+              35
+            ],
+            [
+              41,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              35
+            ],
+            [
+              41,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-back#s5",
+      "pos": "短语",
+      "glossZh": "使某人回想起往事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-back#e-9a05cb1c37a0d278",
+          "text": "The familiar smell instantly took them back to their childhood, yet a gentle sadness hung in the air.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 43
+          },
+          "parts": [
+            [
+              29,
+              33
+            ],
+            [
+              39,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              33
+            ],
+            [
+              39,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-back#e-b775d8d39e0273cd",
+          "text": "Sometimes the smell of metal takes me back to my father’s workshop.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              34
+            ],
+            [
+              38,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ],
+            [
+              38,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

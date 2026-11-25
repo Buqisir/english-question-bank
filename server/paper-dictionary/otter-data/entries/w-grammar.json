@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 11,
-    "mock": 20
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -130,6 +130,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:grammar#s3",
+      "pos": "phr.",
+      "glossZh": "文法中学（grammar school，英国选拔性中学）",
+      "pronunciationId": "w:grammar#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grammar#e-d76a5d74f3a117a0",
+          "text": "The grammar school boy from Stratford-Upon-Avon has made headlines again after a groundbreaking study showed that Shakespeare does benefit children’s literacy and emotional development, but only if they can act him out.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -138,6 +171,6 @@
       "reason": "主要用于 grammar school"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

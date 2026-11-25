@@ -1,0 +1,100 @@
+{
+  "entryId": "w:feel-at-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "at",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "at",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "felt at home",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel at home",
+  "senses": [
+    {
+      "senseId": "w:feel-at-home#s1",
+      "pos": "短语",
+      "glossZh": "感觉像在自己家一样自在",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s19",
+        "w:home#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:feel-at-home#e-60b4f095341fe30e",
+          "text": "I felt at home immediately and signed the rental contract on the spot.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

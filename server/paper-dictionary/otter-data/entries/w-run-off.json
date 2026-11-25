@@ -1,0 +1,196 @@
+{
+  "entryId": "w:run-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "runs off"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "off"
+      ],
+      [
+        "runs",
+        "off"
+      ],
+      [
+        "ran",
+        "off"
+      ],
+      [
+        "running",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run off",
+  "senses": [
+    {
+      "senseId": "w:run-off#s1",
+      "pos": "短语",
+      "glossZh": "（雨水等）从地面或其他表面流走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-off#e-3d51bac415b007e4",
+          "text": "Rain runs off much faster than melting snow, making dry conditions even worse.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-off#s2",
+      "pos": "短语",
+      "glossZh": "跑开；匆忙离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s3",
+      "pos": "短语",
+      "glossZh": "迅速印出；复印",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s4",
+      "pos": "短语",
+      "glossZh": "迅速写成（文章等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s5",
+      "pos": "短语",
+      "glossZh": "排放；放出（液体）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s6",
+      "pos": "短语",
+      "glossZh": "赶走（人或动物）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s7",
+      "pos": "短语",
+      "glossZh": "靠……供能运转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用法为 run off sth，宾语为电源、燃料等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-off#s8",
+      "pos": "短语",
+      "glossZh": "快速逐项说出；一口气背出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

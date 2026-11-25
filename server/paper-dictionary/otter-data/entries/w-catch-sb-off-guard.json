@@ -1,0 +1,113 @@
+{
+  "entryId": "w:catch-sb-off-guard",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      {
+        "slot": "sb"
+      },
+      "off",
+      "guard"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        {
+          "slot": "sb"
+        },
+        "off",
+        "guard"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "caught off guard",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch sb off guard",
+  "senses": [
+    {
+      "senseId": "w:catch-sb-off-guard#s1",
+      "pos": "短语",
+      "glossZh": "使某人措手不及；让某人猝不及防",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:guard#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-sb-off-guard#e-87d105b2bee4b8a7",
+          "text": "“Where are you going that’s so important?” The question caught me off guard.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 75
+          },
+          "parts": [
+            [
+              56,
+              62
+            ],
+            [
+              66,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              62
+            ],
+            [
+              66,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

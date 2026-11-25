@@ -35,8 +35,8 @@
     "mock": 1565
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 1565
+    "gaokao": 35,
+    "mock": 1388
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 216,
-        "mock": 0
+        "mock": 161
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -182,503 +182,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:all#s3",
-      "pos": "短语",
-      "glossZh": "一点也（不）；根本；到底",
-      "pronunciationId": "w:all#p-main",
-      "note": "at all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-4231b36769bd7642",
-          "text": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until,suddenly, it does not work at all anymore.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 149,
-            "end": 152
-          }
-        },
-        {
-          "exampleId": "w:all#e-61f6dcf3978b9ae6",
-          "text": "But when we looked at the tomatoes, we were __46__ because they were so misshapen: not at all like the nice, round, __47__ things you get in a supermarket.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 93
-          }
-        },
-        {
-          "exampleId": "w:all#e-b9ff0f6034286629",
-          "text": "While many visitors have never been to a farm at all, __52__ a sunflower farm, the unique setting allows them to __53__ the city for a while, breathe in the fresh air, gain a newfound __54__ for agriculture, and maybe even __55__ with their farming roots and what they may have taken for granted for too long.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s4",
-      "pos": "短语",
-      "glossZh": "一下子；同时",
-      "pronunciationId": "w:all#p-main",
-      "note": "all at once。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-69855ae90d60a24c",
-          "text": "For this work, titled “Truckload of Plastic,” Von Wong and a group of volunteers collected more than 10,000 pieces of plastic, which were then tied together to look like they’d been dumped（倾倒）from a truck all at once.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 205,
-            "end": 208
-          }
-        },
-        {
-          "exampleId": "w:all#e-6ef8454cddc07197",
-          "text": "Finish it all at once.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
-            "locator": {
-              "question": 9,
-              "questionId": "question:listening:9",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s5",
-      "pos": "短语",
-      "glossZh": "毕竟",
-      "pronunciationId": "w:all#p-main",
-      "note": "after all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-3c926e6487c21daa",
-          "text": "After all, coworking spaces also typically use an open office layout (布局).",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:all#e-fbc54f06b026b732",
-          "text": "After all, I had left him little choice.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:all#e-77529642bcec7809",
-          "text": "After all, I did care about what others would think of me.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s6",
-      "pos": "短语",
-      "glossZh": "首先",
-      "pronunciationId": "w:all#p-main",
-      "note": "first of all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-0ba64fd38d4eead2",
-          "text": "First of all, decide what you want from that person.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "seven-choices-3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:all#e-a4e64f28f126e556",
-          "text": "First of all, learn the technique of nonstop writing.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2022-ii:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:all#e-f8710acb670a5de2",
-          "text": "First of all, become aware of when and why you are regressing.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s7",
-      "pos": "短语",
-      "glossZh": "最重要的是；尤其",
-      "pronunciationId": "w:all#p-main",
-      "note": "above all、most of all、best of all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-621a92351534f246",
-          "text": "Above all, I hoped he wouldn’t assign me to work with the fiercely competitive, extremely serious fellow who always wore dark clothes and apparently had a personality to match.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:all#e-9ff65f62ed3e7cbb",
-          "text": "class and focuses on a range of topics that emphasize active learning, exploration and, most of all, fun!",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 13,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 99
-          }
-        },
-        {
-          "exampleId": "w:all#e-62da89f551aeb3fe",
-          "text": "Best of all, my passion for my hobbies seems to inspire them to be passionate about finding their own.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s8",
-      "pos": "短语",
-      "glossZh": "一直；始终",
-      "pronunciationId": "w:all#p-main",
-      "note": "all the time、at all times 或 all along。all day 或 all week 中 all 表示整个时段。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-882df3848a03f712",
-          "text": "Mike Curtin sees my arugula story all the time – but for him, it’s more like 12 boxes of donated strawberries nearing their last days.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "reading-b-4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:all#e-4c844cd16bde68a7",
-          "text": "We’re all changing and learning all the time and mistakes are a positive way to develop and grow.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:all#e-5069e38dd351dda9",
-          "text": "She said she had felt __57__ all along that she would win.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s9",
-      "pos": "短语",
-      "glossZh": "突然",
-      "pronunciationId": "w:all#p-main",
-      "note": "all of a sudden。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-1f5ac94e257535b7",
-          "text": "And then all of a sudden it clicks.”",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s10",
-      "pos": "短语",
-      "glossZh": "尽管；虽然",
-      "pronunciationId": "w:all#p-main",
-      "note": "for all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:all#e-4fe87ec163475af4",
-          "text": "For all of Bellevue’s success, adaptive signals are not a cure-all for jammed roadways.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:all#s11",
-      "pos": "短语",
-      "glossZh": "当然；务必",
-      "pronunciationId": "w:all#p-main",
-      "note": "by all means。真题单独列为选项。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -687,6 +190,59 @@
       "reason": "体育计分或医学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:above-all",
+    "w:after-all",
+    "w:all-along",
+    "w:all-around",
+    "w:all-at-once",
+    "w:all-but",
+    "w:all-day",
+    "w:all-for",
+    "w:all-good",
+    "w:all-good-things-come-to-an-end",
+    "w:all-in",
+    "w:all-in-all",
+    "w:all-kinds-of",
+    "w:all-night",
+    "w:all-of-a-sudden",
+    "w:all-out",
+    "w:all-over",
+    "w:all-over-again",
+    "w:all-right",
+    "w:all-set",
+    "w:all-the-more",
+    "w:all-the-same",
+    "w:all-the-time",
+    "w:all-the-way",
+    "w:all-told",
+    "w:all-too",
+    "w:all-walks-of-life",
+    "w:all-week",
+    "w:and-all",
+    "w:and-all-that-jazz",
+    "w:any-and-all",
+    "w:at-all",
+    "w:at-all-costs",
+    "w:at-all-times",
+    "w:be-all-about",
+    "w:be-all-ears",
+    "w:best-of-all",
+    "w:by-all-means",
+    "w:first-of-all",
+    "w:for-all",
+    "w:go-all-out",
+    "w:have-it-all",
+    "w:its-all-good",
+    "w:make-all-the-difference",
+    "w:most-of-all",
+    "w:not-at-all",
+    "w:on-all-fours",
+    "w:once-and-for-all",
+    "w:thats-all"
+  ]
 }

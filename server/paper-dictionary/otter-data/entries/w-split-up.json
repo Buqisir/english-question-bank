@@ -1,0 +1,199 @@
+{
+  "entryId": "w:split-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "split",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "split",
+        "up"
+      ],
+      [
+        "splits",
+        "up"
+      ],
+      [
+        "splitting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "split up",
+      "tags": []
+    },
+    {
+      "form": "splitting up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "split (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:split-up#s1",
+      "pos": "短语",
+      "glossZh": "分开；分头行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:split#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:split-up#e-a3eeb848d3ca21e6",
+          "text": "We split up to search: I checked the lower shelves while he scanned the higher ones.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:split-up#e-ab5a26d896671513",
+          "text": "Many buildings have an accessible entrance that is further away, so we split up to avoid dragging everyone around the back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 79
+          },
+          "parts": [
+            [
+              71,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:split-up#e-e0173854d8f3e7c6",
+          "text": "Splitting up（分开） is something we encounter daily.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:split-up#s2",
+      "pos": "短语",
+      "glossZh": "（伴侣）分手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:up#s18"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:split-up#s3",
+      "pos": "短语",
+      "glossZh": "把……拆开；使……分开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

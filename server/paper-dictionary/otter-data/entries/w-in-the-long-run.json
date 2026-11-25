@@ -1,0 +1,161 @@
+{
+  "entryId": "w:in-the-long-run",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "long",
+      "run"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "long",
+        "run"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the long run",
+  "senses": [
+    {
+      "senseId": "w:in-the-long-run#s1",
+      "pos": "短语",
+      "glossZh": "从长远来看",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s58",
+        "w:long#s7",
+        "w:run#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-long-run#e-81130c0fd26e5474",
+          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 80
+          },
+          "parts": [
+            [
+              65,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-long-run#e-4bed95885a8b95c5",
+          "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 175
+          },
+          "parts": [
+            [
+              160,
+              175
+            ]
+          ],
+          "highlightRanges": [
+            [
+              160,
+              175
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-long-run#e-4ada356a43465316",
+          "text": "Or maybe what we feel embarrassed about isn’t a big deal in the long run.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 72
+          },
+          "parts": [
+            [
+              57,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

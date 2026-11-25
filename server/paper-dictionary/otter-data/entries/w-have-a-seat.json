@@ -1,0 +1,108 @@
+{
+  "entryId": "w:have-a-seat",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "seat"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "seat"
+      ],
+      [
+        "had",
+        "a",
+        "seat"
+      ],
+      [
+        "has",
+        "a",
+        "seat"
+      ],
+      [
+        "having",
+        "a",
+        "seat"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a seat",
+  "senses": [
+    {
+      "senseId": "w:have-a-seat#s1",
+      "pos": "动词短语",
+      "glossZh": "坐下；请坐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-a-seat#e-54d3f59b69b8ea82",
+          "text": "Now they seem to be saying, “Have a seat, stay a while, and come back soon.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "note": "用作祈使句时是请人入座的礼貌说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,162 @@
+{
+  "entryId": "w:by-accident",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "accident"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "accident"
+      ],
+      [
+        "more",
+        "by",
+        "accident"
+      ],
+      [
+        "most",
+        "by",
+        "accident"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by accident",
+  "senses": [
+    {
+      "senseId": "w:by-accident#s1",
+      "pos": "短语",
+      "glossZh": "无意中；偶然地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:by-accident#e-54b433c38bc389ee",
+          "text": "Just then, he remembered that once, by accident, how a car tire had crushed (挤压) a can completely flat.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-accident#e-21eb5271f2a19dbf",
+          "text": "She had indeed tipped $130 by accident – a careless click she hadn’t even noticed.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-accident#e-4328dc097e44cea8",
+          "text": "One wrong click may send your private data to the wrong person by accident.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

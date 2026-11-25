@@ -1,0 +1,92 @@
+{
+  "entryId": "w:bit-by-bit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bit",
+      "by",
+      "bit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bit",
+        "by",
+        "bit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bit by bit",
+  "senses": [
+    {
+      "senseId": "w:bit-by-bit#s1",
+      "pos": "短语",
+      "glossZh": "一点一点地；逐步地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bit-by-bit#e-ebb346fa358a58db",
+          "text": "The past few days had been rough, and bit by bit, turned it from a recorder of life into a mere working tool.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 48
+          },
+          "parts": [
+            [
+              38,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

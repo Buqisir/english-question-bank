@@ -1,0 +1,173 @@
+{
+  "entryId": "w:draw-attention",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "attention"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "attention"
+      ],
+      [
+        "drawing",
+        "attention"
+      ],
+      [
+        "drawn",
+        "attention"
+      ],
+      [
+        "draws",
+        "attention"
+      ],
+      [
+        "drew",
+        "attention"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draw attention",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw attention (to sb/sth)",
+  "senses": [
+    {
+      "senseId": "w:draw-attention#s1",
+      "pos": "短语",
+      "glossZh": "引起注意；让人关注某人或某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:draw-attention#e-8e4037f79642683f",
+          "text": "Maybe I didn’t want to draw attention to myself by breaking conventions in social settings.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 37
+          },
+          "parts": [
+            [
+              23,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-attention#e-1cc29aa28a9c004a",
+          "text": "“I want my works to draw attention, but more importantly, to make people think about the stories and realities they reflect.”",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 34
+          },
+          "parts": [
+            [
+              20,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-attention#e-71a995caddbc420f",
+          "text": "If I could break a record, it might draw attention to the value of music.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 50
+          },
+          "parts": [
+            [
+              36,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

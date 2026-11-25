@@ -42,8 +42,8 @@
     "mock": 231
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 230
+    "gaokao": 4,
+    "mock": 34
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 53,
-        "mock": 0
+        "mock": 183
       },
       "folded": false,
       "examples": [
@@ -118,40 +118,6 @@
       ]
     },
     {
-      "senseId": "w:road#s2",
-      "pos": "短语",
-      "glossZh": "今后",
-      "pronunciationId": "w:road#p-main",
-      "note": "down the road。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:road#e-a1f27bae1a2856ed",
-          "text": "Volunteers will wash, cut, and freeze or dry them for use in meals down the road.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "reading-b-4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 76,
-            "end": 80
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:road#s3",
       "pos": "n.",
       "glossZh": "实现目标的途径",
@@ -159,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -199,6 +165,14 @@
       "reason": "航海专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:down-the-road",
+    "w:end-of-the-road",
+    "w:hit-the-road",
+    "w:run-out-of-road"
+  ]
 }

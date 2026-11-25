@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 420
+    "mock": 220
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 71,
-        "mock": 0
+        "mock": 135
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -287,6 +287,11 @@
       "reason": "历史专名 The Few"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:a-few",
+    "w:man-of-few-words",
+    "w:to-name-a-few"
+  ]
 }

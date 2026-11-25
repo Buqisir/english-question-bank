@@ -1,0 +1,106 @@
+{
+  "entryId": "w:see-the-light",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "see",
+      "the",
+      "light"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "the",
+        "light"
+      ],
+      [
+        "saw",
+        "the",
+        "light"
+      ],
+      [
+        "seeing",
+        "the",
+        "light"
+      ],
+      [
+        "seen",
+        "the",
+        "light"
+      ],
+      [
+        "sees",
+        "the",
+        "light"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see the light",
+  "senses": [
+    {
+      "senseId": "w:see-the-light#s1",
+      "pos": "短语",
+      "glossZh": "终于明白；恍然大悟",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-the-light#s2",
+      "pos": "短语",
+      "glossZh": "皈依宗教；在信仰上觉醒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-the-light#s3",
+      "pos": "短语",
+      "glossZh": "（作品等）面世；公开发表",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

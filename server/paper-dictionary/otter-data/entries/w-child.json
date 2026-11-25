@@ -38,7 +38,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 651
+    "mock": 454
   },
   "senses": [
     {
@@ -49,7 +49,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 135,
-        "mock": 0
+        "mock": 147
       },
       "folded": false,
       "examples": [
@@ -121,7 +121,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 62,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -185,59 +185,6 @@
       ]
     },
     {
-      "senseId": "w:child#s3",
-      "pos": "短语",
-      "glossZh": "内在小孩（仍保有童年感受的那部分自我）",
-      "pronunciationId": "w:child#p-main",
-      "note": "inner child",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:child#e-ff3365d37f59a057",
-          "text": "“Everyone has a child inside,” says Cai Gao, the celebrated 79-year-old picture book artist who has spent decades nurturing her inner child and her work.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 134,
-            "end": 139
-          }
-        },
-        {
-          "exampleId": "w:child#e-fa8a5a2b9e940afd",
-          "text": "They bring joy to the inner child within me,” the lady in her 20s told Xinhua.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:child#s4",
       "pos": "n.",
       "glossZh": "（某时代、环境等的）产物",
@@ -257,6 +204,12 @@
       "reason": "占卜、计算机术语或旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:golden-child",
+    "w:inner-child"
+  ]
 }

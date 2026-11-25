@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 439
+    "mock": 245
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 101
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -373,7 +373,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -435,6 +435,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:visit#s7",
+      "pos": "v.",
+      "glossZh": "闲聊；交谈",
+      "pronunciationId": "w:visit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:visit#e-0fa8b4d7be7d87eb",
+          "text": "Studio doors will open at 6:00 pm for you to arrive, visit and buy food and wine from Red’s.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 58
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -443,6 +476,9 @@
       "reason": "较少见的宗教或文学用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:pay-a-visit"
+  ]
 }

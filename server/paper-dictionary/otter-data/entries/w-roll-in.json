@@ -1,0 +1,256 @@
+{
+  "entryId": "w:roll-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "in"
+      ],
+      [
+        "rolled",
+        "in"
+      ],
+      [
+        "rolling",
+        "in"
+      ],
+      [
+        "rolls",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rolled in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll in",
+  "senses": [
+    {
+      "senseId": "w:roll-in#s1",
+      "pos": "短语",
+      "glossZh": "（季节等）到来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:roll#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:roll-in#e-fbfdaf156b3d80eb",
+          "text": "As the summer months roll in, our Georgian country estate makes the perfect setting for an outdoor fitness session.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          },
+          "parts": [
+            [
+              21,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-in#s2",
+      "pos": "短语",
+      "glossZh": "（雾、云等）涌来；漫过来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:roll-in#e-681226ba6616c8a5",
+          "text": "While the villagers remained helpless, Maya chose to spend her afternoons carefully observing the thick mist that rolled in from the sea.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 123
+          },
+          "parts": [
+            [
+              114,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:roll-in#s3",
+      "pos": "短语",
+      "glossZh": "（车辆）驶入；进站",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:roll-in#e-29b9a400977b28c0",
+          "text": "At a small shop outside Abilene, seventeen-year-old Carter Hill rolled in his grandfather’s 1974 Chevy that hadn’t run since spring.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          },
+          "parts": [
+            [
+              64,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:roll-in#e-b3027b6590bdd88d",
+          "text": "A car rolled in and stopped.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 15
+          },
+          "parts": [
+            [
+              6,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:roll-in#s4",
+      "pos": "短语",
+      "glossZh": "（钱、订单等）源源不断地到来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-in#s5",
+      "pos": "短语",
+      "glossZh": "（人）随随便便地到场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

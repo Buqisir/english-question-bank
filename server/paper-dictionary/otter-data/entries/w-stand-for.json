@@ -1,0 +1,263 @@
+{
+  "entryId": "w:stand-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stands for"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "for"
+      ],
+      [
+        "stands",
+        "for"
+      ],
+      [
+        "standing",
+        "for"
+      ],
+      [
+        "stood",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stand for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand for sth",
+  "senses": [
+    {
+      "senseId": "w:stand-for#s1",
+      "pos": "短语",
+      "glossZh": "代表；表示；象征",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stand#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stand-for#e-f62be73895f753af",
+          "text": "What do the numbers on the signs stand for?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-for#e-2c430106780d5745",
+          "text": "This simple yet powerful framework (框架) stands for Goal, Reality, Options, and Will.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-for#e-4df6e920759a74a4",
+          "text": "It created a clear contradiction: social housing high-rises are seen as signs of poverty, while new luxury ones stand for success.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 121
+          },
+          "parts": [
+            [
+              112,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              121
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:stand-for#s2",
+      "pos": "短语",
+      "glossZh": "主张；支持（原则、事业等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-for#e-cf68d13fe5e3508a",
+          "text": "Why did Carl Rogers stand for validation?",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-for#e-ba4d03689210cb27",
+          "text": "The healing and transformation experienced by countless participants there support what he stands for: the art of living an honest existence with oneself and one’s environment.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 101
+          },
+          "parts": [
+            [
+              91,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:stand-for#s3",
+      "pos": "短语",
+      "glossZh": "容忍；忍受",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于否定句，如 won't stand for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

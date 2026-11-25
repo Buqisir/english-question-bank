@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 102
+    "mock": 22
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -337,6 +337,9 @@
       "reason": "同形动植物名、技术或缩写用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:chat-away"
+  ]
 }

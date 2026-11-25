@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 49
+    "mock": 0
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -215,6 +215,6 @@
       "reason": "节庆专名或商品规格"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

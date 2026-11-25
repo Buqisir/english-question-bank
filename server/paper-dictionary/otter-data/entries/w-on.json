@@ -35,7 +35,7 @@
     "mock": 5423
   },
   "unassignedCounts": {
-    "gaokao": 716,
+    "gaokao": 745,
     "mock": 5418
   },
   "senses": [
@@ -529,291 +529,6 @@
       ]
     },
     {
-      "senseId": "w:on#s10",
-      "pos": "短语",
-      "glossZh": "独自",
-      "pronunciationId": "w:on#p-main",
-      "note": "on one’s own。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-6b18fdf959ffb24f",
-          "text": "She ran the family farm on her own.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2020-i:24",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:on#e-6442ca7fd7af6328",
-          "text": "However, Molai went looking on his own and __50__ a nearby island where he began to plant trees.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s11",
-      "pos": "短语",
-      "glossZh": "在路上",
-      "pronunciationId": "w:on#p-main",
-      "note": "on one’s way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-94a59fe5bb1a025b",
-          "text": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 68
-          }
-        },
-        {
-          "exampleId": "w:on#e-39e8f988c782429d",
-          "text": "To enjoy the scenery on the way.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
-            "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s12",
-      "pos": "短语",
-      "glossZh": "集中注意力于……",
-      "pronunciationId": "w:on#p-main",
-      "note": "focus on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-bbe2a47a9329e9a9",
-          "text": "Too often when you stand up to give a speech, you focus on the “public” at the expense of the” speaking.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:on#e-0affd8b767bc14d4",
-          "text": "“__37__ Focus on the speaking.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:on#e-f497265b79320df7",
-          "text": "Take the fear out of public speaking by focusing on your listeners",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-i:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s13",
-      "pos": "短语",
-      "glossZh": "步行",
-      "pronunciationId": "w:on#p-main",
-      "note": "on foot。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-d4dbfd803fd66d6b",
-          "text": "On foot",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:listening.short-dialogue",
-            "locator": {
-              "question": 2,
-              "questionId": "question:listening:2",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s14",
-      "pos": "短语",
-      "glossZh": "另一方面",
-      "pronunciationId": "w:on#p-main",
-      "note": "on the other hand。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-fe73a1e3e02757f3",
-          "text": "“On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 1,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s15",
-      "pos": "短语",
-      "glossZh": "支持某人",
-      "pronunciationId": "w:on#p-main",
-      "note": "on sb’s side。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-42ebf9f98f012d73",
-          "text": "Remember, your doctor and other caregivers are on your side.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-ii:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:on#s16",
       "pos": "adj. / adv.",
       "glossZh": "开着；运行中",
@@ -825,223 +540,213 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:on#s17",
-      "pos": "短语",
-      "glossZh": "打开；启动",
-      "pronunciationId": "w:on#p-main",
-      "note": "turn on 或 switch on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-deb0ddf8efce965e",
-          "text": "Turn on the light.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 10,
-              "questionId": "question:listening:10",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:on#e-60bf09051d8d0f7a",
-          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:on#e-02f1d41db47f5f56",
-          "text": "Maybe you say “go,” or turn on a certain song, or whatever.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s18",
-      "pos": "短语",
-      "glossZh": "平均而言",
-      "pronunciationId": "w:on#p-main",
-      "note": "on average。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-03e1701b38ac3a81",
-          "text": "It isn’t just that people are, on average, living longer.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:on#e-e8cfd73662a1dde5",
-          "text": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 76,
-            "end": 78
-          }
-        },
-        {
-          "exampleId": "w:on#e-2e761566f3fd7836",
-          "text": "Which participants got the highest score on average in the test?",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2026-i:33",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s19",
-      "pos": "短语",
-      "glossZh": "故意",
-      "pronunciationId": "w:on#p-main",
-      "note": "on purpose。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-ab5bf03639a45174",
-          "text": "Communicating messages on purpose.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:on#s20",
-      "pos": "短语",
-      "glossZh": "准时",
-      "pronunciationId": "w:on#p-main",
-      "note": "on time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:on#e-db8faa553b08cc29",
-          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 89
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:act-on",
+    "w:add-on",
+    "w:and-so-on",
+    "w:bank-on-sb-sth",
+    "w:base-on",
+    "w:be-based-on",
+    "w:be-bent-on-doing-sth",
+    "w:be-bent-on-sth",
+    "w:be-hard-on-sth",
+    "w:be-hot-on-sth",
+    "w:be-on-fire",
+    "w:be-on-ones-mind",
+    "w:be-on-ones-side",
+    "w:be-on-to",
+    "w:be-short-on",
+    "w:bring-on",
+    "w:build-on",
+    "w:call-on",
+    "w:carry-on",
+    "w:cash-in-on",
+    "w:cast-doubt-on",
+    "w:cast-light-on",
+    "w:cast-on",
+    "w:catch-on",
+    "w:check-on",
+    "w:come-on",
+    "w:come-on-in",
+    "w:count-on",
+    "w:cut-down-on",
+    "w:dead-on",
+    "w:decide-on",
+    "w:depending-on",
+    "w:drag-on",
+    "w:draw-on-sth",
+    "w:earlier-on",
+    "w:early-on",
+    "w:egg-sb-on",
+    "w:expand-on-sth",
+    "w:fall-down-on",
+    "w:fall-on",
+    "w:fall-on-deaf-ears",
+    "w:feed-on",
+    "w:fix-on",
+    "w:focus-on",
+    "w:follow-on",
+    "w:from-here-on-out",
+    "w:from-now-on",
+    "w:from-then-on",
+    "w:game-on",
+    "w:get-a-handle-on",
+    "w:get-in-on",
+    "w:get-on",
+    "w:get-on-to",
+    "w:get-on-with",
+    "w:get-to-work-on-sth",
+    "w:give-up-on",
+    "w:go-on",
+    "w:go-on-holiday",
+    "w:go-on-to-do",
+    "w:grow-on",
+    "w:hand-on",
+    "w:hang-on",
+    "w:happen-on",
+    "w:have-on",
+    "w:hit-on",
+    "w:hit-on-an-idea",
+    "w:hold-on",
+    "w:hold-on-to-sth",
+    "w:home-in-on",
+    "w:hot-on",
+    "w:impress-sth-on-sb",
+    "w:improve-on",
+    "w:in-on",
+    "w:it-dawns-on-sb-that",
+    "w:jump-on",
+    "w:jump-on-the-bandwagon",
+    "w:keep-an-eye-on",
+    "w:keep-on",
+    "w:keep-tabs-on",
+    "w:kid-on",
+    "w:land-on",
+    "w:late-on",
+    "w:later-on",
+    "w:lay-on",
+    "w:leave-on",
+    "w:live-on",
+    "w:live-on-the-streets",
+    "w:lock-on",
+    "w:look-back-on-sth",
+    "w:look-down-on",
+    "w:look-on",
+    "w:look-on-the-bright-side",
+    "w:lost-on",
+    "w:miss-out-on-sth",
+    "w:move-on",
+    "w:move-on-to-sth",
+    "w:on-a-basis",
+    "w:on-account-of",
+    "w:on-all-fours",
+    "w:on-and-off",
+    "w:on-and-on",
+    "w:on-average",
+    "w:on-behalf-of-sb",
+    "w:on-board",
+    "w:on-business",
+    "w:on-call",
+    "w:on-camera",
+    "w:on-demand",
+    "w:on-duty",
+    "w:on-earth",
+    "w:on-edge",
+    "w:on-foot",
+    "w:on-hand",
+    "w:on-loan",
+    "w:on-occasion",
+    "w:on-ones-behalf",
+    "w:on-ones-own",
+    "w:on-ones-part",
+    "w:on-ones-side",
+    "w:on-ones-way",
+    "w:on-pins-and-needles",
+    "w:on-purpose",
+    "w:on-repeat",
+    "w:on-sale",
+    "w:on-sight",
+    "w:on-the-back-of",
+    "w:on-the-basis-of",
+    "w:on-the-books",
+    "w:on-the-clock",
+    "w:on-the-contrary",
+    "w:on-the-edge-of-sth",
+    "w:on-the-fly",
+    "w:on-the-hour",
+    "w:on-the-move",
+    "w:on-the-order-of",
+    "w:on-the-other-hand",
+    "w:on-the-other-side-of",
+    "w:on-the-same-page",
+    "w:on-the-spot",
+    "w:on-the-strength-of",
+    "w:on-time",
+    "w:on-top-of",
+    "w:on-top-of-that",
+    "w:on-view",
+    "w:pass-on",
+    "w:pick-on",
+    "w:pick-up-on",
+    "w:plan-on",
+    "w:play-on",
+    "w:power-on",
+    "w:press-on",
+    "w:pride-oneself-on-sth",
+    "w:pull-on",
+    "w:put-on",
+    "w:put-on-weight",
+    "w:put-ones-stamp-on-sth",
+    "w:put-sb-on-the-spot",
+    "w:put-sth-on-a-list",
+    "w:put-the-handbrake-on",
+    "w:rest-on-sth",
+    "w:ride-on-sth",
+    "w:right-on",
+    "w:rock-on",
+    "w:roll-on",
+    "w:run-on",
+    "w:set-foot-on",
+    "w:set-on",
+    "w:shine-a-light-on",
+    "w:sign-on",
+    "w:sit-on-the-fence",
+    "w:sleep-on",
+    "w:smile-on",
+    "w:soldier-on",
+    "w:sour-on-sb-sth",
+    "w:spot-on",
+    "w:stand-on",
+    "w:stand-on-end",
+    "w:start-on",
+    "w:stay-on",
+    "w:stay-on-track",
+    "w:step-on",
+    "w:stick-on",
+    "w:switch-on",
+    "w:take-it-out-on-sb",
+    "w:take-on",
+    "w:think-on",
+    "w:throw-light-on",
+    "w:throw-on",
+    "w:touch-on",
+    "w:try-sth-on",
+    "w:turn-on-its-head",
+    "w:turn-sth-on",
+    "w:wait-on",
+    "w:walk-on",
+    "w:wear-on",
+    "w:whats-going-on",
+    "w:word-on-the-street",
+    "w:work-on-sth",
+    "w:youre-on",
+    "w:zero-in-on-sth"
+  ]
 }

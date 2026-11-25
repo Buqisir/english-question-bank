@@ -1,0 +1,352 @@
+{
+  "entryId": "w:set-aside",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "aside"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "set",
+        "aside"
+      ],
+      [
+        "set",
+        {
+          "slot": "sb/sth"
+        },
+        "aside"
+      ],
+      [
+        "sets",
+        "aside"
+      ],
+      [
+        "setting",
+        "aside"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set aside",
+      "tags": []
+    },
+    {
+      "form": "setting aside",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set (sth) aside",
+  "senses": [
+    {
+      "senseId": "w:set-aside#s1",
+      "pos": "短语",
+      "glossZh": "留出；预留（钱、时间或空间等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:aside#s5",
+        "w:set#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-aside#e-146ef4ca093250ca",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 138
+          },
+          "parts": [
+            [
+              129,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              138
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-aside#e-986e34b2119ebb89",
+          "text": "Yet 60 units will be set aside as affordable housing.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-aside#e-da718dd6ba73a8df",
+          "text": "This past year I talked with him about setting aside a time when I would just follow his lead in play, when he would get to decide what happened and how it happened.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 52
+          },
+          "parts": [
+            [
+              39,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:set-aside#s2",
+      "pos": "短语",
+      "glossZh": "把……暂放一旁备用或待处理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-aside#e-9dbe11f37caf7930",
+          "text": "Next time you set your keys aside, focus on the unique aspects of this particular moment, like the sights or smells.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 33
+          },
+          "parts": [
+            [
+              14,
+              17
+            ],
+            [
+              28,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              17
+            ],
+            [
+              28,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-aside#e-990eaae3a8620db7",
+          "text": "Heat moderate olive oil in a pan, fry the chicken until brown on both sides and then set aside on a separate plate.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 94
+          },
+          "parts": [
+            [
+              85,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-aside#e-a0b7e6a68fe9843d",
+          "text": "Those with damage will be set aside for later repair.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          },
+          "parts": [
+            [
+              26,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:set-aside#s3",
+      "pos": "短语",
+      "glossZh": "暂不考虑；搁置（问题或顾虑）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-aside#e-0e625617a11aa872",
+          "text": "Faced with these challenges, Yang set aside his experience in China and started from the very beginning to understand the local planting cycle.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-aside#s4",
+      "pos": "短语",
+      "glossZh": "撤销（裁决或决定）；宣布无效",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

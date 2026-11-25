@@ -1,0 +1,133 @@
+{
+  "entryId": "w:dry-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dry",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dry",
+        "off"
+      ],
+      [
+        "dried",
+        "off"
+      ],
+      [
+        "dries",
+        "off"
+      ],
+      [
+        "drying",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dry off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dry (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:dry-off#s1",
+      "pos": "短语",
+      "glossZh": "弄干身上的水；变干",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dry-off#e-0359dca41cd8fa66",
+          "text": "I urged her into my house to dry off, but she waved me away: “Don’t bother.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:dry-off#s2",
+      "pos": "短语",
+      "glossZh": "擦干或弄干某人或某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dry-off#s3",
+      "pos": "短语",
+      "glossZh": "（畜牧）使奶牛停止泌乳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

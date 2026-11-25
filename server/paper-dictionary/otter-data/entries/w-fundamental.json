@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 26
+    "mock": 0
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -222,6 +222,6 @@
       "reason": "声学术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

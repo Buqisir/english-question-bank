@@ -1,0 +1,139 @@
+{
+  "entryId": "w:go-both-ways",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "both",
+      "ways"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "both",
+        "ways"
+      ],
+      [
+        "goes",
+        "both",
+        "ways"
+      ],
+      [
+        "going",
+        "both",
+        "ways"
+      ],
+      [
+        "gone",
+        "both",
+        "ways"
+      ],
+      [
+        "went",
+        "both",
+        "ways"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go both ways",
+  "senses": [
+    {
+      "senseId": "w:go-both-ways#s1",
+      "pos": "短语",
+      "glossZh": "双方都适用；是相互的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-both-ways#e-36bbd7823affd1bf",
+          "text": "Healthy relationships involve mutual respect, and boundaries can go both ways.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 77
+          },
+          "parts": [
+            [
+              65,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:go-both-ways#s2",
+      "pos": "短语",
+      "glossZh": "可以向两个方向通行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-both-ways#s3",
+      "pos": "短语",
+      "glossZh": "（口语）是双性恋",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

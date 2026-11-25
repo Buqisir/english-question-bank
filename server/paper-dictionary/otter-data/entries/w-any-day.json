@@ -1,0 +1,135 @@
+{
+  "entryId": "w:any-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "any",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "any",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "any day",
+  "senses": [
+    {
+      "senseId": "w:any-day#s1",
+      "pos": "短语",
+      "glossZh": "不管何时都；怎么选都",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:any-day#e-33e750524040c490",
+          "text": "Dealing with teenagers can be challenging at times, but he’ll take them over a bunch of lawyers and judges any day.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 114
+          },
+          "parts": [
+            [
+              107,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              114
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:any-day#e-1b10898187f51077",
+          "text": "Ultimately, it may seem like a sharp contrast to poetic descriptions of virtue, but I’ll take practical wisdom over virtue any day.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 130
+          },
+          "parts": [
+            [
+              123,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              130
+            ]
+          ]
+        }
+      ],
+      "note": "用于比较时强调偏好，例如 take A over B any day。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:any-day#s2",
+      "pos": "短语",
+      "glossZh": "随时；说不定哪天",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

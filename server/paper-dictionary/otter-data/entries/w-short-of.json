@@ -1,0 +1,242 @@
+{
+  "entryId": "w:short-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "short",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "short",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "short of",
+  "senses": [
+    {
+      "senseId": "w:short-of#s2",
+      "pos": "短语",
+      "glossZh": "离（目标或数值）还差；未达到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:short-of#e-809773051e00a8a4",
+          "text": "Today, in Australia, most children on average fall 2,000 steps short of the physical activity they need to avoid being overweight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 71
+          },
+          "parts": [
+            [
+              63,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-of#e-23977fc5ec9a70a4",
+          "text": "There’s still a long way to go here, and the BCI often fell far short of that 74 maximum accuracy rating.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          },
+          "parts": [
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-of#e-5c8860db59339f01",
+          "text": "There’s still a long way to go there, and the BCI often falls far short of that 74 maximum accuracy rating.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 74
+          },
+          "parts": [
+            [
+              66,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:short-of#s1",
+      "pos": "短语",
+      "glossZh": "缺少；缺乏",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:short-of#e-b1c2d77f9878517d",
+          "text": "Within a matter of moments, I began to feel rather short of breath.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 59
+          },
+          "parts": [
+            [
+              51,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-of#e-072f8f2a36e895cd",
+          "text": "When it comes to body fat, we aren’t short of unkind words for it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 45
+          },
+          "parts": [
+            [
+              37,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be short of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:short-of#s3",
+      "pos": "短语",
+      "glossZh": "除非采取……；在不采取……的情况下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

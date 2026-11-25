@@ -1,0 +1,97 @@
+{
+  "entryId": "w:stamp-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stamp",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stamp",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stamps out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stamp sth out",
+  "senses": [
+    {
+      "senseId": "w:stamp-out#s1",
+      "pos": "短语",
+      "glossZh": "彻底消除；消灭",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stamp#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stamp-out#e-6d4de6a51a448d34",
+          "text": "This stamps out the joy of unexpected discovery and means a child may never learn to tolerate something unfamiliar.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

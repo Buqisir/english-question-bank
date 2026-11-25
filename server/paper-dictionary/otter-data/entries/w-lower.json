@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 169
+    "mock": 6
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -175,7 +175,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -308,6 +308,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:lower#s5",
+      "pos": "adv.",
+      "glossZh": "处于较低水平（如得分较低）",
+      "pronunciationId": "w:lower#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lower#e-dcb1b7bdc7975b6a",
+          "text": "In one experiment, highly creative participants who scored lower in wisdom were less willing to help another person in a moral-emergency situation.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -316,6 +349,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

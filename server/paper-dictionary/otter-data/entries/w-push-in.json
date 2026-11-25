@@ -1,0 +1,96 @@
+{
+  "entryId": "w:push-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "in"
+      ],
+      [
+        "pushed",
+        "in"
+      ],
+      [
+        "pushes",
+        "in"
+      ],
+      [
+        "pushing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push in",
+  "senses": [
+    {
+      "senseId": "w:push-in#s1",
+      "pos": "短语",
+      "glossZh": "强行插队",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:push-in#s2",
+      "pos": "短语",
+      "glossZh": "把……推入；往里推",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:push-in#s3",
+      "pos": "短语",
+      "glossZh": "推镜头；摄影机向主体推进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

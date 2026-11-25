@@ -1,0 +1,167 @@
+{
+  "entryId": "w:as-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as of",
+  "senses": [
+    {
+      "senseId": "w:as-of#s1",
+      "pos": "短语",
+      "glossZh": "截至某时；以某一时点为准",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-of#e-69f4917efabce160",
+          "text": "“We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest,” Trost says.“And as of right now, we’ve received about 120 submissions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 128
+          },
+          "parts": [
+            [
+              123,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              128
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-of#e-8fdff9604a503893",
+          "text": "I am touched by the interest, curiosity, and support that these people – strangers as of an hour ago – show toward me.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 88
+          },
+          "parts": [
+            [
+              83,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-of#e-6653cc7cea1ae0f7",
+          "text": "How many people have been saved by emergency crews as of Friday night?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 56
+          },
+          "parts": [
+            [
+              51,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:as-of#s2",
+      "pos": "短语",
+      "glossZh": "自某时起（生效或适用）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

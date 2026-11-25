@@ -1,0 +1,125 @@
+{
+  "entryId": "w:do-without-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "do without"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "without",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "without",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "do",
+        "without"
+      ],
+      [
+        "did",
+        "without"
+      ],
+      [
+        "does",
+        "without"
+      ],
+      [
+        "doing",
+        "without"
+      ],
+      [
+        "done",
+        "without"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "done without",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do without sth",
+  "senses": [
+    {
+      "senseId": "w:do-without-sth#s1",
+      "pos": "短语",
+      "glossZh": "没有……也能应付；只好将就",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:do#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:do-without-sth#e-82fdfc8ec1c09599",
+          "text": "“I don’t know what I would have done without you guys” he said.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          },
+          "parts": [
+            [
+              32,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

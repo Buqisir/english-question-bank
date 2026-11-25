@@ -1,0 +1,94 @@
+{
+  "entryId": "w:dont-get-me-wrong",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "don't",
+      "get",
+      "me",
+      "wrong"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "don't",
+        "get",
+        "me",
+        "wrong"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "don't get me wrong",
+  "senses": [
+    {
+      "senseId": "w:dont-get-me-wrong#s1",
+      "pos": "短语",
+      "glossZh": "别误会我的意思",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dont-get-me-wrong#e-28a2784ca61d4cc1",
+          "text": "Don’t get me wrong, trying new things is great, and I love exploring.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,315 @@
+{
+  "entryId": "w:come-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came over",
+    "coming over"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "over"
+      ],
+      [
+        "came",
+        "over"
+      ],
+      [
+        "coming",
+        "over"
+      ],
+      [
+        "comes",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come over",
+  "senses": [
+    {
+      "senseId": "w:come-over#s1",
+      "pos": "短语",
+      "glossZh": "走过来；来到某人身边",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-over#e-c8f262f3dfe8af0e",
+          "text": "Once, when trying a certain trick on the beam (横杆), I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 123
+          },
+          "parts": [
+            [
+              114,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-over#e-678ca92563869afc",
+          "text": "While we were back there the hospital’s entertainment director Ms. Evans came over to talk to us.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 82
+          },
+          "parts": [
+            [
+              73,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-over#e-69198b0d1cafaae9",
+          "text": "Paragraph 1: Just then, the boy who had asked about sports came over, holding a worn book about world sports.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          },
+          "parts": [
+            [
+              59,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:come-over#s2",
+      "pos": "短语",
+      "glossZh": "过来拜访；来串门",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-over#e-9d418a8e3f584883",
+          "text": "We discussed language, identity, and history; we drew and redrew family trees, and reviewed ancestors’ names and backstories as though they’d be coming over at any moment.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 156
+          },
+          "parts": [
+            [
+              145,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              156
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-over#s3",
+      "pos": "短语",
+      "glossZh": "（情绪等）突然袭上心头",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-over#e-551635c584666633",
+          "text": "When loneliness came over, I would imagine someone like Emily beside me, her gentle voice offering encouragement.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-over#e-68dc27bb53e40797",
+          "text": "I’m not sure what came over me – perhaps it was because my husband was watching a film that didn’t particularly interest me – but I decided to give it a go.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-over#s4",
+      "pos": "短语",
+      "glossZh": "给人某种印象；显得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 come over as …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-over#s5",
+      "pos": "短语",
+      "glossZh": "转到另一方；倒向另一阵营",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

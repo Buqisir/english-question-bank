@@ -1,0 +1,125 @@
+{
+  "entryId": "w:aim-high",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "aim",
+      "high"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "aim",
+        "high"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "aim high",
+  "senses": [
+    {
+      "senseId": "w:aim-high#s1",
+      "pos": "短语",
+      "glossZh": "志存高远；为自己设定高目标",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:high#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:aim-high#e-7b514d4291640045",
+          "text": "Aim high.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aim-high#e-5a42a206f3b116e2",
+          "text": "She will continue to aim high.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

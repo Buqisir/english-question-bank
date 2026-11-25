@@ -1,0 +1,355 @@
+{
+  "entryId": "w:come-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came with",
+    "comes with"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "with"
+      ],
+      [
+        "came",
+        "with"
+      ],
+      [
+        "comes",
+        "with"
+      ],
+      [
+        "coming",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come with",
+  "senses": [
+    {
+      "senseId": "w:come-with#s1",
+      "pos": "短语",
+      "glossZh": "伴随……而来；随着……产生",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-with#e-bd868b85ec479d00",
+          "text": "You’ll develop that painting muscle memory that only comes with repetition.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 63
+          },
+          "parts": [
+            [
+              53,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-with#e-8db836817f1b6c80",
+          "text": "The end of my time in the bush came with no distant lion roars, no whispering packs, no newborn rhino.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-with#e-3343bb356a81febe",
+          "text": "Mondays come with higher rates of anxiety, stress and even suicide compared with other days.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 17
+          },
+          "parts": [
+            [
+              8,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 34
+      }
+    },
+    {
+      "senseId": "w:come-with#s2",
+      "pos": "短语",
+      "glossZh": "附带；配有",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-with#e-c54c69f1a3b233a4",
+          "text": "She was only eight weeks old, and she came with a bag of puppy food and a lot of instructions.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 47
+          },
+          "parts": [
+            [
+              38,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-with#e-f5aad87cdfd6bc51",
+          "text": "Sometimes I wish the human brain came with a user’s manual; it would be so handy.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-with#e-84e1a3e25a4c2a41",
+          "text": "Each word you record comes with its own context, making it easier to remember.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 31
+          },
+          "parts": [
+            [
+              21,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:come-with#s3",
+      "pos": "短语",
+      "glossZh": "跟……一起来；同行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-with#e-31b1a03d503db8f2",
+          "text": "“Come with me,” he said quietly.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-with#e-a2e99bd15c6733d0",
+          "text": "“Come with us, Charlotte.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

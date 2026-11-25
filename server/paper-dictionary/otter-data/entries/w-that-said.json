@@ -1,0 +1,153 @@
+{
+  "entryId": "w:that-said",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "that",
+      "said"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "that",
+        "said"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "that said",
+  "senses": [
+    {
+      "senseId": "w:that-said#s1",
+      "pos": "短语",
+      "glossZh": "话虽如此；不过",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:that-said#e-ca064638200db381",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:that-said#e-08db6e588ce0466e",
+          "text": "That said, technology isn’t necessarily bad for kids when used properly.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:that-said#e-7913d3c67460c31a",
+          "text": "That said, don't limit yourself to just those who are like you.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

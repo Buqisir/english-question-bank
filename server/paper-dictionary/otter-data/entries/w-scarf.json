@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 3
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -136,20 +136,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:scarf#s3",
-      "pos": "短语",
-      "glossZh": "狼吞虎咽",
-      "pronunciationId": "w:scarf#p-main",
-      "note": "scarf down。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -158,6 +144,11 @@
       "reason": "木工或金工专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:scarf-down"
+  ]
 }

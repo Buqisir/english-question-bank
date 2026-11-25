@@ -1,0 +1,168 @@
+{
+  "entryId": "w:all-but",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "but"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "but"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all but",
+  "senses": [
+    {
+      "senseId": "w:all-but#s1",
+      "pos": "短语",
+      "glossZh": "几乎；差一点就",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:but#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-but#e-21b12f8a643f512d",
+          "text": "However, a recent research by Aalto University scientists reveals that using artificial intelligence (AI) all but removes this effect – in fact, it almost reverses (逆转) it.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 113
+          },
+          "parts": [
+            [
+              106,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:all-but#s2",
+      "pos": "短语",
+      "glossZh": "除……以外全部",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-but#e-5fdbe17df6050b22",
+          "text": "For now, at least, all but one of the species in deep freeze still have flesh-and-blood members.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          },
+          "parts": [
+            [
+              19,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-but#e-0d6cbc55d373e16a",
+          "text": "Cora’s decisions seemed pretty good – all but two were indeed deletable (I could read the wrongly filtered messages directly from the briefing webpage).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          },
+          "parts": [
+            [
+              38,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

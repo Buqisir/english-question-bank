@@ -1,0 +1,214 @@
+{
+  "entryId": "w:look-ahead",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking ahead"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "ahead"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "ahead"
+      ],
+      [
+        "looking",
+        "ahead"
+      ],
+      [
+        "looked",
+        "ahead"
+      ],
+      [
+        "looks",
+        "ahead"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look ahead",
+  "senses": [
+    {
+      "senseId": "w:look-ahead#s1",
+      "pos": "短语",
+      "glossZh": "展望未来；提前考虑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-ahead#e-173838256577263a",
+          "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-ahead#e-65af6068bf428eee",
+          "text": "Paragraph 2: Looking ahead, Justin has ambitious plans.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-ahead#e-3a34325f14b32d9b",
+          "text": "Looking ahead, a united global effort is essential.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:look-ahead#s2",
+      "pos": "短语",
+      "glossZh": "朝前方看",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-ahead#e-e9ef0842d7640dd4",
+          "text": "Keino, with a furrowed brow, kept looking ahead at the long line of cars, buses, and taxis in front of him.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 47
+          },
+          "parts": [
+            [
+              34,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

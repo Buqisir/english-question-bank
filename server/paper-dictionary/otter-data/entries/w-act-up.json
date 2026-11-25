@@ -1,0 +1,96 @@
+{
+  "entryId": "w:act-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "act",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "act",
+        "up"
+      ],
+      [
+        "acted",
+        "up"
+      ],
+      [
+        "acting",
+        "up"
+      ],
+      [
+        "acts",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "act up",
+  "senses": [
+    {
+      "senseId": "w:act-up#s1",
+      "pos": "短语",
+      "glossZh": "（尤指孩子）捣乱；不听话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:act-up#s2",
+      "pos": "短语",
+      "glossZh": "（设备）出毛病；（身体部位）又出问题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:act-up#s3",
+      "pos": "短语",
+      "glossZh": "暂代上级职务",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

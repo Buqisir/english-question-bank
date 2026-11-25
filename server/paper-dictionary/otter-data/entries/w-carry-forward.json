@@ -1,0 +1,133 @@
+{
+  "entryId": "w:carry-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "carry",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "carry",
+        "forward"
+      ],
+      [
+        "carried",
+        "forward"
+      ],
+      [
+        "carries",
+        "forward"
+      ],
+      [
+        "carrying",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "carrying forward",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carry sth forward",
+  "senses": [
+    {
+      "senseId": "w:carry-forward#s1",
+      "pos": "短语",
+      "glossZh": "传承并发扬（技艺、传统等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:carry-forward#e-9755e68894b4edc1",
+          "text": "Luckily, the emergence of new media contributes greatly to carrying forward this traditional technique.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 75
+          },
+          "parts": [
+            [
+              59,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:carry-forward#s2",
+      "pos": "短语",
+      "glossZh": "将（账目金额）转至下一页或下一栏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-forward#s3",
+      "pos": "短语",
+      "glossZh": "将（可抵扣金额等）结转至以后年度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

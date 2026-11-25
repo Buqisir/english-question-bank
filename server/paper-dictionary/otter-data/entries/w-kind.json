@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 245
+    "mock": 46
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 38,
-        "mock": 0
+        "mock": 157
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -243,7 +243,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -305,20 +305,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:kind#s5",
-      "pos": "短语",
-      "glossZh": "以实物形式",
-      "pronunciationId": "w:kind#p-main",
-      "note": "in kind。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -327,6 +313,14 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-kind",
+    "w:kind-of",
+    "w:of-its-kind",
+    "w:some-kind-of"
+  ]
 }

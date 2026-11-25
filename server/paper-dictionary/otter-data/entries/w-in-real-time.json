@@ -1,0 +1,159 @@
+{
+  "entryId": "w:in-real-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "real time"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "real",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "real",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in real time",
+  "senses": [
+    {
+      "senseId": "w:in-real-time#s1",
+      "pos": "短语",
+      "glossZh": "实时地；随事件进展同步进行",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:real#s4",
+        "w:time#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-real-time#e-aa111773eacec612",
+          "text": "Also, there is a convenient app that provides growing data in real time.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 71
+          },
+          "parts": [
+            [
+              59,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-real-time#e-e20d92e92a97b643",
+          "text": "Bellevue, a fast-growing city just east of Seattle, uses a system that is gaining popularity around the US: intersection(十字路口) signals that can adjust in real time to traffic conditions.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 151,
+            "end": 163
+          },
+          "parts": [
+            [
+              151,
+              163
+            ]
+          ],
+          "highlightRanges": [
+            [
+              151,
+              163
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-real-time#e-1bed61e35dc2ded2",
+          "text": "Everyone belonging to your StoryTree can add and read the entries in real time, or at any time!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 78
+          },
+          "parts": [
+            [
+              66,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

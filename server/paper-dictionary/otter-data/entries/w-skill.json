@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 528
+    "mock": 328
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 71,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -128,6 +128,6 @@
       "reason": "俚语、旧用法或游戏用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

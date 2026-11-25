@@ -1,0 +1,151 @@
+{
+  "entryId": "w:price-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "price",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "price",
+        "up"
+      ],
+      [
+        "priced",
+        "up"
+      ],
+      [
+        "prices",
+        "up"
+      ],
+      [
+        "pricing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pricing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "price sth up",
+  "senses": [
+    {
+      "senseId": "w:price-up#s1",
+      "pos": "短语",
+      "glossZh": "给……核价；算出……的价格",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:price-up#e-655d445a27c80304",
+          "text": "There is always a shop on the go so they will be pricing up something or finding change.” the headteacher says.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:price-up#e-0d98d234644f500a",
+          "text": "There is always a shop on the go so they will be pricing up something or finding change,” the headteacher says.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:price-up#s2",
+      "pos": "短语",
+      "glossZh": "提高售价",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

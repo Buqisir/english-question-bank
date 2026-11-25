@@ -1,0 +1,169 @@
+{
+  "entryId": "w:trip-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "trip",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "trip",
+        "up"
+      ],
+      [
+        "tripped",
+        "up"
+      ],
+      [
+        "tripping",
+        "up"
+      ],
+      [
+        "trips",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "trip up",
+      "tags": []
+    },
+    {
+      "form": "tripped up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "trip (sb) up",
+  "senses": [
+    {
+      "senseId": "w:trip-up#s1",
+      "pos": "短语",
+      "glossZh": "犯错；出差错",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:trip-up#e-49dc09afebdbc220",
+          "text": "Ignoring them, we trip up.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:trip-up#s2",
+      "pos": "短语",
+      "glossZh": "使某人犯错；难倒某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:trip-up#e-e9b7726172c3ab65",
+          "text": "In his next attempt, Faizan entered the semifinals, but was tripped up by “xylophone”, mistakenly confusing “ph” with “f”. This setback taught him something new: “Every letter carries a cultural context – only memorizing is far less effective than understanding etymology (词源).” Thereafter, he spent 2 hours daily analyzing word origins.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 70
+          },
+          "parts": [
+            [
+              60,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:trip-up#s3",
+      "pos": "短语",
+      "glossZh": "绊一跤；把人绊倒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

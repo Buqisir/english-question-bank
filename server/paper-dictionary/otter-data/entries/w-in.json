@@ -54,8 +54,8 @@
     "mock": 13299
   },
   "unassignedCounts": {
-    "gaokao": 1723,
-    "mock": 13298
+    "gaokao": 1834,
+    "mock": 13299
   },
   "senses": [
     {
@@ -616,806 +616,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:in#s11",
-      "pos": "短语",
-      "glossZh": "参加（竞赛）",
-      "pronunciationId": "w:in#p-main",
-      "note": "go in for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-88fa4e64668c5d95",
-          "text": "Go in for a competition.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
-            "locator": {
-              "question": 13,
-              "questionId": "question:listening:13",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s12",
-      "pos": "短语",
-      "glossZh": "填写",
-      "pronunciationId": "w:in#p-main",
-      "note": "fill in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b855c482467585ff",
-          "text": "Last week our teacher asked us to fill in a questionnaire.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s13",
-      "pos": "短语",
-      "glossZh": "办理入住或登机手续",
-      "pronunciationId": "w:in#p-main",
-      "note": "check in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-02593c071ff90435",
-          "text": "When does the man plan to check in?",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s14",
-      "pos": "短语",
-      "glossZh": "实际上",
-      "pronunciationId": "w:in#p-main",
-      "note": "in fact。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-96c114cf93546bac",
-          "text": "In fact,most people only absorb about 20 percent of a speaker’s message.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:in#e-8b837c3992de9149",
-          "text": "In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:in#e-05bdc001db724d5e",
-          "text": "In fact, her style and tone (口吻) are seemingly directed at children.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:grammar-fill",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-a:grammar-fill:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s15",
-      "pos": "短语",
-      "glossZh": "为了",
-      "pronunciationId": "w:in#p-main",
-      "note": "in order to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b83a881759260a01",
-          "text": "I needed to do something in my community (社区) in order to complete the community service hours required to graduate from high school.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:in#e-307f4457a41debd9",
-          "text": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 201,
-            "end": 203
-          }
-        },
-        {
-          "exampleId": "w:in#e-810c7e8a6a823c5e",
-          "text": "Here are some tips worth following in order to communicate more effectively.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s16",
-      "pos": "短语",
-      "glossZh": "作为对……的回应",
-      "pronunciationId": "w:in#p-main",
-      "note": "in response to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b05bf856898990b6",
-          "text": "Since the effects were small, this may suggest that our creative thinking does not differ that much in response to total silence and 85 decibels of background noise.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 100,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s17",
-      "pos": "短语",
-      "glossZh": "共同的",
-      "pronunciationId": "w:in#p-main",
-      "note": "in common。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-05377bb4bd00626a",
-          "text": "What do the works by Shepherd and Smith have in common?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
-            "locator": {
-              "question": 22,
-              "questionId": "question:paper-gaokao-2021-national-a:22",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s18",
-      "pos": "短语",
-      "glossZh": "连续地",
-      "pronunciationId": "w:in#p-main",
-      "note": "in a row。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-376072bbfeed0bd8",
-          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 123,
-            "end": 125
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s19",
-      "pos": "短语",
-      "glossZh": "以防",
-      "pronunciationId": "w:in#p-main",
-      "note": "in case 或 in case of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-5f765be197fae781",
-          "text": "necessary and they’re keeping it as a security blanket - 19 percent say they never use it while a further 13 percent keep it in case of emergencies.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 125,
-            "end": 127
-          }
-        },
-        {
-          "exampleId": "w:in#e-fbdd199048dbd6bc",
-          "text": "(Preferably a couple of days before the deadline, just in case.)",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:7",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s20",
-      "pos": "短语",
-      "glossZh": "尽管",
-      "pronunciationId": "w:in#p-main",
-      "note": "in spite of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-28988064720c77a1",
-          "text": "In spite of the court hearing testimonials (证明) of her ability as a doctor, she was banned from medicine.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-ed26865ff4e2681b:cell-1-1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s21",
-      "pos": "短语",
-      "glossZh": "在……的前面",
-      "pronunciationId": "w:in#p-main",
-      "note": "in front of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-5a677b29f1c9bbde",
-          "text": "When he woke up and found himself alone, the 4-year-old decided his brother might be on the train he saw in front of him – so he got on.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 105,
-            "end": 107
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s22",
-      "pos": "短语",
-      "glossZh": "尤其",
-      "pronunciationId": "w:in#p-main",
-      "note": "in particular。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-42f54bc3ff449e54",
-          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 89
-          }
-        },
-        {
-          "exampleId": "w:in#e-46217f526ec3a94a",
-          "text": "In the summer in particular, the air conditioning can make them quite cold.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:in#e-bb61666da4c75e60",
-          "text": "Jane Jacobs spent her working life advancing a distinct vision of the city – in particular focusing on what makes a successful urban community.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 79
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s23",
-      "pos": "短语",
-      "glossZh": "事先",
-      "pronunciationId": "w:in#p-main",
-      "note": "in advance。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-ed48eb71b90f4c53",
-          "text": "Registration must be made at least two weeks in advance.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s24",
-      "pos": "短语",
-      "glossZh": "继而，由此",
-      "pronunciationId": "w:in#p-main",
-      "note": "in turn。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-f2948723215c381f",
-          "text": "I post my work on social media and, in turn, have met some of the kindest people.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:in#e-91920d058e56a64d",
-          "text": "These qualities, in turn, are mapped onto products that have been assigned a gender.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s25",
-      "pos": "短语",
-      "glossZh": "除……以外还",
-      "pronunciationId": "w:in#p-main",
-      "note": "in addition to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b4c328122f05b2c6",
-          "text": "In addition to saving money, cheese brine could also be a more eco-friendly option.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s26",
-      "pos": "短语",
-      "glossZh": "相比之下",
-      "pronunciationId": "w:in#p-main",
-      "note": "in contrast。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-804eddc11d93a6e4",
-          "text": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s27",
-      "pos": "短语",
-      "glossZh": "负责",
-      "pronunciationId": "w:in#p-main",
-      "note": "in charge of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-8898c59b9d8f5cf7",
-          "text": "The movements of the black and white pieces reflect the basic ideas of Eastern philosophy, according to Tu Ningning, who is in charge of the exhibition.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 124,
-            "end": 126
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s28",
-      "pos": "短语",
-      "glossZh": "在我看来",
-      "pronunciationId": "w:in#p-main",
-      "note": "in my opinion。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-c9a7f5c990ab979c",
-          "text": "In my opinion, where in trouble, we should seek help from those we trust mostly.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
-              "sentence": 9
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s29",
-      "pos": "短语",
-      "glossZh": "记住并考虑",
-      "pronunciationId": "w:in#p-main",
-      "note": "keep sth in mind。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-c15fb32053142409",
-          "text": "Keep their audience in mind.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:23",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 22
-          }
-        }
-      ]
     },
     {
       "senseId": "w:in#s30",
@@ -2122,1484 +1322,6 @@
       ]
     },
     {
-      "senseId": "w:in#s43",
-      "pos": "短语",
-      "glossZh": "搬进去住",
-      "pronunciationId": "w:in#p-main",
-      "note": "move in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-d5162f3da6de05f2",
-          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s44",
-      "pos": "短语",
-      "glossZh": "交上去",
-      "pronunciationId": "w:in#p-main",
-      "note": "hand in、turn in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-1b404a3ccd5b4dd1",
-          "text": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "reading-a-11",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:in#e-53fc590706c6d350",
-          "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:in#e-5e2b63a6533eb010",
-          "text": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s45",
-      "pos": "短语",
-      "glossZh": "带来收入",
-      "pronunciationId": "w:in#p-main",
-      "note": "bring in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-2ee3d967f016373a",
-          "text": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s46",
-      "pos": "短语",
-      "glossZh": "引进；引入",
-      "pronunciationId": "w:in#p-main",
-      "note": "bring in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-18be80d21c234723",
-          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:in#e-103cd47666819b6b",
-          "text": "Even when I’m planning classes, I tend to think about how I can bring in my hobbies.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 72
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s47",
-      "pos": "短语",
-      "glossZh": "妨碍",
-      "pronunciationId": "w:in#p-main",
-      "note": "get in the way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-c2c644b48293773a",
-          "text": "When I pulled hard, my nose got in the way.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:in#e-8a7b80b1f4f0cf12",
-          "text": "Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s48",
-      "pos": "短语",
-      "glossZh": "赶得及",
-      "pronunciationId": "w:in#p-main",
-      "note": "in time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-a2b526b48e182f0b",
-          "text": "With their ability to see ahead, they could signal any problem, so that fast-moving trains would be able to react in time.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 116
-          }
-        },
-        {
-          "exampleId": "w:in#e-c0766ecc3666a237",
-          "text": "Finding nothing in the tank, she climbed out of the water just in time to see Katherine jumping in on the other side.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 65
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s49",
-      "pos": "短语",
-      "glossZh": "作为对……的回报",
-      "pronunciationId": "w:in#p-main",
-      "note": "in return for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-850f1154fa00ff62",
-          "text": "In return for a food reward one bear, Brutus, would touch the more heavily dotted pattern with his nose.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s50",
-      "pos": "短语",
-      "glossZh": "依照；与……一致",
-      "pronunciationId": "w:in#p-main",
-      "note": "in line with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b8c8df3724f10efd",
-          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s51",
-      "pos": "短语",
-      "glossZh": "亲自；当面",
-      "pronunciationId": "w:in#p-main",
-      "note": "in person。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-0ed8da1002752077",
-          "text": "Talk to Sara in person.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:in#e-2aecb70068bbd5eb",
-          "text": "Professor Alex Davidson teaches the same course in person and online.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s52",
-      "pos": "短语",
-      "glossZh": "从……来看；就……而言",
-      "pronunciationId": "w:in#p-main",
-      "note": "in terms of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-ca81f151a8d3ded4",
-          "text": "In which aspect were the two groups different in terms of research design?",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2022-ii:33",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 48
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s53",
-      "pos": "短语",
-      "glossZh": "公开地",
-      "pronunciationId": "w:in#p-main",
-      "note": "in public。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-1bf5188404fd0d26",
-          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 204,
-            "end": 206
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s54",
-      "pos": "短语",
-      "glossZh": "秘密地",
-      "pronunciationId": "w:in#p-main",
-      "note": "in secret。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-2acd40c2065f47f5",
-          "text": "Keeping the performance in secret.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:29",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 26
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s55",
-      "pos": "短语",
-      "glossZh": "详尽地",
-      "pronunciationId": "w:in#p-main",
-      "note": "in detail。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-6b6b74b478e53e53",
-          "text": "You don’t have to write these things in detail.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s56",
-      "pos": "短语",
-      "glossZh": "总的来说",
-      "pronunciationId": "w:in#p-main",
-      "note": "in general。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-1ff961e31a38e9a5",
-          "text": "Therefore, they can work for longer, consume more and in general be a boost to the economy.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s57",
-      "pos": "短语",
-      "glossZh": "简而言之",
-      "pronunciationId": "w:in#p-main",
-      "note": "in short、in brief。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-1d023330eca4f43f",
-          "text": "In short, he loves postcards, and the excitement of getting a hand-written note from someone far away.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:in#e-2156513e51fc0df2",
-          "text": "In short, AI is redefining the museum in all respects.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-i:36",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:in#e-2a47c6ae5cfe7c11",
-          "text": "In brief, ruins lay behind her.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s58",
-      "pos": "短语",
-      "glossZh": "从长远来看",
-      "pronunciationId": "w:in#p-main",
-      "note": "in the long run。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-e86fde4122d1c9a2",
-          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:in#e-536a3e91a4bda444",
-          "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 160,
-            "end": 162
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s59",
-      "pos": "短语",
-      "glossZh": "在实际情况中",
-      "pronunciationId": "w:in#p-main",
-      "note": "in practice。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-e66c84a22f8336e5",
-          "text": "In practice, doubt has had the opposite effect.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s60",
-      "pos": "短语",
-      "glossZh": "最初；本来",
-      "pronunciationId": "w:in#p-main",
-      "note": "in the first place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-391184710623d324",
-          "text": "Do your part to preserve what makes a destination special in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 60
-          }
-        },
-        {
-          "exampleId": "w:in#e-557dc3c6a5cd835f",
-          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 188,
-            "end": 190
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s61",
-      "pos": "短语",
-      "glossZh": "寻找",
-      "pronunciationId": "w:in#p-main",
-      "note": "in search of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-1c040aa61b3c30a3",
-          "text": "Obviously, if precautions (预防) aren’t taken, grizzlies can become troublesome, sometimes killing farm animals or walking through yards in search of food.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 135,
-            "end": 137
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s62",
-      "pos": "短语",
-      "glossZh": "需要",
-      "pronunciationId": "w:in#p-main",
-      "note": "in need of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-eddd4764209c164b",
-          "text": "The humidity (湿气) of large rainforests contributes to the formation of rainclouds that may travel to other countries in need of rain.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 117,
-            "end": 119
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s63",
-      "pos": "短语",
-      "glossZh": "徒劳地",
-      "pronunciationId": "w:in#p-main",
-      "note": "in vain。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-91ad9b215dbe368f",
-          "text": "His efforts made in vain.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s64",
-      "pos": "短语",
-      "glossZh": "身体状态良好",
-      "pronunciationId": "w:in#p-main",
-      "note": "in shape。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-414c3b9f64a7f0e0",
-          "text": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 117,
-            "end": 119
-          }
-        },
-        {
-          "exampleId": "w:in#e-51a347d8c54b677f",
-          "text": "Running is a great way to get in shape and just about everyone can do it.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s65",
-      "pos": "短语",
-      "glossZh": "以……的形式",
-      "pronunciationId": "w:in#p-main",
-      "note": "in the form of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-40f8afd411e2186d",
-          "text": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:in#e-ef673a96652fcad5",
-          "text": "Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 126,
-            "end": 128
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s66",
-      "pos": "短语",
-      "glossZh": "落实到位",
-      "pronunciationId": "w:in#p-main",
-      "note": "put sth in place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-9999b87f78f3e044",
-          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s67",
-      "pos": "短语",
-      "glossZh": "与……取得联系",
-      "pronunciationId": "w:in#p-main",
-      "note": "get in touch with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-a228c09722f88e60",
-          "text": "My wife suggested I get in touch with my brother, but I resisted, thinking he should call first.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 26
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s68",
-      "pos": "短语",
-      "glossZh": "设身处地",
-      "pronunciationId": "w:in#p-main",
-      "note": "put oneself in sb’s shoes。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-72e269de0f5058f7",
-          "text": "I tried to put myself in my brother’s shoes.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s69",
-      "pos": "短语",
-      "glossZh": "流行",
-      "pronunciationId": "w:in#p-main",
-      "note": "in fashion。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-7ce78a14162ca44b",
-          "text": "“Plants are in fashion right now,” says Dr. Melinda Knuth, a researcher from the University of Florida.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s70",
-      "pos": "短语",
-      "glossZh": "投入（时间或精力）",
-      "pronunciationId": "w:in#p-main",
-      "note": "put in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-6a17cb94b39a14ce",
-          "text": "There’s no better way to improve than to put in those brush miles.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:in#e-93bb735322cf8e62",
-          "text": "Push through, give it time and put in the effort.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s71",
-      "pos": "短语",
-      "glossZh": "开始出现（尤指不好的情况）",
-      "pronunciationId": "w:in#p-main",
-      "note": "set in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-c18765297cbac46b",
-          "text": "As night fell, panic set in.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s72",
-      "pos": "短语",
-      "glossZh": "插上电源",
-      "pronunciationId": "w:in#p-main",
-      "note": "plug in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-d4f7834d4377471f",
-          "text": "“I am pleasantly surprised, because I am always looking for where to plug it in,” Espinoza said before catching the subway in a working-class area of southern Barcelona.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 79
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s73",
-      "pos": "短语",
-      "glossZh": "贸然介入",
-      "pronunciationId": "w:in#p-main",
-      "note": "jump in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-7a79e24ca886262a",
-          "text": "When kids mess up, don’t jump in with a rescue mission.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s74",
-      "pos": "短语",
-      "glossZh": "逐渐被理解",
-      "pronunciationId": "w:in#p-main",
-      "note": "sink in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-14a1619563b4e4d9",
-          "text": "Progress can be slow, and you’ll wonder if it’s all sinking in.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-ii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s75",
-      "pos": "短语",
-      "glossZh": "吸引",
-      "pronunciationId": "w:in#p-main",
-      "note": "draw sb in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-3362f287f466ab41",
-          "text": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity and gradually pulls them into deeper thoughts on desire, loneliness, and aging.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s76",
-      "pos": "短语",
-      "glossZh": "欺骗",
-      "pronunciationId": "w:in#p-main",
-      "note": "take sb in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-0c708536ab37b262",
-          "text": "The more dispassionate that negative write-up, the more likely it was to take the reader in.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 89,
-            "end": 91
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s77",
-      "pos": "短语",
-      "glossZh": "派上用场",
-      "pronunciationId": "w:in#p-main",
-      "note": "come in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-449fb3f447fa2a81",
-          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 210,
-            "end": 212
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s78",
-      "pos": "短语",
-      "glossZh": "（比赛）获得某个名次",
-      "pronunciationId": "w:in#p-main",
-      "note": "come in first、last 等。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-6264bdca8f51db51",
-          "text": "“I’ll come in last for sure.”",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:in#s79",
       "pos": "n.",
       "glossZh": "来龙去脉（与 outs 连用）",
@@ -3685,419 +1407,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:in#s81",
-      "pos": "短语",
-      "glossZh": "就……这一点而言",
-      "pronunciationId": "w:in#p-main",
-      "note": "in so far as，此处引出说它有创新之处的依据。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-65060316fd0c4162",
-          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 89
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s82",
-      "pos": "短语",
-      "glossZh": "在这种情况下",
-      "pronunciationId": "w:in#p-main",
-      "note": "in this case。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-b79b5dfddb522ab4",
-          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 172,
-            "end": 174
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s83",
-      "pos": "短语",
-      "glossZh": "所说的；相关的",
-      "pronunciationId": "w:in#p-main",
-      "note": "in question。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-509a7f80c727e273",
-          "text": "It took him a few tries to find the word in question.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s84",
-      "pos": "短语",
-      "glossZh": "以印刷形式",
-      "pronunciationId": "w:in#p-main",
-      "note": "in print。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-252c49326d5ec6ce",
-          "text": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 111
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s85",
-      "pos": "短语",
-      "glossZh": "准备好，可以开始",
-      "pronunciationId": "w:in#p-main",
-      "note": "be in business。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-338e5f495e44c6cd",
-          "text": "We rolled it over and put his jack on top, and we were in business.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s86",
-      "pos": "短语",
-      "glossZh": "合乎情理",
-      "pronunciationId": "w:in#p-main",
-      "note": "be in order。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-7959349c478bfedd",
-          "text": "So a trip to the local store for milk and supplies was in order.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s87",
-      "pos": "短语",
-      "glossZh": "井井有条",
-      "pronunciationId": "w:in#p-main",
-      "note": "in order。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-6f217a165ff99b07",
-          "text": "She had prepared lots of snacks, while my job was to have the backyard in order.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 73
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s88",
-      "pos": "短语",
-      "glossZh": "带回；收回",
-      "pronunciationId": "w:in#p-main",
-      "note": "bring in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-9ff968eae6748d70",
-          "text": "Hunters bring in more than 300,000 nutria tails a year, so part of Mouton’s job these days is trying to promote fur.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s89",
-      "pos": "短语",
-      "glossZh": "导致",
-      "pronunciationId": "w:in#p-main",
-      "note": "result in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-4a02648605e4f786",
-          "text": "His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:in#e-2ab4eb8eede37796",
-          "text": "This has resulted in a sharp decline in the numbers of many of the species caught.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:in#e-02b1ad5adadd0df2",
-          "text": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 163,
-            "end": 165
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s90",
-      "pos": "短语",
-      "glossZh": "本身",
-      "pronunciationId": "w:in#p-main",
-      "note": "in and of itself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-124f0780941e8b85",
-          "text": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 76
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:in#s91",
-      "pos": "短语",
-      "glossZh": "在使用中",
-      "pronunciationId": "w:in#p-main",
-      "note": "in use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:in#e-aee913e1b7bc53d2",
-          "text": "Staff in care homes have reported a reduction in the use of medicine where hens are in use.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "reading-c-2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 84,
-            "end": 86
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -4110,6 +1419,304 @@
       "reason": "专业或情境限定用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-friend-in-need-is-a-friend-indeed",
+    "w:a-nail-in-the-coffin",
+    "w:a-needle-in-a-haystack",
+    "w:age-in-place",
+    "w:all-in",
+    "w:all-in-all",
+    "w:as-in",
+    "w:ask-in",
+    "w:be-buried-in",
+    "w:be-caught-in",
+    "w:be-in-business",
+    "w:be-in-order",
+    "w:be-in-the-mood-for-sth",
+    "w:be-left-in-the-dust",
+    "w:bear-in-mind",
+    "w:believe-in-sb-sth",
+    "w:book-in",
+    "w:box-in",
+    "w:break-in",
+    "w:bring-in",
+    "w:build-in",
+    "w:bury-oneself-in",
+    "w:buy-in",
+    "w:call-in",
+    "w:case-in-point",
+    "w:cash-in",
+    "w:cash-in-on",
+    "w:cave-in",
+    "w:check-in",
+    "w:chip-in",
+    "w:close-in",
+    "w:color-in",
+    "w:come-in",
+    "w:come-in-first",
+    "w:come-in-for",
+    "w:come-on-in",
+    "w:count-in",
+    "w:crowd-in",
+    "w:cut-in",
+    "w:deal-in",
+    "w:do-in",
+    "w:draw-sb-in",
+    "w:drink-in",
+    "w:drop-in",
+    "w:drop-in-the-ocean",
+    "w:eat-in",
+    "w:end-in",
+    "w:engage-in-sth",
+    "w:eye-in-the-sky",
+    "w:factor-sth-in",
+    "w:fall-in",
+    "w:fall-in-love",
+    "w:fall-in-love-with-sb",
+    "w:fill-in",
+    "w:fit-in",
+    "w:fly-in",
+    "w:fly-in-the-face-of",
+    "w:get-in",
+    "w:get-in-on",
+    "w:get-in-shape",
+    "w:get-in-the-way",
+    "w:get-in-touch",
+    "w:get-in-touch-with",
+    "w:get-stuck-in",
+    "w:get-swept-up-in",
+    "w:give-in",
+    "w:go-back-in-time",
+    "w:go-in-for",
+    "w:go-up-in-smoke",
+    "w:hand-in",
+    "w:hand-in-hand",
+    "w:hang-in",
+    "w:hat-in-hand",
+    "w:have-butterflies-in-ones-stomach",
+    "w:have-in-mind",
+    "w:have-sth-in-common",
+    "w:heart-in-ones-mouth",
+    "w:hold-in",
+    "w:home-in",
+    "w:home-in-on",
+    "w:i-was-born-in",
+    "w:in-a-big-way",
+    "w:in-a-flash",
+    "w:in-a-row",
+    "w:in-addition",
+    "w:in-addition-to",
+    "w:in-advance",
+    "w:in-and-of-itself",
+    "w:in-and-out",
+    "w:in-anothers-skin",
+    "w:in-bed-with",
+    "w:in-between",
+    "w:in-black-and-white",
+    "w:in-brief",
+    "w:in-broad-daylight",
+    "w:in-business",
+    "w:in-case",
+    "w:in-case-of",
+    "w:in-character",
+    "w:in-charge",
+    "w:in-charge-of",
+    "w:in-common",
+    "w:in-concert",
+    "w:in-concert-with",
+    "w:in-conclusion",
+    "w:in-contrast",
+    "w:in-contrast-to",
+    "w:in-demand",
+    "w:in-depth",
+    "w:in-detail",
+    "w:in-doubt",
+    "w:in-exchange",
+    "w:in-exchange-for",
+    "w:in-existence",
+    "w:in-fact",
+    "w:in-fashion",
+    "w:in-favor-of",
+    "w:in-for",
+    "w:in-front-of",
+    "w:in-general",
+    "w:in-good-repair",
+    "w:in-honour-of",
+    "w:in-itself",
+    "w:in-kind",
+    "w:in-light-of",
+    "w:in-line",
+    "w:in-line-with",
+    "w:in-love-with",
+    "w:in-memory-of",
+    "w:in-my-name",
+    "w:in-my-opinion",
+    "w:in-need",
+    "w:in-need-of",
+    "w:in-on",
+    "w:in-ones-element",
+    "w:in-ones-honour",
+    "w:in-ones-own-right",
+    "w:in-ones-shadow",
+    "w:in-order",
+    "w:in-order-for",
+    "w:in-order-to",
+    "w:in-other-words",
+    "w:in-particular",
+    "w:in-passing",
+    "w:in-person",
+    "w:in-place",
+    "w:in-place-of",
+    "w:in-practice",
+    "w:in-print",
+    "w:in-progress",
+    "w:in-public",
+    "w:in-question",
+    "w:in-real-time",
+    "w:in-reality",
+    "w:in-response-to",
+    "w:in-return",
+    "w:in-return-for",
+    "w:in-search-of",
+    "w:in-season",
+    "w:in-secret",
+    "w:in-shape",
+    "w:in-short",
+    "w:in-sight",
+    "w:in-so-far-as",
+    "w:in-spite-of",
+    "w:in-store-for-sb",
+    "w:in-summary",
+    "w:in-terms",
+    "w:in-terms-of",
+    "w:in-that-case",
+    "w:in-the-dark",
+    "w:in-the-dead-of-night",
+    "w:in-the-dead-of-winter",
+    "w:in-the-distance",
+    "w:in-the-end",
+    "w:in-the-event-of-sth",
+    "w:in-the-face-of",
+    "w:in-the-first-place",
+    "w:in-the-form-of",
+    "w:in-the-hope-of",
+    "w:in-the-hope-that",
+    "w:in-the-knowledge-that",
+    "w:in-the-long-run",
+    "w:in-the-main",
+    "w:in-the-middle-of-nowhere",
+    "w:in-the-middle-of-sth",
+    "w:in-the-name-of",
+    "w:in-the-neighbourhood-of",
+    "w:in-the-process",
+    "w:in-the-process-of",
+    "w:in-the-red",
+    "w:in-the-region-of",
+    "w:in-the-same-boat",
+    "w:in-the-shoes-of",
+    "w:in-the-soup",
+    "w:in-the-wake-of-sth",
+    "w:in-the-way-of",
+    "w:in-theory",
+    "w:in-this-regard",
+    "w:in-time",
+    "w:in-total",
+    "w:in-turn",
+    "w:in-use",
+    "w:in-vain",
+    "w:in-your-face",
+    "w:join-in",
+    "w:jump-in",
+    "w:just-in-case",
+    "w:just-in-time",
+    "w:keep-in-mind",
+    "w:keep-in-touch-with",
+    "w:keep-sth-in-check",
+    "w:keep-sth-in-mind",
+    "w:key-sth-in",
+    "w:kick-in",
+    "w:late-in-the-day",
+    "w:lead-in",
+    "w:leave-sb-in-the-dust",
+    "w:let-in",
+    "w:lie-in",
+    "w:listen-in",
+    "w:live-in-hope",
+    "w:living-in-the-moment",
+    "w:lock-sth-in",
+    "w:log-in",
+    "w:lose-oneself-in",
+    "w:lost-in-thought",
+    "w:major-in",
+    "w:make-a-career-in",
+    "w:move-in",
+    "w:nose-in-the-air",
+    "w:ones-heart-is-in-ones-mouth",
+    "w:order-in",
+    "w:outside-in",
+    "w:pack-in",
+    "w:pack-it-in",
+    "w:page-in",
+    "w:phone-in",
+    "w:plug-in",
+    "w:pop-in",
+    "w:price-in",
+    "w:push-in",
+    "w:put-in",
+    "w:put-in-place",
+    "w:put-oneself-in-ones-shoes",
+    "w:put-sth-in-place",
+    "w:read-in",
+    "w:result-in",
+    "w:ring-in",
+    "w:roll-in",
+    "w:rule-in",
+    "w:run-in",
+    "w:run-in-the-family",
+    "w:send-in",
+    "w:set-in",
+    "w:set-sth-in-motion",
+    "w:share-in-sth",
+    "w:shot-in-the-dark",
+    "w:sign-in",
+    "w:sink-in",
+    "w:sit-in",
+    "w:sleep-in",
+    "w:stand-in",
+    "w:stand-in-for",
+    "w:stand-in-the-way",
+    "w:stand-in-the-way-of",
+    "w:stare-sb-in-the-face",
+    "w:step-in",
+    "w:stick-in-ones-mind",
+    "w:stop-in",
+    "w:stop-in-its-tracks",
+    "w:take-in",
+    "w:take-part-in",
+    "w:take-pride-in",
+    "w:take-sb-in",
+    "w:throw-in",
+    "w:tie-in",
+    "w:tie-in-with",
+    "w:trade-in",
+    "w:tune-in",
+    "w:tune-in-to-sth",
+    "w:turn-sth-in",
+    "w:up-in-arms",
+    "w:up-in-the-air",
+    "w:vote-in",
+    "w:walk-in",
+    "w:walk-in-ones-footsteps",
+    "w:walk-in-the-park",
+    "w:wall-in",
+    "w:want-in",
+    "w:wear-in",
+    "w:with-sth-in-mind",
+    "w:work-in-progress",
+    "w:zero-in-on-sth"
+  ]
 }

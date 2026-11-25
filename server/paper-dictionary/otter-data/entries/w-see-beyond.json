@@ -1,0 +1,155 @@
+{
+  "entryId": "w:see-beyond",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "see",
+      "beyond"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "beyond"
+      ],
+      [
+        "saw",
+        "beyond"
+      ],
+      [
+        "seeing",
+        "beyond"
+      ],
+      [
+        "seen",
+        "beyond"
+      ],
+      [
+        "sees",
+        "beyond"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "see beyond",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see beyond sth",
+  "senses": [
+    {
+      "senseId": "w:see-beyond#s1",
+      "pos": "短语",
+      "glossZh": "看出表象背后的东西；从更广的角度看待",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:see-beyond#e-f7d94fe9ff2d936d",
+          "text": "When I brush off a mistake in the moment, I’m really giving myself a second chance to see beyond the error itself.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 96
+          },
+          "parts": [
+            [
+              86,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:see-beyond#e-160f40aa3274d355",
+          "text": "Walking through Chinatown, I can see beyond the English translations of shop signs and understand the meaning hidden beneath.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:see-beyond#s2",
+      "pos": "短语",
+      "glossZh": "着眼于眼前阶段之后；预见后续发展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

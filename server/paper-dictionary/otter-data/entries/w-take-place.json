@@ -1,0 +1,175 @@
+{
+  "entryId": "w:take-place",
+  "headword": "take place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes place",
+    "taking place",
+    "took place"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "place"
+      ],
+      [
+        "takes",
+        "place"
+      ],
+      [
+        "taking",
+        "place"
+      ],
+      [
+        "took",
+        "place"
+      ],
+      [
+        "taken",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 17,
+    "mock": 144
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:take-place#s1",
+      "pos": "短语",
+      "glossZh": "发生；举行",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 144
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:place#s10",
+        "w:take#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-place#e-555960a214d7f655",
+          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-place#e-cc07c316edfcee2e",
+          "text": "【此处可播放相关音频，请去附件查看】 Where does the conversation probably take place?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 66
+          },
+          "parts": [
+            [
+              56,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-place#e-756700706b5fc1df",
+          "text": "All around the world, there are small changes taking place.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

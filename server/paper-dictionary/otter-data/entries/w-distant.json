@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 51
+    "mock": 9
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -202,6 +202,6 @@
       "reason": "广播专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

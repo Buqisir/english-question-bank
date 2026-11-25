@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 146
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 136
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -191,6 +191,9 @@
       "reason": "专业或专名用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:cottage-industry"
+  ]
 }

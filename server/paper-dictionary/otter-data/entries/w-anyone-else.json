@@ -1,0 +1,152 @@
+{
+  "entryId": "w:anyone-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "anyone",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "anyone",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "anyone else",
+  "senses": [
+    {
+      "senseId": "w:anyone-else#s1",
+      "pos": "短语",
+      "glossZh": "任何其他人；别人",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:anyone-else#e-f3a9a0b9a6aa3ef2",
+          "text": "Klein writes, “America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 133
+          },
+          "parts": [
+            [
+              122,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anyone-else#e-9fc56b2d8fba53eb",
+          "text": "This special building is a place in which theatre is made and where children, artists, writers and anyone else have the opportunity（机会）to do creative things.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 110
+          },
+          "parts": [
+            [
+              99,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anyone-else#e-dd8aec7321e89459",
+          "text": "Almost every one of them wanted to join the school team, and Peter and Oliver wanted it more than anyone else.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 109
+          },
+          "parts": [
+            [
+              98,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

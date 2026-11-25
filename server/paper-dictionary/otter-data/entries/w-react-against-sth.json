@@ -1,0 +1,103 @@
+{
+  "entryId": "w:react-against-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "react",
+      "against",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "react",
+        "against",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reacting against",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "react against sth",
+  "senses": [
+    {
+      "senseId": "w:react-against-sth#s1",
+      "pos": "短语",
+      "glossZh": "反对或抵制（现行做法、观念等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:react#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:react-against-sth#e-0d28cc7fe8a17cf6",
+          "text": "In the mid-20th century, Carl Rogers advocated empathetic listening and unconditional positive regard, reacting against then mainstream practice, which often interpreted, corrected, or reframed clients’ experiences.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 119
+          },
+          "parts": [
+            [
+              103,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              119
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

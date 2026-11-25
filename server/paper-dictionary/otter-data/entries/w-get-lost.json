@@ -1,0 +1,212 @@
+{
+  "entryId": "w:get-lost",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting lost",
+    "got lost"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "lost"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "lost"
+      ],
+      [
+        "getting",
+        "lost"
+      ],
+      [
+        "got",
+        "lost"
+      ],
+      [
+        "gets",
+        "lost"
+      ],
+      [
+        "gotten",
+        "lost"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get lost",
+  "senses": [
+    {
+      "senseId": "w:get-lost#s1",
+      "pos": "短语",
+      "glossZh": "迷路；找不到方向",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-lost#e-2f64abb82266d73f",
+          "text": "He got lost while playing in the street.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-lost#e-3bc7ea40eea37510",
+          "text": "Let your eyes, hands, and mind explore, get lost, and discover the land on your own terms.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-lost#e-04eb6c28341d1f28",
+          "text": "The only certainty is that you will get lost, you will get stuck and you will break down.”",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:grammar-fill:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:get-lost#s2",
+      "pos": "短语",
+      "glossZh": "丢失；下落不明",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-lost#s3",
+      "pos": "短语",
+      "glossZh": "被掩盖；变得难以察觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-lost#s4",
+      "pos": "短语",
+      "glossZh": "走开！滚开！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作祈使句时语气粗鲁。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

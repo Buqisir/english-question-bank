@@ -1,0 +1,68 @@
+{
+  "entryId": "w:ones-mouth-waters",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "one’s mouth waters"
+  ],
+  "pattern": {
+    "tokens": [
+      {
+        "slot": "one's"
+      },
+      "mouth",
+      "waters"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        {
+          "slot": "one's"
+        },
+        "mouth",
+        "waters"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one's mouth waters",
+  "senses": [
+    {
+      "senseId": "w:ones-mouth-waters#s1",
+      "pos": "短语",
+      "glossZh": "馋得流口水",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:mouth#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

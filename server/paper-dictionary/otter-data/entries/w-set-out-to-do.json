@@ -1,0 +1,171 @@
+{
+  "entryId": "w:set-out-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "out",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "out",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set out to",
+      "tags": []
+    },
+    {
+      "form": "sets out to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set out to do",
+  "senses": [
+    {
+      "senseId": "w:set-out-to-do#s1",
+      "pos": "短语",
+      "glossZh": "着手做某事；立意做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:set#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-out-to-do#e-9c4c28c85ab8c076",
+          "text": "This is why Campbell has set out to raise awareness of AI and its future now - several decades before these developments are expected to take place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 35
+          },
+          "parts": [
+            [
+              25,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-out-to-do#e-4bba1c20d1143387",
+          "text": "At 80, Betty Kellenberger tightened her pack and set out to hike the 2,197-mile Appalachian Trail.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-out-to-do#e-7dc60d3d561766ff",
+          "text": "Researchers at the University of Chicago set out to understand when and why this occurs.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

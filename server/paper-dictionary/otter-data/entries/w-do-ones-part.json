@@ -1,0 +1,193 @@
+{
+  "entryId": "w:do-ones-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "do",
+      {
+        "slot": "one's"
+      },
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        {
+          "slot": "one's"
+        },
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "do part",
+      "tags": []
+    },
+    {
+      "form": "doing part",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do one's part",
+  "senses": [
+    {
+      "senseId": "w:do-ones-part#s1",
+      "pos": "短语",
+      "glossZh": "尽自己的一份力；尽自己的本分",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:part#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:do-ones-part#e-423946b07cd06b45",
+          "text": "Do your part to preserve what makes a destination special in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              8,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              8,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-ones-part#e-6b2dd56eaf2487ad",
+          "text": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 133
+          },
+          "parts": [
+            [
+              119,
+              124
+            ],
+            [
+              129,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              124
+            ],
+            [
+              129,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-ones-part#e-3bac28bef83afcc1",
+          "text": "Point by point, we fought back, each of us doing our part, the score climbing to 24 - 18.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-170",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 57
+          },
+          "parts": [
+            [
+              43,
+              48
+            ],
+            [
+              53,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              48
+            ],
+            [
+              53,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

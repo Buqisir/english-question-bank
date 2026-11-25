@@ -1,0 +1,99 @@
+{
+  "entryId": "w:a-hard-nut-to-crack",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "hard",
+      "nut",
+      "to",
+      "crack"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "hard",
+        "nut",
+        "to",
+        "crack"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a hard nut to crack",
+  "senses": [
+    {
+      "senseId": "w:a-hard-nut-to-crack#s1",
+      "pos": "短语",
+      "glossZh": "难对付的人；棘手的问题",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nut#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-hard-nut-to-crack#e-770305c16bbed7d8",
+          "text": "A hard nut to crack.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zj-2026-03-m171:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 19
+          },
+          "parts": [
+            [
+              0,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

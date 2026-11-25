@@ -1,0 +1,127 @@
+{
+  "entryId": "w:end-of-the-world",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "end",
+      "of",
+      "the",
+      "world"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "of",
+        "the",
+        "world"
+      ],
+      [
+        "ends",
+        "of",
+        "the",
+        "world"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end of the world",
+  "senses": [
+    {
+      "senseId": "w:end-of-the-world#s1",
+      "pos": "短语",
+      "glossZh": "世界的尽头；天涯海角",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:end-of-the-world#e-887b88e486039d36",
+          "text": "“It almost represents the end of the world – as far as you can go by walking.”",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 42
+          },
+          "parts": [
+            [
+              26,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:end-of-the-world#s2",
+      "pos": "短语",
+      "glossZh": "世界末日；人类或地球的毁灭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:end-of-the-world#s3",
+      "pos": "短语",
+      "glossZh": "（夸张说法）天大的坏事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "It's not the end of the world 表示事情还没那么糟。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

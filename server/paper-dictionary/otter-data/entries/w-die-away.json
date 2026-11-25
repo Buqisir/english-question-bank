@@ -1,0 +1,142 @@
+{
+  "entryId": "w:die-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "die",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "die",
+        "away"
+      ],
+      [
+        "died",
+        "away"
+      ],
+      [
+        "dies",
+        "away"
+      ],
+      [
+        "dying",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "died away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "die away",
+  "senses": [
+    {
+      "senseId": "w:die-away#s1",
+      "pos": "短语",
+      "glossZh": "逐渐减弱直至消失",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:die#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:die-away#e-551e5923fa106ae2",
+          "text": "But his passion for dunk never died away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:die-away#e-78c1ddfc9fb12964",
+          "text": "died away",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:cloze",
+            "locator": {
+              "question": 49,
+              "questionId": "question:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:49#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "可形容声音、风势、热情等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

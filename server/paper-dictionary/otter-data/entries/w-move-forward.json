@@ -1,0 +1,294 @@
+{
+  "entryId": "w:move-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moving forward"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "forward"
+      ],
+      [
+        "moving",
+        "forward"
+      ],
+      [
+        "moved",
+        "forward"
+      ],
+      [
+        "moves",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved forward",
+      "tags": []
+    },
+    {
+      "form": "moves forward",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move forward",
+  "senses": [
+    {
+      "senseId": "w:move-forward#s1",
+      "pos": "短语",
+      "glossZh": "继续前进；取得进展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-forward#e-dd542d6c140c8486",
+          "text": "Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 84
+          },
+          "parts": [
+            [
+              71,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-forward#e-cea7cf0a687409b4",
+          "text": "That night, I learned a valuable lesson: Don’t let the darkness stop you from moving forward.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 92
+          },
+          "parts": [
+            [
+              78,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-forward#e-583d4e2890d06ac6",
+          "text": "Most importantly, you will reflect on how to move forward on the leadership challenges you care about most.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 57
+          },
+          "parts": [
+            [
+              45,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:move-forward#s2",
+      "pos": "短语",
+      "glossZh": "今后；从现在起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-forward#e-a201a8211aeba88f",
+          "text": "“There’s a lot of potential moving forward.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 42
+          },
+          "parts": [
+            [
+              28,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "用于作状语的 moving forward。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:move-forward#s5",
+      "pos": "短语",
+      "glossZh": "向前移动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-forward#e-82a801da4478e81b",
+          "text": "The wind bit into his thin jacket, and his old shoes grew heavy with mud, but the thought of keeping his promise and maintaining his integrity kept him moving forward through the dimly lit urban landscape.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 166
+          },
+          "parts": [
+            [
+              152,
+              166
+            ]
+          ],
+          "highlightRanges": [
+            [
+              152,
+              166
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:move-forward#s3",
+      "pos": "短语",
+      "glossZh": "推动（计划、工作等）取得进展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 move sth forward。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-forward#s4",
+      "pos": "短语",
+      "glossZh": "把（活动或时间）提前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 move sth forward。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

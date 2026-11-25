@@ -1,0 +1,97 @@
+{
+  "entryId": "w:heart-of-gold",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heart",
+      "of",
+      "gold"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heart",
+        "of",
+        "gold"
+      ],
+      [
+        "hearts",
+        "of",
+        "gold"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heart of gold",
+  "senses": [
+    {
+      "senseId": "w:heart-of-gold#s1",
+      "pos": "短语",
+      "glossZh": "一颗金子般的心；非常善良、乐于助人的心肠",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:heart-of-gold#e-06d1c00dc2e294a1",
+          "text": "The greengrocer with a heart of gold – a Chinese immigrant in her 50s who runs this stall alone – is rarely glimpsed by her grateful customers.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 36
+          },
+          "parts": [
+            [
+              23,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 57
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -168,40 +168,6 @@
       ]
     },
     {
-      "senseId": "w:cake#s3",
-      "pos": "短语",
-      "glossZh": "轻而易举的事",
-      "pronunciationId": "w:cake#p-main",
-      "note": "a piece of cake",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cake#e-76d3b159d079ded8",
-          "text": "“Shén me, Shén me… What, What…” A piece of cake!",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cake#s4",
       "pos": "v.",
       "glossZh": "（泥等）结成硬块；使表面结成硬壳",
@@ -209,7 +175,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -241,6 +207,11 @@
       "reason": "俚语或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-piece-of-cake"
+  ]
 }

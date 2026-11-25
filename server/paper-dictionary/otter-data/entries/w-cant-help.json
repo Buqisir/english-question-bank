@@ -1,0 +1,204 @@
+{
+  "entryId": "w:cant-help",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "couldn't help"
+  ],
+  "pattern": {
+    "tokens": [
+      "can't",
+      "help"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can't",
+        "help"
+      ],
+      [
+        "couldn't",
+        "help"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can't help",
+  "senses": [
+    {
+      "senseId": "w:cant-help#s1",
+      "pos": "短语",
+      "glossZh": "忍不住；不由得",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cant-help#e-4e7029202b5ce580",
+          "text": "Though scared speechless, I couldn’t help noticing how beautiful they looked in their natural setting.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 41
+          },
+          "parts": [
+            [
+              28,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-help#e-a2a1c73244297d00",
+          "text": "After school, head down, I dragged my feet on the road and couldn’t help complaining about mom’s absence.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 72
+          },
+          "parts": [
+            [
+              59,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-help#e-c418bd42998a8fc5",
+          "text": "He loved Ling, but he couldn’t help thinking: if only Mom and Dad were here.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 35
+          },
+          "parts": [
+            [
+              22,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常接动词的 -ing 形式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:cant-help#s2",
+      "pos": "短语",
+      "glossZh": "无法避免或改变（某种情况）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cant-help#e-dad0dd3572b79b6b",
+          "text": "They can’t help their situation, and it seems to me that they deserve to enjoy life as much as anyone.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

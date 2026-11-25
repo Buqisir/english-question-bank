@@ -1,0 +1,98 @@
+{
+  "entryId": "w:race-against-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "race",
+      "against",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "race",
+        "against",
+        "time"
+      ],
+      [
+        "races",
+        "against",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "race against time",
+  "senses": [
+    {
+      "senseId": "w:race-against-time#s1",
+      "pos": "短语",
+      "glossZh": "与时间赛跑；争分夺秒赶在时限前完成",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:race-against-time#e-6d0949315c0fdc64",
+          "text": "A race against time to rescue rock carvings",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:35#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 19
+          },
+          "parts": [
+            [
+              2,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

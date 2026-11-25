@@ -1,0 +1,126 @@
+{
+  "entryId": "w:frame-of-reference",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "frame",
+      "of",
+      "reference"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "frame",
+        "of",
+        "reference"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "frame of reference",
+  "senses": [
+    {
+      "senseId": "w:frame-of-reference#s1",
+      "pos": "短语",
+      "glossZh": "参照系；判断物体位置或方向的基准",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:frame#s5",
+        "w:reference#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:frame-of-reference#e-123008fdc1d06ecc",
+          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 149
+          },
+          "parts": [
+            [
+              131,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              149
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:frame-of-reference#e-7d45e9496452d18a",
+          "text": "This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 90
+          },
+          "parts": [
+            [
+              72,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

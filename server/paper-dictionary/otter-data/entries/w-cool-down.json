@@ -1,0 +1,170 @@
+{
+  "entryId": "w:cool-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cool",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cool",
+        "down"
+      ],
+      [
+        "cooled",
+        "down"
+      ],
+      [
+        "cooling",
+        "down"
+      ],
+      [
+        "cools",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cool down",
+      "tags": []
+    },
+    {
+      "form": "cools down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cool (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:cool-down#s1",
+      "pos": "短语",
+      "glossZh": "（使）平静下来；（争论等）缓和下来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cool-down#e-bf454a48de586d66",
+          "text": "When one person remains reasonable, the argument usually cools down much faster.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 67
+          },
+          "parts": [
+            [
+              57,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cool-down#s2",
+      "pos": "短语",
+      "glossZh": "（使）变凉；（使）降温",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cool-down#e-fdc25fbee2eadcb5",
+          "text": "They fail to cool down.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:34#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cool-down#s3",
+      "pos": "短语",
+      "glossZh": "（需求、活动等）降温；趋缓",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,200 @@
+{
+  "entryId": "w:pop-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pop",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pop",
+        "up"
+      ],
+      [
+        "popped",
+        "up"
+      ],
+      [
+        "popping",
+        "up"
+      ],
+      [
+        "pops",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "popped up",
+      "tags": []
+    },
+    {
+      "form": "popping up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pop up",
+  "senses": [
+    {
+      "senseId": "w:pop-up#s1",
+      "pos": "短语",
+      "glossZh": "突然出现；冒出来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pop-up#e-a496cf35c0d4855c",
+          "text": "Paragraph 1: As we reached the last riddle, a clue about an ancient Chinese tale suddenly popped up.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 99
+          },
+          "parts": [
+            [
+              90,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pop-up#e-59897c1ccfc2490d",
+          "text": "However, using the previous handwritten records for testing was trickier than expected and bugs kept popping up.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 111
+          },
+          "parts": [
+            [
+              101,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pop-up#e-d5f86a00076e349d",
+          "text": "Some people are really good at using all the cool new tools that keep popping up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 80
+          },
+          "parts": [
+            [
+              70,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              80
+            ]
+          ]
+        }
+      ],
+      "note": "也可指内容在搜索结果或网页中出现。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:pop-up#s2",
+      "pos": "短语",
+      "glossZh": "（物体）突然向上弹出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pop-up#s3",
+      "pos": "短语",
+      "glossZh": "（窗口、提示等）在屏幕上自动弹出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

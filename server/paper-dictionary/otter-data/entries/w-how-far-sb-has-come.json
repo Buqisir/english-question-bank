@@ -1,0 +1,70 @@
+{
+  "entryId": "w:how-far-sb-has-come",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "far",
+      {
+        "slot": "sb"
+      },
+      "has",
+      "come"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "far",
+        {
+          "slot": "sb"
+        },
+        "has",
+        "come"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how far sb has come",
+  "senses": [
+    {
+      "senseId": "w:how-far-sb-has-come#s1",
+      "pos": "短语",
+      "glossZh": "某人已经取得了多大进步",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:far#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

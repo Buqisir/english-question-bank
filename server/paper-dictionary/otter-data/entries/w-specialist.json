@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 14
+    "mock": 2
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -278,6 +278,6 @@
       "reason": "军事、生态或学校专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

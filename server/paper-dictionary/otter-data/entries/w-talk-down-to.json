@@ -1,0 +1,112 @@
+{
+  "entryId": "w:talk-down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "down",
+        "to"
+      ],
+      [
+        "talked",
+        "down",
+        "to"
+      ],
+      [
+        "talking",
+        "down",
+        "to"
+      ],
+      [
+        "talks",
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "talked down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk down to sb",
+  "senses": [
+    {
+      "senseId": "w:talk-down-to#s1",
+      "pos": "短语",
+      "glossZh": "以居高临下的口气对某人说话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:talk-down-to#e-5b199593087395ca",
+          "text": "Studies show that young people are hungry for signs of social standing and respect, so they are especially insulted（冒犯） when they sense they are being talked down to.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 165
+          },
+          "parts": [
+            [
+              151,
+              165
+            ]
+          ],
+          "highlightRanges": [
+            [
+              151,
+              165
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,187 @@
+{
+  "entryId": "w:use-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "uses up",
+    "using up"
+  ],
+  "pattern": {
+    "tokens": [
+      "use",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "use",
+        "up"
+      ],
+      [
+        "uses",
+        "up"
+      ],
+      [
+        "using",
+        "up"
+      ],
+      [
+        "used",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "used up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "use sth up",
+  "senses": [
+    {
+      "senseId": "w:use-up#s1",
+      "pos": "短语",
+      "glossZh": "用完；耗尽",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:use#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:use-up#e-fca152dd4fa4be5b",
+          "text": "Toby was using up his energy by running back and forth in the backyard and giving the kids plenty of room.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          },
+          "parts": [
+            [
+              9,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:use-up#e-e75a5a0cb9d5f6d3",
+          "text": "This behavior uses up precious energy and makes you highly visible to the enemy.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:use-up#e-adc47bb174533a7e",
+          "text": "One possible explanation for this heat-aggression link in cold-blooded animals is that warmth dials up the animals’ metabolisms(代谢), using up more of their energy.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 141
+          },
+          "parts": [
+            [
+              133,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              141
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:use-up#s2",
+      "pos": "短语",
+      "glossZh": "占去（时间或空间）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

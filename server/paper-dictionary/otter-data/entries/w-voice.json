@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 240
+    "mock": 49
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 146
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -248,7 +248,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -292,12 +292,12 @@
       "pos": "n.",
       "glossZh": "声部",
       "pronunciationId": "w:voice#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -305,12 +305,12 @@
       "pos": "n.",
       "glossZh": "写作中的个人表达风格",
       "pronunciationId": "w:voice#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -325,6 +325,40 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:voice#s9",
+      "pos": "n.",
+      "glossZh": "表达思想或情感的方式",
+      "pronunciationId": "w:voice#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:voice#e-90712d50811ff299",
+          "text": "Words are the voice of the mind.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-nb-2026-m2:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -333,6 +367,9 @@
       "reason": "专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:give-voice"
+  ]
 }

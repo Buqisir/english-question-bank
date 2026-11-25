@@ -48,8 +48,8 @@
     "mock": 45
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 39
+    "gaokao": 1,
+    "mock": 11
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -122,112 +122,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:lion#s2",
-      "pos": "短语",
-      "glossZh": "美洲狮",
-      "pronunciationId": "w:lion#p-main",
-      "note": "mountain lion。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lion#e-a33ed33db5a1ec4c",
-          "text": "This __46__ climbing up and down the side of a mountain inhabited (栖息) by mountain lions, although I should say they were only heard, never __47__.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 83,
-            "end": 88
-          }
-        },
-        {
-          "exampleId": "w:lion#e-e5695da434b32c4f",
-          "text": "“See, a mountain lion!",
-          "source": {
-            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
-            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
-            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:seven-choices:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lion#s3",
-      "pos": "短语",
-      "glossZh": "海狮",
-      "pronunciationId": "w:lion#p-main",
-      "note": "sea lion。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lion#e-ef6c6e92b7b74a02",
-          "text": "Sea Lion Studio – Encounter Sea Lions",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-a",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-a:10",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:lion#e-35f8bdc2b215d747",
-          "text": "To attend the Dolphin or Sea Lion Presentation, please reserve online.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-a",
-            "locator": {
-              "paragraph": 12,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-a:12",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 29,
-            "end": 33
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -236,6 +130,8 @@
       "reason": "专名，m2、m10、m18 留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

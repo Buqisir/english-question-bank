@@ -1,0 +1,127 @@
+{
+  "entryId": "w:life-is-too-short",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "life",
+      "is",
+      "too",
+      "short"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "life",
+        "is",
+        "too",
+        "short"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "life is too short",
+  "senses": [
+    {
+      "senseId": "w:life-is-too-short#s1",
+      "pos": "短语",
+      "glossZh": "人生苦短，别把时间耗在不值得的事上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:life-is-too-short#e-c3c373cda8109ac5",
+          "text": "Ultimately, time is just a construct, and life is too short to stress about being late.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 59
+          },
+          "parts": [
+            [
+              42,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:life-is-too-short#e-a429776817eb7285",
+          "text": "Life is Too Short for So Many Texting.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth 或 for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

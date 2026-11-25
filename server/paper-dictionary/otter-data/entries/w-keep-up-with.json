@@ -1,0 +1,315 @@
+{
+  "entryId": "w:keep-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping up with"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "up",
+        "with"
+      ],
+      [
+        "keeping",
+        "up",
+        "with"
+      ],
+      [
+        "keeps",
+        "up",
+        "with"
+      ],
+      [
+        "kept",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kept up with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep up with",
+  "senses": [
+    {
+      "senseId": "w:keep-up-with#s1",
+      "pos": "短语",
+      "glossZh": "跟上……的速度或进度；与……保持同步",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s18",
+        "w:up#s88"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-up-with#e-9912f777e0450b12",
+          "text": "Ho recognizes the psychological benefit of helping kids keep up with their peers（同龄人）outside the hospital.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 68
+          },
+          "parts": [
+            [
+              56,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up-with#e-528811f7dfb3375c",
+          "text": "One evening, I struggle to keep up with some scientists as they march through thick grass in the Falklands.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 39
+          },
+          "parts": [
+            [
+              27,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up-with#e-91354a03d176ffa6",
+          "text": "So much so that these sources cannot keep up with evaporation (蒸发).",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 49
+          },
+          "parts": [
+            [
+              37,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              49
+            ]
+          ]
+        }
+      ],
+      "note": "接 demand 时表示跟上需求。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:keep-up-with#s2",
+      "pos": "短语",
+      "glossZh": "及时了解；跟上（潮流、动态等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-up-with#e-beecf78c8381c516",
+          "text": "Clothing, water bottles, takeout containers, cutting boards – it’s challenging to keep up with the growing number of items that expose us to tiny plastic particles.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 94
+          },
+          "parts": [
+            [
+              82,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up-with#e-1dccf7d217c0fe72",
+          "text": "Keep up with the latest trends.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:keep-up-with#s3",
+      "pos": "短语",
+      "glossZh": "坚持做；持续进行（练习等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-up-with#e-6570802028f181f4",
+          "text": "You worked out twice, read 20 pages of that business book, spent quality time with family, and kept up with your meditation practice.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 107
+          },
+          "parts": [
+            [
+              95,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-up-with#s4",
+      "pos": "短语",
+      "glossZh": "跟上并理解（讨论或论证的思路）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

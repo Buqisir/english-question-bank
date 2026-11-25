@@ -1,0 +1,421 @@
+{
+  "entryId": "w:bring-sth-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bring back",
+    "bringing back",
+    "brings back"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      {
+        "slot": "sth"
+      },
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "bring",
+        {
+          "slot": "sth"
+        },
+        "back"
+      ],
+      [
+        "bring",
+        "back"
+      ],
+      [
+        "bring",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "bringing",
+        "back"
+      ],
+      [
+        "brings",
+        "back"
+      ],
+      [
+        "brought",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brought back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth back",
+  "senses": [
+    {
+      "senseId": "w:bring-sth-back#s1",
+      "pos": "短语",
+      "glossZh": "带回来；带回原处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-sth-back#e-b1a1f584779c882d",
+          "text": "Then he went around to local ponds and streams and brought back some plants and animals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-ee7b1dbc0f7b4157",
+          "text": "What did Alex bring back?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 24
+          },
+          "parts": [
+            [
+              14,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-5a7ce8ebbc2687ef",
+          "text": "Two out of three Americans bring back a souvenir from their travels, with US sales topping $21bn in 2022.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:bring-sth-back#s2",
+      "pos": "短语",
+      "glossZh": "恢复；使重新出现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s11",
+        "w:bring#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-sth-back#e-1d89d84ca356fbbb",
+          "text": "“We’re trying to generate a language that helps bring the human-nature interactions back into our daily lives.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 88
+          },
+          "parts": [
+            [
+              48,
+              53
+            ],
+            [
+              84,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              53
+            ],
+            [
+              84,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-3e7d1ac9056cca26",
+          "text": "But some ecologists and fashion (时装)enthusiasts are trying to bring back the market for fur made from nutria(海狸鼠).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-ff657ccd190b8ef0",
+          "text": "Movies like Barbie, Indiana Jones, and Top Gun are drawing huge crowds by bringing back old favorites.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 87
+          },
+          "parts": [
+            [
+              74,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:bring-sth-back#s3",
+      "pos": "短语",
+      "glossZh": "唤起回忆；使想起往事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s11",
+        "w:bring#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-sth-back#e-812f37314c9ecf2b",
+          "text": "Bring back lost memories.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-a:28#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-0014d1592c108ff6",
+          "text": "“Retracing your steps works because it reinstates the original episode and brings back the buried intention to the surface.”",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 86
+          },
+          "parts": [
+            [
+              75,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              86
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-back#e-60566b4b9048e3c8",
+          "text": "But the sight of the boards brought back bad memories for me.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 40
+          },
+          "parts": [
+            [
+              28,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

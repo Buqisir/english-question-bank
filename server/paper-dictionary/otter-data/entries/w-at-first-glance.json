@@ -1,0 +1,156 @@
+{
+  "entryId": "w:at-first-glance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "first",
+      "glance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "first",
+        "glance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at first glance",
+  "senses": [
+    {
+      "senseId": "w:at-first-glance#s1",
+      "pos": "短语",
+      "glossZh": "乍一看；凭初步印象",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:glance#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-first-glance#e-22fc3691d6df7938",
+          "text": "At first glance, the idea of living a minimalist（极简主义的）lifestyle may sound difficult, restrictive, or even boring.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-first-glance#e-0c854be4e05e7fab",
+          "text": "At first glance, the polymer lantern seems simple.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-first-glance#e-9ae24f13f8580683",
+          "text": "At first glance, this sounds like a superpower.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -48,8 +48,8 @@
     "mock": 36
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 27
+    "gaokao": 5,
+    "mock": 1
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -196,78 +196,6 @@
       ]
     },
     {
-      "senseId": "w:citizen#s3",
-      "pos": "短语",
-      "glossZh": "参与科学研究的公众志愿者",
-      "pronunciationId": "w:citizen#p-main",
-      "note": "citizen scientist",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:citizen#e-57a3db4a19c73a89",
-          "text": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 85,
-            "end": 92
-          }
-        },
-        {
-          "exampleId": "w:citizen#e-a40c9303d10318f6",
-          "text": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 104,
-            "end": 111
-          }
-        },
-        {
-          "exampleId": "w:citizen#e-8725c59a2bf8a172",
-          "text": "NASA has issued a public call to the nation’s “community of makers, garage designers, and citizen scientists” to help develop a zero-gravity toilet.",
-          "source": {
-            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
-            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
-            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 90,
-            "end": 97
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:citizen#s4",
       "pos": "n.",
       "glossZh": "共同体的成员",
@@ -275,7 +203,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -326,6 +254,8 @@
       "reason": "专称或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

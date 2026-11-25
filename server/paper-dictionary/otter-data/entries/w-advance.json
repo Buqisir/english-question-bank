@@ -71,8 +71,8 @@
     "mock": 212
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 212
+    "gaokao": 5,
+    "mock": 58
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -135,7 +135,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -181,58 +181,6 @@
       ]
     },
     {
-      "senseId": "w:advance#s3",
-      "pos": "adj. / 短语",
-      "glossZh": "预先的；提前（in advance）",
-      "pronunciationId": "w:advance#p-main",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:advance#e-66d9eda3876f2da1",
-          "text": "Advance bookings are required(info@middletonlodge.co.uk)",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-a",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:advance#e-3bbdafa6a0033d1f",
-          "text": "Registration must be made at least two weeks in advance.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:advance#s4",
       "pos": "adj.",
       "glossZh": "先进的；高级的（advanced）",
@@ -240,7 +188,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 98
       },
       "folded": false,
       "examples": [
@@ -309,12 +257,12 @@
       "pos": "v.",
       "glossZh": "前进；向前移动",
       "pronunciationId": "w:advance#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -329,9 +277,67 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:advance#s7",
+      "pos": "adj.",
+      "glossZh": "（疾病）晚期的；进展到严重阶段的（advanced）",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advance#e-8795ec5e0c01f2fb",
+          "text": "His eye disease was too advanced to be treated.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:advance#e-65707d4db5b11de0",
+          "text": "This matching opens the door to innovative combinations and, in many cases, renewed hope for those with advanced or recurrent disease.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 112
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-advance"
+  ]
 }

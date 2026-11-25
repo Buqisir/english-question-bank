@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 47
+    "mock": 11
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -211,6 +211,6 @@
       "reason": "计算机专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:prior-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "prior",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "prior",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "prior to",
+  "senses": [
+    {
+      "senseId": "w:prior-to#s1",
+      "pos": "短语",
+      "glossZh": "在……之前",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:prior#s2",
+        "w:to#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:prior-to#e-fd37c90686705679",
+          "text": "Prior to SLEAP, tracking the physical characteristics of both plants and animals required a lot of labor that slowed the scientific process.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:prior-to#e-10872641ab5cccc3",
+          "text": "or course, you are responsible for discussing it with your instructor prior to using it.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 78
+          },
+          "parts": [
+            [
+              70,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:prior-to#e-e3c76a0ff367a692",
+          "text": "Eurail Trips have to be booked a minimum of 21 days prior to the desired start date.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          },
+          "parts": [
+            [
+              52,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              60
+            ]
+          ]
+        }
+      ],
+      "note": "较正式。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

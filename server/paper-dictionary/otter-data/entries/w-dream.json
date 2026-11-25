@@ -66,8 +66,8 @@
     "mock": 334
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 328
+    "gaokao": 10,
+    "mock": 165
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -223,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -294,7 +294,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -327,7 +327,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -370,59 +370,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:dream#s6",
-      "pos": "短语",
-      "glossZh": "想出；构思出",
-      "pronunciationId": "w:dream#p-main",
-      "note": "dream up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dream#e-6c97b9d18376bb92",
-          "text": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "reading-c-2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:dream#e-9cb3aa9a8b2c16a6",
-          "text": "He wasn’t mean or abusive; he just gave me the impression he could do whatever project we dreamed up better if he did it alone.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 97
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -431,6 +378,12 @@
       "reason": "大写同形缩略词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dream-come-true",
+    "w:dream-up"
+  ]
 }

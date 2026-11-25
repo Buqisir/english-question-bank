@@ -1,0 +1,101 @@
+{
+  "entryId": "w:go-through-the-motions",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "through",
+      "the",
+      "motions"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "through",
+        "the",
+        "motions"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "going through the motions",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go through the motions",
+  "senses": [
+    {
+      "senseId": "w:go-through-the-motions#s1",
+      "pos": "短语",
+      "glossZh": "走过场；敷衍了事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:motion#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-through-the-motions#e-bbcc6770fd910348",
+          "text": "It often comes across as going through the motions of life without truly connecting to it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 50
+          },
+          "parts": [
+            [
+              25,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,270 @@
+{
+  "entryId": "w:what-if",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "what if"
+  ],
+  "pattern": {
+    "tokens": [
+      "what",
+      "if",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "if",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what if …",
+  "senses": [
+    {
+      "senseId": "w:what-if#s1",
+      "pos": "短语",
+      "glossZh": "要是……会怎样；如果……怎么办",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:if#s5",
+        "w:what#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:what-if#e-0bd8efca14618f5a",
+          "text": "“What if he has told the truth?” he thought to himself.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-if#e-6217e3b932a491ae",
+          "text": "That’s when Julia, who used to play lots of sports in high school, had a sudden idea: what if they",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 93
+          },
+          "parts": [
+            [
+              86,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-if#e-5eef24d97234b161",
+          "text": "The truth that poured out was simple and childlike: What if this book isn’t as good as the first?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
+          },
+          "parts": [
+            [
+              52,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 37
+      }
+    },
+    {
+      "senseId": "w:what-if#s2",
+      "pos": "短语",
+      "glossZh": "要不……怎么样（提出建议）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-if#e-53122cfcd35b4630",
+          "text": "Suddenly an idea struck him, “What if I run and collect firsthand data myself?” he thought.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          },
+          "parts": [
+            [
+              30,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-if#e-7f8831b5c6237b66",
+          "text": "What if I could reframe my commute as daily creative brainstorming sessions?",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-if#e-82ce9f49b3bb80c1",
+          "text": "What if the tear wasn’t just a tear, but a line of shining light?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,157 @@
+{
+  "entryId": "w:hot-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hot",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hot",
+        "spot"
+      ],
+      [
+        "hot",
+        "spots"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hot spots",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hot spot",
+  "senses": [
+    {
+      "senseId": "w:hot-spot#s1",
+      "pos": "短语",
+      "glossZh": "某种活动频繁或某类生物聚集的热点地区",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hot-spot#e-0de18abd87017b50",
+          "text": "The sea is also a hot spot for some seabirds.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          },
+          "parts": [
+            [
+              18,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hot-spot#e-deec32f5ca64d050",
+          "text": "Birding has boosted my time outdoors, pushing me to explore my neighborhood in ways I never would have: amazing hot spots in industrial areas, wastewater treatment plants, and random parks.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 121
+          },
+          "parts": [
+            [
+              112,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              121
+            ]
+          ]
+        }
+      ],
+      "note": "如观鸟热点、海鸟聚集地，也可指冲突、风险或生物多样性集中的地区。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:hot-spot#s2",
+      "pos": "短语",
+      "glossZh": "温度或辐射高于周围的局部区域",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-spot#s3",
+      "pos": "短语",
+      "glossZh": "无线网络热点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

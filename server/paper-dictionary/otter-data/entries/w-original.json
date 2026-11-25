@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 113
+    "mock": 3
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -285,9 +285,42 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:original#s5",
+      "pos": "n.",
+      "glossZh": "有独创性的人",
+      "pronunciationId": "w:original#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:original#e-0fd9491d84205976",
+          "text": "Yet after years of studying originals, I have found that the advantages of acting quickly are often outweighed by the downsides.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

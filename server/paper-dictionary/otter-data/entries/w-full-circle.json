@@ -1,0 +1,76 @@
+{
+  "entryId": "w:full-circle",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "full",
+      "circle"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "full",
+        "circle"
+      ],
+      [
+        "full",
+        "circles"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "full circle",
+  "senses": [
+    {
+      "senseId": "w:full-circle#s1",
+      "pos": "短语",
+      "glossZh": "兜了一圈又回到起点；经历变化后回到原状",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常作 come full circle。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:full-circle#s2",
+      "pos": "短语",
+      "glossZh": "转满一整圈，回到原位或原朝向",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

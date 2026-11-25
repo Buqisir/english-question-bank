@@ -1,0 +1,113 @@
+{
+  "entryId": "w:go-through-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "through",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "through",
+        "with"
+      ],
+      [
+        "goes",
+        "through",
+        "with"
+      ],
+      [
+        "going",
+        "through",
+        "with"
+      ],
+      [
+        "gone",
+        "through",
+        "with"
+      ],
+      [
+        "went",
+        "through",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go through with",
+  "senses": [
+    {
+      "senseId": "w:go-through-with#s1",
+      "pos": "短语",
+      "glossZh": "把已决定或答应的事做到底",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-through-with#e-bebe8a0f8dc53e96",
+          "text": "Consumed by fear, I called Sally in tears, telling her I couldn’t go through with it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 81
+          },
+          "parts": [
+            [
+              66,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              81
+            ]
+          ]
+        }
+      ],
+      "note": "常指虽有顾虑或困难仍继续做。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

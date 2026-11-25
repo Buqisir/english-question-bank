@@ -47,8 +47,8 @@
     "mock": 26
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 20
+    "gaokao": 1,
+    "mock": 1
   },
   "senses": [
     {
@@ -59,7 +59,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -130,7 +130,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -198,47 +198,13 @@
       "pos": "n.",
       "glossZh": "巨人",
       "pronunciationId": "w:giant#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:giant#s4",
-      "pos": "短语",
-      "glossZh": "大熊猫",
-      "pronunciationId": "w:giant#p-main",
-      "note": "giant panda。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:giant#e-41f88c15999558ce",
-          "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP).",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "grammar-fill-1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 66
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -247,6 +213,8 @@
       "reason": "网络专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

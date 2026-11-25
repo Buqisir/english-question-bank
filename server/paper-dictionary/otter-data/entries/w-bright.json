@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 101
+    "mock": 7
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -354,12 +354,12 @@
       "pos": "adj.",
       "glossZh": "聪明的；机灵的",
       "pronunciationId": "w:bright#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -367,12 +367,12 @@
       "pos": "adv.",
       "glossZh": "明亮地",
       "pronunciationId": "w:bright#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -382,6 +382,11 @@
       "reason": "专名或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bright-side",
+    "w:bright-spot",
+    "w:look-on-the-bright-side"
+  ]
 }

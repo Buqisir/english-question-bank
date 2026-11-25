@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 48
+    "mock": 2
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -184,12 +184,12 @@
       "pos": "n.",
       "glossZh": "正方形",
       "pronunciationId": "w:square#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 8
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -200,7 +200,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -234,7 +234,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -335,26 +335,12 @@
       "pos": "v.",
       "glossZh": "求……的平方",
       "pronunciationId": "w:square#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:square#s8",
-      "pos": "短语",
-      "glossZh": "与……一致",
-      "pronunciationId": "w:square#p-main",
-      "note": "square with。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -364,6 +350,11 @@
       "reason": "专业义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:square-with"
+  ]
 }

@@ -1,0 +1,221 @@
+{
+  "entryId": "w:cut-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "up"
+      ],
+      [
+        "cuts",
+        "up"
+      ],
+      [
+        "cutting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cut up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:cut-up#s1",
+      "pos": "短语",
+      "glossZh": "切碎；切成小块或小段",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-up#e-639c25c0952e2ad8",
+          "text": "The company processes unwanted clothes at a Parisian studio, where clothes are sorted by color and cut up into fibers.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 105
+          },
+          "parts": [
+            [
+              99,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              105
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-up#s2",
+      "pos": "短语",
+      "glossZh": "把（人或动物）多处割伤",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s3",
+      "pos": "短语",
+      "glossZh": "使很难过；使伤心",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be cut up about sth 表示为某事十分难过。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s4",
+      "pos": "短语",
+      "glossZh": "（英式英语）突然并到别车前面，迫使对方避让",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s5",
+      "pos": "短语",
+      "glossZh": "（非正式）耍宝；胡闹逗笑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s6",
+      "pos": "短语",
+      "glossZh": "（俚语）精瘦且肌肉线条分明的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s7",
+      "pos": "短语",
+      "glossZh": "（旧用法）严厉批评",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s8",
+      "pos": "短语",
+      "glossZh": "碎裂；（场地）因踩踏而变得坑洼",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s9",
+      "pos": "短语",
+      "glossZh": "（旧用法）遗产分配后所得多或少",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-up#s10",
+      "pos": "短语",
+      "glossZh": "（体育）形成某种参赛阵容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

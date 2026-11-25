@@ -1,0 +1,163 @@
+{
+  "entryId": "w:spring-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spring",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spring",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "spring from",
+      "tags": []
+    },
+    {
+      "form": "springs from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spring from sth",
+  "senses": [
+    {
+      "senseId": "w:spring-from#s1",
+      "pos": "短语",
+      "glossZh": "源于；由……引起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:spring#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:spring-from#e-723592ff6d263c83",
+          "text": "This phenomenon springs from “cognitive offloading” (认知卸载) — users accept AI-generated answers without critical confirmation.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 28
+          },
+          "parts": [
+            [
+              16,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:spring-from#e-06b77007fe112c20",
+          "text": "Meanwhile, expert Robert Stickgold argues that dreams spring from memory.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:spring-from#e-6001d144378f8a6c",
+          "text": "They pointed out that the bystander effect mainly springs from people’s failure to interpret a situation as an emergency due to others’ inaction.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

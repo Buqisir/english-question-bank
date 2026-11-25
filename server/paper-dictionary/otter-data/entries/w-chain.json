@@ -59,146 +59,21 @@
     "mock": 50
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 41
+    "gaokao": 1,
+    "mock": 22
   },
   "senses": [
-    {
-      "senseId": "w:chain#s1",
-      "pos": "短语",
-      "glossZh": "供应链",
-      "pronunciationId": "w:chain#p-main",
-      "note": "supply chain",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chain#e-8a93a75461170a17",
-          "text": "Food waste is a growing concern in the restaurant, supermarket, and supply chain industries.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 75,
-            "end": 80
-          }
-        },
-        {
-          "exampleId": "w:chain#e-f9fb202e4934f9a8",
-          "text": "Still, the young supply chain means manufacturing these batteries is currently about 30 percent more expensive, realistically pushing mass production toward the end of this decade.” We should be looking into lowering the cost while maintaining their strong performance at low temperatures,” says Phate Zhang, an EV news founder.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 24,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:chain#e-99698ab492cac582",
-          "text": "Looking ahead, the company will further strengthen its supply chain by expanding sourcing capabilities, improving logistics (物流) efficiency, and investing in production capacity and research and development.",
-          "source": {
-            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
-            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
-            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:grammar-fill",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:grammar-fill:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 62,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:chain#s2",
-      "pos": "短语",
-      "glossZh": "食物链",
-      "pronunciationId": "w:chain#p-main",
-      "note": "food chain",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chain#e-f62992a8e49deb49",
-          "text": "Experiments show that shading from panels can slow the growth of algae that fish eat and also reduce harmful algae, affecting the food chain.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
-            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 135,
-            "end": 140
-          }
-        },
-        {
-          "exampleId": "w:chain#e-35ed087e9234fb6b",
-          "text": "“It’s sad how widely human activities impact the ocean,” Chong says, noting that plastics in the patch not only entangle marine life or block their digestive systems, but also carry harmful substances up the food chain to higher-level organisms, ultimately threatening the balance of entire marine ecosystems.",
-          "source": {
-            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
-            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
-            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 213,
-            "end": 218
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:chain#s3",
       "pos": "n.",
       "glossZh": "链子；链条",
       "pronunciationId": "w:chain#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -209,7 +84,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -280,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -329,12 +204,12 @@
       "pos": "v.",
       "glossZh": "用链子拴住；束缚",
       "pronunciationId": "w:chain#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -344,6 +219,8 @@
       "reason": "测量或数学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,75 @@
+{
+  "entryId": "w:hold-it-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "it",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "it",
+        "together"
+      ],
+      [
+        "held",
+        "it",
+        "together"
+      ],
+      [
+        "holding",
+        "it",
+        "together"
+      ],
+      [
+        "holds",
+        "it",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold it together",
+  "senses": [
+    {
+      "senseId": "w:hold-it-together#s1",
+      "pos": "短语",
+      "glossZh": "在压力下保持镇定；控制住情绪",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

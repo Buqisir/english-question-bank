@@ -1,0 +1,123 @@
+{
+  "entryId": "w:no-big-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "big",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "big",
+        "deal"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no big deal",
+  "senses": [
+    {
+      "senseId": "w:no-big-deal#s1",
+      "pos": "短语",
+      "glossZh": "没什么大不了；不算什么大事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-big-deal#e-bac9d4294c3bca83",
+          "text": "Memory troubles are no big deal.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-big-deal#e-cf018a60f9b6fe51",
+          "text": "No big deal.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

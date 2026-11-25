@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 14
+    "mock": 5
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -307,41 +307,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:license#s6",
-      "pos": "短语",
-      "glossZh": "车辆牌照",
-      "pronunciationId": "w:license#p-main",
-      "note": "license plate，美式用法。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:license#e-f9729974c8a3bd95",
-          "text": "Her rear license plate light is not on.",
-          "source": {
-            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
-            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
-            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:listening.long-form",
-            "locator": {
-              "question": 6,
-              "questionId": "question:listening:6",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 16
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -350,6 +315,8 @@
       "reason": "语言学术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

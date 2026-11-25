@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 177
+    "mock": 5
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 111
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -209,7 +209,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -313,7 +313,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -383,6 +383,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:cold#s8",
+      "pos": "adv.",
+      "glossZh": "突然且彻底地（停住）",
+      "pronunciationId": "w:cold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cold#e-6c0ae80cb618ac93",
+          "text": "A statistic – the average life expectancy of a mill worker in 1830 was just 42 – stopped him cold.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -391,6 +424,9 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:catch-a-cold"
+  ]
 }

@@ -42,8 +42,8 @@
     "mock": 65
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 61
+    "gaokao": 1,
+    "mock": 13
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -193,113 +193,12 @@
       "pos": "n.",
       "glossZh": "南方",
       "pronunciationId": "w:south#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:south#s4",
-      "pos": "短语",
-      "glossZh": "南非",
-      "pronunciationId": "w:south#p-main",
-      "note": "South Africa。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:south#e-0b01c13c25806b52",
-          "text": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:south#e-d3480a6d3203f9c6",
-          "text": "There, a street honoring anti-apartheid (反种族隔离) leader Albert Luthuli has a sign noting: “Formerly: Louis Botha street,” named after a prime minister of colonial South Africa.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 162,
-            "end": 167
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:south#s5",
-      "pos": "短语",
-      "glossZh": "南美洲",
-      "pronunciationId": "w:south#p-main",
-      "note": "South America。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:south#e-b633bd39ab09d81d",
-          "text": "Researchers from the University of Buenos Aires have successfully used a robotic tutor to teach the male chingolo, a kind of small bird in South America, a song that was once part of the species’ culture but had been lost for more than half a century.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
-            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 139,
-            "end": 144
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:south#s6",
-      "pos": "短语",
-      "glossZh": "变糟",
-      "pronunciationId": "w:south#p-main",
-      "note": "go south，美式非正式用法。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
       "examples": []
     }
   ],
@@ -309,6 +208,11 @@
       "reason": "特定用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-south"
+  ]
 }

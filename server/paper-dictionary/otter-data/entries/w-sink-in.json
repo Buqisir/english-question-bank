@@ -1,0 +1,134 @@
+{
+  "entryId": "w:sink-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sink",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sink",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sank in",
+      "tags": []
+    },
+    {
+      "form": "sinking in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sink in",
+  "senses": [
+    {
+      "senseId": "w:sink-in#s1",
+      "pos": "短语",
+      "glossZh": "逐渐被理解；慢慢被领会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s74",
+        "w:sink#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sink-in#e-bbb310031be1bc0b",
+          "text": "Progress can be slow, and you’ll wonder if it’s all sinking in.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sink-in#e-c20a5586e53299f0",
+          "text": "Her words sank in.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

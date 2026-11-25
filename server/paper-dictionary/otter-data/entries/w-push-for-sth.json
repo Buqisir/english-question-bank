@@ -1,0 +1,170 @@
+{
+  "entryId": "w:push-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "push for",
+      "tags": []
+    },
+    {
+      "form": "pushed for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push for sth",
+  "senses": [
+    {
+      "senseId": "w:push-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "努力争取；大力推动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:push#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:push-for-sth#e-04e8f4f463560696",
+          "text": "\"We need something on the books that can change people’s behavior,” said Félix W. Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 103
+          },
+          "parts": [
+            [
+              93,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:push-for-sth#e-9cebf4f0a3862e7a",
+          "text": "She notes parents should push for safer spaces, prepare kids for dangers, and wait for the right time to let them explore.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:push-for-sth#e-5deb49bef8136645",
+          "text": "Push for stricter delivery rules.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

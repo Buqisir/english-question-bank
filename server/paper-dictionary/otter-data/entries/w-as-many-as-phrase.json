@@ -1,0 +1,126 @@
+{
+  "entryId": "w:as-many-as-phrase",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "many",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "many",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as many as",
+  "senses": [
+    {
+      "senseId": "w:as-many-as-phrase#s1",
+      "pos": "短语",
+      "glossZh": "多达（某一数量）",
+      "note": "后接数字，强调数量多。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:many#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-many-as-phrase#e-7f83472c2a6d7013",
+          "text": "Instead, as many as 800, 000 crowded the roads to the bridge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-many-as-phrase#e-bd90f6375ef250ed",
+          "text": "As many as 117 sirenas once invested over 40 hours in clearing a massive 300-foot-long fishing net.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,133 @@
+{
+  "entryId": "w:go-up-in-smoke",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "up",
+      "in",
+      "smoke"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "up",
+        "in",
+        "smoke"
+      ],
+      [
+        "goes",
+        "up",
+        "in",
+        "smoke"
+      ],
+      [
+        "going",
+        "up",
+        "in",
+        "smoke"
+      ],
+      [
+        "gone",
+        "up",
+        "in",
+        "smoke"
+      ],
+      [
+        "went",
+        "up",
+        "in",
+        "smoke"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go up in smoke",
+  "senses": [
+    {
+      "senseId": "w:go-up-in-smoke#s1",
+      "pos": "短语",
+      "glossZh": "（计划、希望、成果等）化为乌有",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:smoke#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-up-in-smoke#e-7396f2d551377fc0",
+          "text": "But now thinking of the loan, weeks of work, and my friends’ disappointed faces, I wouldn’t want our business to go up in smoke.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 127
+          },
+          "parts": [
+            [
+              113,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              127
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-up-in-smoke#s2",
+      "pos": "短语",
+      "glossZh": "被彻底烧毁；付之一炬",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

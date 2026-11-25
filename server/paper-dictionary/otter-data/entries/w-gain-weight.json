@@ -1,0 +1,151 @@
+{
+  "entryId": "w:gain-weight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "gain",
+      "weight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "gain",
+        "weight"
+      ],
+      [
+        "gained",
+        "weight"
+      ],
+      [
+        "gaining",
+        "weight"
+      ],
+      [
+        "gains",
+        "weight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gained weight",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "gain weight",
+  "senses": [
+    {
+      "senseId": "w:gain-weight#s1",
+      "pos": "动词短语",
+      "glossZh": "体重增加；长胖",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:gain-weight#e-3abe2a3681ca7580",
+          "text": "As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 95
+          },
+          "parts": [
+            [
+              84,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:gain-weight#e-74e20582b9464311",
+          "text": "Three recaptured individuals had gained weight, showing they could hunt successfully in the wild.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 46
+          },
+          "parts": [
+            [
+              33,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:gain-weight#s2",
+      "pos": "动词短语",
+      "glossZh": "（观点或论据）变得更有分量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

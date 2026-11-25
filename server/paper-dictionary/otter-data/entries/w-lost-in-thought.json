@@ -1,0 +1,135 @@
+{
+  "entryId": "w:lost-in-thought",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lost",
+      "in",
+      "thought"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lost",
+        "in",
+        "thought"
+      ],
+      [
+        "more",
+        "lost",
+        "in",
+        "thought"
+      ],
+      [
+        "most",
+        "lost",
+        "in",
+        "thought"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lost in thought",
+  "senses": [
+    {
+      "senseId": "w:lost-in-thought#s1",
+      "pos": "短语",
+      "glossZh": "陷入沉思；想得出神",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lost-in-thought#e-26648485b8055f5c",
+          "text": "I just got on to warm my feet, if you don’t mind.” Hearing this, Frank was lost in thought.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 90
+          },
+          "parts": [
+            [
+              75,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lost-in-thought#e-926344a02350f07d",
+          "text": "Sitting on the library steps outside, Nate was lost in thought.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 62
+          },
+          "parts": [
+            [
+              47,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

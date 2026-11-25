@@ -1,0 +1,132 @@
+{
+  "entryId": "w:set-fire-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "setting fire to"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      "fire",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "fire",
+        "to"
+      ],
+      [
+        "setting",
+        "fire",
+        "to"
+      ],
+      [
+        "sets",
+        "fire",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set fire to sth",
+  "senses": [
+    {
+      "senseId": "w:set-fire-to#s1",
+      "pos": "短语",
+      "glossZh": "使某物着火；放火烧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-fire-to#e-6aae555c8616226e",
+          "text": "Whether it was sheltering Jews or transporting top-secret information in her saddlebags, setting fire to military facilities or shooting Nazi officers, the breathtaking courage she demonstrated was unprecedented.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 104
+          },
+          "parts": [
+            [
+              89,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-fire-to#s2",
+      "pos": "短语",
+      "glossZh": "彻底破坏或推翻（旧制度、旧观念等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "比喻用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-fire-to#s3",
+      "pos": "短语",
+      "glossZh": "激起（热情、愤怒等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "比喻用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,60 @@
+{
+  "entryId": "w:ready-to-roll",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ready",
+      "to",
+      "roll"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ready",
+        "to",
+        "roll"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ready to roll",
+  "senses": [
+    {
+      "senseId": "w:ready-to-roll#s1",
+      "pos": "短语",
+      "glossZh": "准备就绪；随时可以开始或出发",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

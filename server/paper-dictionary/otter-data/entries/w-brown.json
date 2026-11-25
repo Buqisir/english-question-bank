@@ -102,7 +102,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 36
+    "mock": 12
   },
   "senses": [
     {
@@ -113,7 +113,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -184,7 +184,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -241,6 +241,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:brown#s4",
+      "pos": "n.",
+      "glossZh": "（hash browns）煎薯饼",
+      "pronunciationId": "w:brown#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brown#e-08e2727c78723cf2",
+          "text": "At a breakfast buffet at the airport, I sampled a vegan meatball, while Leopold tried a mouse bite of hash browns he said looked “funny.” Neither of us loved it, but we both agreed it wasn’t bad.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 113
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -249,6 +282,6 @@
       "reason": "专名、俚语或领域专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

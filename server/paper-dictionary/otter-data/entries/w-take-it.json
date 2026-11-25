@@ -1,0 +1,93 @@
+{
+  "entryId": "w:take-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes it",
+    "taking it",
+    "took it"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "it"
+      ],
+      [
+        "takes",
+        "it"
+      ],
+      [
+        "taking",
+        "it"
+      ],
+      [
+        "took",
+        "it"
+      ],
+      [
+        "taken",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take it",
+  "senses": [
+    {
+      "senseId": "w:take-it#s1",
+      "pos": "短语",
+      "glossZh": "以为；据此推断",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 I take it (that) …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-it#s2",
+      "pos": "短语",
+      "glossZh": "承受；忍受（压力、痛苦等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 can/can’t take it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

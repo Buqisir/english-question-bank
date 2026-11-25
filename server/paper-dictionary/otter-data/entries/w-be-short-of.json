@@ -1,0 +1,168 @@
+{
+  "entryId": "w:be-short-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "short",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "short",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are short of",
+      "tags": []
+    },
+    {
+      "form": "is short of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be short of",
+  "senses": [
+    {
+      "senseId": "w:be-short-of#s1",
+      "pos": "短语",
+      "glossZh": "缺少；（钱、时间等）不够",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:short#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-short-of#e-13c1d3e5c3516816",
+          "text": "They are short of time.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-short-of#e-3f99f2552acc1149",
+          "text": "He is short of money.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-short-of#e-1cf4ac9d58763d2f",
+          "text": "He is short of money",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

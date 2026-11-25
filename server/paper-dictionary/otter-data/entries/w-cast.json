@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 42
+    "mock": 13
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -298,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -324,113 +324,6 @@
       ]
     },
     {
-      "senseId": "w:cast#s6",
-      "pos": "短语",
-      "glossZh": "使人怀疑；使……受到怀疑",
-      "pronunciationId": "w:cast#p-main",
-      "note": "cast doubt on",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cast#e-f916bf1c96c1d719",
-          "text": "A huge and beautifully preserved set of fossils （化石） discovered in China has cast doubt on the idea that complex life dramatically flourished during a rapid burst of evolution known as the Cambrian （寒武纪） explosion.",
-          "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
-            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 77,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:cast#e-a2277d95036b3f71",
-          "text": "Recent research has cast doubt on the universality of Darley and Latané’s classic bystander effect theory.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
-            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cast#s7",
-      "pos": "短语",
-      "glossZh": "阐明；使更清楚",
-      "pronunciationId": "w:cast#p-main",
-      "note": "cast light on",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cast#e-84f6394c6b0a0ab6",
-          "text": "Constantinou and his colleagues studied changes in the Venusian atmosphere to cast light on the water content of its interior.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
-            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
-            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 78,
-            "end": 82
-          }
-        },
-        {
-          "exampleId": "w:cast#e-cbb4a8bb03641d36",
-          "text": "It cast new light on medical studies.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:29",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cast#s8",
       "pos": "v.",
       "glossZh": "施（魔法）；施咒",
@@ -438,7 +331,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -514,12 +407,12 @@
       "pos": "n.",
       "glossZh": "（固定骨折处的）石膏；铸件",
       "pronunciationId": "w:cast#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -529,6 +422,14 @@
       "reason": "行业、技术或同形旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cast-an-eye-over-sth",
+    "w:cast-doubt-on",
+    "w:cast-light-on",
+    "w:cast-on"
+  ]
 }

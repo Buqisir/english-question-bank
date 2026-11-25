@@ -1,0 +1,125 @@
+{
+  "entryId": "w:on-the-clock",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "clock"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "clock"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the clock",
+  "senses": [
+    {
+      "senseId": "w:on-the-clock#s1",
+      "pos": "短语",
+      "glossZh": "在上班；处于计薪工作时间内",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:clock#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-clock#e-379b4c97270b6336",
+          "text": "How long we stay on the clock and how we spend that time are under careful examination in many workplaces.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 29
+          },
+          "parts": [
+            [
+              17,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-clock#e-743b445289acdc7a",
+          "text": "He did not do it as an employee, not on the clock, but as someone who recognized that this seventeen-year-old needed more than a fixed truck – he needed to connect to a grandfather, to a generation that built things to last, to a time when vehicles were simpler and more repairable.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 49
+          },
+          "parts": [
+            [
+              37,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

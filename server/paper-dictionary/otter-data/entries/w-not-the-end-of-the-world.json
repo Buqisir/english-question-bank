@@ -1,0 +1,98 @@
+{
+  "entryId": "w:not-the-end-of-the-world",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "the",
+      "end",
+      "of",
+      "the",
+      "world"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "the",
+        "end",
+        "of",
+        "the",
+        "world"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not the end of the world",
+  "senses": [
+    {
+      "senseId": "w:not-the-end-of-the-world#s1",
+      "pos": "短语",
+      "glossZh": "没那么严重；没什么大不了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-the-end-of-the-world#e-ae5f3006af0be9b6",
+          "text": "The key is understanding that it is not the end of the world – or a friendship.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 60
+          },
+          "parts": [
+            [
+              36,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

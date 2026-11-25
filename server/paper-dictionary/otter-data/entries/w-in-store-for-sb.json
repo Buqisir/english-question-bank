@@ -1,0 +1,76 @@
+{
+  "entryId": "w:in-store-for-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in store for somebody"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "store",
+      "for",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "store",
+        "for",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "in",
+        "store",
+        "for",
+        "somebody"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in store for sb",
+  "senses": [
+    {
+      "senseId": "w:in-store-for-sb#s1",
+      "pos": "短语",
+      "glossZh": "等待着某人；是某人将要面对的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:store#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

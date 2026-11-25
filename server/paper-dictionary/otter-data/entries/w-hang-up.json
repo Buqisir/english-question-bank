@@ -1,0 +1,216 @@
+{
+  "entryId": "w:hang-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "up"
+      ],
+      [
+        "hanging",
+        "up"
+      ],
+      [
+        "hangs",
+        "up"
+      ],
+      [
+        "hung",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hanging up",
+      "tags": []
+    },
+    {
+      "form": "hung up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang (sth) up",
+  "senses": [
+    {
+      "senseId": "w:hang-up#s1",
+      "pos": "短语",
+      "glossZh": "挂断电话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hang#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hang-up#e-12e3cbe84b3d9c84",
+          "text": "Society needs to see its creators.” Hanging up, I felt my stomach tighten.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 46
+          },
+          "parts": [
+            [
+              36,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-up#e-e8320587b0f938b4",
+          "text": "Paragraph 1: “I’ll be right there,” Mrs. Glover said and hung up.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-up#e-bfda7ca338a1f67b",
+          "text": "After hanging up, my dad thought aloud about the whole thing.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:hang-up#s2",
+      "pos": "短语",
+      "glossZh": "把衣物等挂起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-up#s3",
+      "pos": "短语",
+      "glossZh": "使耽搁；使卡住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 get hung up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-up#s4",
+      "pos": "短语",
+      "glossZh": "结束职业生涯；不再从事某项活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接代表该职业或活动的物品，如 hang up one's boots。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

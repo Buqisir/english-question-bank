@@ -1,0 +1,154 @@
+{
+  "entryId": "w:free-of-charge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "free",
+      "of",
+      "charge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "free",
+        "of",
+        "charge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "free of charge",
+  "senses": [
+    {
+      "senseId": "w:free-of-charge#s1",
+      "pos": "短语",
+      "glossZh": "免费；不收取费用",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:free-of-charge#e-b065ed6a47e6dee8",
+          "text": "Free of charge: Children under 1.2 meters (exclusive) in height, senior citizens aged 70 and above,",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:free-of-charge#e-72cf85e0a22fe757",
+          "text": "Accept the offer and receive fast payment OR decline and everything is returned, insured, free of charge",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 104
+          },
+          "parts": [
+            [
+              90,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:free-of-charge#e-b639416e35bf159b",
+          "text": "The selected residents will receive the device free of charge and will be able to keep it after the trial ends.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 61
+          },
+          "parts": [
+            [
+              47,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

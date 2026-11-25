@@ -1,0 +1,154 @@
+{
+  "entryId": "w:my-name-is",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "my",
+      "name",
+      "is"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "my",
+        "name",
+        "is"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "my name is",
+  "senses": [
+    {
+      "senseId": "w:my-name-is#s1",
+      "pos": "短语",
+      "glossZh": "我叫……（用于自我介绍）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:my-name-is#e-20010178b93a1f3f",
+          "text": "My name is Shaquille O’Neal, but no, I am not the legendary basketball star everyone knows.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:my-name-is#e-131c1df64dce5528",
+          "text": "My name is Helen, a middle-aged British woman.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:my-name-is#e-2deb7ca82431017a",
+          "text": "My name is Clara.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

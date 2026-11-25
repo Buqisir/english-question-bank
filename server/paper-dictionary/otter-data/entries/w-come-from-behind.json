@@ -1,0 +1,79 @@
+{
+  "entryId": "w:come-from-behind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came from behind",
+    "coming from behind"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "from",
+      "behind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "from",
+        "behind"
+      ],
+      [
+        "came",
+        "from",
+        "behind"
+      ],
+      [
+        "coming",
+        "from",
+        "behind"
+      ],
+      [
+        "comes",
+        "from",
+        "behind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come from behind",
+  "senses": [
+    {
+      "senseId": "w:come-from-behind#s1",
+      "pos": "短语",
+      "glossZh": "从落后中追上或反超",
+      "note": "常用于比赛，come from behind to win 表示逆转取胜。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

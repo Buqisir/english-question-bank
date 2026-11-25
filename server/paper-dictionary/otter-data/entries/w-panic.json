@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 52
+    "mock": 21
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -188,6 +188,9 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:get-into-a-panic"
+  ]
 }

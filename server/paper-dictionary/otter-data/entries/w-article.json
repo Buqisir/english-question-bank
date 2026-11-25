@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 82
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -123,12 +123,12 @@
       "glossZh": "物件；物品",
       "pronunciationId": "w:article#p-main",
       "note": "如 an article of clothing。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -165,6 +165,6 @@
       "reason": "历史用法或罕见义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

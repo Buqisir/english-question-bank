@@ -1,0 +1,101 @@
+{
+  "entryId": "w:life-of-its-own",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "life",
+      "of",
+      "its",
+      "own"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "life",
+        "of",
+        "its",
+        "own"
+      ],
+      [
+        "lives",
+        "of",
+        "their",
+        "own"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "life of its own",
+  "senses": [
+    {
+      "senseId": "w:life-of-its-own#s1",
+      "pos": "短语",
+      "glossZh": "不依附于外界安排的独立生活或发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:life-of-its-own#e-8b6fe188ba90786f",
+          "text": "Crucially, this companion will live a life of its own.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 53
+          },
+          "parts": [
+            [
+              38,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "事物作主语时，常用 have 或 take on a life of its own，指开始自行发展。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

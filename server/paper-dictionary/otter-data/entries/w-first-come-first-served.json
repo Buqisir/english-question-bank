@@ -1,0 +1,96 @@
+{
+  "entryId": "w:first-come-first-served",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "first",
+      "come",
+      ",",
+      "first",
+      "served"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "first",
+        "come",
+        ",",
+        "first",
+        "served"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "first come, first served",
+  "senses": [
+    {
+      "senseId": "w:first-come-first-served#s1",
+      "pos": "短语",
+      "glossZh": "先到先得；按到达顺序提供服务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:first-come-first-served#e-c923e0366fc6280a",
+          "text": "First come, first served.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 24
+          },
+          "parts": [
+            [
+              0,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,158 @@
+{
+  "entryId": "w:first-of-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "first",
+      "of",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "first",
+        "of",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "first of all",
+  "senses": [
+    {
+      "senseId": "w:first-of-all#s1",
+      "pos": "短语",
+      "glossZh": "首先；第一步",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s6",
+        "w:first#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:first-of-all#e-6054916205778384",
+          "text": "First of all, become aware of when and why you are regressing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:first-of-all#e-edd443c8e644d0c5",
+          "text": "First of all, learn the technique of nonstop writing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-ii:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:first-of-all#e-7c7ea8b92d8714ac",
+          "text": "First of all, decide what you want from that person.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "seven-choices-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 8,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

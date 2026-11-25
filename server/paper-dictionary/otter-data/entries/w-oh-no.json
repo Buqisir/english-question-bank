@@ -1,0 +1,153 @@
+{
+  "entryId": "w:oh-no",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "oh",
+      "no"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "oh",
+        "no"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "oh no",
+  "senses": [
+    {
+      "senseId": "w:oh-no#s1",
+      "pos": "短语",
+      "glossZh": "糟了！哎呀！",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:oh-no#e-b50209ebe2100683",
+          "text": "“Oh no, the lady took my phone by mistake!” Meanwhile, the guy on the bike stayed close to me.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 6
+          },
+          "parts": [
+            [
+              1,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:oh-no#e-86bf0a3223e8f1c4",
+          "text": "“Oh no, not again!” Mrs. Carter called out from behind the fence.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 6
+          },
+          "parts": [
+            [
+              1,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:oh-no#e-3579ea407dc6ee98",
+          "text": "Though she had an anxious “oh no” feeling, she didn’t stop him.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 32
+          },
+          "parts": [
+            [
+              27,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "遇到意外或坏消息时表示担忧或懊恼。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

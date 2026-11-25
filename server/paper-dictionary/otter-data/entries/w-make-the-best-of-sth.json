@@ -1,0 +1,276 @@
+{
+  "entryId": "w:make-the-best-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make the best of",
+    "making the best of"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "best",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "best",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the best of sth",
+  "senses": [
+    {
+      "senseId": "w:make-the-best-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "在不理想的处境中尽量把事情做好",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-the-best-of-sth#e-1996f77ca6e16d78",
+          "text": "Some looked like they had totally given up on life, while others seemed to be making the best of the situation, smiling and joking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 96
+          },
+          "parts": [
+            [
+              78,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-best-of-sth#e-f501d8f60be0507e",
+          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 110
+          },
+          "parts": [
+            [
+              94,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-best-of-sth#e-d2c3b6f418b89700",
+          "text": "When things get tough, they make the best of it and keep walking.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 44
+          },
+          "parts": [
+            [
+              28,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-the-best-of-sth#s2",
+      "pos": "短语",
+      "glossZh": "尽量利用现有资源或机会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s30"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-the-best-of-sth#e-05aefa59f65d26d7",
+          "text": "Making the best of this close encounter(相遇), I took some pictures of the bear.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-best-of-sth#e-c3d9f2b430ee262a",
+          "text": "You can choose to fight the current or go with it and make the best of what you find down river.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:4",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 70
+          },
+          "parts": [
+            [
+              54,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-best-of-sth#e-ad708f807f16c94e",
+          "text": "They simply make the best of what they have.” The students nodded, grasping the lesson hidden in a cup of coffee.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 28
+          },
+          "parts": [
+            [
+              12,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

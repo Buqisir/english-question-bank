@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 12
+    "mock": 0
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -175,6 +175,6 @@
       "reason": "俚语性委婉用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

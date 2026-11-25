@@ -1,0 +1,133 @@
+{
+  "entryId": "w:full-house",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "full",
+      "house"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "full",
+        "house"
+      ],
+      [
+        "full",
+        "houses"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "full house",
+  "senses": [
+    {
+      "senseId": "w:full-house#s1",
+      "pos": "短语",
+      "glossZh": "满场；座无虚席",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:full-house#e-69216237e99601be",
+          "text": "Its first showing in Rome successfully drew a full house and strong emotional reactions.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:full-house#s2",
+      "pos": "短语",
+      "glossZh": "（扑克）葫芦；三张同点数牌加一对",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:full-house#s3",
+      "pos": "短语",
+      "glossZh": "（英式橄榄球）同一球员单场集齐四种得分",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:full-house#s4",
+      "pos": "短语",
+      "glossZh": "（弹药）满威力装填的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

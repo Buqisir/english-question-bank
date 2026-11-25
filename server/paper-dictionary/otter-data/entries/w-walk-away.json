@@ -1,0 +1,288 @@
+{
+  "entryId": "w:walk-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking away"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "away"
+      ],
+      [
+        "walking",
+        "away"
+      ],
+      [
+        "walked",
+        "away"
+      ],
+      [
+        "walks",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk away",
+  "senses": [
+    {
+      "senseId": "w:walk-away#s1",
+      "pos": "短语",
+      "glossZh": "主动离开；从不愿继续的处境中抽身",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-away#e-bab30491ad28301f",
+          "text": "If the ongoing cost outweighs the expected benefit, one should cut their losses and walk away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 93
+          },
+          "parts": [
+            [
+              84,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-away#e-b02703ab4994a98f",
+          "text": "If you ever feel unsafe, it is always okay to set boundaries, ask for help, or walk away.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 88
+          },
+          "parts": [
+            [
+              79,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:walk-away#s2",
+      "pos": "短语",
+      "glossZh": "走开；步行离开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-away#e-bbb435c97ea2b7b6",
+          "text": "Ethan wanted to believe him, yet the picture of Tyler walking away kept replaying in his mind.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 66
+          },
+          "parts": [
+            [
+              54,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-away#e-cd735dd99c075dab",
+          "text": "After a while, she packed her knitting and slowly walked away into the crowd.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-away#e-d43f2150a1db677b",
+          "text": "Just before I walked away, one grinned and said, “Good luck in life!”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:walk-away#s3",
+      "pos": "短语",
+      "glossZh": "（从事故或险境中）平安脱身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-away#s4",
+      "pos": "短语",
+      "glossZh": "赢得或带走（奖品等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 walk away with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-away#s5",
+      "pos": "短语",
+      "glossZh": "（物品）不见了；被人拿走了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,181 @@
+{
+  "entryId": "w:open-the-door-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "open",
+      "the",
+      "door",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "open",
+        "the",
+        "door",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "open the door to",
+      "tags": []
+    },
+    {
+      "form": "opened the door to",
+      "tags": []
+    },
+    {
+      "form": "opening the door to",
+      "tags": []
+    },
+    {
+      "form": "opens the door to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "open the door to sth",
+  "senses": [
+    {
+      "senseId": "w:open-the-door-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "为……创造机会；使……得以接触或开展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:door#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:open-the-door-to-sth#e-442872140c89f7a3",
+          "text": "Who opened the door to philosophy for the author?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-national-a:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 22
+          },
+          "parts": [
+            [
+              4,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-the-door-to-sth#e-03fd8610cd81b87f",
+          "text": "By focusing on motion rather than high-tech sensing, we may open the door to robots that can go where others cannot.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 76
+          },
+          "parts": [
+            [
+              60,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-the-door-to-sth#e-67e5a5410b644cf2",
+          "text": "“By turning the coolant into a fluid, it opens the door to high-performance, zero-emission cooling for homes and industry.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 58
+          },
+          "parts": [
+            [
+              41,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

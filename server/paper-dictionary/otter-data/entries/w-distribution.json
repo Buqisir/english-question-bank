@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 17
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -195,6 +195,6 @@
       "reason": "牌戏、计算机或数学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

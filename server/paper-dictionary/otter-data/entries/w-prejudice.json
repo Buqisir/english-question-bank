@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 20
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -160,6 +160,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:prejudice#s4",
+      "pos": "adj.",
+      "glossZh": "带有偏见的",
+      "pronunciationId": "w:prejudice#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:prejudice#e-6a6f578c497b8b03",
+          "text": "This framing is not only prejudiced – it’s unscientific.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 35
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -168,6 +201,6 @@
       "reason": "旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

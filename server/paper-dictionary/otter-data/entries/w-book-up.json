@@ -1,0 +1,123 @@
+{
+  "entryId": "w:book-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "book",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "book",
+        "up"
+      ],
+      [
+        "booked",
+        "up"
+      ],
+      [
+        "booking",
+        "up"
+      ],
+      [
+        "books",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "booked up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "book up",
+  "senses": [
+    {
+      "senseId": "w:book-up#s1",
+      "pos": "短语",
+      "glossZh": "把名额订满；被订满",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:book-up#e-082d58633530204f",
+          "text": "booked up",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:cloze",
+            "locator": {
+              "question": 41,
+              "questionId": "question:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:41#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "be booked up 表示预订已满。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:book-up#s2",
+      "pos": "短语",
+      "glossZh": "钻研并熟悉某项内容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，可指钻研棋类比赛的开局。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

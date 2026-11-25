@@ -59,8 +59,8 @@
     "mock": 157
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 155
+    "gaokao": 28,
+    "mock": 134
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -135,275 +135,6 @@
       ]
     },
     {
-      "senseId": "w:deal#s2",
-      "pos": "短语",
-      "glossZh": "大量；相当多",
-      "pronunciationId": "w:deal#p-main",
-      "note": "a great deal (of) 或 a good deal (of)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:deal#e-6a1a0a3a91da0102",
-          "text": "She spent a great deal of time visiting the poor.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:deal#e-6f5ac4b8be432a25",
-          "text": "But if you have to read a great deal for study, you will appreciate the benefits of being able to read more quickly.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:deal#e-ce45c960c05a496d",
-          "text": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as __50__ to a restaurant where the service is __51__, the menu is known in advance, and the meal is expected to be no __52__.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 71
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:deal#s3",
-      "pos": "短语",
-      "glossZh": "处理；应对；与某人打交道",
-      "pronunciationId": "w:deal#p-main",
-      "note": "deal with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:deal#e-193f73fc4da8ac82",
-          "text": "I was back teaching after an absence of 15 years, dealing with the various kinds of “forbidden fruit” that come out of book bags.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 57
-          }
-        },
-        {
-          "exampleId": "w:deal#e-0f5e4a8e2ab52dc1",
-          "text": "How does the author deal with the challenge as a landscape photographer in the Midwest?",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2023-national-b:24",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:deal#e-08a429f6ba035a78",
-          "text": "Many of us also turn to food to deal with unpleasant emotions such as sadness, loneliness, or boredom.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:deal#s4",
-      "pos": "短语",
-      "glossZh": "涉及；论及",
-      "pronunciationId": "w:deal#p-main",
-      "note": "deal with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:deal#e-e5263fd4c2647e30",
-          "text": "A history book which may contain the facts in story form will be easier to read than one dealing with scientific subjects.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 103
-          }
-        },
-        {
-          "exampleId": "w:deal#e-1509b6fa76820ff3",
-          "text": "The themes of traditional fables often deal with simple truths about everyday life.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-a:grammar-fill:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:deal#s5",
-      "pos": "短语",
-      "glossZh": "重要的人或事；当作大事",
-      "pronunciationId": "w:deal#p-main",
-      "note": "a big deal 或 make a big deal of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:deal#e-2252c0965dc2e5e0",
-          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:deal#e-d6ba0a308c30a5c6",
-          "text": "“We didn’t make a big deal of that,” said Novem Auyeung, a Parks Department senior scientist.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:deal#e-d34e71694dc5749c",
-          "text": "That’s why we feel like we have to appear busy, and there’s a real perception that if someone is knee-deep in meetings, emails, and stress, then they’re probably a big deal.",
-          "source": {
-            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
-            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
-            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 168,
-            "end": 172
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:deal#s6",
       "pos": "v.",
       "glossZh": "买卖；经营",
@@ -442,13 +173,46 @@
       "pos": "v.",
       "glossZh": "发（牌）；给予（打击）",
       "pronunciationId": "w:deal#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:deal#s8",
+      "pos": "n.",
+      "glossZh": "（某人的）情况；来头",
+      "pronunciationId": "w:deal#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deal#e-8ae819ffe3199963",
+          "text": "“What’s Beth’s deal?” sets off a bullet point list of queries that reads like a multiple choice exam question (“Is Beth a celebrity?” “a friend from school?” “a fictional character?”).",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -457,6 +221,22 @@
       "reason": "木材专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-big-deal",
+    "w:a-good-deal",
+    "w:a-good-deal-of",
+    "w:a-great-deal",
+    "w:a-great-deal-of",
+    "w:big-deal",
+    "w:deal-in",
+    "w:deal-with",
+    "w:good-deal",
+    "w:make-a-big-deal-of-sth",
+    "w:no-big-deal",
+    "w:strike-a-deal"
+  ]
 }

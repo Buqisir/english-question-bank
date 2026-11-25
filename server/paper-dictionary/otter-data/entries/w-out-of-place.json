@@ -1,0 +1,184 @@
+{
+  "entryId": "w:out-of-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of place",
+  "senses": [
+    {
+      "senseId": "w:out-of-place#s1",
+      "pos": "短语",
+      "glossZh": "格格不入；因不适应环境而不自在",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:place#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-of-place#e-a2ad881a6bfc9385",
+          "text": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 87
+          },
+          "parts": [
+            [
+              75,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-place#e-c0d35b45c93fc842",
+          "text": "Looking back, I realize that what once made me feel out of place was actually where I was rooted.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 64
+          },
+          "parts": [
+            [
+              52,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-place#e-b9f7ca96b8bc7819",
+          "text": "Still, I felt awkward and out of place living in a right-handed world.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation:7",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:out-of-place#s2",
+      "pos": "短语",
+      "glossZh": "不合场合；不相称",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:place#s12"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-place#s3",
+      "pos": "短语",
+      "glossZh": "不在原位；放错了位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

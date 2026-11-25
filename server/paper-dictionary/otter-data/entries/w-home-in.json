@@ -1,0 +1,87 @@
+{
+  "entryId": "w:home-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "homes in"
+  ],
+  "pattern": {
+    "tokens": [
+      "home",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "home",
+        "in"
+      ],
+      [
+        "homes",
+        "in"
+      ],
+      [
+        "homed",
+        "in"
+      ],
+      [
+        "homing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "home in",
+  "senses": [
+    {
+      "senseId": "w:home-in#s1",
+      "pos": "短语",
+      "glossZh": "循着信号朝目标靠近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "home in on sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:home-in#s2",
+      "pos": "短语",
+      "glossZh": "逐步锁定（目标、原因等）；把注意力集中到……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "home in on sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

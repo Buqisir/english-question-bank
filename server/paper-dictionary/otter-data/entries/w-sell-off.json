@@ -1,0 +1,70 @@
+{
+  "entryId": "w:sell-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sell",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sell",
+        "off"
+      ],
+      [
+        "selling",
+        "off"
+      ],
+      [
+        "sells",
+        "off"
+      ],
+      [
+        "sold",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sell sth off",
+  "senses": [
+    {
+      "senseId": "w:sell-off#s1",
+      "pos": "短语",
+      "glossZh": "清仓出售；变卖资产",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

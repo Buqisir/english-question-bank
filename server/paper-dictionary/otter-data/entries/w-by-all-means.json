@@ -1,0 +1,81 @@
+{
+  "entryId": "w:by-all-means",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "all",
+      "means"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "all",
+        "means"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by all means",
+  "senses": [
+    {
+      "senseId": "w:by-all-means#s1",
+      "pos": "短语",
+      "glossZh": "当然可以；请便",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:all#s11",
+        "w:means#s4"
+      ],
+      "examples": [],
+      "note": "用于欣然同意对方的请求或提议。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:by-all-means#s2",
+      "pos": "短语",
+      "glossZh": "务必；一定要",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:all#s11",
+        "w:means#s4"
+      ],
+      "examples": [],
+      "note": "用于加强劝请或鼓励的语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

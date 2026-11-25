@@ -1,0 +1,166 @@
+{
+  "entryId": "w:take-part-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "part",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "part",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taking part in",
+      "tags": []
+    },
+    {
+      "form": "took part in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take part in",
+  "senses": [
+    {
+      "senseId": "w:take-part-in#s1",
+      "pos": "短语",
+      "glossZh": "参加；参与（活动、项目等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:part#s8",
+        "w:take#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-part-in#e-56029d9a46e877ef",
+          "text": "Lynn Lewis, director of Notting Hill Pathways, said: “We are happy to be taking part in the project.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "reading-c-8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 87
+          },
+          "parts": [
+            [
+              73,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-part-in#e-668cc91e4b2055ad",
+          "text": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 102
+          },
+          "parts": [
+            [
+              90,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-part-in#e-fea00591f7bb5823",
+          "text": "Among those taking part in the project is 80-year-old Ruth Xavier.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-c-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 28
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

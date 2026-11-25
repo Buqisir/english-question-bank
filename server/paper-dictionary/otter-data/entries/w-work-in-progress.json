@@ -1,0 +1,187 @@
+{
+  "entryId": "w:work-in-progress",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "work",
+      "in",
+      "progress"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "work",
+        "in",
+        "progress"
+      ],
+      [
+        "works",
+        "in",
+        "progress"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "work in progress",
+  "senses": [
+    {
+      "senseId": "w:work-in-progress#s1",
+      "pos": "短语",
+      "glossZh": "进行中的工作；尚未完成的作品或项目",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:work-in-progress#e-1ebeb7ac0ffd8d0f",
+          "text": "This can be a work in progress rather than a completed piece.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 30
+          },
+          "parts": [
+            [
+              14,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-in-progress#e-ec0b492fb3183403",
+          "text": "I tried to correct the behavior until I remembered that if I finish everything in my Work in Progress folder I’m afraid I’ll die,” Sarah Manguso once said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 101
+          },
+          "parts": [
+            [
+              85,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:work-in-progress#s2",
+      "pos": "短语",
+      "glossZh": "仍在成长或有待完善的人或事物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:work-in-progress#e-e18d96abd6900b91",
+          "text": "With more time to reflect, I realized I was a work in progress.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 62
+          },
+          "parts": [
+            [
+              46,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:work-in-progress#s3",
+      "pos": "短语",
+      "glossZh": "在制品；尚未完工的产品",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "制造业及会计用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

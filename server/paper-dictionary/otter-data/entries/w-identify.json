@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 226
+    "mock": 38
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 91
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -258,20 +258,6 @@
       ]
     },
     {
-      "senseId": "w:identify#s4",
-      "pos": "短语",
-      "glossZh": "与……有共鸣",
-      "pronunciationId": "w:identify#p-main",
-      "note": "identify with sb。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:identify#s5",
       "pos": "v.",
       "glossZh": "自我认定为",
@@ -287,6 +273,11 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:identify-with-sb"
+  ]
 }

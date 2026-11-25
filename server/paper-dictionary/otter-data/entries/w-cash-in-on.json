@@ -1,0 +1,99 @@
+{
+  "entryId": "w:cash-in-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cash",
+      "in",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cash",
+        "in",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cashes in on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cash in on sth",
+  "senses": [
+    {
+      "senseId": "w:cash-in-on#s1",
+      "pos": "短语",
+      "glossZh": "利用……赚钱；从……牟利",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cash#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cash-in-on#e-d3601ccc4467d6ee",
+          "text": "What is far less acceptable is the vet who cashes in on an owner’s misguided love for their pet to conduct unnecessary, painful and expensive tests and procedures on an animal that cannot give its permission.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,91 @@
+{
+  "entryId": "w:greater-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "greater",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "greater",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "greater good",
+  "senses": [
+    {
+      "senseId": "w:greater-good#s1",
+      "pos": "短语",
+      "glossZh": "更广泛的公共利益；整体利益",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:greater-good#e-e58143fbab2fdb99",
+          "text": "If creativity and innovation are accelerating (加速) faster than ever, what ensures they serve the greater good?",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 109
+          },
+          "parts": [
+            [
+              97,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              109
+            ]
+          ]
+        }
+      ],
+      "note": "常用 the greater good。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

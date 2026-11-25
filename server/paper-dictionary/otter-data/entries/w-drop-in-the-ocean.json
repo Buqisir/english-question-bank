@@ -1,0 +1,102 @@
+{
+  "entryId": "w:drop-in-the-ocean",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "in",
+      "the",
+      "ocean"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "in",
+        "the",
+        "ocean"
+      ],
+      [
+        "drops",
+        "in",
+        "the",
+        "ocean"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop in the ocean",
+  "senses": [
+    {
+      "senseId": "w:drop-in-the-ocean#s1",
+      "pos": "短语",
+      "glossZh": "沧海一粟；相对于所需总量微不足道的一点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drop-in-the-ocean#e-4265f1e3347ef08c",
+          "text": "A drop in the ocean.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zj-2026-03-m171:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 19
+          },
+          "parts": [
+            [
+              2,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "常作 a drop in the ocean。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

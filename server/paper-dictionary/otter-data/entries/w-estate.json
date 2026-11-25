@@ -42,7 +42,7 @@
     "mock": 7
   },
   "unassignedCounts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 3
   },
   "senses": [
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -118,78 +118,6 @@
       ]
     },
     {
-      "senseId": "w:estate#s2",
-      "pos": "短语",
-      "glossZh": "房地产",
-      "pronunciationId": "w:estate#p-main",
-      "note": "real estate。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:estate#e-cbebdf338745f47c",
-          "text": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:estate#e-c641e863669c93a8",
-          "text": "Sarah Jennings of Bay Shore, New York was ready to buy it, but her real estate agent suggested getting a home inspection.",
-          "source": {
-            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
-            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
-            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 72,
-            "end": 78
-          }
-        },
-        {
-          "exampleId": "w:estate#e-85e1c7f10e567c2a",
-          "text": "But for this vacant(空着的) office outside Dupont Circle in Washington, D. C., real estate developers see potential.",
-          "source": {
-            "paperId": "paper-mock-zj-wenzhou-2026-m2",
-            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
-            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 81,
-            "end": 87
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:estate#s3",
       "pos": "n.",
       "glossZh": "住宅区",
@@ -243,6 +171,11 @@
       "reason": "仅用于 estate car 的英式汽车用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:real-estate"
+  ]
 }

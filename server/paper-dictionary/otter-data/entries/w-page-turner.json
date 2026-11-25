@@ -1,0 +1,168 @@
+{
+  "entryId": "w:page-turner",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "page",
+      "turner"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "page",
+        "turner"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "page turner",
+  "senses": [
+    {
+      "senseId": "w:page-turner#s1",
+      "pos": "短语",
+      "glossZh": "翻谱员",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:page#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:page-turner#e-260c756f98650768",
+          "text": "In his spare time though he goes on stage beside pianist Maria Raspopova – not as a musician but as her page turner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 115
+          },
+          "parts": [
+            [
+              104,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:page-turner#e-cb2aacfb72dda4c7",
+          "text": "Mr Titterton is chairman of the Omega Ensemble but has been the group’s official page turner for the past four years.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 92
+          },
+          "parts": [
+            [
+              81,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:page-turner#e-c9a2b21a55cd86c3",
+          "text": "“He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’ “Robert is the best page turner I’ve had in my entire life.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 115
+          },
+          "parts": [
+            [
+              104,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:page-turner#s2",
+      "pos": "短语",
+      "glossZh": "引人入胜、让人读得停不下来的书",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "也写作 page-turner。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

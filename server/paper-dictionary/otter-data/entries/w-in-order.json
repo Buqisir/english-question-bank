@@ -1,0 +1,288 @@
+{
+  "entryId": "w:in-order",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "order"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "order"
+      ],
+      [
+        "more",
+        "in",
+        "order"
+      ],
+      [
+        "most",
+        "in",
+        "order"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in order",
+  "senses": [
+    {
+      "senseId": "w:in-order#s1",
+      "pos": "短语",
+      "glossZh": "井井有条；收拾妥当",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s87"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-order#e-3f9a1ef81bca6392",
+          "text": "She had prepared lots of snacks, while my job was to have the backyard in order.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 79
+          },
+          "parts": [
+            [
+              71,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order#e-1981626c3141ab3e",
+          "text": "To explore how ants keep the colony in order.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order#e-99760dcd50b70d47",
+          "text": "To keep dorm rooms in order.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-05-tenth:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:in-order#s2",
+      "pos": "短语",
+      "glossZh": "按顺序；依次",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-order#e-da301ea2cea18dad",
+          "text": "Toss (投掷) beanbags and try to land them on the digits of pi in order, starting with 3.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order#e-1c40c4eaa124d160",
+          "text": "However, when the staff started calling graduates up in order, I began to get nervous.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 61
+          },
+          "parts": [
+            [
+              53,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order#e-0cc9e40bf19311a1",
+          "text": "Test out different things and rank them in order of what your dog likes best.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:in-order#s3",
+      "pos": "短语",
+      "glossZh": "适当；合乎程序",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:order#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -78,7 +78,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 36
+    "mock": 1
   },
   "senses": [
     {
@@ -89,7 +89,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -161,7 +161,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -295,20 +295,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:salt#s7",
-      "pos": "短语",
-      "glossZh": "对……持保留态度",
-      "pronunciationId": "w:salt#p-main",
-      "note": "take sth with a pinch of salt。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -317,6 +303,12 @@
       "reason": "计算机专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:salt-out",
+    "w:take-sth-with-a-pinch-of-salt"
+  ]
 }

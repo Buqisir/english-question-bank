@@ -1,0 +1,96 @@
+{
+  "entryId": "w:from-near-and-far",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "near",
+      "and",
+      "far"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "near",
+        "and",
+        "far"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from near and far",
+  "senses": [
+    {
+      "senseId": "w:from-near-and-far#s1",
+      "pos": "短语",
+      "glossZh": "从远近各地；从四面八方",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:near#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:from-near-and-far#e-9b0bf47a4aeb2886",
+          "text": "People from near and far crowd into these markets on daji days.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 24
+          },
+          "parts": [
+            [
+              7,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

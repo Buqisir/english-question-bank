@@ -1,0 +1,135 @@
+{
+  "entryId": "w:friendly-fire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "friendly",
+      "fire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "friendly",
+        "fire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "friendly fire",
+  "senses": [
+    {
+      "senseId": "w:friendly-fire#s1",
+      "pos": "短语",
+      "glossZh": "（比喻）自身防御误伤自己一方",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:friendly-fire#e-1d59e9bb841c89cf",
+          "text": "If this pretence succeeds, it can lead to a form of biological “friendly fire,” where the immune system mistakenly attacks the body’s own cells.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 77
+          },
+          "parts": [
+            [
+              64,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:friendly-fire#e-c6465b6379c6c791",
+          "text": "What is the result of “friendly fire” ?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-guangdong-2025-12-second-joint-survey:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 36
+          },
+          "parts": [
+            [
+              23,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "如 biological friendly fire 指免疫系统误攻自身细胞。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:friendly-fire#s2",
+      "pos": "短语",
+      "glossZh": "造成误伤的友军火力；友军误击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

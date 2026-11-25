@@ -1,0 +1,134 @@
+{
+  "entryId": "w:go-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going along"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "along"
+      ],
+      [
+        "going",
+        "along"
+      ],
+      [
+        "goes",
+        "along"
+      ],
+      [
+        "gone",
+        "along"
+      ],
+      [
+        "went",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go along",
+  "senses": [
+    {
+      "senseId": "w:go-along#s1",
+      "pos": "短语",
+      "glossZh": "一起去；跟着去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-along#e-ec1337abd2ee5ad9",
+          "text": "I hurried to go along.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-along#s2",
+      "pos": "短语",
+      "glossZh": "顺着往前走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-along#s3",
+      "pos": "短语",
+      "glossZh": "继续进行；逐步推进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -75,8 +75,8 @@
     "mock": 135
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 132
+    "gaokao": 15,
+    "mock": 78
   },
   "senses": [
     {
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -191,7 +191,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -288,92 +288,19 @@
       "pos": "n.",
       "glossZh": "投掷",
       "pronunciationId": "w:throw#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:throw#s7",
-      "pos": "短语",
-      "glossZh": "丢弃",
+      "senseId": "w:throw#s11",
+      "pos": "v.",
+      "glossZh": "使突然陷入某种状态（throw ... into）",
       "pronunciationId": "w:throw#p-main",
-      "note": "throw away 或 throw out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:throw#e-393e9923b771ec11",
-          "text": "Clothing takes a huge amount of natural resources（资源）to make, and buying loads of new clothing ( or throwing out old clothing ) is not healthy for the environment.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 100,
-            "end": 108
-          }
-        },
-        {
-          "exampleId": "w:throw#e-fe5bf8a9f984e759",
-          "text": "Does your soul die a little every time you throw away unused food?",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:throw#e-c6455b3d87aa047c",
-          "text": "Up to 84.3% is simply thrown out.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 28
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:throw#s8",
-      "pos": "短语",
-      "glossZh": "阐明",
-      "pronunciationId": "w:throw#p-main",
-      "note": "throw light on。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -382,52 +309,64 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:throw#e-0bc132ded1b7934a",
-          "text": "The Nobel Prize winner Daniel Kahneman threw light on this tendency via his “wheel of fortune” experiment.",
+          "exampleId": "w:throw#e-8c6e82cd9a0eae50",
+          "text": "Climate change and pesticides (杀虫剂) get a lot of the blame for population declines in all sorts of animal species, insects included, but this research is saying that, by making ants smell different, we are throwing their hyper-functional, ultra-cooperative societies into disorder and violence even without realizing it.",
           "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:2",
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c:5",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 39,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:throw#e-3756dd56886a3530",
-          "text": "Today, science throws light on the distinct roles of dreams.",
-          "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 21
+            "start": 206,
+            "end": 214
           }
         }
       ]
     },
     {
-      "senseId": "w:throw#s9",
-      "pos": "短语",
-      "glossZh": "全身心投入",
+      "senseId": "w:throw#s12",
+      "pos": "v.",
+      "glossZh": "迅速把……环绕或披在……上（throw ... around）",
       "pronunciationId": "w:throw#p-main",
-      "note": "throw oneself into。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-bc5b5787fb1a60bb",
+          "text": "I threw a jacket around him and gathered him into my arms.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s13",
+      "pos": "v.",
+      "glossZh": "使偏离；扰乱（throw ... off）",
+      "pronunciationId": "w:throw#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -436,39 +375,58 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:throw#e-d5313bd792f9f6c5",
-          "text": "When I moved to London, I threw myself into work while my housemates were endlessly trying new things.",
+          "exampleId": "w:throw#e-1a6b1f38e603e29b",
+          "text": "“Its similarity to daylight saving time is striking: both represent deliberate interventions that throw human biology off the natural light-dark cycle.",
           "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
-            "paperTitle": "厦门市2026届高中毕业班模拟测试",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-d",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices:1",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-d:4",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 31
+            "start": 98,
+            "end": 103
           }
         }
       ]
     },
     {
-      "senseId": "w:throw#s10",
-      "pos": "短语",
-      "glossZh": "呕吐",
+      "senseId": "w:throw#s14",
+      "pos": "n.",
+      "glossZh": "装饰靠枕（throw pillow）",
       "pronunciationId": "w:throw#p-main",
-      "note": "throw up。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-8474ff96d0bed010",
+          "text": "Duck doormats, duck dishware, and duck throw pillows filled the house.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:3",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -477,6 +435,21 @@
       "reason": "具体领域用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:throw-a-party",
+    "w:throw-away",
+    "w:throw-back",
+    "w:throw-down",
+    "w:throw-in",
+    "w:throw-light-on",
+    "w:throw-off",
+    "w:throw-on",
+    "w:throw-oneself-into",
+    "w:throw-out",
+    "w:throw-up"
+  ]
 }

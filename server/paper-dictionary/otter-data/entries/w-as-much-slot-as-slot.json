@@ -1,0 +1,198 @@
+{
+  "entryId": "w:as-much-slot-as-slot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "much",
+      {
+        "slot": "…"
+      },
+      "as",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "much",
+        {
+          "slot": "…"
+        },
+        "as",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "as much as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as much … as …",
+  "senses": [
+    {
+      "senseId": "w:as-much-slot-as-slot#s1",
+      "pos": "短语",
+      "glossZh": "与……一样多；达到同等程度",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:much#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-much-slot-as-slot#e-2761808c8c0259fe",
+          "text": "Basically, it means eating only as much food as your body needs.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 47
+          },
+          "parts": [
+            [
+              32,
+              39
+            ],
+            [
+              45,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ],
+            [
+              45,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-slot-as-slot#e-9d3fe66f56a0490d",
+          "text": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 78
+          },
+          "parts": [
+            [
+              62,
+              69
+            ],
+            [
+              76,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              69
+            ],
+            [
+              76,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-slot-as-slot#e-cf8003f3f4e6bfdf",
+          "text": "One of the surest ways to establish your artistic interests is to look at as much art as you can.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 88
+          },
+          "parts": [
+            [
+              74,
+              81
+            ],
+            [
+              86,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              81
+            ],
+            [
+              86,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "as much ... as possible 或 as much ... as sb can 表示尽可能多。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

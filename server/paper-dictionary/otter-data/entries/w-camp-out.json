@@ -1,0 +1,120 @@
+{
+  "entryId": "w:camp-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "camp",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "camp",
+        "out"
+      ],
+      [
+        "camped",
+        "out"
+      ],
+      [
+        "camping",
+        "out"
+      ],
+      [
+        "camps",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "camped out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "camp out",
+  "senses": [
+    {
+      "senseId": "w:camp-out#s1",
+      "pos": "短语",
+      "glossZh": "在某处长时间守候",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:camp-out#e-953b9537fcc0e458",
+          "text": "He camped out with his Free Bikes sign and waited to see whether the bikes were needed.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:camp-out#s2",
+      "pos": "短语",
+      "glossZh": "在户外或临时住处过夜；露营",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

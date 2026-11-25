@@ -1,0 +1,154 @@
+{
+  "entryId": "w:in-addition",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "addition"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "addition"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in addition",
+  "senses": [
+    {
+      "senseId": "w:in-addition#s1",
+      "pos": "短语",
+      "glossZh": "此外；另外",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:addition#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-addition#e-55530f85c651043a",
+          "text": "In addition, there’s no need for pesticides and other chemicals that pollute traditional farms and the surrounding environment.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-addition#e-f3de4cb7253bfa77",
+          "text": "In addition, I have an old two-volume copy of the Shorter Oxford Dictionary, picked up a few years ago in a bookshop sale for just 99 pence.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-addition#e-e792a3ed33490f22",
+          "text": "In addition, the way that toddlers demonstrate that they like other children is markedly different from what adults think of as expressions of friendship.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

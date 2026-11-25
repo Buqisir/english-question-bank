@@ -1,0 +1,83 @@
+{
+  "entryId": "w:buy-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "buy",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "buy",
+        "up"
+      ],
+      [
+        "bought",
+        "up"
+      ],
+      [
+        "buying",
+        "up"
+      ],
+      [
+        "buys",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "buy sth up",
+  "senses": [
+    {
+      "senseId": "w:buy-up#s1",
+      "pos": "短语",
+      "glossZh": "把……全买下来；大量收购现有供应",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:buy-up#s2",
+      "pos": "短语",
+      "glossZh": "（旧）花钱收买；出钱封口",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

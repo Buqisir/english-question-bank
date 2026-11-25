@@ -1,0 +1,387 @@
+{
+  "entryId": "w:leave-sb-alone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leave alone"
+  ],
+  "pattern": {
+    "tokens": [
+      "leave",
+      {
+        "slot": "sb"
+      },
+      "alone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leave",
+        {
+          "slot": "sb"
+        },
+        "alone"
+      ],
+      [
+        "leave",
+        "alone"
+      ],
+      [
+        "leaves",
+        "alone"
+      ],
+      [
+        "leaving",
+        "alone"
+      ],
+      [
+        "left",
+        "alone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "leaving alone",
+      "tags": []
+    },
+    {
+      "form": "left alone",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leave sb/sth alone",
+  "senses": [
+    {
+      "senseId": "w:leave-sb-alone#s1",
+      "pos": "短语",
+      "glossZh": "让某人独处；留下某人独自待着",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-sb-alone#e-fe157ed6c5b32c2d",
+          "text": "Then they were left alone in the room.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-sb-alone#e-1d24c75512ed6fd4",
+          "text": "Tiredness set in, and the other climbers had all overtaken me, leaving me completely alone.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 90
+          },
+          "parts": [
+            [
+              63,
+              70
+            ],
+            [
+              85,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              70
+            ],
+            [
+              85,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-sb-alone#e-54c7e683e1d43133",
+          "text": "Watching the trees shaking in the strong wind, Jane felt very worried about Pip, who was left all alone in the yard.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 103
+          },
+          "parts": [
+            [
+              89,
+              93
+            ],
+            [
+              98,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              93
+            ],
+            [
+              98,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:leave-sb-alone#s2",
+      "pos": "短语",
+      "glossZh": "不打扰；不干涉（某人）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:leave#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:leave-sb-alone#e-20dd29c92cb75976",
+          "text": "Soon, though, social critics thought it would be so easy to talk that we'd never leave each other alone.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 103
+          },
+          "parts": [
+            [
+              81,
+              86
+            ],
+            [
+              98,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              86
+            ],
+            [
+              98,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-sb-alone#e-41b2acee73c911e0",
+          "text": "We decided to leave the ducks alone so they could recover peacefully.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 35
+          },
+          "parts": [
+            [
+              14,
+              19
+            ],
+            [
+              30,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              19
+            ],
+            [
+              30,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-sb-alone#e-21636f283bcaa80a",
+          "text": "At dinner, I complained to my wife: “I wish the residents would leave me alone.” “Paul, you sound more like a grouchkeeper（抱怨者）than a groundskeeper,” Debby said, laughing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 78
+          },
+          "parts": [
+            [
+              64,
+              69
+            ],
+            [
+              73,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              69
+            ],
+            [
+              73,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:leave-sb-alone#s3",
+      "pos": "短语",
+      "glossZh": "不碰；不管（某事物）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-sb-alone#e-2e90212174f5c177",
+          "text": "If there were a silence option, I might leave it alone.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 54
+          },
+          "parts": [
+            [
+              40,
+              45
+            ],
+            [
+              49,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              45
+            ],
+            [
+              49,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

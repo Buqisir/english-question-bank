@@ -1,0 +1,179 @@
+{
+  "entryId": "w:jump-at-the-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "at",
+      "the",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "at",
+        "the",
+        "chance"
+      ],
+      [
+        "jumped",
+        "at",
+        "the",
+        "chance"
+      ],
+      [
+        "jumping",
+        "at",
+        "the",
+        "chance"
+      ],
+      [
+        "jumps",
+        "at",
+        "the",
+        "chance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "jumped at the chance",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump at the chance",
+  "senses": [
+    {
+      "senseId": "w:jump-at-the-chance#s1",
+      "pos": "短语",
+      "glossZh": "毫不犹豫地抓住机会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:jump-at-the-chance#e-dc588b4809e1b930",
+          "text": "So when I found a small house just around the corner from the school, I jumped at the chance.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 92
+          },
+          "parts": [
+            [
+              72,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-at-the-chance#e-92bc3f2ced8f0248",
+          "text": "The organizers even encouraged U10 players to join, so naturally, the boys and girls I coached jumped at the chance.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 115
+          },
+          "parts": [
+            [
+              95,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-at-the-chance#e-e4a921aa9061b21f",
+          "text": "I jumped at the chance.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 22
+          },
+          "parts": [
+            [
+              2,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-fact",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "fact"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "fact"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in fact",
+  "senses": [
+    {
+      "senseId": "w:in-fact#s1",
+      "pos": "短语",
+      "glossZh": "事实上；实际上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fact#s2",
+        "w:in#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-fact#e-5b3a249416b04c84",
+          "text": "“In fact, we may be helping increase the moisture downwind by creating wetter ground.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-fact#e-7ccc3cd36c9e8ead",
+          "text": "In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-fact#e-6123fcf5ec08bc22",
+          "text": "In fact, building work ethic (道德) in kids doesn’t require military-style drills.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "用于纠正印象、补充事实或加强前述观点。",
+      "counts": {
+        "gaokao": 9,
+        "mock": 96
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 96
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

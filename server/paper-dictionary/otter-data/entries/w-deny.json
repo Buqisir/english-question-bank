@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 26
+    "mock": 17
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -198,6 +198,6 @@
       "reason": "体育场景下的专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

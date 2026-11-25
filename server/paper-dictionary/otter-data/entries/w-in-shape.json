@@ -1,0 +1,95 @@
+{
+  "entryId": "w:in-shape",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "shape"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "shape"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in shape",
+  "senses": [
+    {
+      "senseId": "w:in-shape#s1",
+      "pos": "短语",
+      "glossZh": "身体状态良好；体能良好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s64",
+        "w:shape#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-shape#e-e310f73c4f1b1338",
+          "text": "Getting his body in shape.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "get in shape 表示把身体练到良好状态。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

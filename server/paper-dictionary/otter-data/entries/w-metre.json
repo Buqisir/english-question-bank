@@ -51,7 +51,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 62
+    "mock": 3
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -146,6 +146,6 @@
       "reason": "现代英语写作 meter，与 metre 的美式拼写同形"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

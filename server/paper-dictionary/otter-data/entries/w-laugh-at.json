@@ -1,0 +1,330 @@
+{
+  "entryId": "w:laugh-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "laughing at"
+  ],
+  "pattern": {
+    "tokens": [
+      "laugh",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "laugh",
+        "at"
+      ],
+      [
+        "laughing",
+        "at"
+      ],
+      [
+        "laughed",
+        "at"
+      ],
+      [
+        "laughs",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "laugh at",
+      "tags": []
+    },
+    {
+      "form": "laughed at",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "laugh at sb/sth",
+  "senses": [
+    {
+      "senseId": "w:laugh-at#s1",
+      "pos": "短语",
+      "glossZh": "嘲笑；取笑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:laugh#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:laugh-at#e-a239f2d57f34c015",
+          "text": "“I was afraid that kids from other schools would laugh at him,” he explained uncomfortably.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "writing-continuation-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 57
+          },
+          "parts": [
+            [
+              49,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:laugh-at#e-9ccfadd674a31638",
+          "text": "“I am ahead of my time.” If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          },
+          "parts": [
+            [
+              117,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:laugh-at#e-97443ef42fe6da6d",
+          "text": "laugh at the speaker.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:laugh-at#s2",
+      "pos": "短语",
+      "glossZh": "因……好笑而发笑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:laugh-at#e-6f4b96b63ffc8417",
+          "text": "My grandmother would probably have laughed at that.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:laugh-at#e-27c1e8725c6e3ed7",
+          "text": "Gradually, I noticed small changes – a child who had never smiled before now laughed at jokes; another who was hesitant to speak out loud started asking questions confidently.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 87
+          },
+          "parts": [
+            [
+              77,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:laugh-at#e-1da9660f665d7778",
+          "text": "For hours, I climbed mechanically over snow-covered rocks, complaining about the pain, laughing at how ridiculous it all was, falling more than once, but always repeating to myself: Just one more step.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 98
+          },
+          "parts": [
+            [
+              87,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:laugh-at#s3",
+      "pos": "短语",
+      "glossZh": "不把（威胁、困难等）当回事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:laugh-at#e-7b5282c600ca308c",
+          "text": "In the modern workplace workers feel pushed to the edge by continual meetings, overflowing inboxes, non-stop busywork, and office rules that laugh at autonomy and agency.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 149
+          },
+          "parts": [
+            [
+              141,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              141,
+              149
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

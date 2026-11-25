@@ -1,0 +1,85 @@
+{
+  "entryId": "w:answer-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "answer to",
+    "answers to"
+  ],
+  "pattern": {
+    "tokens": [
+      "answer",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "answer",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "answer",
+        "to"
+      ],
+      [
+        "answers",
+        "to"
+      ],
+      [
+        "answered",
+        "to"
+      ],
+      [
+        "answering",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "answer to sb",
+  "senses": [
+    {
+      "senseId": "w:answer-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "向某人负责；须向某人交代",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:answer#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

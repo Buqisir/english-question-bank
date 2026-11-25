@@ -1,0 +1,107 @@
+{
+  "entryId": "w:do-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "did in",
+    "does in",
+    "doing in"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "in"
+      ],
+      [
+        "did",
+        "in"
+      ],
+      [
+        "does",
+        "in"
+      ],
+      [
+        "doing",
+        "in"
+      ],
+      [
+        "done",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:do-in#s1",
+      "pos": "短语",
+      "glossZh": "使筋疲力尽；累垮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常用 be done in 表示“累坏了”。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-in#s2",
+      "pos": "短语",
+      "glossZh": "杀死（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-in#s3",
+      "pos": "短语",
+      "glossZh": "弄伤；弄坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，可指弄伤身体部位。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

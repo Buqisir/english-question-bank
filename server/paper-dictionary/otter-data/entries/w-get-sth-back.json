@@ -1,0 +1,326 @@
+{
+  "entryId": "w:get-sth-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get back",
+    "getting back",
+    "got back"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      {
+        "slot": "sth"
+      },
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "get",
+        {
+          "slot": "sth"
+        },
+        "back"
+      ],
+      [
+        "get",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get sth back",
+  "senses": [
+    {
+      "senseId": "w:get-sth-back#s1",
+      "pos": "短语",
+      "glossZh": "拿回；取回；要回",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-back#e-efa62401abe99df8",
+          "text": "A week later, I got the test back.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 33
+          },
+          "parts": [
+            [
+              16,
+              19
+            ],
+            [
+              29,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              19
+            ],
+            [
+              29,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-back#e-88902978f39529e4",
+          "text": "Hurry to get the boots back.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 27
+          },
+          "parts": [
+            [
+              9,
+              12
+            ],
+            [
+              23,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              12
+            ],
+            [
+              23,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-back#e-5c7d1c04c74cfffe",
+          "text": "Get her money back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              3
+            ],
+            [
+              14,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              3
+            ],
+            [
+              14,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-sth-back#s2",
+      "pos": "短语",
+      "glossZh": "恢复；重新获得（能力、状态等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-back#e-4aaaa1de81978993",
+          "text": "New research, however, shows a simple trick that allows us to get back some control and bounce back from goal-pursuit failure.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-back#e-f62eb5ede1dc67c5",
+          "text": "So, are you ready to quiet the mental popcorn and get your focus back?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 69
+          },
+          "parts": [
+            [
+              50,
+              53
+            ],
+            [
+              65,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              53
+            ],
+            [
+              65,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-back#e-230fd10ffa458e54",
+          "text": "But we can get that sharpness back with three strategies.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 34
+          },
+          "parts": [
+            [
+              11,
+              14
+            ],
+            [
+              30,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              14
+            ],
+            [
+              30,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [
+    {
+      "legacySenseIds": [
+        "w:get#s36"
+      ],
+      "glossZh": "返回",
+      "reason": "属于不带宾语的 get back，表示主语返回。"
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

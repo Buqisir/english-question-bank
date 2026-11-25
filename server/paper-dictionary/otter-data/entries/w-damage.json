@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 174
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 81
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 90
       },
       "folded": false,
       "examples": [
@@ -226,6 +226,6 @@
       "reason": "口语或行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

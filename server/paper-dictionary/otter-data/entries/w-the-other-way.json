@@ -1,0 +1,61 @@
+{
+  "entryId": "w:the-other-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "other",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "other",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the other way",
+  "senses": [
+    {
+      "senseId": "w:the-other-way#s1",
+      "pos": "短语",
+      "glossZh": "朝反方向；往另一边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "棒球中可指将球打向与惯常拉打方向相反的一侧。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

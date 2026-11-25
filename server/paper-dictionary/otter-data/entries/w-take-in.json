@@ -1,0 +1,516 @@
+{
+  "entryId": "w:take-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes in",
+    "taking in",
+    "took in"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "in"
+      ],
+      [
+        "takes",
+        "in"
+      ],
+      [
+        "taking",
+        "in"
+      ],
+      [
+        "took",
+        "in"
+      ],
+      [
+        "taken",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take in",
+      "tags": []
+    },
+    {
+      "form": "taken in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:take-in#s1",
+      "pos": "短语",
+      "glossZh": "理解；消化（信息）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s33"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-in#e-dd26c478a8f3849c",
+          "text": "I take in their views on what is happening in the world and share some of my own.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          },
+          "parts": [
+            [
+              2,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-84716cd8102c219c",
+          "text": "The explanation for why our brain’s faster processing would slow time is that it’s increasing the amount of information it can take in at once.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 134
+          },
+          "parts": [
+            [
+              127,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              127,
+              134
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-75a52ff04134298a",
+          "text": "you might be taking in more than you think.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:take-in#s2",
+      "pos": "短语",
+      "glossZh": "吸收；摄入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-in#e-4808c5bfa4ceb966",
+          "text": "How many calories would you take in by eating the whole container of Frozen Lasagna?",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-zj-wenzhou-2026-m1:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-74faaf465bd6eb27",
+          "text": "Imagine taking in a capsule containing these engineered yeast cells.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 17
+          },
+          "parts": [
+            [
+              8,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-cd7de75d412ad1cc",
+          "text": "What is a result of taking in flavanols from dark chocolate?",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-t8-2025-12-senior-three-joint-assessment:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:take-in#s3",
+      "pos": "短语",
+      "glossZh": "收留；收养",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-in#e-b613a58d021b9aeb",
+          "text": "Our parents hosted an emergency safe house for children taken in by social services.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          },
+          "parts": [
+            [
+              56,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-f4caa628663a03e9",
+          "text": "He takes in abandoned animals.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-henan-zhengzhou-2026-01-first:24#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:take-in#s5",
+      "pos": "短语",
+      "glossZh": "观看；欣赏（景色或演出）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-in#e-bd6910cc9bece250",
+          "text": "Since museums are often vast, attempting to take in every exhibit can easily leave you feeling stressed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-167642e6e7567348",
+          "text": "It’s a super calm way to take in this amazing part of the Lake District National Park.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-in#e-d777a2f3eba26935",
+          "text": "Luckily, there’s a pretty good reason for it, according to the church’s website: “We want you to take in its unique beauty and history without the distractions that widespread photography would bring.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 104
+          },
+          "parts": [
+            [
+              97,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:take-in#s4",
+      "pos": "短语",
+      "glossZh": "欺骗；蒙骗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:take#s32"
+      ],
+      "examples": [],
+      "note": "常用 be taken in，表示“上当”。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-in#s6",
+      "pos": "短语",
+      "glossZh": "收窄；改小（衣服）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-in#s7",
+      "pos": "短语",
+      "glossZh": "收进；获得（钱款或收入）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

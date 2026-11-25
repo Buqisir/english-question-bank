@@ -1,0 +1,122 @@
+{
+  "entryId": "w:factor-sth-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "factor in",
+    "factors in"
+  ],
+  "pattern": {
+    "tokens": [
+      "factor",
+      {
+        "slot": "sth"
+      },
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "factor",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "factor",
+        "in"
+      ],
+      [
+        "factors",
+        "in"
+      ],
+      [
+        "factored",
+        "in"
+      ],
+      [
+        "factoring",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "factoring in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "factor sth in",
+  "senses": [
+    {
+      "senseId": "w:factor-sth-in#s1",
+      "pos": "短语",
+      "glossZh": "把……考虑在内；把……算进去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:factor#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:factor-sth-in#e-17a2210883fd91a5",
+          "text": "Factoring in users' history, activity levels, and this two-sided approach to preference led to a substantial increase in matches during field experiments in Texas.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

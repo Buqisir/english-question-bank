@@ -1,0 +1,102 @@
+{
+  "entryId": "w:play-dumb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "dumb"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "dumb"
+      ],
+      [
+        "played",
+        "dumb"
+      ],
+      [
+        "playing",
+        "dumb"
+      ],
+      [
+        "plays",
+        "dumb"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play dumb",
+  "senses": [
+    {
+      "senseId": "w:play-dumb#s1",
+      "pos": "短语",
+      "glossZh": "装傻；装作不懂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-dumb#e-02e8fc00a7943b1d",
+          "text": "Other models have learned to “play dumb”, intentionally failing simple tasks to avoid restrictions.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

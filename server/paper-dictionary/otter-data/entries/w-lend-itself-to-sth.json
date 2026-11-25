@@ -1,0 +1,105 @@
+{
+  "entryId": "w:lend-itself-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lend",
+      "itself",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lend",
+        "itself",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lends itself to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lend itself to sth",
+  "senses": [
+    {
+      "senseId": "w:lend-itself-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "适于某种用途或做法；有利于某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lend#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lend-itself-to-sth#e-c3edc4aaca237b34",
+          "text": "This work also hints at the possibility that the individuality that comes with pessimism lends itself to more diverse approaches to problems, with a greater chance that one will succeed than the optimists who all try the same thing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 104
+          },
+          "parts": [
+            [
+              89,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

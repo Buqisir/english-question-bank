@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 24
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -146,40 +146,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:rope#s3",
-      "pos": "短语",
-      "glossZh": "告诉某人做事的诀窍",
-      "pronunciationId": "w:rope#p-main",
-      "note": "show sb the ropes。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rope#e-3cb42eb52d42e602",
-          "text": "their curiosity, I decided to show them the ropes through experience rather than simply __42__.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
-            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:cloze:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 56
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -188,6 +154,8 @@
       "reason": "体育行话"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

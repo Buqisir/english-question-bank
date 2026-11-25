@@ -1,0 +1,134 @@
+{
+  "entryId": "w:make-way-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make way for"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "way",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "way",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make way for sth",
+  "senses": [
+    {
+      "senseId": "w:make-way-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "为……让路；为……腾出空间",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:way#s10",
+        "w:make#s38"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-way-for-sth#e-0d6a2069dd38ba43",
+          "text": "Whole neighbourhoods were destroyed to make way for new road networks and kids had to play elsewhere.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 51
+          },
+          "parts": [
+            [
+              39,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-way-for-sth#e-b31d6a591fede1e6",
+          "text": "After eight years of planning, a cost of more than 500m kronor (£39m) and an early morning blessing, Kiruna Kyrka began a slow 5km journey on Tuesday to make way for the expansion of Europe’s biggest underground mine.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 165
+          },
+          "parts": [
+            [
+              153,
+              165
+            ]
+          ],
+          "highlightRanges": [
+            [
+              153,
+              165
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

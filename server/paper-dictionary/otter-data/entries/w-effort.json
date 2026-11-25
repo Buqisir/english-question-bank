@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 305
+    "mock": 113
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 1
+        "mock": 111
       },
       "folded": false,
       "examples": [
@@ -196,6 +196,10 @@
       "reason": "专业或罕见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:make-an-effort",
+    "w:spare-no-effort"
+  ]
 }

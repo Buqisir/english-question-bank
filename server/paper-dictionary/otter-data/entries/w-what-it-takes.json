@@ -1,0 +1,124 @@
+{
+  "entryId": "w:what-it-takes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what",
+      "it",
+      "takes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "it",
+        "takes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what it takes",
+  "senses": [
+    {
+      "senseId": "w:what-it-takes#s1",
+      "pos": "短语",
+      "glossZh": "做成某事所需的条件、能力或行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-it-takes#e-60c6109251f2dbce",
+          "text": "Cities select for smart individuals and species because that’s what it takes to survive.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 76
+          },
+          "parts": [
+            [
+              63,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-it-takes#e-ce551cbab6281122",
+          "text": "That might be because if teens think of themselves as scientists, then they are willing to do what it takes to be the person they want to become.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 107
+          },
+          "parts": [
+            [
+              94,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              107
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 have what it takes 和 do what it takes。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

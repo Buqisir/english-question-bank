@@ -35,8 +35,8 @@
     "mock": 1053
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 1053
+    "gaokao": 27,
+    "mock": 877
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 100
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -383,7 +383,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -435,7 +435,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -506,290 +506,88 @@
       "examples": []
     },
     {
-      "senseId": "w:through#s10",
-      "pos": "短语",
-      "glossZh": "浏览",
+      "senseId": "w:through#s15",
+      "pos": "prep.",
+      "glossZh": "逐步做完或了解……（与引导类动词连用）",
       "pronunciationId": "w:through#p-main",
-      "note": "look through、leaf through 或 go through。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 10,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 4
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:through#e-f85a86a8019bb3ff",
-          "text": "Spend a few minutes looking through the book.",
+          "exampleId": "w:through#e-f3cf3403c08267f0",
+          "text": "The call handler talked me through it: lay her down, press her chest to a count, keep going.",
           "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
             "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "B",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:through#e-4ce1b6d3c332514e",
+          "text": "With one pound of clay, Jennelle will walk you through the steps of handling your clay on a mold (模具).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:through#e-9246d77e9f4c66a8",
+          "text": "●Walk you through the process of selecting the right exhibition to meet your programmatic goals and space.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-a:10",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 28,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:through#e-aceef4d5c72c0e4a",
-          "text": "Of course, these days there are plenty of online dictionaries and thesauruses, but I’m old-fashioned enough to prefer a hard cover and pages I can leaf through with my fingers.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 159,
-            "end": 166
-          }
-        },
-        {
-          "exampleId": "w:through#e-04ad0b45dffddac9",
-          "text": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?” After a while, he looked at me and asked, “Do you know all these words, Mom?” I smiled.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 19
+            "start": 10,
+            "end": 17
           }
         }
       ]
     },
     {
-      "senseId": "w:through#s11",
-      "pos": "短语",
-      "glossZh": "经历",
+      "senseId": "w:through#s16",
+      "pos": "phr.",
+      "glossZh": "坚持做完；付诸行动（follow through）",
       "pronunciationId": "w:through#p-main",
-      "note": "go through 或 put someone through。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 4,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:through#e-ac07e9caa9ebf059",
-          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 135,
-            "end": 142
-          }
-        },
-        {
-          "exampleId": "w:through#e-162ad2f43ae1de05",
-          "text": "She went through trials.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
-            "locator": {
-              "question": 22,
-              "questionId": "question:paper-gaokao-2023-national-b:22",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:through#e-a017764880d420b1",
-          "text": "However, most produce at the store went through weeks of travel and covered hundreds of miles before reaching the table.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:through#s12",
-      "pos": "短语",
-      "glossZh": "克服",
-      "pronunciationId": "w:through#p-main",
-      "note": "push through 或 get through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:through#e-af50b5056b685d45",
-          "text": "Push through, give it time and put in the effort.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:through#e-26eae84378020040",
-          "text": "That encouragement helped me to get through the language __45__.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-ii:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:through#s13",
-      "pos": "短语",
-      "glossZh": "显露出来",
-      "pronunciationId": "w:through#p-main",
-      "note": "shine through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:through#e-ea5a44cfd07edf9d",
-          "text": "That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 126,
-            "end": 133
-          }
-        },
-        {
-          "exampleId": "w:through#e-b35d254b87379e07",
-          "text": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:through#s14",
-      "pos": "短语",
-      "glossZh": "接通电话",
-      "pronunciationId": "w:through#p-main",
-      "note": "put someone through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:through#e-4d126c351d8a7712",
-          "text": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 50
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -798,6 +596,41 @@
       "reason": "罕用名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:blow-through",
+    "w:break-through",
+    "w:click-through",
+    "w:come-through",
+    "w:cut-through",
+    "w:fall-through",
+    "w:get-through",
+    "w:go-through",
+    "w:go-through-the-motions",
+    "w:go-through-with",
+    "w:leaf-through",
+    "w:live-through",
+    "w:look-through",
+    "w:make-it-through",
+    "w:pass-through",
+    "w:pull-through",
+    "w:push-through",
+    "w:put-sb-through",
+    "w:run-through",
+    "w:sail-through",
+    "w:see-through",
+    "w:shine-through",
+    "w:shoot-through",
+    "w:sit-through",
+    "w:sort-through",
+    "w:talk-through",
+    "w:think-through",
+    "w:through-thick-and-thin",
+    "w:walk-through",
+    "w:wet-through",
+    "w:work-through"
+  ]
 }

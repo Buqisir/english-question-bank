@@ -1,0 +1,115 @@
+{
+  "entryId": "w:go-ahead-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went ahead with"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "ahead",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "ahead",
+        "with"
+      ],
+      [
+        "went",
+        "ahead",
+        "with"
+      ],
+      [
+        "goes",
+        "ahead",
+        "with"
+      ],
+      [
+        "going",
+        "ahead",
+        "with"
+      ],
+      [
+        "gone",
+        "ahead",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go ahead with",
+  "senses": [
+    {
+      "senseId": "w:go-ahead-with#s1",
+      "pos": "短语",
+      "glossZh": "着手或继续实施计划",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-ahead-with#e-58c8b1704bd9e0cd",
+          "text": "I went ahead with my plan pretty quickly, but I wasn’t prepared for some of the reactions I got.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 17
+          },
+          "parts": [
+            [
+              2,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "常接 plan、project 或 proposal。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

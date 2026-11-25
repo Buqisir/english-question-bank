@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 183
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 162
       },
       "folded": false,
       "examples": [
@@ -139,12 +139,12 @@
       "pos": "v.",
       "glossZh": "挺过（困难）",
       "pronunciationId": "w:weather#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 12
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -152,48 +152,13 @@
       "pos": "v.",
       "glossZh": "风化",
       "pronunciationId": "w:weather#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:weather#s4",
-      "pos": "短语",
-      "glossZh": "身体不适",
-      "pronunciationId": "w:weather#p-main",
-      "note": "under the weather。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:weather#e-e452d001d82d345b",
-          "text": "under the weather",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
-            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
-            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:cloze",
-            "locator": {
-              "question": 45,
-              "questionId": "question:paper-mock-fujian-2026-01-first-quality-test:45",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 10,
-            "end": 17
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -202,6 +167,11 @@
       "reason": "公司名或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:under-the-weather"
+  ]
 }

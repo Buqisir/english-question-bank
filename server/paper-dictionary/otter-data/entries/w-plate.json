@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 43
+    "mock": 6
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 1
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -289,39 +289,17 @@
       "examples": []
     },
     {
-      "senseId": "w:plate#s6",
-      "pos": "短语",
-      "glossZh": "手头要操心的事",
+      "senseId": "w:plate#s7",
+      "pos": "n.",
+      "glossZh": "便携式加热炉（hot plate）",
       "pronunciationId": "w:plate#p-main",
-      "note": "如 take sth off sb’s plate，替某人分担。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:plate#e-c6b0c68b874d5e0c",
-          "text": "Sometimes, having even the smallest thing taken off your plate can make a big difference.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
-            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
-            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 57,
-            "end": 62
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -330,6 +308,11 @@
       "reason": "餐馆名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-sth-off-ones-plate"
+  ]
 }

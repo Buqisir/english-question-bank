@@ -1,0 +1,62 @@
+{
+  "entryId": "w:fighting-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fighting",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fighting",
+        "chance"
+      ],
+      [
+        "fighting",
+        "chances"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fighting chance",
+  "senses": [
+    {
+      "senseId": "w:fighting-chance#s1",
+      "pos": "短语",
+      "glossZh": "一线胜算；经努力仍有望成功的机会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

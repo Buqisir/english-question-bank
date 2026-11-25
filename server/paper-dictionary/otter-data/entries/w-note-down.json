@@ -1,0 +1,174 @@
+{
+  "entryId": "w:note-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "notes down"
+  ],
+  "pattern": {
+    "tokens": [
+      "note",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "note",
+        "down"
+      ],
+      [
+        "notes",
+        "down"
+      ],
+      [
+        "noted",
+        "down"
+      ],
+      [
+        "noting",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "note down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "note (sth) down",
+  "senses": [
+    {
+      "senseId": "w:note-down#s1",
+      "pos": "短语",
+      "glossZh": "记下；写下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:note-down#e-75e4f4d45ee03dc3",
+          "text": "note down",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "question": 51,
+              "questionId": "question:paper-gaokao-2021-ii:51#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:note-down#e-acd7d3ad5252056b",
+          "text": "Another trick is to note down the new words whenever you encounter them.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:note-down#e-dba83dfe7bba45bd",
+          "text": "Why do the speakers note down the types of garbage?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

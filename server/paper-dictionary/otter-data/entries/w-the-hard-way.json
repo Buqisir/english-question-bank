@@ -1,0 +1,93 @@
+{
+  "entryId": "w:the-hard-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "hard",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "hard",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the hard way",
+  "senses": [
+    {
+      "senseId": "w:the-hard-way#s1",
+      "pos": "短语",
+      "glossZh": "通过艰难的亲身经历；吃过苦头才……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:the-hard-way#e-2286a06a423ce4ff",
+          "text": "But some Broadway stars who came up the hard way fear that few audience members will bother to scan the QR codes with their phones to see who is performing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "come up the hard way 指一路吃苦打拼才出头，learn sth the hard way 指吃过亏才懂得。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

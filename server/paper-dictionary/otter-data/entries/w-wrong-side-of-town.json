@@ -1,0 +1,126 @@
+{
+  "entryId": "w:wrong-side-of-town",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wrong",
+      "side",
+      "of",
+      "town"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wrong",
+        "side",
+        "of",
+        "town"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wrong side of town",
+  "senses": [
+    {
+      "senseId": "w:wrong-side-of-town#s1",
+      "pos": "短语",
+      "glossZh": "城里被视为贫困或不安全的街区",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wrong-side-of-town#e-49e48756a4c64279",
+          "text": "Suddenly, I realized we were on the “wrong side of town”.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 55
+          },
+          "parts": [
+            [
+              37,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wrong-side-of-town#e-a2edf340f1f6348b",
+          "text": "Suddenly, I realised we were on the “wrong side of town”.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 55
+          },
+          "parts": [
+            [
+              37,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              55
+            ]
+          ]
+        }
+      ],
+      "note": "常用 the wrong side of town，带有对街区的成见。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

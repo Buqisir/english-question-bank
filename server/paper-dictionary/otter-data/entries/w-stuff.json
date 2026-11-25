@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 39
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -323,11 +323,10 @@
       "examples": []
     },
     {
-      "senseId": "w:stuff#s6",
-      "pos": "短语",
-      "glossZh": "毛绒玩具",
+      "senseId": "w:stuff#s7",
+      "pos": "n.",
+      "glossZh": "食物的填馅",
       "pronunciationId": "w:stuff#p-main",
-      "note": "stuffed animal。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -336,22 +335,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:stuff#e-d27eff13da6d3738",
-          "text": "He brought her small comforts – books, crayons, stuffed animals – and encouraged her to talk about her mother and brother when she was ready.",
+          "exampleId": "w:stuff#e-d29c121fb7d817d5",
+          "text": "These were carefully prepared baskets with all necessities for a traditional holiday meal: golden stuffing mix, green beans, sweet potatoes, jellied cranberry sauce, flour, butter, onions, and dessert items, and even turkeys and hams.",
           "source": {
-            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
-            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
-            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
             "locator": {
               "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b:4",
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:4",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 48,
-            "end": 55
+            "start": 98,
+            "end": 106
           }
         }
       ]
@@ -363,6 +362,12 @@
       "reason": "行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:and-stuff",
+    "w:small-stuff"
+  ]
 }

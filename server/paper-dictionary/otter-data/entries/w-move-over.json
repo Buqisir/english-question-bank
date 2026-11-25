@@ -1,0 +1,70 @@
+{
+  "entryId": "w:move-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "over"
+      ],
+      [
+        "moved",
+        "over"
+      ],
+      [
+        "moves",
+        "over"
+      ],
+      [
+        "moving",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move over",
+  "senses": [
+    {
+      "senseId": "w:move-over#s1",
+      "pos": "短语",
+      "glossZh": "往旁边挪一挪；让出位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,172 @@
+{
+  "entryId": "w:get-married",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting married",
+    "got married"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "married"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "married"
+      ],
+      [
+        "getting",
+        "married"
+      ],
+      [
+        "got",
+        "married"
+      ],
+      [
+        "gets",
+        "married"
+      ],
+      [
+        "gotten",
+        "married"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get married",
+  "senses": [
+    {
+      "senseId": "w:get-married#s1",
+      "pos": "短语",
+      "glossZh": "结婚",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-married#e-aec8ee7df52e955d",
+          "text": "In India, particularly outside cities, young women are expected to move in with their husband’s family when they get married.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 124
+          },
+          "parts": [
+            [
+              113,
+              124
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              124
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-married#e-4d1a44a54777a2a0",
+          "text": "When will Tom and Anne get married?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 34
+          },
+          "parts": [
+            [
+              23,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-married#e-c4dd3380c80fd300",
+          "text": "In our personal lives, we might seek to enter a top university, get married, have children, or move to a better neighborhood.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 75
+          },
+          "parts": [
+            [
+              64,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              75
+            ]
+          ]
+        }
+      ],
+      "note": "get married to sb 表示与某人结婚。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

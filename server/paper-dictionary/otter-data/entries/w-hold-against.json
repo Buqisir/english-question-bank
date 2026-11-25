@@ -1,0 +1,70 @@
+{
+  "entryId": "w:hold-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "against"
+      ],
+      [
+        "held",
+        "against"
+      ],
+      [
+        "holding",
+        "against"
+      ],
+      [
+        "holds",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold sth against sb",
+  "senses": [
+    {
+      "senseId": "w:hold-against#s1",
+      "pos": "短语",
+      "glossZh": "因某事责怪某人或对某人有成见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

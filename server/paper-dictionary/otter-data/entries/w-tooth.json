@@ -38,7 +38,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 2
   },
   "senses": [
     {
@@ -49,7 +49,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -164,40 +164,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:tooth#s3",
-      "pos": "短语",
-      "glossZh": "爱吃甜食",
-      "pronunciationId": "w:tooth#p-main",
-      "note": "have a sweet tooth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:tooth#e-85d5da3e92969618",
-          "text": "Dates with butter and salt, for instance, help sustain blood sugar while satisfying a sweet tooth.",
-          "source": {
-            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
-            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
-            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 99,
-            "end": 104
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -206,6 +172,11 @@
       "reason": "专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:have-a-sweet-tooth"
+  ]
 }

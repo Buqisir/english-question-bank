@@ -1,0 +1,168 @@
+{
+  "entryId": "w:whats-going-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what's",
+      "going",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what's",
+        "going",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what's going on",
+  "senses": [
+    {
+      "senseId": "w:whats-going-on#s1",
+      "pos": "短语",
+      "glossZh": "发生了什么事？怎么回事？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:whats-going-on#e-29540bb064e691c6",
+          "text": "Can you tell me what’s going on?” Mrs. Glover asked anxiously, her voice getting more panicked as she spoke.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 31
+          },
+          "parts": [
+            [
+              16,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-going-on#e-394fd56246cea058",
+          "text": "What’s going on inside their heads?",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-going-on#e-7f179b357df5c4ed",
+          "text": "Social psychologists describe what’s going on here with “construal level theory”, which refers to the way we envision objects and events from different mental altitudes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 45
+          },
+          "parts": [
+            [
+              30,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:whats-going-on#s2",
+      "pos": "短语",
+      "glossZh": "最近怎么样？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于非正式问候。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

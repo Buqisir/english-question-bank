@@ -1,0 +1,173 @@
+{
+  "entryId": "w:make-ends-meet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "ends",
+      "meet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "ends",
+        "meet"
+      ],
+      [
+        "made",
+        "ends",
+        "meet"
+      ],
+      [
+        "makes",
+        "ends",
+        "meet"
+      ],
+      [
+        "making",
+        "ends",
+        "meet"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make ends meet",
+  "senses": [
+    {
+      "senseId": "w:make-ends-meet#s1",
+      "pos": "短语",
+      "glossZh": "使收支相抵；勉强维持生计",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:end#s7",
+        "w:make#s20",
+        "w:meet#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-ends-meet#e-25867bf51d602363",
+          "text": "Many of their families were struggling to make ends meet.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 56
+          },
+          "parts": [
+            [
+              42,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ends-meet#e-2e76e8f830af4032",
+          "text": "Knowing what hard work his mother did to make ends meet, John really didn't want his mother to worry.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 55
+          },
+          "parts": [
+            [
+              41,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ends-meet#e-133bc5d59bfbdd62",
+          "text": "She and Princess were living in a small, worn-down apartment, working hard to make ends meet.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 92
+          },
+          "parts": [
+            [
+              78,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

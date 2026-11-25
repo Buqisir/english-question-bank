@@ -1,0 +1,107 @@
+{
+  "entryId": "w:so-much-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "so",
+      "much",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "so",
+        "much",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "so much as",
+  "senses": [
+    {
+      "senseId": "w:so-much-as#s1",
+      "pos": "短语",
+      "glossZh": "与其说是……不如说是……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:so-much-as#e-5a40a061e4e69604",
+          "text": "I figured I’d better not let him get out of sight – not a matter of precognition (先知) so much as thinking it was best to keep an eye on anyone who was off a trail in the wild.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 96
+          },
+          "parts": [
+            [
+              86,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              96
+            ]
+          ]
+        }
+      ],
+      "note": "用于 not A so much as B 或 not so much A as B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:so-much-as#s2",
+      "pos": "短语",
+      "glossZh": "甚至；连……都",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常与 not、without 等连用，强调最低限度的动作也没发生。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

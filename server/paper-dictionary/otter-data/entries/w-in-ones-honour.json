@@ -1,0 +1,68 @@
+{
+  "entryId": "w:in-ones-honour",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in sb’s honour"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      {
+        "slot": "one's"
+      },
+      "honour"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        {
+          "slot": "one's"
+        },
+        "honour"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in one's honour",
+  "senses": [
+    {
+      "senseId": "w:in-ones-honour#s1",
+      "pos": "短语",
+      "glossZh": "为向某人致敬；为纪念某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:honour#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

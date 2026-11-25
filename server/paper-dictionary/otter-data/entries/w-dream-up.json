@@ -1,0 +1,145 @@
+{
+  "entryId": "w:dream-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dream",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dream",
+        "up"
+      ],
+      [
+        "dreamed",
+        "up"
+      ],
+      [
+        "dreaming",
+        "up"
+      ],
+      [
+        "dreams",
+        "up"
+      ],
+      [
+        "dreamt",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dreamed up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dream sth up",
+  "senses": [
+    {
+      "senseId": "w:dream-up#s1",
+      "pos": "短语",
+      "glossZh": "想出；凭想象构思出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dream#s6",
+        "w:up#s54"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dream-up#e-905ba442d42383b8",
+          "text": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-c-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dream-up#e-7db4c52f18b87458",
+          "text": "He wasn’t mean or abusive; he just gave me the impression he could do whatever project we dreamed up better if he did it alone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 100
+          },
+          "parts": [
+            [
+              90,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

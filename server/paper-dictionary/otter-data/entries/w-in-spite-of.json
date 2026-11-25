@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-spite-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "spite",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "spite",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in spite of",
+  "senses": [
+    {
+      "senseId": "w:in-spite-of#s1",
+      "pos": "短语",
+      "glossZh": "尽管；不顾",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-spite-of#e-09722847467dc794",
+          "text": "In spite of the court hearing testimonials (证明) of her ability as a doctor, she was banned from medicine.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-ed26865ff4e2681b:cell-1-1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-spite-of#e-219ba464f1fc688c",
+          "text": "But in spite of these successes, there is evidence to suggest that celebrity endorsement (代言) may be overrated.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-spite-of#e-875f361fb7bdd08b",
+          "text": "In spite of this, she pursued her passion for cooking.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

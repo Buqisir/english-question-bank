@@ -1,0 +1,104 @@
+{
+  "entryId": "w:fall-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falls in",
+    "fell in"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "in"
+      ],
+      [
+        "falls",
+        "in"
+      ],
+      [
+        "fell",
+        "in"
+      ],
+      [
+        "fallen",
+        "in"
+      ],
+      [
+        "falling",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall in",
+  "senses": [
+    {
+      "senseId": "w:fall-in#s1",
+      "pos": "短语",
+      "glossZh": "（屋顶等）向内塌陷",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-in#s2",
+      "pos": "短语",
+      "glossZh": "（士兵）入列；集合成队",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-in#s3",
+      "pos": "短语",
+      "glossZh": "（租约、年金等）期满终止",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式法律用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 92
+    "mock": 7
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 73
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -214,6 +214,6 @@
       "reason": "宗教专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,234 @@
+{
+  "entryId": "w:turn-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turning away"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "away"
+      ],
+      [
+        "turning",
+        "away"
+      ],
+      [
+        "turned",
+        "away"
+      ],
+      [
+        "turns",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn away",
+      "tags": []
+    },
+    {
+      "form": "turned away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn (sb) away",
+  "senses": [
+    {
+      "senseId": "w:turn-away#s1",
+      "pos": "短语",
+      "glossZh": "转过身去；把脸转向别处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-away#e-97a0a003efebc8c2",
+          "text": "One morning, I waved at her enthusiastically, but she just stared at me and turned away, leaving me annoyed.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 87
+          },
+          "parts": [
+            [
+              76,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-away#e-90dcb104bd9da1cd",
+          "text": "Taken aback, they stopped, and then slowly turned away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 54
+          },
+          "parts": [
+            [
+              43,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-away#e-59ba7e91710635f1",
+          "text": "I forced a smile and thanked him as he turned away.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 50
+          },
+          "parts": [
+            [
+              39,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:turn-away#s2",
+      "pos": "短语",
+      "glossZh": "拒绝接纳；把某人拒之门外",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-away#e-0601d24d5cb1bf66",
+          "text": "Our hospital policy, however, was not to turn away any patient, so I admitted them in and explained the wait because ambulances had brought in several more critical patients.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-away#s3",
+      "pos": "短语",
+      "glossZh": "不再支持；背离",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 turn away from sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

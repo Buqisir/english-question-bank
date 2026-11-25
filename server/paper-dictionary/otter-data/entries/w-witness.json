@@ -65,8 +65,8 @@
     "mock": 90
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 87
+    "gaokao": 5,
+    "mock": 22
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -284,36 +284,34 @@
       "examples": []
     },
     {
-      "senseId": "w:witness#s7",
-      "pos": "短语",
-      "glossZh": "证明；印证",
+      "senseId": "w:witness#s8",
+      "pos": "n.",
+      "glossZh": "见证；佐证",
       "pronunciationId": "w:witness#p-main",
-      "note": "bear witness to sth。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:witness#e-955c129a6eb536b7",
-          "text": "It bore witness to her efforts.",
+          "exampleId": "w:witness#e-4e6a110e363c2fed",
+          "text": "The sounds showcased in the museum are a witness to history, representing a valuable cultural heritage.",
           "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-b",
             "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2026-i:26",
-              "option": "C",
-              "sentence": 1
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-b:3",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 8,
-            "end": 15
+            "start": 41,
+            "end": 48
           }
         }
       ]
@@ -325,6 +323,11 @@
       "reason": "专名或宗教用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bear-witness-to-sth"
+  ]
 }

@@ -1,0 +1,92 @@
+{
+  "entryId": "w:tipping-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tipping",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tipping",
+        "point"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tipping point",
+  "senses": [
+    {
+      "senseId": "w:tipping-point#s1",
+      "pos": "短语",
+      "glossZh": "引发重大变化的临界点；转折点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tip#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tipping-point#e-cb0140a0416f98af",
+          "text": "She explains we are at a “tipping point\" in history and must act now to prevent an extinction-level event for humanity.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 39
+          },
+          "parts": [
+            [
+              26,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

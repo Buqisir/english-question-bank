@@ -59,8 +59,8 @@
     "mock": 59
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 51
+    "gaokao": 5,
+    "mock": 10
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 3
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -303,128 +303,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:stone#s9",
-      "pos": "短语",
-      "glossZh": "石器时代",
-      "pronunciationId": "w:stone#p-main",
-      "note": "Stone Age。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stone#e-7b0bb364fd23a73d",
-          "text": "New power machinery and artificial fertilizers(化肥)have now totally transformed a way of life that started in the Stone Age.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:grammar-fill:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 113,
-            "end": 118
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stone#s10",
-      "pos": "短语",
-      "glossZh": "一举两得",
-      "pronunciationId": "w:stone#p-main",
-      "note": "kill two birds with one stone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stone#e-535e7a1bc2134f01",
-          "text": "killing two birds with one stone",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stone#s11",
-      "pos": "短语",
-      "glossZh": "达到目标的跳板",
-      "pronunciationId": "w:stone#p-main",
-      "note": "stepping stone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stone#e-65c47410e3f72c02",
-          "text": "In both of these ways, expansive framing represents a stepping stone towards better science comprehension and scientific competence.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 63,
-            "end": 68
-          }
-        },
-        {
-          "exampleId": "w:stone#e-e5f6e8bedc623fd8",
-          "text": "More importantly, I saw education __54__: college isn’t just a stepping stone to a __55__, but a place to accumulate strength and discover your true interest.",
-          "source": {
-            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
-            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
-            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:cloze:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 72,
-            "end": 77
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -433,6 +311,12 @@
       "reason": "姓氏或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:kill-two-birds-with-one-stone",
+    "w:stepping-stone"
+  ]
 }

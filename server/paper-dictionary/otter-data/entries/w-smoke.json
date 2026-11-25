@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 24
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -264,74 +264,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:smoke#s6",
-      "pos": "短语",
-      "glossZh": "化为乌有",
-      "pronunciationId": "w:smoke#p-main",
-      "note": "go up in smoke。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:smoke#e-b70bc982f5048a19",
-          "text": "But now thinking of the loan, weeks of work, and my friends’ disappointed faces, I wouldn’t want our business to go up in smoke.",
-          "source": {
-            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
-            "paperTitle": "太原市2026年高三年级模拟考试（一）",
-            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:10",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 122,
-            "end": 127
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:smoke#s7",
-      "pos": "短语",
-      "glossZh": "掩护真实目的的手段",
-      "pronunciationId": "w:smoke#p-main",
-      "note": "smoke screen。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:smoke#e-88bc8b9d304826a0",
-          "text": "Dr. Emily Carter who led the study notes, “This is evolution’s version of a smoke screen – but far more shining.”",
-          "source": {
-            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
-            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
-            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 76,
-            "end": 81
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -340,6 +272,12 @@
       "reason": "专名、体育或粗俗俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-up-in-smoke",
+    "w:smoke-screen"
+  ]
 }

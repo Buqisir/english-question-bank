@@ -1,0 +1,96 @@
+{
+  "entryId": "w:on-pins-and-needles",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "pins",
+      "and",
+      "needles"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "pins",
+        "and",
+        "needles"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on pins and needles",
+  "senses": [
+    {
+      "senseId": "w:on-pins-and-needles#s1",
+      "pos": "短语",
+      "glossZh": "如坐针毡；因等待而紧张不安",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:needle#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-pins-and-needles#e-a0bfd2c6366b071b",
+          "text": "Just as I was sitting on pins and needles, my phone rang.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 41
+          },
+          "parts": [
+            [
+              22,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

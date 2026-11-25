@@ -1,0 +1,115 @@
+{
+  "entryId": "w:back-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "back",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "back",
+        "off"
+      ],
+      [
+        "backed",
+        "off"
+      ],
+      [
+        "backing",
+        "off"
+      ],
+      [
+        "backs",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "back off",
+  "senses": [
+    {
+      "senseId": "w:back-off#s1",
+      "pos": "短语",
+      "glossZh": "退开；别靠近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:back-off#e-cd6ebdb4962fc357",
+          "text": "The industrious buzz of bees in cherry flowers was annoying, accompanied by “back off” warning chirps from blackbirds nesting in the tree.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          },
+          "parts": [
+            [
+              77,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:back-off#s2",
+      "pos": "短语",
+      "glossZh": "收敛；停止逼迫或干涉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

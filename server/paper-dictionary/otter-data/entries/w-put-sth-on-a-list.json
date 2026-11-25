@@ -1,0 +1,70 @@
+{
+  "entryId": "w:put-sth-on-a-list",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sth"
+      },
+      "on",
+      "a",
+      "list"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sth"
+        },
+        "on",
+        "a",
+        "list"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth on a list",
+  "senses": [
+    {
+      "senseId": "w:put-sth-on-a-list#s1",
+      "pos": "短语",
+      "glossZh": "将某物列入清单",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:put#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

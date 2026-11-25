@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 25
+    "mock": 0
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -227,7 +227,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -298,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -363,6 +363,6 @@
       "reason": "科学、行业或少见专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

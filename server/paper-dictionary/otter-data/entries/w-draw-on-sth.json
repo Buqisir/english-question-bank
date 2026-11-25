@@ -1,0 +1,193 @@
+{
+  "entryId": "w:draw-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "draw on",
+    "drawing on"
+  ],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "draw",
+        "on"
+      ],
+      [
+        "drawing",
+        "on"
+      ],
+      [
+        "drawn",
+        "on"
+      ],
+      [
+        "draws",
+        "on"
+      ],
+      [
+        "drew",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draws on",
+      "tags": []
+    },
+    {
+      "form": "drew on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw on sth",
+  "senses": [
+    {
+      "senseId": "w:draw-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "利用；借助；取材于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:draw#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-on-sth#e-1b7b96c54eb699ad",
+          "text": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 109
+          },
+          "parts": [
+            [
+              102,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-on-sth#e-7b7fac2dc1b73fa9",
+          "text": "In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-on-sth#e-90ed7330d558590a",
+          "text": "What is the new thing that Mark wants to draw on?",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          },
+          "parts": [
+            [
+              41,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "常接经验、知识、研究或其他资源。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

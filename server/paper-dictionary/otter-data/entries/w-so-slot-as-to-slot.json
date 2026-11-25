@@ -1,0 +1,133 @@
+{
+  "entryId": "w:so-slot-as-to-slot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "so … as to do"
+  ],
+  "pattern": {
+    "tokens": [
+      "so",
+      {
+        "slot": "…"
+      },
+      "as",
+      "to",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "so",
+        {
+          "slot": "…"
+        },
+        "as",
+        "to",
+        {
+          "slot": "…"
+        }
+      ],
+      [
+        "so",
+        {
+          "slot": "…"
+        },
+        "as",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "so as to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "so … as to …",
+  "senses": [
+    {
+      "senseId": "w:so-slot-as-to-slot#s1",
+      "pos": "短语",
+      "glossZh": "如此……以至于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:so#s10",
+        "w:as#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:so-slot-as-to-slot#e-6011813338a0c212",
+          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 98
+          },
+          "parts": [
+            [
+              85,
+              87
+            ],
+            [
+              93,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              87
+            ],
+            [
+              93,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

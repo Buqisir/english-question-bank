@@ -1,0 +1,60 @@
+{
+  "entryId": "w:on-camera",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "camera"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "camera"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on camera",
+  "senses": [
+    {
+      "senseId": "w:on-camera#s1",
+      "pos": "短语",
+      "glossZh": "在镜头前；被拍摄下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:camera#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

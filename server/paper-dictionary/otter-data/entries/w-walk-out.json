@@ -1,0 +1,257 @@
+{
+  "entryId": "w:walk-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking out"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "out"
+      ],
+      [
+        "walking",
+        "out"
+      ],
+      [
+        "walked",
+        "out"
+      ],
+      [
+        "walks",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk out",
+  "senses": [
+    {
+      "senseId": "w:walk-out#s1",
+      "pos": "短语",
+      "glossZh": "走出去；步行离开",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-out#e-c22cc8b288255b51",
+          "text": "“I’ll see you back home in a month, okay?” His parents nodded, and they watched as he walked out of sight into the crowds of hundreds of students and parents.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 96
+          },
+          "parts": [
+            [
+              86,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-out#e-acf72379f715261a",
+          "text": "Then the officer walked out to the parking lot with us to take a look at the damage to my car.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-out#e-b4d3e50e8cc0a46c",
+          "text": "Her family was walking out of the front door, getting into the car, and leaving without her.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:walk-out#s2",
+      "pos": "短语",
+      "glossZh": "愤而离席；突然离场以示不满",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-out#e-d7b22e4b4449a5d1",
+          "text": "He often interrupted lessons, played jokes on younger children, and sometimes even walked out angrily.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 93
+          },
+          "parts": [
+            [
+              83,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:walk-out#s3",
+      "pos": "短语",
+      "glossZh": "罢工；集体离岗抗议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-out#s4",
+      "pos": "短语",
+      "glossZh": "与某人交往；谈恋爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法，常用 walk out with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-out#s5",
+      "pos": "短语",
+      "glossZh": "陪某人走出去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "walk sb out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

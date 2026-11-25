@@ -1,0 +1,496 @@
+{
+  "entryId": "w:refer-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "refer",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "refer",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "referred to",
+      "tags": []
+    },
+    {
+      "form": "referring to",
+      "tags": []
+    },
+    {
+      "form": "refers to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "refer to",
+  "senses": [
+    {
+      "senseId": "w:refer-to#s1",
+      "pos": "短语",
+      "glossZh": "指的是；指代",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:refer#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:refer-to#e-8a25574474596715",
+          "text": "“The footprint” underlined in the last sentence refers to the CO2 produced in __.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 57
+          },
+          "parts": [
+            [
+              48,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-524ef094f1a7dda6",
+          "text": "What does the underlined phrase “an added meaning” in paragraph 3 refer to?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2020-national-ii:33",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 74
+          },
+          "parts": [
+            [
+              66,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-200f58473c0572c8",
+          "text": "What do the underlined words “this feeling” refer to in the last paragraph?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 52
+          },
+          "parts": [
+            [
+              44,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 16,
+        "mock": 62
+      }
+    },
+    {
+      "senseId": "w:refer-to#s2",
+      "pos": "短语",
+      "glossZh": "提及；谈到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:refer#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:refer-to#e-6159b9a1c6922c36",
+          "text": "By referring to another study.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:29#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-09f909a3b5c59701",
+          "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 28
+          },
+          "parts": [
+            [
+              16,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-85a061d90db8f849",
+          "text": "We found that 62% of UK hotel websites do not include sustainability information, with only 2% of social media posts referring to it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 129
+          },
+          "parts": [
+            [
+              117,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              129
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:refer-to#s4",
+      "pos": "短语",
+      "glossZh": "称……为……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:refer-to#e-9b3a4fd3509628a7",
+          "text": "Referred to as matrix planting, this approach aims for nature to do a lot more of the heavy lifting in the garden, and even some of the designing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-546f13dc4d788076",
+          "text": "Joseph Haydn, Wolfgang Amadeus Mozart, and Ludwig van Beethoven, often referred to as the",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 82
+          },
+          "parts": [
+            [
+              71,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-6261be6a37ddd9b6",
+          "text": "Most travelers seek immersive, everyday experiences, which social media users often refer to as “very Chinese moments”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 92
+          },
+          "parts": [
+            [
+              84,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              92
+            ]
+          ]
+        }
+      ],
+      "note": "refer to sb/sth as …，常见于被动形式。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:refer-to#s3",
+      "pos": "短语",
+      "glossZh": "查阅；参考",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:refer#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:refer-to#e-f60a4a4c78e3f889",
+          "text": "“There’s a huge body of literature, but we can’t refer to it because no one’s using the same methods,” explained Eva Bianchi, a Stanford PhD graduate.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          },
+          "parts": [
+            [
+              49,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-9e05f9cd5e70adbc",
+          "text": "By referring to routinely collected data.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:32#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to#e-6dc1cc66b5987021",
+          "text": "By referring to the landmarks.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 19,
+    "mock": 88
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

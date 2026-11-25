@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 274
+    "mock": 77
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -247,7 +247,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 84
       },
       "folded": false,
       "examples": [
@@ -319,7 +319,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -352,7 +352,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -385,7 +385,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -418,7 +418,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -470,7 +470,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -494,6 +494,172 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:full#s10",
+      "pos": "adj.",
+      "glossZh": "茂密的；蓬松丰满的",
+      "pronunciationId": "w:full#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:full#e-0b7e894a69b0a3cc",
+          "text": "Use the following methods to turn your plants into full and thick ones.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:full#s11",
+      "pos": "phr.",
+      "glossZh": "忙得不可开交（have one's hands full）",
+      "pronunciationId": "w:full#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:full#e-678b895d8188ae6d",
+          "text": "However, with more abandoned bikes flooding in, Harry had his hands full and the repairing work was more than he could deal with.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:full#s12",
+      "pos": "adv.",
+      "glossZh": "完全地；彻底地",
+      "pronunciationId": "w:full#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:full#e-0dceb164b43997d4",
+          "text": "Social comparison is a deeply human nature, but when fed by algorithms (算法) and polished selfies, it goes full Black Mirror.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:full#s13",
+      "pos": "phr.",
+      "glossZh": "全额地；完整地（in full）",
+      "pronunciationId": "w:full#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:full#e-163a44f06c72a230",
+          "text": "But the elephant was addressed correctly, and the shipping charges had been paid in full.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:full#s14",
+      "pos": "phr.",
+      "glossZh": "充分地；达到最大程度（to the full）",
+      "pronunciationId": "w:full#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:full#e-37df471d0ba53d08",
+          "text": "Their OPA region has developed to the full.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -502,6 +668,10 @@
       "reason": "纺织行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:full-circle",
+    "w:full-house"
+  ]
 }

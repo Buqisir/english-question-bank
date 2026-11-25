@@ -59,8 +59,8 @@
     "mock": 359
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 357
+    "gaokao": 6,
+    "mock": 190
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 104
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -321,7 +321,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -366,133 +366,6 @@
       ]
     },
     {
-      "senseId": "w:sense#s6",
-      "pos": "短语",
-      "glossZh": "理解",
-      "pronunciationId": "w:sense#p-main",
-      "note": "make sense of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sense#e-5c31487220b9a095",
-          "text": "I hear him making sense of friendship and its limits.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:sense#e-5e34072ed953d532",
-          "text": "make sense of human faces",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jun:28",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sense#s7",
-      "pos": "短语",
-      "glossZh": "讲得通",
-      "pronunciationId": "w:sense#p-main",
-      "note": "make sense。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sense#e-5b7d80f98511891f",
-          "text": "I’m unsure now why I thought forcing my head inside the pumpkin would settle the matter, but it seemed to make perfect sense at the time.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 119,
-            "end": 124
-          }
-        },
-        {
-          "exampleId": "w:sense#e-be731b8c5a9f6ced",
-          "text": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:sense#e-2fb0f8cd55172a41",
-          "text": "It makes little sense to him.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sense#s8",
       "pos": "v.",
       "glossZh": "察觉",
@@ -500,7 +373,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -533,7 +406,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -563,12 +436,12 @@
       "pos": "n.",
       "glossZh": "判断力",
       "pronunciationId": "w:sense#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -578,6 +451,13 @@
       "reason": "遗传学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:common-sense",
+    "w:make-sense",
+    "w:make-sense-of"
+  ]
 }

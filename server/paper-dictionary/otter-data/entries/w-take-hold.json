@@ -1,0 +1,190 @@
+{
+  "entryId": "w:take-hold",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking hold",
+    "took hold"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "hold"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "hold"
+      ],
+      [
+        "taking",
+        "hold"
+      ],
+      [
+        "took",
+        "hold"
+      ],
+      [
+        "taken",
+        "hold"
+      ],
+      [
+        "takes",
+        "hold"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken hold",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take hold",
+  "senses": [
+    {
+      "senseId": "w:take-hold#s1",
+      "pos": "短语",
+      "glossZh": "扎根；开始流行或产生持久影响",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-hold#e-744595d01c2e2511",
+          "text": "“Becoming Chinese”, a viral trend, has taken hold on social media platforms.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 49
+          },
+          "parts": [
+            [
+              39,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-hold#e-559fe6030affc724",
+          "text": "As I watched him smile softly while picking up the packages, my earlier annoyance faded away, and a faint curiosity took hold.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 125
+          },
+          "parts": [
+            [
+              116,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-hold#e-8876ac3abbdcbb69",
+          "text": "As temperatures rise across China, a new trend is taking hold.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:take-hold#s2",
+      "pos": "短语",
+      "glossZh": "抓住；握牢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 take hold of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

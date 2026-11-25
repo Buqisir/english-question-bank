@@ -1,0 +1,70 @@
+{
+  "entryId": "w:crowd-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "crowd",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "crowd",
+        "out"
+      ],
+      [
+        "crowded",
+        "out"
+      ],
+      [
+        "crowding",
+        "out"
+      ],
+      [
+        "crowds",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "crowd sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:crowd-out#s1",
+      "pos": "短语",
+      "glossZh": "挤走；因占据空间或资源而排挤",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

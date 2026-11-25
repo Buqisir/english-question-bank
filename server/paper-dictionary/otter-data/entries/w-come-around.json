@@ -1,0 +1,144 @@
+{
+  "entryId": "w:come-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "comes around"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "around"
+      ],
+      [
+        "comes",
+        "around"
+      ],
+      [
+        "came",
+        "around"
+      ],
+      [
+        "coming",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come around",
+  "senses": [
+    {
+      "senseId": "w:come-around#s1",
+      "pos": "短语",
+      "glossZh": "（时机、事情等）到来；出现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-around#e-70789f59f6d9509b",
+          "text": "If a new duty comes around that’s more important than others, do your best to rearrange your to-do list.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 26
+          },
+          "parts": [
+            [
+              14,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-around#s2",
+      "pos": "短语",
+      "glossZh": "改变看法，转而接受",
+      "note": "常用 come around to sth。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-around#s3",
+      "pos": "短语",
+      "glossZh": "苏醒；恢复意识",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-around#s4",
+      "pos": "短语",
+      "glossZh": "过来拜访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

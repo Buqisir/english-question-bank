@@ -1,0 +1,76 @@
+{
+  "entryId": "w:have-a-heart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "heart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "heart"
+      ],
+      [
+        "had",
+        "a",
+        "heart"
+      ],
+      [
+        "has",
+        "a",
+        "heart"
+      ],
+      [
+        "having",
+        "a",
+        "heart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a heart",
+  "senses": [
+    {
+      "senseId": "w:have-a-heart#s1",
+      "pos": "习语",
+      "glossZh": "发发善心；体谅一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用祈使句请求对方宽容或通融。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,175 @@
+{
+  "entryId": "w:live-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lives up",
+    "living up"
+  ],
+  "pattern": {
+    "tokens": [
+      "live",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "up"
+      ],
+      [
+        "lives",
+        "up"
+      ],
+      [
+        "living",
+        "up"
+      ],
+      [
+        "lived",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lived up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live up",
+  "senses": [
+    {
+      "senseId": "w:live-up#s1",
+      "pos": "短语",
+      "glossZh": "达到（标准或期望）；不负（盛名）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-up#e-e1363c860cfc5c23",
+          "text": "Underwater, it lives up to its fame – thousands of fish species and crystal-clear waters ease wildlife viewing.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-up#e-acf7ff9fe8db1dde",
+          "text": "living up to",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze",
+            "locator": {
+              "question": 49,
+              "questionId": "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-up#e-2245c3ac0ea869d8",
+          "text": "lives up to",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze",
+            "locator": {
+              "question": 55,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:55#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "note": "完整搭配为 live up to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

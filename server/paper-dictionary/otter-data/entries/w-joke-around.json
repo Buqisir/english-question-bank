@@ -1,0 +1,115 @@
+{
+  "entryId": "w:joke-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "joke",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "joke",
+        "around"
+      ],
+      [
+        "joked",
+        "around"
+      ],
+      [
+        "jokes",
+        "around"
+      ],
+      [
+        "joking",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "joke around",
+  "senses": [
+    {
+      "senseId": "w:joke-around#s1",
+      "pos": "短语",
+      "glossZh": "说笑；开玩笑逗乐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:joke-around#e-069cbb6baf6fccc8",
+          "text": "Taking time to catch up, joke around or show appreciation for someone feels good, and lowers stress and loneliness.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:joke-around#s2",
+      "pos": "短语",
+      "glossZh": "胡闹；不认真做事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

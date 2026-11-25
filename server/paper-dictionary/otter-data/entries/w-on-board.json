@@ -1,0 +1,214 @@
+{
+  "entryId": "w:on-board",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "board"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "board"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on board",
+  "senses": [
+    {
+      "senseId": "w:on-board#s1",
+      "pos": "短语",
+      "glossZh": "在船、飞机、火车等交通工具上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:board#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-board#e-c5cd08bbe0752fc9",
+          "text": "Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural（乡村）populations with basic medical care, X-ray scans and prescriptions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 92
+          },
+          "parts": [
+            [
+              84,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-board#e-38348f160fb3a96b",
+          "text": "Day 2: Fly from Quito to Galápagos and begin your expedition on board National Geographic Endeavour II.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          },
+          "parts": [
+            [
+              61,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-board#e-7defefb009129145",
+          "text": "What is the man’s opinion of the service on board?",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:on-board#s2",
+      "pos": "短语",
+      "glossZh": "同意并支持；愿意参与",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:board#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-board#e-f704c73fc647b5b8",
+          "text": "If you have individuals who are not on board, your words probably won't do much and can often leave you feeling more discouraged.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:on-board#s3",
+      "pos": "短语",
+      "glossZh": "已加入团队或项目；作为成员参与",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

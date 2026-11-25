@@ -1,0 +1,83 @@
+{
+  "entryId": "w:cross-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cross",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cross",
+        "over"
+      ],
+      [
+        "crossed",
+        "over"
+      ],
+      [
+        "crosses",
+        "over"
+      ],
+      [
+        "crossing",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cross over",
+  "senses": [
+    {
+      "senseId": "w:cross-over#s1",
+      "pos": "短语",
+      "glossZh": "越到另一边；转到另一领域或阵营",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cross-over#s2",
+      "pos": "短语",
+      "glossZh": "（委婉说法）去世",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

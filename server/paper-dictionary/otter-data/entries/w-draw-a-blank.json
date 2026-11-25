@@ -1,0 +1,112 @@
+{
+  "entryId": "w:draw-a-blank",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "a",
+      "blank"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "a",
+        "blank"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drew a blank",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw a blank",
+  "senses": [
+    {
+      "senseId": "w:draw-a-blank#s1",
+      "pos": "短语",
+      "glossZh": "想不起来；脑子一片空白",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blank#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-a-blank#e-23bb9c99d65a0455",
+          "text": "My mind raced back to my first-aid class, but I drew a blank, afraid of getting it wrong.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:draw-a-blank#s2",
+      "pos": "短语",
+      "glossZh": "查无结果；搜寻无果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

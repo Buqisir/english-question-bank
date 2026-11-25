@@ -1,0 +1,172 @@
+{
+  "entryId": "w:take-action",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking action"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "action"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "action"
+      ],
+      [
+        "taking",
+        "action"
+      ],
+      [
+        "taken",
+        "action"
+      ],
+      [
+        "takes",
+        "action"
+      ],
+      [
+        "took",
+        "action"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take action",
+  "senses": [
+    {
+      "senseId": "w:take-action#s1",
+      "pos": "短语",
+      "glossZh": "采取行动；采取措施",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s44"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-action#e-71ac32da4b8c2593",
+          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-action#e-8663ea2b316dd910",
+          "text": "It wasn’t until his niece Zara got addicted to electronic devices that he resolved to take action.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 97
+          },
+          "parts": [
+            [
+              86,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-action#e-20ed6be51b6d9cc1",
+          "text": "As soon as a school phobia is identified, parents should take action too.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 68
+          },
+          "parts": [
+            [
+              57,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

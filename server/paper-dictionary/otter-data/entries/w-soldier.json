@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -116,20 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:soldier#s2",
-      "pos": "短语",
-      "glossZh": "硬撑着继续做",
-      "pronunciationId": "w:soldier#p-main",
-      "note": "soldier on。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -138,6 +124,11 @@
       "reason": "专名、专物名称或行业词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:soldier-on"
+  ]
 }

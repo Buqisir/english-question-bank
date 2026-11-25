@@ -1,0 +1,307 @@
+{
+  "entryId": "w:in-turn",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "turn"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "turn"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in turn",
+  "senses": [
+    {
+      "senseId": "w:in-turn#s1",
+      "pos": "短语",
+      "glossZh": "继而；由此又",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s24",
+        "w:turn#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-turn#e-8c55a05852409522",
+          "text": "These qualities, in turn, are mapped onto products that have been assigned a gender.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-turn#e-28791d01bd142554",
+          "text": "I post my work on social media and, in turn, have met some of the kindest people.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-turn#e-bd098419e36b9fa2",
+          "text": "In turn, our minds unconsciously adjust our attitudes to reduce the discomfort this inconsistency brings on.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 17
+      }
+    },
+    {
+      "senseId": "w:in-turn#s2",
+      "pos": "短语",
+      "glossZh": "作为回应；反过来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-turn#e-846e4426d6b0207e",
+          "text": "We humans, in turn, will begin to adopt the linguistic patterns and behaviors of these models.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-turn#e-3b86a4a3d9e8e649",
+          "text": "His son, in turn, told him how proud he was of his father’s progress.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          },
+          "parts": [
+            [
+              9,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-turn#e-ca636a086626d83b",
+          "text": "Chung believes that “artificial” intelligence still relies on human data, shaped by human biases, and it impacts human experiences in turn.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 138
+          },
+          "parts": [
+            [
+              131,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              138
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:in-turn#s3",
+      "pos": "短语",
+      "glossZh": "依次；轮流",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-turn#e-0a1a51515171751e",
+          "text": "This two-way cycle enables continuous cooling as pressure is applied and released in turn, making it an ideal one for refrigeration systems.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 89
+          },
+          "parts": [
+            [
+              82,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

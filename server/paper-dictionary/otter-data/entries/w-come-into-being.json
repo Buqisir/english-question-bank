@@ -1,0 +1,175 @@
+{
+  "entryId": "w:come-into-being",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came into being",
+    "comes into being"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "into",
+      "being"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "into",
+        "being"
+      ],
+      [
+        "came",
+        "into",
+        "being"
+      ],
+      [
+        "comes",
+        "into",
+        "being"
+      ],
+      [
+        "coming",
+        "into",
+        "being"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come into being",
+  "senses": [
+    {
+      "senseId": "w:come-into-being#s1",
+      "pos": "短语",
+      "glossZh": "产生；形成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:being#s3",
+        "w:come#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-into-being#e-8ebeb455220a9a56",
+          "text": "The image of the reader appears throughout history, in art made long before books as we now know them came into being.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 117
+          },
+          "parts": [
+            [
+              102,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              117
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-into-being#e-089f9a6231f97e3b",
+          "text": "Three days later, a beautiful stairway came into being.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 54
+          },
+          "parts": [
+            [
+              39,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-into-being#e-2baf88bfd151f82c",
+          "text": "Pinocchio comes into being when a man discovers a talking piece of wood.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 26
+          },
+          "parts": [
+            [
+              10,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

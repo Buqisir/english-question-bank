@@ -1,0 +1,156 @@
+{
+  "entryId": "w:something-of-a",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "something",
+      "of",
+      "a"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "something",
+        "of",
+        "a"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "something of a",
+  "senses": [
+    {
+      "senseId": "w:something-of-a#s1",
+      "pos": "短语",
+      "glossZh": "有点像个……；多少算是个……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:something#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:something-of-a#e-454c27bb67ceccc2",
+          "text": "It’s something of a cliché（陈词滥调）that most people learn not from their successes but their mistakes.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 19
+          },
+          "parts": [
+            [
+              5,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-of-a#e-2155ab775b8cd126",
+          "text": "Within the scientific community, dreams are still something of a mystery.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 64
+          },
+          "parts": [
+            [
+              50,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-of-a#e-42a75608b666d5ab",
+          "text": "Pet travel isn’t just a trend, it’s something of a transformation.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 50
+          },
+          "parts": [
+            [
+              36,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

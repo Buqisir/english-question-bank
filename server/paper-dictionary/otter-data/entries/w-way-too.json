@@ -1,0 +1,121 @@
+{
+  "entryId": "w:way-too",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "way",
+      "too"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "way",
+        "too"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "way too",
+  "senses": [
+    {
+      "senseId": "w:way-too#s1",
+      "pos": "短语",
+      "glossZh": "太……了；……得过头",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:way-too#e-f91c492ed83280fc",
+          "text": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          },
+          "parts": [
+            [
+              38,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:way-too#e-70f828839629b9b7",
+          "text": "However, compared with other football giants, he was “way too small” to consider a football career.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          },
+          "parts": [
+            [
+              54,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

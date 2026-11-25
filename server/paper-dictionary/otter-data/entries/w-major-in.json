@@ -1,0 +1,177 @@
+{
+  "entryId": "w:major-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "major",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "major",
+        "in"
+      ],
+      [
+        "majored",
+        "in"
+      ],
+      [
+        "majoring",
+        "in"
+      ],
+      [
+        "majors",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "major in",
+      "tags": []
+    },
+    {
+      "form": "majored in",
+      "tags": []
+    },
+    {
+      "form": "majoring in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "major in sth",
+  "senses": [
+    {
+      "senseId": "w:major-in#s1",
+      "pos": "短语",
+      "glossZh": "主修（某学科）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:major-in#e-1f494188dcd44091",
+          "text": "On a holiday afternoon, Tom, a college student majoring in architecture, came to visit Grandma as usual.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:major-in#e-4fa2e0276a11ac4b",
+          "text": "Growing up in Portland, Ore., Shah loved creative writing but was identified as a “STEM kid.” She majored in mechanical engineering.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 108
+          },
+          "parts": [
+            [
+              98,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:major-in#e-7bf0d9fe65c50e1c",
+          "text": "I majored in Mechanical Engineering in college and what I experienced during the job-hunting season in my final year changed my life completely.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

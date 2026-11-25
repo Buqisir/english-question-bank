@@ -1,0 +1,248 @@
+{
+  "entryId": "w:run-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running away from",
+    "runs away from"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "away",
+        "from"
+      ],
+      [
+        "running",
+        "away",
+        "from"
+      ],
+      [
+        "runs",
+        "away",
+        "from"
+      ],
+      [
+        "ran",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run away from",
+  "senses": [
+    {
+      "senseId": "w:run-away-from#s1",
+      "pos": "短语",
+      "glossZh": "逃避（问题、责任等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-away-from#e-7ae959834c4e8ca7",
+          "text": "Another time, a friend told me to stop running away from my problems and to start living life.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 56
+          },
+          "parts": [
+            [
+              39,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-away-from#e-cfb5e635c1a4ef35",
+          "text": "But deep down, I knew that running away from my mistake wouldn't make it disappear – not the tear in the book, and not the guilt in my heart.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 44
+          },
+          "parts": [
+            [
+              27,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-away-from#e-c8cac30fb89bc7c0",
+          "text": "Desperate to run away from my own failure, I picked up my jacket and a small sketchbook, stepping out to wander the city streets with no plan at all.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:run-away-from#s2",
+      "pos": "短语",
+      "glossZh": "逃离；跑开以躲避",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-away-from#e-e6748d9a013fed82",
+          "text": "If your cat keeps running away from you, consider leaving behind a small treat in a place it can find.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 35
+          },
+          "parts": [
+            [
+              18,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-away-from#e-9aac6e4cda033868",
+          "text": "If your cat runs away from you, it may still be angry, upset, or frightened.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

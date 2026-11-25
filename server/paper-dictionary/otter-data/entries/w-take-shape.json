@@ -1,0 +1,174 @@
+{
+  "entryId": "w:take-shape",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking shape",
+    "took shape"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "shape"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "shape"
+      ],
+      [
+        "taking",
+        "shape"
+      ],
+      [
+        "took",
+        "shape"
+      ],
+      [
+        "taken",
+        "shape"
+      ],
+      [
+        "takes",
+        "shape"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take shape",
+  "senses": [
+    {
+      "senseId": "w:take-shape#s1",
+      "pos": "短语",
+      "glossZh": "逐渐成形；渐渐有了清晰的轮廓",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shape#s5",
+        "w:take#s59"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-shape#e-ec8152421c136e01",
+          "text": "Appropriately, the book took shape during a summer spent between sea and mountains.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          },
+          "parts": [
+            [
+              24,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-shape#e-f87aba0913ad094b",
+          "text": "An idea for a “Garden Reading Corner” project, aimed at young readers, began to take shape.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 90
+          },
+          "parts": [
+            [
+              80,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-shape#e-cd5a53f8526d92f1",
+          "text": "Beyond the runway, a new initiative is taking shape.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 51
+          },
+          "parts": [
+            [
+              39,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

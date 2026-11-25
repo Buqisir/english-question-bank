@@ -1,0 +1,97 @@
+{
+  "entryId": "w:how-much-does-it-cost",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "much",
+      "does",
+      "it",
+      "cost"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "much",
+        "does",
+        "it",
+        "cost"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how much does it cost",
+  "senses": [
+    {
+      "senseId": "w:how-much-does-it-cost#s1",
+      "pos": "短语",
+      "glossZh": "要花多少钱？费用是多少？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:how-much-does-it-cost#e-eb8eb0596392bbe6",
+          "text": "How much does it cost to rent an e-bike for 8.5 hours in July?",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-2026-01-shandong-jinan-gaosan-first:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "可接 to do sth 询问做某事的费用。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

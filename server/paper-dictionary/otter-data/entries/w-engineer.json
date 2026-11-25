@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 10,
-    "mock": 118
+    "mock": 12
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -225,13 +225,136 @@
       "pos": "v.",
       "glossZh": "设法促成",
       "pronunciationId": "w:engineer#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:engineer#s5",
+      "pos": "n.",
+      "glossZh": "工程学；工程技术",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 33
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engineer#e-169a9ae42b329368",
+          "text": "If you love science and engineering, sci-fi is the place you turn to to imagine the answers.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-0945d9cae037ddce",
+          "text": "Although the laboratory results are encouraging, extending the service life of large dielectric films in dynamic outdoor conditions will also require further engineering.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 169
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-e33a22eb737af9db",
+          "text": "She majored in mechanical engineering.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:engineer#s6",
+      "pos": "n.",
+      "glossZh": "基因改造（genetic engineering）",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engineer#e-c6ed24a2a56f22d9",
+          "text": "Both supporters and critics of genetic engineering say that the apple could be a turning point in the nation’s debate with extreme opinions over genetically modified organisms (GMOs).",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-af6563930d6118ed",
+          "text": "“We can use the tomato or Etuberosum to perhaps do some genetic engineering to improve the potato,” Knapp says.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 75
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -244,6 +367,6 @@
       "reason": "历史军事用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

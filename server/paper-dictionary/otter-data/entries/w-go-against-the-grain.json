@@ -1,0 +1,64 @@
+{
+  "entryId": "w:go-against-the-grain",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "against",
+      "the",
+      "grain"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "against",
+        "the",
+        "grain"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go against the grain",
+  "senses": [
+    {
+      "senseId": "w:go-against-the-grain#s1",
+      "pos": "短语",
+      "glossZh": "违背常规或本人的习惯、原则",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:grain#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

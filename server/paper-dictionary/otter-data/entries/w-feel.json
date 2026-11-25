@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 6,
-    "mock": 1372
+    "mock": 1174
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 87,
-        "mock": 0
+        "mock": 137
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -285,12 +285,12 @@
       "pos": "v.",
       "glossZh": "感受到（触觉）",
       "pronunciationId": "w:feel#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -301,7 +301,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -334,7 +334,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -423,20 +423,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:feel#s9",
-      "pos": "短语",
-      "glossZh": "想要（做）",
-      "pronunciationId": "w:feel#p-main",
-      "note": "feel like doing sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -445,6 +431,18 @@
       "reason": "同形命中属于另一词头"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:feel-at-home",
+    "w:feel-for",
+    "w:feel-free",
+    "w:feel-like",
+    "w:feel-like-doing-sth",
+    "w:feel-out",
+    "w:feel-sorry-for",
+    "w:feel-the-burn"
+  ]
 }

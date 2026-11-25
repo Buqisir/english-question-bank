@@ -1,0 +1,109 @@
+{
+  "entryId": "w:any-day-of-the-week",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "any",
+      "day",
+      "of",
+      "the",
+      "week"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "any",
+        "day",
+        "of",
+        "the",
+        "week"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "any day of the week",
+  "senses": [
+    {
+      "senseId": "w:any-day-of-the-week#s1",
+      "pos": "短语",
+      "glossZh": "一周中哪天都行；随时",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:any-day-of-the-week#e-44c14fffbaed6b8e",
+          "text": "It’s a hub for a quick, satisfying, and familiar meal any day of the week.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 73
+          },
+          "parts": [
+            [
+              54,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:any-day-of-the-week#s2",
+      "pos": "短语",
+      "glossZh": "无论何时都一样（强调选择或比较时的把握）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

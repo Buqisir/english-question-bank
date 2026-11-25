@@ -1,0 +1,123 @@
+{
+  "entryId": "w:size-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "size",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "size",
+        "up"
+      ],
+      [
+        "sized",
+        "up"
+      ],
+      [
+        "sizes",
+        "up"
+      ],
+      [
+        "sizing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sized up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "size (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:size-up#s1",
+      "pos": "短语",
+      "glossZh": "估量某人或某事；判断形势",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:size#s4",
+        "w:up#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:size-up#e-84555a344df036a7",
+          "text": "He sized up the situation and called for his daughter, who spoke English.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:size-up#s2",
+      "pos": "短语",
+      "glossZh": "（选衣物等）拿大一码",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

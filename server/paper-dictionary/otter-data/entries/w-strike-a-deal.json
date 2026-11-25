@@ -1,0 +1,130 @@
+{
+  "entryId": "w:strike-a-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strike",
+      "a",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        "a",
+        "deal"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "struck a deal",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike a deal",
+  "senses": [
+    {
+      "senseId": "w:strike-a-deal#s1",
+      "pos": "短语",
+      "glossZh": "达成协议；谈成交易",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:strike#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:strike-a-deal#e-2ad3144852f8130c",
+          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 109
+          },
+          "parts": [
+            [
+              96,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:strike-a-deal#e-a81effcefa0fec0f",
+          "text": "At that moment, I struck a deal with myself.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 31
+          },
+          "parts": [
+            [
+              18,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

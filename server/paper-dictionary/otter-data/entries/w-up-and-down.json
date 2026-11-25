@@ -1,0 +1,234 @@
+{
+  "entryId": "w:up-and-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "and",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "and",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up and down",
+  "senses": [
+    {
+      "senseId": "w:up-and-down#s1",
+      "pos": "短语",
+      "glossZh": "上上下下；一上一下地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-and-down#e-34a6771dce397e96",
+          "text": "Instead of running away immediately, you might jump up and down with all four legs.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 63
+          },
+          "parts": [
+            [
+              52,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-and-down#e-eace941b4c40f335",
+          "text": "The first few days I kept him in the apartment, but it was hard for him to get up and down the stairs when he needed a breath of air and he couldn’t fit in the elevator.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 90
+          },
+          "parts": [
+            [
+              79,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-and-down#e-fface0cefab2a003",
+          "text": "As if sensing the movement, the swallow suddenly flapped its wings and flew up, perching on the branches of the Chinese parasol tree in the corner of the courtyard, its tail wagging up and down.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 182,
+            "end": 193
+          },
+          "parts": [
+            [
+              182,
+              193
+            ]
+          ],
+          "highlightRanges": [
+            [
+              182,
+              193
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s2",
+      "pos": "短语",
+      "glossZh": "沿同一路线来回地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s3",
+      "pos": "短语",
+      "glossZh": "遍及……；在……各处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s4",
+      "pos": "短语",
+      "glossZh": "信誓旦旦地；斩钉截铁地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 swear up and down。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s5",
+      "pos": "短语",
+      "glossZh": "竖直的；垂直的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s6",
+      "pos": "短语",
+      "glossZh": "坦率的；正直的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:up-and-down#s7",
+      "pos": "短语",
+      "glossZh": "有上下两层楼的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "菲律宾英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:after-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "after",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "after",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "after all",
+  "senses": [
+    {
+      "senseId": "w:after-all#s1",
+      "pos": "短语",
+      "glossZh": "毕竟；别忘了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:after#s3",
+        "w:all#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:after-all#e-96677d952d79484c",
+          "text": "After all, coworking spaces also typically use an open office layout (布局).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:after-all#e-17bdda7066eab2d1",
+          "text": "After all, I did care about what others would think of me.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:after-all#e-6266e68c745e7c20",
+          "text": "After all, I had left him little choice.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "用于提醒对方注意某项事实或给出理由。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 86
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 86
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

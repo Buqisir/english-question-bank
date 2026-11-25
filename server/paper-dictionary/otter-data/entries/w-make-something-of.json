@@ -1,0 +1,141 @@
+{
+  "entryId": "w:make-something-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "something",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "something",
+        "of"
+      ],
+      [
+        "made",
+        "something",
+        "of"
+      ],
+      [
+        "makes",
+        "something",
+        "of"
+      ],
+      [
+        "making",
+        "something",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "make something of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make something of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:make-something-of#s1",
+      "pos": "短语",
+      "glossZh": "让某人有所成就；利用某事物做出成果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-something-of#e-463f49413d54253e",
+          "text": "Every morning, she looked in the mirror and thought, You better make something of yourself, kid.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 81
+          },
+          "parts": [
+            [
+              64,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              81
+            ]
+          ]
+        }
+      ],
+      "note": "make something of oneself 指努力让自己有出息。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-something-of#s2",
+      "pos": "短语",
+      "glossZh": "弄懂；对某事作出解释",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "否定句中常用 make anything of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-something-of#s3",
+      "pos": "短语",
+      "glossZh": "拿某事挑起争执",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于带挑衅语气的问句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

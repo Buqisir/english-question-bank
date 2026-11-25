@@ -1,0 +1,91 @@
+{
+  "entryId": "w:face-up-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "face up",
+    "face up to"
+  ],
+  "pattern": {
+    "tokens": [
+      "face",
+      "up",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "face",
+        "up",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "face",
+        "up",
+        "to"
+      ],
+      [
+        "faced",
+        "up",
+        "to"
+      ],
+      [
+        "faces",
+        "up",
+        "to"
+      ],
+      [
+        "facing",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "face up to sth",
+  "senses": [
+    {
+      "senseId": "w:face-up-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "正视并面对（困难、责任或不愉快的事实）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:face#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,180 @@
+{
+  "entryId": "w:take-a-look",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a look",
+    "took a look"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "look"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "look"
+      ],
+      [
+        "taking",
+        "a",
+        "look"
+      ],
+      [
+        "took",
+        "a",
+        "look"
+      ],
+      [
+        "taken",
+        "a",
+        "look"
+      ],
+      [
+        "takes",
+        "a",
+        "look"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a look",
+  "senses": [
+    {
+      "senseId": "w:take-a-look#s1",
+      "pos": "短语",
+      "glossZh": "看一看；查看一下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s28"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-look#e-f4e838e979af20ac",
+          "text": "She jumped back into the water and swam over to take a look behind the box, and her question was answered.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 59
+          },
+          "parts": [
+            [
+              48,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-look#e-b575e42aaf070985",
+          "text": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 74
+          },
+          "parts": [
+            [
+              61,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-look#e-acf72379f715261a",
+          "text": "Then the officer walked out to the parking lot with us to take a look at the damage to my car.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "常接 at sth。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

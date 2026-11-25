@@ -1,0 +1,133 @@
+{
+  "entryId": "w:play-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "along"
+      ],
+      [
+        "played",
+        "along"
+      ],
+      [
+        "playing",
+        "along"
+      ],
+      [
+        "plays",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play along",
+  "senses": [
+    {
+      "senseId": "w:play-along#s1",
+      "pos": "短语",
+      "glossZh": "配合；顺着别人的计划或玩笑行事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:along#s5",
+        "w:play#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:play-along#e-1570a12db9f80ae4",
+          "text": "He tried it several times, but the card machine just did not play along.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 71
+          },
+          "parts": [
+            [
+              61,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              71
+            ]
+          ]
+        }
+      ],
+      "note": "可指假装附和，也可拟人地指机器配合操作。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-along#s2",
+      "pos": "短语",
+      "glossZh": "跟着音乐或录音一起演奏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-along#s3",
+      "pos": "短语",
+      "glossZh": "以假意配合或拖延来操纵某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式用法，用 play sb along。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

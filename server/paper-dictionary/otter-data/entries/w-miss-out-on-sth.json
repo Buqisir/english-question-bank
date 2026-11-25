@@ -1,0 +1,171 @@
+{
+  "entryId": "w:miss-out-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "miss",
+      "out",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "miss",
+        "out",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "miss out on",
+      "tags": []
+    },
+    {
+      "form": "missing out on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "miss out on sth",
+  "senses": [
+    {
+      "senseId": "w:miss-out-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "错过参加、体验或享受某事的机会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:miss#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:miss-out-on-sth#e-5ebdaa74f7467543",
+          "text": "He argues childhood’s purpose is building independence, and without it, kids miss out on growing up.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-out-on-sth#e-7c8d6f909f264577",
+          "text": "Kids who spend a lot of time on screens often miss out on chances to develop crucial social skills.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-out-on-sth#e-58d55c415fab972a",
+          "text": "is because they’re afraid of missing out on social opportunities, since so many young people",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 43
+          },
+          "parts": [
+            [
+              29,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

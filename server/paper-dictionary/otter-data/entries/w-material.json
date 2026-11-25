@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 294
+    "mock": 105
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 132
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -220,12 +220,12 @@
       "pos": "adj.",
       "glossZh": "物质的",
       "pronunciationId": "w:material#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 9
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -248,6 +248,6 @@
       "reason": "专名或专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

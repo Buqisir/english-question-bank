@@ -1,0 +1,166 @@
+{
+  "entryId": "w:game-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "game",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "game",
+        "over"
+      ],
+      [
+        "game",
+        "overed"
+      ],
+      [
+        "game",
+        "overing"
+      ],
+      [
+        "game",
+        "overs"
+      ],
+      [
+        "gamed",
+        "over"
+      ],
+      [
+        "games",
+        "over"
+      ],
+      [
+        "gaming",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "game over",
+  "senses": [
+    {
+      "senseId": "w:game-over#s1",
+      "pos": "短语",
+      "glossZh": "游戏结束；游戏结束提示",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:game-over#e-b1d093d2a190e6b9",
+          "text": "Game over.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-171",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:game-over#s2",
+      "pos": "短语",
+      "glossZh": "彻底完了；再无机会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:game-over#s3",
+      "pos": "短语",
+      "glossZh": "（比喻）死了；生命结束了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:game-over#s4",
+      "pos": "短语",
+      "glossZh": "（少见动词）结束游戏并收到结束提示",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:game-over#s5",
+      "pos": "短语",
+      "glossZh": "（少见动词）使对手出局并收到结束提示",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

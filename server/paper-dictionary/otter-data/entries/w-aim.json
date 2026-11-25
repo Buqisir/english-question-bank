@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 121
+    "mock": 4
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -130,7 +130,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 97
       },
       "folded": false,
       "examples": [
@@ -199,13 +199,46 @@
       "pos": "v.",
       "glossZh": "瞄准；把……对准",
       "pronunciationId": "w:aim#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:aim#s4",
+      "pos": "n.",
+      "glossZh": "瞄准（take aim）",
+      "pronunciationId": "w:aim#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:aim#e-8a0c9f75008f1d91",
+          "text": "One cold spring morning, Hannie was taken from her cell and marched to a point, where one of the Nazi soldiers took aim.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 119
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -214,6 +247,10 @@
       "reason": "同形专名缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:aim-at",
+    "w:aim-high"
+  ]
 }

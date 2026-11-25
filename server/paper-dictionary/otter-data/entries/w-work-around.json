@@ -1,0 +1,166 @@
+{
+  "entryId": "w:work-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "working around"
+  ],
+  "pattern": {
+    "tokens": [
+      "work",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "work",
+        "around"
+      ],
+      [
+        "working",
+        "around"
+      ],
+      [
+        "worked",
+        "around"
+      ],
+      [
+        "works",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "work around",
+  "senses": [
+    {
+      "senseId": "w:work-around#s1",
+      "pos": "短语",
+      "glossZh": "绕开（问题或限制）；设法变通",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:work-around#e-88c6278395e974e7",
+          "text": "In the subsequent years, I kept working around my anxiety about crowds and people by waiting them out.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 46
+          },
+          "parts": [
+            [
+              32,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-around#e-82d64cfeb634dc48",
+          "text": "Understanding them, we can work around them.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-around#e-bd32893caf369d94",
+          "text": "Therefore, businesses need to design their IT infrastructure(基础设施) to fit their employees’ work, rather than force employees to work around the company’s IT limitations.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 139
+          },
+          "parts": [
+            [
+              128,
+              139
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              139
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,185 @@
+{
+  "entryId": "w:speak-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "speaking up",
+    "spoke up"
+  ],
+  "pattern": {
+    "tokens": [
+      "speak",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speak",
+        "up"
+      ],
+      [
+        "speaking",
+        "up"
+      ],
+      [
+        "spoke",
+        "up"
+      ],
+      [
+        "speaks",
+        "up"
+      ],
+      [
+        "spoken",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speak up",
+  "senses": [
+    {
+      "senseId": "w:speak-up#s1",
+      "pos": "短语",
+      "glossZh": "主动发言；公开表达意见",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-up#e-418345085678f7ed",
+          "text": "My desk-mate encouraged me, “Next time, just speak up.” I nodded, forcing a bitter smile.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 53
+          },
+          "parts": [
+            [
+              45,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-up#e-ca4e9e5d95d34bdd",
+          "text": "But I remembered what I had learned from that writing class: sometimes you must speak up before you feel ready.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          },
+          "parts": [
+            [
+              80,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-up#e-3a7dabf37702016e",
+          "text": "We’re used to filling those awkward silences and pauses, often by speaking up ourselves, but sometimes, a little silence is OK!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        }
+      ],
+      "note": "speak up for sb/sth 表示为某人或某事发声。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:speak-up#s2",
+      "pos": "短语",
+      "glossZh": "提高音量；说大声点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

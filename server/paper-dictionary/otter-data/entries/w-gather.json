@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 126
+    "mock": 18
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -266,7 +266,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -316,12 +316,12 @@
       "pos": "v.",
       "glossZh": "推断",
       "pronunciationId": "w:gather#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -344,6 +344,9 @@
       "reason": "机械术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:gather-up"
+  ]
 }

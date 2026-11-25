@@ -1,0 +1,171 @@
+{
+  "entryId": "w:run-out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "run",
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "ran out of",
+      "tags": []
+    },
+    {
+      "form": "run out of",
+      "tags": []
+    },
+    {
+      "form": "running out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run out of sth",
+  "senses": [
+    {
+      "senseId": "w:run-out-of#s1",
+      "pos": "短语",
+      "glossZh": "用完；耗尽（资源、时间、点子等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s13",
+        "w:run#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:run-out-of#e-5dca1449799b339f",
+          "text": "I’d read that if the pond froze solid in winter, the fish would run out of oxygen.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 74
+          },
+          "parts": [
+            [
+              64,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-out-of#e-5b2fd3b6f4e5dabe",
+          "text": "Mustafa, who was much shorter than Bob, was running out of patience.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 58
+          },
+          "parts": [
+            [
+              44,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-out-of#e-0869c7393122d8b9",
+          "text": "They never run out of battery, which is a relief.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-mingxiao-2025-11-midterm:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          },
+          "parts": [
+            [
+              11,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

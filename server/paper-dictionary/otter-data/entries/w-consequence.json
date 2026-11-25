@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 68
+    "mock": 8
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -123,12 +123,12 @@
       "glossZh": "重要性；影响",
       "pronunciationId": "w:consequence#p-main",
       "note": "of little consequence 指「无关紧要」。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -138,6 +138,6 @@
       "reason": "特殊动词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

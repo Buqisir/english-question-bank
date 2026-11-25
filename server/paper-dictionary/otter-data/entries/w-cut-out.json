@@ -1,0 +1,268 @@
+{
+  "entryId": "w:cut-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cutting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "out"
+      ],
+      [
+        "cutting",
+        "out"
+      ],
+      [
+        "cuts",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut out",
+  "senses": [
+    {
+      "senseId": "w:cut-out#s1",
+      "pos": "短语",
+      "glossZh": "剪出；切出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-out#e-ebae1d642446fdd7",
+          "text": "Think of your first draft as a path cut out of the jungle – as part of an exploration, not as a complete highway.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-out#e-4ddc2784f3b7fe30",
+          "text": "She must have been secretly working at her sewing machine for weeks, carefully cutting out patterns, choosing fabrics, adding tiny details with her needle and thread and an abundance of patience.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 90
+          },
+          "parts": [
+            [
+              79,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-out#s2",
+      "pos": "短语",
+      "glossZh": "停止做；戒掉或停止摄入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-out#e-ea61a6a3a8c0cf38",
+          "text": "Experts advise that we should not cut out carbs totally.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-out#s3",
+      "pos": "短语",
+      "glossZh": "删去（文字或其他内容）；去掉（环节）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s4",
+      "pos": "短语",
+      "glossZh": "突然停止运转；突然中断",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s5",
+      "pos": "短语",
+      "glossZh": "适合；胜任",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 be cut out for sth 或 be cut out to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s6",
+      "pos": "短语",
+      "glossZh": "突然离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s7",
+      "pos": "短语",
+      "glossZh": "把某人排除在外",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s8",
+      "pos": "短语",
+      "glossZh": "把牲畜从畜群中分离出来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-out#s9",
+      "pos": "短语",
+      "glossZh": "拦截（传球等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

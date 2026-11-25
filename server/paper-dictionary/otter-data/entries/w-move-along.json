@@ -1,0 +1,96 @@
+{
+  "entryId": "w:move-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "along"
+      ],
+      [
+        "moved",
+        "along"
+      ],
+      [
+        "moves",
+        "along"
+      ],
+      [
+        "moving",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move along",
+  "senses": [
+    {
+      "senseId": "w:move-along#s1",
+      "pos": "短语",
+      "glossZh": "继续往前走；别停留",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-along#s2",
+      "pos": "短语",
+      "glossZh": "逐步推进；取得进展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-along#s3",
+      "pos": "短语",
+      "glossZh": "转到下一项议程或下一个话题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

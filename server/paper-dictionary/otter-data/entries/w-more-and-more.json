@@ -1,0 +1,263 @@
+{
+  "entryId": "w:more-and-more",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "more",
+      "and",
+      "more"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "more",
+        "and",
+        "more"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "more and more",
+  "senses": [
+    {
+      "senseId": "w:more-and-more#s1",
+      "pos": "短语",
+      "glossZh": "越来越多（的）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:more-and-more#e-2d7a0af409bbcd7c",
+          "text": "But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 76
+          },
+          "parts": [
+            [
+              63,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-and-more#e-3fe0c28901427cae",
+          "text": "Books, which were previously only available to a tiny group, became available to more and more people.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 94
+          },
+          "parts": [
+            [
+              81,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-and-more#e-0100043b3a4ce8a4",
+          "text": "More and more people try detoxes to reclaim attention control and build healthier digital habits.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:more-and-more#s2",
+      "pos": "短语",
+      "glossZh": "越来越……；日益",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:more-and-more#e-da62687f9191f2f9",
+          "text": "As the snow came down more and more heavily, Emily was directed off the highway.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 35
+          },
+          "parts": [
+            [
+              22,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-and-more#e-5a06f1d3b85e1416",
+          "text": "Everything gains in grandeur(宏伟) every day, becomes more and more unknown, more and more beautiful.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 65
+          },
+          "parts": [
+            [
+              52,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-and-more#e-0451c789029a5055",
+          "text": "Moreover, similar signs of emotion are popping up more and more frequently.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 63
+          },
+          "parts": [
+            [
+              50,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

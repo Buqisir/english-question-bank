@@ -1,0 +1,200 @@
+{
+  "entryId": "w:die-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "die",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "die",
+        "out"
+      ],
+      [
+        "died",
+        "out"
+      ],
+      [
+        "dies",
+        "out"
+      ],
+      [
+        "dying",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "died out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "die out",
+  "senses": [
+    {
+      "senseId": "w:die-out#s1",
+      "pos": "短语",
+      "glossZh": "（谈话、习俗等）逐渐消失；渐渐停止",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:die#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:die-out#e-b0f017147ebb15b3",
+          "text": "They discovered a clear pattern: conversations containing more abbreviations consistently died out faster.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 98
+          },
+          "parts": [
+            [
+              90,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:die-out#s2",
+      "pos": "短语",
+      "glossZh": "（火焰）熄灭",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:die-out#e-7d7e70949a2f22fb",
+          "text": "Any small flames that start along its walls quickly die out.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
+          },
+          "parts": [
+            [
+              52,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:die-out#e-1ded8f7fa438218a",
+          "text": "As it approaches the first house, the plants around it catch fire, but the house itself stubbornly refuses to do so: any small flames along its walls quickly die out.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 165
+          },
+          "parts": [
+            [
+              158,
+              165
+            ]
+          ],
+          "highlightRanges": [
+            [
+              158,
+              165
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:die-out#s3",
+      "pos": "短语",
+      "glossZh": "（物种等）灭绝",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:die#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

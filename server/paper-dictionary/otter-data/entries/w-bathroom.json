@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 18
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -130,40 +130,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:bathroom#s3",
-      "pos": "短语",
-      "glossZh": "上厕所",
-      "pronunciationId": "w:bathroom#p-main",
-      "note": "go to the bathroom。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bathroom#e-bb3e9f16398d42e2",
-          "text": "Our puppy needed to learn to go to the bathroom outside.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
-            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
-            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 47
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -172,6 +138,11 @@
       "reason": "医疗工作语境中的罕见用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-to-the-bathroom"
+  ]
 }

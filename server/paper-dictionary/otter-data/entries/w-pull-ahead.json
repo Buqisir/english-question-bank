@@ -1,0 +1,107 @@
+{
+  "entryId": "w:pull-ahead",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "ahead"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "ahead"
+      ],
+      [
+        "pulled",
+        "ahead"
+      ],
+      [
+        "pulling",
+        "ahead"
+      ],
+      [
+        "pulls",
+        "ahead"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulled ahead",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull ahead",
+  "senses": [
+    {
+      "senseId": "w:pull-ahead#s1",
+      "pos": "短语",
+      "glossZh": "赶到前面；取得领先",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-ahead#e-dc568c864b9190a4",
+          "text": "I pulled ahead.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,180 @@
+{
+  "entryId": "w:shoot-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "shooting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "shoot",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shoot",
+        "out"
+      ],
+      [
+        "shooting",
+        "out"
+      ],
+      [
+        "shoots",
+        "out"
+      ],
+      [
+        "shot",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shoot (sth) out",
+  "senses": [
+    {
+      "senseId": "w:shoot-out#s1",
+      "pos": "短语",
+      "glossZh": "猛地喷出；迅速冲出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shoot-out#e-4002fb9e885aa88c",
+          "text": "Pulling up to the building, Grant saw flames (火焰) shooting out of a second-floor window.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shoot-out#e-42e4b2e9e85aa7c8",
+          "text": "Then Jeff noticed steam shooting out of the pot and the lid（盖子）starting to shake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:writing-continuation:material-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shoot-out#e-335e62929e4ea613",
+          "text": "Then Jeff noticed steam shooting out of the pot and the lid starting to shake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "可用 shoot out of sth，主语可为火焰、蒸汽等。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shoot-out#s2",
+      "pos": "短语",
+      "glossZh": "用枪打掉；射坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

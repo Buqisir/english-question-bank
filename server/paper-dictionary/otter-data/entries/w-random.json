@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 50
+    "mock": 14
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -246,59 +246,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:random#s4",
-      "pos": "短语",
-      "glossZh": "随机地",
-      "pronunciationId": "w:random#p-main",
-      "note": "at random。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:random#e-107c06b3129fd507",
-          "text": "Toys were assigned to a category at random.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:5",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:random#e-be73fa00f926e3ff",
-          "text": "Then one of six odors – chosen at random from caramel（焦糖）, cherry, coffee, lemon, and peppermint, plus odorless water as a control – was broadcast into the room with an ultrasonic diffuser for five minutes.",
-          "source": {
-            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
-            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
-            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 40
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -307,6 +254,11 @@
       "reason": "军事旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-random"
+  ]
 }

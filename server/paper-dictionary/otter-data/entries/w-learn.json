@@ -68,8 +68,8 @@
     "mock": 1288
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 1286
+    "gaokao": 8,
+    "mock": 1098
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 148,
-        "mock": 0
+        "mock": 130
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 66,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -214,146 +214,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:learn#s3",
-      "pos": "短语",
-      "glossZh": "从经历中吸取教训",
-      "pronunciationId": "w:learn#p-main",
-      "note": "learn a lesson / learn from sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:learn#e-8e7c284ea9a595aa",
-          "text": "However, her children have learned an important lesson witnessing their mother earn her degree.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:learn#e-809dc90c169c2d24",
-          "text": "Instead of focusing only on declines, we should also learn from and follow the success stories of growing bee populations around the world.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 53,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:learn#s4",
-      "pos": "短语",
-      "glossZh": "机器学习",
-      "pronunciationId": "w:learn#p-main",
-      "note": "machine learning。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:learn#e-976ea6aa778ed4dd",
-          "text": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:learn#s5",
-      "pos": "短语",
-      "glossZh": "深度学习",
-      "pronunciationId": "w:learn#p-main",
-      "note": "deep learning。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:learn#e-c96852b5785a7316",
-          "text": "SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 85,
-            "end": 93
-          }
-        },
-        {
-          "exampleId": "w:learn#e-712877bdd6263f8f",
-          "text": "However, in recent years, Google has switched to neural (神经的) machine translation (NMT), which uses deep learning models to improve accuracy by understanding context rather than just individual words.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 105,
-            "end": 113
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -362,6 +222,11 @@
       "reason": "现代标准用语用 teach"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:learn-a-lesson"
+  ]
 }

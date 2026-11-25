@@ -1,0 +1,171 @@
+{
+  "entryId": "w:look-beyond",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking beyond"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "beyond"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "beyond"
+      ],
+      [
+        "looking",
+        "beyond"
+      ],
+      [
+        "looked",
+        "beyond"
+      ],
+      [
+        "looks",
+        "beyond"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look beyond",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look beyond sth",
+  "senses": [
+    {
+      "senseId": "w:look-beyond#s1",
+      "pos": "短语",
+      "glossZh": "跳出眼前或表面的局限，考虑更深或更广的情况",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-beyond#e-5318b7fcec590fcb",
+          "text": "Consequently, scientists are now looking beyond simple ownership.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 47
+          },
+          "parts": [
+            [
+              33,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-beyond#e-9fb4d85cafdd522d",
+          "text": "Philosopher Jonathan Birch, also a judge of the Jeremy Coller Centre, stressed that the Challenge is looking beyond the interspecies communication we have with pets, or that a farmer has with a sheepdog.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 115
+          },
+          "parts": [
+            [
+              101,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-beyond#e-a40c81a64613dded",
+          "text": "To reduce exposure to harmful substances, producers must look beyond greenwashing and advocate for systemic change – whether through stricter guidelines or the reintroduction of traditional, non-toxic alternatives.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 68
+          },
+          "parts": [
+            [
+              57,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

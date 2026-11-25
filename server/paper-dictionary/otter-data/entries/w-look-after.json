@@ -1,0 +1,233 @@
+{
+  "entryId": "w:look-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking after",
+    "looks after"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "after"
+      ],
+      [
+        "looking",
+        "after"
+      ],
+      [
+        "looks",
+        "after"
+      ],
+      [
+        "looked",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked after",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look after",
+  "senses": [
+    {
+      "senseId": "w:look-after#s1",
+      "pos": "短语",
+      "glossZh": "照顾；照看；照料",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:after#s2",
+        "w:look#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-after#e-8c6e880256d4172b",
+          "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 87
+          },
+          "parts": [
+            [
+              77,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-after#e-3d93e1e62df2474d",
+          "text": "The elderly residents (居民) in care homes in London are being given hens to look after to stop them feeling lonely.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-c-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-after#e-4afbb45ecdf42f97",
+          "text": "What’s more, indoor plants are easy to look after and are not very expensive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 49
+          },
+          "parts": [
+            [
+              39,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 23
+      }
+    },
+    {
+      "senseId": "w:look-after#s2",
+      "pos": "短语",
+      "glossZh": "负责管理；料理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-after#e-c74dfca7604a5e35",
+          "text": "Many colleges and universities will have a public safety department that looks after the safety of the university population.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:seven-choices:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 84
+          },
+          "parts": [
+            [
+              73,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:look-after#s3",
+      "pos": "短语",
+      "glossZh": "目送；望着……离去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

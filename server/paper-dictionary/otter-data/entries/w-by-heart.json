@@ -1,0 +1,159 @@
+{
+  "entryId": "w:by-heart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "heart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "heart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by heart",
+  "senses": [
+    {
+      "senseId": "w:by-heart#s1",
+      "pos": "短语",
+      "glossZh": "凭记忆；熟记到能背诵",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s10",
+        "w:heart#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-heart#e-414846e8595d0a6c",
+          "text": "You may find yourself having to learn something by heart.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 56
+          },
+          "parts": [
+            [
+              48,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-heart#e-6852af3b8829b90a",
+          "text": "An applicant learns the judge’s expressions by heart.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-zj-taizhou-2026-m2:32#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 52
+          },
+          "parts": [
+            [
+              44,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-heart#e-662be9b4cf39ec10",
+          "text": "Learn Shakespeare’s lines by heart.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-nb-2026-m2:28#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "常说 learn sth by heart，表示把某事记熟、背下来。",
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:piece-by-piece",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "piece",
+      "by",
+      "piece"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "piece",
+        "by",
+        "piece"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "piece by piece",
+  "senses": [
+    {
+      "senseId": "w:piece-by-piece#s1",
+      "pos": "短语",
+      "glossZh": "一部分一部分地；逐步地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:piece-by-piece#e-94eb47ffdc50db95",
+          "text": "Piece by piece, those small beginnings grew into the book I had been afraid to start.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:piece-by-piece#e-69f341251e935d40",
+          "text": "Paragraph 2: As the work progressed, the yard transformed piece by piece.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 72
+          },
+          "parts": [
+            [
+              58,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 165
+    "mock": 0
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 164
       },
       "folded": false,
       "examples": [
@@ -137,9 +137,42 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:immediately#s4",
+      "pos": "adv.",
+      "glossZh": "直接地",
+      "pronunciationId": "w:immediately#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:immediately#e-af0bbae5550401e2",
+          "text": "The doorway studies added a third dimension, the structure of experience itself, adjusting access to the immediately relevant memories accordingly.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 116
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,122 @@
+{
+  "entryId": "w:touch-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "touch",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "touch",
+        "up"
+      ],
+      [
+        "touched",
+        "up"
+      ],
+      [
+        "touches",
+        "up"
+      ],
+      [
+        "touching",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "touched up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "touch (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:touch-up#s1",
+      "pos": "短语",
+      "glossZh": "局部修补；稍加修饰",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:touch-up#e-acbc947cd525c309",
+          "text": "Though still fearful, I splashed cold water on my tear-stained face, touched up my makeup, and whispered to myself, “I’m doing this.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 79
+          },
+          "parts": [
+            [
+              69,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              79
+            ]
+          ]
+        }
+      ],
+      "note": "touch up one's makeup 指补妆。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:touch-up#s2",
+      "pos": "短语",
+      "glossZh": "猥亵地触摸某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

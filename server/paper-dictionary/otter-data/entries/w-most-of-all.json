@@ -1,0 +1,126 @@
+{
+  "entryId": "w:most-of-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "most",
+      "of",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "most",
+        "of",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "most of all",
+  "senses": [
+    {
+      "senseId": "w:most-of-all#s1",
+      "pos": "短语",
+      "glossZh": "尤其；最重要的是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s7",
+        "w:most#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:most-of-all#e-a143da0b50497164",
+          "text": "class and focuses on a range of topics that emphasize active learning, exploration and, most of all, fun!",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 99
+          },
+          "parts": [
+            [
+              88,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:most-of-all#e-35f03cbf72743374",
+          "text": "Most of all, the language barrier made everything harder.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

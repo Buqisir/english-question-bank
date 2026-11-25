@@ -1,0 +1,198 @@
+{
+  "entryId": "w:come-to-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came to life",
+    "comes to life"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "life"
+      ],
+      [
+        "came",
+        "to",
+        "life"
+      ],
+      [
+        "comes",
+        "to",
+        "life"
+      ],
+      [
+        "coming",
+        "to",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to life",
+  "senses": [
+    {
+      "senseId": "w:come-to-life#s1",
+      "pos": "短语",
+      "glossZh": "变得生动；仿佛活了起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-to-life#e-7d9cb404beecae82",
+          "text": "Welcome to the Bullock Texas State History Museum, a place where the rich story of Texas comes to life.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 102
+          },
+          "parts": [
+            [
+              89,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-life#e-110fa28f6a0cc2ff",
+          "text": "This tour takes you through the heart of Harvard Yard, where history, tradition, and academic excellence come to life.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 117
+          },
+          "parts": [
+            [
+              105,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              117
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-life#e-901e6df705657fad",
+          "text": "Little by little, a cheerful sunflower came to life.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 51
+          },
+          "parts": [
+            [
+              39,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:come-to-life#s2",
+      "pos": "短语",
+      "glossZh": "开始活跃起来；变得热闹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-to-life#s3",
+      "pos": "短语",
+      "glossZh": "获得生命；活过来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

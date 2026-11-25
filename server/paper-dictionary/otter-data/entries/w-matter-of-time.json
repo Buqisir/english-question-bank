@@ -1,0 +1,93 @@
+{
+  "entryId": "w:matter-of-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "matter",
+      "of",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "matter",
+        "of",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "matter of time",
+  "senses": [
+    {
+      "senseId": "w:matter-of-time#s1",
+      "pos": "短语",
+      "glossZh": "只是时间问题；迟早会发生",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:matter-of-time#e-7df648138cf6dacb",
+          "text": "I knew it was only a matter of time before the science class covered the actual internal structures of houses.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常用 it is only a matter of time before ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

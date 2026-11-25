@@ -1,0 +1,289 @@
+{
+  "entryId": "w:slow-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "slow",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "slow",
+        "down"
+      ],
+      [
+        "slowed",
+        "down"
+      ],
+      [
+        "slowing",
+        "down"
+      ],
+      [
+        "slows",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "slow down",
+      "tags": []
+    },
+    {
+      "form": "slowed down",
+      "tags": []
+    },
+    {
+      "form": "slowing down",
+      "tags": []
+    },
+    {
+      "form": "slows down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "slow (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:slow-down#s1",
+      "pos": "短语",
+      "glossZh": "减速；放慢节奏",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:slow-down#e-3aea31285e528e40",
+          "text": "It’s important to slow down and think about food as something nutritious rather than just something to eat in between meetings.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slow-down#e-0064163c5aa29a5a",
+          "text": "Slow down",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "question": 51,
+              "questionId": "question:paper-gaokao-2021-i:51#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slow-down#e-20e735e584077d7d",
+          "text": "It rises slowly, speeds up when it’s at the highest point in the sky, and then slows down as it sets.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 89
+          },
+          "parts": [
+            [
+              79,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 31
+      }
+    },
+    {
+      "senseId": "w:slow-down#s2",
+      "pos": "短语",
+      "glossZh": "使……减速；拖慢……的进度",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:slow-down#e-045075caef0069e2",
+          "text": "Instead, it will slow down everyone a little bit but speed up checkout overall.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slow-down#e-115d72804e854fce",
+          "text": "Policymakers are beginning to see this problem as a reason to slow down the use of renewable energy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          },
+          "parts": [
+            [
+              62,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:slow-down#e-72c667cc21638464",
+          "text": "The opposing team seemed to realize what was happening and slowed down the pace, not pressing too hard.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:thanks-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "thanks",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "thanks",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "thanks to",
+  "senses": [
+    {
+      "senseId": "w:thanks-to#s1",
+      "pos": "短语",
+      "glossZh": "多亏；由于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:thank#s4",
+        "w:to#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:thanks-to#e-567e050b00f64dab",
+          "text": "Thanks to them, a family was saved from the fire.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:thanks-to#e-636a4a7ed79f419e",
+          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:thanks-to#e-7880ff0e1ba1e62f",
+          "text": "In Queensland, a dog care institution is making waves thanks to its founder, dog trainer Jo Mcvilly.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 63
+          },
+          "parts": [
+            [
+              54,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              63
+            ]
+          ]
+        }
+      ],
+      "note": "多用于促成好结果的原因，也可反讽。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 41
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

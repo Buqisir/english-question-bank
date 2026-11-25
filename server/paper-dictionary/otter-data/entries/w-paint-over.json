@@ -1,0 +1,105 @@
+{
+  "entryId": "w:paint-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "painting over"
+  ],
+  "pattern": {
+    "tokens": [
+      "paint",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "paint",
+        "over"
+      ],
+      [
+        "painting",
+        "over"
+      ],
+      [
+        "painted",
+        "over"
+      ],
+      [
+        "paints",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "paint over sth",
+  "senses": [
+    {
+      "senseId": "w:paint-over#s1",
+      "pos": "短语",
+      "glossZh": "涂上一层漆盖住……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:paint-over#e-638f1b809388a0da",
+          "text": "painting over",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "question": 41,
+              "questionId": "question:paper-gaokao-2025-i:41#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 4
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -118,59 +118,6 @@
       ]
     },
     {
-      "senseId": "w:capsule#s2",
-      "pos": "短语",
-      "glossZh": "时间胶囊（留给未来的人打开的容器或保存物）",
-      "pronunciationId": "w:capsule#p-main",
-      "note": "time capsule",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:capsule#e-9d98e965e03e6dc0",
-          "text": "But I plan to hold on to my beloved, dog-eared physical dictionaries – such priceless time capsules, one of the last paradises of freedom from the endless scroll of digital content.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-d:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 91,
-            "end": 99
-          }
-        },
-        {
-          "exampleId": "w:capsule#e-f1d32ffe1f2cc6cb",
-          "text": "On the final day of senior year, students gathered to bury time capsules – letters to their future selves.",
-          "source": {
-            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 64,
-            "end": 72
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:capsule#s3",
       "pos": "n.",
       "glossZh": "（航天器的）舱",
@@ -190,6 +137,8 @@
       "reason": "植物学、医学或行业专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false
 }

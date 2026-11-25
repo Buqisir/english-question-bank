@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 832
+    "mock": 634
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 51,
-        "mock": 0
+        "mock": 156
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -247,7 +247,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -319,7 +319,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -371,7 +371,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -395,9 +395,61 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:offer#s7",
+      "pos": "n.",
+      "glossZh": "所提供的作品、产品或服务（offering）",
+      "pronunciationId": "w:offer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:offer#e-c649edeee4655b17",
+          "text": "Hanley-Dafoe’s third offering, following Stress Wisely, makes an inspiring case for the power of hope.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:offer#e-47c96c386782833a",
+          "text": "Anticipating a rise in visitors, Khiva is expanding its tourism offering.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

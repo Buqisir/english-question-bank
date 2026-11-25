@@ -1,0 +1,103 @@
+{
+  "entryId": "w:hit-the-road",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "the",
+      "road"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "the",
+        "road"
+      ],
+      [
+        "hits",
+        "the",
+        "road"
+      ],
+      [
+        "hitting",
+        "the",
+        "road"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit the road",
+  "senses": [
+    {
+      "senseId": "w:hit-the-road#s1",
+      "pos": "短语",
+      "glossZh": "动身；出发上路",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hit-the-road#e-37c1d3d923dcf746",
+          "text": "With all the keys in hand, all that’s left is to hit the road and begin your adventure.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 61
+          },
+          "parts": [
+            [
+              49,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              61
+            ]
+          ]
+        }
+      ],
+      "note": "口语中也可表示该离开了。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

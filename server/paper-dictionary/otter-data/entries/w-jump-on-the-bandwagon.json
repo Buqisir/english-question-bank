@@ -1,0 +1,64 @@
+{
+  "entryId": "w:jump-on-the-bandwagon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "on",
+      "the",
+      "bandwagon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "on",
+        "the",
+        "bandwagon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump on the bandwagon",
+  "senses": [
+    {
+      "senseId": "w:jump-on-the-bandwagon#s1",
+      "pos": "短语",
+      "glossZh": "跟风加入流行的活动或阵营",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:jump#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

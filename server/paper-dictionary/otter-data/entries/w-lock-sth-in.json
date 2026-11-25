@@ -1,0 +1,244 @@
+{
+  "entryId": "w:lock-sth-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lock in"
+  ],
+  "pattern": {
+    "tokens": [
+      "lock",
+      {
+        "slot": "sth"
+      },
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "lock",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "lock",
+        "in"
+      ],
+      [
+        "locked",
+        "in"
+      ],
+      [
+        "locking",
+        "in"
+      ],
+      [
+        "locks",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "locked in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lock sb/sth in",
+  "senses": [
+    {
+      "senseId": "w:lock-sth-in#s1",
+      "pos": "短语",
+      "glossZh": "封住；留住（气味、色泽等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lock#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lock-sth-in#e-a7ae5142c0af25bc",
+          "text": "This bag keeps bad smells locked in, thanks to a built-in air freshener.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          },
+          "parts": [
+            [
+              26,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lock-sth-in#e-16be48f6d8781f15",
+          "text": "To lock in the vegetables’ color.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-shandong-jining-2026-05-third-mock:23#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lock-sth-in#s2",
+      "pos": "短语",
+      "glossZh": "把……锁在里面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lock-sth-in#e-6728463844ec49d5",
+          "text": "He was locked in the house.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:lock-sth-in#s3",
+      "pos": "短语",
+      "glossZh": "锁定；确保（价格、条件、支出等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lock-sth-in#e-51a6cdb33bd93827",
+          "text": "Whether the strategy can lock in the young generation’s emotional spend will decide if the doll-dress economy becomes a classic or a crash.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

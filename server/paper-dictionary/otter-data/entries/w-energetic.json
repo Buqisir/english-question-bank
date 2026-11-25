@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 33
+    "mock": 8
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -194,6 +194,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:energetic#s3",
+      "pos": "adj.",
+      "glossZh": "能量高的",
+      "pronunciationId": "w:energetic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:energetic#e-c1c1ba819e2208c9",
+          "text": "They are isolated, highly energetic, and – thanks to Hawking radiation – can entangle with the outside world.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -202,6 +235,6 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

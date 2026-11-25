@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 121
+    "mock": 11
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -127,7 +127,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -267,12 +267,12 @@
       "pos": "n.",
       "glossZh": "（程序运行时的）后台",
       "pronunciationId": "w:background#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -282,6 +282,6 @@
       "reason": "少见动词或物理学专业用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

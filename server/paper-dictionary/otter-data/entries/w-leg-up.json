@@ -1,0 +1,130 @@
+{
+  "entryId": "w:leg-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "leg",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leg",
+        "up"
+      ],
+      [
+        "legged",
+        "up"
+      ],
+      [
+        "legging",
+        "up"
+      ],
+      [
+        "legs",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leg up",
+  "senses": [
+    {
+      "senseId": "w:leg-up#s1",
+      "pos": "短语",
+      "glossZh": "有助于领先或取得进展的助力",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leg-up#e-8cbfda78417f3c8d",
+          "text": "I have long realized that people who have grown up on a farm have a leg up on so many future job prospects.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          },
+          "parts": [
+            [
+              68,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              74
+            ]
+          ]
+        }
+      ],
+      "note": "常用 have a leg up on sb 或 give sb a leg up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:leg-up#s2",
+      "pos": "短语",
+      "glossZh": "用手托脚帮人登高或翻越",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:leg-up#s3",
+      "pos": "短语",
+      "glossZh": "让马定期在硬地上行走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "马术用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

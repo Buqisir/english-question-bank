@@ -1,0 +1,127 @@
+{
+  "entryId": "w:fall-into-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "into place"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "into",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "into",
+        "place"
+      ],
+      [
+        "fallen",
+        "into",
+        "place"
+      ],
+      [
+        "falling",
+        "into",
+        "place"
+      ],
+      [
+        "falls",
+        "into",
+        "place"
+      ],
+      [
+        "fell",
+        "into",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall into place",
+  "senses": [
+    {
+      "senseId": "w:fall-into-place#s1",
+      "pos": "短语",
+      "glossZh": "（事情）逐渐理顺；各环节顺利衔接",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-into-place#e-c31a06af760ab07f",
+          "text": "With their warmth and support, everything seemed to fall into place.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 67
+          },
+          "parts": [
+            [
+              52,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-into-place#s2",
+      "pos": "短语",
+      "glossZh": "（线索、信息等）逐渐串联起来，变得明朗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

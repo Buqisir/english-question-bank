@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 529
+    "mock": 372
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -295,7 +295,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -368,7 +368,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -436,12 +436,12 @@
       "pos": "n.",
       "glossZh": "节目单",
       "pronunciationId": "w:programme#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -452,7 +452,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -504,7 +504,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -556,6 +556,6 @@
       "reason": "较少见的比喻义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

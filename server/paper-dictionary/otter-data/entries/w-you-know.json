@@ -1,0 +1,199 @@
+{
+  "entryId": "w:you-know",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "know"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "know"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you know",
+  "senses": [
+    {
+      "senseId": "w:you-know#s1",
+      "pos": "短语",
+      "glossZh": "你知道吧；你也知道（口语插入语，用于停顿或引起注意）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:know#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:you-know#e-41dfcbd1f22a454c",
+          "text": "But she came forth and walked forward, and I walked forward, and my feelings and tears and the chemical in my brain, you know, it was like a nuclear fusion（核聚变）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          },
+          "parts": [
+            [
+              117,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:you-know#e-039e781684e5aacf",
+          "text": "D makes you feel like the center of attention one moment, and unintentionally disposable the next, because you know, they have a lot going on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 115
+          },
+          "parts": [
+            [
+              107,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:you-know#e-8f5968a9afcff0ed",
+          "text": "You know, designer ones.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:you-know#s2",
+      "pos": "短语",
+      "glossZh": "你懂的（委婉暗示未说出的内容）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:you-know#e-eaa28ad030aeed58",
+          "text": "I am so sorry, but you know...",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:writing-continuation:6",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

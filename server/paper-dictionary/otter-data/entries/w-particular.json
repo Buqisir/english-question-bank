@@ -54,8 +54,8 @@
     "mock": 59
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 58
+    "gaokao": 4,
+    "mock": 15
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -235,78 +235,6 @@
       ]
     },
     {
-      "senseId": "w:particular#s4",
-      "pos": "短语",
-      "glossZh": "尤其",
-      "pronunciationId": "w:particular#p-main",
-      "note": "in particular。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:particular#e-8a3ac36cc5fd950c",
-          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 100
-          }
-        },
-        {
-          "exampleId": "w:particular#e-f5854c06b1e781d4",
-          "text": "In the summer in particular, the air conditioning can make them quite cold.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:particular#e-4f4f40f4ecff8ea8",
-          "text": "Jane Jacobs spent her working life advancing a distinct vision of the city – in particular focusing on what makes a successful urban community.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 80,
-            "end": 90
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:particular#s5",
       "pos": "n.",
       "glossZh": "具体细节",
@@ -322,6 +250,11 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-particular"
+  ]
 }

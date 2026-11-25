@@ -1,0 +1,92 @@
+{
+  "entryId": "w:grey-area",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "grey",
+      "area"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "grey",
+        "area"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "grey area",
+  "senses": [
+    {
+      "senseId": "w:grey-area#s1",
+      "pos": "短语",
+      "glossZh": "灰色地带；界限或判断标准不明确的领域",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:grey#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:grey-area#e-f98d6f1d818f0e0d",
+          "text": "Since that is an ethically grey area, Dr Kikusui worked instead with mice.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -297,6 +297,12 @@
       "reason": "专业细义"
     }
   ],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:course-of-action",
+    "w:jump-into-action",
+    "w:spring-into-action",
+    "w:take-action"
+  ]
 }

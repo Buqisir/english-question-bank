@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 29
+    "mock": 4
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -199,7 +199,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -251,7 +251,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -294,6 +294,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:height#s5",
+      "pos": "n.",
+      "glossZh": "音高",
+      "pronunciationId": "w:height#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:height#e-aa7ae7f33248327f",
+          "text": "Cage used coin tosses to choose notes – random in note height, length, and volume.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -306,6 +339,6 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

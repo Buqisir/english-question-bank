@@ -1,0 +1,279 @@
+{
+  "entryId": "w:come-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came from",
+    "comes from",
+    "coming from"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "from"
+      ],
+      [
+        "came",
+        "from"
+      ],
+      [
+        "comes",
+        "from"
+      ],
+      [
+        "coming",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come from",
+  "senses": [
+    {
+      "senseId": "w:come-from#s1",
+      "pos": "短语",
+      "glossZh": "来自；出身于（某地或某种背景）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-from#e-973119a157d3bfd2",
+          "text": "My family came from Brazil, so English was only my second language.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 19
+          },
+          "parts": [
+            [
+              10,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-from#e-a7faeaabd07481d5",
+          "text": "They should come from art schools.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-national-b:23#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-from#e-cc4977efbe0d1a5c",
+          "text": "Where a driver came from.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-ii:29#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:come-from#s2",
+      "pos": "短语",
+      "glossZh": "源于；由……产生",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-from#e-7ee6354dec018350",
+          "text": "Every straw that’s part of Von Wong’s artwork likely came from a drink that someone used for only a few minutes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 62
+          },
+          "parts": [
+            [
+              53,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-from#e-62a32f9e8f601f37",
+          "text": "It saddened me to think of how many people there were who didn’t have a place to call home and the only food they got came from a soup kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 127
+          },
+          "parts": [
+            [
+              118,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              127
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-from#e-5e9e2c9607900d36",
+          "text": "As a writer says, future geniuses come from those with “intelligence, creativity, perseverance(毅力), and simple good fortune, who are able to change the world.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 151
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 165
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

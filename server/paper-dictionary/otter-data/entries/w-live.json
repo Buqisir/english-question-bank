@@ -84,8 +84,8 @@
     "mock": 381
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 378
+    "gaokao": 6,
+    "mock": 198
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 44,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -239,7 +239,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -305,108 +305,6 @@
       ]
     },
     {
-      "senseId": "w:live#s4",
-      "pos": "短语",
-      "glossZh": "容忍；接受并应对",
-      "pronunciationId": "w:live#p-main",
-      "note": "live with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:live#e-52fb764de74f85da",
-          "text": "Yet, by learning to live with imperfection, you will save yourself headaches and a wastepaper basket full of crumpled (弄皱) paper.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:live#s5",
-      "pos": "短语",
-      "glossZh": "在生活中践行",
-      "pronunciationId": "w:live#p-main",
-      "note": "live out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:live#e-107db9db78f7f293",
-          "text": "BMF employees live out sustainability in their everyday lives.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:live#s6",
-      "pos": "短语",
-      "glossZh": "靠……生活",
-      "pronunciationId": "w:live#p-main",
-      "note": "live off。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:live#e-50fe57c58aa4c7e3",
-          "text": "The project becomes a rare partnership between people who once lived off the forest and those who now seek to save it.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
-            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:6",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 63,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:live#s7",
       "pos": "adj.",
       "glossZh": "活的",
@@ -414,7 +312,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -447,7 +345,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -518,7 +416,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -583,7 +481,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -609,69 +507,134 @@
       ]
     },
     {
-      "senseId": "w:live#s12",
-      "pos": "短语",
-      "glossZh": "在想象中体验",
-      "pronunciationId": "w:live#p-main",
-      "note": "live out。",
-      "origin": "gaokao",
+      "senseId": "w:live#s14",
+      "pos": "adv.",
+      "glossZh": "在现场",
+      "pronunciationId": "w:live#p-adj",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:live#e-9b97bf083476a27e",
-          "text": "Stories were like air to me and while other kids played ball or went to parties, I lived out adventures through the books I checked out from the library.",
+          "exampleId": "w:live#e-0745530391f83130",
+          "text": "He enjoyed a play live.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:listening.long-form",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
-              "sentence": 4
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "A",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 83,
-            "end": 88
+            "start": 18,
+            "end": 22
           }
         }
       ]
     },
     {
-      "senseId": "w:live#s13",
-      "pos": "短语",
-      "glossZh": "实现（梦想）",
-      "pronunciationId": "w:live#p-main",
-      "note": "live one’s dreams。",
-      "origin": "gaokao",
+      "senseId": "w:live#s15",
+      "pos": "adj.",
+      "glossZh": "亮着的；保持开启的",
+      "pronunciationId": "w:live#p-adj",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:live#e-63da0921852f7961",
-          "text": "The boy replied with a __48__ look, “Well, you are telling us to live our dreams when you haven’t even done it yourself.",
+          "exampleId": "w:live#e-900e50f868a71852",
+          "text": "When you’re ready to roll up your sleeves, cook mode gives you step-by-step instructions and keeps your screen live.",
           "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
-              "sentence": 5
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:5",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 65,
-            "end": 69
+            "start": 111,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:live#s16",
+      "pos": "adj.",
+      "glossZh": "开放使用的；已上线的（go live）",
+      "pronunciationId": "w:live#p-adj",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:live#e-6ed631e0bb6b6068",
+          "text": "Exhibits can go live.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:live#s17",
+      "pos": "adv.",
+      "glossZh": "实时地",
+      "pronunciationId": "w:live#p-adj",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:live#e-c183adf6bf995b92",
+          "text": "For more questions about food safety, contact the USDA’s hotline at 1-888-674-6854 to talk to a food safety expert during working hours on weekdays, or chat live at ask.usda.gov from 10 a.m. to 6 p.m., Saturday through Tuesday.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 161
           }
         }
       ]
@@ -687,6 +650,22 @@
       "reason": "按相关领域释义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:live-for",
+    "w:live-in-hope",
+    "w:live-off",
+    "w:live-on",
+    "w:live-on-the-streets",
+    "w:live-ones-dreams",
+    "w:live-out",
+    "w:live-through",
+    "w:live-up",
+    "w:live-wire",
+    "w:live-with",
+    "w:real-live"
+  ]
 }

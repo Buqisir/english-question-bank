@@ -1,0 +1,198 @@
+{
+  "entryId": "w:something-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "something",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "something",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "something like",
+  "senses": [
+    {
+      "senseId": "w:something-like#s1",
+      "pos": "短语",
+      "glossZh": "大约；差不多（接数量）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:something-like#e-42e3c6c5879382fa",
+          "text": "On the flight home, she did the math: 9,000 runners, 17 aid stations and something like 150,000 cups used once and thrown away.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 87
+          },
+          "parts": [
+            [
+              73,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:something-like#s2",
+      "pos": "短语",
+      "glossZh": "类似于……；大致像……这样",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:something-like#e-382e4c7d004de4a6",
+          "text": "The closest match I can think of in English to this would be something like “I <3 you” or “I heart you”, representing “I love you”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 75
+          },
+          "parts": [
+            [
+              61,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-like#e-4696cce1b9e0171e",
+          "text": "Opal, I found, provides something like gentle parenting for your smartphone habits: you set up a daily schedule of which apps to block, and then the app guides you into sticking with it.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 38
+          },
+          "parts": [
+            [
+              24,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-like#e-c753d8df57b8d9dd",
+          "text": "For example, if you have told a friend that there is a certain topic you don’t feel comfortable talking about, but they keep asking you about it, you can consider saying something like, “I don’t feel comfortable talking about that.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 170,
+            "end": 184
+          },
+          "parts": [
+            [
+              170,
+              184
+            ]
+          ],
+          "highlightRanges": [
+            [
+              170,
+              184
+            ]
+          ]
+        }
+      ],
+      "note": "可引出近似的说法或例子。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

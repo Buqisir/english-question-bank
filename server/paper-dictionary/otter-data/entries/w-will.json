@@ -370,6 +370,10 @@
       "reason": "专业或古旧"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:ill-will",
+    "w:will-do"
+  ]
 }

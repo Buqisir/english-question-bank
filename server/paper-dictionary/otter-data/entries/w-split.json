@@ -51,8 +51,8 @@
     "mock": 28
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 19
+    "gaokao": 1,
+    "mock": 7
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -115,7 +115,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -194,74 +194,6 @@
       ]
     },
     {
-      "senseId": "w:split#s4",
-      "pos": "短语",
-      "glossZh": "分手",
-      "pronunciationId": "w:split#p-main",
-      "note": "split up with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:split#e-9366a45b66a08881",
-          "text": "She had split up with her husband the week before, was living in a flat __52__, and since she’d found it too much to cope with (应对), she’d taken it out on __53__ people.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:split#s5",
-      "pos": "短语",
-      "glossZh": "分头行动",
-      "pronunciationId": "w:split#p-main",
-      "note": "split up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:split#e-977426f3f09d4c7e",
-          "text": "We split up to search: I checked the lower shelves while he scanned the higher ones.",
-          "source": {
-            "paperId": "paper-mock-zj-taizhou-2026-m2",
-            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
-            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:split#s6",
       "pos": "n.",
       "glossZh": "分歧",
@@ -269,7 +201,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -347,59 +279,6 @@
       ]
     },
     {
-      "senseId": "w:split#s8",
-      "pos": "短语",
-      "glossZh": "一瞬间",
-      "pronunciationId": "w:split#p-main",
-      "note": "split second。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:split#e-cbfd7cf9b52a5a27",
-          "text": "Even tiny differences in brain activity can make a huge impact at the highest level, where “being a split second faster than an opponent separates victory from defeat.” This research helps us understand that individual differences, even minute ones, can lead to unique strengths and successes.",
-          "source": {
-            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
-            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
-            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 100,
-            "end": 105
-          }
-        },
-        {
-          "exampleId": "w:split#e-cb7f17ede97eea9a",
-          "text": "A split second later, Ben lost his balance and slipped.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
-            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
-            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:6",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 2,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:split#s9",
       "pos": "n.",
       "glossZh": "一字马",
@@ -412,6 +291,92 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:split#s10",
+      "pos": "n.",
+      "glossZh": "分离；分裂",
+      "pronunciationId": "w:split#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:split#e-3e702e84da52c88f",
+          "text": "Britain’s split from Continental Europe.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:split#e-5ba8c67cfcca4e50",
+          "text": "The model shows that in the years after the split, one of the two groups contracted temporarily.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:split#s11",
+      "pos": "n.",
+      "glossZh": "分配方式",
+      "pronunciationId": "w:split#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:split#e-85e08349c2533c9e",
+          "text": "If Blake doesn’t think Alex’s split was fair, Chris looks to see if there are two pieces he would take.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -420,6 +385,13 @@
       "reason": "运动、行业或数学专义，或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:split-second",
+    "w:split-up",
+    "w:split-up-with"
+  ]
 }

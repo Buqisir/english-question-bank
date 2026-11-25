@@ -1,0 +1,260 @@
+{
+  "entryId": "w:right-now",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "now"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "now"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right now",
+  "senses": [
+    {
+      "senseId": "w:right-now#s1",
+      "pos": "短语",
+      "glossZh": "现在；此刻",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:right-now#e-c3f078e6d9ae55ec",
+          "text": "“Plants are in fashion right now,” says Dr. Melinda Knuth, a researcher from the University of Florida.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-now#e-ff23678768da462b",
+          "text": "\"At the end of the day all transit agencies right now are doing everything they can to improve the rider experience.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          },
+          "parts": [
+            [
+              44,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-now#e-69f4917efabce160",
+          "text": "“We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest,” Trost says.“And as of right now, we’ve received about 120 submissions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 138
+          },
+          "parts": [
+            [
+              129,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              138
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:right-now#s2",
+      "pos": "短语",
+      "glossZh": "立刻；马上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:right-now#e-4a3734538cb5ba27",
+          "text": "You must leave right now!” he called out, holding the branch with both hands.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-now#e-f4f7e7e06b57a2d7",
+          "text": "He asked if they had to decide right now.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-now#e-d382c187d8dc3aec",
+          "text": "Stopping working right now.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

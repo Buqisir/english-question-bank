@@ -1,0 +1,117 @@
+{
+  "entryId": "w:go-south",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "south"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "south"
+      ],
+      [
+        "goes",
+        "south"
+      ],
+      [
+        "going",
+        "south"
+      ],
+      [
+        "gone",
+        "south"
+      ],
+      [
+        "went",
+        "south"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go south",
+  "senses": [
+    {
+      "senseId": "w:go-south#s1",
+      "pos": "短语",
+      "glossZh": "变糟；恶化",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:south#s6"
+      ],
+      "examples": [],
+      "note": "美式非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-south#s2",
+      "pos": "短语",
+      "glossZh": "逃走；消失",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-south#s3",
+      "pos": "短语",
+      "glossZh": "给人进行口交",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-south#s4",
+      "pos": "短语",
+      "glossZh": "（扑克现金局）未离桌就私下撤走部分筹码",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

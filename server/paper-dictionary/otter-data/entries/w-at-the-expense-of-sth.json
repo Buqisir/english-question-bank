@@ -1,0 +1,136 @@
+{
+  "entryId": "w:at-the-expense-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "at the expense of"
+  ],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "expense",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "expense",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the expense of sth",
+  "senses": [
+    {
+      "senseId": "w:at-the-expense-of-sth#s1",
+      "pos": "固定短语",
+      "glossZh": "以牺牲……为代价",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:expense#s2",
+        "w:at#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-expense-of-sth#e-badb0be4bc5397ae",
+          "text": "Too often when you stand up to give a speech, you focus on the “public” at the expense of the” speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 89
+          },
+          "parts": [
+            [
+              72,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-expense-of-sth#e-dc399de75c038491",
+          "text": "Crops typically respond to nitrogen shortage by investing more in root growth to search for nutrients, often at the expense of shoot (茎叶) development and grain production.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 126
+          },
+          "parts": [
+            [
+              109,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              126
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

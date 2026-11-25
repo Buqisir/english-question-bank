@@ -1,0 +1,165 @@
+{
+  "entryId": "w:cool-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cool",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cool",
+        "off"
+      ],
+      [
+        "cooled",
+        "off"
+      ],
+      [
+        "cooling",
+        "off"
+      ],
+      [
+        "cools",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cool off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cool (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:cool-off#s1",
+      "pos": "短语",
+      "glossZh": "凉快下来；使降温",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cool-off#e-4fc6e019fa9ef277",
+          "text": "How to cool off in hot weather.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 15
+          },
+          "parts": [
+            [
+              7,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cool-off#e-64c675705a85191c",
+          "text": "Once just a simple way to cool off, ice cream has seen a surge of new varieties to meet the expanding tastes and preferences of Chinese consumers since its first appearance.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:cool-off#s2",
+      "pos": "短语",
+      "glossZh": "冷静下来；使平息怒气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cool-off#s3",
+      "pos": "短语",
+      "glossZh": "热情减退；失去兴趣",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

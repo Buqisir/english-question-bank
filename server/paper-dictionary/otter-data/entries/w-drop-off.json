@@ -1,0 +1,282 @@
+{
+  "entryId": "w:drop-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "off"
+      ],
+      [
+        "dropped",
+        "off"
+      ],
+      [
+        "dropping",
+        "off"
+      ],
+      [
+        "drops",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drop off",
+      "tags": []
+    },
+    {
+      "form": "dropped off",
+      "tags": []
+    },
+    {
+      "form": "dropping off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:drop-off#s1",
+      "pos": "短语",
+      "glossZh": "送某人到某处下车；把东西送到指定地点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drop#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drop-off#e-9562cecb77667f32",
+          "text": "He even insisted on riding in the car when she was being dropped off at school.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 68
+          },
+          "parts": [
+            [
+              57,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drop-off#e-5fd36936a6786b87",
+          "text": "About a year ago, my mother turned on the dishwasher and went to the airport to drop off my father who was headed overseas on a work trip.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          },
+          "parts": [
+            [
+              80,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drop-off#e-e7c918ca34a78bc3",
+          "text": "Individuals should properly drop off e-waste at collection points, fix items rather than throw them away, and support brands with strong environmental commitments.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:drop-off#s2",
+      "pos": "短语",
+      "glossZh": "（数量、水平等）下降；减少",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drop-off#e-b2936fe215bc018c",
+          "text": "But when the steamy days of summer crept in, business dropped off sharply.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drop-off#e-7eeaf1a67b0aa893",
+          "text": "Its population has dropped off dramatically.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-03-first:32#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:drop-off#s3",
+      "pos": "短语",
+      "glossZh": "不知不觉睡着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:drop-off#s4",
+      "pos": "短语",
+      "glossZh": "脱落；掉下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

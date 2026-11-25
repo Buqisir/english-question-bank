@@ -1,0 +1,98 @@
+{
+  "entryId": "w:a-good-deal-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "good",
+      "deal",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "good",
+        "deal",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a good deal of",
+  "senses": [
+    {
+      "senseId": "w:a-good-deal-of#s1",
+      "pos": "短语",
+      "glossZh": "大量的；相当多的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deal#s2",
+        "w:good#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-good-deal-of#e-e2902b8739305284",
+          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 51
+          },
+          "parts": [
+            [
+              37,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              51
+            ]
+          ]
+        }
+      ],
+      "note": "后接不可数名词。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,92 @@
+{
+  "entryId": "w:on-duty",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "duty"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "duty"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on duty",
+  "senses": [
+    {
+      "senseId": "w:on-duty#s1",
+      "pos": "短语",
+      "glossZh": "值班；执勤",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:duty#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-duty#e-0fd1bdb3a8851abc",
+          "text": "When not on duty, Hunter lives comfortably with Officer Connor and his family, enjoying a warm and caring home environment.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          },
+          "parts": [
+            [
+              9,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 7
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -244,7 +244,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -294,74 +294,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:stamp#s8",
-      "pos": "短语",
-      "glossZh": "消灭",
-      "pronunciationId": "w:stamp#p-main",
-      "note": "stamp out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stamp#e-ac72eb0d70cbe153",
-          "text": "This stamps out the joy of unexpected discovery and means a child may never learn to tolerate something unfamiliar.",
-          "source": {
-            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
-            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
-            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stamp#s9",
-      "pos": "短语",
-      "glossZh": "打上自己的烙印",
-      "pronunciationId": "w:stamp#p-main",
-      "note": "put one’s stamp on something。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stamp#e-94b8ccf8639324ee",
-          "text": "With nearly 40 adaptations so far, and more to come as new artists compete to put their stamp on it, the book may already be the most-adapted of all time.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
-            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
-            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 88,
-            "end": 93
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -370,6 +302,12 @@
       "reason": "行业义、俚语或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:put-ones-stamp-on-sth",
+    "w:stamp-out"
+  ]
 }

@@ -1,0 +1,157 @@
+{
+  "entryId": "w:on-foot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "foot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "foot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on foot",
+  "senses": [
+    {
+      "senseId": "w:on-foot#s1",
+      "pos": "短语",
+      "glossZh": "步行",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:foot#s4",
+        "w:on#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-foot#e-f4bac03da684d46b",
+          "text": "As we came to a heavily traveled street, we saw an unusual procession approaching: a bony, wild-eyed cow followed by many cars, and boys on bicycles and on foot.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 153,
+            "end": 160
+          },
+          "parts": [
+            [
+              153,
+              160
+            ]
+          ],
+          "highlightRanges": [
+            [
+              153,
+              160
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-foot#e-031843dca63f5021",
+          "text": "On foot.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-foot#e-12ba8e68179b1ec0",
+          "text": "On foot",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 17
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

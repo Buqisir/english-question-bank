@@ -1,0 +1,201 @@
+{
+  "entryId": "w:strike-sb-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "strike somebody as"
+  ],
+  "pattern": {
+    "tokens": [
+      "strike",
+      {
+        "slot": "sb"
+      },
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        {
+          "slot": "sb"
+        },
+        "as"
+      ],
+      [
+        "strike",
+        "somebody",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "strike as",
+      "tags": []
+    },
+    {
+      "form": "struck as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike sb as",
+  "senses": [
+    {
+      "senseId": "w:strike-sb-as#s1",
+      "pos": "短语",
+      "glossZh": "给某人留下……的印象；让某人觉得……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:strike#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:strike-sb-as#e-b1ae7c14b782d0aa",
+          "text": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 120
+          },
+          "parts": [
+            [
+              106,
+              112
+            ],
+            [
+              118,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              112
+            ],
+            [
+              118,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:strike-sb-as#e-424cf4699e86a71a",
+          "text": "Annoyed by the level of distraction(干扰)in his open office, he said, “That’s why I have a membership at the coworking space across the street – so I can focus.” His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 172,
+            "end": 184
+          },
+          "parts": [
+            [
+              172,
+              178
+            ],
+            [
+              182,
+              184
+            ]
+          ],
+          "highlightRanges": [
+            [
+              172,
+              178
+            ],
+            [
+              182,
+              184
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:strike-sb-as#e-99f08e47c0c603ab",
+          "text": "Comics struck him as shallow.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 20
+          },
+          "parts": [
+            [
+              7,
+              13
+            ],
+            [
+              18,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              13
+            ],
+            [
+              18,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

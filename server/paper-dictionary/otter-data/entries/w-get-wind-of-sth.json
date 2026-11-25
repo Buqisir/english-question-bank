@@ -1,0 +1,68 @@
+{
+  "entryId": "w:get-wind-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "wind",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "wind",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get wind of sth",
+  "senses": [
+    {
+      "senseId": "w:get-wind-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "听到某事的风声；得知尚未公开的消息",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:wind#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

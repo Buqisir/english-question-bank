@@ -1,0 +1,159 @@
+{
+  "entryId": "w:by-no-means",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "no",
+      "means"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "no",
+        "means"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by no means",
+  "senses": [
+    {
+      "senseId": "w:by-no-means#s1",
+      "pos": "短语",
+      "glossZh": "绝不；一点也不",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:means#s3",
+        "w:no#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-no-means#e-c3abbf2fb86dcb53",
+          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-no-means#e-23108c8a0c25970f",
+          "text": "Small steps can by no means change the situation.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-no-means#e-43a6d19b31ec0c1a",
+          "text": "by no means",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:52#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

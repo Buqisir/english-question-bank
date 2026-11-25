@@ -1,0 +1,283 @@
+{
+  "entryId": "w:be-supposed-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is supposed to",
+    "was supposed to"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "supposed",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "supposed",
+        "to"
+      ],
+      [
+        "was",
+        "supposed",
+        "to"
+      ],
+      [
+        "is",
+        "supposed",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are supposed to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be supposed to",
+  "senses": [
+    {
+      "senseId": "w:be-supposed-to#s1",
+      "pos": "短语",
+      "glossZh": "按规定或职责应当；理应",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:suppose#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-supposed-to#e-9087f69c0834b923",
+          "text": "Instead, we are supposed to reduce refined grains and increase whole grains, beans and tubers.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 27
+          },
+          "parts": [
+            [
+              12,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-supposed-to#e-149f5b49eed301c1",
+          "text": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 30
+          },
+          "parts": [
+            [
+              15,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-supposed-to#e-9fc7d3fa32bcfca4",
+          "text": "Each student was supposed to bake cookies with their father.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 28
+          },
+          "parts": [
+            [
+              13,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:be-supposed-to#s2",
+      "pos": "短语",
+      "glossZh": "按计划或预期会；原本要",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:suppose#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-supposed-to#e-dfa3dad0d5481f44",
+          "text": "The bag that was supposed to set me free had trapped me – in fear, in pride, in a lie about who I was.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 28
+          },
+          "parts": [
+            [
+              13,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-supposed-to#e-b7224014557105ca",
+          "text": "The use of technology in sports is supposed to be able to provide accurate and instant feedback, with better",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 46
+          },
+          "parts": [
+            [
+              32,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-supposed-to#e-a24bbe85a10ab096",
+          "text": "He was supposed to help with setting up the larger paintings and managing the guestbook.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

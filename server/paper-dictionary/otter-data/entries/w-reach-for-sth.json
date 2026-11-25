@@ -1,0 +1,371 @@
+{
+  "entryId": "w:reach-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "reach for"
+  ],
+  "pattern": {
+    "tokens": [
+      "reach",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reach",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "reach",
+        "for"
+      ],
+      [
+        "reached",
+        "for"
+      ],
+      [
+        "reaches",
+        "for"
+      ],
+      [
+        "reaching",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reached for",
+      "tags": []
+    },
+    {
+      "form": "reaching for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reach for sth",
+  "senses": [
+    {
+      "senseId": "w:reach-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "伸手去够；伸手去拿",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:reach#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:reach-for-sth#e-8749206476f15499",
+          "text": "After the operation, the boy began to reach for toys and recognize people at a short distance.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 47
+          },
+          "parts": [
+            [
+              38,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-sth#e-835f391570324d58",
+          "text": "Paragraph 1: But just as I reached for the zipper, another hand appeared and picked it up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-sth#e-49d7bd5696ce3ee0",
+          "text": "Reaching for the school’s antique microscope, she accidentally knocked it from the table.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 17
+      }
+    },
+    {
+      "senseId": "w:reach-for-sth#s2",
+      "pos": "短语",
+      "glossZh": "下意识地选用（词语、办法等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reach-for-sth#e-b6db95a51736ad21",
+          "text": "When you care too much about what others think, you reach for these tricks all the time.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-sth#e-5e7d5e081d3d5c82",
+          "text": "a problem, instinctively (本能地) reach for the quickest solution.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-d",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-d:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-sth#e-decfdcac4c9ad768",
+          "text": "Why do we reach for the word “accident” so quickly?",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 19
+          },
+          "parts": [
+            [
+              10,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:reach-for-sth#s3",
+      "pos": "短语",
+      "glossZh": "努力争取；追求（目标、成就等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reach-for-sth#e-7d2b82237a52db54",
+          "text": "I am still reaching for the moon, but I am no longer afraid.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-sth#e-f6a81cf8389f5293",
+          "text": "What does the author mean by saying “reaching for the moon”?",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:27",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 49
+          },
+          "parts": [
+            [
+              37,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 47
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 38
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -189,78 +189,6 @@
       ]
     },
     {
-      "senseId": "w:instant#s3",
-      "pos": "短语",
-      "glossZh": "一……就……",
-      "pronunciationId": "w:instant#p-main",
-      "note": "the instant 后接分句。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:instant#e-9d2b737814259d9d",
-          "text": "She ceased her struggle the instant I picked her up.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:instant#e-0c9fc6416a9fc37b",
-          "text": "Coined by Swedish author Fredrik Haren from the Latin “we see,” it describes the instant someone else truly grasps your idea and says, “Oh, I see!” That recognition makes innovators feel they are no longer alone.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
-            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 81,
-            "end": 88
-          }
-        },
-        {
-          "exampleId": "w:instant#e-f6f0a8ff32277894",
-          "text": "Her heart ached the instant she recognized its __45__.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
-            "paperTitle": "南昌市2025年高三年级九月测试英语",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 20,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:instant#s4",
       "pos": "adj.",
       "glossZh": "速溶的",
@@ -302,7 +230,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -353,6 +281,11 @@
       "reason": "旧式书信用语或法律用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:the-instant"
+  ]
 }

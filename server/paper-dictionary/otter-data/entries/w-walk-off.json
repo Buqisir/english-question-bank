@@ -1,0 +1,164 @@
+{
+  "entryId": "w:walk-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "off"
+      ],
+      [
+        "walked",
+        "off"
+      ],
+      [
+        "walking",
+        "off"
+      ],
+      [
+        "walks",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk (sth) off",
+  "senses": [
+    {
+      "senseId": "w:walk-off#s1",
+      "pos": "短语",
+      "glossZh": "走开；转身离去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-off#e-6d394f9d5fcc5492",
+          "text": "Together, the pair walked off into the forest-safe at last.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-off#e-ca5c8b5eff358a7b",
+          "text": "They spun on their heels and walked off, muttering.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:walk-off#s2",
+      "pos": "短语",
+      "glossZh": "靠走动缓解（不适等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-off#s3",
+      "pos": "短语",
+      "glossZh": "用脚步测量（距离）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,306 @@
+{
+  "entryId": "w:hold-on-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hold onto",
+    "holding onto"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "on",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "on",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "hold",
+        "onto"
+      ],
+      [
+        "holding",
+        "onto"
+      ],
+      [
+        "held",
+        "onto"
+      ],
+      [
+        "holds",
+        "onto"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held onto",
+      "tags": []
+    },
+    {
+      "form": "hold on to",
+      "tags": []
+    },
+    {
+      "form": "holding on to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold on to sth",
+  "senses": [
+    {
+      "senseId": "w:hold-on-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "抓紧；抓牢",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hold#s14",
+        "w:onto#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-on-to-sth#e-5a969eb6c948650e",
+          "text": "Paragraph 1: Looking back, they saw little Mike holding on to a broken chunk(大块) of ice, unable to crawl onto it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-on-to-sth#e-316d825eeeee4d43",
+          "text": "Mr. Carter answered, looking pleasantly surprised but slightly confused, with a child holding onto each leg and a naughty dog circling his feet.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 98
+          },
+          "parts": [
+            [
+              86,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-on-to-sth#e-7634914c889eb766",
+          "text": "Approximately fifty yards offshore, he discovered a terrifying scene: a teenage girl was struggling in the deep water, desperately holding onto the foot of another girl who was completely submerged and unconscious.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 143
+          },
+          "parts": [
+            [
+              131,
+              143
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              143
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:hold-on-to-sth#s2",
+      "pos": "短语",
+      "glossZh": "保留；设法保住；不放弃",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:onto#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-on-to-sth#e-5051044674955437",
+          "text": "Yet deep down, I held onto the faint hope that my months of effort might pay off somehow.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-on-to-sth#e-037e143cd2588190",
+          "text": "In education we have to hold onto this faith: everything we do for a child is worthwhile.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-on-to-sth#e-5e666447ff08dae6",
+          "text": "I think better in writing, I’d tell myself, holding on to my text messages.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 57
+          },
+          "parts": [
+            [
+              44,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "可接物品、工作、希望或信念等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

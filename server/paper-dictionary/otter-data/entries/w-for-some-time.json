@@ -1,0 +1,123 @@
+{
+  "entryId": "w:for-some-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "some",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "some",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for some time",
+  "senses": [
+    {
+      "senseId": "w:for-some-time#s1",
+      "pos": "固定短语",
+      "glossZh": "有一段时间；持续了好一阵子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:for-some-time#e-9dc3e649af3780b5",
+          "text": "It’s hard to tell exactly how many people agree with him, but research indicates that the numbers have been rising for some time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 128
+          },
+          "parts": [
+            [
+              115,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              128
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-some-time#e-c96e976a24001ec8",
+          "text": "For some time now, people had soured on him.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

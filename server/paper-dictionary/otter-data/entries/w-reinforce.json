@@ -58,7 +58,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 18
+    "mock": 2
   },
   "senses": [
     {
@@ -121,7 +121,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -192,7 +192,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -248,9 +248,42 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:reinforce#s5",
+      "pos": "v.",
+      "glossZh": "巩固（关系等）",
+      "pronunciationId": "w:reinforce#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reinforce#e-20649a1cd932d055",
+          "text": "Scientists argue that playful teasing in apes or “laughter” in dogs could serve a similar purpose – breaking the ice and reinforcing relationships.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 132
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

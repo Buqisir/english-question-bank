@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 20
+    "mock": 6
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -305,6 +305,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:tension#s6",
+      "pos": "n.",
+      "glossZh": "电压",
+      "pronunciationId": "w:tension#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tension#e-237d4190861447d9",
+          "text": "The system also charged capacitors（电容器）to useful electric tension only within minutes, showing its potential for powering small electronics and wireless sensors.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -313,6 +346,6 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

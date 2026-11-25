@@ -1,0 +1,162 @@
+{
+  "entryId": "w:little-one",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "little",
+      "one"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "little",
+        "one"
+      ],
+      [
+        "little",
+        "ones"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "little ones",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "little one",
+  "senses": [
+    {
+      "senseId": "w:little-one#s1",
+      "pos": "短语",
+      "glossZh": "年幼的孩子；小家伙",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:little-one#e-bed3ef542e41daaa",
+          "text": "Hoping to find a hobby that can be shared by both the little ones and adults?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:little-one#e-df1430e75807f07a",
+          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 135
+          },
+          "parts": [
+            [
+              125,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              135
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:little-one#e-36c4443ed8618f27",
+          "text": "“Help yourself while I run into the other room and check on my little one.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 73
+          },
+          "parts": [
+            [
+              63,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "可用作爱称，也可指年幼的动物。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

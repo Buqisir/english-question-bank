@@ -1,0 +1,419 @@
+{
+  "entryId": "w:go-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes off",
+    "going off",
+    "went off"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "off"
+      ],
+      [
+        "goes",
+        "off"
+      ],
+      [
+        "going",
+        "off"
+      ],
+      [
+        "went",
+        "off"
+      ],
+      [
+        "gone",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go off",
+  "senses": [
+    {
+      "senseId": "w:go-off#s1",
+      "pos": "短语",
+      "glossZh": "离开；动身去某处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-off#e-2218004d2c41dbfd",
+          "text": "I continued to make these pencil marks for years, and when I went off to college, I packed that dictionary in my suitcase.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 69
+          },
+          "parts": [
+            [
+              61,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-off#e-1e9af9cf3ce14da9",
+          "text": "I want to tell her – everyone understands that lunch breaks are for going off by yourself.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          },
+          "parts": [
+            [
+              68,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-off#e-75e536bf5d75cd9d",
+          "text": "But footsteps can be muddied and they can go off in different directions.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 48
+          },
+          "parts": [
+            [
+              42,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-off#s2",
+      "pos": "短语",
+      "glossZh": "（闹钟、警报器等）响起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-off#e-33e67d3fa1a0aa29",
+          "text": "Related to this, one strategy is to set an alarm that will go off after, for example, 20 minutes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          },
+          "parts": [
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-off#e-efd006af58a80c71",
+          "text": "Then set a timer for 60 seconds and don’t think about it until the timer goes off.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 81
+          },
+          "parts": [
+            [
+              73,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-off#e-a663d05d5174ff0c",
+          "text": "The phone alarm went off.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-off#s3",
+      "pos": "短语",
+      "glossZh": "（枪）开火；走火",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-off#e-ac3c80c2fb6c713d",
+          "text": "For example, the English sentence “he fired the gun” is usually phrased as “the gun went off” in Japanese.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 92
+          },
+          "parts": [
+            [
+              84,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-off#s4",
+      "pos": "短语",
+      "glossZh": "（炸弹、烟火等）爆炸",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s5",
+      "pos": "短语",
+      "glossZh": "（灯、电源等）熄灭；停止运作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s6",
+      "pos": "短语",
+      "glossZh": "（食物）变质",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s7",
+      "pos": "短语",
+      "glossZh": "不再喜欢；对……失去兴趣",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "多见于英式英语，后可直接接宾语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s8",
+      "pos": "短语",
+      "glossZh": "（活动）以某种方式进行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 go off well。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s9",
+      "pos": "短语",
+      "glossZh": "（胶、树脂等）凝固；固化",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-off#s10",
+      "pos": "短语",
+      "glossZh": "发火；激烈地抱怨或抨击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用语，如 go off on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

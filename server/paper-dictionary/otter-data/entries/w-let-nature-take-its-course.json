@@ -1,0 +1,125 @@
+{
+  "entryId": "w:let-nature-take-its-course",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "let",
+      "nature",
+      "take",
+      "its",
+      "course"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        "nature",
+        "take",
+        "its",
+        "course"
+      ],
+      [
+        "lets",
+        "nature",
+        "take",
+        "its",
+        "course"
+      ],
+      [
+        "letting",
+        "nature",
+        "take",
+        "its",
+        "course"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let nature take its course",
+  "senses": [
+    {
+      "senseId": "w:let-nature-take-its-course#s1",
+      "pos": "短语",
+      "glossZh": "不加干预，让事情自然发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:let-nature-take-its-course#e-867a6d6a0f53b80e",
+          "text": "She let nature take its course.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:25#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 30
+          },
+          "parts": [
+            [
+              4,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:let-nature-take-its-course#s2",
+      "pos": "短语",
+      "glossZh": "不再延缓死亡，让生命自然结束",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "临终语境中的委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

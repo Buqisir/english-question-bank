@@ -1,0 +1,166 @@
+{
+  "entryId": "w:walk-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking on"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "on"
+      ],
+      [
+        "walking",
+        "on"
+      ],
+      [
+        "walked",
+        "on"
+      ],
+      [
+        "walks",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk on",
+  "senses": [
+    {
+      "senseId": "w:walk-on#s1",
+      "pos": "短语",
+      "glossZh": "继续往前走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-on#e-0a56602af981b460",
+          "text": "He walked on, each step heavy with a desperate, unspoken hope that someone would finally see him and call him back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-on#e-6725cc84e4dcce62",
+          "text": "As she walked on, an unusual call caught her attention.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:walk-on#s2",
+      "pos": "短语",
+      "glossZh": "走上舞台；登场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-on#s3",
+      "pos": "短语",
+      "glossZh": "未经招募自行加入大学运动队",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

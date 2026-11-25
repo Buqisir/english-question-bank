@@ -1,0 +1,200 @@
+{
+  "entryId": "w:try-sth-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "tries out",
+    "try out",
+    "trying out"
+  ],
+  "pattern": {
+    "tokens": [
+      "try",
+      {
+        "slot": "sth"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "try",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "try",
+        "out"
+      ],
+      [
+        "tries",
+        "out"
+      ],
+      [
+        "try",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "trying",
+        "out"
+      ],
+      [
+        "tried",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tried out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "try sth out",
+  "senses": [
+    {
+      "senseId": "w:try-sth-out#s1",
+      "pos": "短语",
+      "glossZh": "试用；实际试一试以检验效果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:try#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:try-sth-out#e-c950ea18fbd73b9e",
+          "text": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-sth-out#e-62f9bae5d8c08468",
+          "text": "They tried their ideas out first by sticking a shake-to-charge flashlight they had bought inside a",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 26
+          },
+          "parts": [
+            [
+              5,
+              10
+            ],
+            [
+              23,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              10
+            ],
+            [
+              23,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-sth-out#e-1fa9966ade296b23",
+          "text": "Try out core practices associated with making thinking visible, and learn how they relate to and interact with one another.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

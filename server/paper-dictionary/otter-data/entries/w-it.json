@@ -48,7 +48,7 @@
     "mock": 7865
   },
   "unassignedCounts": {
-    "gaokao": 908,
+    "gaokao": 941,
     "mock": 7865
   },
   "senses": [
@@ -546,605 +546,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:it#s9",
-      "pos": "短语",
-      "glossZh": "说到……",
-      "pronunciationId": "w:it#p-main",
-      "note": "when it comes to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-799f0de7cb6f4816",
-          "text": "When it comes to public speaking, less is usually more.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-i:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:it#e-501c315e9491602b",
-          "text": "Terri Bolton is a dab hand when it comes to DIY (do-it-yourself).",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:it#e-20aa5087f34d90b8",
-          "text": "When it came to faking a review, length was important to believability, as was detail.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s10",
-      "pos": "短语",
-      "glossZh": "成功抵达",
-      "pronunciationId": "w:it#p-main",
-      "note": "make it (to)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-b35331f30a2aeb8e",
-          "text": "She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 53,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:it#e-afcfefc96d25b83c",
-          "text": "The next day, she __54__ with Karen and made it back to George in Virginia within a few days.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:it#e-50698d42d30327b5",
-          "text": "Gunter parked the taxi behind the bus, turned around, and looked at me with a big smile on his face.“We made it,” he said.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 111
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s11",
-      "pos": "短语",
-      "glossZh": "活下来；熬过去",
-      "pronunciationId": "w:it#p-main",
-      "note": "make it (through)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-a956d37c58a3a62c",
-          "text": "Globally, a third of Sumatran cubs in zoos don’t make it to adulthood, so I decided to give them round-the-clock care at home.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 56
-          }
-        },
-        {
-          "exampleId": "w:it#e-0f315796079ac2ae",
-          "text": "If you’re among the groups of people who are enjoying the mental and physical health benefits of surrounding yourself with plants, don’t beat yourself up if one (or a few!) doesn’t make it.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 186,
-            "end": 188
-          }
-        },
-        {
-          "exampleId": "w:it#e-a7d74c4fd57117e4",
-          "text": "I still made it through the next three years of college, even without the book.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s12",
-      "pos": "短语",
-      "glossZh": "结果是；原来",
-      "pronunciationId": "w:it#p-main",
-      "note": "it turns out (that)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-31823268ffbcc343",
-          "text": "First, it turned out that at least one can use a comb.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:it#e-4926556eb9a21892",
-          "text": "It turns out that pet transporting pays quite well at about $30,000 per year before tax.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:it#e-a22bc04adc04675e",
-          "text": "As it turned out, Douglas did __50__ what she needed to do to become Olympic champion when she __51__ two Russians.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s13",
-      "pos": "短语",
-      "glossZh": "碰巧",
-      "pronunciationId": "w:it#p-main",
-      "note": "it happens that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-cc20ad3e6804175b",
-          "text": "It happened that the plant downtown needed eight kids for __43__ help during our spring break, for which I had no __44__ beyond listening to my favorite records.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s14",
-      "pos": "短语",
-      "glossZh": "到了该……的时候",
-      "pronunciationId": "w:it#p-main",
-      "note": "it is time to do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-0ee9425b50656e20",
-          "text": "It was time to say goodbye for now at least.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:it#e-78527b8b94f51681",
-          "text": "A few months ago, the 30-year-old teacher decided it was time to put her __42__ to good use.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s15",
-      "pos": "短语",
-      "glossZh": "特意去做",
-      "pronunciationId": "w:it#p-main",
-      "note": "make it a point to do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-b291007db5f5a1ed",
-          "text": "My parents made it a point for their two kids to spend time outside, no matter the weather or season.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s16",
-      "pos": "短语",
-      "glossZh": "毫无用处",
-      "pronunciationId": "w:it#p-main",
-      "note": "it is no use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-3ebcad994b688562",
-          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 118,
-            "end": 120
-          }
-        },
-        {
-          "exampleId": "w:it#e-8ad3bd568d3a9e73",
-          "text": "She went right into the shower to washing it, but it was no use.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s17",
-      "pos": "短语",
-      "glossZh": "把气撒在……身上",
-      "pronunciationId": "w:it#p-main",
-      "note": "take it out on sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-208048288b663062",
-          "text": "She had split up with her husband the week before, was living in a flat __52__, and since she’d found it too much to cope with (应对), she’d taken it out on __53__ people.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 145,
-            "end": 147
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s18",
-      "pos": "短语",
-      "glossZh": "正巧；命运偏偏如此",
-      "pronunciationId": "w:it#p-main",
-      "note": "as fate would have it。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-731e05393d9b6e84",
-          "text": "As fate（命运） would have it, Dr. Henderson very deliberately matched everyone in class and announced that I would be working with the one person in class I wanted to avoid.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s19",
-      "pos": "短语",
-      "glossZh": "正如某人所说",
-      "pronunciationId": "w:it#p-main",
-      "note": "as sb puts it。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-94556f0dc6ae2c06",
-          "text": "As Kristian Hammond, professor of electrical engineering and computer science at Northwestern University, put it: \"There's never a stage at which the system knows",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 110,
-            "end": 112
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:it#s20",
-      "pos": "短语",
-      "glossZh": "说对了",
-      "pronunciationId": "w:it#p-main",
-      "note": "have it right。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:it#e-b03b3b0d4f382477",
-          "text": "Movement have it right: it’s time to think differently about that street outside your front door.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 16
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -1153,6 +554,88 @@
       "reason": "同形缩写或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-fate-would-have-it",
+    "w:as-it-is",
+    "w:as-it-turned-out",
+    "w:as-luck-would-have-it",
+    "w:as-sb-puts-it",
+    "w:beat-it",
+    "w:believe-it-or-not",
+    "w:buy-it",
+    "w:call-it-a-day",
+    "w:cool-it",
+    "w:cut-it",
+    "w:damn-it",
+    "w:forget-it",
+    "w:get-it",
+    "w:go-for-it",
+    "w:go-it-alone",
+    "w:hand-it-to",
+    "w:have-it",
+    "w:have-it-all",
+    "w:have-it-right",
+    "w:hold-it",
+    "w:hold-it-together",
+    "w:how-much-does-it-cost",
+    "w:i-know-it-when-i-see-it",
+    "w:isnt-it",
+    "w:it-dawns-on-sb-that",
+    "w:it-depends",
+    "w:it-doesnt-matter",
+    "w:it-happens-that",
+    "w:it-happens-to-the-best-of-us",
+    "w:it-is-no-use",
+    "w:it-is-time-to-do",
+    "w:it-turns-out",
+    "w:it-turns-out-that",
+    "w:keep-it-up",
+    "w:kick-it",
+    "w:let-it-be",
+    "w:like-it-or-not",
+    "w:lose-it",
+    "w:make-a-day-of-it",
+    "w:make-it",
+    "w:make-it-a-point-to-do",
+    "w:make-it-back",
+    "w:make-it-big",
+    "w:make-it-so-that",
+    "w:make-it-through",
+    "w:make-it-to",
+    "w:mix-it-up",
+    "w:nothing-to-it",
+    "w:pack-it-in",
+    "w:pay-it-forward",
+    "w:play-it-safe",
+    "w:push-it",
+    "w:save-it",
+    "w:so-be-it",
+    "w:so-it-seems",
+    "w:stick-it-out",
+    "w:stop-it",
+    "w:take-it",
+    "w:take-it-easy",
+    "w:take-it-or-leave-it",
+    "w:take-it-out-on-sb",
+    "w:thats-it",
+    "w:there-you-have-it",
+    "w:this-is-it",
+    "w:to-top-it-off",
+    "w:tough-it-out",
+    "w:use-it-or-lose-it",
+    "w:watch-it",
+    "w:what-date-is-it-today",
+    "w:what-day-is-it-today",
+    "w:what-it-takes",
+    "w:what-time-is-it",
+    "w:when-it-comes-to-sth",
+    "w:wing-it",
+    "w:worth-it",
+    "w:you-got-it",
+    "w:you-know-it"
+  ]
 }

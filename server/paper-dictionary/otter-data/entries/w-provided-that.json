@@ -1,0 +1,92 @@
+{
+  "entryId": "w:provided-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "provided",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "provided",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "provided that",
+  "senses": [
+    {
+      "senseId": "w:provided-that#s1",
+      "pos": "短语",
+      "glossZh": "只要；条件是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:provide#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:provided-that#e-abc31bb8291b3aac",
+          "text": "Provided that he remains in good health, Bryce expects to work in this field until he is 70.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:like-magic",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "like",
+      "magic"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "like",
+        "magic"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "like magic",
+  "senses": [
+    {
+      "senseId": "w:like-magic#s1",
+      "pos": "短语",
+      "glossZh": "像变魔术一样；神奇地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:magic#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:like-magic#e-104736606c48fb30",
+          "text": "My imaginary Grandma’s Box worked like magic that spring, and later.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 44
+          },
+          "parts": [
+            [
+              34,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:like-magic#e-c4f3e69b070cad4a",
+          "text": "What is the main theme of A Little Like Magic?",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

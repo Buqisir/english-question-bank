@@ -1,0 +1,96 @@
+{
+  "entryId": "w:close-to-the-mark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "to",
+      "the",
+      "mark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "to",
+        "the",
+        "mark"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close to the mark",
+  "senses": [
+    {
+      "senseId": "w:close-to-the-mark#s1",
+      "pos": "短语",
+      "glossZh": "接近事实；相当准确",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mark#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:close-to-the-mark#e-266de5a1ece6de07",
+          "text": "His predictions about slowing population growth, mobile phones and increasing height were close to the mark.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 107
+          },
+          "parts": [
+            [
+              90,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

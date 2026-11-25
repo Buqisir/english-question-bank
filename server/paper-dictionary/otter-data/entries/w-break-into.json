@@ -1,0 +1,214 @@
+{
+  "entryId": "w:break-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking into",
+    "broke into"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "into"
+      ],
+      [
+        "breaking",
+        "into"
+      ],
+      [
+        "broke",
+        "into"
+      ],
+      [
+        "breaks",
+        "into"
+      ],
+      [
+        "broken",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break into sth",
+  "senses": [
+    {
+      "senseId": "w:break-into#s1",
+      "pos": "短语",
+      "glossZh": "突然开始（微笑、跑步等）；一下子进入某种状态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-into#e-e8f1e1869521cc52",
+          "text": "The class broke into applause, and Mia, the girl sitting beside me, whispered softly, “The sparrow looks so alive and lovely!”",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-into#e-e76bc0c18183c1cb",
+          "text": "Here and there stood peach-trees that broke into delicate flowers of pink.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 48
+          },
+          "parts": [
+            [
+              38,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-into#e-61d55b0f31037312",
+          "text": "The woman froze for a second, and then broke into a faint smile.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 49
+          },
+          "parts": [
+            [
+              39,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:break-into#s2",
+      "pos": "短语",
+      "glossZh": "强行闯入（建筑物、车辆等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:break#s11"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-into#s3",
+      "pos": "短语",
+      "glossZh": "打入（难以进入的行业、领域等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-into#s4",
+      "pos": "短语",
+      "glossZh": "打开并开始取用（存放的物品等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

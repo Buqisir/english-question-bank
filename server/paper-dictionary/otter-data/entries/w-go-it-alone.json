@@ -1,0 +1,128 @@
+{
+  "entryId": "w:go-it-alone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going it alone"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "it",
+      "alone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "it",
+        "alone"
+      ],
+      [
+        "going",
+        "it",
+        "alone"
+      ],
+      [
+        "goes",
+        "it",
+        "alone"
+      ],
+      [
+        "gone",
+        "it",
+        "alone"
+      ],
+      [
+        "went",
+        "it",
+        "alone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go it alone",
+  "senses": [
+    {
+      "senseId": "w:go-it-alone#s1",
+      "pos": "短语",
+      "glossZh": "独自做；不依靠他人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-it-alone#e-5354a03c55e810df",
+          "text": "The study offers the first test challenging a long-standing assumption that people from group-oriented societies, cultures that emphasize collective thinking and community harmony, are naturally more likely to seek advice from others and that individualistic cultures like the United States are expected to favor going it alone.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 313,
+            "end": 327
+          },
+          "parts": [
+            [
+              313,
+              327
+            ]
+          ],
+          "highlightRanges": [
+            [
+              313,
+              327
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-it-alone#s2",
+      "pos": "短语",
+      "glossZh": "不与搭档合作，独自打一手牌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于某些纸牌游戏。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

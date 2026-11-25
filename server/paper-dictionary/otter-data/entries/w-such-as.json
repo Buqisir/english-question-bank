@@ -1,0 +1,262 @@
+{
+  "entryId": "w:such-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "such",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "such",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "such as",
+  "senses": [
+    {
+      "senseId": "w:such-as#s1",
+      "pos": "短语",
+      "glossZh": "例如；诸如",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s8",
+        "w:such#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:such-as#e-90ec12b9fdb557f0",
+          "text": "It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          },
+          "parts": [
+            [
+              30,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:such-as#e-7dfd73af7ed95d46",
+          "text": "Playing together also helps these kids practice social behaviors, such as kindness, sharing, and cooperation.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 73
+          },
+          "parts": [
+            [
+              66,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:such-as#e-74d9df655a67eaaa",
+          "text": "There are alternatives to constant written communication, such as leaving voice messages or having a group chat.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 65
+          },
+          "parts": [
+            [
+              58,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 22,
+        "mock": 270
+      }
+    },
+    {
+      "senseId": "w:such-as#s2",
+      "pos": "短语",
+      "glossZh": "像……那样的；类似……的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:such-as#e-60d488e3ba77627b",
+          "text": "This is a unique piece, as posters such as this one were printed on soft paper and very few have survived.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          },
+          "parts": [
+            [
+              35,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:such-as#e-7db1bfa7cbe9e7d5",
+          "text": "When we consider contact (联系) between literate and non-literate societies such as these, all our first-hand accounts are necessarily twisted, only one half of a dialogue.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 81
+          },
+          "parts": [
+            [
+              74,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:such-as#e-fb7be1cb4a01bc61",
+          "text": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 24,
+    "mock": 272
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

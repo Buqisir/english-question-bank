@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-common",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "common"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "common"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in common",
+  "senses": [
+    {
+      "senseId": "w:in-common#s1",
+      "pos": "短语",
+      "glossZh": "共同的；共有的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-common#e-e9c114af9dad4a35",
+          "text": "Here’s a riddle: What do traffic jams, long lines and waiting for a vacation to start all have in common?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 104
+          },
+          "parts": [
+            [
+              95,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-common#e-81679c760460df30",
+          "text": "What do chimps and humans have in common according to Dr Hobaiter?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-common#e-e490bfd55ad2c449",
+          "text": "What do the works by Shepherd and Smith have in common?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2021-national-a:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 54
+          },
+          "parts": [
+            [
+              45,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "常用 have sth in common (with sb/sth)，表示有共同之处。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 48
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

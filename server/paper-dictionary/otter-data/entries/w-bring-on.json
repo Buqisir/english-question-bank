@@ -1,0 +1,144 @@
+{
+  "entryId": "w:bring-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "brings on"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "on"
+      ],
+      [
+        "brings",
+        "on"
+      ],
+      [
+        "bringing",
+        "on"
+      ],
+      [
+        "brought",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring on",
+  "senses": [
+    {
+      "senseId": "w:bring-on#s1",
+      "pos": "短语",
+      "glossZh": "引起；导致（不适、疾病等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bring-on#e-bd098419e36b9fa2",
+          "text": "In turn, our minds unconsciously adjust our attitudes to reduce the discomfort this inconsistency brings on.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 107
+          },
+          "parts": [
+            [
+              98,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bring-on#s2",
+      "pos": "短语",
+      "glossZh": "让演员、选手等上场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-on#s3",
+      "pos": "短语",
+      "glossZh": "尽管来吧；放马过来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 Bring it on! 表示乐于接受挑战。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-on#s4",
+      "pos": "短语",
+      "glossZh": "招入团队；让某人加入项目",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

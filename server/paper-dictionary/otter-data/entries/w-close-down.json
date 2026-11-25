@@ -1,0 +1,187 @@
+{
+  "entryId": "w:close-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "down"
+      ],
+      [
+        "closed",
+        "down"
+      ],
+      [
+        "closes",
+        "down"
+      ],
+      [
+        "closing",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "closed down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close down",
+  "senses": [
+    {
+      "senseId": "w:close-down#s1",
+      "pos": "短语",
+      "glossZh": "停业；关停；停止运营",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:close-down#e-25640afd4a264d47",
+          "text": "It will close down.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-ii:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-down#e-e2051843eb70c60e",
+          "text": "Her stubbornness seemed self-destructive as stores around them closed down.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-down#e-2f273d6dfffa7d0a",
+          "text": "He heard the garage had closed down.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 35
+          },
+          "parts": [
+            [
+              24,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:close-down#s2",
+      "pos": "短语",
+      "glossZh": "逼近对手以封堵其活动空间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于足球等运动。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

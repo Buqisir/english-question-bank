@@ -1,0 +1,74 @@
+{
+  "entryId": "w:or-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "or",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "or",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "or else",
+  "senses": [
+    {
+      "senseId": "w:or-else#s1",
+      "pos": "短语",
+      "glossZh": "否则；要不然",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:else#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:or-else#s2",
+      "pos": "短语",
+      "glossZh": "否则后果自负",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "置于命令末尾，省略具体后果，表示警告。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

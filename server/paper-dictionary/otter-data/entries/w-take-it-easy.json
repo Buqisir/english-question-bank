@@ -1,0 +1,109 @@
+{
+  "entryId": "w:take-it-easy",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "it",
+      "easy"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "it",
+        "easy"
+      ],
+      [
+        "taken",
+        "it",
+        "easy"
+      ],
+      [
+        "takes",
+        "it",
+        "easy"
+      ],
+      [
+        "taking",
+        "it",
+        "easy"
+      ],
+      [
+        "took",
+        "it",
+        "easy"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take it easy",
+  "senses": [
+    {
+      "senseId": "w:take-it-easy#s1",
+      "pos": "短语",
+      "glossZh": "放松；别紧张或太劳累",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:easy#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-it-easy#s2",
+      "pos": "短语",
+      "glossZh": "（告别时）保重",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-it-easy#s3",
+      "pos": "短语",
+      "glossZh": "对某人宽容些；别太严厉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 take it easy on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,107 @@
+{
+  "entryId": "w:first-leg",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "first",
+      "leg"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "first",
+        "leg"
+      ],
+      [
+        "first",
+        "legs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "first leg",
+  "senses": [
+    {
+      "senseId": "w:first-leg#s1",
+      "pos": "短语",
+      "glossZh": "（行程的）第一段；去程",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:first-leg#e-89eef0b34738fae6",
+          "text": "Psychiatrist Gary Small relates it to the “return trip effect,” which argues that the first leg of a trip (outward journey) can feel longer because we tend to underestimate how long it will take.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 95
+          },
+          "parts": [
+            [
+              86,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              95
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:first-leg#s2",
+      "pos": "短语",
+      "glossZh": "（两回合比赛的）首回合",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

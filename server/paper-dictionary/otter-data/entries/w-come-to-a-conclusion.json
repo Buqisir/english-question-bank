@@ -1,0 +1,64 @@
+{
+  "entryId": "w:come-to-a-conclusion",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "a",
+      "conclusion"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "a",
+        "conclusion"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to a conclusion",
+  "senses": [
+    {
+      "senseId": "w:come-to-a-conclusion#s1",
+      "pos": "短语",
+      "glossZh": "得出结论",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:come#s23"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,173 @@
+{
+  "entryId": "w:head-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "head",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "head",
+        "out"
+      ],
+      [
+        "headed",
+        "out"
+      ],
+      [
+        "heading",
+        "out"
+      ],
+      [
+        "heads",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "headed out",
+      "tags": []
+    },
+    {
+      "form": "heading out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "head out",
+  "senses": [
+    {
+      "senseId": "w:head-out#s1",
+      "pos": "短语",
+      "glossZh": "出门；离开原地出发",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:head-out#e-353b088f303807bf",
+          "text": "When I woke up early the next morning, Jed was already heading out the back door with Shyla in his arms.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 66
+          },
+          "parts": [
+            [
+              55,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:head-out#e-851a3cfd7a5e9a31",
+          "text": "Ethan wolfed down his cereal and headed out to the barn (畜棚).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:head-out#e-8709cf77ee26c39e",
+          "text": "People who visited my parents were always astonished that we kids got our barn boots and headed out the door for milking time without a word said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 99
+          },
+          "parts": [
+            [
+              89,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

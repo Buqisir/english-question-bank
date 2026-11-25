@@ -1,0 +1,167 @@
+{
+  "entryId": "w:as-good-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "good",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "good",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as good as",
+  "senses": [
+    {
+      "senseId": "w:as-good-as#s2",
+      "pos": "短语",
+      "glossZh": "和……一样好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-good-as#e-ea3f9af426023436",
+          "text": "But it does suggest that within limits of common sense,one way of eating is about as good as another.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 92
+          },
+          "parts": [
+            [
+              82,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-good-as#e-37ed0f60713193c3",
+          "text": "But it does suggest that within limits of common sense, one way of eating is about as good as another.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 93
+          },
+          "parts": [
+            [
+              83,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-good-as#e-5eef24d97234b161",
+          "text": "The truth that poured out was simple and childlike: What if this book isn’t as good as the first?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 86
+          },
+          "parts": [
+            [
+              76,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:as-good-as#s1",
+      "pos": "短语",
+      "glossZh": "几乎等于；实际上就是",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 69
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 58
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -174,13 +174,46 @@
       "pos": "n.",
       "glossZh": "体毛",
       "pronunciationId": "w:hair#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:hair#s4",
+      "pos": "短语",
+      "glossZh": "毛细胞（有毛状突起的感觉细胞）",
+      "pronunciationId": "w:hair#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hair#e-0cb275a77f3a0aef",
+          "text": "Fang investigated that the hearing loss that happened to mice could be prevented by improving cochlear(耳蜗) health and restoring outer hair cell loss.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 138
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -189,6 +222,6 @@
       "reason": "制琴专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

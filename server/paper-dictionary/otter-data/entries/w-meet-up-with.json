@@ -1,0 +1,135 @@
+{
+  "entryId": "w:meet-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "meet",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "meet",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "meet up with",
+      "tags": []
+    },
+    {
+      "form": "met up with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "meet up with sb",
+  "senses": [
+    {
+      "senseId": "w:meet-up-with#s1",
+      "pos": "短语",
+      "glossZh": "和……碰面；遇见",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s36"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:meet-up-with#e-21aa232b8e0df022",
+          "text": "One day in the trees, Squirt met up with a family of gray squirrels.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-up-with#e-efa35227ef093204",
+          "text": "Meet up with Jane.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

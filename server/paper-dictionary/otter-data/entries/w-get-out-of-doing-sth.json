@@ -1,0 +1,105 @@
+{
+  "entryId": "w:get-out-of-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "out",
+      "of",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "out",
+        "of",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get out of doing sth",
+  "senses": [
+    {
+      "senseId": "w:get-out-of-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "设法逃避做本该做的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s28"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-out-of-doing-sth#e-65ebfec3d5cf1d28",
+          "text": "Ever watched your child try to get out of doing housework by making excuses?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

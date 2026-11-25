@@ -1,0 +1,120 @@
+{
+  "entryId": "w:cook-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cook",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cook",
+        "up"
+      ],
+      [
+        "cooked",
+        "up"
+      ],
+      [
+        "cooking",
+        "up"
+      ],
+      [
+        "cooks",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cooked up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cook (sth) up",
+  "senses": [
+    {
+      "senseId": "w:cook-up#s1",
+      "pos": "短语",
+      "glossZh": "想出（点子、计划等）；编造（故事、借口等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cook-up#e-282793ea9e421254",
+          "text": "Now researchers in Norway and Italy have cooked up a new idea.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cook-up#s2",
+      "pos": "短语",
+      "glossZh": "做出（饭菜）；烹制",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

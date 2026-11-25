@@ -57,8 +57,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 58
+    "gaokao": 2,
+    "mock": 5
   },
   "senses": [
     {
@@ -69,7 +69,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -193,7 +193,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -270,43 +270,11 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:operate#s5",
-      "pos": "短语",
-      "glossZh": "操作系统",
-      "pronunciationId": "w:operate#p-main",
-      "note": "operating system。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:operate#e-7e91b6a4bb70ffa9",
-          "text": "It would work like this: An officer arriving at the scene of a crash could ask for the phones of the drivers and use the Textalyzer to check in the operating system for recent activity.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 148,
-            "end": 157
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

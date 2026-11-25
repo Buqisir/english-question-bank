@@ -59,8 +59,8 @@
     "mock": 206
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 202
+    "gaokao": 12,
+    "mock": 52
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -256,59 +256,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:comfort#s4",
-      "pos": "短语",
-      "glossZh": "舒适区；让人感到自在的熟悉范围",
-      "pronunciationId": "w:comfort#p-main",
-      "note": "comfort zone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:comfort#e-3359d2a6e8b0234d",
-          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 137,
-            "end": 144
-          }
-        },
-        {
-          "exampleId": "w:comfort#e-237e633732e8830b",
-          "text": "Walking at night-time is a great way to step out of your comfort zone.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 64
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -317,6 +264,12 @@
       "reason": "古旧义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:comfort-zone",
+    "w:get-out-of-your-comfort-zone"
+  ]
 }

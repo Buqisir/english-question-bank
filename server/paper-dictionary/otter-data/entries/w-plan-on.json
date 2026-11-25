@@ -1,0 +1,118 @@
+{
+  "entryId": "w:plan-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "plans on"
+  ],
+  "pattern": {
+    "tokens": [
+      "plan",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plan",
+        "on"
+      ],
+      [
+        "plans",
+        "on"
+      ],
+      [
+        "planned",
+        "on"
+      ],
+      [
+        "planning",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plan on sth/doing sth",
+  "senses": [
+    {
+      "senseId": "w:plan-on#s1",
+      "pos": "短语",
+      "glossZh": "打算做；计划做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:plan-on#e-95ed4894961029ee",
+          "text": "The writer still plans on putting the lights up.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:plan-on#s2",
+      "pos": "短语",
+      "glossZh": "预计某事会发生并据此作安排",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

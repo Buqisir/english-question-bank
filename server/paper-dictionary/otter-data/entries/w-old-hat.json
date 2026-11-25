@@ -1,0 +1,105 @@
+{
+  "entryId": "w:old-hat",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "old",
+      "hat"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "old",
+        "hat"
+      ],
+      [
+        "old",
+        "hats"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "old hat",
+  "senses": [
+    {
+      "senseId": "w:old-hat#s1",
+      "pos": "短语",
+      "glossZh": "老套的；过时的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "也可指陈旧的说法、做法等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:old-hat#s2",
+      "pos": "短语",
+      "glossZh": "女性生殖器",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "古旧粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:old-hat#s3",
+      "pos": "短语",
+      "glossZh": "被视为性伴侣的女性",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "古旧俚语，含贬损意味。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:old-hat#s4",
+      "pos": "短语",
+      "glossZh": "性交",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "古旧粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

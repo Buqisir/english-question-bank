@@ -1,0 +1,147 @@
+{
+  "entryId": "w:be-out-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is out for"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "out",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "out",
+        "for"
+      ],
+      [
+        "is",
+        "out",
+        "for"
+      ],
+      [
+        "been",
+        "out",
+        "for"
+      ],
+      [
+        "being",
+        "out",
+        "for"
+      ],
+      [
+        "was",
+        "out",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be out for sth",
+  "senses": [
+    {
+      "senseId": "w:be-out-for#s1",
+      "pos": "短语",
+      "glossZh": "一心想得到；一心谋求",
+      "note": "be out for oneself 表示一心为自己谋利。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-out-for#e-89ad5dffa2283e74",
+          "text": "“That not everyone is out for himself.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-out-for#e-032d8efa59f3b753",
+          "text": "He is out for contests.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

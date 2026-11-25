@@ -1,0 +1,114 @@
+{
+  "entryId": "w:let-down-ones-guard",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "let",
+      "down",
+      {
+        "slot": "one's"
+      },
+      "guard"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        "down",
+        {
+          "slot": "one's"
+        },
+        "guard"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "let down guard",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let down one's guard",
+  "senses": [
+    {
+      "senseId": "w:let-down-ones-guard#s1",
+      "pos": "短语",
+      "glossZh": "放松警惕；放下戒心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:guard#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-down-ones-guard#e-b250b6f5e3fd4c59",
+          "text": "You let down your guard.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 23
+          },
+          "parts": [
+            [
+              4,
+              12
+            ],
+            [
+              18,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ],
+            [
+              18,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

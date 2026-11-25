@@ -1,0 +1,129 @@
+{
+  "entryId": "w:sign-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sign",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sign",
+        "off"
+      ],
+      [
+        "signed",
+        "off"
+      ],
+      [
+        "signing",
+        "off"
+      ],
+      [
+        "signs",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sign off",
+  "senses": [
+    {
+      "senseId": "w:sign-off#s1",
+      "pos": "短语",
+      "glossZh": "正式批准；签字同意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sign-off#e-0c60dff3b0e51fb9",
+          "text": "We have no information about her, and we need someone to sign off on some tests,” the nurse explained.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          },
+          "parts": [
+            [
+              57,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              65
+            ]
+          ]
+        }
+      ],
+      "note": "批准的事项常用 on 引出。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:sign-off#s2",
+      "pos": "短语",
+      "glossZh": "结束通信或广播；用告别语收尾",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sign-off#s3",
+      "pos": "短语",
+      "glossZh": "退出计算机系统",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,72 @@
+{
+  "entryId": "w:happen-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "happening on"
+  ],
+  "pattern": {
+    "tokens": [
+      "happen",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "happen",
+        "on"
+      ],
+      [
+        "happening",
+        "on"
+      ],
+      [
+        "happened",
+        "on"
+      ],
+      [
+        "happens",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "happen on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:happen-on#s1",
+      "pos": "短语",
+      "glossZh": "偶然发现；碰巧遇到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

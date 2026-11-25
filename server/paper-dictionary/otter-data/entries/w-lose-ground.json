@@ -1,0 +1,102 @@
+{
+  "entryId": "w:lose-ground",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "ground"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "ground"
+      ],
+      [
+        "loses",
+        "ground"
+      ],
+      [
+        "losing",
+        "ground"
+      ],
+      [
+        "lost",
+        "ground"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose ground",
+  "senses": [
+    {
+      "senseId": "w:lose-ground#s1",
+      "pos": "短语",
+      "glossZh": "失去原有优势或进展；出现倒退",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lose-ground#e-800cbd0b81eb3224",
+          "text": "We do enough not to lose ground but rarely enough to truly advance.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

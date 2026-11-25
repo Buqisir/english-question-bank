@@ -59,8 +59,8 @@
     "mock": 260
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 257
+    "gaokao": 4,
+    "mock": 84
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 123
       },
       "folded": false,
       "examples": [
@@ -315,94 +315,6 @@
       ]
     },
     {
-      "senseId": "w:lost#s5",
-      "pos": "短语",
-      "glossZh": "迷路",
-      "pronunciationId": "w:lost#p-main",
-      "note": "lost one’s way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lost#e-8f0a89461b0da828",
-          "text": "They have lost their way.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.short-dialogue",
-            "locator": {
-              "question": 5,
-              "questionId": "question:listening:5",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lost#s6",
-      "pos": "短语",
-      "glossZh": "沉浸于",
-      "pronunciationId": "w:lost#p-main",
-      "note": "lost in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lost#e-1e5b246f66b06793",
-          "text": "Adults are portrayed(描绘) alone in many settings and poses – absorbed in a volume, deep in thought or lost in a moment of leisure.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 101,
-            "end": 105
-          }
-        },
-        {
-          "exampleId": "w:lost#e-baa0c4a6b5b0b5c3",
-          "text": "He often sat alone, seemingly lost in unshared memories of sea stories about his lonely life at sea.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:3",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:lost#s7",
       "pos": "adj.",
       "glossZh": "损失掉的（时间、睡眠等）",
@@ -410,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -453,9 +365,197 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:lost#s8",
+      "pos": "v.",
+      "glossZh": "输掉；落败",
+      "pronunciationId": "w:lost#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lost#e-92049a22947df957",
+          "text": "The opposing team lost.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:lost#e-f3f293d610f9c18d",
+          "text": "This may feel like a battle already lost.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-10-second:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:lost#e-901321abe8197366",
+          "text": "By his count, Academy had lost the game by a point.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lost#s9",
+      "pos": "adj.",
+      "glossZh": "茫然的；不知所措的",
+      "pronunciationId": "w:lost#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lost#e-c9115e7c825b06f2",
+          "text": "As a non-native speaker placed in English as a Second Language (ESL) classes, I felt lost from the start.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:lost#e-d7a07093ee5f8d00",
+          "text": "“Why do so many people feel lost?” he asked.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lost#s10",
+      "pos": "adj.",
+      "glossZh": "听不懂的；跟不上进度的",
+      "pronunciationId": "w:lost#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lost#e-770eb04d3c02d26a",
+          "text": "I watched a little of her dissertation defense（博士论文答辩）online, and was lost as soon as she finished introducing herself.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:lost#e-5e639d62b728fb47",
+          "text": "AI tutors can save children from classes pitched to the median, where bright pupils are bored and struggling ones are lost.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 122
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-lost",
+    "w:lost-and-found",
+    "w:lost-cause",
+    "w:lost-in-thought",
+    "w:lost-on",
+    "w:lost-to-time",
+    "w:make-up-for-lost-time"
+  ]
 }

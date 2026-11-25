@@ -1,0 +1,135 @@
+{
+  "entryId": "w:no-idea",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "idea"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "idea"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no idea",
+  "senses": [
+    {
+      "senseId": "w:no-idea#s1",
+      "pos": "短语",
+      "glossZh": "完全不知道；一点也不清楚",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-idea#e-6d62ccba67e35506",
+          "text": "I had no future plans, no idea what I would do next.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 30
+          },
+          "parts": [
+            [
+              23,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-idea#e-e7abd5b133093495",
+          "text": "Those apples were just what I needed for my persistent morning sickness, but I’d no idea at the time that this neighbour would be an antidote for life’s struggles.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 88
+          },
+          "parts": [
+            [
+              81,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "常用 have no idea，口语中也可单独作答。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:no-idea#s2",
+      "pos": "短语",
+      "glossZh": "没有主意；还没想好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

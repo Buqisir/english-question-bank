@@ -1,0 +1,104 @@
+{
+  "entryId": "w:off-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "off",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "off",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "off of",
+  "senses": [
+    {
+      "senseId": "w:off-of#s1",
+      "pos": "短语",
+      "glossZh": "（地点）在……旁；从……岔出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:off-of#e-96998d922838bf2b",
+          "text": "On Macdonald, off of Main Street in Downtown Mesa, dtmesafest.com, free admission.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          },
+          "parts": [
+            [
+              14,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "用于说明街道或地点相对于主路的位置。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:off-of#s2",
+      "pos": "短语",
+      "glossZh": "从……上移开或取下；从……取得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 61
+    "mock": 8
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -204,6 +204,19 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:crowd#s3",
+      "pos": "n.",
+      "glossZh": "聚在一起的一大群动物等",
+      "pronunciationId": "w:crowd#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -212,6 +225,11 @@
       "reason": "音乐历史或航海用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:crowd-in",
+    "w:crowd-out",
+    "w:follow-the-crowd"
+  ]
 }

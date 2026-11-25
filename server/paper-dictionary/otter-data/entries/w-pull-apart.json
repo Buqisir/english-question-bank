@@ -1,0 +1,134 @@
+{
+  "entryId": "w:pull-apart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "apart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "apart"
+      ],
+      [
+        "pulled",
+        "apart"
+      ],
+      [
+        "pulling",
+        "apart"
+      ],
+      [
+        "pulls",
+        "apart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulling apart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull apart",
+  "senses": [
+    {
+      "senseId": "w:pull-apart#s1",
+      "pos": "短语",
+      "glossZh": "受拉而分开；拉裂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-apart#e-2b5565fe0e4cd928",
+          "text": "In the process of her mapping, Tharp discovered the central valley of the Mid-Atlantic Ridge, a place where the ocean floor was pulling apart.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 141
+          },
+          "parts": [
+            [
+              128,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              141
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pull-apart#s2",
+      "pos": "短语",
+      "glossZh": "把……拉开、拆开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可指拆开部件，也可指把打斗的人拉开。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pull-apart#s3",
+      "pos": "短语",
+      "glossZh": "逐一剖析并指出问题；严厉批驳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

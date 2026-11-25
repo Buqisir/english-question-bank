@@ -1,12 +1,24 @@
 {
   "entryId": "w:according-to",
-  "headword": "according to",
   "kind": "phrase",
   "lists": [
     "3000",
     "3100"
   ],
   "variants": [],
+  "pattern": {
+    "tokens": [
+      "according",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "according",
+        "to"
+      ]
+    ]
+  },
   "ipa": {
     "uk": "/əˈkɔːdɪŋ tə/",
     "us": "/əˈkɔːrdɪŋ tə/"
@@ -30,46 +42,21 @@
     }
   ],
   "forms": [],
-  "counts": {
-    "gaokao": 47,
-    "mock": 346
-  },
-  "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 346
-  },
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "headword": "according to",
   "senses": [
     {
       "senseId": "w:according-to#s1",
-      "pos": "prep.",
-      "glossZh": "根据；据……所说或所示",
       "pronunciationId": "w:according-to#p-main",
+      "pos": "短语",
+      "glossZh": "根据；据……所说或所示",
       "origin": "gaokao",
-      "counts": {
-        "gaokao": 45,
-        "mock": 0
-      },
       "folded": false,
+      "legacySenseIds": [
+        "w:according-to#s1"
+      ],
       "examples": [
-        {
-          "exampleId": "w:according-to#e-945900577c43edeb",
-          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 12
-          }
-        },
         {
           "exampleId": "w:according-to#e-d40cc0177b2da6bf",
           "text": "Dogs may indeed be able to distinguish between happy and angry human faces, according to a new study.",
@@ -87,7 +74,19 @@
           "target": {
             "start": 76,
             "end": 88
-          }
+          },
+          "parts": [
+            [
+              76,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              88
+            ]
+          ]
         },
         {
           "exampleId": "w:according-to#e-8ebb215ca79f0c57",
@@ -106,22 +105,68 @@
           "target": {
             "start": 0,
             "end": 12
-          }
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:according-to#e-a3f08e2de0f48ba6",
+          "text": "The answer depends on whom you ask, according to new research led by Katherine Hilton from Stanford University.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
         }
-      ]
+      ],
+      "counts": {
+        "gaokao": 44,
+        "mock": 329
+      }
     },
     {
       "senseId": "w:according-to#s2",
-      "pos": "prep.",
-      "glossZh": "按照（规则或标准）；视……而定",
-      "note": "如 according to size，表示按大小区分。",
       "pronunciationId": "w:according-to#p-main",
+      "pos": "短语",
+      "glossZh": "按照（规则或标准）；视……而定",
       "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
       "folded": false,
+      "legacySenseIds": [
+        "w:according-to#s2",
+        "w:to#s10"
+      ],
       "examples": [
         {
           "exampleId": "w:according-to#e-a74c1aa4b4250442",
@@ -140,12 +185,99 @@
           "target": {
             "start": 139,
             "end": 151
-          }
+          },
+          "parts": [
+            [
+              139,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              139,
+              151
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:according-to#e-51f5c2f13cf9693a",
+          "text": "Your group should be comfortable with the environment according to “Leave No Trace” principles.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 66
+          },
+          "parts": [
+            [
+              54,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:according-to#e-002b8d146d904c56",
+          "text": "Learning Mandarin was not going according to plan, and the trip was fast approaching.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          },
+          "parts": [
+            [
+              32,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              44
+            ]
+          ]
         }
-      ]
+      ],
+      "note": "如 according to size，表示按大小区分。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
     }
   ],
   "droppedSenses": [],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "counts": {
+    "gaokao": 45,
+    "mock": 333
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
 }

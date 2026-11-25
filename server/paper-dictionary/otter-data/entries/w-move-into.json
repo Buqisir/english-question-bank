@@ -1,0 +1,263 @@
+{
+  "entryId": "w:move-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moves into",
+    "moving into"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "into"
+      ],
+      [
+        "moves",
+        "into"
+      ],
+      [
+        "moving",
+        "into"
+      ],
+      [
+        "moved",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move into",
+  "senses": [
+    {
+      "senseId": "w:move-into#s1",
+      "pos": "短语",
+      "glossZh": "搬进；迁入（新住所或工作地点）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-into#e-ba10d1d71b2995c2",
+          "text": "A housewarming party is a special party to be held when someone buys or moves into a new apartment or house.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 82
+          },
+          "parts": [
+            [
+              72,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-into#e-50bb7d5d6f9586b2",
+          "text": "Move into the flat.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-into#e-0a202c3a1118024b",
+          "text": "Sometimes, because a housewarming party happens shortly after a person moves into their new home, people may be asked to help unpack boxes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 81
+          },
+          "parts": [
+            [
+              71,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:move-into#s2",
+      "pos": "短语",
+      "glossZh": "移动到；进入（某一区域）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-into#e-d49182c3e454ac6b",
+          "text": "If you have successfully moved a pawn backwards at least two spaces beyond your own START space, you may, on a subsequent turn, move into your own SAFETY ZONE without moving all the way around the board.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:21",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 137
+          },
+          "parts": [
+            [
+              128,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:move-into#s3",
+      "pos": "短语",
+      "glossZh": "转入（新阶段或新领域）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-into#e-29368c7f84aec8ad",
+          "text": "When Gen Zers do move into management, Glassdoor finds that they’re rewriting the traditional playbook.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

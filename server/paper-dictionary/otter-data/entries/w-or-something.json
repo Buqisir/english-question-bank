@@ -1,0 +1,124 @@
+{
+  "entryId": "w:or-something",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "or",
+      "something"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "or",
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "or something",
+  "senses": [
+    {
+      "senseId": "w:or-something#s1",
+      "pos": "短语",
+      "glossZh": "……之类的；……什么的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:something#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:or-something#e-b97e09896b93dfc3",
+          "text": "“Aren't you worried there might be a fire or something?” my husband asked, genuinely astonished.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          },
+          "parts": [
+            [
+              42,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:or-something#e-82c968a6b3eb53d5",
+          "text": "The other kids are always in a p-p-play or something.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 52
+          },
+          "parts": [
+            [
+              40,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              52
+            ]
+          ]
+        }
+      ],
+      "note": "用于举出一种可能但不确定具体是什么时。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

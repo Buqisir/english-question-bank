@@ -1,0 +1,106 @@
+{
+  "entryId": "w:read-between-the-lines",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "read",
+      "between",
+      "the",
+      "lines"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "read",
+        "between",
+        "the",
+        "lines"
+      ],
+      [
+        "reading",
+        "between",
+        "the",
+        "lines"
+      ],
+      [
+        "reads",
+        "between",
+        "the",
+        "lines"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "read between the lines",
+  "senses": [
+    {
+      "senseId": "w:read-between-the-lines#s1",
+      "pos": "短语",
+      "glossZh": "读懂字里行间的含意；领会言外之意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:read-between-the-lines#e-2b003cb7aba4fc1b",
+          "text": "There are easy literal questions that ask for information directly from the text and also inferential and evaluative questions that require readers to read between the lines.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 173
+          },
+          "parts": [
+            [
+              151,
+              173
+            ]
+          ],
+          "highlightRanges": [
+            [
+              151,
+              173
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

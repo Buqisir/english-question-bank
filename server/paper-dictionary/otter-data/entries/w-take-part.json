@@ -1,0 +1,142 @@
+{
+  "entryId": "w:take-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes part",
+    "taking part",
+    "took part"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "part"
+      ],
+      [
+        "takes",
+        "part"
+      ],
+      [
+        "taking",
+        "part"
+      ],
+      [
+        "took",
+        "part"
+      ],
+      [
+        "taken",
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take part",
+  "senses": [
+    {
+      "senseId": "w:take-part#s1",
+      "pos": "短语",
+      "glossZh": "参加；参与",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-part#e-346c2384d4f7a5b4",
+          "text": "What should the students do if they don’t take part?",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 51
+          },
+          "parts": [
+            [
+              42,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-part#e-b2eb4bd916bf4161",
+          "text": "It encourages families to take part.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:21#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          },
+          "parts": [
+            [
+              26,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

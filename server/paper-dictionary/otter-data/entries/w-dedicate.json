@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 5
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -239,7 +239,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -310,6 +310,6 @@
       "reason": "罕见词性或专门仪式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

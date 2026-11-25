@@ -1,0 +1,64 @@
+{
+  "entryId": "w:pay-out-of-pocket",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "out",
+      "of",
+      "pocket"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "out",
+        "of",
+        "pocket"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay out of pocket",
+  "senses": [
+    {
+      "senseId": "w:pay-out-of-pocket#s1",
+      "pos": "短语",
+      "glossZh": "自掏腰包支付；自费",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:pocket#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

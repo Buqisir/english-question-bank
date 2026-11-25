@@ -1,0 +1,93 @@
+{
+  "entryId": "w:heres-the-thing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "here's",
+      "the",
+      "thing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "here's",
+        "the",
+        "thing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "here's the thing",
+  "senses": [
+    {
+      "senseId": "w:heres-the-thing#s1",
+      "pos": "短语",
+      "glossZh": "关键是……；事情是这样的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:heres-the-thing#e-b9475b3626d19198",
+          "text": "But here’s the thing: I’ve lived within walking distance of the Met for years.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 20
+          },
+          "parts": [
+            [
+              4,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "用来引出接下来要说的重点。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:call-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "calling up"
+  ],
+  "pattern": {
+    "tokens": [
+      "call",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "up"
+      ],
+      [
+        "calling",
+        "up"
+      ],
+      [
+        "called",
+        "up"
+      ],
+      [
+        "calls",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:call-up#s1",
+      "pos": "短语",
+      "glossZh": "给某人打电话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-up#s2",
+      "pos": "短语",
+      "glossZh": "调取、显示（电脑中的信息）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-up#s3",
+      "pos": "短语",
+      "glossZh": "唤起（记忆等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-up#s4",
+      "pos": "短语",
+      "glossZh": "征召入伍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-up#s5",
+      "pos": "短语",
+      "glossZh": "征召入队；选入正式阵容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

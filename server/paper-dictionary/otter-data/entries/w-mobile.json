@@ -53,8 +53,8 @@
     "mock": 36
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 32
+    "gaokao": 6,
+    "mock": 14
   },
   "senses": [
     {
@@ -65,7 +65,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -188,7 +188,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -252,78 +252,6 @@
       ]
     },
     {
-      "senseId": "w:mobile#s4",
-      "pos": "短语",
-      "glossZh": "手机",
-      "pronunciationId": "w:mobile#p-main",
-      "note": "mobile phone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mobile#e-701799c8fcaf8ea1",
-          "text": "When almost everyone has a mobile phone, why are more than half of Australian homes still paying for a landline（座机）?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:mobile#e-79451a4ddd2acb45",
-          "text": "Generation Xers with young families, like my wife and me, can still find it convenient to have a home phone rather than providing a mobile phone for every family member.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 132,
-            "end": 138
-          }
-        },
-        {
-          "exampleId": "w:mobile#e-a0add92aee5916ae",
-          "text": "My mobile phone was inside, but luckily there was a telephone box across the street.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:mobile#s5",
       "pos": "n.",
       "glossZh": "手机",
@@ -377,6 +305,8 @@
       "reason": "同形专名或游戏术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

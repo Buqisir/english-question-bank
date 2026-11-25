@@ -1,0 +1,127 @@
+{
+  "entryId": "w:on-top-of-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "top",
+      "of",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "top",
+        "of",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on top of that",
+  "senses": [
+    {
+      "senseId": "w:on-top-of-that#s1",
+      "pos": "短语",
+      "glossZh": "此外；再加上这一点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:top#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-top-of-that#e-c7a954cff0b7d479",
+          "text": "On top of that, I felt as if I’d changed too.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n085:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-top-of-that#e-25f690fccf368dae",
+          "text": "On top of that, increased screen time is often tied to rising levels of social anxiety and loneliness, which can lead kids to withdraw even further into their digital worlds, cutting off real-life social opportunities.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

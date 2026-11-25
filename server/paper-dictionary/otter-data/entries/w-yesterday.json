@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 22
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -162,43 +162,14 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:yesterday#s4",
-      "pos": "短语",
-      "glossZh": "没那么容易受骗",
-      "pronunciationId": "w:yesterday#p-main",
-      "note": "not be born yesterday。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yesterday#e-8641f5fa61f458b4",
-          "text": "Why does the woman say “I wasn’t born yesterday”?",
-          "source": {
-            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
-            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
-            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 38,
-            "end": 47
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-be-born-yesterday"
+  ]
 }

@@ -73,8 +73,8 @@
     "mock": 95
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 90
+    "gaokao": 2,
+    "mock": 60
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -130,78 +130,6 @@
       ]
     },
     {
-      "senseId": "w:contrast#s2",
-      "pos": "短语",
-      "glossZh": "相比之下；与……相比",
-      "pronunciationId": "w:contrast#p-main",
-      "note": "in contrast (to)；by contrast。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:contrast#e-b5b39751bc76e8e1",
-          "text": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:contrast#e-5da347ea135de9ff",
-          "text": "And in contrast to our increasingly networked lives where the information we consume is monitored and tracked, a printed book still offers the chance of a wholly private, “off-line” activity.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:contrast#e-dd3de76e4ed1643c",
-          "text": "By contrast, the wealthy landowners, large companies and illegal loggers, in their pursuit of financial gain, have done huge damage.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:contrast#s3",
       "pos": "v.",
       "glossZh": "对比；形成反差",
@@ -209,7 +137,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -261,6 +189,13 @@
       "reason": "医疗专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-contrast",
+    "w:in-contrast",
+    "w:in-contrast-to"
+  ]
 }

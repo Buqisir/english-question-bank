@@ -71,8 +71,8 @@
     "mock": 90
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 88
+    "gaokao": 7,
+    "mock": 29
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -258,7 +258,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -322,78 +322,6 @@
       ]
     },
     {
-      "senseId": "w:average#s5",
-      "pos": "短语",
-      "glossZh": "平均来看；按平均值计算",
-      "pronunciationId": "w:average#p-main",
-      "note": "on average。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:average#e-c20b05cf22b701f3",
-          "text": "It isn’t just that people are, on average, living longer.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:average#e-eb53e090ce41cbd0",
-          "text": "Today, in Australia, most children on average fall 2,000 steps short of the physical activity they need to avoid being overweight.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 45
-          }
-        },
-        {
-          "exampleId": "w:average#e-4042675a58a5b24e",
-          "text": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 86
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:average#s6",
       "pos": "v.",
       "glossZh": "计算平均值；求平均",
@@ -431,12 +359,12 @@
       "pos": "v.",
       "glossZh": "平均为；平均达到",
       "pronunciationId": "w:average#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -446,6 +374,11 @@
       "reason": "航运专业义或历史用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-average"
+  ]
 }

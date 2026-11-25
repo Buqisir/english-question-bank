@@ -1,0 +1,204 @@
+{
+  "entryId": "w:wake-up-call",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wake-up",
+      "call"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wake-up",
+        "call"
+      ],
+      [
+        "wake-up",
+        "calls"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wake-up call",
+  "senses": [
+    {
+      "senseId": "w:wake-up-call#s1",
+      "pos": "短语",
+      "glossZh": "警钟；促人正视问题的提醒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wake-up-call#e-8ee8e770e8948b96",
+          "text": "Years of exhaustion became my wake-up call.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 42
+          },
+          "parts": [
+            [
+              30,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-up-call#e-0b6b9a6e24b6256e",
+          "text": "The student’s request was a wake-up call.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 40
+          },
+          "parts": [
+            [
+              28,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-up-call#e-9a014b89fc2a6631",
+          "text": "A wake-up call to stay competitive.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-jiaxing-2026-apr-m179:31#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:wake-up-call#s2",
+      "pos": "短语",
+      "glossZh": "叫醒电话；电话叫醒服务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wake-up-call#e-c0f9f6b782f4a014",
+          "text": "Make a wake-up call.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

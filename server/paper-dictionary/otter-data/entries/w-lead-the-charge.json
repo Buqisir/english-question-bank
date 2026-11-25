@@ -1,0 +1,111 @@
+{
+  "entryId": "w:lead-the-charge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leading the charge"
+  ],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "the",
+      "charge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "the",
+        "charge"
+      ],
+      [
+        "leading",
+        "the",
+        "charge"
+      ],
+      [
+        "leads",
+        "the",
+        "charge"
+      ],
+      [
+        "led",
+        "the",
+        "charge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead the charge",
+  "senses": [
+    {
+      "senseId": "w:lead-the-charge#s1",
+      "pos": "短语",
+      "glossZh": "带头行动；率先推动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:charge#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lead-the-charge#e-a124a3b2462e83ab",
+          "text": "Though DIY has traditionally been seen as a male hobby, the research shows it is women now leading the charge.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 109
+          },
+          "parts": [
+            [
+              91,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

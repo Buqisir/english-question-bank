@@ -1,0 +1,225 @@
+{
+  "entryId": "w:calm-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "calm",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "calm",
+        "down"
+      ],
+      [
+        "calmed",
+        "down"
+      ],
+      [
+        "calming",
+        "down"
+      ],
+      [
+        "calms",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "calm down",
+      "tags": []
+    },
+    {
+      "form": "calmed down",
+      "tags": []
+    },
+    {
+      "form": "calming down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "calm (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:calm-down#s1",
+      "pos": "短语",
+      "glossZh": "平静下来；冷静下来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:calm-down#e-9c0be399d63a5428",
+          "text": "calmed down",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "question": 47,
+              "questionId": "question:paper-gaokao-2022-i:47#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:calm-down#e-fe00845208e82cad",
+          "text": "Calm down",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "question": 51,
+              "questionId": "question:paper-gaokao-2021-i:51#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:calm-down#e-e708ad68b06a7f94",
+          "text": "Some people report using self-talk to help them calm down in periods of negative mental states.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          },
+          "parts": [
+            [
+              48,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "Calm down! 可独立用作劝人冷静的祈使句。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:calm-down#s2",
+      "pos": "短语",
+      "glossZh": "使某人平静下来；使局势缓和",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:calm-down#e-954491bece4f25cf",
+          "text": "How does the man calm down the woman?",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

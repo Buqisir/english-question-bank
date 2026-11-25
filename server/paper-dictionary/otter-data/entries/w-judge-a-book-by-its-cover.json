@@ -1,0 +1,161 @@
+{
+  "entryId": "w:judge-a-book-by-its-cover",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "judge",
+      "a",
+      "book",
+      "by",
+      "its",
+      "cover"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "judge",
+        "a",
+        "book",
+        "by",
+        "its",
+        "cover"
+      ],
+      [
+        "judged",
+        "a",
+        "book",
+        "by",
+        "its",
+        "cover"
+      ],
+      [
+        "judges",
+        "a",
+        "book",
+        "by",
+        "its",
+        "cover"
+      ],
+      [
+        "judging",
+        "a",
+        "book",
+        "by",
+        "its",
+        "cover"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "judging a book by its cover",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "judge a book by its cover",
+  "senses": [
+    {
+      "senseId": "w:judge-a-book-by-its-cover#s1",
+      "pos": "短语",
+      "glossZh": "以貌取人；只凭表象判断事物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:judge-a-book-by-its-cover#e-258f74f1f41fc3e3",
+          "text": "Never judge a book by its cover.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:30#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 31
+          },
+          "parts": [
+            [
+              6,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:judge-a-book-by-its-cover#e-6d4e5ad73acc65f2",
+          "text": "Judging a book by its cover.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-shandong-weifang-2026-02-first:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 27
+          },
+          "parts": [
+            [
+              0,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常用于否定劝告，如 Never judge a book by its cover。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

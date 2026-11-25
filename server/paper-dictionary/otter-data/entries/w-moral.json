@@ -54,8 +54,8 @@
     "mock": 35
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 31
+    "gaokao": 2,
+    "mock": 1
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -178,41 +178,6 @@
           "target": {
             "start": 131,
             "end": 136
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:moral#s3",
-      "pos": "短语",
-      "glossZh": "精神上的支持",
-      "pronunciationId": "w:moral#p-main",
-      "note": "moral support。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:moral#e-eb4aa5c59c6c69c8",
-          "text": "Lack of moral support.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
-            "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 13
           }
         }
       ]
@@ -258,7 +223,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -290,6 +255,8 @@
       "reason": "历史、罕见用法或同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

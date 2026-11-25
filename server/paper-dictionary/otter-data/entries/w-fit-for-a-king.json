@@ -1,0 +1,126 @@
+{
+  "entryId": "w:fit-for-a-king",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fit",
+      "for",
+      "a",
+      "king"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fit",
+        "for",
+        "a",
+        "king"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fit for a king",
+  "senses": [
+    {
+      "senseId": "w:fit-for-a-king#s1",
+      "pos": "短语",
+      "glossZh": "好得堪比王室享受；极其优渥",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fit-for-a-king#e-ba57a5556c20d54d",
+          "text": "What does the author mean by “a childhood fit for a king” in paragraph 1?",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:28",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 56
+          },
+          "parts": [
+            [
+              42,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fit-for-a-king#e-d96ce9da59d8eeb6",
+          "text": "A childhood fit for a king could become universal.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "可形容丰盛的餐食、豪华的住宿或优厚的待遇。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

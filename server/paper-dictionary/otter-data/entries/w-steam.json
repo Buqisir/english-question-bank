@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -257,40 +257,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:steam#s4",
-      "pos": "短语",
-      "glossZh": "势头变强",
-      "pronunciationId": "w:steam#p-main",
-      "note": "gain steam。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:steam#e-f784f6aa15f5cd28",
-          "text": "But that is no longer true: as AI promises to transform how we work, and the four-day-workweek movement gains steam, it is time to admit once and for all that working more does not make you more productive.",
-          "source": {
-            "paperId": "paper-mock-jiaxing-2026-apr-m179",
-            "paperTitle": "嘉兴市2026年高三教学测试",
-            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -299,6 +265,11 @@
       "reason": "同形缩写或行业专称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:gain-steam"
+  ]
 }

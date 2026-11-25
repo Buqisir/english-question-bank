@@ -1,0 +1,130 @@
+{
+  "entryId": "w:make-it-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made it back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make it back",
+  "senses": [
+    {
+      "senseId": "w:make-it-back#s1",
+      "pos": "短语",
+      "glossZh": "成功返回；顺利回来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it-back#e-09275e25ac720548",
+          "text": "But don’t freak out – we keep it safe!” Then one added, “Check out what a cool video this phone could shoot!” “If you’re seeing this, it means you’ve made it back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 162
+          },
+          "parts": [
+            [
+              150,
+              162
+            ]
+          ],
+          "highlightRanges": [
+            [
+              150,
+              162
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it-back#e-ffed5c235fcc9ac5",
+          "text": "Eventually I made it back to land.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

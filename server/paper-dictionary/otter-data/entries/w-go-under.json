@@ -1,0 +1,143 @@
+{
+  "entryId": "w:go-under",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went under"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "under"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "under"
+      ],
+      [
+        "went",
+        "under"
+      ],
+      [
+        "goes",
+        "under"
+      ],
+      [
+        "going",
+        "under"
+      ],
+      [
+        "gone",
+        "under"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go under",
+  "senses": [
+    {
+      "senseId": "w:go-under#s1",
+      "pos": "短语",
+      "glossZh": "沉没；沉入水下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-under#s2",
+      "pos": "短语",
+      "glossZh": "（企业等）倒闭；破产",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-under#s3",
+      "pos": "短语",
+      "glossZh": "死去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-under#s4",
+      "pos": "短语",
+      "glossZh": "以某个名字或身份活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "go under the name of ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-under#s5",
+      "pos": "短语",
+      "glossZh": "进入催眠或恍惚状态",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-under#s6",
+      "pos": "短语",
+      "glossZh": "入狱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "澳大利亚俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

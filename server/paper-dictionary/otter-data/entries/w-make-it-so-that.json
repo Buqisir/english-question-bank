@@ -1,0 +1,112 @@
+{
+  "entryId": "w:make-it-so-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it",
+      "so",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it",
+        "so",
+        "that"
+      ],
+      [
+        "made",
+        "it",
+        "so",
+        "that"
+      ],
+      [
+        "makes",
+        "it",
+        "so",
+        "that"
+      ],
+      [
+        "making",
+        "it",
+        "so",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make it so that",
+  "senses": [
+    {
+      "senseId": "w:make-it-so-that#s1",
+      "pos": "短语",
+      "glossZh": "使得；让某种结果成为现实",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-it-so-that#e-d049e70e3b6d16ae",
+          "text": "Using seaweed for animal feed would also make it so that less land would need to be used for farms.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-c:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 56
+          },
+          "parts": [
+            [
+              41,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

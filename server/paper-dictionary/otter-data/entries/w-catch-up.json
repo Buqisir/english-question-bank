@@ -1,0 +1,428 @@
+{
+  "entryId": "w:catch-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "caught up"
+  ],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "up"
+      ],
+      [
+        "caught",
+        "up"
+      ],
+      [
+        "catches",
+        "up"
+      ],
+      [
+        "catching",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catching up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch up",
+  "senses": [
+    {
+      "senseId": "w:catch-up#s1",
+      "pos": "短语",
+      "glossZh": "追上；赶上（同等水平）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:catch#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-up#e-ce8277037562fb73",
+          "text": "The rise of China’s coffee industry and the Luckin brand isn’t just about catching up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:grammar-fill:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 85
+          },
+          "parts": [
+            [
+              74,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-up#e-716fc6e0cf9d6103",
+          "text": "Young bilingual children often show early cognitive advantages, though monolingual peers may catch up later in life.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 101
+          },
+          "parts": [
+            [
+              93,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-up#e-09812085fdefc364",
+          "text": "Other tools are starting to catch up, but it’s",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:19",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:catch-up#s2",
+      "pos": "短语",
+      "glossZh": "补上落下的进度；补看遗漏的消息",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s60"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-up#e-5ffc6bd6f212e187",
+          "text": "Callers arranged regular “visiting” calls, dialing remote family to catch up on news.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 76
+          },
+          "parts": [
+            [
+              68,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-up#e-3d6af2b0d850156b",
+          "text": "It was fun to catch up on news that we had missed during the long winter indoors.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-up#e-e551038bdca3e6ab",
+          "text": "Now, after long, drawn-out weeks without their beloved football, she was eager to share her new college life and catch up on Tom’s recent news.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 121
+          },
+          "parts": [
+            [
+              113,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              121
+            ]
+          ]
+        }
+      ],
+      "note": "常用 catch up on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:catch-up#s3",
+      "pos": "短语",
+      "glossZh": "被卷入；沉浸于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:catch-up#e-7b761032f58f9cdc",
+          "text": "Gerard was so caught up in the memories that he tossed the coin unthinkingly, which flew out and was nowhere to be seen.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:13",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-up#e-a806604641f29600",
+          "text": "Taking the stroller and her suitcase, she left for New York, ultimately forgetting the painful inheritance as she got caught up with work.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 127
+          },
+          "parts": [
+            [
+              118,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              127
+            ]
+          ]
+        }
+      ],
+      "note": "用于 be caught up in sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:catch-up#s4",
+      "pos": "短语",
+      "glossZh": "叙旧；互聊近况",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 catch up with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-up#s5",
+      "pos": "短语",
+      "glossZh": "给某人补充最新消息",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 catch sb up on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-up#s6",
+      "pos": "短语",
+      "glossZh": "（过去的问题）最终影响到某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 catch up with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-up#s7",
+      "pos": "短语",
+      "glossZh": "突然抓起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-up#s8",
+      "pos": "短语",
+      "glossZh": "缠住；绞在一起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

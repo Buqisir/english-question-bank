@@ -1,0 +1,62 @@
+{
+  "entryId": "w:come-in-first",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "in",
+      "first"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "in",
+        "first"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come in first",
+  "senses": [
+    {
+      "senseId": "w:come-in-first#s1",
+      "pos": "短语",
+      "glossZh": "（比赛中）获得第一名",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:in#s78"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

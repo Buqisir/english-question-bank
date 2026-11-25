@@ -1,0 +1,108 @@
+{
+  "entryId": "w:near-miss",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "near",
+      "miss"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "near",
+        "miss"
+      ],
+      [
+        "near",
+        "misses"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "near miss",
+  "senses": [
+    {
+      "senseId": "w:near-miss#s1",
+      "pos": "短语",
+      "glossZh": "险情；差点发生碰撞或其他事故",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:near-miss#e-9dc776617053993e",
+          "text": "A near miss of an accident.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:24#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:near-miss#s2",
+      "pos": "短语",
+      "glossZh": "差一点就命中或成功的尝试",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

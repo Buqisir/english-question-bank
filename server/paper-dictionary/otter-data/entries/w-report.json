@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 260
+    "mock": 74
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 84
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -180,7 +180,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -251,7 +251,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -322,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -372,12 +372,12 @@
       "pos": "v.",
       "glossZh": "举报",
       "pronunciationId": "w:report#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -392,6 +392,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:report#s8",
+      "pos": "n.",
+      "glossZh": "爆响；枪炮声",
+      "pronunciationId": "w:report#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:report#e-d93640d75196f565",
+          "text": "When Ismael’s tire suddenly blew, the sharp report ripped through the air like a firecracker.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -400,6 +433,6 @@
       "reason": "较少见的文学用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

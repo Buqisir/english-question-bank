@@ -62,8 +62,8 @@
     "mock": 234
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 231
+    "gaokao": 5,
+    "mock": 113
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -296,7 +296,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -365,92 +365,19 @@
       "pos": "v.",
       "glossZh": "用手语表达",
       "pronunciationId": "w:sign#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:sign#s8",
-      "pos": "短语",
-      "glossZh": "报名",
+      "senseId": "w:sign#s10",
+      "pos": "v.",
+      "glossZh": "为……办理登记（sign someone in）",
       "pronunciationId": "w:sign#p-main",
-      "note": "sign up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sign#e-17150539df1eab6a",
-          "text": "Campers who sign up for the 2-week secret agent camp can get to know about the life of real secret agents by learning strategies and military skills on the paintball field.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:sign#e-591f0601cc6d713a",
-          "text": "Some of my friends had signed up to spend time at a soup kitchen, so I did, too.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:sign#e-27dc168bbeee996c",
-          "text": "She signed up on the website Bookalokal, and now welcomes __43__ into her Brussels flat twice a week for dinner parties.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sign#s9",
-      "pos": "短语",
-      "glossZh": "手语",
-      "pronunciationId": "w:sign#p-main",
-      "note": "sign language。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -459,22 +386,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:sign#e-447a0276a57a61e6",
-          "text": "And no one could offer Leisa a simple __43__ like “good morning” in sign language.",
+          "exampleId": "w:sign#e-2991f32f08b6dbc9",
+          "text": "Despite a busy day of rides, he signed Romano into the ER and sat with him from 2 to 8 p. m., missing hours of work.",
           "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:cloze",
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:cloze:1",
-              "sentence": 3
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b:2",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 68,
-            "end": 72
+            "start": 32,
+            "end": 38
           }
         }
       ]
@@ -486,6 +413,14 @@
       "reason": "宗教或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sign-in",
+    "w:sign-off",
+    "w:sign-on",
+    "w:sign-up"
+  ]
 }

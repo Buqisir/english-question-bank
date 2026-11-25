@@ -42,8 +42,8 @@
     "mock": 713
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 712
+    "gaokao": 1,
+    "mock": 513
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 73,
-        "mock": 0
+        "mock": 155
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -230,7 +230,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -347,30 +347,16 @@
       ]
     },
     {
-      "senseId": "w:before#s6",
-      "pos": "短语",
-      "glossZh": "本末倒置",
-      "pronunciationId": "w:before#p-main",
-      "note": "put the cart before the horse。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
-    },
-    {
       "senseId": "w:before#s7",
       "pos": "prep.",
       "glossZh": "优先于；先于（排序）",
       "pronunciationId": "w:before#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -388,6 +374,12 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:come-before",
+    "w:put-the-cart-before-the-horse"
+  ]
 }

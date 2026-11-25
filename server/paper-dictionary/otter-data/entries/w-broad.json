@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 47
+    "mock": 1
   },
   "senses": [
     {
@@ -113,7 +113,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -240,40 +240,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:broad#s5",
-      "pos": "短语",
-      "glossZh": "大白天；光天化日",
-      "pronunciationId": "w:broad#p-main",
-      "note": "in broad daylight",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:broad#e-fd8fdd67be494bfc",
-          "text": "Aerospace engineers of the Beijing-based Academy of Sciences have struck a satellite with an infrared (红外) laser in broad daylight and across a distance of 130,000 km.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n123",
-            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
-            "groupId": "group:paper-mock-import-20261026-n123:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-import-20261026-n123:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 116,
-            "end": 121
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -282,6 +248,11 @@
       "reason": "地区、历史、行业或冒犯用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-broad-daylight"
+  ]
 }

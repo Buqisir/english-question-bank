@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 200
+    "mock": 12
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 180
       },
       "folded": false,
       "examples": [
@@ -148,12 +148,12 @@
       "pos": "n.",
       "glossZh": "建筑群；综合设施",
       "pronunciationId": "w:complex#p-noun",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -168,6 +168,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:complex#s4",
+      "pos": "n.",
+      "glossZh": "（生化）复合物",
+      "pronunciationId": "w:complex#p-noun",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:complex#e-62fd41dd98eb4844",
+          "text": "In the roots, WRINKLED1a supports nitrogen uptake, but also prevents the formation of a protein complex that would otherwise limit root growth.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 103
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -176,6 +209,6 @@
       "reason": "数理或化学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,153 @@
+{
+  "entryId": "w:for-fun",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "fun"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "fun"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for fun",
+  "senses": [
+    {
+      "senseId": "w:for-fun#s1",
+      "pos": "短语",
+      "glossZh": "为了好玩；图个乐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:for-fun#e-a033877706f13d58",
+          "text": "By the end of that summer, I had secured my private pilot’s license and began taking local flights just for fun.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 111
+          },
+          "parts": [
+            [
+              104,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-fun#e-286b43349ea2bf4f",
+          "text": "Gag gifts can be almost anything that is meant for fun.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-fun#e-c71bf6935a3f414e",
+          "text": "Oftentimes, hobbies begin as something just for fun.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

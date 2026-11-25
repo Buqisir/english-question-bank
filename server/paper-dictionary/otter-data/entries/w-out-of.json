@@ -1,0 +1,486 @@
+{
+  "entryId": "w:out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of",
+  "senses": [
+    {
+      "senseId": "w:out-of#s1",
+      "pos": "短语",
+      "glossZh": "从……里面出来；从……中取出或取用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of#e-adb2e9f36d55e2a5",
+          "text": "It was full of ideas that were new to me, so I spent the summer with my head in and out of that book.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 90
+          },
+          "parts": [
+            [
+              84,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-9bc85b1171dd0f5d",
+          "text": "Then he got a saw (锯子) from the truck and cut a section out of a big log on the side of the road.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          },
+          "parts": [
+            [
+              56,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-4002fb9e885aa88c",
+          "text": "Pulling up to the building, Grant saw flames (火焰) shooting out of a second-floor window.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 65
+          },
+          "parts": [
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 17,
+        "mock": 60
+      }
+    },
+    {
+      "senseId": "w:out-of#s2",
+      "pos": "短语",
+      "glossZh": "用……制成；以……为材料",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of#e-efa00c746176031d",
+          "text": "He builds massive sculptures out of plastic garbage, forcing viewers to re-examine their relationship to single-use plastic products.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          },
+          "parts": [
+            [
+              29,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-c3e106becce8c309",
+          "text": "Join the Harvard Undergraduate Knitting Circle to make pom-poms and tassels out of thread, or pick up a pair of needles and learn to knit（编织）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 82
+          },
+          "parts": [
+            [
+              76,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-f29633d402730a97",
+          "text": "Nevertheless, it serves as a reminder that there are many ways to address problems of sustainability, and that you can make an amazing meal out of almost anything.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 146
+          },
+          "parts": [
+            [
+              140,
+              146
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              146
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:out-of#s3",
+      "pos": "短语",
+      "glossZh": "出于（某种动机或情感）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of#e-6243fd814be39b8f",
+          "text": "Russia, once the biggest consumer of kangaroo meat, has issued a ban out of concern for food safety.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 75
+          },
+          "parts": [
+            [
+              69,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-a10fa2fa658382b8",
+          "text": "We often interrupt ourselves out of habit when a random thought enters our mind.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 35
+          },
+          "parts": [
+            [
+              29,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-92374cdce751fe59",
+          "text": "Paragraph 1: It was Alice, who had followed him out of curiosity.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          },
+          "parts": [
+            [
+              48,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:out-of#s4",
+      "pos": "短语",
+      "glossZh": "在……之外；不在……里",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of#e-c0fbed2a796f96a6",
+          "text": "“Out of my way!” popped out of my mouth, and I quickened my pace to avoid her intentionally.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 7
+          },
+          "parts": [
+            [
+              1,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-f849bb5a2bdcbdf1",
+          "text": "That discomfort keeps them out of parks and trails, spaces long linked to better physical and mental health.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          },
+          "parts": [
+            [
+              27,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of#e-3d1c16d77c4a8440",
+          "text": "“It allows people to think out of the box, to rethink what it is to have a hand or finger.”",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          },
+          "parts": [
+            [
+              27,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 23
+      }
+    },
+    {
+      "senseId": "w:out-of#s5",
+      "pos": "短语",
+      "glossZh": "以……为基地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 22,
+    "mock": 99
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

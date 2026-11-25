@@ -60,8 +60,8 @@
     "mock": 794
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 794
+    "gaokao": 1,
+    "mock": 594
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 100,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -134,43 +134,15 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:often#s2",
-      "pos": "短语",
-      "glossZh": "不时；偶尔",
-      "pronunciationId": "w:often#p-main",
-      "note": "every so often。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:often#e-10abcf6b2cdb47f8",
-          "text": "I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 37
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:every-so-often",
+    "w:more-often-than-not"
+  ]
 }

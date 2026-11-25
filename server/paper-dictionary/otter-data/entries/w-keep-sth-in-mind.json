@@ -1,0 +1,198 @@
+{
+  "entryId": "w:keep-sth-in-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      {
+        "slot": "sth"
+      },
+      "in",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        {
+          "slot": "sth"
+        },
+        "in",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep in mind",
+      "tags": []
+    },
+    {
+      "form": "kept in mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep sth in mind",
+  "senses": [
+    {
+      "senseId": "w:keep-sth-in-mind#s1",
+      "pos": "短语",
+      "glossZh": "把……记在心里；做事时考虑到……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s29",
+        "w:keep#s14",
+        "w:mind#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-sth-in-mind#e-0274b5afb05e3831",
+          "text": "Keep your audience in mind.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 26
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              19,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              19,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-sth-in-mind#e-0e73ce5fc336e8a5",
+          "text": "Keep their audience in mind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:23#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 27
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-sth-in-mind#e-75eed28e058c7ecd",
+          "text": "Keep these tips in mind the next time you experience change, and trust in life’s renewable and sustainable potential.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 23
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:lost-to-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lost",
+      "to",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lost",
+        "to",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lost to time",
+  "senses": [
+    {
+      "senseId": "w:lost-to-time#s1",
+      "pos": "短语",
+      "glossZh": "随着时间流逝而失传或被遗忘",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lost-to-time#e-f3ca356f7e049764",
+          "text": "He knew he couldn’t let this be one more thing lost to time.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 59
+          },
+          "parts": [
+            [
+              47,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lost-to-time#e-9c1211dac63c077f",
+          "text": "These photographs, once lost to time, now stand as timeless bridges – linking three civilizations, preserving moments of peace among history’s storms, and whispering humanity’s shared warmth.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -35,8 +35,8 @@
     "mock": 6057
   },
   "unassignedCounts": {
-    "gaokao": 396,
-    "mock": 6055
+    "gaokao": 409,
+    "mock": 6057
   },
   "senses": [
     {
@@ -1691,335 +1691,6 @@
       ]
     },
     {
-      "senseId": "w:with#s26",
-      "pos": "短语",
-      "glossZh": "提出；想出",
-      "pronunciationId": "w:with#p-main",
-      "note": "come up with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-5513cb061fa6fa04",
-          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:with#e-26bc23e374856b30",
-          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s27",
-      "pos": "短语",
-      "glossZh": "放弃持有；舍得割舍",
-      "pronunciationId": "w:with#p-main",
-      "note": "part with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-25e25eb1a630522a",
-          "text": "It was hard for us to finally part with them.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:with#e-fdd8218d8810823e",
-          "text": "Do you have a home full of things you’re ready to part with?",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s28",
-      "pos": "短语",
-      "glossZh": "选择",
-      "pronunciationId": "w:with#p-main",
-      "note": "go with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-d23e46b1d81a566d",
-          "text": "Did they tend to go with those most confident about their estimates?",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s29",
-      "pos": "短语",
-      "glossZh": "接受并照做",
-      "pronunciationId": "w:with#p-main",
-      "note": "go along with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-fe472f16c2703e99",
-          "text": "So just go along with it!",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s30",
-      "pos": "短语",
-      "glossZh": "以某结果告终",
-      "pronunciationId": "w:with#p-main",
-      "note": "end up with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-af427b0502542ea6",
-          "text": "He noted that his online students usually end up with lower grades.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s31",
-      "pos": "短语",
-      "glossZh": "妨碍",
-      "pronunciationId": "w:with#p-main",
-      "note": "interfere with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-ac78c92066181054",
-          "text": "However, many make a number of common mistakes, which can interfere （妨碍） with training or lead to injury __36__ , keep these things in mind to help you increase your chances of running success.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 73,
-            "end": 77
-          }
-        },
-        {
-          "exampleId": "w:with#e-70684803cb47c104",
-          "text": "Many artists worry that artificial intelligence may interfere with artistic creation.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s32",
-      "pos": "短语",
-      "glossZh": "做了坏事却未受惩罚",
-      "pronunciationId": "w:with#p-main",
-      "note": "get away with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-b9ba3ba3d37ef291",
-          "text": "Thinking that the man might get away with whatever he wanted before the police arrived, Kevin decided to do something.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s33",
-      "pos": "短语",
-      "glossZh": "与……分手",
-      "pronunciationId": "w:with#p-main",
-      "note": "split up with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-d9a16b6502a15167",
-          "text": "She had split up with her husband the week before, was living in a flat __52__, and since she’d found it too much to cope with (应对), she’d taken it out on __53__ people.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:with#s34",
       "pos": "prep.",
       "glossZh": "表示协助完成的事",
@@ -2091,98 +1762,95 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:with#s35",
-      "pos": "短语",
-      "glossZh": "与……相处",
-      "pronunciationId": "w:with#p-main",
-      "note": "get along with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-51fbeb2de8644f72",
-          "text": "He doesn’t get along with the host family.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:with#e-7ac1f197910281d5",
-          "text": "He’s difficult to get along with.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
-            "locator": {
-              "question": 4,
-              "questionId": "question:listening:4",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:with#s36",
-      "pos": "短语",
-      "glossZh": "忍受并接受现实",
-      "pronunciationId": "w:with#p-main",
-      "note": "live with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:with#e-aad37f297c6207da",
-          "text": "Yet, by learning to live with imperfection, you will save yourself headaches and a wastepaper basket full of crumpled (弄皱) paper.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-brush-with",
+    "w:agree-with-sb",
+    "w:along-with",
+    "w:as-with",
+    "w:be-done-with",
+    "w:be-fed-up-with-sth",
+    "w:beside-oneself-with-anger",
+    "w:beside-oneself-with-joy",
+    "w:break-with",
+    "w:bring-sb-into-contact-with",
+    "w:burst-with",
+    "w:close-with",
+    "w:come-down-with",
+    "w:come-up-with",
+    "w:come-with",
+    "w:compared-with",
+    "w:complete-with",
+    "w:deal-with",
+    "w:do-away-with-sth",
+    "w:do-with-sth",
+    "w:down-with",
+    "w:end-up-with",
+    "w:engage-with-sth",
+    "w:face-to-face-with-sb",
+    "w:fall-in-love-with-sb",
+    "w:find-fault-with-sb-sth",
+    "w:finish-with",
+    "w:get-along-with",
+    "w:get-away-with",
+    "w:get-by-with",
+    "w:get-in-touch-with",
+    "w:get-on-with",
+    "w:go-ahead-with",
+    "w:go-along-with",
+    "w:go-through-with",
+    "w:go-to-bed-with",
+    "w:go-with",
+    "w:go-with-the-flow",
+    "w:have-to-do-with-sth",
+    "w:identify-with-sb",
+    "w:in-bed-with",
+    "w:in-concert-with",
+    "w:in-line-with",
+    "w:in-love-with",
+    "w:interfere-with",
+    "w:keep-in-touch-with",
+    "w:keep-pace-with",
+    "w:keep-up-with",
+    "w:kill-two-birds-with-one-stone",
+    "w:live-with",
+    "w:make-with",
+    "w:meet-up-with",
+    "w:meet-with",
+    "w:mess-with-sb",
+    "w:mess-with-sth",
+    "w:monkey-around-with-sth",
+    "w:no-longer-with-us",
+    "w:over-with",
+    "w:part-with",
+    "w:put-up-with",
+    "w:reason-with",
+    "w:run-with",
+    "w:shower-with",
+    "w:side-with",
+    "w:sit-with",
+    "w:sleep-with-sb",
+    "w:split-up-with",
+    "w:square-with",
+    "w:stand-with",
+    "w:stick-with",
+    "w:take-sth-with-a-pinch-of-salt",
+    "w:team-up-with",
+    "w:tie-in-with",
+    "w:to-begin-with",
+    "w:to-start-with",
+    "w:together-with",
+    "w:toy-with",
+    "w:walk-away-with",
+    "w:whats-up-with",
+    "w:with-an-eye-to",
+    "w:with-an-open-mind",
+    "w:with-sth-in-mind"
+  ]
 }

@@ -1,0 +1,153 @@
+{
+  "entryId": "w:go-missing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went missing"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "missing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "missing"
+      ],
+      [
+        "went",
+        "missing"
+      ],
+      [
+        "goes",
+        "missing"
+      ],
+      [
+        "going",
+        "missing"
+      ],
+      [
+        "gone",
+        "missing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go missing",
+  "senses": [
+    {
+      "senseId": "w:go-missing#s1",
+      "pos": "动词短语",
+      "glossZh": "失踪；不见了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-missing#e-c0e9280fc59030e4",
+          "text": "A passenger went missing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-missing#e-9a2e0eec97c49af2",
+          "text": "However, disaster struck: Gobi went missing in Urumqi while awaiting an official approval to leave China.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-missing#s2",
+      "pos": "动词短语",
+      "glossZh": "（表现、能力等）在需要时突然消失",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

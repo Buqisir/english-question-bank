@@ -1,0 +1,173 @@
+{
+  "entryId": "w:fall-for-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fall for",
+    "falling for"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "for",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "for",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "fall",
+        "for"
+      ],
+      [
+        "falling",
+        "for"
+      ],
+      [
+        "fallen",
+        "for"
+      ],
+      [
+        "falls",
+        "for"
+      ],
+      [
+        "fell",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fallen for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:fall-for-sb#s1",
+      "pos": "短语",
+      "glossZh": "爱上某人；对某人动心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-for-sb#e-16d979cda3e1668a",
+          "text": "Falling for the Hometown Girl.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-third:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-for-sb#s2",
+      "pos": "短语",
+      "glossZh": "信以为真而上当",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-for-sb#e-c8b186bcba9055a9",
+          "text": "I’d been so hungry for a friend that I’d fallen for her mean trick.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation:13",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        }
+      ],
+      "note": "常接 trick、lie 等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

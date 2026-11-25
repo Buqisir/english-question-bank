@@ -1,0 +1,118 @@
+{
+  "entryId": "w:rise-to-the-challenge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rise",
+      "to",
+      "the",
+      "challenge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rise",
+        "to",
+        "the",
+        "challenge"
+      ],
+      [
+        "risen",
+        "to",
+        "the",
+        "challenge"
+      ],
+      [
+        "rises",
+        "to",
+        "the",
+        "challenge"
+      ],
+      [
+        "rising",
+        "to",
+        "the",
+        "challenge"
+      ],
+      [
+        "rose",
+        "to",
+        "the",
+        "challenge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rise to the challenge",
+  "senses": [
+    {
+      "senseId": "w:rise-to-the-challenge#s1",
+      "pos": "短语",
+      "glossZh": "迎难而上；成功应对挑战",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rise-to-the-challenge#e-6ff1127f688c1d19",
+          "text": "Studies also show that when you hold young people to high standards and make it clear that you believe they can meet them, young people rise to the challenge because you show respect by taking them seriously.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 157
+          },
+          "parts": [
+            [
+              136,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              136,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

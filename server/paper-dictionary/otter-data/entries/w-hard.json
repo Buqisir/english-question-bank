@@ -60,8 +60,8 @@
     "mock": 457
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 455
+    "gaokao": 5,
+    "mock": 261
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 35,
-        "mock": 0
+        "mock": 113
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -339,7 +339,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -410,7 +410,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -474,40 +474,6 @@
       ]
     },
     {
-      "senseId": "w:hard#s7",
-      "pos": "短语",
-      "glossZh": "对……有损害",
-      "pronunciationId": "w:hard#p-main",
-      "note": "be hard on sth。用于人也可表示「对……苛刻」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hard#e-ef105807ebd4d149",
-          "text": "Running is a high-impact activity which can be really hard on your body.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hard#s8",
       "pos": "adj.",
       "glossZh": "含较多钙镁盐的（水）",
@@ -553,6 +519,105 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:hard#s10",
+      "pos": "adj.",
+      "glossZh": "侧重量化和严格实证的（科学）",
+      "pronunciationId": "w:hard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hard#e-4e67d7a6a7637069",
+          "text": "“The harder sciences seem to have more success coming to agreement on difficult questions,” she says.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hard#s11",
+      "pos": "短语",
+      "glossZh": "硬摇滚",
+      "pronunciationId": "w:hard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hard#e-77e45f61f57161ce",
+          "text": "We played a mix of hard rock and heavy metal.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hard#s12",
+      "pos": "adj.",
+      "glossZh": "用力的；猛烈的",
+      "pronunciationId": "w:hard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hard#e-90c5efcfbf1931a1",
+          "text": "Troy yelled, gave his younger brother a hard shove and knocked him to the ground.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -561,6 +626,16 @@
       "reason": "语音或赛车专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-hard-nut-to-crack",
+    "w:be-hard-on-sth",
+    "w:be-hard-pressed-to-do",
+    "w:hard-copy",
+    "w:have-a-hard-time",
+    "w:the-hard-way"
+  ]
 }

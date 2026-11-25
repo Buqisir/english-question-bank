@@ -1,0 +1,184 @@
+{
+  "entryId": "w:make-the-most-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "most",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "most",
+        "of"
+      ],
+      [
+        "made",
+        "the",
+        "most",
+        "of"
+      ],
+      [
+        "makes",
+        "the",
+        "most",
+        "of"
+      ],
+      [
+        "making",
+        "the",
+        "most",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "making the most of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the most of",
+  "senses": [
+    {
+      "senseId": "w:make-the-most-of#s1",
+      "pos": "短语",
+      "glossZh": "充分利用；使……发挥最大价值",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s18",
+        "w:most#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-the-most-of#e-c70e24d783abc76b",
+          "text": "than half of people are planning to make the most of the long, warm summer days to get jobs done.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 52
+          },
+          "parts": [
+            [
+              36,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-most-of#e-ff42c0e0c5306af0",
+          "text": "Volunteering makes you feel capable and inspires you to make the most of each day.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 72
+          },
+          "parts": [
+            [
+              56,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-most-of#e-e40509aba86b400f",
+          "text": "Perhaps these tips will help you make the most of your time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:31#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 49
+          },
+          "parts": [
+            [
+              33,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 14,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

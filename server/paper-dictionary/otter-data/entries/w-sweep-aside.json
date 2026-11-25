@@ -1,0 +1,97 @@
+{
+  "entryId": "w:sweep-aside",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sweep",
+      "aside"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sweep",
+        "aside"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "swept aside",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sweep sth aside",
+  "senses": [
+    {
+      "senseId": "w:sweep-aside#s1",
+      "pos": "短语",
+      "glossZh": "清除；抛在一边",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sweep#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sweep-aside#e-4feafced1ade8578",
+          "text": "Shirley Fitzgerald, the city’s official historian, told me that in its rush to modernity in the 1970s, Sydney swept aside much of its past, including many of its finest buildings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 121
+          },
+          "parts": [
+            [
+              110,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              121
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

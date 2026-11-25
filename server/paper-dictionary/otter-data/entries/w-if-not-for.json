@@ -1,0 +1,92 @@
+{
+  "entryId": "w:if-not-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "if",
+      "not",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "if",
+        "not",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "if not for",
+  "senses": [
+    {
+      "senseId": "w:if-not-for#s1",
+      "pos": "短语",
+      "glossZh": "若不是因为……；如果没有……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:if-not-for#e-236b282d7df48e1f",
+          "text": "On what other occasions might I have met her if not for this solo trip?",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 55
+          },
+          "parts": [
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

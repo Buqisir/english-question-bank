@@ -1,0 +1,92 @@
+{
+  "entryId": "w:worse-and-worse",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "worse",
+      "and",
+      "worse"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "worse",
+        "and",
+        "worse"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "worse and worse",
+  "senses": [
+    {
+      "senseId": "w:worse-and-worse#s1",
+      "pos": "短语",
+      "glossZh": "越来越糟；不断恶化",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:worse-and-worse#e-06ce61ce32930a6c",
+          "text": "For the following two days, Aughtry and her family provided continuous care for Joey, but it was just getting worse and worse.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 125
+          },
+          "parts": [
+            [
+              110,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              125
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

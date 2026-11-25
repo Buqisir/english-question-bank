@@ -1,0 +1,156 @@
+{
+  "entryId": "w:little-by-little",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "little",
+      "by",
+      "little"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "little",
+        "by",
+        "little"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "little by little",
+  "senses": [
+    {
+      "senseId": "w:little-by-little#s1",
+      "pos": "短语",
+      "glossZh": "一点一点地；逐渐地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:little#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:little-by-little#e-4c0a8f4a986904fb",
+          "text": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:little-by-little#e-3e9fad60061ad835",
+          "text": "Thousands of dollars were raised that way, little by little.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 59
+          },
+          "parts": [
+            [
+              43,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:little-by-little#e-5583e84513b78f78",
+          "text": "Little by little, something in me started to soften.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:5",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

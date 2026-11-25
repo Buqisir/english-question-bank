@@ -1,0 +1,107 @@
+{
+  "entryId": "w:yours-truly",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "Yours truly"
+  ],
+  "pattern": {
+    "tokens": [
+      "yours",
+      "truly"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "yours",
+        "truly"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "yours truly",
+  "senses": [
+    {
+      "senseId": "w:yours-truly#s1",
+      "pos": "短语",
+      "glossZh": "谨致问候（信末署名前的客套语）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:yours#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:yours-truly#e-eca8329609046a77",
+          "text": "Yours truly,",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:yours-truly#s2",
+      "pos": "短语",
+      "glossZh": "我本人（诙谐自称）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

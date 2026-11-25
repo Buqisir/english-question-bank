@@ -1,0 +1,77 @@
+{
+  "entryId": "w:face-the-music",
+  "headword": "face the music",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "face",
+      "the",
+      "music"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "face",
+        "the",
+        "music"
+      ],
+      [
+        "faced",
+        "the",
+        "music"
+      ],
+      [
+        "faces",
+        "the",
+        "music"
+      ],
+      [
+        "facing",
+        "the",
+        "music"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:face-the-music#s1",
+      "pos": "短语",
+      "glossZh": "承担不愉快的后果",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [
+        "w:music#s4"
+      ],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

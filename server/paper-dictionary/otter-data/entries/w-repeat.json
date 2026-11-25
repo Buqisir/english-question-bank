@@ -62,8 +62,8 @@
     "mock": 86
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 82
+    "gaokao": 4,
+    "mock": 13
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -276,40 +276,6 @@
       ]
     },
     {
-      "senseId": "w:repeat#s5",
-      "pos": "短语",
-      "glossZh": "反复播放或重复出现",
-      "pronunciationId": "w:repeat#p-main",
-      "note": "on repeat。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:repeat#e-f8152244f2a16104",
-          "text": "“You don’t want to get fat” was on constant repeat throughout my childhood.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:repeat#s6",
       "pos": "v.",
       "glossZh": "再次发生",
@@ -317,7 +283,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -350,7 +316,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -387,6 +353,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:repeat#s9",
+      "pos": "adj.",
+      "glossZh": "重读的；重修的",
+      "pronunciationId": "w:repeat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:repeat#e-79b29cc4e34a0019",
+          "text": "Due to the on-campus support requirement of this role, repeat students or students completing a work placement year may not be qualified for the programme.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -395,6 +394,11 @@
       "reason": "医疗专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-repeat"
+  ]
 }

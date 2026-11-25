@@ -1,0 +1,191 @@
+{
+  "entryId": "w:cut-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cutting back"
+  ],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "back"
+      ],
+      [
+        "cutting",
+        "back"
+      ],
+      [
+        "cuts",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut back",
+  "senses": [
+    {
+      "senseId": "w:cut-back#s1",
+      "pos": "短语",
+      "glossZh": "削减；减少（开支、用量或摄入量等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-back#e-6db23e73125b22f3",
+          "text": "He then explained that Caper would soon be right as rain if they cut back on his diet and let him rest properly.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 73
+          },
+          "parts": [
+            [
+              65,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-back#e-f0764775c178e069",
+          "text": "This trend helps people live a simpler and more sustainable life by cutting back on buying things they don’t need.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 80
+          },
+          "parts": [
+            [
+              68,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              80
+            ]
+          ]
+        }
+      ],
+      "note": "常用 cut back on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:cut-back#s2",
+      "pos": "短语",
+      "glossZh": "修剪（植物）；把枝条剪短",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-back#e-0283afe593b151b2",
+          "text": "Cut back an overgrown plant.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-back#s3",
+      "pos": "短语",
+      "glossZh": "（冲浪时）掉头滑回浪的破碎区",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

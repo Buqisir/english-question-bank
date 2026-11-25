@@ -72,8 +72,8 @@
     "mock": 47
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 41
+    "gaokao": 2,
+    "mock": 13
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -306,34 +306,33 @@
       ]
     },
     {
-      "senseId": "w:greet#s5",
-      "pos": "短语",
-      "glossZh": "贺卡",
+      "senseId": "w:greet#s6",
+      "pos": "v.",
+      "glossZh": "对……作出反应",
       "pronunciationId": "w:greet#p-main",
-      "note": "greeting card。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:greet#e-93f0919553d4c02b",
-          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "exampleId": "w:greet#e-74459ab5b2fe9dda",
+          "text": "For decades “Monday blues” has been a term for the collective groan (叹息) that greets the start of each workweek.",
           "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-d",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-d:1",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 76,
+            "start": 78,
             "end": 84
           }
         }
@@ -346,6 +345,8 @@
       "reason": "方言，语料未见"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

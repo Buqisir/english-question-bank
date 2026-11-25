@@ -1,0 +1,112 @@
+{
+  "entryId": "w:mean-everything-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mean",
+      "everything",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mean",
+        "everything",
+        "to"
+      ],
+      [
+        "meaning",
+        "everything",
+        "to"
+      ],
+      [
+        "means",
+        "everything",
+        "to"
+      ],
+      [
+        "meant",
+        "everything",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "meant everything to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mean everything to sb",
+  "senses": [
+    {
+      "senseId": "w:mean-everything-to#s1",
+      "pos": "短语",
+      "glossZh": "对某人来说就是一切；对某人无比重要",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:mean-everything-to#e-d426b5613edaa6ca",
+          "text": "Jack meant everything to me.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 24
+          },
+          "parts": [
+            [
+              5,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

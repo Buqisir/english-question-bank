@@ -1,0 +1,109 @@
+{
+  "entryId": "w:get-the-best-of-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get the best of sth/sb"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "the",
+      "best",
+      "of",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "the",
+        "best",
+        "of",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get the best of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get the best of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-the-best-of-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "胜过（某人）；（在争论等中）占上风",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-the-best-of-sb-sth#e-011f627197858769",
+          "text": "In his 1936 work How to Win Friends and Influence People, Dale Carnegie wrote: “I have come to the conclusion that there is only one way to get the best of an argument- and that is to avoid it.” This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 155
+          },
+          "parts": [
+            [
+              140,
+              155
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              155
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

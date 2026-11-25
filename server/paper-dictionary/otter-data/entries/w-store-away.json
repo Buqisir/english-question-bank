@@ -1,0 +1,107 @@
+{
+  "entryId": "w:store-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "store",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "store",
+        "away"
+      ],
+      [
+        "stored",
+        "away"
+      ],
+      [
+        "stores",
+        "away"
+      ],
+      [
+        "storing",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stored away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "store sth away",
+  "senses": [
+    {
+      "senseId": "w:store-away#s1",
+      "pos": "短语",
+      "glossZh": "把某物收起来存放",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:store-away#e-9c0a52ea80e5fe0c",
+          "text": "Most of it is stored away or used for research.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

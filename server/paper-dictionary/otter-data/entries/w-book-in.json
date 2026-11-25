@@ -1,0 +1,113 @@
+{
+  "entryId": "w:book-in",
+  "headword": "book (sb) in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "books in"
+  ],
+  "pattern": {
+    "tokens": [
+      "book",
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "book",
+        "in"
+      ],
+      [
+        "books",
+        "in"
+      ],
+      [
+        "booked",
+        "in"
+      ],
+      [
+        "booking",
+        "in"
+      ],
+      [
+        "book",
+        {
+          "slot": "sb"
+        },
+        "in"
+      ],
+      [
+        "books",
+        {
+          "slot": "sb"
+        },
+        "in"
+      ],
+      [
+        "booked",
+        {
+          "slot": "sb"
+        },
+        "in"
+      ],
+      [
+        "booking",
+        {
+          "slot": "sb"
+        },
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:book-in#s1",
+      "pos": "短语",
+      "glossZh": "登记入住",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": []
+    },
+    {
+      "senseId": "w:book-in#s2",
+      "pos": "短语",
+      "glossZh": "为某人预约",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

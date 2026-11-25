@@ -1,0 +1,281 @@
+{
+  "entryId": "w:look-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking like",
+    "looks like"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "like"
+      ],
+      [
+        "looking",
+        "like"
+      ],
+      [
+        "looks",
+        "like"
+      ],
+      [
+        "looked",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked like",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look like",
+  "senses": [
+    {
+      "senseId": "w:look-like#s1",
+      "pos": "短语",
+      "glossZh": "看起来像；呈现……的样子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-like#e-8e0bce0109e34b4f",
+          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 98
+          },
+          "parts": [
+            [
+              86,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-like#e-c9137ec34ab3dd12",
+          "text": "\"They’re the only thing that looks like human language in that respect.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-like#e-8e0c4d8780239fcc",
+          "text": "It also gives people a chance to see what the new home looks like.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-iii:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          },
+          "parts": [
+            [
+              55,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 51
+      }
+    },
+    {
+      "senseId": "w:look-like#s2",
+      "pos": "短语",
+      "glossZh": "看样子似乎……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-like#e-1996f77ca6e16d78",
+          "text": "Some looked like they had totally given up on life, while others seemed to be making the best of the situation, smiling and joking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-like#e-fdd509e8d249128e",
+          "text": "For this work, titled “Truckload of Plastic,” Von Wong and a group of volunteers collected more than 10,000 pieces of plastic, which were then tied together to look like they’d been dumped（倾倒）from a truck all at once.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 169
+          },
+          "parts": [
+            [
+              160,
+              169
+            ]
+          ],
+          "highlightRanges": [
+            [
+              160,
+              169
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-like#e-2fe3bec96aebf17b",
+          "text": "These cells also looked like they were hiding near the plaques, a sign that they were sent to target the proteins.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        }
+      ],
+      "note": "可接从句，表示根据外观或迹象作出的判断。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 59
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

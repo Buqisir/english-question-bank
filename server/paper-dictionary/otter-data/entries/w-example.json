@@ -42,8 +42,8 @@
     "mock": 314
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 313
+    "gaokao": 16,
+    "mock": 216
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 89
       },
       "folded": false,
       "examples": [
@@ -118,78 +118,6 @@
       ]
     },
     {
-      "senseId": "w:example#s2",
-      "pos": "短语",
-      "glossZh": "例如",
-      "pronunciationId": "w:example#p-main",
-      "note": "for example。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 12,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:example#e-7a3bcf3e90bd4f6e",
-          "text": "A waiter’s job, for example, that requires multitasking, teamwork and decision-making could be just as stimulating as any high-level office work.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:example#e-40a2f09d4d37077d",
-          "text": "For example, one participant’s experience of “We sat and listened to the waves at the beach for a while” was assigned the categories “sitting at beach” and “listening to waves.”",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:example#e-bc256af5582ba590",
-          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:example#s3",
       "pos": "n.",
       "glossZh": "榜样",
@@ -198,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -263,6 +191,12 @@
       "reason": "罕见，现代常用 exemplify"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-example",
+    "w:lead-by-example"
+  ]
 }

@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-advance",
+  "headword": "in advance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "advance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "advance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:in-advance#s1",
+      "pos": "短语",
+      "glossZh": "提前；事先",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 44
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:advance#s3",
+        "w:in#s23"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-advance#e-b6d76421580a1279",
+          "text": "Groups of five or more require special arrangements and must be confirmed in advance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 84
+          },
+          "parts": [
+            [
+              74,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-advance#e-f42e4a75da5ffeb5",
+          "text": "Registration must be made at least two weeks in advance.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 55
+          },
+          "parts": [
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-advance#e-613913ff85dafc62",
+          "text": "The best way to handle an attack is to prepare in advance, like changing your passwords frequently.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              57
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

@@ -117,6 +117,14 @@
       "reason": "仍用上述释义，具体对象由语境决定"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:at-your-leisure",
+    "w:dont-hold-your-breath",
+    "w:get-out-of-your-comfort-zone",
+    "w:in-your-face",
+    "w:take-your-time",
+    "w:what-is-your-name"
+  ]
 }

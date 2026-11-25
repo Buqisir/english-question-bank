@@ -1,0 +1,109 @@
+{
+  "entryId": "w:be-hard-pressed-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "be hard pressed to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "hard",
+      "pressed",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "hard",
+        "pressed",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "be hard pressed to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be hard pressed to do",
+  "senses": [
+    {
+      "senseId": "w:be-hard-pressed-to-do#s1",
+      "pos": "短语",
+      "glossZh": "很难做到某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:press#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-hard-pressed-to-do#e-39459f286617bf33",
+          "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 35
+          },
+          "parts": [
+            [
+              17,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 192
+    "mock": 5
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 150
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -243,7 +243,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -296,7 +296,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -367,7 +367,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -399,12 +399,12 @@
       "glossZh": "不擅长的",
       "pronunciationId": "w:bad#p-main",
       "note": "be bad at sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 11
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -420,20 +420,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:bad#s9",
-      "pos": "短语",
-      "glossZh": "还不错；相当好",
-      "pronunciationId": "w:bad#p-main",
-      "note": "not bad。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -442,6 +428,19 @@
       "reason": "俚语、专业或同形用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bad-actor",
+    "w:bad-boy",
+    "w:bad-guy",
+    "w:bad-language",
+    "w:bad-off",
+    "w:go-bad",
+    "w:my-bad",
+    "w:not-bad",
+    "w:too-bad"
+  ]
 }

@@ -59,8 +59,8 @@
     "mock": 80
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 73
+    "gaokao": 2,
+    "mock": 21
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -104,7 +104,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -175,7 +175,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -305,161 +305,6 @@
       "examples": []
     },
     {
-      "senseId": "w:sight#s6",
-      "pos": "短语",
-      "glossZh": "眼看就要到来",
-      "pronunciationId": "w:sight#p-main",
-      "note": "in sight 的比喻用法。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sight#e-d2192b4bb47b1490",
-          "text": "The end of the school year was in sight and spirits were high.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sight#s7",
-      "pos": "短语",
-      "glossZh": "忽视",
-      "pronunciationId": "w:sight#p-main",
-      "note": "lose sight of 的比喻用法。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sight#e-38f63598c4dfb13c",
-          "text": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sight#s8",
-      "pos": "短语",
-      "glossZh": "瞥见",
-      "pronunciationId": "w:sight#p-main",
-      "note": "catch sight of。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sight#e-5d1a83b153053efe",
-          "text": "I caught sight of myself in a cafe window the other day, bent over my phone, with my head down and shoulders tense near my ears.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:sight#e-b58d45f7f2f7b9ab",
-          "text": "One afternoon, as she sat by her window in despair, she looked out of the window and caught sight of a small yellow bird landing on the branch outside.",
-          "source": {
-            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
-            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
-            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 92,
-            "end": 97
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sight#s9",
-      "pos": "短语",
-      "glossZh": "乍一看",
-      "pronunciationId": "w:sight#p-main",
-      "note": "at first sight。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sight#e-2b1a4646f6fba8e6",
-          "text": "At first sight, Easthope doesn't seem much like a Cassandra.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
-            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
-            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sight#s10",
       "pos": "n.",
       "glossZh": "瞄准器",
@@ -471,6 +316,123 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:sight#s11",
+      "pos": "n.",
+      "glossZh": "目击；看到（罕见事物）",
+      "pronunciationId": "w:sight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sight#e-73cfa041f537b77c",
+          "text": "Holding up her phone, Corinne recorded the bird’s distinctive call while silently hoping to get lucky with a sighting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sight#s12",
+      "pos": "adj.",
+      "glossZh": "有视力的",
+      "pronunciationId": "w:sight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sight#e-5ddfc51b14c0499d",
+          "text": "For the first time – like sighted children seeing themselves in a mirror – We got the sense of ourselves as those who existed outside our own head.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:sight#e-ef565387773f0bfb",
+          "text": "As a sighted person, it does initially feel like something new and unusual.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:sight#e-b49f134286ebf6f2",
+          "text": "My control group also consisted of eighteen sighted undergraduates.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sight#s13",
+      "pos": "n.",
+      "glossZh": "目标（set one’s sights on 指以……为目标）",
+      "pronunciationId": "w:sight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -479,6 +441,17 @@
       "reason": "地区性旧用法或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-first-sight",
+    "w:at-the-sight-of",
+    "w:catch-sight-of",
+    "w:in-sight",
+    "w:lose-sight-of",
+    "w:on-sight",
+    "w:out-of-sight"
+  ]
 }

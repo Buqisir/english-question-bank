@@ -42,8 +42,8 @@
     "mock": 86
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 77
+    "gaokao": 3,
+    "mock": 12
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -128,7 +128,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -201,7 +201,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -272,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -335,166 +335,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:sale#s5",
-      "pos": "短语",
-      "glossZh": "待售",
-      "pronunciationId": "w:sale#p-main",
-      "note": "for sale。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sale#e-f3813fcdbf4f74a3",
-          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 192,
-            "end": 196
-          }
-        },
-        {
-          "exampleId": "w:sale#e-6d6ddcedb34bfdc9",
-          "text": "It is put up for sale.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2026-ii:26",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        },
-        {
-          "exampleId": "w:sale#e-7c26613bb233692c",
-          "text": "David, in his early seventies, is finally preparing his mother’s home for sale.",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
-            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sale#s6",
-      "pos": "短语",
-      "glossZh": "上市销售",
-      "pronunciationId": "w:sale#p-main",
-      "note": "on sale。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sale#e-af22aed62c79bef2",
-          "text": "“Blind boxes” containing randomly flavored ice creams are also on sale to attract customers.",
-          "source": {
-            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
-            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
-            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 66,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:sale#e-01c3bff566b7da3d",
-          "text": "After years of development, protest and regulatory red tape, the first genetically modified (转基因的), non-browning apples under the brand Arctic Apple, will soon go on sale in the United States.",
-          "source": {
-            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
-            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
-            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 166,
-            "end": 170
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sale#s7",
-      "pos": "短语",
-      "glossZh": "减价出售",
-      "pronunciationId": "w:sale#p-main",
-      "note": "on sale。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sale#e-e1b16a5f49ed2dfb",
-          "text": "The thought of the mall __45__ me, but I jump like a kid if my brother calls with the __46__ of baseball caps on sale.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
-            "paperTitle": "2026届广州市高三年级调研测试英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:cloze:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 113,
-            "end": 117
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -503,6 +343,14 @@
       "reason": "旧式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-sale",
+    "w:on-sale",
+    "w:put-up-for-sale",
+    "w:up-for-sale"
+  ]
 }

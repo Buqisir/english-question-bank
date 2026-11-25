@@ -1,0 +1,138 @@
+{
+  "entryId": "w:team-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "team",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "team",
+        "up"
+      ],
+      [
+        "teamed",
+        "up"
+      ],
+      [
+        "teaming",
+        "up"
+      ],
+      [
+        "teams",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "team up",
+  "senses": [
+    {
+      "senseId": "w:team-up#s1",
+      "pos": "短语",
+      "glossZh": "组队合作；联手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:team#s2",
+        "w:up#s74"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:team-up#e-4a0962ab0f9fb471",
+          "text": "The poster stated that all materials would be provided on-site, so we decided to team up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 88
+          },
+          "parts": [
+            [
+              81,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:team-up#e-f09b8f241accb429",
+          "text": "team up",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze",
+            "locator": {
+              "question": 48,
+              "questionId": "question:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:48#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "可接 with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

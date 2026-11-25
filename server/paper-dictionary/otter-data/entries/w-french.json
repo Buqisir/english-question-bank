@@ -65,8 +65,8 @@
     "mock": 64
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 60
+    "gaokao": 5,
+    "mock": 3
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -291,7 +291,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -335,94 +335,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:french#s5",
-      "pos": "短语",
-      "glossZh": "法式吐司",
-      "pronunciationId": "w:french#p-main",
-      "note": "French toast。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:french#e-4119daf749e2eb66",
-          "text": "They planned to make French toast and chicken porridge.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:french#e-d2292be132c826c4",
-          "text": "They put some rice into a pot of water and left it to boil while they made the French toast.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 85
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:french#s6",
-      "pos": "短语",
-      "glossZh": "炸薯条",
-      "pronunciationId": "w:french#p-main",
-      "note": "French fries。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:french#e-21c3279bdd7c5abf",
-          "text": "French fries.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -431,6 +343,8 @@
       "reason": "饮品调制中的罕见简称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

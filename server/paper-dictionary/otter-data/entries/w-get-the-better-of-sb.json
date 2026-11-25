@@ -1,0 +1,183 @@
+{
+  "entryId": "w:get-the-better-of-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get the better of",
+    "got the better of"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "the",
+      "better",
+      "of",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "the",
+        "better",
+        "of",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get the better of sb",
+  "senses": [
+    {
+      "senseId": "w:get-the-better-of-sb#s1",
+      "pos": "短语",
+      "glossZh": "（情绪、冲动等）压倒某人，使其难以自控",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s32"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-the-better-of-sb#e-c9d868daef5881cf",
+          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 96
+          },
+          "parts": [
+            [
+              79,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-the-better-of-sb#e-e58b17eee94f984a",
+          "text": "But despite all the preparation, my nerves got the better of me.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 60
+          },
+          "parts": [
+            [
+              43,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-the-better-of-sb#e-2ec6bdf49c35eb6e",
+          "text": "Eventually, Sam’s curiosity got the better of him.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 45
+          },
+          "parts": [
+            [
+              28,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:get-the-better-of-sb#s2",
+      "pos": "短语",
+      "glossZh": "胜过某人；在较量中占上风",
+      "note": "也可指靠机智或计谋胜过对方。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:better#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

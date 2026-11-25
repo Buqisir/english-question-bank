@@ -35,8 +35,8 @@
     "mock": 1288
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 1286
+    "gaokao": 21,
+    "mock": 1118
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 106,
-        "mock": 0
+        "mock": 81
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 33,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 68,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -262,7 +262,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -395,354 +395,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:so#s6",
-      "pos": "短语",
-      "glossZh": "大约",
-      "pronunciationId": "w:so#p-main",
-      "note": "数字或数量词加 or so。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-d82c739e90826f2d",
-          "text": "In the last century or so, these changes have accelerated.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:grammar-fill:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:so#e-f7d84e7560cf4235",
-          "text": "However, in this case, I was a woman all alone, in a strange neighborhood, at night, and there were twenty or so very large men – all wearing insignia（徽章） that indicated they were in some sort of club – standing before me.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 110,
-            "end": 112
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s7",
-      "pos": "短语",
-      "glossZh": "到目前为止",
-      "pronunciationId": "w:so#p-main",
-      "note": "so far。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-1125b8a223b0304e",
-          "text": "For the biggest stadiums in the world, we have used data supplied by the World Atlas list so far, which ranks them by their stated permanent capacity, as well as updated information from official stadium websites.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 92
-          }
-        },
-        {
-          "exampleId": "w:so#e-a2ba810692076f1b",
-          "text": "So far, Mr. Lewis is pleased with the results of his experiment.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:grammar-fill:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s8",
-      "pos": "短语",
-      "glossZh": "即使如此",
-      "pronunciationId": "w:so#p-main",
-      "note": "even so。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-97ab52b587307050",
-          "text": "Even so, how quickly your child develops into a social creature may also depend on his temperament（性格）.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s9",
-      "pos": "短语",
-      "glossZh": "偶尔",
-      "pronunciationId": "w:so#p-main",
-      "note": "every so often。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-b48fe93615ecc63e",
-          "text": "I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s10",
-      "pos": "短语",
-      "glossZh": "如此……以至于……",
-      "pronunciationId": "w:so#p-main",
-      "note": "so … that … 或 so … as to …，结果从句中的 that 有时可省略。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-e38bf046331a28b3",
-          "text": "Scientists in Louisiana were so concerned that they decided to pay hunters $5 a tail.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:so#e-5b754afba425664b",
-          "text": "It was so tiny that we had to leave our suitcases in the hallway.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:so#e-36f6f9f864bc10eb",
-          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 85,
-            "end": 87
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s11",
-      "pos": "短语",
-      "glossZh": "在……的意义上",
-      "pronunciationId": "w:so#p-main",
-      "note": "in so far as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-73add958353dc9fa",
-          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 92
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s12",
-      "pos": "短语",
-      "glossZh": "等等",
-      "pronunciationId": "w:so#p-main",
-      "note": "and so on。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-75581c5b93e0cb1e",
-          "text": "Dogs receive professional attention, while those special participants also benefit from making friends, getting away from computer screens, and exploring new careers like human handlers and so on.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 190,
-            "end": 192
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:so#s13",
-      "pos": "短语",
-      "glossZh": "与其说……不如说……",
-      "pronunciationId": "w:so#p-main",
-      "note": "not so much A as B；也可用分号后的独立句转折。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:so#e-832a156fbfd91e8c",
-          "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off-set training and living conditions that are raising concerns.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 26
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -751,6 +403,37 @@
       "reason": "唱名、同形缩写或日语借词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:and-so-forth",
+    "w:and-so-on",
+    "w:even-so",
+    "w:ever-so",
+    "w:every-so-often",
+    "w:i-dont-think-so",
+    "w:i-think-so",
+    "w:in-so-far-as",
+    "w:just-so",
+    "w:like-so",
+    "w:make-it-so-that",
+    "w:not-so-much-a-as-b",
+    "w:or-so",
+    "w:quite-so",
+    "w:so-as-to",
+    "w:so-be-it",
+    "w:so-far",
+    "w:so-it-seems",
+    "w:so-long",
+    "w:so-long-as",
+    "w:so-much-as",
+    "w:so-much-for",
+    "w:so-slot-as-to-slot",
+    "w:so-that",
+    "w:so-that-phrase",
+    "w:so-they-say",
+    "w:so-what"
+  ]
 }

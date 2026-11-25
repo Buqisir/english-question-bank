@@ -1,0 +1,155 @@
+{
+  "entryId": "w:even-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "even",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "even",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "even as",
+  "senses": [
+    {
+      "senseId": "w:even-as#s1",
+      "pos": "短语",
+      "glossZh": "正当……时；就在……的同时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:even#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:even-as#e-c7fa90a7355329e6",
+          "text": "Grizzly bears, which may grow to about 2.5 m long and weigh over 400 kg, occupy a conflicted corner of the American psyche-we revere (敬畏) them even as they give us frightening dreams.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 150
+          },
+          "parts": [
+            [
+              143,
+              150
+            ]
+          ],
+          "highlightRanges": [
+            [
+              143,
+              150
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:even-as#e-5257584b42cd881e",
+          "text": "You just have to push through.” But even as the words left my mouth, I felt uneasy.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:even-as#e-4f477616df12df76",
+          "text": "Seeking a safer option for grocery seafood displays, the team turned to gelatin – a food-safe material whose protein structure can trap water even as it freezes and thaws(解冻).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 142,
+            "end": 149
+          },
+          "parts": [
+            [
+              142,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              142,
+              149
+            ]
+          ]
+        }
+      ],
+      "note": "可突出同时发生的两件事之间的反差。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

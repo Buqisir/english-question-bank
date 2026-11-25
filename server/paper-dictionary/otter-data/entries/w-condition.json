@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 198
+    "mock": 12
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -317,12 +317,12 @@
       "pos": "v.",
       "glossZh": "训练；使适应；使形成特定反应",
       "pronunciationId": "w:condition#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -337,6 +337,59 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:condition#s7",
+      "pos": "短语",
+      "glossZh": "空气调节；空调（air conditioning）",
+      "pronunciationId": "w:condition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:condition#e-d9cb31fd6ee2b76c",
+          "text": "Eco-friendliness is at the core of the design: vertical gardens on apartment buildings (to keep them cool without expensive, energy-hungry air conditioning), solar panels on every rooftop to supply electricity, and “Sponge City” technology – like pavements that let water seep through and rain gardens – to collect water.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 155
+          }
+        },
+        {
+          "exampleId": "w:condition#e-338b3429a3d9900d",
+          "text": "To test air conditioning.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -349,6 +402,6 @@
       "reason": "air conditioning 应作为复合词理解"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

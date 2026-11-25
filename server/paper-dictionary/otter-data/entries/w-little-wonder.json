@@ -1,0 +1,92 @@
+{
+  "entryId": "w:little-wonder",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "little",
+      "wonder"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "little",
+        "wonder"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "little wonder",
+  "senses": [
+    {
+      "senseId": "w:little-wonder#s1",
+      "pos": "短语",
+      "glossZh": "难怪；不足为奇",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wonder#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:little-wonder#e-c44678d6f873db07",
+          "text": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

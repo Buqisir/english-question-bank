@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-public",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "public"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "public"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in public",
+  "senses": [
+    {
+      "senseId": "w:in-public#s1",
+      "pos": "短语",
+      "glossZh": "公开地；在公众场合",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s53",
+        "w:public#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-public#e-bf8b5e333489a145",
+          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 204,
+            "end": 213
+          },
+          "parts": [
+            [
+              204,
+              213
+            ]
+          ],
+          "highlightRanges": [
+            [
+              204,
+              213
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-public#e-a3f8aaddc62de26b",
+          "text": "To illustrate accessibility barriers in public that separate her family.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 46
+          },
+          "parts": [
+            [
+              37,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-public#e-d7c620d7a06b672f",
+          "text": "For example, you can try to finish a task within a limited time, volunteer to speak in public, or end your shower with a short burst of cold water.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 93
+          },
+          "parts": [
+            [
+              84,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

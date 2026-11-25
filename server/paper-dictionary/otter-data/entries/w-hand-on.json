@@ -1,0 +1,73 @@
+{
+  "entryId": "w:hand-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hands on"
+  ],
+  "pattern": {
+    "tokens": [
+      "hand",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hand",
+        "on"
+      ],
+      [
+        "hands",
+        "on"
+      ],
+      [
+        "handed",
+        "on"
+      ],
+      [
+        "handing",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hand sth on",
+  "senses": [
+    {
+      "senseId": "w:hand-on#s1",
+      "pos": "短语",
+      "glossZh": "把东西、消息或职责转交给下一人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可接 to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

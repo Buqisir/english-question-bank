@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 5
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -223,20 +223,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:jog#s4",
-      "pos": "短语",
-      "glossZh": "唤起某人的记忆",
-      "pronunciationId": "w:jog#p-main",
-      "note": "jog sb’s memory。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -245,6 +231,11 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:jog-ones-memory"
+  ]
 }

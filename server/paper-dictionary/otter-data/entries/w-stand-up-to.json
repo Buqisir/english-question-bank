@@ -1,0 +1,160 @@
+{
+  "entryId": "w:stand-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stands up to"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "up",
+        "to"
+      ],
+      [
+        "stands",
+        "up",
+        "to"
+      ],
+      [
+        "standing",
+        "up",
+        "to"
+      ],
+      [
+        "stood",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stand up to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand up to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:stand-up-to#s1",
+      "pos": "短语",
+      "glossZh": "勇敢反抗；不向……屈服",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-up-to#e-16ef0fd13fc36e0d",
+          "text": "As Celie comes into her own, she starts to get the color’s meaning by “noticing” her worth, learning to love herself and gaining the strength to stand up to those who mistreat her.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 156
+          },
+          "parts": [
+            [
+              145,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              156
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stand-up-to#s2",
+      "pos": "短语",
+      "glossZh": "经受住；经得起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-up-to#e-734224a5ac5d1c89",
+          "text": "Neither reason stands up to closer inspection.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "可接 inspection、scrutiny 等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

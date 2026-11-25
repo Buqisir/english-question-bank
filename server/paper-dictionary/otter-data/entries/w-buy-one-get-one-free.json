@@ -1,0 +1,100 @@
+{
+  "entryId": "w:buy-one-get-one-free",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "buy one, get one"
+  ],
+  "pattern": {
+    "tokens": [
+      "buy",
+      "one",
+      ",",
+      "get",
+      "one",
+      "free"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "buy",
+        "one",
+        ",",
+        "get",
+        "one",
+        "free"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "buy one, get one free",
+  "senses": [
+    {
+      "senseId": "w:buy-one-get-one-free#s1",
+      "pos": "短语",
+      "glossZh": "买一送一",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:buy-one-get-one-free#e-33135e40e834ff89",
+          "text": "The finest optics: And buy one, get one FREE!",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 44
+          },
+          "parts": [
+            [
+              23,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

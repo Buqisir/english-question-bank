@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 102
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -288,6 +288,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:core#s5",
+      "pos": "后缀",
+      "glossZh": "表示以某事物为主题的风格或潮流（-core）",
+      "pronunciationId": "w:core#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:core#e-b6588093e0305aa2",
+          "text": "Deinfluencing is linked to the recent underconsumption core trend.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -296,6 +329,6 @@
       "reason": "专门义或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

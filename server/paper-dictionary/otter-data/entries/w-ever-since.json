@@ -1,0 +1,155 @@
+{
+  "entryId": "w:ever-since",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ever",
+      "since"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ever",
+        "since"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ever since",
+  "senses": [
+    {
+      "senseId": "w:ever-since#s1",
+      "pos": "短语",
+      "glossZh": "自……以来一直；从那以后一直",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ever#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:ever-since#e-92e5fcc80e584f2d",
+          "text": "Ever since her childhood, Ginni, now 71, has had a deep love for travel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ever-since#e-bfb3bcf7ea316d43",
+          "text": "Ever since Tom was born three years ago, Mom and Dad’s world seemed to completely revolve around him.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ever-since#e-552d77f2e5248864",
+          "text": "Summer and I have not gotten along well ever since we quarreled over a chair in the kindergarten.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        }
+      ],
+      "note": "可接时间、事件或从句，也可单独作状语。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

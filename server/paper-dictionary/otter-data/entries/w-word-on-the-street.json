@@ -1,0 +1,94 @@
+{
+  "entryId": "w:word-on-the-street",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "word",
+      "on",
+      "the",
+      "street"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "word",
+        "on",
+        "the",
+        "street"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "word on the street",
+  "senses": [
+    {
+      "senseId": "w:word-on-the-street#s1",
+      "pos": "短语",
+      "glossZh": "人们私下流传的消息；坊间传闻",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:word-on-the-street#e-6ec42c63b887882c",
+          "text": "“The word on the street was that there was nothing we could do.”",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 23
+          },
+          "parts": [
+            [
+              5,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

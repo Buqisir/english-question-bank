@@ -1,0 +1,194 @@
+{
+  "entryId": "w:catch-ones-breath",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      {
+        "slot": "one's"
+      },
+      "breath"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        {
+          "slot": "one's"
+        },
+        "breath"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catch breath",
+      "tags": []
+    },
+    {
+      "form": "caught breath",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch one's breath",
+  "senses": [
+    {
+      "senseId": "w:catch-ones-breath#s1",
+      "pos": "短语",
+      "glossZh": "喘口气；恢复正常呼吸",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:breath#s3",
+        "w:catch#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-ones-breath#e-c2cc165ad50309ae",
+          "text": "It had no composer, only the rhythm of shuttle looms and small pauses where her mother caught her breath.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 104
+          },
+          "parts": [
+            [
+              87,
+              93
+            ],
+            [
+              98,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              93
+            ],
+            [
+              98,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-ones-breath#e-ca0b3d521d635073",
+          "text": "Exhausted from the run-around, Ethan collapsed down on the ground to catch his breath.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 85
+          },
+          "parts": [
+            [
+              69,
+              74
+            ],
+            [
+              79,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              74
+            ],
+            [
+              79,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-ones-breath#e-af9dbba9078cd648",
+          "text": "Ethan collapsed down on the ground to catch his breath.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 54
+          },
+          "parts": [
+            [
+              38,
+              43
+            ],
+            [
+              48,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              43
+            ],
+            [
+              48,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

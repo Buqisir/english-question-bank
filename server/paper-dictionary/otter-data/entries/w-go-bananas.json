@@ -1,0 +1,61 @@
+{
+  "entryId": "w:go-bananas",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "bananas"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "bananas"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go bananas",
+  "senses": [
+    {
+      "senseId": "w:go-bananas#s1",
+      "pos": "短语",
+      "glossZh": "发疯似地失去控制；兴奋得发狂",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:banana#s3"
+      ],
+      "examples": [],
+      "note": "非正式，可形容极度兴奋或愤怒。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

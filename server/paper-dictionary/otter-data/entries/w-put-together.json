@@ -1,0 +1,364 @@
+{
+  "entryId": "w:put-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting together"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "together"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "together"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "together"
+      ],
+      [
+        "putting",
+        "together"
+      ],
+      [
+        "puts",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put together",
+      "tags": []
+    },
+    {
+      "form": "puts together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sb/sth) together",
+  "senses": [
+    {
+      "senseId": "w:put-together#s1",
+      "pos": "短语",
+      "glossZh": "汇集编成；整理制定",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:together#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-together#e-3e518bc4c999b0c7",
+          "text": "So I’ve put together some good tips for starting an art journey.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 20
+          },
+          "parts": [
+            [
+              8,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-together#e-8c1e6a357c33f39f",
+          "text": "The fake reviews written for Azimi’s study were put together by humans, but increasingly, fake reviews are being written by AI, which makes them look more real.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-together#e-f5df397eabc36260",
+          "text": "“It is curious that no one has put together a history of both the steam and electric revolutions,” writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:put-together#s3",
+      "pos": "短语",
+      "glossZh": "使人或事物相遇；把两者配在一起",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-together#e-fe12cb9359adad07",
+          "text": "I see libraries as a safe haven(避风港) for readers and writers, a bridge that helps put together a reader with a book.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 94
+          },
+          "parts": [
+            [
+              82,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              94
+            ]
+          ]
+        }
+      ],
+      "note": "可用 put together A with B。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-together#s2",
+      "pos": "短语",
+      "glossZh": "把零件或材料组装、拼合起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-together#e-83ebf351707f7285",
+          "text": "In the future, such modular parts can be mass-produced, allowing people to put together custom robots easily.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 87
+          },
+          "parts": [
+            [
+              75,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-together#e-dcd5558eea8e6664",
+          "text": "He started building it over a week ago and just finished putting it together last night.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 76
+          },
+          "parts": [
+            [
+              57,
+              64
+            ],
+            [
+              68,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ],
+            [
+              68,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-together#e-a409c4421a73d326",
+          "text": "We are now actively putting the two together: cells and vasculature, at organ scale.”",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 44
+          },
+          "parts": [
+            [
+              20,
+              27
+            ],
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ],
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:put-together#s4",
+      "pos": "短语",
+      "glossZh": "综合线索；推断出真相",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

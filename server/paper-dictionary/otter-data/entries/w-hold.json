@@ -59,8 +59,8 @@
     "mock": 443
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 437
+    "gaokao": 12,
+    "mock": 277
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -318,7 +318,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -352,7 +352,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -419,7 +419,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -473,7 +473,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -506,7 +506,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -551,238 +551,16 @@
       ]
     },
     {
-      "senseId": "w:hold#s11",
-      "pos": "短语",
-      "glossZh": "克制自己",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hold#e-f7bcd5c4f2f32be9",
-          "text": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:hold#s12",
-      "pos": "短语",
-      "glossZh": "阻碍",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold sb/sth back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hold#e-e54efbb6cce22c6d",
-          "text": "I felt he treated me as though I would hold him back and probably make him fail to get an A in the course.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:hold#e-029ec3bf4328eda1",
-          "text": "Now, a series of experiments on zebra finches (斑胸草雀) suggests that while darkness holds back singing, birds build up a strong motivation to sing in the night that causes them to burst into song at dawn.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 82,
-            "end": 87
-          }
-        },
-        {
-          "exampleId": "w:hold#e-91a8c648c4fff142",
-          "text": "James worked odd jobs, like busing tables and bartending, but his inability to read held him back.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 84,
-            "end": 88
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:hold#s13",
-      "pos": "短语",
-      "glossZh": "耽搁；拖延",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hold#e-cf03257fb03c849f",
-          "text": "Any small interruption – a price check, a chatty customer – can have downstream effects, holding up an entire line.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 103
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:hold#s14",
-      "pos": "短语",
-      "glossZh": "抓牢",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold on to sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hold#e-199dc82ddfd88143",
-          "text": "Holding onto the climbing wall by my fingers and toes, using every muscle to stay safe, I was merely __51__ what I was doing in that moment rather than years of stress, failure, or depression.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:cloze:2",
-              "sentence": 9
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:hold#s15",
-      "pos": "短语",
-      "glossZh": "坚持住",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hold#e-b475fef0f017a783",
-          "text": "“Hold on: Consider failure as a __50__ to success and never give up.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 1,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:hold#s16",
-      "pos": "短语",
-      "glossZh": "等一下",
-      "pronunciationId": "w:hold#p-main",
-      "note": "hold on，电话中也可用。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:hold#s17",
       "pos": "n.",
       "glossZh": "握法；抓握",
       "pronunciationId": "w:hold#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -797,6 +575,609 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:hold#s19",
+      "pos": "phr.",
+      "glossZh": "（on hold）通话暂时挂起；等候接通",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-adb1ed067d7f5076",
+          "text": "Apparently, the phone-company rep had placed her on hold for a moment.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s20",
+      "pos": "v.",
+      "glossZh": "具有（潜力、价值、意义等）；蕴含",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-16bfba2ac9f0d597",
+          "text": "These repurposed devices hold promise for a wide range of smart city applications.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:hold#e-9c0a5241dd2723fa",
+          "text": "Commuting holds a hidden opportunity.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:hold#e-bd84d8a93b78c5dc",
+          "text": "Monitoring a person’s heartbeat from a distance holds significant value, as it can detect irregularities like abnormal heart rates, providing crucial warnings of potential heart issues.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s21",
+      "pos": "v.",
+      "glossZh": "认为；主张",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-10a431c5c9b4e50e",
+          "text": "Data centres are indeed consuming more power than before and, as Goldman Sachs, a bank, holds, will account for nearly half of the overall demand growth in America in the coming years.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:hold#e-f4b100d6238da3ae",
+          "text": "Writing is rewriting and that is the reason why writing – usually held to be such a lonely occupation – is in fact deeply collaborative.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:hold#e-2aa0c5532fad07c4",
+          "text": "Woods holds that quality doesn’t always match mass-market standards, and the sales back her up – readers now choose small press titles at rates nearly equal to those from major ones.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s22",
+      "pos": "v.",
+      "glossZh": "限制；阻止（某人行动）",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-8b0073e1ffbb0c5e",
+          "text": "Phrases like “I have limited access to email” and “I’ll respond as soon as I get back” sound like you’re being held against your will from working as opposed to making the most of your time off.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:hold#e-cf907fe9024c4362",
+          "text": "So many students are held bound to it in the classroom, but we have the chance to encourage by leading with empathy.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s23",
+      "pos": "v.",
+      "glossZh": "使保持在某一位置或状态",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-aed31522bb7ce704",
+          "text": "My replies on their papers were personal: Did you notice how I held my hands to keep them from shaking today?",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:hold#e-a45826258caedde6",
+          "text": "Have you ever been in mid-conversation with someone, when you look over and find them standing in exactly the same pose as you, or holding the same facial expression?",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:hold#e-3e595abdec837d0c",
+          "text": "She first planted shrubs and grasses to hold the soil.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s24",
+      "pos": "v.",
+      "glossZh": "支撑；承受重量",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-b8c474717eca79f3",
+          "text": "I tried to stand, but my leg wouldn’t hold me.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:hold#e-ca88363a63dc7246",
+          "text": "She slid more bravely imagining herself a figure skater as the ice seemed strong enough to hold her.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s25",
+      "pos": "n.",
+      "glossZh": "掌握；控制",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-5a180404b16a7d11",
+          "text": "This indicates that a looser hold of self-image can help to drive conscious change.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s26",
+      "pos": "phr.",
+      "glossZh": "（not hold a candle to）远不如；无法与……相比",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-bfd66655d5dfd416",
+          "text": "And while all those connections have become dear to me since, none of them hold a candle to the bond I found in my then-56-year-old castmate, who brought his own objects to rehearsal and made references I didn’t understand.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s27",
+      "pos": "n.",
+      "glossZh": "（图书馆的）预约借阅",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-0ca0f7e79373f923",
+          "text": "Login to My Library Account to see renewals, checkouts, holds, overdue items and fines.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:hold#e-459925db8d7f446f",
+          "text": "Visitors from outside of New York State can use the online application to apply for a temporary card that allows them to place holds for physical items for use when they are visiting.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s28",
+      "pos": "v.",
+      "glossZh": "保持（某一状态）；维持不变",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-d6cd482c85c8ce51",
+          "text": "Some people change a lot and some people hold pretty steady.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s29",
+      "pos": "v.",
+      "glossZh": "把……记在脑中",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-2d2e0b56dd1ed990",
+          "text": "Your goal isn’t to pass a test or hold a bunch of dates in your head.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s30",
+      "pos": "v.",
+      "glossZh": "珍视；铭记于心",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-bdc565ab8404fcef",
+          "text": "For now, anyway, I'm holding our recent experience close to my heart.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hold#s31",
+      "pos": "phr.",
+      "glossZh": "（hold sb to account）追究某人的责任",
+      "pronunciationId": "w:hold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hold#e-18dab8c911610a6e",
+          "text": "Stricter regulations can hold manufacturers to account – a tax on synthetic gum can help pay for clean ups.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -805,6 +1186,30 @@
       "reason": "体育、博彩或航空专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dont-hold-your-breath",
+    "w:hold-against",
+    "w:hold-firm",
+    "w:hold-hands",
+    "w:hold-in",
+    "w:hold-it",
+    "w:hold-it-together",
+    "w:hold-off",
+    "w:hold-on",
+    "w:hold-on-to-sth",
+    "w:hold-out",
+    "w:hold-sb-sth-back",
+    "w:hold-the-phone",
+    "w:hold-to",
+    "w:hold-together",
+    "w:hold-true",
+    "w:hold-up",
+    "w:hold-water",
+    "w:not-hold-a-candle-to",
+    "w:take-hold"
+  ]
 }

@@ -1,0 +1,62 @@
+{
+  "entryId": "w:in-concert-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "concert",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "concert",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in concert with",
+  "senses": [
+    {
+      "senseId": "w:in-concert-with#s1",
+      "pos": "短语",
+      "glossZh": "与……协同行动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:concert#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

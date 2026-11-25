@@ -1,0 +1,158 @@
+{
+  "entryId": "w:at-the-heart-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "heart",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "heart",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the heart of",
+  "senses": [
+    {
+      "senseId": "w:at-the-heart-of#s1",
+      "pos": "短语",
+      "glossZh": "处于……的核心；是……的关键",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-heart-of#e-a7f683d95045eea6",
+          "text": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-heart-of#e-f542e42a33017c58",
+          "text": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 199,
+            "end": 214
+          },
+          "parts": [
+            [
+              199,
+              214
+            ]
+          ],
+          "highlightRanges": [
+            [
+              199,
+              214
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-heart-of#e-d6f869318de58be2",
+          "text": "According to a new Glassdoor report, “career minimalism” is at the heart of this shift.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 75
+          },
+          "parts": [
+            [
+              60,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

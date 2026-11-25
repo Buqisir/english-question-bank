@@ -1,0 +1,204 @@
+{
+  "entryId": "w:switch-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "switch",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "switch",
+        "on"
+      ],
+      [
+        "switched",
+        "on"
+      ],
+      [
+        "switches",
+        "on"
+      ],
+      [
+        "switching",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "switch on",
+      "tags": []
+    },
+    {
+      "form": "switches on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "switch (sth) on",
+  "senses": [
+    {
+      "senseId": "w:switch-on#s1",
+      "pos": "短语",
+      "glossZh": "打开电器；启动设备；开始运转",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:on#s17",
+        "w:switch#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:switch-on#e-dc5f80e6e2949573",
+          "text": "When we turn on a light or switch on a TV or a computer we use energy and we need water to produce this energy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:switch-on#e-d9e448e5bf609eac",
+          "text": "When the battery is exhausted, the ICE switches on – not to drive the wheels directly, but to power the generator and charge the battery.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 50
+          },
+          "parts": [
+            [
+              39,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:switch-on#s2",
+      "pos": "短语",
+      "glossZh": "激活基因；开启基因表达",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:switch-on#e-7434a39308f0d219",
+          "text": "In the shoot, it switches on NGR5, a key gene that promotes branching.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:switch-on#s3",
+      "pos": "短语",
+      "glossZh": "突然显露某种表情或态度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如突然摆出笑脸。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

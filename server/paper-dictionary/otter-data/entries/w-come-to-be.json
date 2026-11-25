@@ -1,0 +1,91 @@
+{
+  "entryId": "w:come-to-be",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came to be"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "be"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "be"
+      ],
+      [
+        "came",
+        "to",
+        "be"
+      ],
+      [
+        "comes",
+        "to",
+        "be"
+      ],
+      [
+        "coming",
+        "to",
+        "be"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to be",
+  "senses": [
+    {
+      "senseId": "w:come-to-be#s1",
+      "pos": "句型",
+      "glossZh": "产生；形成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-to-be#s2",
+      "pos": "句型",
+      "glossZh": "逐渐成为；后来变得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "后接名词、形容词或过去分词等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

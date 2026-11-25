@@ -1,0 +1,281 @@
+{
+  "entryId": "w:go-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes around",
+    "went around"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "around"
+      ],
+      [
+        "goes",
+        "around"
+      ],
+      [
+        "went",
+        "around"
+      ],
+      [
+        "going",
+        "around"
+      ],
+      [
+        "gone",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go around",
+  "senses": [
+    {
+      "senseId": "w:go-around#s1",
+      "pos": "短语",
+      "glossZh": "绕着走；绕行经过",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-around#e-1701fe194b202663",
+          "text": "He would chatter (吱吱叫) for his next meal, playfully go around the girls, and",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-around#e-ec7a4453dd3e0d02",
+          "text": "In Barcelona, Spain, city planners built “superblocks”, where traffic goes around big groups of buildings and the inner streets are pedestrianised.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 81
+          },
+          "parts": [
+            [
+              70,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-around#s2",
+      "pos": "短语",
+      "glossZh": "四处走动；到多处去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-around#e-b1a1f584779c882d",
+          "text": "Then he went around to local ponds and streams and brought back some plants and animals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-around#e-0f76eb3ee430499a",
+          "text": "Why does Fraser go around the room with the trolley?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-around#s3",
+      "pos": "短语",
+      "glossZh": "传开；流行（消息、疾病等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-around#s4",
+      "pos": "短语",
+      "glossZh": "够大家分",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-around#s5",
+      "pos": "短语",
+      "glossZh": "到某人那里去一趟；去拜访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-around#s6",
+      "pos": "短语",
+      "glossZh": "转动；绕圈运转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-around#s7",
+      "pos": "短语",
+      "glossZh": "复飞；中止着陆后重新爬升",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

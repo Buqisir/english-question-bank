@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 163
+    "mock": 0
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 124
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -240,7 +240,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -289,12 +289,12 @@
       "pos": "n.",
       "glossZh": "底部；底座；底边",
       "pronunciationId": "w:base#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -302,12 +302,12 @@
       "pos": "n.",
       "glossZh": "基础；根基；基础原料",
       "pronunciationId": "w:base#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 10
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -335,6 +335,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:base#s8",
+      "pos": "adj.",
+      "glossZh": "基础的；作为基准的",
+      "pronunciationId": "w:base#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:base#e-ed57eab4ee88e651",
+          "text": "The basics still stand: Greenhouse gases trap heat, and more heat increases the base risks for extreme weather events.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -343,6 +376,9 @@
       "reason": "专业、历史或罕见用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:base-on"
+  ]
 }

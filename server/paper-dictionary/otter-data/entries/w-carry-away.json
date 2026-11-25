@@ -1,0 +1,136 @@
+{
+  "entryId": "w:carry-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "carry",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "carry",
+        "away"
+      ],
+      [
+        "carried",
+        "away"
+      ],
+      [
+        "carries",
+        "away"
+      ],
+      [
+        "carrying",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "carried away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carry (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:carry-away#s1",
+      "pos": "短语",
+      "glossZh": "使着迷；使陶醉",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:carry-away#e-52c34fae0efa161d",
+          "text": "Readers are often carried away by character.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2024-national-a:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 30
+          },
+          "parts": [
+            [
+              18,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be carried away by sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-away#s2",
+      "pos": "短语",
+      "glossZh": "兴奋或激动得忘乎所以",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 get carried away。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-away#s3",
+      "pos": "短语",
+      "glossZh": "带走；搬走；冲走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

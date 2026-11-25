@@ -1,0 +1,147 @@
+{
+  "entryId": "w:me-too",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "me",
+      "too"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "me",
+        "too"
+      ],
+      [
+        "me",
+        "tooed"
+      ],
+      [
+        "me",
+        "tooing"
+      ],
+      [
+        "me",
+        "toos"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "me too",
+  "senses": [
+    {
+      "senseId": "w:me-too#s1",
+      "pos": "短语",
+      "glossZh": "我也是；我也一样",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:me-too#e-8387b676a9451d4e",
+          "text": "These statistics were shocking to me too, but in entirely the opposite way: so few?",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          },
+          "parts": [
+            [
+              34,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:me-too#e-bd8ba68411b6af5c",
+          "text": "After class, when our teacher praised us, I turned to Marcus and said, “I’m glad we got paired up.” He looked down, smiled slightly and replied, “Me too.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 152
+          },
+          "parts": [
+            [
+              146,
+              152
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              152
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:me-too#s2",
+      "pos": "短语",
+      "glossZh": "跟着说“我也是”；附和",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作动词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

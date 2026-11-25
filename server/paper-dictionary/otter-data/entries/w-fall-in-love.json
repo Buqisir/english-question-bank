@@ -1,0 +1,128 @@
+{
+  "entryId": "w:fall-in-love",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell in love"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "in",
+      "love"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "in",
+        "love"
+      ],
+      [
+        "fell",
+        "in",
+        "love"
+      ],
+      [
+        "fallen",
+        "in",
+        "love"
+      ],
+      [
+        "falling",
+        "in",
+        "love"
+      ],
+      [
+        "falls",
+        "in",
+        "love"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall in love",
+  "senses": [
+    {
+      "senseId": "w:fall-in-love#s1",
+      "pos": "短语",
+      "glossZh": "爱上某物；迷上某个地方或活动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-in-love#e-c32a0dd5c5345a0c",
+          "text": "Then, one day, she was walking down the high street in Bishop’s Castle, a few miles away from her home, when she looked into a closed-up shop, saw the dusty and neglected Edwardian shelves and drawers – and fell in love.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 207,
+            "end": 219
+          },
+          "parts": [
+            [
+              207,
+              219
+            ]
+          ],
+          "highlightRanges": [
+            [
+              207,
+              219
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-in-love#s2",
+      "pos": "短语",
+      "glossZh": "爱上某人；坠入爱河",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可接 with sb；复数主语可表示彼此相爱。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

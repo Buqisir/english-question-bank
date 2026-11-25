@@ -1,0 +1,106 @@
+{
+  "entryId": "w:as-it-is",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "it",
+      "is"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "it",
+        "is"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as it is",
+  "senses": [
+    {
+      "senseId": "w:as-it-is#s2",
+      "pos": "短语",
+      "glossZh": "照原样；按现状",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-it-is#e-9193de4154ff61c8",
+          "text": "I realize that what he gave me was more than skills – it was a way of seeing the world not as it is, but as it could be.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          },
+          "parts": [
+            [
+              91,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:as-it-is#s1",
+      "pos": "短语",
+      "glossZh": "按目前的情况；事实上已经如此",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可强调现有负担已经够重。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

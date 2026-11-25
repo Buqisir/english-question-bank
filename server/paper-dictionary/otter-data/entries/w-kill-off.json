@@ -1,0 +1,169 @@
+{
+  "entryId": "w:kill-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kill",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kill",
+        "off"
+      ],
+      [
+        "killed",
+        "off"
+      ],
+      [
+        "killing",
+        "off"
+      ],
+      [
+        "kills",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "killed off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kill (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:kill-off#s1",
+      "pos": "短语",
+      "glossZh": "杀光；彻底消灭；使灭绝",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:kill#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:kill-off#e-edba216ba5fa6037",
+          "text": "Lybarger realized he had nearly killed off an area with a wild seed bank of countless species just to plant a few foreign ones.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kill-off#e-5fc05559fb5b8193",
+          "text": "Lybarger realized that he had killed off an area with a wild seed bank of countless species that were ideal for attracting wildlife, all in order to plant two or three species that weren’t part of the native ecosystem.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:kill-off#s2",
+      "pos": "短语",
+      "glossZh": "（比喻）彻底终止或消除",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:kill#s4"
+      ],
+      "examples": [],
+      "note": "可接计划、兴趣、希望等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kill-off#s3",
+      "pos": "短语",
+      "glossZh": "在剧情中安排某个角色死亡",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

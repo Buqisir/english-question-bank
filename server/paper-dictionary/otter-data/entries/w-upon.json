@@ -35,8 +35,8 @@
     "mock": 69
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 66
+    "gaokao": 2,
+    "mock": 9
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -99,7 +99,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -170,7 +170,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -216,76 +216,151 @@
       ]
     },
     {
-      "senseId": "w:upon#s4",
+      "senseId": "w:upon#s6",
       "pos": "短语",
-      "glossZh": "即将来到",
+      "glossZh": "使某人认识到（impress upon）",
       "pronunciationId": "w:upon#p-main",
-      "note": "be upon sb。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:upon#s7",
+      "pos": "短语",
+      "glossZh": "轻视；看不起（look down upon）",
+      "pronunciationId": "w:upon#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:upon#e-b494037de23d2258",
-          "text": "Summer is upon us.",
+          "exampleId": "w:upon#e-c85b24907717cc00",
+          "text": "When we look down upon waiting, we risk losing part of our shared humanity.",
           "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-putian-2026-05-adaptability-exam:36",
+              "option": "G",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 10,
-            "end": 14
+            "start": 18,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:upon#e-de05b5460190a3e0",
+          "text": "I felt looked down upon, degraded, and rejected that day in seventh grade.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:upon#e-007a292ac679cab9",
+          "text": "In America, financial independence is a virtue, and if someone pays for you, they seem to look down upon you.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 104
           }
         }
       ]
     },
     {
-      "senseId": "w:upon#s5",
+      "senseId": "w:upon#s8",
       "pos": "短语",
-      "glossZh": "仔细思考",
+      "glossZh": "偶然想到；突然想到（hit upon）",
       "pronunciationId": "w:upon#p-main",
-      "note": "reflect upon。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:upon#s9",
+      "pos": "短语",
+      "glossZh": "不赞同（frown upon）",
+      "pronunciationId": "w:upon#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:upon#e-2b2497aafb6a056f",
-          "text": "reflect upon",
+          "exampleId": "w:upon#e-b1ab875ee3e14829",
+          "text": "Napping is frowned upon in a productivity-driven society, but it’s how we’re hardwired.",
           "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices",
             "locator": {
-              "question": 57,
-              "questionId": "question:paper-gaokao-2024-national-a:57",
-              "option": "A",
-              "sentence": 1
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices:2",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 8,
-            "end": 12
+            "start": 19,
+            "end": 23
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-upon-sb",
+    "w:build-upon",
+    "w:chance-upon",
+    "w:hit-upon",
+    "w:impress-sth-upon-sb",
+    "w:once-upon-a-time",
+    "w:reflect-upon",
+    "w:smile-upon",
+    "w:touch-upon"
+  ]
 }

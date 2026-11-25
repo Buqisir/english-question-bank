@@ -1,0 +1,202 @@
+{
+  "entryId": "w:switch-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "switch",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "switch",
+        "off"
+      ],
+      [
+        "switched",
+        "off"
+      ],
+      [
+        "switches",
+        "off"
+      ],
+      [
+        "switching",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "switch off",
+      "tags": []
+    },
+    {
+      "form": "switched off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "switch (sth) off",
+  "senses": [
+    {
+      "senseId": "w:switch-off#s1",
+      "pos": "短语",
+      "glossZh": "关掉设备；切断电源或连接",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:switch#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:switch-off#e-63f48fc6de4f46f7",
+          "text": "Even after the power is switched off, the resistance level remains, thus allowing memristors to function like tiny memory units inside a computer.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:switch-off#e-77e42e2299908d70",
+          "text": "Plugs such as the Eve Energy are able to give you remote access to your devices and appliances through your smartphone and switch off any that have been left on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 133
+          },
+          "parts": [
+            [
+              123,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:switch-off#e-93d1732024902e99",
+          "text": "To compare the effectiveness of handwritten and typed classroom notes, Pam Mueller from Princeton and Daniel Oppenheimer from UCLA conducted experiments in a simulated（模拟的）classroom environment, where groups of students – sample sizes ranged from 67 to 151 – watched video lectures and took notes either by hand or on laptops, with the Internet switched off and other programs disabled to avoid distraction.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 345,
+            "end": 357
+          },
+          "parts": [
+            [
+              345,
+              357
+            ]
+          ],
+          "highlightRanges": [
+            [
+              345,
+              357
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:switch-off#s2",
+      "pos": "短语",
+      "glossZh": "走神；不再关注",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:switch-off#s3",
+      "pos": "短语",
+      "glossZh": "轮换；交替进行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

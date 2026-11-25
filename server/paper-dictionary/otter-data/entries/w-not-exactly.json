@@ -1,0 +1,200 @@
+{
+  "entryId": "w:not-exactly",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "exactly"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "exactly"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not exactly",
+  "senses": [
+    {
+      "senseId": "w:not-exactly#s1",
+      "pos": "短语",
+      "glossZh": "并不算；并不是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:exactly#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-exactly#e-5736a6d2fd4bdd24",
+          "text": "Of course, with its 2,672 pages, it’s not exactly short.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-exactly#e-ab67f327ca9d8696",
+          "text": "We were coming all the way across Western Australia to get there – not exactly a “lap of the map”, but still a big trip.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-exactly#e-114d5822eb5d88be",
+          "text": "This suggests that at any time in our development, a large-scale breakdown in the technological system would spell not exactly our doom, but our complete reorganization.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 126
+          },
+          "parts": [
+            [
+              115,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              126
+            ]
+          ]
+        }
+      ],
+      "note": "常用于委婉或反讽地否定某种描述。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:not-exactly#s2",
+      "pos": "短语",
+      "glossZh": "不完全是；不完全吻合",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-exactly#e-7ab1097b6d92a43e",
+          "text": "Now, whenever I bake, I still hear my grandmother’s question: “Is it pale enough yet?” It is not exactly a rule.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 104
+          },
+          "parts": [
+            [
+              93,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

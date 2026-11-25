@@ -1,0 +1,96 @@
+{
+  "entryId": "w:keep-in-touch-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "in",
+      "touch",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "in",
+        "touch",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep in touch with",
+  "senses": [
+    {
+      "senseId": "w:keep-in-touch-with#s1",
+      "pos": "短语",
+      "glossZh": "与某人保持联系",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:touch#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-in-touch-with#e-0e4198f1fd7f7f26",
+          "text": "Plus, you will probably only get the numbers of the handful of students you'll actually keep in touch with.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:15",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 106
+          },
+          "parts": [
+            [
+              88,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -104,8 +104,8 @@
     "mock": 6564
   },
   "unassignedCounts": {
-    "gaokao": 1177,
-    "mock": 6560
+    "gaokao": 1190,
+    "mock": 6561
   },
   "senses": [
     {
@@ -460,141 +460,6 @@
       ]
     },
     {
-      "senseId": "w:do#s8",
-      "pos": "短语",
-      "glossZh": "处理；利用",
-      "pronunciationId": "w:do#p-main",
-      "note": "do with sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:do#e-831f9955d3c98510",
-          "text": "So what should cheese makers do with the waste?",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:do#e-c94e7068e81c0044",
-          "text": "What does the woman suggest the man do with his big table?",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:do#s9",
-      "pos": "短语",
-      "glossZh": "没有……也行；将就",
-      "pronunciationId": "w:do#p-main",
-      "note": "do without sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:do#e-bf6e5c933df79e78",
-          "text": "The only __40__ to pay for the groceries was to take off the __41__ she could do without: a bottle of rubbing alcohol （医用酒精）and a bar of soap.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 80
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:do#s10",
-      "pos": "短语",
-      "glossZh": "尽力",
-      "pronunciationId": "w:do#p-main",
-      "note": "do one's best。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:do#e-9ab94c42958fd1bf",
-          "text": "We did our best for him but he started to get depressed and fed up with life.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:do#s11",
-      "pos": "短语",
-      "glossZh": "废除；去掉",
-      "pronunciationId": "w:do#p-main",
-      "note": "do away with sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:do#s12",
       "pos": "v.",
       "glossZh": "游览；走遍",
@@ -741,40 +606,6 @@
       ]
     },
     {
-      "senseId": "w:do#s17",
-      "pos": "短语",
-      "glossZh": "与……有关",
-      "pronunciationId": "w:do#p-main",
-      "note": "(have) to do with sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:do#e-f652adc2194c383f",
-          "text": "Age isn’t the only factor; I’d say it’s also to do with the makeup of your household.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:do#s18",
       "pos": "v.",
       "glossZh": "帮（某人）一个忙",
@@ -841,6 +672,27 @@
       "reason": "专门缩写或低频俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:do-away-with-sth",
+    "w:do-business",
+    "w:do-good",
+    "w:do-in",
+    "w:do-justice-to-sb-sth",
+    "w:do-ones-best",
+    "w:do-ones-part",
+    "w:do-sb-a-world-of-good",
+    "w:do-the-job",
+    "w:do-the-talking",
+    "w:do-up",
+    "w:do-with-sth",
+    "w:do-without-sth",
+    "w:do-you-mind",
+    "w:how-do-you-mean",
+    "w:what-do-you-know",
+    "w:will-do"
+  ]
 }

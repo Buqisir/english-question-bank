@@ -1,0 +1,75 @@
+{
+  "entryId": "w:chip-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "chip",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chip",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chip in",
+  "senses": [
+    {
+      "senseId": "w:chip-in#s1",
+      "pos": "短语",
+      "glossZh": "凑钱；出一份力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:chip#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:chip-in#s2",
+      "pos": "短语",
+      "glossZh": "插话；插上一句",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:chip#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

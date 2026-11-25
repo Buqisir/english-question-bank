@@ -1,0 +1,103 @@
+{
+  "entryId": "w:be-upon-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "upon",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "upon",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "is upon",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be upon sb",
+  "senses": [
+    {
+      "senseId": "w:be-upon-sb#s1",
+      "pos": "短语",
+      "glossZh": "（时节或事件）已经来临或即将到来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:upon#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-upon-sb#e-9c7f239d4f4d827c",
+          "text": "Summer is upon us.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          },
+          "parts": [
+            [
+              7,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

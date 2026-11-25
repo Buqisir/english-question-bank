@@ -1,0 +1,125 @@
+{
+  "entryId": "w:come-down-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "down",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "down",
+        "with"
+      ],
+      [
+        "came",
+        "down",
+        "with"
+      ],
+      [
+        "comes",
+        "down",
+        "with"
+      ],
+      [
+        "coming",
+        "down",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "come down with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come down with sth",
+  "senses": [
+    {
+      "senseId": "w:come-down-with#s1",
+      "pos": "短语",
+      "glossZh": "得（某种病）；开始出现病症",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-down-with#e-b25a543b7a279db4",
+          "text": "“It’s unclear why children come down with DMDD, yet it possibly involves genes, hard experiences and parenting ways,” Evans says.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 41
+          },
+          "parts": [
+            [
+              27,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-down-with#s2",
+      "pos": "短语",
+      "glossZh": "掏钱付款",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

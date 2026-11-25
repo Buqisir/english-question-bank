@@ -1,0 +1,112 @@
+{
+  "entryId": "w:run-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran in",
+    "runs in"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "in"
+      ],
+      [
+        "ran",
+        "in"
+      ],
+      [
+        "runs",
+        "in"
+      ],
+      [
+        "running",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:run-in#s1",
+      "pos": "短语",
+      "glossZh": "磨合（新发动机或新机器）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-in#s2",
+      "pos": "短语",
+      "glossZh": "逮捕；把某人带到警局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-in#s3",
+      "pos": "短语",
+      "glossZh": "（橄榄球）带球跑入得分区得分",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-in#s4",
+      "pos": "短语",
+      "glossZh": "（排版时）把文字接排在同一行或同一段",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,201 @@
+{
+  "entryId": "w:the-more-the-more",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "more",
+      {
+        "slot": "…"
+      },
+      ",",
+      "the",
+      "more",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "more",
+        {
+          "slot": "…"
+        },
+        ",",
+        "the",
+        "more",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "the more , the more",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the more …, the more …",
+  "senses": [
+    {
+      "senseId": "w:the-more-the-more#s1",
+      "pos": "短语",
+      "glossZh": "越……就越……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-more-the-more#e-f7b0159ff97258d3",
+          "text": "You’ll soon find that the more patience you practice, the more you start to apply it to other, more annoying situations.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 62
+          },
+          "parts": [
+            [
+              22,
+              30
+            ],
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ],
+            [
+              52,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-more-the-more#e-3e5eeb2602d27ffe",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 30
+          },
+          "parts": [
+            [
+              4,
+              12
+            ],
+            [
+              20,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ],
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-more-the-more#e-7ce3fa1a1b73fa09",
+          "text": "The more it is used, the more it drives down the price of electricity from all sources.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 29
+          },
+          "parts": [
+            [
+              0,
+              8
+            ],
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ],
+            [
+              19,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

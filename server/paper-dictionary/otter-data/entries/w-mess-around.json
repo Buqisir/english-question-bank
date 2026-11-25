@@ -1,0 +1,112 @@
+{
+  "entryId": "w:mess-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mess",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mess",
+        "around"
+      ],
+      [
+        "messed",
+        "around"
+      ],
+      [
+        "messes",
+        "around"
+      ],
+      [
+        "messing",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mess around",
+  "senses": [
+    {
+      "senseId": "w:mess-around#s1",
+      "pos": "短语",
+      "glossZh": "瞎忙活；随便摆弄",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "表示摆弄某物时常接 with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mess-around#s2",
+      "pos": "短语",
+      "glossZh": "开玩笑；闹着玩",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mess-around#s3",
+      "pos": "短语",
+      "glossZh": "与人发生随意的性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mess-around#s4",
+      "pos": "短语",
+      "glossZh": "随意跳舞",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

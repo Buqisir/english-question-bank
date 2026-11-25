@@ -74,8 +74,8 @@
     "mock": 95
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 90
+    "gaokao": 4,
+    "mock": 12
   },
   "senses": [
     {
@@ -86,7 +86,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -222,74 +222,6 @@
       ]
     },
     {
-      "senseId": "w:cross#s3",
-      "pos": "短语",
-      "glossZh": "掠过心头；想到",
-      "pronunciationId": "w:cross#p-main",
-      "note": "cross one’s mind。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cross#e-3ee5c6fe7cff413e",
-          "text": "When you were trying to figure out what to buy for the environmentalist on your holiday list, fur probably didn’t cross your mind.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 119
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cross#s4",
-      "pos": "短语",
-      "glossZh": "划掉；删去",
-      "pronunciationId": "w:cross#p-main",
-      "note": "cross out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cross#e-08aad3d44a2c2c2a",
-          "text": "As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cross#s5",
       "pos": "n.",
       "glossZh": "十字；十字架；叉形记号",
@@ -297,7 +229,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -330,7 +262,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -400,6 +332,91 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:cross#s9",
+      "pos": "n.",
+      "glossZh": "横渡；穿越（crossing）",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-59455cdd466af4c0",
+          "text": "There’s no place to rest and refuel on the water, so birds may wait for ideal atmospheric conditions, such as favorable winds, before making an offshore crossing.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 161
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s10",
+      "pos": "n.",
+      "glossZh": "供人或动物穿越道路等的通道（crossing）",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-3eb4c4cdffd644df",
+          "text": "I had quite a time locating him, but I eventually found him standing on a traffic island, tears coursing down his cheeks because he couldn’t figure out how to navigate the crossing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 180
+          }
+        },
+        {
+          "exampleId": "w:cross#e-b9bc8a48b7e05c74",
+          "text": "In 2022, a wildlife crossing in Washington State was used more than 5,000 times by animals such as deer and coyotes.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -408,6 +425,13 @@
       "reason": "数理、体育或纸牌专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cross-ones-mind",
+    "w:cross-out",
+    "w:cross-over"
+  ]
 }

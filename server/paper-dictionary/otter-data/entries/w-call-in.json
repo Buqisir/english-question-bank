@@ -1,0 +1,228 @@
+{
+  "entryId": "w:call-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "call",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "in"
+      ],
+      [
+        "called",
+        "in"
+      ],
+      [
+        "calling",
+        "in"
+      ],
+      [
+        "calls",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "call in",
+      "tags": []
+    },
+    {
+      "form": "called in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:call-in#s1",
+      "pos": "短语",
+      "glossZh": "打电话联系；来电咨询、报告或请假",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-in#e-ad1f9921f3d9096c",
+          "text": "Call in with questions.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:call-in#s2",
+      "pos": "短语",
+      "glossZh": "请（专业人员等）来帮忙",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-in#e-3c3d81adae263946",
+          "text": "At the hospital, child psychiatrist Dr. Victor Fornari was called in to help.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          },
+          "parts": [
+            [
+              59,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:call-in#e-f8dede4210385685",
+          "text": "Call in a repairman.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:call-in#s3",
+      "pos": "短语",
+      "glossZh": "顺道拜访；短暂造访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-in#s4",
+      "pos": "短语",
+      "glossZh": "召回（商品）；收回（流通物）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-in#s5",
+      "pos": "短语",
+      "glossZh": "要求立即偿还（贷款或债务）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

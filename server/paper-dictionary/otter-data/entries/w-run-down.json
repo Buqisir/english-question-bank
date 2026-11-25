@@ -1,0 +1,170 @@
+{
+  "entryId": "w:run-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran down",
+    "running down"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "down"
+      ],
+      [
+        "ran",
+        "down"
+      ],
+      [
+        "running",
+        "down"
+      ],
+      [
+        "runs",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:run-down#s1",
+      "pos": "短语",
+      "glossZh": "（电池）逐渐耗尽；耗尽（电量）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-down#e-40eabcf4e47e5363",
+          "text": "A small device called BlinkWise clips (夹住) onto regular glasses and uses AI to read your eyelid movements一 without cameras, without cloud data, and without running down your battery.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 168
+          },
+          "parts": [
+            [
+              156,
+              168
+            ]
+          ],
+          "highlightRanges": [
+            [
+              156,
+              168
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-down#s2",
+      "pos": "短语",
+      "glossZh": "开车撞倒；撞伤",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-down#s3",
+      "pos": "短语",
+      "glossZh": "贬低；说……的坏话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-down#s4",
+      "pos": "短语",
+      "glossZh": "追查到；追踪找到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-down#s5",
+      "pos": "短语",
+      "glossZh": "快速过一遍（清单）；简述要点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-down#s6",
+      "pos": "短语",
+      "glossZh": "逐步缩减（业务、库存等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

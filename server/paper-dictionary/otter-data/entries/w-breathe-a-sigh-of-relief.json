@@ -1,0 +1,103 @@
+{
+  "entryId": "w:breathe-a-sigh-of-relief",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "breathe",
+      "a",
+      "sigh",
+      "of",
+      "relief"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "breathe",
+        "a",
+        "sigh",
+        "of",
+        "relief"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "breathed a sigh of relief",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "breathe a sigh of relief",
+  "senses": [
+    {
+      "senseId": "w:breathe-a-sigh-of-relief#s1",
+      "pos": "短语",
+      "glossZh": "（担忧解除后）松一口气",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:breathe#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:breathe-a-sigh-of-relief#e-d98e41fff1116ab3",
+          "text": "The man froze for a second, but when he saw the skinny boy he breathed a sigh of relief.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 87
+          },
+          "parts": [
+            [
+              62,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

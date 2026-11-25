@@ -1,0 +1,276 @@
+{
+  "entryId": "w:be-known-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "known",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "known",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are known as",
+      "tags": []
+    },
+    {
+      "form": "been known as",
+      "tags": []
+    },
+    {
+      "form": "is known as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be known as",
+  "senses": [
+    {
+      "senseId": "w:be-known-as#s1",
+      "pos": "短语",
+      "glossZh": "被称为；以……之名为人所知",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:know#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-known-as#e-b1681fe415b007ac",
+          "text": "Ludlow is known as the Foodie Center of England.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-as#e-9d96708ea839c590",
+          "text": "This accidental harvest is known as bycatch, and every year it kills millions of marine animals.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 35
+          },
+          "parts": [
+            [
+              24,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-as#e-16d408ed434f6799",
+          "text": "This phenomenon is known as “greenhushing” and it could be just as dangerous as greenwashing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 26
+      }
+    },
+    {
+      "senseId": "w:be-known-as#s2",
+      "pos": "短语",
+      "glossZh": "被公认为（某类人或事物）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-known-as#e-c613c52b3ee2408a",
+          "text": "Khoomei, a traditional art form from Mongolia, is known as a kind of throat singing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-as#e-0a996bf41d90d085",
+          "text": "Drug development has long been known as a high-risk and high-cost process.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 39
+          },
+          "parts": [
+            [
+              26,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-as#e-62cab563f1d30ae5",
+          "text": "Above all we should be known as a school devoted to developing healthy minds and bodies, always ready to cooperate and compete.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

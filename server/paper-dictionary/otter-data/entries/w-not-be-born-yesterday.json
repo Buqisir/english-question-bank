@@ -1,0 +1,64 @@
+{
+  "entryId": "w:not-be-born-yesterday",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "be",
+      "born",
+      "yesterday"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "be",
+        "born",
+        "yesterday"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not be born yesterday",
+  "senses": [
+    {
+      "senseId": "w:not-be-born-yesterday#s1",
+      "pos": "短语",
+      "glossZh": "没那么容易受骗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:yesterday#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

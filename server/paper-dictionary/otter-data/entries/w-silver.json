@@ -71,8 +71,8 @@
     "mock": 40
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 30
+    "gaokao": 2,
+    "mock": 18
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -116,7 +116,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -265,113 +265,6 @@
       ]
     },
     {
-      "senseId": "w:silver#s5",
-      "pos": "短语",
-      "glossZh": "不幸中的一线希望",
-      "pronunciationId": "w:silver#p-main",
-      "note": "silver lining。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:silver#e-fe3ac139b3001628",
-          "text": "Martin sees a silver lining, however: She believes that anthropomorphism（拟人化）“provides an opportunity to change stereotypes.” When women are put into positions of leadership like running companies, it reduces negative stereotypes about women.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:silver#e-a23a123626bbfda6",
-          "text": "Every cloud has a silver lining.",
-          "source": {
-            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
-            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-mock-shandong-binzhou-2026-03-first:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 18,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:silver#s6",
-      "pos": "短语",
-      "glossZh": "能轻易解决难题的办法",
-      "pronunciationId": "w:silver#p-main",
-      "note": "silver bullet，常用于否定句。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:silver#e-3a8a2de5dbc7b26a",
-          "text": "It's an exciting approach, but she warns that this method is not a silver bullet for all methane emissions.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
-            "paperTitle": "南昌市2025年高三年级九月测试英语",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 67,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:silver#e-ebc4e27347abbfaf",
-          "text": "While there is no silver bullet, practical steps – rooted in policy and personal awareness – can narrow the gap.",
-          "source": {
-            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
-            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
-            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 18,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:silver#s7",
       "pos": "adj.",
       "glossZh": "第二十五周年的",
@@ -405,6 +298,12 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:silver-bullet",
+    "w:silver-lining"
+  ]
 }

@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-vain",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "vain"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "vain"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in vain",
+  "senses": [
+    {
+      "senseId": "w:in-vain#s1",
+      "pos": "短语",
+      "glossZh": "徒劳地；白费力气",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s63"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-vain#e-50fc9ce4b783f009",
+          "text": "His efforts made in vain.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-vain#e-321cdb6ad7866771",
+          "text": "With eyebrows wrinkled in frustration, I pulled my hair and racked my brains in vain for a single idea for this assignment.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
+          },
+          "parts": [
+            [
+              77,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-vain#e-a35b8f3c86b9cea2",
+          "text": "But all my efforts were in vain.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 31
+          },
+          "parts": [
+            [
+              24,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,98 @@
+{
+  "entryId": "w:make-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "good"
+      ],
+      [
+        "made",
+        "good"
+      ],
+      [
+        "makes",
+        "good"
+      ],
+      [
+        "making",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make good",
+  "senses": [
+    {
+      "senseId": "w:make-good#s1",
+      "pos": "短语",
+      "glossZh": "（在事业或生活中）取得成功",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-good#s2",
+      "pos": "短语",
+      "glossZh": "履行承诺；兑现诺言或威胁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 make good on a promise。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-good#s3",
+      "pos": "短语",
+      "glossZh": "弥补损失；赔偿或修复损坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 make good the damage。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -48,8 +48,8 @@
     "mock": 261
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 260
+    "gaokao": 4,
+    "mock": 67
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 175
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -184,7 +184,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -246,90 +246,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:soon#s4",
-      "pos": "短语",
-      "glossZh": "迟早",
-      "pronunciationId": "w:soon#p-main",
-      "note": "sooner or later。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:soon#e-50821dd9ed767e04",
-          "text": "It will come to an end sooner or later.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:24",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:soon#s5",
-      "pos": "短语",
-      "glossZh": "尽快",
-      "pronunciationId": "w:soon#p-main",
-      "note": "as soon as possible。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:soon#e-574b6a1ee7724ece",
-          "text": "Because the animal shelter needed the donation as soon as possible.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:26",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:soon#s6",
-      "pos": "短语",
-      "glossZh": "宁愿",
-      "pronunciationId": "w:soon#p-main",
-      "note": "would sooner (do something)。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -338,6 +254,13 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-soon-as",
+    "w:as-soon-as-possible",
+    "w:soon-enough"
+  ]
 }

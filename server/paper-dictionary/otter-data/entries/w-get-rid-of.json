@@ -1,0 +1,165 @@
+{
+  "entryId": "w:get-rid-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "rid",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "rid",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting rid of",
+      "tags": []
+    },
+    {
+      "form": "got rid of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get rid of",
+  "senses": [
+    {
+      "senseId": "w:get-rid-of#s1",
+      "pos": "短语",
+      "glossZh": "摆脱；处理掉；除去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-rid-of#e-24277e4cb9527e5c",
+          "text": "It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 31
+          },
+          "parts": [
+            [
+              21,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-rid-of#e-fe1453db42472902",
+          "text": "Getting rid of stuff you don’t need means you need fewer boxes and fewer packaging materials.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-rid-of#e-cbd6bcf79defaa50",
+          "text": "The main goal of minimalism is to get rid of the things that don’t contribute to the value of your daily life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          },
+          "parts": [
+            [
+              34,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

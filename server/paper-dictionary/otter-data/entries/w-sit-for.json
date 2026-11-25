@@ -1,0 +1,113 @@
+{
+  "entryId": "w:sit-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting for"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "for"
+      ],
+      [
+        "sitting",
+        "for"
+      ],
+      [
+        "sat",
+        "for"
+      ],
+      [
+        "sits",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:sit-for#s1",
+      "pos": "短语",
+      "glossZh": "参加考试",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "sit for an exam",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-for#s2",
+      "pos": "短语",
+      "glossZh": "给艺术家当模特；坐着让人画像",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "sit for a portrait",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-for#s3",
+      "pos": "短语",
+      "glossZh": "替人临时照看孩子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-for#s4",
+      "pos": "短语",
+      "glossZh": "在议会中代表某选区或政党",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

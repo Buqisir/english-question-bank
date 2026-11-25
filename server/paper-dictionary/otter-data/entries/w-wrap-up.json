@@ -1,0 +1,164 @@
+{
+  "entryId": "w:wrap-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wrap",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wrap",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wrap up",
+      "tags": []
+    },
+    {
+      "form": "wrapped up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wrap (sth) up",
+  "senses": [
+    {
+      "senseId": "w:wrap-up#s1",
+      "pos": "短语",
+      "glossZh": "结束；收尾",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wrap#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wrap-up#e-73592a8a8cd76dd6",
+          "text": "What does the underlined phrase “wrapped up” in the first paragraph mean?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wrap-up#e-9101e57f33976bfb",
+          "text": "Get together to wrap up the details.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wrap-up#e-2d96a4c2969e6156",
+          "text": "Amalia Garcia Lopez and Carlos Lafuente Picazo, two final-year university students from Spain, have just wrapped up a nine-day trip to Shanghai – a city they might one day consider calling home.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 115
+          },
+          "parts": [
+            [
+              105,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

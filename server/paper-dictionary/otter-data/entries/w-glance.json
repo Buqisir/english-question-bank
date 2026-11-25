@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 54
+    "mock": 9
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -239,93 +239,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:glance#s4",
-      "pos": "短语",
-      "glossZh": "乍一看",
-      "pronunciationId": "w:glance#p-main",
-      "note": "at first glance。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:glance#e-919375427a0a279a",
-          "text": "At first glance, the polymer lantern seems simple.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
-            "paperTitle": "2026届广州市高三年级调研测试英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:glance#e-6e1732f7bebdad61",
-          "text": "At first glance, the idea of living a minimalist（极简主义的）lifestyle may sound difficult, restrictive, or even boring.",
-          "source": {
-            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
-            "paperTitle": "惠州市2026届高三第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:glance#s5",
-      "pos": "短语",
-      "glossZh": "一眼就能看明白",
-      "pronunciationId": "w:glance#p-main",
-      "note": "at a glance。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:glance#e-b9a69bdbd25daec7",
-          "text": "Your Schedule at a Glance (Minimum 2-week commitment):",
-          "source": {
-            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
-            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
-            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-a:9",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -334,6 +247,13 @@
       "reason": "矿物名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-a-glance",
+    "w:at-first-glance",
+    "w:steal-a-glance"
+  ]
 }

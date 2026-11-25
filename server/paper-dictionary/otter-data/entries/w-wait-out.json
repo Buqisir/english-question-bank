@@ -1,0 +1,109 @@
+{
+  "entryId": "w:wait-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "waiting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "wait",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wait",
+        "out"
+      ],
+      [
+        "waiting",
+        "out"
+      ],
+      [
+        "waited",
+        "out"
+      ],
+      [
+        "waits",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wait out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wait out sth",
+  "senses": [
+    {
+      "senseId": "w:wait-out#s1",
+      "pos": "短语",
+      "glossZh": "等到（风暴、困难时期等）过去；熬过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wait-out#e-c1a483a07f1e6b5e",
+          "text": "“We need to drive off and wait out this storm.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

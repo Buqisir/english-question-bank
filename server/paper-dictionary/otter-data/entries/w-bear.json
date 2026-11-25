@@ -462,6 +462,13 @@
       "reason": "牌戏和地区俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bear-down",
+    "w:bear-fruit",
+    "w:bear-in-mind",
+    "w:bear-off",
+    "w:bear-witness-to-sth"
+  ]
 }

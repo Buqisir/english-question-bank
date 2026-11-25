@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 441
+    "mock": 243
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 96
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 91
       },
       "folded": false,
       "examples": [
@@ -296,7 +296,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -329,7 +329,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -359,12 +359,12 @@
       "pos": "adj.",
       "glossZh": "完好无损的",
       "pronunciationId": "w:sound#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -419,6 +419,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:sound#s11",
+      "pos": "adv.",
+      "glossZh": "沉沉地；酣然地",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-709f679ac888946f",
+          "text": "One sleepless night, I found Casey sound asleep on the couch, breathing deeply and calmly.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:sound#e-af5225758abae0b7",
+          "text": "Often both were sound asleep, a tangle of dark fur, blond hair, small hands and huge paws.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -427,6 +479,9 @@
       "reason": "罕用义或行业专称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:safe-and-sound"
+  ]
 }

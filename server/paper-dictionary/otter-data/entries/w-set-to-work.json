@@ -1,0 +1,120 @@
+{
+  "entryId": "w:set-to-work",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "to",
+      "work"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "to",
+        "work"
+      ],
+      [
+        "sets",
+        "to",
+        "work"
+      ],
+      [
+        "setting",
+        "to",
+        "work"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set to work",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set (sb) to work",
+  "senses": [
+    {
+      "senseId": "w:set-to-work#s1",
+      "pos": "短语",
+      "glossZh": "开始工作；着手做事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-to-work#e-53a50b4de1a8cc47",
+          "text": "Laughing in disbelief, they set to work with fresh energy.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 39
+          },
+          "parts": [
+            [
+              28,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-to-work#s2",
+      "pos": "短语",
+      "glossZh": "安排某人开始工作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

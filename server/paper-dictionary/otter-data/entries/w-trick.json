@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 107
+    "mock": 25
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -405,13 +405,84 @@
       "pos": "n.",
       "glossZh": "恶作剧",
       "pronunciationId": "w:trick#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:trick#s7",
+      "pos": "短语",
+      "glossZh": "奏效；达到预期效果",
+      "pronunciationId": "w:trick#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:trick#e-253f7a9353598d97",
+          "text": "can actually do the trick.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:trick#e-20e725ef0a478422",
+          "text": "They’d used it on a few of the moon missions, and he thought it might do the trick for Stevie.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:trick#e-74290835ad46add0",
+          "text": "While olive oil is a popular choice, other healthy fats like avocado, nuts, or canola oil can also do the trick.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -420,6 +491,6 @@
       "reason": "专门或过时用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

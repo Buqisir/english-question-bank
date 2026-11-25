@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 21
+    "mock": 13
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -170,7 +170,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -241,7 +241,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -300,11 +300,10 @@
       "examples": []
     },
     {
-      "senseId": "w:junior#s6",
+      "senseId": "w:junior#s7",
       "pos": "短语",
-      "glossZh": "初中",
+      "glossZh": "（英国）小学高年级学校（junior school）",
       "pronunciationId": "w:junior#p-main",
-      "note": "junior high school。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -313,60 +312,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:junior#e-464c5fe11c5cfb50",
-          "text": "Tom, a hard-working junior high school student, was buried in thick review books and exercise papers all day long.",
+          "exampleId": "w:junior#e-d365a7dca5781714",
+          "text": "The group also works with a junior school on environmental awareness projects, helping young students learn to mend their connection to the natural world.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:4",
+              "sentence": 5
             }
           },
           "tier": "mock",
           "target": {
-            "start": 20,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:junior#e-a97e0046c3eef388",
-          "text": "She grew up like other kids, and showed no special talent until she started learning Olympiad mathematics in junior high school – this unlocked her potential and surprised everyone.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 109,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:junior#e-8b40383fbfedf27b",
-          "text": "They’d stuck together from elementary school to junior high school, claiming bus seats, sitting together at lunch, and being the best in gym teams.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
-            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
-            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 48,
-            "end": 54
+            "start": 28,
+            "end": 34
           }
         }
       ]
@@ -378,6 +339,8 @@
       "reason": "专名或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

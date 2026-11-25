@@ -1,0 +1,104 @@
+{
+  "entryId": "w:think-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "thinking on"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "on"
+      ],
+      [
+        "thinking",
+        "on"
+      ],
+      [
+        "thinks",
+        "on"
+      ],
+      [
+        "thought",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think on sth",
+  "senses": [
+    {
+      "senseId": "w:think-on#s1",
+      "pos": "短语",
+      "glossZh": "认真思量；仔细考虑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-on#e-33759c3eb2023f05",
+          "text": "I kept these sights in mind, thinking on time itself.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

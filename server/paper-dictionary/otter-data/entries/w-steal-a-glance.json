@@ -1,0 +1,63 @@
+{
+  "entryId": "w:steal-a-glance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "steal",
+      "a",
+      "glance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "steal",
+        "a",
+        "glance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "steal a glance",
+  "senses": [
+    {
+      "senseId": "w:steal-a-glance#s1",
+      "pos": "短语",
+      "glossZh": "偷偷瞥一眼",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:steal#s5"
+      ],
+      "examples": [],
+      "note": "常接 at sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

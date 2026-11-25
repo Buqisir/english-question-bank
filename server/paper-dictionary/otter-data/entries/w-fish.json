@@ -59,8 +59,8 @@
     "mock": 145
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 145
+    "gaokao": 2,
+    "mock": 2
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -352,54 +352,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:fish#s5",
-      "pos": "短语",
-      "glossZh": "（从某处）摸出",
-      "pronunciationId": "w:fish#p-main",
-      "note": "fish out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fish#e-1e01618d10445e32",
-          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 42
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:fish#s6",
-      "pos": "短语",
-      "glossZh": "旁敲侧击地索取",
-      "pronunciationId": "w:fish#p-main",
-      "note": "fish for compliments 设法引人夸奖。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -412,6 +364,12 @@
       "reason": "航海专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fish-for-compliments",
+    "w:fish-out"
+  ]
 }

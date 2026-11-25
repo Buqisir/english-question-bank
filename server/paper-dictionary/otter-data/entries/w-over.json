@@ -35,8 +35,8 @@
     "mock": 1073
   },
   "unassignedCounts": {
-    "gaokao": 12,
-    "mock": 1072
+    "gaokao": 34,
+    "mock": 893
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 63
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -331,7 +331,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -364,7 +364,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -435,7 +435,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -506,7 +506,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -560,7 +560,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -613,7 +613,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -672,322 +672,6 @@
       ]
     },
     {
-      "senseId": "w:over#s12",
-      "pos": "短语",
-      "glossZh": "一再；反复",
-      "pronunciationId": "w:over#p-main",
-      "note": "over and over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-cf44e4d00c64264f",
-          "text": "This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb's-quarters, foxtails, and the king of weeds, the pretty purple thistle.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:over#e-8bd2ea5017d01602",
-          "text": "Once in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s13",
-      "pos": "短语",
-      "glossZh": "接管",
-      "pronunciationId": "w:over#p-main",
-      "note": "take over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-4a1df9a878eabce7",
-          "text": "What will remain of us when artificial intelligence takes over will be our creativity, and it is our creative spirit, our visionary sense of freshness, that has been our strength for centuries.\"",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:over#e-fb5b5adc6e8d97b9",
-          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:over#e-92be2b7a877a9a1b",
-          "text": "Just see how cars have been taken over our cities.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2022-national-b:writing-short-error-correction:8",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s14",
-      "pos": "短语",
-      "glossZh": "靠边停车",
-      "pronunciationId": "w:over#p-main",
-      "note": "pull over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-0214a698d010104b",
-          "text": "Right as I was about to give up, a Mexican family in a small truck pulled over, and the father bounded out.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s15",
-      "pos": "短语",
-      "glossZh": "从……中恢复；克服",
-      "pronunciationId": "w:over#p-main",
-      "note": "get over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-8fabe343b1bf6785",
-          "text": "Getting over an injury.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:over#e-a7dd559e6ad545ce",
-          "text": "Well, he’ll get over it, I reasoned.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s16",
-      "pos": "短语",
-      "glossZh": "移交",
-      "pronunciationId": "w:over#p-main",
-      "note": "hand over；turn over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-8b507cfdedd476e2",
-          "text": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s17",
-      "pos": "短语",
-      "glossZh": "剩余",
-      "pronunciationId": "w:over#p-main",
-      "note": "left over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-a1d5834a1a18f7d2",
-          "text": "Donate whatever clothes are left over",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-national-a:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:over#s18",
-      "pos": "短语",
-      "glossZh": "溢出",
-      "pronunciationId": "w:over#p-main",
-      "note": "boil over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:over#e-d95aee514f2995bd",
-          "text": "The next minute, the porridge boiled over and put out the fire.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:over#s19",
       "pos": "adv.",
       "glossZh": "倒下；倒向一边",
@@ -996,7 +680,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -1049,7 +733,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -1073,9 +757,131 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:over#s21",
+      "pos": "短语",
+      "glossZh": "年事已高；已过巅峰期（over the hill）",
+      "pronunciationId": "w:over#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:over#e-bbbc92a8e441f852",
+          "text": "Those unexpected words warmed my heart and eased my fear of being “over the hill.” Being valued for what we had accomplished felt like winning an Olympic medal – even if just for participation.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:over#s22",
+      "pos": "短语",
+      "glossZh": "仔细检查；审阅（go over）",
+      "pronunciationId": "w:over#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:over#e-10c92378feccb89c",
+          "text": "Go over the project.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-over",
+    "w:all-over-again",
+    "w:boil-over",
+    "w:bring-over",
+    "w:cast-an-eye-over-sth",
+    "w:change-over",
+    "w:chew-over",
+    "w:come-over",
+    "w:cross-over",
+    "w:fall-over",
+    "w:game-over",
+    "w:get-over",
+    "w:go-over",
+    "w:hand-over",
+    "w:hang-over",
+    "w:have-over",
+    "w:ice-over",
+    "w:leave-over",
+    "w:left-over",
+    "w:look-over",
+    "w:lord-over",
+    "w:move-over",
+    "w:over-again",
+    "w:over-and-over",
+    "w:over-and-over-again",
+    "w:over-here",
+    "w:over-the-moon",
+    "w:over-there",
+    "w:over-with",
+    "w:paint-over",
+    "w:pass-over",
+    "w:pull-over",
+    "w:read-over",
+    "w:roll-over",
+    "w:run-over",
+    "w:sleep-over",
+    "w:smooth-things-over",
+    "w:stand-over",
+    "w:start-over",
+    "w:take-over",
+    "w:talk-over",
+    "w:think-over",
+    "w:tip-over",
+    "w:trip-over",
+    "w:turn-over",
+    "w:turn-sth-over-to-sb",
+    "w:walk-over",
+    "w:wash-over-sb",
+    "w:watch-over",
+    "w:win-over",
+    "w:work-over"
+  ]
 }

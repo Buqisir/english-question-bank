@@ -1,0 +1,68 @@
+{
+  "entryId": "w:monkey-around-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "monkey",
+      "around",
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "monkey",
+        "around",
+        "with",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "monkey around with sth",
+  "senses": [
+    {
+      "senseId": "w:monkey-around-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "胡乱摆弄某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:monkey#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,137 @@
+{
+  "entryId": "w:tune-in-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tune",
+      "in",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tune",
+        "in",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tune in to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tune in to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:tune-in-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "留意并感受他人的状态或自身的信号",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tune#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tune-in-to-sth#e-f50921fc260b7a02",
+          "text": "Put down the headphones and tune in to others.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 38
+          },
+          "parts": [
+            [
+              28,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tune-in-to-sth#e-a14ac232174b9a42",
+          "text": "Tune in to your inner signals.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

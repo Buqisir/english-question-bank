@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 62
+    "mock": 9
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -205,12 +205,12 @@
       "pos": "n.",
       "glossZh": "庭审",
       "pronunciationId": "w:trial#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -255,7 +255,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -279,40 +279,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:trial#s6",
-      "pos": "短语",
-      "glossZh": "反复尝试，从错误中摸索",
-      "pronunciationId": "w:trial#p-main",
-      "note": "trial and error。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:trial#e-5401f89544d7b290",
-          "text": "However, the only way to learn how to make the best use of new technologies and reduce their risks is through trial and error.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -321,6 +287,11 @@
       "reason": "语言学专门义或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:trial-and-error"
+  ]
 }

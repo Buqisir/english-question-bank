@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 9
+    "mock": 3
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -155,20 +155,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:banana#s3",
-      "pos": "短语",
-      "glossZh": "发疯；欣喜若狂",
-      "pronunciationId": "w:banana#p-main",
-      "note": "go bananas，非正式用语。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -177,6 +163,8 @@
       "reason": "专名、冒犯性词语或专业义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false
 }

@@ -1,0 +1,63 @@
+{
+  "entryId": "w:done-thing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "done",
+      "thing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "done",
+        "thing"
+      ],
+      [
+        "done",
+        "things"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "done thing",
+  "senses": [
+    {
+      "senseId": "w:done-thing#s1",
+      "pos": "短语",
+      "glossZh": "合乎礼节或社会习惯的做法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "通常用 the done thing。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

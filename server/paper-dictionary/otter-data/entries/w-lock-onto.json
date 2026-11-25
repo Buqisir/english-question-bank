@@ -1,0 +1,146 @@
+{
+  "entryId": "w:lock-onto",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lock",
+      "onto"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lock",
+        "onto"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lock onto",
+      "tags": []
+    },
+    {
+      "form": "locked onto",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lock onto sb/sth",
+  "senses": [
+    {
+      "senseId": "w:lock-onto#s1",
+      "pos": "短语",
+      "glossZh": "（目光）紧盯着；牢牢锁定",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lock#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lock-onto#e-c901fe7e0fc01e97",
+          "text": "Her wide eyes locked onto mine.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:lock-onto#s2",
+      "pos": "短语",
+      "glossZh": "牢牢扣住；夹紧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lock-onto#e-8c69340b5e698723",
+          "text": "The grippers can lock onto rock with 600 newtons of force to fix this problem.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:grammar-fill:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

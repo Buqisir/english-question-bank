@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 104
+    "mock": 10
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 58
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -228,7 +228,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -294,7 +294,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -318,6 +318,91 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:wall#s7",
+      "pos": "n.",
+      "glossZh": "岩壁；陡壁",
+      "pronunciationId": "w:wall#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wall#e-c1da5c6bcba0b140",
+          "text": "Space agencies are wondering how to assess the structural stability of caves and strengthen their walls and ceilings.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:wall#e-0691c409a71a4798",
+          "text": "Its big draw is diverse options – Bloody Bay Wall, a massive wall dropping from 10-20 feet deep, is top for serious divers, with unique wildlife in upper walls and shallows.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wall#s8",
+      "pos": "n.",
+      "glossZh": "社交网站个人主页的留言墙",
+      "pronunciationId": "w:wall#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wall#e-1efc1c8dbcb30dd7",
+          "text": "#getoffyourphone #listentoyourkids,” Jen posted on her Facebook wall.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 68
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -326,6 +411,10 @@
       "reason": "专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:hit-a-wall",
+    "w:wall-in"
+  ]
 }

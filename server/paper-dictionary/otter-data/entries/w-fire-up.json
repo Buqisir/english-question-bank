@@ -1,0 +1,199 @@
+{
+  "entryId": "w:fire-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fired up"
+  ],
+  "pattern": {
+    "tokens": [
+      "fire",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fire",
+        "up"
+      ],
+      [
+        "fired",
+        "up"
+      ],
+      [
+        "fires",
+        "up"
+      ],
+      [
+        "firing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fire (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:fire-up#s1",
+      "pos": "短语",
+      "glossZh": "发动；启动（发动机、电脑等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fire#s11",
+        "w:up#s53"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fire-up#e-2939be5dc45bab7b",
+          "text": "He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fire-up#e-849af00231390ba7",
+          "text": "I immediately returned home, fired up my computer, and posted on social media: “Please be on the lookout for our bright blue parrot.” I attached photos and a list of his words, expecting good news.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fire-up#s2",
+      "pos": "短语",
+      "glossZh": "激起热情或斗志；鼓舞",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fire-up#e-ae21d8176b314f57",
+          "text": "Athletes find reasons to get fired up against opponents.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-jiuwu-2026-final:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "get fired up 表示情绪高涨或斗志昂扬。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:fire-up#s3",
+      "pos": "短语",
+      "glossZh": "点燃；生火",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 fire up the grill。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

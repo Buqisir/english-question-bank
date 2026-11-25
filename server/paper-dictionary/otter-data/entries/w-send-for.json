@@ -1,0 +1,135 @@
+{
+  "entryId": "w:send-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "send",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "send",
+        "for"
+      ],
+      [
+        "sending",
+        "for"
+      ],
+      [
+        "sends",
+        "for"
+      ],
+      [
+        "sent",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "send for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "send for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:send-for#s1",
+      "pos": "短语",
+      "glossZh": "叫人把某物送来；索取",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:send-for#e-02dec4b36a8cddf0",
+          "text": "He’ll send for the key.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          },
+          "parts": [
+            [
+              6,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:send-for#s2",
+      "pos": "短语",
+      "glossZh": "叫某人来；派人去请",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:send-for#s3",
+      "pos": "短语",
+      "glossZh": "公开嘲讽或抨击某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

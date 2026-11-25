@@ -1,0 +1,103 @@
+{
+  "entryId": "w:under-the-watchful-eye-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "under",
+      "the",
+      "watchful",
+      "eye",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "under",
+        "the",
+        "watchful",
+        "eye",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "under the watchful eye of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "under the watchful eye of sb",
+  "senses": [
+    {
+      "senseId": "w:under-the-watchful-eye-of#s1",
+      "pos": "短语",
+      "glossZh": "在某人的密切看护或监督下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eye#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:under-the-watchful-eye-of#e-dd12839c6b01f23e",
+          "text": "This is a beautifully illustrated tale about a young boy living under the watchful eye of his overly cautious family.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 89
+          },
+          "parts": [
+            [
+              64,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

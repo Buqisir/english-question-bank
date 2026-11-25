@@ -1,0 +1,370 @@
+{
+  "entryId": "w:get-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets out",
+    "getting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "out"
+      ],
+      [
+        "gets",
+        "out"
+      ],
+      [
+        "getting",
+        "out"
+      ],
+      [
+        "got",
+        "out"
+      ],
+      [
+        "gotten",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get out",
+  "senses": [
+    {
+      "senseId": "w:get-out#s1",
+      "pos": "短语",
+      "glossZh": "出去；离开；设法脱身",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s33"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-out#e-6db23e5d8e0dfe5d",
+          "text": "It was only when I tried to remove my head that I realized getting out was going to be less straightforward than getting in.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out#e-76bd74d2f28a046a",
+          "text": "“Get out!” Grant shouted.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out#e-8bad2f8f100951d0",
+          "text": "Getting out was a different story, but the experience was a delight as Leopold and I braved it together.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "用于命令时可译作“出去！”；离开汽车时可译作“下车”。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-out#s2",
+      "pos": "短语",
+      "glossZh": "出门活动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-out#e-24c34d2476ce817c",
+          "text": "One of the best ways to enjoy Lake Windermere, the largest lake in the country, is by getting out on the water.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 97
+          },
+          "parts": [
+            [
+              86,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out#e-430df4ed047ea2f2",
+          "text": "It would take me all day just to find the energy to get out,” says Alex Staniforth, a mental health campaigner.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
+          },
+          "parts": [
+            [
+              52,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out#e-50c9e72aa052f64c",
+          "text": "Now kids seldom get out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:get-out#s3",
+      "pos": "短语",
+      "glossZh": "（消息、秘密等）传开；泄露",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-out#e-ba66d94ce1b74d2e",
+          "text": "13, but Andrew said he was worried that word might get out about his surprise because he had gone to the shelter in advance to pay the fees.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          },
+          "parts": [
+            [
+              51,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-out#s4",
+      "pos": "短语",
+      "glossZh": "获释；出院",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-out#s5",
+      "pos": "短语",
+      "glossZh": "（学校）放学",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-out#s6",
+      "pos": "短语",
+      "glossZh": "不会吧！真的假的！（表示惊讶或不信）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

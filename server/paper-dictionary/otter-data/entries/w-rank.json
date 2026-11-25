@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 21
+    "mock": 1
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -166,7 +166,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -271,7 +271,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -370,7 +370,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -407,6 +407,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:rank#s9",
+      "pos": "n.",
+      "glossZh": "排名；排序结果",
+      "pronunciationId": "w:rank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rank#e-e3bf312fd2ac2fd0",
+          "text": "Identical testing procedures using the exact same materials frequently resulted in different charges, going against the established ranking.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 139
+          }
+        },
+        {
+          "exampleId": "w:rank#e-e598d875a6e000b1",
+          "text": "Participants in the first group were first asked to rank the effectiveness of the 21 individual behaviors, before being shown the true effectiveness ranking.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 156
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -419,6 +471,6 @@
       "reason": "乐器术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

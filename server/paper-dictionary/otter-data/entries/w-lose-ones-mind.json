@@ -1,0 +1,150 @@
+{
+  "entryId": "w:lose-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lose",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lost mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose one's mind",
+  "senses": [
+    {
+      "senseId": "w:lose-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "发疯；失去理智",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mind#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lose-ones-mind#e-09485f298b4805b3",
+          "text": "He left after seven months, physically broken and having lost his mind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 70
+          },
+          "parts": [
+            [
+              57,
+              61
+            ],
+            [
+              66,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              61
+            ],
+            [
+              66,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-ones-mind#e-d2c51d1ea74ea45d",
+          "text": "She looked at me as if I had lost my mind.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              33
+            ],
+            [
+              37,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              33
+            ],
+            [
+              37,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

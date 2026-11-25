@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 227
+    "mock": 27
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 73
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -194,16 +194,21 @@
       "pos": "n.",
       "glossZh": "今天",
       "pronunciationId": "w:today#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 12
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:here-today-gone-tomorrow",
+    "w:what-date-is-it-today",
+    "w:what-day-is-it-today"
+  ]
 }

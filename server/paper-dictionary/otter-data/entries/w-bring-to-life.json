@@ -1,0 +1,142 @@
+{
+  "entryId": "w:bring-to-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "to",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "to",
+        "life"
+      ],
+      [
+        "bringing",
+        "to",
+        "life"
+      ],
+      [
+        "brings",
+        "to",
+        "life"
+      ],
+      [
+        "brought",
+        "to",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brought to life",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth to life",
+  "senses": [
+    {
+      "senseId": "w:bring-to-life#s1",
+      "pos": "短语",
+      "glossZh": "赋予生命；使活起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:life#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-to-life#e-d5307aa5d561e892",
+          "text": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 55
+          },
+          "parts": [
+            [
+              40,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-to-life#s2",
+      "pos": "短语",
+      "glossZh": "使恢复生命或知觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-to-life#s3",
+      "pos": "短语",
+      "glossZh": "使变得生动或有活力；使虚构形象栩栩如生",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bring#s10"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

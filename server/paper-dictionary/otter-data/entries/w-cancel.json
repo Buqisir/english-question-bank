@@ -72,8 +72,8 @@
     "mock": 48
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 48
+    "gaokao": 3,
+    "mock": 3
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -150,40 +150,6 @@
       ]
     },
     {
-      "senseId": "w:cancel#s2",
-      "pos": "短语",
-      "glossZh": "抵消；相互抵消",
-      "pronunciationId": "w:cancel#p-main",
-      "note": "cancel out",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cancel#e-4f732939d03953c5",
-          "text": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cancel#s3",
       "pos": "v.",
       "glossZh": "约去；划掉",
@@ -203,6 +169,11 @@
       "reason": "行业专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cancel-out"
+  ]
 }

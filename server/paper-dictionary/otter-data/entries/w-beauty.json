@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 116
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 96
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -177,7 +177,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -207,12 +207,12 @@
       "pos": "n.",
       "glossZh": "美容；美容行业",
       "pronunciationId": "w:beauty#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 13
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -222,6 +222,9 @@
       "reason": "物理专门义或罕见动词义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:beauty-sleep"
+  ]
 }

@@ -59,8 +59,8 @@
     "mock": 37
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 28
+    "gaokao": 2,
+    "mock": 8
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -258,59 +258,6 @@
       ]
     },
     {
-      "senseId": "w:brush#s4",
-      "pos": "短语",
-      "glossZh": "不理会；打发掉",
-      "pronunciationId": "w:brush#p-main",
-      "note": "brush aside 或 brush off",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:brush#e-715cbdf1b43f6c23",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:brush#e-218d3b69f3e66ab3",
-          "text": "Both young men brushed off any talk of __52__.",
-          "source": {
-            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
-            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
-            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:cloze:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:brush#s5",
       "pos": "n.",
       "glossZh": "灌木丛",
@@ -318,7 +265,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -344,20 +291,6 @@
       ]
     },
     {
-      "senseId": "w:brush#s6",
-      "pos": "短语",
-      "glossZh": "短暂的遭遇；险些碰上",
-      "pronunciationId": "w:brush#p-main",
-      "note": "a brush with",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:brush#s7",
       "pos": "v.",
       "glossZh": "拂去",
@@ -365,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -389,6 +322,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:brush#s8",
+      "pos": "v.",
+      "glossZh": "（brush up）温习；重新练熟",
+      "pronunciationId": "w:brush#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brush#e-dee56002034bae9f",
+          "text": "Yet perhaps if we brushed up our apology skills, we could help relieve the tension in our communities and our world, one honest admission at a time.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -397,6 +363,13 @@
       "reason": "行业专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-brush-with",
+    "w:brush-aside",
+    "w:brush-off"
+  ]
 }

@@ -1,0 +1,210 @@
+{
+  "entryId": "w:sign-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "signs up"
+  ],
+  "pattern": {
+    "tokens": [
+      "sign",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sign",
+        "up"
+      ],
+      [
+        "signs",
+        "up"
+      ],
+      [
+        "signed",
+        "up"
+      ],
+      [
+        "signing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sign up",
+      "tags": []
+    },
+    {
+      "form": "signed up",
+      "tags": []
+    },
+    {
+      "form": "signing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sign (sb) up",
+  "senses": [
+    {
+      "senseId": "w:sign-up#s1",
+      "pos": "短语",
+      "glossZh": "报名参加；注册",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sign#s8",
+        "w:up#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sign-up#e-31df4527383130d1",
+          "text": "Some of my friends had signed up to spend time at a soup kitchen, so I did, too.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sign-up#e-346fb01390d631e0",
+          "text": "Campers who sign up for the 2-week secret agent camp can get to know about the life of real secret agents by learning strategies and military skills on the paintball field.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          },
+          "parts": [
+            [
+              12,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sign-up#e-5cdd162469aee578",
+          "text": "To sign up for his course.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "常用 sign up for sth 或 sign up to do sth。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 45
+      }
+    },
+    {
+      "senseId": "w:sign-up#s2",
+      "pos": "短语",
+      "glossZh": "替某人报名；为某人办理注册",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sign-up#s3",
+      "pos": "短语",
+      "glossZh": "报名参军",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

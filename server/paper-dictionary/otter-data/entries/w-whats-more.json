@@ -1,0 +1,156 @@
+{
+  "entryId": "w:whats-more",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "what’s more"
+  ],
+  "pattern": {
+    "tokens": [
+      "what's",
+      "more"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what's",
+        "more"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what's more",
+  "senses": [
+    {
+      "senseId": "w:whats-more#s1",
+      "pos": "短语",
+      "glossZh": "而且；此外；更重要的是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:whats-more#e-4afbb45ecdf42f97",
+          "text": "What’s more, indoor plants are easy to look after and are not very expensive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-more#e-ad09fa1f12d1908e",
+          "text": "What’s more, tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics, as well as whether multiple root characteristics are determined by the same genes or independently.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-more#e-38b14a8db988cd7b",
+          "text": "What’s more, three quarters claimed that they didn’t respond to celebrity endorsement in any way.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

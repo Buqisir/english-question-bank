@@ -1,0 +1,219 @@
+{
+  "entryId": "w:feel-free",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "feeling free"
+  ],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "free"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "free"
+      ],
+      [
+        "feeling",
+        "free"
+      ],
+      [
+        "feels",
+        "free"
+      ],
+      [
+        "felt",
+        "free"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "feel free",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel free to do sth",
+  "senses": [
+    {
+      "senseId": "w:feel-free#s1",
+      "pos": "短语",
+      "glossZh": "觉得可以放心做某事；做某事没有顾虑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-free#e-409f77d6e7f7e8e0",
+          "text": "Feeling free to change topics.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:feel-free#s2",
+      "pos": "短语",
+      "glossZh": "请随意；尽管做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-free#e-521d7e5d0d81ee1f",
+          "text": "Feel free to bring your own beverages (wine & beer are welcome for evenings) and snacks to have at your station.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-free#e-da4dff2919b99436",
+          "text": "Feel free to test different methods until you achieve the look you want.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-free#e-aa4d7cfb5733ba2a",
+          "text": "Acting?” Seeing this, Megan suddenly remembered the librarian had mentioned she could feel free to use the garden at the back of the library.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 95
+          },
+          "parts": [
+            [
+              86,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              95
+            ]
+          ]
+        }
+      ],
+      "note": "常以 Feel free to ... 开头，表示允许或欢迎对方这样做。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

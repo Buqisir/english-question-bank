@@ -1,0 +1,188 @@
+{
+  "entryId": "w:on-the-edge-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on the edge of"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "edge",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "edge",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "on",
+        "the",
+        "edge",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the edge of sth",
+  "senses": [
+    {
+      "senseId": "w:on-the-edge-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "濒临；即将陷入某种状态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:edge#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-edge-of-sth#e-177b14c931213075",
+          "text": "Sadly, for every success story like the wild bison, there are dozens of other species hanging on the edge of",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 108
+          },
+          "parts": [
+            [
+              94,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-edge-of-sth#e-9241a340ee509bb6",
+          "text": "Still, this study provides the know-how to avoid the axolotl’s “last nail in the coffin,” showing that even species on the edge of extinction may have a path to recovery.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 130
+          },
+          "parts": [
+            [
+              116,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:on-the-edge-of-sth#s2",
+      "pos": "短语",
+      "glossZh": "在……的边缘",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:edge#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-edge-of-sth#e-8159b9a874a1aed6",
+          "text": "Unlike other roads and highways on this list, this one isn’t perched on the edge of a mountain.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 83
+          },
+          "parts": [
+            [
+              69,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

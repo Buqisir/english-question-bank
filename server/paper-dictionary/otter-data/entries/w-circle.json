@@ -59,8 +59,8 @@
     "mock": 72
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 66
+    "gaokao": 2,
+    "mock": 12
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -251,59 +251,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:circle#s5",
-      "pos": "短语",
-      "glossZh": "绕回来；折返",
-      "pronunciationId": "w:circle#p-main",
-      "note": "circle back",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:circle#e-552573757544c008",
-          "text": "Then he __42__ a U-turn, circling back to take another look.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:cloze:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:circle#e-2f96420ee9b6ea27",
-          "text": "I left my daughter at the swimming center, circled back and found the cow standing at the grassy edge of a side street, breathing heavily.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 50
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -312,6 +259,13 @@
       "reason": "专名或领域用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:circle-back",
+    "w:circle-of-life",
+    "w:full-circle"
+  ]
 }

@@ -1,0 +1,167 @@
+{
+  "entryId": "w:stand-between",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing between"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "between"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "between"
+      ],
+      [
+        "standing",
+        "between"
+      ],
+      [
+        "stands",
+        "between"
+      ],
+      [
+        "stood",
+        "between"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand between",
+  "senses": [
+    {
+      "senseId": "w:stand-between#s1",
+      "pos": "短语",
+      "glossZh": "挡在两者之间；阻隔",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-between#e-fb17b2684547c66f",
+          "text": "The empty cage sitting on the bookshelf was like a wall standing between them, right in their hearts.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:4",
+              "sentence": 18
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 72
+          },
+          "parts": [
+            [
+              56,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-between#e-9a11b413614e138c",
+          "text": "He promised I’d love the mountains, but all I could imagine was those peaks standing between me and the ocean.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 92
+          },
+          "parts": [
+            [
+              76,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-between#e-e297316bbf0d4fd1",
+          "text": "But I knew mountains would only stand between me and the rosy sun rising over the ocean.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-continuation:9",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 45
+          },
+          "parts": [
+            [
+              32,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "常用 stand between A and B，可指实际阻挡或抽象隔阂。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

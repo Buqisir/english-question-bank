@@ -1,0 +1,485 @@
+{
+  "entryId": "w:close-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "closer to"
+  ],
+  "pattern": {
+    "tokens": [
+      "close",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "to"
+      ],
+      [
+        "closer",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close to",
+  "senses": [
+    {
+      "senseId": "w:close-to#s1",
+      "pos": "短语",
+      "glossZh": "靠近；离……很近",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-to#e-36fd00bd1306df5c",
+          "text": "As an added bonus, it’s close to the main train station.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          },
+          "parts": [
+            [
+              24,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-eb6bfcb2d99196f9",
+          "text": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 110
+          },
+          "parts": [
+            [
+              102,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-809066fd6cee63f9",
+          "text": "Moments later, I find myself inside a museum, leaning close to a painting I have never seen in real life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 62
+          },
+          "parts": [
+            [
+              54,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 30
+      }
+    },
+    {
+      "senseId": "w:close-to#s2",
+      "pos": "短语",
+      "glossZh": "接近（某一数值或时长）；约莫",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-to#e-3b322c81185a2ea5",
+          "text": "One of those times, I was on the side of the road for close to three hours with my big Jeep.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 62
+          },
+          "parts": [
+            [
+              54,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-ac97ac4820eff0a6",
+          "text": "Silver medalists’ smiling frequency was close to that of gold medalists.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-0e6edd23d37a43cc",
+          "text": "Those typically cost closer to a dollar.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:close-to#s3",
+      "pos": "短语",
+      "glossZh": "接近（某种状态）；几乎达到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-to#e-261faa4fd668f7ed",
+          "text": "You’ll find yourself virtually alone, or close to it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-ii:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-d2a0d48e1da2a084",
+          "text": "This breakthrough brings efficient and practical osmotic power stations one step closer to reality.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 90
+          },
+          "parts": [
+            [
+              81,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-2318120b87c08dd5",
+          "text": "Unfortunately, we are no closer to understanding what the communicative differences of the two roar types may be.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:close-to#s4",
+      "pos": "短语",
+      "glossZh": "与……亲近；与……有密切联系",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-to#e-d2807041949b21b9",
+          "text": "You write “Hi Nanna and Pop” because you are close to them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:31#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 53
+          },
+          "parts": [
+            [
+              45,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-384d4634f42c6603",
+          "text": "People enjoy living close to nature.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2023-ii:32#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 28
+          },
+          "parts": [
+            [
+              20,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-to#e-3db589f718d08aa8",
+          "text": "be close to nature.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:22#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "如亲近大自然，也可指人与人之间的亲近感。",
+      "counts": {
+        "gaokao": 9,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 18,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

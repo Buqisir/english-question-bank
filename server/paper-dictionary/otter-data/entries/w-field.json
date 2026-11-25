@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 230
+    "mock": 35
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -335,12 +335,12 @@
       "glossZh": "矿产资源区",
       "pronunciationId": "w:field#p-main",
       "note": "如 oil field。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -348,12 +348,12 @@
       "pos": "n.",
       "glossZh": "物理场",
       "pronunciationId": "w:field#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -407,6 +407,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:field#s11",
+      "pos": "n.",
+      "glossZh": "视野范围",
+      "pronunciationId": "w:field#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:field#e-90d7fc8e3f3cc5e6",
+          "text": "Telescopes and binoculars, despite their uses elsewhere, are having the opposite effect as they restrict the wide field of view essential for spotting meteors.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:field#s12",
+      "pos": "n.",
+      "glossZh": "开阔场地",
+      "pronunciationId": "w:field#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:field#e-44fe9ba7d529d223",
+          "text": "Most parking fields do not allow overnight parking, but some garages are open 24 hours a day, 7 days a week (24/7).",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -415,6 +481,10 @@
       "reason": "地名专有成分，当前语境不足以分配"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:level-the-playing-field",
+    "w:track-and-field"
+  ]
 }

@@ -59,8 +59,8 @@
     "mock": 109
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 106
+    "gaokao": 2,
+    "mock": 15
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -247,7 +247,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -298,12 +298,12 @@
       "pos": "n.",
       "glossZh": "升力",
       "pronunciationId": "w:lift#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -311,12 +311,12 @@
       "pos": "v.",
       "glossZh": "解除（限制）",
       "pronunciationId": "w:lift#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -324,44 +324,196 @@
       "pos": "v.",
       "glossZh": "消散",
       "pronunciationId": "w:lift#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:lift#s8",
-      "pos": "短语",
-      "glossZh": "艰巨的工作",
+      "senseId": "w:lift#s9",
+      "pos": "v.",
+      "glossZh": "提高；提升",
       "pronunciationId": "w:lift#p-main",
-      "note": "heavy lifting。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:lift#e-79414c6da2e2becc",
-          "text": "Referred to as matrix planting, this approach aims for nature to do a lot more of the heavy lifting in the garden, and even some of the designing.",
+          "exampleId": "w:lift#e-e71fcf19ef01ce4b",
+          "text": "Luzindole directly lifts birds’ dawn-singing motivation.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:lift#e-3ec3f63a946f570b",
+          "text": "It is this pursuit of spiritual expression that lifts calligraphy to a high art form.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:grammar-fill",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:grammar-fill:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lift#s10",
+      "pos": "n.",
+      "glossZh": "吊运；提升动作",
+      "pronunciationId": "w:lift#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lift#e-a5c89c9bca4682da",
+          "text": "Following over a year of careful restoration, installing the massive piece was an engineering feat, requiring a large opening in the building wall and crane lifts.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 162
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lift#s11",
+      "pos": "v.",
+      "glossZh": "起飞；发射升空（lift off）",
+      "pronunciationId": "w:lift#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lift#e-350035a1451773a1",
+          "text": "It lifted off at the agency’s Kennedy Space Center in Florida at 6:35 p. m. April 1, carrying the first astronauts to travel to the Moon in more than half a century.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:2",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 92,
-            "end": 99
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lift#s12",
+      "pos": "n.",
+      "glossZh": "振奋；情绪好转",
+      "pronunciationId": "w:lift#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lift#e-a0cd8f51597a3c49",
+          "text": "People get a mood lift with something to look forward to.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lift#s13",
+      "pos": "v.",
+      "glossZh": "扶持；帮助成长",
+      "pronunciationId": "w:lift#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lift#e-4ef926db14706f8d",
+          "text": "That sense of continuity of one generation of chefs lifting the next helps make Canadian cuisine globally renowned for diversity, regionality and innovation.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
           }
         }
       ]
@@ -373,6 +525,11 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:lift-sb-up"
+  ]
 }

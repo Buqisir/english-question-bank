@@ -1,0 +1,175 @@
+{
+  "entryId": "w:fall-victim-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "victim",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "victim",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fall victim to",
+      "tags": []
+    },
+    {
+      "form": "falls victim to",
+      "tags": []
+    },
+    {
+      "form": "fell victim to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall victim to sth",
+  "senses": [
+    {
+      "senseId": "w:fall-victim-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "遭受……之害；成为……的受害者",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:victim#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-victim-to-sth#e-ee896cb2936fd028",
+          "text": "The wildlife in the reserve thus fell victim to severe undernutrition in the hard winter.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 47
+          },
+          "parts": [
+            [
+              33,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-victim-to-sth#e-7037e57067d9a1d9",
+          "text": "Unfortunately, reading always falls victim to seeking productivity shortcuts.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 45
+          },
+          "parts": [
+            [
+              30,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-victim-to-sth#e-b2d724286950d1a2",
+          "text": "We also meet the fictional Nero, who seems to understand the role of randomness in his professional life but falls victim to his own irrational foolishness.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 124
+          },
+          "parts": [
+            [
+              109,
+              124
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              124
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

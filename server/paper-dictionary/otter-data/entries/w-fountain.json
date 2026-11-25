@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -202,59 +202,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:fountain#s4",
-      "pos": "短语",
-      "glossZh": "自来水笔",
-      "pronunciationId": "w:fountain#p-main",
-      "note": "fountain pen。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fountain#e-32506484a314fad2",
-          "text": "Lily’s fingertips brushed over the brand-new fountain pen.",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
-            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 45,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:fountain#e-af878d804f30ee0d",
-          "text": "As the lid popped open, a pile of yellowed letters, a cracked coarse porcelain bowl（粗瓷碗）, and an unremarkable old fountain pen fell out.",
-          "source": {
-            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
-            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
-            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 114,
-            "end": 122
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -263,6 +210,8 @@
       "reason": "表演专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

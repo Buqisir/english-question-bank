@@ -1,0 +1,168 @@
+{
+  "entryId": "w:go-crazy",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went crazy"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "crazy"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "crazy"
+      ],
+      [
+        "went",
+        "crazy"
+      ],
+      [
+        "goes",
+        "crazy"
+      ],
+      [
+        "going",
+        "crazy"
+      ],
+      [
+        "gone",
+        "crazy"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go crazy",
+  "senses": [
+    {
+      "senseId": "w:go-crazy#s1",
+      "pos": "短语",
+      "glossZh": "发疯；烦乱得快要失去理智",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-crazy#e-0b30b085c9862d42",
+          "text": "Many people go crazy trying to figure out how to spend time with friends, family, work, play, etc.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          },
+          "parts": [
+            [
+              12,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-crazy#s2",
+      "pos": "短语",
+      "glossZh": "兴奋得发狂；表现得极为激动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-crazy#e-f2e1a1637e377915",
+          "text": "They went crazy with the purple quartz rock.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-national-b:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-crazy#s3",
+      "pos": "短语",
+      "glossZh": "表现特别出色；效果极佳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，用于夸赞。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

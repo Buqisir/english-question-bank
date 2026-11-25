@@ -1,0 +1,195 @@
+{
+  "entryId": "w:out-of-sight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "sight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "sight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of sight",
+  "senses": [
+    {
+      "senseId": "w:out-of-sight#s1",
+      "pos": "短语",
+      "glossZh": "在视线之外；看不见",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of-sight#e-c22cc8b288255b51",
+          "text": "“I’ll see you back home in a month, okay?” His parents nodded, and they watched as he walked out of sight into the crowds of hundreds of students and parents.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 105
+          },
+          "parts": [
+            [
+              93,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-sight#e-d5f8b6de5966b543",
+          "text": "Then she flew quickly out of sight.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-sight#e-d59fffa8838e3fcd",
+          "text": "Picture yourself halfway up a winding trail, lungs burning, legs trembling, the summit still out of sight.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 105
+          },
+          "parts": [
+            [
+              93,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              105
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:out-of-sight#s2",
+      "pos": "短语",
+      "glossZh": "（目标等）暂时无法实现或达到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-sight#s3",
+      "pos": "短语",
+      "glossZh": "棒极了；好得出奇",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧的俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-sight#s4",
+      "pos": "短语",
+      "glossZh": "（价格）高得离谱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

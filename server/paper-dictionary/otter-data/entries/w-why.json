@@ -54,8 +54,8 @@
     "mock": 1412
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 1411
+    "gaokao": 2,
+    "mock": 1212
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 195,
-        "mock": 0
+        "mock": 196
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -201,59 +201,6 @@
       ]
     },
     {
-      "senseId": "w:why#s3",
-      "pos": "短语",
-      "glossZh": "何不……",
-      "pronunciationId": "w:why#p-main",
-      "note": "why not。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:why#e-a7d18b71bc0944a7",
-          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 76,
-            "end": 79
-          }
-        },
-        {
-          "exampleId": "w:why#e-1f8ed355747e2bca",
-          "text": "Why not try a regional alternative or check out a popular destination’s lesser-known sights?",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:why#s4",
       "pos": "n.",
       "glossZh": "原因",
@@ -273,6 +220,11 @@
       "reason": "较少见的口语语气用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:why-not"
+  ]
 }

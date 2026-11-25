@@ -1,0 +1,199 @@
+{
+  "entryId": "w:long-term",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "long",
+      "term"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "long",
+        "term"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "long term",
+  "senses": [
+    {
+      "senseId": "w:long-term#s1",
+      "pos": "短语",
+      "glossZh": "较长时期；长远",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:long-term#e-ccb982889ca023ea",
+          "text": "Get anything less, and you are more likely to suffer from poor health in the short and long term.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 96
+          },
+          "parts": [
+            [
+              87,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-term#e-d7953ca4c2c14e8a",
+          "text": "Whether AI will leave people's brains weak in the long term remains an open question.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 59
+          },
+          "parts": [
+            [
+              50,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-term#e-9079d2cca51738cd",
+          "text": "These are great free resources that help you both in the short and long term.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 76
+          },
+          "parts": [
+            [
+              67,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              76
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 in the long term，意为「从长远来看」。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:long-term#s2",
+      "pos": "短语",
+      "glossZh": "长期的；着眼于长远的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:long-term#e-514efa102c48174e",
+          "text": "Self-control, too, is a cornerstone (基石) of personal growth, helping us pursue long term goals.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 88
+          },
+          "parts": [
+            [
+              79,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "作前置定语通常写作 long-term，如 long-term goals。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,109 @@
+{
+  "entryId": "w:ask-for-trouble",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "asking for trouble"
+  ],
+  "pattern": {
+    "tokens": [
+      "ask",
+      "for",
+      "trouble"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ask",
+        "for",
+        "trouble"
+      ],
+      [
+        "asking",
+        "for",
+        "trouble"
+      ],
+      [
+        "asked",
+        "for",
+        "trouble"
+      ],
+      [
+        "asks",
+        "for",
+        "trouble"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ask for trouble",
+  "senses": [
+    {
+      "senseId": "w:ask-for-trouble#s1",
+      "pos": "短语",
+      "glossZh": "自找麻烦；自招祸患",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ask-for-trouble#e-17c2d8058a57cb91",
+          "text": "One afternoon, while Jane was feeding Pip by the fence, Mr. Thompson shouted from his side, “You’re just asking for trouble!” Jane gently lifted Pip in her hands so Mr. Thompson could see him through the gaps in the fence.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 123
+          },
+          "parts": [
+            [
+              105,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 87
+    "mock": 7
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -232,6 +232,6 @@
       "reason": "姓氏、星期缩写、专用单位或牌名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

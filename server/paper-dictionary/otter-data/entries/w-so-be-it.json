@@ -1,0 +1,92 @@
+{
+  "entryId": "w:so-be-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "so",
+      "be",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "so",
+        "be",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "so be it",
+  "senses": [
+    {
+      "senseId": "w:so-be-it#s1",
+      "pos": "短语",
+      "glossZh": "那就这样吧（表示接受）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:so-be-it#e-b67fe3ec9a4a2712",
+          "text": "If you’re happier flipping burgers, so be it.”",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,165 @@
+{
+  "entryId": "w:end-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "end",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "end up with",
+      "tags": []
+    },
+    {
+      "form": "ended up with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end up with sth",
+  "senses": [
+    {
+      "senseId": "w:end-up-with#s1",
+      "pos": "短语",
+      "glossZh": "最后得到……；结果落得……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:with#s30"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:end-up-with#e-5914608cb20e6f97",
+          "text": "I would always defend the biggest kid on the other team, and ended up with a bloody nose.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 74
+          },
+          "parts": [
+            [
+              61,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:end-up-with#e-d36c8a5fe51b036c",
+          "text": "Alma always wanted to be a writer, but ended up with a shadow life instead, living and working around books and literature.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 52
+          },
+          "parts": [
+            [
+              39,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:end-up-with#e-a2daea11d70a7a8d",
+          "text": "“When you do that, you end up with average food that you’re selling for £ 5 and it’s not what people want” – especially when they are paying £ 4 for a coffee.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 34
+          },
+          "parts": [
+            [
+              23,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

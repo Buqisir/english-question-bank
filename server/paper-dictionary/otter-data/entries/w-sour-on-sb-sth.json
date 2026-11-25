@@ -1,0 +1,103 @@
+{
+  "entryId": "w:sour-on-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sour",
+      "on",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sour",
+        "on",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "soured on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sour on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:sour-on-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "对某人或某事不再抱有好感",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sour#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sour-on-sb-sth#e-c96e976a24001ec8",
+          "text": "For some time now, people had soured on him.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

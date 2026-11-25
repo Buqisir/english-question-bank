@@ -61,8 +61,8 @@
     "mock": 101
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 99
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 92
       },
       "folded": false,
       "examples": [
@@ -137,40 +137,6 @@
       ]
     },
     {
-      "senseId": "w:breathe#s2",
-      "pos": "短语",
-      "glossZh": "松一口气",
-      "pronunciationId": "w:breathe#p-main",
-      "note": "breathe a sigh of relief",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:breathe#e-65b65019610e3035",
-          "text": "The man froze for a second, but when he saw the skinny boy he breathed a sigh of relief.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:breathe#s3",
       "pos": "v.",
       "glossZh": "透气",
@@ -191,7 +157,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -224,7 +190,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -248,6 +214,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:breathe#s6",
+      "pos": "v.",
+      "glossZh": "流露；洋溢着（某种感情）",
+      "pronunciationId": "w:breathe#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:breathe#e-9295c532a0049611",
+          "text": "The words were plain, but they breathed with true love.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -256,6 +255,11 @@
       "reason": "宗教或特定旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:breathe-a-sigh-of-relief"
+  ]
 }

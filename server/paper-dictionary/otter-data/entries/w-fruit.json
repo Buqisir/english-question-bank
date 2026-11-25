@@ -59,8 +59,8 @@
     "mock": 82
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 81
+    "gaokao": 5,
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -176,7 +176,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -202,93 +202,6 @@
       ]
     },
     {
-      "senseId": "w:fruit#s4",
-      "pos": "短语",
-      "glossZh": "取得成果",
-      "pronunciationId": "w:fruit#p-main",
-      "note": "bear fruit。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fruit#e-1e43dceec6cf8841",
-          "text": "That willpower bore fruit when Jennifer graduated from University of Wisconsin-Eau Claire and became the first in her large family to earn a bachelor's degree.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:fruit#s5",
-      "pos": "短语",
-      "glossZh": "禁果",
-      "pronunciationId": "w:fruit#p-main",
-      "note": "forbidden fruit，可比喻被禁止而又有吸引力的东西。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fruit#e-8186c9f7037f7f1a",
-          "text": "I was back teaching after an absence of 15 years, dealing with the various kinds of “forbidden fruit” that come out of book bags.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 95,
-            "end": 100
-          }
-        },
-        {
-          "exampleId": "w:fruit#e-3ac494cf7b948a7a",
-          "text": "I decided to think up a method of dealing with forbidden fruit.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fruit#s6",
       "pos": "v.",
       "glossZh": "结果实",
@@ -303,6 +216,12 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bear-fruit",
+    "w:forbidden-fruit"
+  ]
 }

@@ -1,0 +1,88 @@
+{
+  "entryId": "w:drink-to-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "drink to"
+  ],
+  "pattern": {
+    "tokens": [
+      "drink",
+      "to",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drink",
+        "to",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "drink",
+        "to"
+      ],
+      [
+        "drank",
+        "to"
+      ],
+      [
+        "drinking",
+        "to"
+      ],
+      [
+        "drinks",
+        "to"
+      ],
+      [
+        "drunk",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drink to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:drink-to-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "为……举杯祝酒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:drink#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

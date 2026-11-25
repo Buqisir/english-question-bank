@@ -1,0 +1,89 @@
+{
+  "entryId": "w:take-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took after"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "after"
+      ],
+      [
+        "took",
+        "after"
+      ],
+      [
+        "taken",
+        "after"
+      ],
+      [
+        "takes",
+        "after"
+      ],
+      [
+        "taking",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take after sb",
+  "senses": [
+    {
+      "senseId": "w:take-after#s1",
+      "pos": "短语",
+      "glossZh": "（外貌、性格等）像某位亲属",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-after#s2",
+      "pos": "短语",
+      "glossZh": "仿效某人的做法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

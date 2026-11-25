@@ -1,0 +1,101 @@
+{
+  "entryId": "w:let-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "letting up"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        "up"
+      ],
+      [
+        "letting",
+        "up"
+      ],
+      [
+        "lets",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let up",
+  "senses": [
+    {
+      "senseId": "w:let-up#s1",
+      "pos": "短语",
+      "glossZh": "减弱；缓和；停止",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:let-up#e-995dad194f7bc857",
+          "text": "The traffic showed no signs of letting up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        }
+      ],
+      "note": "可用于雨势、疼痛、压力或交通拥堵等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 37
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 35
+    "gaokao": 3,
+    "mock": 32
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -116,78 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:greenhouse#s2",
-      "pos": "短语",
-      "glossZh": "温室气体",
-      "pronunciationId": "w:greenhouse#p-main",
-      "note": "greenhouse gas。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:greenhouse#e-2da7802f178e3d65",
-          "text": "It is calculated by the amount of greenhouse gas we produce in our daily lives.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:greenhouse#e-8563260443612c5b",
-          "text": "In fact, Royte writes, “if food waste were a country, it would be the third largest producer of greenhouse gases in the world.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "reading-b-3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 106
-          }
-        },
-        {
-          "exampleId": "w:greenhouse#e-299925227d20732f",
-          "text": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 154,
-            "end": 164
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -196,6 +124,8 @@
       "reason": "航空专业俗称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

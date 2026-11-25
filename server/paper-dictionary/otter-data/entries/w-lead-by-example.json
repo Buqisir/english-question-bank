@@ -1,0 +1,143 @@
+{
+  "entryId": "w:lead-by-example",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "by",
+      "example"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "by",
+        "example"
+      ],
+      [
+        "leading",
+        "by",
+        "example"
+      ],
+      [
+        "leads",
+        "by",
+        "example"
+      ],
+      [
+        "led",
+        "by",
+        "example"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "leading by example",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead by example",
+  "senses": [
+    {
+      "senseId": "w:lead-by-example#s1",
+      "pos": "短语",
+      "glossZh": "以身作则；用实际行动作表率",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lead-by-example#e-f8f7a87a5b9beb0f",
+          "text": "My colleagues and I then joined the Labos 1point5 program, a collective of around 600 researchers who believe science should lead by example in reducing society’s carbon footprint.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 140
+          },
+          "parts": [
+            [
+              125,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              140
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-by-example#e-a65a6188d6811953",
+          "text": "Realizing the ripple(涟漪) effect of his actions through others, Arrillaga months later made a rare exception: he permitted his name to appear on just one building – not for personal distinction, but as a nod to the power of leading by example.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 223,
+            "end": 241
+          },
+          "parts": [
+            [
+              223,
+              241
+            ]
+          ],
+          "highlightRanges": [
+            [
+              223,
+              241
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

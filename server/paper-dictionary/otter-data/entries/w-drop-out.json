@@ -1,0 +1,173 @@
+{
+  "entryId": "w:drop-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "out"
+      ],
+      [
+        "dropped",
+        "out"
+      ],
+      [
+        "dropping",
+        "out"
+      ],
+      [
+        "drops",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dropped out",
+      "tags": []
+    },
+    {
+      "form": "dropping out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop out",
+  "senses": [
+    {
+      "senseId": "w:drop-out#s1",
+      "pos": "短语",
+      "glossZh": "中途退出；辍学",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drop#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drop-out#e-bffce2e38c328108",
+          "text": "Dropping out of the project.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drop-out#e-885059f219a78921",
+          "text": "He dropped out of school.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-cq-nankai-2025-09-first-quality-test:24#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "常接 of，说明退出的学校、项目或比赛。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:drop-out#s2",
+      "pos": "短语",
+      "glossZh": "脱离主流社会的生活方式",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:drop-out#s3",
+      "pos": "短语",
+      "glossZh": "（信号或连接）中断",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 43
+    "mock": 1
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -135,38 +135,10 @@
       ]
     },
     {
-      "senseId": "w:cave#s2",
-      "pos": "短语",
-      "glossZh": "倒塌；塌陷",
-      "pronunciationId": "w:cave#p-main",
-      "note": "cave in。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:cave#s3",
       "pos": "v.",
       "glossZh": "进行洞穴探险",
       "pronunciationId": "w:cave#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:cave#s4",
-      "pos": "短语",
-      "glossZh": "屈服；让步",
-      "pronunciationId": "w:cave#p-main",
-      "note": "cave in。",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -182,6 +154,11 @@
       "reason": "专业用法或历史称呼"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cave-in"
+  ]
 }

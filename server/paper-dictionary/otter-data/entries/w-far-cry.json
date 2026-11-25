@@ -1,0 +1,95 @@
+{
+  "entryId": "w:far-cry",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "far",
+      "cry"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "far",
+        "cry"
+      ],
+      [
+        "far",
+        "cries"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "far cry",
+  "senses": [
+    {
+      "senseId": "w:far-cry#s1",
+      "pos": "短语",
+      "glossZh": "与……相去甚远；与……大不相同",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:far-cry#e-c852971b9d653f4a",
+          "text": "Today when you turn on the TV, you will see that Food Network, once the flagship of cooking instructions, has filled programs with competitions like Chopped with celebrity judges, presenting restaurant dishes as luxury experiences that create a forbidding barrier to the kitchen – a far cry from early TV chefs’ pursuit of accessibility.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 283,
+            "end": 290
+          },
+          "parts": [
+            [
+              283,
+              290
+            ]
+          ],
+          "highlightRanges": [
+            [
+              283,
+              290
+            ]
+          ]
+        }
+      ],
+      "note": "常作 a far cry from sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

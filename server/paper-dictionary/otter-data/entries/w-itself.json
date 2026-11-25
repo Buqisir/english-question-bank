@@ -42,8 +42,8 @@
     "mock": 127
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 124
+    "gaokao": 2,
+    "mock": 8
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 92
       },
       "folded": false,
       "examples": [
@@ -188,116 +188,17 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:itself#s3",
-      "pos": "短语",
-      "glossZh": "就自身而言",
-      "pronunciationId": "w:itself#p-main",
-      "note": "in (and of) itself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:itself#e-b2010fb4e1713b39",
-          "text": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 84,
-            "end": 90
-          }
-        },
-        {
-          "exampleId": "w:itself#e-6245b906eacb12cc",
-          "text": "This, in itself, was extremely __45__, since my son usually refuses to reveal anything that __46__ between 9 and 3:30 unless medically necessary.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:itself#e-fc9e6b66d37e8f5f",
-          "text": "This, in itself, is a precious form of self-healing.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-cq-nankai-2026-05-ninth-quality-test:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:itself#s4",
-      "pos": "短语",
-      "glossZh": "单独地",
-      "pronunciationId": "w:itself#p-main",
-      "note": "by itself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:itself#e-62e0c89c87b198cc",
-          "text": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 18
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-itself",
+    "w:in-and-of-itself",
+    "w:in-itself",
+    "w:lend-itself-to-sth"
+  ]
 }

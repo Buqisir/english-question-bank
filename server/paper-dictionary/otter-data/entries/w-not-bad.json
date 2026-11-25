@@ -1,0 +1,60 @@
+{
+  "entryId": "w:not-bad",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "bad"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "bad"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not bad",
+  "senses": [
+    {
+      "senseId": "w:not-bad#s1",
+      "pos": "短语",
+      "glossZh": "还不错；挺好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bad#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

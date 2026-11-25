@@ -1,0 +1,284 @@
+{
+  "entryId": "w:live-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lives with",
+    "living with"
+  ],
+  "pattern": {
+    "tokens": [
+      "live",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "with"
+      ],
+      [
+        "lives",
+        "with"
+      ],
+      [
+        "living",
+        "with"
+      ],
+      [
+        "lived",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lived with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live with",
+  "senses": [
+    {
+      "senseId": "w:live-with#s1",
+      "pos": "短语",
+      "glossZh": "与……一起生活；与……同住",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-with#e-7c804c403ca2bca0",
+          "text": "It is said that about 20% of 25-34-year-olds live with their parents, compared with 16% in 1991.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 54
+          },
+          "parts": [
+            [
+              45,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-with#e-85169fb2358c3c5c",
+          "text": "For many years, I enjoyed living with my dogs, Tilly and Chance.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-with#e-fcabbe5ba7a8db78",
+          "text": "What does Becky like about living with her parents?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        }
+      ],
+      "note": "对象为伴侣时，可指同居。",
+      "counts": {
+        "gaokao": 10,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:live-with#s2",
+      "pos": "短语",
+      "glossZh": "接受并应对长期存在的情况；忍受",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:live#s4",
+        "w:with#s36"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:live-with#e-c5303cded7158812",
+          "text": "Nobody is better able to understand the impact of desertification and climate change than somebody who is living with no access to water.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 117
+          },
+          "parts": [
+            [
+              106,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              117
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-with#e-71ac32da4b8c2593",
+          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 168,
+            "end": 179
+          },
+          "parts": [
+            [
+              168,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              168,
+              179
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-with#e-bddf83fa88be6187",
+          "text": "Millions of people worldwide who live with long-term parasitic worm（寄生虫）infections experience appetite loss.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "也可指带着疾病或残障生活。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 12,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

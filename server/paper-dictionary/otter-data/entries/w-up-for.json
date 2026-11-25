@@ -1,0 +1,116 @@
+{
+  "entryId": "w:up-for",
+  "headword": "be up for sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "up",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "up",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "up for",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:up-for#s1",
+      "pos": "短语",
+      "glossZh": "愿意参加；有兴趣",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-for#e-e419052ee928692a",
+          "text": "If you’re not up for the walk, you’ll find several bike rental companies near the park.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          },
+          "parts": [
+            [
+              14,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:up-for#s2",
+      "pos": "短语",
+      "glossZh": "有待评估或决定",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "mock",
+  "folded": false
+}

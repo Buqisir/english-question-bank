@@ -62,8 +62,8 @@
     "mock": 693
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 691
+    "gaokao": 26,
+    "mock": 517
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -339,7 +339,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -384,309 +384,6 @@
       ]
     },
     {
-      "senseId": "w:call#s6",
-      "pos": "短语",
-      "glossZh": "喊出；大声叫",
-      "pronunciationId": "w:call#p-main",
-      "note": "call out",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-62f028e3a47f0421",
-          "text": "After finishing an order, she calls out the name on the cup.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2025-i:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:call#e-eff85daf9ec27cdd",
-          "text": "he called out, holding the branch with both hands.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:call#e-e7eda6711ba65061",
-          "text": "“Your car is all set, ma’am,” the mechanic called out to the woman.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:call#s7",
-      "pos": "短语",
-      "glossZh": "取消",
-      "pronunciationId": "w:call#p-main",
-      "note": "call off",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-06ce76508f8c9af1",
-          "text": "To call off a meeting.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:call#s8",
-      "pos": "短语",
-      "glossZh": "号召；要求（某人做某事）",
-      "pronunciationId": "w:call#p-main",
-      "note": "call on",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-a526531313b5033f",
-          "text": "What does the author call on other writers to do?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-gaokao-2020-national-ii:34",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:call#e-5e1705444dc0f555",
-          "text": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.” Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 87
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:call#s9",
-      "pos": "短语",
-      "glossZh": "需要；呼吁；要求",
-      "pronunciationId": "w:call#p-main",
-      "note": "call for",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-4bdddf84261301cf",
-          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 77
-          }
-        },
-        {
-          "exampleId": "w:call#e-c7592c80ebfcca2b",
-          "text": "To call for action to protect animals.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:call#e-d26b6600d4d3756b",
-          "text": "In their new book Movement: How to Take Back Our Streets and Transform Our Lives, they call for a rethink of our streets and the role they play in our lives.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 91
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:call#s10",
-      "pos": "短语",
-      "glossZh": "拜访；探望",
-      "pronunciationId": "w:call#p-main",
-      "note": "call on",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-4754e96cd2982f39",
-          "text": "Calling on her mother.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
-            "locator": {
-              "question": 10,
-              "questionId": "question:listening:10",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:call#s11",
-      "pos": "短语",
-      "glossZh": "随叫随到；值班待命",
-      "pronunciationId": "w:call#p-main",
-      "note": "on call",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:call#e-0a2b489d5345ca8a",
-          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 204,
-            "end": 208
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:call#s12",
       "pos": "n.",
       "glossZh": "号召；征集通知",
@@ -694,7 +391,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -746,7 +443,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -785,11 +482,10 @@
       "examples": []
     },
     {
-      "senseId": "w:call#s15",
-      "pos": "短语",
-      "glossZh": "要求停止",
+      "senseId": "w:call#s16",
+      "pos": "v.",
+      "glossZh": "（体育比赛中）作出判定",
       "pronunciationId": "w:call#p-main",
-      "note": "call a stop to",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -798,22 +494,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:call#e-1c02823f48e51eb0",
-          "text": "They include “debt-for-nature-swapping” agreements under which some donor countries and organisations reduce their debt repayment demands in return for calling a stop to destructive logging.",
+          "exampleId": "w:call#e-97942ef4896e6dfe",
+          "text": "electronic line calling system failed just a week into the 2025 championship.",
           "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
             "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
-              "sentence": 2
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:seven-choices:5",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 152,
-            "end": 159
+            "start": 16,
+            "end": 23
           }
         }
       ]
@@ -825,6 +521,25 @@
       "reason": "金融、计算机、游戏或测量专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:call-a-stop-to",
+    "w:call-back",
+    "w:call-for",
+    "w:call-for-help",
+    "w:call-in",
+    "w:call-it-a-day",
+    "w:call-off",
+    "w:call-on",
+    "w:call-out",
+    "w:call-to",
+    "w:call-up",
+    "w:close-call",
+    "w:give-sb-a-call",
+    "w:on-call",
+    "w:wake-up-call"
+  ]
 }

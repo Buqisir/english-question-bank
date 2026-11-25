@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 24
+    "mock": 0
   },
   "senses": [
     {
@@ -61,7 +61,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -133,7 +133,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -216,6 +216,9 @@
       "reason": "节庆中的特定旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bad-guy"
+  ]
 }

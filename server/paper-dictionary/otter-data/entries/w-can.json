@@ -446,6 +446,12 @@
       "reason": "俚语、术语或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bite-off-more-than-one-can-chew",
+    "w:can-too",
+    "w:can-you-help-me",
+    "w:you-can-talk"
+  ]
 }

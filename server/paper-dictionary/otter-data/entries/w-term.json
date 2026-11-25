@@ -59,8 +59,8 @@
     "mock": 146
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 136
+    "gaokao": 3,
+    "mock": 31
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -298,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -362,135 +362,114 @@
       "pos": "v.",
       "glossZh": "称为",
       "pronunciationId": "w:term#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:term#s8",
-      "pos": "短语",
-      "glossZh": "就……而言",
+      "senseId": "w:term#s10",
+      "pos": "phr.",
+      "glossZh": "按自己的方式或条件（on one's own terms）",
       "pronunciationId": "w:term#p-main",
-      "note": "in terms of。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 6
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:term#e-703fe483223082a9",
-          "text": "In which aspect were the two groups different in terms of research design?",
+          "exampleId": "w:term#e-641e09731c8793d4",
+          "text": "Such activities must get permission from local communities and should directly benefit communities, ensuring heritage is shared on the community’s own terms.",
           "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
             "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2022-ii:33",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:term#e-43ce550555dac769",
-          "text": "In economic terms, however, he liked to think he was still important, encouraging careful budgeting.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:term#s9",
-      "pos": "短语",
-      "glossZh": "用……的说法",
-      "pronunciationId": "w:term#p-main",
-      "note": "in ... terms。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:term#e-1bb9656caaabdf46",
-          "text": "In more technical terms, the wisdom of crowds requires that people’s estimates be independent.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:term#e-a791de1488442673",
-          "text": "“We usually think in very concrete terms when doing something on a screen,” said Simone Schnall, senior author of the study.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:term#e-093f10d6d97f2cba",
-          "text": "In human terms, they have an effective dating app – and it has the gibbon scientists of the world buzzing.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
-            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:4",
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-62",
               "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 16,
-            "end": 21
+            "start": 151,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:term#e-2f8c28266105ec72",
+          "text": "Let your eyes, hands, and mind explore, get lost, and discover the land on your own terms.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:term#e-43065fbe66835bb8",
+          "text": "“It was then that I decided to get back to saving animals, but on my own terms,” he said.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:term#s11",
+      "pos": "n.",
+      "glossZh": "节气（solar term）",
+      "pronunciationId": "w:term#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:term#e-ba5cefe85d2b31b8",
+          "text": "Ancient China developed a comprehensive agricultural calendar known as the 24 solar terms.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 89
           }
         }
       ]
@@ -502,6 +481,12 @@
       "reason": "领域专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:long-term",
+    "w:short-term"
+  ]
 }

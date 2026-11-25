@@ -1,0 +1,90 @@
+{
+  "entryId": "w:out-west",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "west"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "west"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out west",
+  "senses": [
+    {
+      "senseId": "w:out-west#s1",
+      "pos": "短语",
+      "glossZh": "在西部；往西部去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-west#e-dcd152fd3535f192",
+          "text": "When mom and dad announced we were moving, Dad said we were going “home.” He meant out west, where",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 91
+          },
+          "parts": [
+            [
+              83,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,95 @@
+{
+  "entryId": "w:house-wine",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "house",
+      "wine"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "house",
+        "wine"
+      ],
+      [
+        "house",
+        "wines"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "house wine",
+  "senses": [
+    {
+      "senseId": "w:house-wine#s1",
+      "pos": "短语",
+      "glossZh": "餐馆或酒吧常备的自选葡萄酒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:house-wine#e-e24634c394eb2432",
+          "text": "House wine is good: perhaps a couple of dollars per carafe（喇叭瓶）.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "通常价格较低。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

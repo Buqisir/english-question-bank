@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 42
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -116,6 +116,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:passenger#s2",
+      "pos": "n.",
+      "glossZh": "旅鸽（passenger pigeon）",
+      "pronunciationId": "w:passenger#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:passenger#e-15657dcbe92725e6",
+          "text": "passenger pigeons, whose numbers were in sharp decline.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -124,6 +157,6 @@
       "reason": "独立鸟类名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

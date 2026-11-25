@@ -1,0 +1,226 @@
+{
+  "entryId": "w:bring-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bringing up"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "bring",
+        "up"
+      ],
+      [
+        "bring",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "bringing",
+        "up"
+      ],
+      [
+        "brings",
+        "up"
+      ],
+      [
+        "brought",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bring up",
+      "tags": []
+    },
+    {
+      "form": "brought up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:bring-up#s1",
+      "pos": "短语",
+      "glossZh": "提起（话题）；提出（问题）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s4",
+        "w:up#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-up#e-d94a7afb7aecdd2e",
+          "text": "It also makes it easier for you to bring up anything that you are worried about.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          },
+          "parts": [
+            [
+              35,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-up#e-63d5e6b35de23999",
+          "text": "Paragraph 2: The next day, Mr. Miller came by, and my mother brought up the past.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 71
+          },
+          "parts": [
+            [
+              61,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-up#e-732c69afd7b6ec71",
+          "text": "Sometimes, one small problem can bring up every other past complaint.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:bring-up#s2",
+      "pos": "短语",
+      "glossZh": "抚养；养育",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bring#s12"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-up#s3",
+      "pos": "短语",
+      "glossZh": "调出（电脑屏幕上的信息）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-up#s4",
+      "pos": "短语",
+      "glossZh": "吐出（吃下的东西）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 465
+    "mock": 272
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 47,
-        "mock": 0
+        "mock": 126
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -359,6 +359,9 @@
       "reason": "旧义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:teach-to-the-test"
+  ]
 }

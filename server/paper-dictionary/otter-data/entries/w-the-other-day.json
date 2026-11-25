@@ -1,0 +1,170 @@
+{
+  "entryId": "w:the-other-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "other",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "other",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the other day",
+  "senses": [
+    {
+      "senseId": "w:the-other-day#s1",
+      "pos": "短语",
+      "glossZh": "前几天；不久前的某一天",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:day#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-other-day#e-ce97a2de21d9d730",
+          "text": "Just the other day, I saw a similar question on Xiaohongshu, but the discussion quickly turned into heated arguments.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 18
+          },
+          "parts": [
+            [
+              5,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-other-day#e-51c6f4bb5bd5484c",
+          "text": "I caught sight of myself in a cafe window the other day, bent over my phone, with my head down and shoulders tense near my ears.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 55
+          },
+          "parts": [
+            [
+              42,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-other-day#e-ef048ab87880dcea",
+          "text": "The other day, a customer told me I was annoying.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:grammar-fill:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:the-other-day#s2",
+      "pos": "短语",
+      "glossZh": "前天",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "菲律宾英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

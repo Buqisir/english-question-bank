@@ -1,0 +1,173 @@
+{
+  "entryId": "w:eat-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "eat",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eat",
+        "away"
+      ],
+      [
+        "ate",
+        "away"
+      ],
+      [
+        "eaten",
+        "away"
+      ],
+      [
+        "eating",
+        "away"
+      ],
+      [
+        "eats",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "eaten away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eat away",
+  "senses": [
+    {
+      "senseId": "w:eat-away#s1",
+      "pos": "短语",
+      "glossZh": "逐渐侵蚀；慢慢损坏",
+      "note": "可用 eat away sth 或 eat away at sth。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eat#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:eat-away#e-9ef7025bbf6f0edb",
+          "text": "There it can pollute drinking water, harm plants, and eat away soil.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 62
+          },
+          "parts": [
+            [
+              54,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:eat-away#e-ff4fcf3cebe46e7b",
+          "text": "Existing above ground for 2,000 years before it was sunk by earthquakes, the layout of the town has been preserved perfectly four metres below the waves, with its streets, buildings and tombs eaten away by age but clear to see – at least 15 buildings have been identified.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 192,
+            "end": 202
+          },
+          "parts": [
+            [
+              192,
+              202
+            ]
+          ],
+          "highlightRanges": [
+            [
+              192,
+              202
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:eat-away#s2",
+      "pos": "短语",
+      "glossZh": "逐步削弱或蚕食（信心、资源等）",
+      "note": "常用 eat away at sth。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-away#s3",
+      "pos": "短语",
+      "glossZh": "（内疚、忧虑等）不断折磨（某人）",
+      "note": "常用 eat away at sb。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

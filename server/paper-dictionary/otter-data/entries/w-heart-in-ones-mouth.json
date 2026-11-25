@@ -1,0 +1,116 @@
+{
+  "entryId": "w:heart-in-ones-mouth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "heart in one’s mouth"
+  ],
+  "pattern": {
+    "tokens": [
+      "heart",
+      "in",
+      {
+        "slot": "one's"
+      },
+      "mouth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heart",
+        "in",
+        {
+          "slot": "one's"
+        },
+        "mouth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "heart in mouth",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heart in one's mouth",
+  "senses": [
+    {
+      "senseId": "w:heart-in-ones-mouth#s1",
+      "pos": "短语",
+      "glossZh": "紧张或害怕得心都提到了嗓子眼",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mouth#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:heart-in-ones-mouth#e-698f59af6eef0fd7",
+          "text": "With his heart in his mouth, Kevin grabbed Mrs. Hill’s home phone and called the police.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 27
+          },
+          "parts": [
+            [
+              9,
+              17
+            ],
+            [
+              22,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ],
+            [
+              22,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常用 with one's heart in one's mouth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

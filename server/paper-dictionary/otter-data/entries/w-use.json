@@ -75,8 +75,8 @@
     "mock": 1453
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 1453
+    "gaokao": 16,
+    "mock": 1255
   },
   "senses": [
     {
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 162,
-        "mock": 0
+        "mock": 158
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -274,284 +274,72 @@
       ]
     },
     {
-      "senseId": "w:use#s4",
-      "pos": "短语",
-      "glossZh": "没用",
-      "pronunciationId": "w:use#p-noun",
-      "note": "be no use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:use#e-8a9a68e9f08431d0",
-          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 128,
-            "end": 131
-          }
-        },
-        {
-          "exampleId": "w:use#e-603dea1dc8efa0c5",
-          "text": "She went right into the shower to washing it, but it was no use.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:use#s5",
-      "pos": "短语",
-      "glossZh": "用不太上",
-      "pronunciationId": "w:use#p-noun",
-      "note": "not have much use for sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:use#e-b489bf5de523e52d",
-          "text": "That is the only French phrase I mastered, and it’s a shame I don’t have much use for it.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 81
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:use#s6",
-      "pos": "短语",
-      "glossZh": "正在使用中",
-      "pronunciationId": "w:use#p-noun",
-      "note": "in use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:use#e-f6fff66a3712221f",
-          "text": "Staff in care homes have reported a reduction in the use of medicine where hens are in use.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "reading-c-2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 90
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:use#s7",
-      "pos": "短语",
-      "glossZh": "利用",
-      "pronunciationId": "w:use#p-noun",
-      "note": "make use of 或 put sth to use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:use#e-13dd34adccf1f020",
-          "text": "Make good use of it.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:use#e-70a730d24a0d9c22",
-          "text": "Making use of the findings.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "question": 35,
-              "questionId": "question:paper-gaokao-2022-ii:35",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 10
-          }
-        },
-        {
-          "exampleId": "w:use#e-1f499c82a8bdc808",
-          "text": "Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:use#s8",
-      "pos": "短语",
-      "glossZh": "需要；有……会更好",
+      "senseId": "w:use#s10",
+      "pos": "aux.",
+      "glossZh": "过去常常；过去曾经（used to）",
       "pronunciationId": "w:use#p-main",
-      "note": "could use sth。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 7,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 4
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:use#e-37f9942beae76369",
-          "text": "“Without anybody left in the house but us, this place could use a bit of fun.",
+          "exampleId": "w:use#e-34a791394af98b1a",
+          "text": "Where did the man use to work?",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:listening.long-form",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 63
-          }
-        },
-        {
-          "exampleId": "w:use#e-27aad5b4811252cd",
-          "text": "They’re all situations where we could use a little extra patience",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-national-a:36",
-              "option": "G",
+              "question": 10,
+              "questionId": "question:listening:10",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 38,
-            "end": 41
+            "start": 18,
+            "end": 21
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:use#s9",
-      "pos": "短语",
-      "glossZh": "用尽",
-      "pronunciationId": "w:use#p-main",
-      "note": "use up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:use#e-f7dd2269a255f7bd",
-          "text": "Toby was using up his energy by running back and forth in the backyard and giving the kids plenty of room.",
+          "exampleId": "w:use#e-4ee8681c8f27b9ac",
+          "text": "What did Emily use to do?",
           "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:listening.long-form",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:4",
-              "sentence": 2
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 9,
-            "end": 14
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:use#e-8fb80dce8572c82e",
+          "text": "What did the man use to be?",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
           }
         }
       ]
@@ -567,6 +355,22 @@
       "reason": "罕见旧义或行业用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-no-use",
+    "w:could-use-sth",
+    "w:fall-out-of-use",
+    "w:in-use",
+    "w:it-is-no-use",
+    "w:make-good-use-of",
+    "w:make-use-of",
+    "w:not-have-much-use-for-sth",
+    "w:put-sth-to-good-use",
+    "w:put-sth-to-use",
+    "w:use-it-or-lose-it",
+    "w:use-up"
+  ]
 }

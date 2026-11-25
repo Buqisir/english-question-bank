@@ -1,0 +1,149 @@
+{
+  "entryId": "w:make-peace",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "peace"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "peace"
+      ],
+      [
+        "made",
+        "peace"
+      ],
+      [
+        "makes",
+        "peace"
+      ],
+      [
+        "making",
+        "peace"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make peace",
+  "senses": [
+    {
+      "senseId": "w:make-peace#s1",
+      "pos": "短语",
+      "glossZh": "和解；平息争端",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-peace#e-35da31ae9af67442",
+          "text": "Experts suggest doing personal work before trying to reconnect with siblings, and if you do choose to talk, use “I” statements and be clear about your purpose – whether it's trying to make peace or setting boundaries.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 184,
+            "end": 194
+          },
+          "parts": [
+            [
+              184,
+              194
+            ]
+          ],
+          "highlightRanges": [
+            [
+              184,
+              194
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-peace#s2",
+      "pos": "短语",
+      "glossZh": "与自己和解；接受难以改变的现实",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-peace#e-0b659bfc8e17ef0c",
+          "text": "Make peace with yourself, and let the injury go.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "比喻用法常接 with oneself 或 with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

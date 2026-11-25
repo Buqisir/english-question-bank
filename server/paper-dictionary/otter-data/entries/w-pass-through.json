@@ -1,0 +1,216 @@
+{
+  "entryId": "w:pass-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing through"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "through"
+      ],
+      [
+        "passing",
+        "through"
+      ],
+      [
+        "passed",
+        "through"
+      ],
+      [
+        "passes",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passes through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass through",
+  "senses": [
+    {
+      "senseId": "w:pass-through#s1",
+      "pos": "短语",
+      "glossZh": "穿过；经过；通过",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-through#e-6c01702185d76fe1",
+          "text": "“Our hope is to have a clean, attractant-free place where bears can pass through without learning bad habits,” says James Jonkel, longtime biologist who manages bears in and around Missoula.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 80
+          },
+          "parts": [
+            [
+              68,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-through#e-db072b78834d280f",
+          "text": "Under normal conditions, these nanopores allow ions to pass through with high precision but at a very slow pace.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-through#e-52540c0caff2b926",
+          "text": "The animals pass through run-down, abandoned towns, implying that humanity may have been wiped out by a disaster.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:pass-through#s2",
+      "pos": "短语",
+      "glossZh": "经历；度过（某一阶段）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-through#e-0d0f74168c198c10",
+          "text": "Human brains pass through a critical period for language acquisition.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

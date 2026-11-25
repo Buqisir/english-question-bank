@@ -1,0 +1,137 @@
+{
+  "entryId": "w:can-too",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "can",
+      "too"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can",
+        "too"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can too",
+  "senses": [
+    {
+      "senseId": "w:can-too#s1",
+      "pos": "短语",
+      "glossZh": "也能做到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:can-too#e-803c1bd7244e17e0",
+          "text": "“This butterfly changed,” James recalls prisoners telling him, “and maybe we can too.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 84
+          },
+          "parts": [
+            [
+              77,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:can-too#e-b3c76e4ee55e05a7",
+          "text": "If they can do it, you can too.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 30
+          },
+          "parts": [
+            [
+              23,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "省略上文已提到的动词或动作。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:can-too#s2",
+      "pos": "短语",
+      "glossZh": "明明能；偏能做到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "在口语中反驳对方说的 can't。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

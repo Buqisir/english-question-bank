@@ -80,7 +80,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 56
+    "mock": 31
   },
   "senses": [
     {
@@ -91,7 +91,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -162,7 +162,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -207,88 +207,16 @@
       ]
     },
     {
-      "senseId": "w:dive#s3",
-      "pos": "短语",
-      "glossZh": "投入；深入探究",
-      "pronunciationId": "w:dive#p-main",
-      "note": "dive into sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dive#e-2b0e7b1974d3c5b8",
-          "text": "From Pre-K to Upper School, students dive headfirst into the world of fact-based storytelling, learning the core principles of reporting and developing the skills to become active creators of news.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:dive#e-9a6cc2186d199bfd",
-          "text": "Paragraph 1: The girls dived into work right away.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
-            "locator": {
-              "paragraph": 19,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:19",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 23,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:dive#e-2e81ab5fe22f25d3",
-          "text": "Diving into research, he learned that before human settlement, the Southeast was home to expansive grasslands.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:dive#s4",
       "pos": "n.",
       "glossZh": "跳水；潜水；俯冲",
       "pronunciationId": "w:dive#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 17
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -300,7 +228,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -345,6 +273,11 @@
       "reason": "俚语、体育专门用法或旧拼写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dive-into-sth"
+  ]
 }

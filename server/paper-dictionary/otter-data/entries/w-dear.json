@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 156
+    "mock": 1
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 1
+        "mock": 147
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -182,7 +182,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -261,6 +261,10 @@
       "reason": "旧义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:dear-sir",
+    "w:oh-dear"
+  ]
 }

@@ -1,0 +1,133 @@
+{
+  "entryId": "w:plug-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "plug",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plug",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "plug in",
+      "tags": []
+    },
+    {
+      "form": "plugging in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plug (sth) in",
+  "senses": [
+    {
+      "senseId": "w:plug-in#s1",
+      "pos": "短语",
+      "glossZh": "插上电源；接上电源充电",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s72"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:plug-in#e-2598aaf268bc31f1",
+          "text": "By plugging in the printer.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plug-in#e-62253f9a138e6be8",
+          "text": "While salespeople might simply advise you to “plug in daily and use gas for longer trips,” understanding the underlying mechanics is key to determining if an HEV truly fits your needs.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 53
+          },
+          "parts": [
+            [
+              46,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

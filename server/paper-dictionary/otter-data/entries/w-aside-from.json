@@ -1,0 +1,136 @@
+{
+  "entryId": "w:aside-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "aside",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "aside",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "aside from",
+  "senses": [
+    {
+      "senseId": "w:aside-from#s1",
+      "pos": "短语",
+      "glossZh": "除……之外，还……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:aside#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:aside-from#e-13e2b6bda39f26a7",
+          "text": "Aside from relevancy, this personal contextualization opens the door for engaging with critical questions not usually covered by standards.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aside-from#e-91d8b625bde18822",
+          "text": "It takes longer to do any task and people get more stressed.” Aside from making us perform tasks less effectively, the ease with which we get distracted by one thing or another on the internet also means that we can waste time that could be spent on activities considered more worthwhile.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:aside-from#s2",
+      "pos": "短语",
+      "glossZh": "除去……；不包括……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

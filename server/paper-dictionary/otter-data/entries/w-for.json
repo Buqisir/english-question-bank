@@ -48,7 +48,7 @@
     "mock": 8127
   },
   "unassignedCounts": {
-    "gaokao": 877,
+    "gaokao": 894,
     "mock": 8127
   },
   "senses": [
@@ -1119,266 +1119,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:for#s20",
-      "pos": "短语",
-      "glossZh": "例如",
-      "pronunciationId": "w:for#p-main",
-      "note": "for example 或 for instance。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:for#e-455a693166ec1c62",
-          "text": "A waiter’s job, for example, that requires multitasking, teamwork and decision-making could be just as stimulating as any high-level office work.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:for#e-87bfb15ca41b479a",
-          "text": "A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:for#e-740df4f3775dffad",
-          "text": "For example, one participant’s experience of “We sat and listened to the waves at the beach for a while” was assigned the categories “sitting at beach” and “listening to waves.”",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:for#s21",
-      "pos": "短语",
-      "glossZh": "免费",
-      "pronunciationId": "w:for#p-main",
-      "note": "for free 或 for nothing。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:for#e-a900b5cfa2bc92c4",
-          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:for#e-f65694a29674bf68",
-          "text": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:for#e-74e132b945ecb9e7",
-          "text": "It provides phone service for free.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2024-zhejiang-jan:26",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:for#s22",
-      "pos": "短语",
-      "glossZh": "没有缘由",
-      "pronunciationId": "w:for#p-main",
-      "note": "for nothing。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:for#e-a6a919c9b7fe1aca",
-          "text": "They are not called rainforests for nothing!",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 35
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:for#s23",
-      "pos": "短语",
-      "glossZh": "唯恐",
-      "pronunciationId": "w:for#p-main",
-      "note": "for fear of/that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:for#e-648bf89fab203e56",
-          "text": "However, some high sugar brands, like Classic Coca Cola, have accepted the sugar tax and are refusing to change for fear of upsetting consumers.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 112,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:for#e-41ed77842d301ae8",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 138,
-            "end": 141
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:for#s24",
-      "pos": "短语",
-      "glossZh": "除……以外",
-      "pronunciationId": "w:for#p-main",
-      "note": "except for。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:for#s25",
-      "pos": "短语",
-      "glossZh": "至于",
-      "pronunciationId": "w:for#p-main",
-      "note": "as for。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -1387,6 +1127,120 @@
       "reason": "组织缩写 FOR"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:account-for",
+    "w:all-for",
+    "w:allow-for-sth",
+    "w:answer-for-sth",
+    "w:as-for",
+    "w:ask-for",
+    "w:ask-for-trouble",
+    "w:be-dying-for-sth",
+    "w:be-good-for",
+    "w:be-in-the-mood-for-sth",
+    "w:be-known-for",
+    "w:be-made-for",
+    "w:be-out-for",
+    "w:be-pressed-for-time",
+    "w:be-short-for",
+    "w:but-for",
+    "w:call-for",
+    "w:call-for-help",
+    "w:care-for",
+    "w:come-in-for",
+    "w:cry-for",
+    "w:cry-out-for",
+    "w:done-for",
+    "w:except-for",
+    "w:fall-for-sb",
+    "w:feel-for",
+    "w:feel-sorry-for",
+    "w:fish-for-compliments",
+    "w:fit-for-a-king",
+    "w:fit-for-purpose",
+    "w:food-for-thought",
+    "w:for-a-rainy-day",
+    "w:for-a-song",
+    "w:for-a-while",
+    "w:for-all",
+    "w:for-example",
+    "w:for-fear-of",
+    "w:for-fear-that",
+    "w:for-free",
+    "w:for-fun",
+    "w:for-good",
+    "w:for-good-reason",
+    "w:for-instance",
+    "w:for-lack-of",
+    "w:for-life",
+    "w:for-nothing",
+    "w:for-now",
+    "w:for-one",
+    "w:for-real",
+    "w:for-sale",
+    "w:for-some-time",
+    "w:for-sure",
+    "w:for-the-most-part",
+    "w:go-for",
+    "w:go-for-it",
+    "w:go-for-the-gold",
+    "w:go-in-for",
+    "w:going-for-gold",
+    "w:gun-for",
+    "w:have-an-eye-for",
+    "w:have-little-time-for",
+    "w:have-no-time-for",
+    "w:if-not-for",
+    "w:in-exchange-for",
+    "w:in-for",
+    "w:in-order-for",
+    "w:in-return-for",
+    "w:in-store-for-sb",
+    "w:listen-for",
+    "w:live-for",
+    "w:long-for",
+    "w:look-for",
+    "w:look-out-for",
+    "w:make-for",
+    "w:make-the-case-for",
+    "w:make-up-for",
+    "w:make-up-for-lost-time",
+    "w:make-way-for-sth",
+    "w:not-for-nothing",
+    "w:not-have-much-use-for-sth",
+    "w:now-for",
+    "w:once-and-for-all",
+    "w:pass-for",
+    "w:pay-for",
+    "w:provide-for-sb",
+    "w:push-for-sth",
+    "w:put-up-for-sale",
+    "w:reach-for-sth",
+    "w:reach-for-the-moon",
+    "w:root-for",
+    "w:save-for",
+    "w:seek-for",
+    "w:send-for",
+    "w:set-sb-up-for-sth",
+    "w:short-for",
+    "w:sit-for",
+    "w:so-much-for",
+    "w:speak-for",
+    "w:speak-up-for",
+    "w:stand-for",
+    "w:stand-in-for",
+    "w:stand-up-for",
+    "w:take-a-turn-for-the-worse",
+    "w:take-for-granted",
+    "w:up-for",
+    "w:up-for-grabs",
+    "w:up-for-sale",
+    "w:value-for-money",
+    "w:watch-out-for-sth",
+    "w:worse-for-wear"
+  ]
 }

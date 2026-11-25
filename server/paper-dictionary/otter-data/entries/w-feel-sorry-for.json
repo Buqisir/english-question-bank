@@ -1,0 +1,179 @@
+{
+  "entryId": "w:feel-sorry-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "feels sorry for"
+  ],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "sorry",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "sorry",
+        "for"
+      ],
+      [
+        "feels",
+        "sorry",
+        "for"
+      ],
+      [
+        "feeling",
+        "sorry",
+        "for"
+      ],
+      [
+        "felt",
+        "sorry",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "felt sorry for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel sorry for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:feel-sorry-for#s1",
+      "pos": "短语",
+      "glossZh": "同情；为……的遭遇感到难过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-sorry-for#e-260e3b127409252e",
+          "text": "Jorge almost felt sorry for the skinny beast.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 27
+          },
+          "parts": [
+            [
+              13,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-sorry-for#e-84a4b385812f194c",
+          "text": "She felt sorry for her son’s condition.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:24#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-sorry-for#e-8248ef963f39f76a",
+          "text": "He feels sorry for Sally.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "feel sorry for oneself 表示自怜。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

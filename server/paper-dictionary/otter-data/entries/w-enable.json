@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 104
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 101
       },
       "folded": false,
       "examples": [
@@ -140,12 +140,12 @@
       "pos": "v.",
       "glossZh": "启用（功能）",
       "pronunciationId": "w:enable#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -163,6 +163,6 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

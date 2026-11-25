@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 117
+    "mock": 25
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -199,6 +199,6 @@
       "reason": "归入 mean 的动词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

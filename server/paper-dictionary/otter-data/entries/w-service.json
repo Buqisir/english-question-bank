@@ -59,8 +59,8 @@
     "mock": 301
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 299
+    "gaokao": 5,
+    "mock": 109
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 137
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -266,7 +266,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -338,7 +338,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -383,51 +383,16 @@
       ]
     },
     {
-      "senseId": "w:service#s6",
-      "pos": "短语",
-      "glossZh": "客房送餐服务",
-      "pronunciationId": "w:service#p-main",
-      "note": "room service。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:service#e-9332fc325445c9e0",
-          "text": "Order room service.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:listening.short-dialogue",
-            "locator": {
-              "question": 5,
-              "questionId": "question:listening:5",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:service#s7",
       "pos": "n.",
       "glossZh": "服役",
       "pronunciationId": "w:service#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -435,12 +400,12 @@
       "pos": "n.",
       "glossZh": "宗教仪式",
       "pronunciationId": "w:service#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -468,6 +433,60 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:service#s11",
+      "pos": "n.",
+      "glossZh": "（设备的）使用",
+      "pronunciationId": "w:service#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:service#e-2df5d26a04e5ce10",
+          "text": "Extend the plug’s service life.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:21",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:service#e-0b275e066118840a",
+          "text": "It has a short service life.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:33",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -476,6 +495,8 @@
       "reason": "罕见植物名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

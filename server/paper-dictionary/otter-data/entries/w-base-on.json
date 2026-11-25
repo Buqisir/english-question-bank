@@ -1,0 +1,300 @@
+{
+  "entryId": "w:base-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "base upon"
+  ],
+  "pattern": {
+    "tokens": [
+      "base",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "base",
+        "on"
+      ],
+      [
+        "base",
+        "upon"
+      ],
+      [
+        "based",
+        "on"
+      ],
+      [
+        "bases",
+        "on"
+      ],
+      [
+        "basing",
+        "on"
+      ],
+      [
+        "based",
+        "upon"
+      ],
+      [
+        "bases",
+        "upon"
+      ],
+      [
+        "basing",
+        "upon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "based on",
+      "tags": []
+    },
+    {
+      "form": "based upon",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "base sth on sth",
+  "senses": [
+    {
+      "senseId": "w:base-on#s1",
+      "pos": "短语",
+      "glossZh": "以……为基础或依据",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:base-on#e-e2902b8739305284",
+          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:base-on#e-c334b36f0f5222ba",
+          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 55
+          },
+          "parts": [
+            [
+              47,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:base-on#e-671f428e5b1baa64",
+          "text": "What is the author’s statement about multigenerational family based on?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-national-iii:30",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be based on。",
+      "counts": {
+        "gaokao": 11,
+        "mock": 86
+      }
+    },
+    {
+      "senseId": "w:base-on#s2",
+      "pos": "短语",
+      "glossZh": "取材于；根据……改编",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:base-on#e-d5ad0add8a1ea72d",
+          "text": "What is Norman’s story based on?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:base-on#e-06268a408085944e",
+          "text": "She executive produced Poacher, a 2024 hit miniseries based on a real elephant poaching investigation in India.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 62
+          },
+          "parts": [
+            [
+              54,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:base-on#e-6394ffad3f2c2144",
+          "text": "The story is a gothic（哥特风格的）romance based on Gaston Leroux’s novel launched in 1910.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "常用于故事、电影等作品。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 13,
+    "mock": 93
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

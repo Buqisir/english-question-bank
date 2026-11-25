@@ -1,0 +1,196 @@
+{
+  "entryId": "w:open-house",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "open",
+      "house"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "open",
+        "house"
+      ],
+      [
+        "open",
+        "houses"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "open house",
+  "senses": [
+    {
+      "senseId": "w:open-house#s1",
+      "pos": "短语",
+      "glossZh": "（学校或机构的）开放日；开放参观活动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:open-house#e-af9b407af9980d4d",
+          "text": "By attending the Open House, you can take advantage of the following exclusive offers:",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-house#e-6fed4128928f951a",
+          "text": "We usually schedule the final due date just before our school’s open house so that the magazines can be displayed for the community.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 74
+          },
+          "parts": [
+            [
+              64,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-house#e-3e26049de7c7cc15",
+          "text": "Interested in attending the British Council’s Open House?",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:open-house#s2",
+      "pos": "短语",
+      "glossZh": "待售房屋的公开看房活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:open-house#s3",
+      "pos": "短语",
+      "glossZh": "来客可自由进出的家庭聚会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:open-house#s4",
+      "pos": "短语",
+      "glossZh": "随时欢迎客人来访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 keep open house。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

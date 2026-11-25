@@ -1,0 +1,132 @@
+{
+  "entryId": "w:all-in-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "in",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "in",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all in all",
+  "senses": [
+    {
+      "senseId": "w:all-in-all#s1",
+      "pos": "短语",
+      "glossZh": "总的来说；总体而言",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-in-all#e-a623857af189a0d3",
+          "text": "All in all, human activity has cut off about half the sand that would otherwise end up on the world’s beaches.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:all-in-all#s2",
+      "pos": "短语",
+      "glossZh": "总共；合计",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-in-all#s3",
+      "pos": "短语",
+      "glossZh": "完全地；在各方面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-in-all#s4",
+      "pos": "短语",
+      "glossZh": "最重要的一切；全部寄托",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

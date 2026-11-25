@@ -1,0 +1,157 @@
+{
+  "entryId": "w:rain-or-shine",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rain",
+      "or",
+      "shine"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rain",
+        "or",
+        "shine"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rain or shine",
+  "senses": [
+    {
+      "senseId": "w:rain-or-shine#s1",
+      "pos": "短语",
+      "glossZh": "无论晴雨；风雨无阻",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rain#s3",
+        "w:shine#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:rain-or-shine#e-863469d338adbdd6",
+          "text": "We’ll be working rain or shine.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 30
+          },
+          "parts": [
+            [
+              17,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rain-or-shine#e-b0fd59d3c9be8c6d",
+          "text": "For twenty-three years, rain or shine, she has sold single roses from a metal cart for $2 each.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 37
+          },
+          "parts": [
+            [
+              24,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rain-or-shine#e-0c857e52c3d5080c",
+          "text": "Rain or shine, the woman performs this essential, though difficult job, always accompanied by her faithful companion.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

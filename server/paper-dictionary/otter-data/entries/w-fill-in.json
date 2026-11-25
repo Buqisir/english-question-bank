@@ -1,0 +1,301 @@
+{
+  "entryId": "w:fill-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fill",
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "fill",
+        "in"
+      ],
+      [
+        "fill",
+        {
+          "slot": "sb/sth"
+        },
+        "in"
+      ],
+      [
+        "filled",
+        "in"
+      ],
+      [
+        "filling",
+        "in"
+      ],
+      [
+        "fills",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fill in",
+      "tags": []
+    },
+    {
+      "form": "filled in",
+      "tags": []
+    },
+    {
+      "form": "filling in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fill (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:fill-in#s1",
+      "pos": "短语",
+      "glossZh": "填写（表格、问卷或空格）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fill#s5",
+        "w:in#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fill-in#e-69bbf3fd22567a1e",
+          "text": "Last week our teacher asked us to fill in a questionnaire.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fill-in#e-23e6702f1b163b66",
+          "text": "Then, ask your adult to visit hrp.org.uk/teachingawards to fill in the nomination.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 66
+          },
+          "parts": [
+            [
+              59,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fill-in#e-48a0fd7ec6957bcf",
+          "text": "On which occasion should you fill in the Claim Returned Form?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:fill-in#s2",
+      "pos": "短语",
+      "glossZh": "向某人补充说明情况",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fill-in#e-9282621880fbbb82",
+          "text": "“Okay, boys, I just want to fill you in on a couple of important details,” Ms. Evans told us.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 39
+          },
+          "parts": [
+            [
+              28,
+              32
+            ],
+            [
+              37,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              32
+            ],
+            [
+              37,
+              39
+            ]
+          ]
+        }
+      ],
+      "note": "常用 fill sb in on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fill-in#s4",
+      "pos": "短语",
+      "glossZh": "临时代班；暂时顶替",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fill-in#e-f431577e099f55d0",
+          "text": "By filling in for an actor.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "note": "常用 fill in for sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fill-in#s3",
+      "pos": "短语",
+      "glossZh": "填平（坑、沟等）；填补空缺",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

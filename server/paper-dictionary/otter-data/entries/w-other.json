@@ -42,8 +42,8 @@
     "mock": 1565
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 1565
+    "gaokao": 37,
+    "mock": 1382
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 95,
-        "mock": 0
+        "mock": 114
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 52,
-        "mock": 0
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -259,222 +259,27 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:other#s4",
-      "pos": "短语",
-      "glossZh": "彼此；互相",
-      "pronunciationId": "w:other#p-main",
-      "note": "each other。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 31,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:other#e-90d0fc49dff1e92f",
-          "text": "People were trying to help each other meet the challenges.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:other#e-c330913161ea484d",
-          "text": "We sat down next to each other, but David wouldn’t look at me.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "writing-continuation-11",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:other#e-426ba0f806c2ee20",
-          "text": "Everyone brings something unique to the table and can connect with each other in a new way.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 84
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:other#s5",
-      "pos": "短语",
-      "glossZh": "另一方面",
-      "pronunciationId": "w:other#p-main",
-      "note": "on the other hand。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:other#e-81bb7acd36a0f011",
-          "text": "“On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:other#e-3dcd709b1c70ffd1",
-          "text": "On the other hand, being young and old at the same time has its attractions.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:other#e-234fe991e7e533d4",
-          "text": "A lengthy, positive review, on the other hand, was regarded as suspicious, and participants tended to trust writers that kept their glowing reviews short.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 40
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:other#s6",
-      "pos": "短语",
-      "glossZh": "除了……以外",
-      "pronunciationId": "w:other#p-main",
-      "note": "other than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:other#e-7574431f0e036b53",
-          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:other#s7",
-      "pos": "短语",
-      "glossZh": "每隔一年",
-      "pronunciationId": "w:other#p-main",
-      "note": "every other year。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:other#e-6ce553c508d7518a",
-          "text": "Every other year.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 11
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:among-other-things",
+    "w:each-other",
+    "w:every-other",
+    "w:every-other-year",
+    "w:in-other-words",
+    "w:like-no-other",
+    "w:on-the-other-hand",
+    "w:on-the-other-side-of",
+    "w:other-half",
+    "w:other-than",
+    "w:the-other-day",
+    "w:the-other-side-of-the-coin",
+    "w:the-other-way",
+    "w:the-other-way-around"
+  ]
 }

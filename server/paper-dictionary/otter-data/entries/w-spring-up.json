@@ -1,0 +1,124 @@
+{
+  "entryId": "w:spring-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spring",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spring",
+        "up"
+      ],
+      [
+        "sprang",
+        "up"
+      ],
+      [
+        "springing",
+        "up"
+      ],
+      [
+        "springs",
+        "up"
+      ],
+      [
+        "sprung",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "springing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spring up",
+  "senses": [
+    {
+      "senseId": "w:spring-up#s1",
+      "pos": "短语",
+      "glossZh": "猛地跳起来；一下子站起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:spring-up#e-43395016e4d3e570",
+          "text": "“You’re here!” one said, springing up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 37
+          },
+          "parts": [
+            [
+              25,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:spring-up#s2",
+      "pos": "短语",
+      "glossZh": "突然出现；迅速形成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

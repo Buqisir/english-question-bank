@@ -1,0 +1,126 @@
+{
+  "entryId": "w:in-my-opinion",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "my",
+      "opinion"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "my",
+        "opinion"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in my opinion",
+  "senses": [
+    {
+      "senseId": "w:in-my-opinion#s1",
+      "pos": "短语",
+      "glossZh": "在我看来；我认为",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s28",
+        "w:opinion#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-my-opinion#e-adc7c19993a288aa",
+          "text": "In my opinion, where in trouble, we should seek help from those we trust mostly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-my-opinion#e-cc9fd5df5d5f919e",
+          "text": "In my opinion, students can benefit a lot doing some housework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

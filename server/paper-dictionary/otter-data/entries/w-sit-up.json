@@ -1,0 +1,207 @@
+{
+  "entryId": "w:sit-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "up"
+      ],
+      [
+        "sat",
+        "up"
+      ],
+      [
+        "sits",
+        "up"
+      ],
+      [
+        "sitting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sat up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit up",
+  "senses": [
+    {
+      "senseId": "w:sit-up#s1",
+      "pos": "短语",
+      "glossZh": "从躺姿坐起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-up#e-5600483010847e6a",
+          "text": "I struggled to sit up, but after being hospitalized several days for severe breathing difficulties, I was still very weak.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          },
+          "parts": [
+            [
+              15,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:sit-up#s2",
+      "pos": "短语",
+      "glossZh": "坐直；挺直上身",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-up#e-5dce31a9e7127235",
+          "text": "Peter sat up straight, confident he’d make it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          },
+          "parts": [
+            [
+              6,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 sit up straight。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:sit-up#s3",
+      "pos": "短语",
+      "glossZh": "突然警觉起来；开始留意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 sit up and take notice。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-up#s4",
+      "pos": "短语",
+      "glossZh": "熬夜不睡",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-up#s5",
+      "pos": "短语",
+      "glossZh": "（球）弹到便于击打的高度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-up#s6",
+      "pos": "短语",
+      "glossZh": "连续数晚在家接待前来致意的访客",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "历史上的印度英语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

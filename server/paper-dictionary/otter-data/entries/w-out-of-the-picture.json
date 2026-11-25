@@ -1,0 +1,64 @@
+{
+  "entryId": "w:out-of-the-picture",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "the",
+      "picture"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "the",
+        "picture"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of the picture",
+  "senses": [
+    {
+      "senseId": "w:out-of-the-picture#s1",
+      "pos": "短语",
+      "glossZh": "不再参与；已不在考虑范围内",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:picture#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

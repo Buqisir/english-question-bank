@@ -1,0 +1,166 @@
+{
+  "entryId": "w:something-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "something",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "something",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "something else",
+  "senses": [
+    {
+      "senseId": "w:something-else#s1",
+      "pos": "短语",
+      "glossZh": "别的东西；另外的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:something-else#e-2563a1748451513c",
+          "text": "Now I think of her as reading so much of the time while doing something else.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 76
+          },
+          "parts": [
+            [
+              62,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-else#e-97d5f794c5e2c336",
+          "text": "I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 64
+          },
+          "parts": [
+            [
+              50,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:something-else#e-c5821c9194ac365d",
+          "text": "What actually happens is that the magician makes the cut or burned object disappear by quickly hiding it while the audience watches something else.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 146
+          },
+          "parts": [
+            [
+              132,
+              146
+            ]
+          ],
+          "highlightRanges": [
+            [
+              132,
+              146
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:something-else#s2",
+      "pos": "短语",
+      "glossZh": "真不一般；非同寻常",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中可表示赞叹，也可带讽刺。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -266,34 +266,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:how#s5",
-      "pos": "短语",
-      "glossZh": "……怎么样（提议）",
-      "pronunciationId": "w:how#p-main",
-      "note": "how about sth/doing sth?",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:how#s6",
-      "pos": "短语",
-      "glossZh": "怎么会；为什么",
-      "pronunciationId": "w:how#p-main",
-      "note": "how come 后接陈述语序。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -302,6 +274,19 @@
       "reason": "同形专名、古旧或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:how-about-doing-sth",
+    "w:how-about-sth",
+    "w:how-are-things",
+    "w:how-are-you",
+    "w:how-come",
+    "w:how-do-you-mean",
+    "w:how-far",
+    "w:how-far-sb-has-come",
+    "w:how-much-does-it-cost"
+  ]
 }

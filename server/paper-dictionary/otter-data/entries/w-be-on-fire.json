@@ -1,0 +1,91 @@
+{
+  "entryId": "w:be-on-fire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "on",
+      "fire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "on",
+        "fire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be on fire",
+  "senses": [
+    {
+      "senseId": "w:be-on-fire#s1",
+      "pos": "短语",
+      "glossZh": "着火；在燃烧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:be-on-fire#s2",
+      "pos": "短语",
+      "glossZh": "有灼烧感；火辣辣地疼",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fire#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:be-on-fire#s3",
+      "pos": "短语",
+      "glossZh": "表现特别出色；状态极佳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fire#s10"
+      ],
+      "examples": [],
+      "note": "口语，常形容一段时间里接连有出色表现。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

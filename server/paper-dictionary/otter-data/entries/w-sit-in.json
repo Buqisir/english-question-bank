@@ -1,0 +1,99 @@
+{
+  "entryId": "w:sit-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting in"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "in"
+      ],
+      [
+        "sitting",
+        "in"
+      ],
+      [
+        "sat",
+        "in"
+      ],
+      [
+        "sits",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit in",
+  "senses": [
+    {
+      "senseId": "w:sit-in#s1",
+      "pos": "短语",
+      "glossZh": "旁听；列席",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 sit in on a class/meeting。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-in#s2",
+      "pos": "短语",
+      "glossZh": "临时加入合奏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-in#s3",
+      "pos": "短语",
+      "glossZh": "参加静坐抗议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

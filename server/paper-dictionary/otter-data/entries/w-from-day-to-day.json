@@ -1,0 +1,108 @@
+{
+  "entryId": "w:from-day-to-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "day",
+      "to",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "day",
+        "to",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from day to day",
+  "senses": [
+    {
+      "senseId": "w:from-day-to-day#s1",
+      "pos": "短语",
+      "glossZh": "每天；一天一天地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:from-day-to-day#e-3ea0d3bbec11d732",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 42
+          },
+          "parts": [
+            [
+              27,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "vary from day to day 指每天都可能不同。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:from-day-to-day#s2",
+      "pos": "短语",
+      "glossZh": "过一天算一天；只顾眼前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

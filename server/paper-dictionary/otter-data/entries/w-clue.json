@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 51
+    "mock": 5
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -162,6 +162,6 @@
       "reason": "航海专门义或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

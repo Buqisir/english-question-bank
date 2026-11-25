@@ -1,0 +1,217 @@
+{
+  "entryId": "w:speak-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "speaking out"
+  ],
+  "pattern": {
+    "tokens": [
+      "speak",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speak",
+        "out"
+      ],
+      [
+        "speaking",
+        "out"
+      ],
+      [
+        "speaks",
+        "out"
+      ],
+      [
+        "spoke",
+        "out"
+      ],
+      [
+        "spoken",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speak out",
+  "senses": [
+    {
+      "senseId": "w:speak-out#s1",
+      "pos": "短语",
+      "glossZh": "公开发声；直言表达看法或感受",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-out#e-f7f9f98978c5e724",
+          "text": "They suppress emotions like anger, hide true feelings and bottle up distress instead of speaking out.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 100
+          },
+          "parts": [
+            [
+              88,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-out#e-13ddc6d55bf1fbd1",
+          "text": "She wants other young people to speak out when they see something wrong, even if they feel shy about it at first.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-out#e-4616278405760dcf",
+          "text": "To speak out against wartime violence.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-fujian-putian-2026-03-second-quality-test:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常用 speak out against 表示公开反对。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:speak-out#s2",
+      "pos": "短语",
+      "glossZh": "把（心里的话）说出声来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-out#e-60a342cba850fa9a",
+          "text": "Another issue to overcome is the potential for translating, logging, and speaking out inner monologues that are intended to be kept private--not something you want in a BCI.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 85
+          },
+          "parts": [
+            [
+              73,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

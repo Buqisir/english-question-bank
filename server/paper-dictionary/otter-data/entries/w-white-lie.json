@@ -1,0 +1,96 @@
+{
+  "entryId": "w:white-lie",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "white",
+      "lie"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "white",
+        "lie"
+      ],
+      [
+        "white",
+        "lies"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "white lie",
+  "senses": [
+    {
+      "senseId": "w:white-lie#s1",
+      "pos": "短语",
+      "glossZh": "善意的谎言",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:white#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:white-lie#e-3a352a6122a7cb4d",
+          "text": "This doesn’t mean that you never tell a “little white lie” – what this means is that you always act towards yourself and others in a way that’s true to your core values.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          },
+          "parts": [
+            [
+              48,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

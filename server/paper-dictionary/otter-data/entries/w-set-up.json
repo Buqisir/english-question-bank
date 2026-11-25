@@ -1,0 +1,546 @@
+{
+  "entryId": "w:set-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sets up",
+    "setting up"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "set",
+        "up"
+      ],
+      [
+        "set",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "sets",
+        "up"
+      ],
+      [
+        "setting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:set-up#s1",
+      "pos": "短语",
+      "glossZh": "建立；创办；设立",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:set#s17",
+        "w:up#s56"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-up#e-d39b10a90a567926",
+          "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "grammar-fill-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          },
+          "parts": [
+            [
+              52,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-ff1a2701b51bc8d1",
+          "text": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          },
+          "parts": [
+            [
+              26,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-afd510b64057fd9b",
+          "text": "To set up his own business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          },
+          "parts": [
+            [
+              3,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 29
+      }
+    },
+    {
+      "senseId": "w:set-up#s2",
+      "pos": "短语",
+      "glossZh": "搭建；安装就绪",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:set#s18",
+        "w:up#s67",
+        "w:up#s73"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-up#e-51f4731bf314e0bf",
+          "text": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          },
+          "parts": [
+            [
+              69,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-9eb3933ddd234dc2",
+          "text": "It can be set up for a family.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          },
+          "parts": [
+            [
+              10,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-1ffa7743b6c39772",
+          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 139
+          },
+          "parts": [
+            [
+              133,
+              139
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              139
+            ]
+          ]
+        }
+      ],
+      "note": "常接摊位、设备等。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 34
+      }
+    },
+    {
+      "senseId": "w:set-up#s3",
+      "pos": "短语",
+      "glossZh": "安排；准备好",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s64"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-up#e-4baeeb641ffe76e9",
+          "text": "The project required each team to develop a hypothesis（假说）, set up an experiment to test the hypothesis, do the statistical analysis and present the findings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          },
+          "parts": [
+            [
+              60,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-599d6a7bae7ba3b7",
+          "text": "The experiment was set up to test how rising temperatures would affect salamanders’ behavior.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          },
+          "parts": [
+            [
+              19,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-8942137a8086e5ee",
+          "text": "Paragraph 1: Meanwhile, Aaron was helping a new resident, Mrs. Evelyn, set up a video call.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 77
+          },
+          "parts": [
+            [
+              71,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              77
+            ]
+          ]
+        }
+      ],
+      "note": "如安排实验，或配置系统。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:set-up#s4",
+      "pos": "短语",
+      "glossZh": "为某人提供所需的东西",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-up#e-7848b74e205537a7",
+          "text": "Brown set us up with classes, books, dorm rooms, and funds to purchase winter clothes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 15
+          },
+          "parts": [
+            [
+              6,
+              9
+            ],
+            [
+              13,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              9
+            ],
+            [
+              13,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-up#e-41ece61da1f443d8",
+          "text": "We will provide training to help set you up as a self-employed person.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              36
+            ],
+            [
+              41,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              36
+            ],
+            [
+              41,
+              43
+            ]
+          ]
+        }
+      ],
+      "note": "set sb up with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:set-up#s5",
+      "pos": "短语",
+      "glossZh": "设局陷害（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-up#s6",
+      "pos": "短语",
+      "glossZh": "撮合（两人）；安排约会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-up#s7",
+      "pos": "短语",
+      "glossZh": "凝固；变硬",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-up#s8",
+      "pos": "短语",
+      "glossZh": "为（队友）创造得分机会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

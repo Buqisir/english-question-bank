@@ -1,0 +1,97 @@
+{
+  "entryId": "w:touch-upon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "touch",
+      "upon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "touch",
+        "upon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "touches upon",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "touch upon sth",
+  "senses": [
+    {
+      "senseId": "w:touch-upon#s1",
+      "pos": "短语",
+      "glossZh": "简要提及；略谈",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:touch#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:touch-upon#e-7a053b3fdc1fd1b9",
+          "text": "Ultimately, it touches upon time itself – how to balance the preservation of historical identity with the need for change.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

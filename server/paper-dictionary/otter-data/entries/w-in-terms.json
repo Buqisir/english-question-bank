@@ -1,0 +1,322 @@
+{
+  "entryId": "w:in-terms",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in ... terms"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      {
+        "slot": "…"
+      },
+      "terms"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        {
+          "slot": "…"
+        },
+        "terms"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in terms",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in … terms",
+  "senses": [
+    {
+      "senseId": "w:in-terms#s1",
+      "pos": "短语",
+      "glossZh": "用……的说法；以……的方式表述",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:term#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-terms#e-4f5b99d9289a712c",
+          "text": "In more technical terms, the wisdom of crowds requires that people’s estimates be independent.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 23
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              18,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              18,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-terms#e-8ccd63609a6b27a6",
+          "text": "In simple terms, cognitive dissonance occurs when our behaviors are inconsistent with our beliefs.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              10,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              10,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-terms#e-669368b7dbcb7b03",
+          "text": "This “freezing”, or tonic immobility in academic terms, is an adaptive defense response to stress or danger.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 54
+          },
+          "parts": [
+            [
+              37,
+              39
+            ],
+            [
+              49,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              39
+            ],
+            [
+              49,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:in-terms#s2",
+      "pos": "短语",
+      "glossZh": "从……的角度考虑；以……的方式思考",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-terms#e-c640b3f1bbf3b6c4",
+          "text": "“We usually think in very concrete terms when doing something on a screen,” said Simone Schnall, senior author of the study.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 40
+          },
+          "parts": [
+            [
+              18,
+              20
+            ],
+            [
+              35,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              20
+            ],
+            [
+              35,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-terms#e-b7bfc2e4ca522fc0",
+          "text": "In economic terms, however, he liked to think he was still important, encouraging careful budgeting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              12,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              12,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-terms#e-144d61645f25dcfb",
+          "text": "In contrast, thinking about exercise in all-or-nothing terms – “I need at least 30 minutes or there’s no point” – is the enemy of consistency.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 60
+          },
+          "parts": [
+            [
+              37,
+              39
+            ],
+            [
+              55,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              39
+            ],
+            [
+              55,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

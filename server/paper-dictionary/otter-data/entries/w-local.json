@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 470
+    "mock": 270
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 61,
-        "mock": 0
+        "mock": 186
       },
       "folded": false,
       "examples": [
@@ -172,7 +172,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -242,6 +242,6 @@
       "reason": "口语省略或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

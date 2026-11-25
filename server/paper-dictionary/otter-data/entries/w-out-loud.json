@@ -1,0 +1,155 @@
+{
+  "entryId": "w:out-loud",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "loud"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "loud"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out loud",
+  "senses": [
+    {
+      "senseId": "w:out-loud#s1",
+      "pos": "短语",
+      "glossZh": "出声地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:loud#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-loud#e-ba51761302e252e4",
+          "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-loud#e-d26b8ec8ec5c3cec",
+          "text": "They wondered out loud.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-loud#e-27fc1477835bef02",
+          "text": "Sharing your thoughts out loud can help you sort through them more clearly and ease the emotional burden.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常与 read、say、laugh 搭配。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

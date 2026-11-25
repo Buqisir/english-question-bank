@@ -1,0 +1,62 @@
+{
+  "entryId": "w:pack-it-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pack",
+      "it",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pack",
+        "it",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pack it in",
+  "senses": [
+    {
+      "senseId": "w:pack-it-in#s1",
+      "pos": "短语",
+      "glossZh": "停手；放弃不干了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:pack#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

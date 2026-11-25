@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 60
+    "mock": 17
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -200,81 +200,14 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:yes#s5",
-      "pos": "短语",
-      "glossZh": "同意",
-      "pronunciationId": "w:yes#p-main",
-      "note": "say yes。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yes#e-6735a07bd5b0688f",
-          "text": "If Blake says yes, Chris chooses a piece; Blake chooses next, pleased to get one of the two pieces he liked, followed by Alex, who would be satisfied with any of the pieces.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:yes#e-5610866b877c9fec",
-          "text": "before graduation, I just said ‘yes’,” recalls Hagan, whose passion outweighs the district’s limited resources.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:yes#e-9277ab6325d0c18a",
-          "text": "But the best opportunities came from raising my hand at the right moment – saying yes before I felt completely ready.",
-          "source": {
-            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
-            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
-            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 82,
-            "end": 85
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:yes-and-no"
+  ]
 }

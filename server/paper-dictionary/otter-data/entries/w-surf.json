@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 0
   },
   "senses": [
     {
@@ -104,7 +104,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -175,7 +175,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -239,6 +239,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:surf#s4",
+      "pos": "v.",
+      "glossZh": "使借力滑行",
+      "pronunciationId": "w:surf#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:surf#e-a817b77441c0a7d1",
+          "text": "To get even closer, researchers at NASA’s Innovative Advanced Concepts program have developed two novel shields which they believe could surf a probe as close as 1 sun length from the surface.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 141
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -247,6 +280,6 @@
       "reason": "同形缩写或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,106 @@
+{
+  "entryId": "w:as-you-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "you",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "you",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as you like",
+  "senses": [
+    {
+      "senseId": "w:as-you-like#s1",
+      "pos": "短语",
+      "glossZh": "按自己的喜好；随意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-you-like#e-bf895f422f43fc51",
+          "text": "You’ve followed all sleep experts’ advice – going to bed on time, avoiding afternoon coffee, and keeping your bedroom cool as you like, dark with no light on, and quiet as possible – yet you still toss and turn.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 134
+          },
+          "parts": [
+            [
+              123,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:as-you-like#s2",
+      "pos": "短语",
+      "glossZh": "随你吧；由你决定",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可单独用作答语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

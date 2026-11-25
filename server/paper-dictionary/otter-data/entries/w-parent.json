@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 387
+    "mock": 188
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 64,
-        "mock": 0
+        "mock": 182
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -231,9 +231,97 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:parent#s5",
+      "pos": "n.",
+      "glossZh": "亲本；产生后代的个体或品系",
+      "pronunciationId": "w:parent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:parent#e-4b31f9e481945625",
+          "text": "This rare hybridization created a new plant with a unique ability that neither of its parent plants has: forming underground tubers (the part we eat).",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:parent#e-8c1608fe665dda10",
+          "text": "All three designer types showed higher levels of non-social fear – such as fear of loud noises or lifeless objects – separation anxiety, and excitability compared to their purebred parents.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 181,
+            "end": 188
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:parent#s6",
+      "pos": "n.",
+      "glossZh": "宠物主人",
+      "pronunciationId": "w:parent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:parent#e-5e22041116e3ed9e",
+          "text": "Get in touch with your vet or fellow pet parents if you need advice or support.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:helicopter-parent"
+  ]
 }

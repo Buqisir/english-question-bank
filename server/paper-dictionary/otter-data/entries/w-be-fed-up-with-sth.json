@@ -1,0 +1,73 @@
+{
+  "entryId": "w:be-fed-up-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fed up",
+    "feed up"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "fed",
+      "up",
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "fed",
+        "up",
+        "with",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be fed up with sth",
+  "senses": [
+    {
+      "senseId": "w:be-fed-up-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "对某事烦透了；受够了某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:feed#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -59,8 +59,8 @@
     "mock": 490
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 487
+    "gaokao": 6,
+    "mock": 300
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 110
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -339,7 +339,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -365,151 +365,16 @@
       ]
     },
     {
-      "senseId": "w:face#s6",
-      "pos": "短语",
-      "glossZh": "面对面",
-      "pronunciationId": "w:face#p-main",
-      "note": "face to face (with sb/sth)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:face#e-6f2c02fe264aef57",
-          "text": "When I'm face to face with a polar bear, I like it to be through a camera with a telephoto lens.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:face#e-bd8f2cffa7b1b19d",
-          "text": "I’d come face to face with the homeless: How should I act?",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:face#s7",
-      "pos": "短语",
-      "glossZh": "正面朝下",
-      "pronunciationId": "w:face#p-main",
-      "note": "face down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:face#e-491c0ec08c65863d",
-          "text": "Place them face down on “Place Pack Here” to form the Draw pile.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:10",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:face#s8",
-      "pos": "短语",
-      "glossZh": "表面价值",
-      "pronunciationId": "w:face#p-main",
-      "note": "face value，也可表示面值。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:face#e-3eeb2092a307ce9d",
-          "text": "This was his chief comfort: that some people, at least, would still appreciate that face value and true worth are not at all the same thing.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:7",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 84,
-            "end": 88
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:face#s9",
-      "pos": "短语",
-      "glossZh": "勇敢面对",
-      "pronunciationId": "w:face#p-main",
-      "note": "face up to sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:face#s10",
       "pos": "n.",
       "glossZh": "外侧表面",
       "pronunciationId": "w:face#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -537,6 +402,52 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:face#s13",
+      "pos": "短语",
+      "glossZh": "乍看起来（on the face of it）",
+      "pronunciationId": "w:face#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:face#e-70d3f5a54a335549",
+          "text": "On the face of it, it seems pointless, but this common habit actually reveals how we interpret our experiences, especially the disappointing ones.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:face#s14",
+      "pos": "短语",
+      "glossZh": "面对（in the face of）",
+      "pronunciationId": "w:face#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -545,6 +456,20 @@
       "reason": "娱乐行业专用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:face-down",
+    "w:face-the-music",
+    "w:face-to-face",
+    "w:face-to-face-with-sb",
+    "w:face-up-to-sth",
+    "w:face-value",
+    "w:fly-in-the-face-of",
+    "w:in-the-face-of",
+    "w:in-your-face",
+    "w:stare-sb-in-the-face"
+  ]
 }

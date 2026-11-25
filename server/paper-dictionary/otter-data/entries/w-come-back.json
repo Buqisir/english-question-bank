@@ -1,0 +1,272 @@
+{
+  "entryId": "w:come-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came back",
+    "coming back"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "back"
+      ],
+      [
+        "came",
+        "back"
+      ],
+      [
+        "coming",
+        "back"
+      ],
+      [
+        "comes",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come back",
+  "senses": [
+    {
+      "senseId": "w:come-back#s1",
+      "pos": "短语",
+      "glossZh": "回来；返回",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-back#e-5f773d59d786b243",
+          "text": "Then, for eight years, the scientists asked the same group to come back to the lab every 18 months to take the same sorts of tests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 71
+          },
+          "parts": [
+            [
+              62,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-back#e-6399e62ecbbc9038",
+          "text": "One night, Squirt didn’t come back to our house and it rained hard.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-back#e-e0435942a58d306e",
+          "text": "Burchill is now welcome to come back, the Fairmont said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 23
+      }
+    },
+    {
+      "senseId": "w:come-back#s3",
+      "pos": "短语",
+      "glossZh": "恢复；重新活跃或流行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-back#e-df0b4c473b05be5f",
+          "text": "Writing is the only hobby that I have repeatedly come back to despite dropping it constantly.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-back#e-68273e64aa987740",
+          "text": "After two weeks of work, the engine finally turned over with a smooth rumble – the sound of an engine coming back to life after months of silence, and the most satisfying sound in automotive work.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 113
+          },
+          "parts": [
+            [
+              102,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-back#s2",
+      "pos": "短语",
+      "glossZh": "（记忆等）重新浮现",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-back#s4",
+      "pos": "短语",
+      "glossZh": "反驳；回嘴",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 come back with a reply。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

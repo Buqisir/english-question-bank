@@ -1,0 +1,111 @@
+{
+  "entryId": "w:enter-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "enter",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "enter",
+        "into"
+      ],
+      [
+        "entered",
+        "into"
+      ],
+      [
+        "entering",
+        "into"
+      ],
+      [
+        "enters",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "enter into sth",
+  "senses": [
+    {
+      "senseId": "w:enter-into#s1",
+      "pos": "短语",
+      "glossZh": "正式订立协议；承担义务",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:enter-into#s2",
+      "pos": "短语",
+      "glossZh": "开始参加；投入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可接讨论、谈判等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:enter-into#s3",
+      "pos": "短语",
+      "glossZh": "纳入考虑；成为影响因素",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "主语通常是影响判断的因素。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:enter-into#s4",
+      "pos": "短语",
+      "glossZh": "穿入；渗入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

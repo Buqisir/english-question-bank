@@ -1,0 +1,115 @@
+{
+  "entryId": "w:push-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "up"
+      ],
+      [
+        "pushed",
+        "up"
+      ],
+      [
+        "pushes",
+        "up"
+      ],
+      [
+        "pushing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push up",
+  "senses": [
+    {
+      "senseId": "w:push-up#s1",
+      "pos": "短语",
+      "glossZh": "推高（价格、成本等）；使上升",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-up#e-c9b8b24a8d515da9",
+          "text": "Yet the tendency has moral issues: lawyers demanding harsher initial sentences often secure longer sentences, while real estate agents controlling listing prices can artificially push up market values.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 179,
+            "end": 186
+          },
+          "parts": [
+            [
+              179,
+              186
+            ]
+          ],
+          "highlightRanges": [
+            [
+              179,
+              186
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-up#s2",
+      "pos": "短语",
+      "glossZh": "向上顶出；向上隆起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

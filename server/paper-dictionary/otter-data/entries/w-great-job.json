@@ -1,0 +1,91 @@
+{
+  "entryId": "w:great-job",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "great",
+      "job"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "great",
+        "job"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "great job",
+  "senses": [
+    {
+      "senseId": "w:great-job#s1",
+      "pos": "短语",
+      "glossZh": "做得很棒；干得漂亮",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:great-job#e-cb30c80edc80a728",
+          "text": "“You’re doing a great job,” Grandpa said with a smile.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "可单独用作称赞语，也常用 do a great job。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

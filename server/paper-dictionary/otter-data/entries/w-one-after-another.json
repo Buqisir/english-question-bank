@@ -1,0 +1,158 @@
+{
+  "entryId": "w:one-after-another",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "after",
+      "another"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "after",
+        "another"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one after another",
+  "senses": [
+    {
+      "senseId": "w:one-after-another#s1",
+      "pos": "短语",
+      "glossZh": "一个接一个地；依次；接二连三地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:after#s4",
+        "w:another#s3",
+        "w:one#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:one-after-another#e-0ee0b5d24f76be30",
+          "text": "Low intensity speakers find it rude to talk at the same time and prefer people speak one after another in conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 102
+          },
+          "parts": [
+            [
+              85,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-after-another#e-0d8a2ca8b9fc7c02",
+          "text": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 23
+          },
+          "parts": [
+            [
+              6,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-after-another#e-560124ab30407042",
+          "text": "They made a game of spotting Mario’s dad as he unloaded the morning catch, and Mr. Harper’s daughter, Fiona, as she cleaned the fish one after another.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 150
+          },
+          "parts": [
+            [
+              133,
+              150
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              150
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

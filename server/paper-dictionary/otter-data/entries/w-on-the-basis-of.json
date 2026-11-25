@@ -1,0 +1,94 @@
+{
+  "entryId": "w:on-the-basis-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "basis",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "basis",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the basis of",
+  "senses": [
+    {
+      "senseId": "w:on-the-basis-of#s1",
+      "pos": "短语",
+      "glossZh": "依据；根据；以……为准",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-the-basis-of#e-53501cfd4f78b8e5",
+          "text": "Entries will be judged by an NYPL staff committee (around May 1, 2025) on the basis of three criteria:",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 86
+          },
+          "parts": [
+            [
+              71,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

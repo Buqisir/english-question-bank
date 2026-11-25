@@ -1,0 +1,186 @@
+{
+  "entryId": "w:hand-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hand",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "hand",
+        "out"
+      ],
+      [
+        "hand",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "handed",
+        "out"
+      ],
+      [
+        "handing",
+        "out"
+      ],
+      [
+        "hands",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hand out",
+      "tags": []
+    },
+    {
+      "form": "handed out",
+      "tags": []
+    },
+    {
+      "form": "handing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hand (sth) out",
+  "senses": [
+    {
+      "senseId": "w:hand-out#s1",
+      "pos": "短语",
+      "glossZh": "分发；发放",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hand-out#e-48440ee07f475fb8",
+          "text": "She was quietly helping – bringing cups of soup, handing out cookies – content in her own little world.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 60
+          },
+          "parts": [
+            [
+              49,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-out#e-bcadf19ae8b6d5d2",
+          "text": "Upon arriving at the concert hall, Ms. Carson handed out script（剧本）copies to the actors.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-out#e-4c0aae47791d0f95",
+          "text": "I handed out old hats and gloves – comically large on Sam – and explained our mission: reclaim the kingdom from the weeds.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,126 @@
+{
+  "entryId": "w:in-this-regard",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "this",
+      "regard"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "this",
+        "regard"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in this regard",
+  "senses": [
+    {
+      "senseId": "w:in-this-regard#s1",
+      "pos": "短语",
+      "glossZh": "在这方面；就此而言",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:regard#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-this-regard#e-8f7600771500c098",
+          "text": "In this regard, self-regulation will be a key aspect.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zaozhuang-2026-05-third-mock:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-this-regard#e-820760e1ddb89b6e",
+          "text": "Although booking platforms signal the sustainability of hotels that have third-party certifications, hotel websites often don’t provide much explanation in this regard.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 167
+          },
+          "parts": [
+            [
+              153,
+              167
+            ]
+          ],
+          "highlightRanges": [
+            [
+              153,
+              167
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,112 @@
+{
+  "entryId": "w:come-round",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "round"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "round"
+      ],
+      [
+        "came",
+        "round"
+      ],
+      [
+        "comes",
+        "round"
+      ],
+      [
+        "coming",
+        "round"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come round",
+  "senses": [
+    {
+      "senseId": "w:come-round#s1",
+      "pos": "短语",
+      "glossZh": "过来拜访；顺道来访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:round#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-round#s2",
+      "pos": "短语",
+      "glossZh": "苏醒；恢复意识",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-round#s3",
+      "pos": "短语",
+      "glossZh": "改变看法；转而接受另一种意见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 come round to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-round#s4",
+      "pos": "短语",
+      "glossZh": "转向；绕过来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

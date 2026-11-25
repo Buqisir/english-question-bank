@@ -1,0 +1,69 @@
+{
+  "entryId": "w:help-oneself-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "help",
+      "oneself",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "help",
+        "oneself",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "help oneself to sth",
+  "senses": [
+    {
+      "senseId": "w:help-oneself-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "自行取用（食物、饮料等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:help#s5"
+      ],
+      "examples": [],
+      "note": "祈使句常用于招呼客人自取。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

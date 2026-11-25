@@ -1,0 +1,84 @@
+{
+  "entryId": "w:close-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "with"
+      ],
+      [
+        "closed",
+        "with"
+      ],
+      [
+        "closes",
+        "with"
+      ],
+      [
+        "closing",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:close-with#s1",
+      "pos": "短语",
+      "glossZh": "逼近某人并与其交战",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:close-with#s2",
+      "pos": "短语",
+      "glossZh": "以……结束",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如以一句话或一首歌收尾。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

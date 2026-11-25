@@ -1,0 +1,94 @@
+{
+  "entryId": "w:on-the-books",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "books"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "books"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the books",
+  "senses": [
+    {
+      "senseId": "w:on-the-books#s1",
+      "pos": "短语",
+      "glossZh": "正式记录在册；载入法规",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:book#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-books#e-04e8f4f463560696",
+          "text": "\"We need something on the books that can change people’s behavior,” said Félix W. Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 31
+          },
+          "parts": [
+            [
+              19,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

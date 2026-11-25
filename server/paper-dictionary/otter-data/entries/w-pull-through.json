@@ -1,0 +1,156 @@
+{
+  "entryId": "w:pull-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "through"
+      ],
+      [
+        "pulled",
+        "through"
+      ],
+      [
+        "pulling",
+        "through"
+      ],
+      [
+        "pulls",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pull through",
+      "tags": []
+    },
+    {
+      "form": "pulled through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull (sb) through",
+  "senses": [
+    {
+      "senseId": "w:pull-through#s1",
+      "pos": "短语",
+      "glossZh": "挺过来；渡过难关",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-through#e-2ea30bd917c37ea9",
+          "text": "“I picked it up yesterday, just knowing my hardworking kid would pull through,” she said, pressing the box into my hands.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 77
+          },
+          "parts": [
+            [
+              65,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-through#e-793adb85dc333d68",
+          "text": "To share how she pulled through ups and downs in her life.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zj-2026-03-m171:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 31
+          },
+          "parts": [
+            [
+              17,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:pull-through#s2",
+      "pos": "短语",
+      "glossZh": "帮助某人挺过难关",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

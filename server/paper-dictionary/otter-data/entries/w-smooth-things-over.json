@@ -1,0 +1,130 @@
+{
+  "entryId": "w:smooth-things-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "smooth",
+      "things",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "smooth",
+        "things",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "smoothing things over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "smooth things over",
+  "senses": [
+    {
+      "senseId": "w:smooth-things-over#s1",
+      "pos": "短语",
+      "glossZh": "缓和紧张局面；调解矛盾",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:smooth#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:smooth-things-over#e-564072497735c5a0",
+          "text": "Anticipating others’ reactions, smoothing things over, or presenting a “bulletproof” reason may prevent punishment or emotional fallout.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 53
+          },
+          "parts": [
+            [
+              32,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:smooth-things-over#e-d4196def43bd9858",
+          "text": "My parents tried to smooth things over, but I refused.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 38
+          },
+          "parts": [
+            [
+              20,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

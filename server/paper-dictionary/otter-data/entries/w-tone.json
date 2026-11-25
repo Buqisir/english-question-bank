@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 58
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -177,7 +177,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -211,7 +211,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -263,7 +263,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -300,40 +300,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:tone#s7",
-      "pos": "短语",
-      "glossZh": "减弱",
-      "pronunciationId": "w:tone#p-main",
-      "note": "tone down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:tone#e-522f487f587530fa",
-          "text": "When organizations tone down their efforts, the broader sustainability conversation can be weakened – and the opportunity for businesses to be drivers of social change could be lost.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
-            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
-            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:1",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 23
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -342,6 +308,11 @@
       "reason": "专名或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:tone-down"
+  ]
 }

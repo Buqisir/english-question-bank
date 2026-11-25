@@ -96,7 +96,7 @@
   },
   "unassignedCounts": {
     "gaokao": 6,
-    "mock": 787
+    "mock": 589
   },
   "senses": [
     {
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 49,
-        "mock": 0
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -178,7 +178,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 84,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -248,12 +248,12 @@
       "glossZh": "邀请",
       "pronunciationId": "w:ask#p-main",
       "note": "ask sb to dinner；ask sb out。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -290,6 +290,14 @@
       "reason": "方言、专名或专业缩写。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:ask-after",
+    "w:ask-back",
+    "w:ask-for",
+    "w:ask-for-trouble",
+    "w:ask-in",
+    "w:ask-out"
+  ]
 }

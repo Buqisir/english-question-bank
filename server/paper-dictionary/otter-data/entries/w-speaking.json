@@ -1,0 +1,102 @@
+{
+  "entryId": "w:speaking",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      {
+        "slot": "…"
+      },
+      "speaking"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        {
+          "slot": "…"
+        },
+        "speaking"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "speaking",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "… speaking",
+  "senses": [
+    {
+      "senseId": "w:speaking#s1",
+      "pos": "短语",
+      "glossZh": "从……角度来说；就……而言",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:speak#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:speaking#e-58b944d5ed38a0b8",
+          "text": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 73
+          },
+          "parts": [
+            [
+              65,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "speaking 前接副词，如 technically speaking。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -59,8 +59,8 @@
     "mock": 85
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 84
+    "gaokao": 10,
+    "mock": 29
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -136,79 +136,6 @@
       ]
     },
     {
-      "senseId": "w:zone#s2",
-      "pos": "短语",
-      "glossZh": "感到自在的环境",
-      "pronunciationId": "w:zone#p-main",
-      "note": "comfort zone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:zone#e-2a8fcfffd4a83fdf",
-          "text": "Get out of your comfort zone.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-ii:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:zone#e-9e02abd289f6c839",
-          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 145,
-            "end": 149
-          }
-        },
-        {
-          "exampleId": "w:zone#e-080820c1b1ffbd46",
-          "text": "Walking at night-time is a great way to step out of your comfort zone.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 69
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:zone#s3",
       "pos": "v.",
       "glossZh": "划分为功能区",
@@ -220,59 +147,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:zone#s4",
-      "pos": "短语",
-      "glossZh": "走神",
-      "pronunciationId": "w:zone#p-main",
-      "note": "zone out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:zone#e-234e4a6d10e637eb",
-          "text": "“It’s becoming much rarer to zone out and just let the mind wander, but that’s when we think in ways that broaden our minds.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:zone#e-45114a4ca64d579a",
-          "text": "zoning out is typically shown to have a negative effect.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
-            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:11",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -281,6 +155,13 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:comfort-zone",
+    "w:get-out-of-your-comfort-zone",
+    "w:zone-out"
+  ]
 }

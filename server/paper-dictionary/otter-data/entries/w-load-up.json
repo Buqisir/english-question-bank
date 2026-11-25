@@ -1,0 +1,130 @@
+{
+  "entryId": "w:load-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "load",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "load",
+        "up"
+      ],
+      [
+        "loaded",
+        "up"
+      ],
+      [
+        "loading",
+        "up"
+      ],
+      [
+        "loads",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "load up",
+  "senses": [
+    {
+      "senseId": "w:load-up#s1",
+      "pos": "短语",
+      "glossZh": "上车准备出发；装货上车（或上船）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s37"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:load-up#e-ca2fd56c7cc97f00",
+          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:load-up#s2",
+      "pos": "短语",
+      "glossZh": "（软件、游戏）加载并准备运行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:load-up#s3",
+      "pos": "短语",
+      "glossZh": "（俚语）喝醉；吸毒后兴奋",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

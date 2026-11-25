@@ -1,0 +1,206 @@
+{
+  "entryId": "w:in-the-face-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "face",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "face",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in the face of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the face of sth",
+  "senses": [
+    {
+      "senseId": "w:in-the-face-of#s1",
+      "pos": "短语",
+      "glossZh": "面对；面临（困难、变化等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-face-of#e-fc637e51276e21f2",
+          "text": "“Actually, genetic diversity can make ecosystems robust in the face of dramatic changes like climate change and disease,” she notes.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 70
+          },
+          "parts": [
+            [
+              56,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-face-of#e-5e6a3006bd3fc775",
+          "text": "That’s good news in the face of warmer temperatures, changes in rainfall, and human activity that are enabling the spread of mosquito-borne illnesses to new places.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 31
+          },
+          "parts": [
+            [
+              17,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:in-the-face-of#s2",
+      "pos": "短语",
+      "glossZh": "尽管面临……；即使在……面前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-face-of#e-b716a1489a39dcdb",
+          "text": "How do you keep upbeat in the face of such new challenges?",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 37
+          },
+          "parts": [
+            [
+              23,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-face-of#e-adea4fa22dcb262a",
+          "text": "Horror is a testament to human adaptability and our remarkable capacity to find meaning, connection and even growth in the face of our deepest fears.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 130
+          },
+          "parts": [
+            [
+              116,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

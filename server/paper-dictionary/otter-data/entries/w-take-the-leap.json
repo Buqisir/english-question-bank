@@ -1,0 +1,134 @@
+{
+  "entryId": "w:take-the-leap",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "leap"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "leap"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taking the leap",
+      "tags": []
+    },
+    {
+      "form": "took the leap",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the leap",
+  "senses": [
+    {
+      "senseId": "w:take-the-leap#s1",
+      "pos": "短语",
+      "glossZh": "下定决心迈出有风险的一步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:leap#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-the-leap#e-41c87609825b3fce",
+          "text": "With this in mind, I took the leap into this kind of learning by organising a stream stroll at the university where I taught.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 34
+          },
+          "parts": [
+            [
+              21,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-leap#e-b3ad3d13f0f0925d",
+          "text": "Taking the leap was the hardest step I had ever taken.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

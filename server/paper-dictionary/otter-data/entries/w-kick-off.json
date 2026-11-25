@@ -1,0 +1,226 @@
+{
+  "entryId": "w:kick-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kick",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kick",
+        "off"
+      ],
+      [
+        "kicked",
+        "off"
+      ],
+      [
+        "kicking",
+        "off"
+      ],
+      [
+        "kicks",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kick off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kick (sth) off",
+  "senses": [
+    {
+      "senseId": "w:kick-off#s1",
+      "pos": "短语",
+      "glossZh": "开始；启动（活动、项目等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:kick#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:kick-off#e-801bb65fbe7c311a",
+          "text": "To kick off your garden marker project, you’ll need to get hands-on with some oven-bake clay.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kick-off#e-d22d50bf77d10def",
+          "text": "Kick off your day with a calm activity.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:kick-off#s2",
+      "pos": "短语",
+      "glossZh": "踢掉（鞋袜等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:kick-off#e-b2e5c6b8f5d21541",
+          "text": "So kick off your shoes and socks.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-a:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:kick-off#s3",
+      "pos": "短语",
+      "glossZh": "（足球等比赛）开球",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-off#s4",
+      "pos": "短语",
+      "glossZh": "把某人赶出（队伍、组织等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 kick sb off sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-off#s5",
+      "pos": "短语",
+      "glossZh": "突然发火；（争吵、打斗等）爆发",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

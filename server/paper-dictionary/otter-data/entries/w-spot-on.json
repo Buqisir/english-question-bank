@@ -1,0 +1,81 @@
+{
+  "entryId": "w:spot-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spot",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spot",
+        "on"
+      ],
+      [
+        "more",
+        "spot",
+        "on"
+      ],
+      [
+        "most",
+        "spot",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spot on",
+  "senses": [
+    {
+      "senseId": "w:spot-on#s1",
+      "pos": "短语",
+      "glossZh": "完全正确的；十分准确的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:spot-on#s2",
+      "pos": "短语",
+      "glossZh": "恰到好处的；非常合适的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

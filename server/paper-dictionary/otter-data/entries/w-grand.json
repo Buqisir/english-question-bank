@@ -66,8 +66,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 59
+    "gaokao": 3,
+    "mock": 13
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -189,59 +189,6 @@
           "target": {
             "start": 15,
             "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:grand#s3",
-      "pos": "短语",
-      "glossZh": "最高奖",
-      "pronunciationId": "w:grand#p-main",
-      "note": "grand prize。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grand#e-5296845a12904a2d",
-          "text": "3 Grand Prizes: Trip to Washington, D.C. for each of three winners, a parent and one other person of the winner’s choice.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:grand#e-256f58eea59a568e",
-          "text": "How many people can each grand prize winner take on the free trip?",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-gaokao-2020-i:21",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 30
           }
         }
       ]
@@ -294,20 +241,6 @@
       "examples": []
     },
     {
-      "senseId": "w:grand#s6",
-      "pos": "短语",
-      "glossZh": "三角钢琴",
-      "pronunciationId": "w:grand#p-main",
-      "note": "grand piano。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:grand#s7",
       "pos": "前缀",
       "glossZh": "隔一代",
@@ -328,6 +261,8 @@
       "reason": "剧院专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

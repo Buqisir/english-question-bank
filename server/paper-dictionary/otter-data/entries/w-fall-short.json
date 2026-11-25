@@ -1,0 +1,173 @@
+{
+  "entryId": "w:fall-short",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falling short",
+    "falls short"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "short"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "short"
+      ],
+      [
+        "falling",
+        "short"
+      ],
+      [
+        "falls",
+        "short"
+      ],
+      [
+        "fallen",
+        "short"
+      ],
+      [
+        "fell",
+        "short"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall short",
+  "senses": [
+    {
+      "senseId": "w:fall-short#s1",
+      "pos": "短语",
+      "glossZh": "未达到目标或标准；数量不足",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-short#e-c2c843559dd5ad25",
+          "text": "What does the underlined part “falls short of” mean in paragraph 4?",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-short#e-c16057f6829c98f5",
+          "text": "The first draft rarely falls short.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:24#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 34
+          },
+          "parts": [
+            [
+              23,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-short#e-4313317a9ecee632",
+          "text": "Dr Randazzo said the EU’s human-centric approach is the preferred path to protect human dignity but without a global commitment to this goal, even that approach falls short.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 161,
+            "end": 172
+          },
+          "parts": [
+            [
+              161,
+              172
+            ]
+          ],
+          "highlightRanges": [
+            [
+              161,
+              172
+            ]
+          ]
+        }
+      ],
+      "note": "可接 of sth，说明未达到的标准或数量。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,287 @@
+{
+  "entryId": "w:bring-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bringing together",
+    "brings together"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "together"
+      ],
+      [
+        "bringing",
+        "together"
+      ],
+      [
+        "brings",
+        "together"
+      ],
+      [
+        "brought",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bring together",
+      "tags": []
+    },
+    {
+      "form": "brought together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth together",
+  "senses": [
+    {
+      "senseId": "w:bring-together#s1",
+      "pos": "短语",
+      "glossZh": "把不同事物汇集或结合在一起",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-together#e-090b2f469dffa5a6",
+          "text": "“The exhibition brings together Go culture, cutting-edge technology and contemporary art,” says Tu.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 31
+          },
+          "parts": [
+            [
+              16,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-together#e-b2f95235e8db388b",
+          "text": "Ideally a history would bring together texts and objects, and some chapters of this book are able to do just that, but in many cases we simply can’t.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 38
+          },
+          "parts": [
+            [
+              24,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-together#e-cc510cecfd8db995",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 136
+          },
+          "parts": [
+            [
+              120,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              136
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bring-together#s2",
+      "pos": "短语",
+      "glossZh": "让人们相聚；促成人们建立联系或团结合作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:together#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-together#e-7bc6159a5a06d5c9",
+          "text": "The program, called Entering Mentoring, brought together graduate students for weekly discussions.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 56
+          },
+          "parts": [
+            [
+              40,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-together#e-96475ec4b1ed3784",
+          "text": "Since starting in march, Book It Around D.C. has grown, bringing together audiobook listeners who said they felt happier or safer in a group.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 73
+          },
+          "parts": [
+            [
+              56,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-together#e-ab86eeb97541bc3f",
+          "text": "The Silk Road International Arts Festival is a unique event that brings together artists from around the world through performances and exhibitions.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 80
+          },
+          "parts": [
+            [
+              65,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

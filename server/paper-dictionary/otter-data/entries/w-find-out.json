@@ -1,0 +1,195 @@
+{
+  "entryId": "w:find-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "finding out"
+  ],
+  "pattern": {
+    "tokens": [
+      "find",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "find",
+        "out"
+      ],
+      [
+        "find",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "finding",
+        "out"
+      ],
+      [
+        "finds",
+        "out"
+      ],
+      [
+        "found",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "found out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "find out",
+  "senses": [
+    {
+      "senseId": "w:find-out#s1",
+      "pos": "短语",
+      "glossZh": "查明；弄清；得知",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:find#s5",
+        "w:out#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:find-out#e-c408d5360a77b7d4",
+          "text": "What does the follow-up test aim to find out about the cockatoos?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-national-a:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:find-out#e-ef00c3732c4eb67b",
+          "text": "What can the Textalyzer help a police officer find out?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-ii:29",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 54
+          },
+          "parts": [
+            [
+              46,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:find-out#e-b9a9faeb1a331990",
+          "text": "I thought that we would just be passing out dinners to those in need, but I found out we would be doing everything from preparing to serving the dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 85
+          },
+          "parts": [
+            [
+              76,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 43
+      }
+    },
+    {
+      "senseId": "w:find-out#s2",
+      "pos": "短语",
+      "glossZh": "识破某人的隐瞒或欺骗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 find sb out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

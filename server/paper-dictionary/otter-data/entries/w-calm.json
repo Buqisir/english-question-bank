@@ -90,7 +90,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 181
+    "mock": 21
   },
   "senses": [
     {
@@ -101,7 +101,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 79
       },
       "folded": false,
       "examples": [
@@ -172,7 +172,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -243,7 +243,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -273,12 +273,12 @@
       "pos": "adj.",
       "glossZh": "（海、天气等）风平浪静的",
       "pronunciationId": "w:calm#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -288,6 +288,9 @@
       "reason": "医学同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:calm-down"
+  ]
 }

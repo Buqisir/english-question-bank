@@ -1,0 +1,111 @@
+{
+  "entryId": "w:make-it-a-point-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make it a point to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it",
+      "a",
+      "point",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it",
+        "a",
+        "point",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "make it a point to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make it a point to do sth",
+  "senses": [
+    {
+      "senseId": "w:make-it-a-point-to-do#s1",
+      "pos": "短语",
+      "glossZh": "特意去做；把做某事当作要务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it-a-point-to-do#e-6ec0bc61d6602f13",
+          "text": "Regardless of how famous they are, and despite the star treatment they receive, many celebrities make it a point to give back to charities.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 115
+          },
+          "parts": [
+            [
+              97,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

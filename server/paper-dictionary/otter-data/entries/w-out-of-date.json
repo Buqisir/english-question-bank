@@ -1,0 +1,159 @@
+{
+  "entryId": "w:out-of-date",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "date"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "date"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of date",
+  "senses": [
+    {
+      "senseId": "w:out-of-date#s1",
+      "pos": "短语",
+      "glossZh": "过时的；不再适用的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:date#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-of-date#e-e91a3356b66f7156",
+          "text": "The printed book is not totally out of date.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-ii:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-date#e-468c6d97bc494415",
+          "text": "Traditional color space is out of date.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:33#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-date#e-b2fec4d7ea5bba51",
+          "text": "They are out of date.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-shandong-jinan-2026-04-second-mock:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 20
+          },
+          "parts": [
+            [
+              9,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

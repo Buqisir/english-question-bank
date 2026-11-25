@@ -113,8 +113,8 @@
     "mock": 390
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 379
+    "gaokao": 7,
+    "mock": 208
   },
   "senses": [
     {
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 37,
-        "mock": 0
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -269,7 +269,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -340,7 +340,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -392,7 +392,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -425,7 +425,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -497,7 +497,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -568,7 +568,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -601,7 +601,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -669,211 +669,13 @@
       "pos": "adv.",
       "glossZh": "向右",
       "pronunciationId": "w:right#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:right#s11",
-      "pos": "短语",
-      "glossZh": "对吧",
-      "pronunciationId": "w:right#p-main",
-      "note": "用于确认对方是否同意。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:right#e-9eab7ba501514a85",
-          "text": "Sounds harmless, right?",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:right#e-8caf4e27d803a5bf",
-          "text": "You keep hearing about recycling, right?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:right#e-2448494d0d10043c",
-          "text": "Ages ago, right?",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:right#s12",
-      "pos": "短语",
-      "glossZh": "凭自身资格",
-      "pronunciationId": "w:right#p-main",
-      "note": "in one's own right。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:right#e-cc3a15afad6ef742",
-          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 111,
-            "end": 116
-          }
-        },
-        {
-          "exampleId": "w:right#e-095d19ce7b45cf46",
-          "text": "Instead, it is a vital, dynamic body part, an organ in its own right that works with the brain, the bones and more to help keep us healthy.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 70,
-            "end": 75
-          }
-        },
-        {
-          "exampleId": "w:right#e-c2579bc4f1a3ddef",
-          "text": "What the new survey suggests is that management is now seen as a career-ladder move, not something good in its own right.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 115,
-            "end": 120
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:right#s13",
-      "pos": "短语",
-      "glossZh": "立刻",
-      "pronunciationId": "w:right#p-main",
-      "note": "right away。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:right#e-3e7098d79eaace53",
-          "text": "However, it’s important to remember that there are hidden dangers that many young people may not notice right away.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 104,
-            "end": 109
-          }
-        },
-        {
-          "exampleId": "w:right#e-9130d420c9e69241",
-          "text": "Putting in an offer right away.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 20,
-            "end": 25
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "senseId": "w:right#s14",
@@ -934,6 +736,23 @@
       "reason": "仅见专名 right whale 等"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-right",
+    "w:have-it-right",
+    "w:in-ones-own-right",
+    "w:left-and-right",
+    "w:right-as-rain",
+    "w:right-away",
+    "w:right-here",
+    "w:right-now",
+    "w:right-of-way",
+    "w:right-on",
+    "w:right-then-and-there",
+    "w:sit-right",
+    "w:thats-right"
+  ]
 }

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 28
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -123,12 +123,12 @@
       "pos": "adj.",
       "glossZh": "极好的",
       "pronunciationId": "w:super#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -178,6 +178,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:super#s5",
+      "pos": "adj.",
+      "glossZh": "有超能力的",
+      "pronunciationId": "w:super#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:super#e-9c5a0e5cc157eb86",
+          "text": "We’ve all seen this happen in a science-fiction movie: The super heroes jump into a shaky spaceship and escape the bad guys by flying through the asteroid (小行星) belt, where huge rocks fall and spin so close that the crew has to duck and dive to avoid being broken into pieces.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -186,6 +219,6 @@
       "reason": "专业义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

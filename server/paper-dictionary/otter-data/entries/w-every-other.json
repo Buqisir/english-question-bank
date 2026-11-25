@@ -1,0 +1,200 @@
+{
+  "entryId": "w:every-other",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "other"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "other"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every other",
+  "senses": [
+    {
+      "senseId": "w:every-other#s1",
+      "pos": "短语",
+      "glossZh": "每隔一个的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:every#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:every-other#e-b3c5ef5c4b144746",
+          "text": "Every other Sunday, we play on a proper pitch (球 场) at our local sports complex.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "every other Sunday 指每隔一周的星期日。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:every-other#s2",
+      "pos": "短语",
+      "glossZh": "其余所有的；其他每一个的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:every-other#e-732c69afd7b6ec71",
+          "text": "Sometimes, one small problem can bring up every other past complaint.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          },
+          "parts": [
+            [
+              42,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:every-other#e-c8e420e8600b56e7",
+          "text": "In every other way, Mark was a perfect dad.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:every-other#e-855ec9509fc47a70",
+          "text": "That changed in 2017 when Netflix presented an all-new adaptation of the novels as Anne with an E. As opposed to almost every other adaptation of the books, Netflix dug into the story’s implied darkness and went with an “edgy” (前卫的) approach to the story that had its devoted fans up in arms.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 131
+          },
+          "parts": [
+            [
+              120,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              131
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

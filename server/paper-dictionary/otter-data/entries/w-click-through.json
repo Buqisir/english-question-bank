@@ -1,0 +1,121 @@
+{
+  "entryId": "w:click-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "click",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "click",
+        "through"
+      ],
+      [
+        "clicked",
+        "through"
+      ],
+      [
+        "clicking",
+        "through"
+      ],
+      [
+        "clicks",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "clicked through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "click through",
+  "senses": [
+    {
+      "senseId": "w:click-through#s1",
+      "pos": "短语",
+      "glossZh": "逐页点击浏览",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:click-through#e-d5bbc4942eb9c50c",
+          "text": "Paragraph 2: As I clicked through the pages, a wave of feelings flooded back.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 33
+          },
+          "parts": [
+            [
+              18,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:click-through#s2",
+      "pos": "短语",
+      "glossZh": "点击链接进入另一个页面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 click through to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 486
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 484
+    "gaokao": 7,
+    "mock": 295
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -231,7 +231,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -303,7 +303,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -375,7 +375,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -428,7 +428,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -471,130 +471,17 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:thought#s8",
-      "pos": "短语",
-      "glossZh": "把……看作",
-      "pronunciationId": "w:thought#p-main",
-      "note": "thought of ... as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thought#e-1f7bb61ee1f01ab5",
-          "text": "David had a brain disease which prevented him from walking or running like other children, but at school his classmates thought of him as a regular kid.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "writing-continuation-7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 120,
-            "end": 127
-          }
-        },
-        {
-          "exampleId": "w:thought#e-742fdcf96e47334a",
-          "text": "Though I lived __42__ three and a half hours away, most of my classmates thought of Ohio as a whole different world.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 73,
-            "end": 80
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:thought#s9",
-      "pos": "短语",
-      "glossZh": "想出",
-      "pronunciationId": "w:thought#p-main",
-      "note": "thought up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thought#e-ec280b0502f7410a",
-          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 85
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:thought#s10",
-      "pos": "短语",
-      "glossZh": "毫不犹豫",
-      "pronunciationId": "w:thought#p-main",
-      "note": "without a second thought。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thought#e-569a77958c264b97",
-          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 138,
-            "end": 145
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:food-for-thought",
+    "w:lost-in-thought",
+    "w:train-of-thought",
+    "w:without-a-second-thought"
+  ]
 }

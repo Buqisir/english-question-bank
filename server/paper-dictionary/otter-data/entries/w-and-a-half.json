@@ -1,0 +1,169 @@
+{
+  "entryId": "w:and-a-half",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "and",
+      "a",
+      "half"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "and",
+        "a",
+        "half"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "and a half",
+  "senses": [
+    {
+      "senseId": "w:and-a-half#s1",
+      "pos": "短语",
+      "glossZh": "……半；另加半个单位",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:and-a-half#e-3dba86e0b665f7e8",
+          "text": "Due to a big storm, my flight had been delayed by an hour and a half.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:and-a-half#e-4bd10eea559964af",
+          "text": "Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 52
+          },
+          "parts": [
+            [
+              42,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:and-a-half#e-bf24b92ae3e10a5b",
+          "text": "Victoire, a POP MART fan from France, has been collecting the brand’s blind box figurines (小像) for a year and a half.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 116
+          },
+          "parts": [
+            [
+              106,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              116
+            ]
+          ]
+        }
+      ],
+      "note": "如 four and a half hours（四个半小时）、an hour and a half（一个半小时）。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:and-a-half#s2",
+      "pos": "短语",
+      "glossZh": "十足的……；特别了不起的……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中放在名词后加强语气，可褒可贬。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

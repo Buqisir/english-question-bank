@@ -1,0 +1,68 @@
+{
+  "entryId": "w:put-sth-to-use",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sth"
+      },
+      "to",
+      "use"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sth"
+        },
+        "to",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth to use",
+  "senses": [
+    {
+      "senseId": "w:put-sth-to-use#s1",
+      "pos": "短语",
+      "glossZh": "把某物用起来；将某物付诸应用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:use#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

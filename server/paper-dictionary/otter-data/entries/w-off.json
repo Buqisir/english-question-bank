@@ -48,8 +48,8 @@
     "mock": 509
   },
   "unassignedCounts": {
-    "gaokao": 17,
-    "mock": 506
+    "gaokao": 40,
+    "mock": 377
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -204,7 +204,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -328,7 +328,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -399,7 +399,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -451,7 +451,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -477,106 +477,157 @@
       ]
     },
     {
-      "senseId": "w:off#s8",
-      "pos": "短语",
-      "glossZh": "取得成效",
+      "senseId": "w:off#s20",
+      "pos": "adj.",
+      "glossZh": "淡季的；非旺季的",
       "pronunciationId": "w:off#p-main",
-      "note": "pay off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 4,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:off#s21",
+      "pos": "短语",
+      "glossZh": "引发某人的情绪或反应（set sb off）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-dd8abc278d68c376",
-          "text": "Hard work pays off.",
+          "exampleId": "w:off#e-a09c187194ecd83f",
+          "text": "Even now, small things can set me off.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
             "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2020-i:27",
-              "option": "C",
-              "sentence": 1
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:5",
+              "sentence": 6
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 15,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:off#e-17b2d7ed05fcb43c",
-          "text": "Many would say the Internet is a place for people who have given up on the traditional postal service, but Paulo’s hunch（直觉）paid off.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 129,
-            "end": 132
-          }
-        },
-        {
-          "exampleId": "w:off#e-beed202ae2f2610c",
-          "text": "Paragraph 2: Slowly but surely, my efforts to adjust to the new routine paid off.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 80
+            "start": 34,
+            "end": 37
           }
         }
       ]
     },
     {
-      "senseId": "w:off#s9",
+      "senseId": "w:off#s22",
       "pos": "短语",
-      "glossZh": "取消",
+      "glossZh": "成功做成（pull off）",
       "pronunciationId": "w:off#p-main",
-      "note": "call off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:off#s23",
+      "pos": "短语",
+      "glossZh": "使启动；使开始运作（get off the ground）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-7ff37de68613a226",
-          "text": "To call off a meeting.",
+          "exampleId": "w:off#e-4b9f43f2290a0ed0",
+          "text": "As she was getting her business off the ground, Kristina emailed race directors to ask if their event used disposable (一次性的) cups.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b",
             "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "option": "C",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b:2",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:off#s24",
+      "pos": "短语",
+      "glossZh": "不假思索地；凭记忆（off the top of one’s head）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:off#e-e6d70ad56c2481ff",
+          "text": "Don't feel bad if you couldn't answer off the top of your head.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:off#s25",
+      "pos": "短语",
+      "glossZh": "交给别人；移交（hand off）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:off#e-6460ce1bbff373ff",
+          "text": "Handing off.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:29",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
           "target": {
             "start": 8,
             "end": 11
@@ -585,418 +636,335 @@
       ]
     },
     {
-      "senseId": "w:off#s10",
+      "senseId": "w:off#s26",
       "pos": "短语",
-      "glossZh": "吓走",
+      "glossZh": "毫无防备（off guard）",
       "pronunciationId": "w:off#p-main",
-      "note": "scare off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-06d378ffdf50da34",
-          "text": "Sometimes loud noises like these will scare bears off.",
+          "exampleId": "w:off#e-600151908e951763",
+          "text": "Caught off guard, I gave a real answer.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:off#s27",
+      "pos": "prep.",
+      "glossZh": "在……范围之外",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:off#e-3181a32b8b5dae6a",
+          "text": "Consequently, while we’re well-known for our strong exam scores, which remains a baseline we all strive to support, we should also be known as a school where kids keep guitars and basketballs close at hand, and where students form bands and teams to play on and off campus.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:2",
               "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 50,
-            "end": 53
+            "start": 262,
+            "end": 265
           }
         },
         {
-          "exampleId": "w:off#e-9696b8272147628c",
-          "text": "We watched it from a distance, not wanting to disturb it or scare off its mother.",
+          "exampleId": "w:off#e-ea0d5b17eea6818a",
+          "text": "Students can live off campus in special cases, such as being married, having children, commuting from home, or being older.",
           "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:reading-a",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:4",
-              "sentence": 1
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:reading-a:2",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 66,
-            "end": 69
+            "start": 18,
+            "end": 21
           }
         }
       ]
     },
     {
-      "senseId": "w:off#s11",
+      "senseId": "w:off#s28",
       "pos": "短语",
-      "glossZh": "放出；散发",
+      "glossZh": "出售以脱手（sell off）",
       "pronunciationId": "w:off#p-main",
-      "note": "give off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:off#s29",
+      "pos": "adv.",
+      "glossZh": "从清单上划掉或作标记以示完成",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-788bfefaa7c73dc0",
-          "text": "I heard somewhere that electronics and appliances give off 90% of their carbon footprint after they leave the factory.",
+          "exampleId": "w:off#e-1ac962e3c4264d60",
+          "text": "Add ingredients from any recipe to your shopping list, then cross them off as you shop.",
           "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:off#e-0fbbea013fa596bc",
+          "text": "I wanted to cross everything off from the list overnight, but the progress came slowly.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:cloze:2",
               "sentence": 4
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 55,
-            "end": 58
+            "start": 29,
+            "end": 32
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:off#s12",
-      "pos": "短语",
-      "glossZh": "飞离；起飞",
-      "pronunciationId": "w:off#p-main",
-      "note": "take off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:off#e-3318b73e4451dfc1",
-          "text": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them.",
+          "exampleId": "w:off#e-0d854a1b8197a45f",
+          "text": "If you’re looking to tick off the final few names on your Christmas list, you could pay it forward as Theatre Tokens make the perfect present.",
           "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a:4",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 77,
-            "end": 80
+            "start": 26,
+            "end": 29
           }
         }
       ]
     },
     {
-      "senseId": "w:off#s13",
+      "senseId": "w:off#s30",
       "pos": "短语",
-      "glossZh": "迅速流行",
+      "glossZh": "打断某人说话（cut sb off）",
       "pronunciationId": "w:off#p-main",
-      "note": "take off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-6590503b9fb755a1",
-          "text": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "exampleId": "w:off#e-351f62361371a47c",
+          "text": "she began, only to be cut off by Sophia whose patience had run out.",
           "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:off#s14",
-      "pos": "短语",
-      "glossZh": "境况较好或较差",
-      "pronunciationId": "w:off#p-main",
-      "note": "better off、worse off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:off#e-64fe09946582bea8",
-          "text": "Some were better off than others, but they all needed a good meal and",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:off#e-f9c02b5bb8087942",
-          "text": "“Within 10 years rich farmers became worse off, and in 10 years from now they will be poor.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:off#e-47bde3556ffe67ad",
-          "text": "Even when you win, you end up no better off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:4",
               "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 40,
-            "end": 43
+            "start": 26,
+            "end": 29
           }
         }
       ]
     },
     {
-      "senseId": "w:off#s15",
+      "senseId": "w:off#s31",
       "pos": "短语",
-      "glossZh": "推迟",
+      "glossZh": "很快吃完（polish off）",
       "pronunciationId": "w:off#p-main",
-      "note": "put off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-eaecadef02b06733",
-          "text": "Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake.",
+          "exampleId": "w:off#e-2da6ab2c413d16e6",
+          "text": "The passive-aggressive signs on some buffet tables asking guests to take only what they know they will polish off have been shown to increase the piles of leftovers.",
           "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-c",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
-              "sentence": 4
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-c:2",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 4,
-            "end": 7
+            "start": 110,
+            "end": 113
           }
         }
       ]
     },
     {
-      "senseId": "w:off#s16",
+      "senseId": "w:off#s32",
       "pos": "短语",
-      "glossZh": "出发",
+      "glossZh": "炫耀；显摆（show off）",
       "pronunciationId": "w:off#p-main",
-      "note": "set off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:off#e-ca6da3131f2f65cd",
-          "text": "The sun was beginning to sink as I set off into the Harenna Forest.",
+          "exampleId": "w:off#e-2904d33559f97c8e",
+          "text": "For example, what you may have come to think of as humor may be seen as showing off.",
           "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:off#s33",
+      "pos": "短语",
+      "glossZh": "声音渐弱直至停止（trail off）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:off#e-f37126593e16dbdd",
+          "text": "His words trailed off like droplets of water forming dotted indents in the snow – disappearing into the snow forever but leaving their marks behind.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:off#s34",
+      "pos": "短语",
+      "glossZh": "未受关注（off the radar）",
+      "pronunciationId": "w:off#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:off#e-50ef97977b2df201",
+          "text": "While ball games and chess dominate the spotlight, some unusual sports remain off the radar but they’re just as thrilling!",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-a:1",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 39,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:off#e-12572099013473fb",
-          "text": "I gathered up my wallet and room key and set off.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 48
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:off#s17",
-      "pos": "短语",
-      "glossZh": "送行",
-      "pronunciationId": "w:off#p-main",
-      "note": "see sb off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:off#e-c4a3ae025cab54c0",
-          "text": "Seeing a friend off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:off#s18",
-      "pos": "短语",
-      "glossZh": "使失去兴趣",
-      "pronunciationId": "w:off#p-main",
-      "note": "turn off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:off#e-002e2a92a279fd31",
-          "text": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:off#s19",
-      "pos": "短语",
-      "glossZh": "不理会",
-      "pronunciationId": "w:off#p-main",
-      "note": "brush off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:off#e-49d6ba97a0116d4d",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 77
+            "start": 78,
+            "end": 81
           }
         }
       ]
@@ -1008,6 +976,90 @@
       "reason": "缺上下文，无法在多个用法间判定"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:back-off",
+    "w:bad-off",
+    "w:bear-off",
+    "w:better-off",
+    "w:bite-off-more-than-one-can-chew",
+    "w:block-off",
+    "w:break-off",
+    "w:brush-off",
+    "w:call-off",
+    "w:cap-off",
+    "w:catch-sb-off-guard",
+    "w:check-off",
+    "w:clean-off",
+    "w:close-off",
+    "w:come-off",
+    "w:come-off-as",
+    "w:cool-off",
+    "w:cut-off",
+    "w:day-off",
+    "w:drive-off",
+    "w:drop-off",
+    "w:dry-off",
+    "w:fall-off",
+    "w:fight-off",
+    "w:finish-off",
+    "w:fire-off",
+    "w:fly-off",
+    "w:get-off",
+    "w:get-sth-off-ones-chest",
+    "w:give-off",
+    "w:go-off",
+    "w:hand-off",
+    "w:head-off",
+    "w:hold-off",
+    "w:keep-off",
+    "w:kick-off",
+    "w:kill-off",
+    "w:laugh-off",
+    "w:live-off",
+    "w:move-off",
+    "w:nod-off",
+    "w:off-course",
+    "w:off-duty",
+    "w:off-of",
+    "w:on-and-off",
+    "w:pay-off",
+    "w:pull-sth-off",
+    "w:push-off",
+    "w:put-off",
+    "w:race-off",
+    "w:ride-off",
+    "w:run-off",
+    "w:scare-off",
+    "w:see-sb-off",
+    "w:sell-off",
+    "w:set-off",
+    "w:shake-off",
+    "w:show-off",
+    "w:sign-off",
+    "w:stand-off",
+    "w:start-sth-off",
+    "w:step-off",
+    "w:storm-off",
+    "w:switch-off",
+    "w:take-off",
+    "w:take-ones-hat-off-to-sb",
+    "w:take-sth-off-ones-plate",
+    "w:take-the-edge-off",
+    "w:throw-off",
+    "w:time-off",
+    "w:to-top-it-off",
+    "w:turn-off",
+    "w:turn-sb-off",
+    "w:walk-off",
+    "w:ward-sth-off",
+    "w:wave-off",
+    "w:wear-off",
+    "w:well-off",
+    "w:worse-off",
+    "w:write-off"
+  ]
 }

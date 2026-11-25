@@ -1,0 +1,628 @@
+{
+  "entryId": "w:break-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "break it down",
+    "breaking down"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "break",
+        "down"
+      ],
+      [
+        "break",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "breaking",
+        "down"
+      ],
+      [
+        "breaks",
+        "down"
+      ],
+      [
+        "broke",
+        "down"
+      ],
+      [
+        "broken",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "break down",
+      "tags": []
+    },
+    {
+      "form": "breaks down",
+      "tags": []
+    },
+    {
+      "form": "broke down",
+      "tags": []
+    },
+    {
+      "form": "broken down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break (sth) down",
+  "senses": [
+    {
+      "senseId": "w:break-down#s1",
+      "pos": "短语",
+      "glossZh": "消除；打破（壁垒或偏见）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s7",
+        "w:down#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-down#e-38bc4894e731d87f",
+          "text": "Volunteering can be the first step in breaking down prejudice.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-ii:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 51
+          },
+          "parts": [
+            [
+              38,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-8be18949c4283b11",
+          "text": "Love breaks down barriers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-i:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-f9129e9e66193e68",
+          "text": "Breaking down boundaries without conditions.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "note": "也可指破开门等有形障碍。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-down#s2",
+      "pos": "短语",
+      "glossZh": "拆分；分步骤说明",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-down#e-beecfc048c5dd8d2",
+          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 50
+          },
+          "parts": [
+            [
+              39,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-e8972ea5e73d83c5",
+          "text": "The chart below summarizes food’s share of total emissions and breaks it down by source.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 77
+          },
+          "parts": [
+            [
+              63,
+              69
+            ],
+            [
+              73,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              69
+            ],
+            [
+              73,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-44d52e1c270f6bc4",
+          "text": "Her content breaks down her tips and tricks for viewers looking to tidy up their lives.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常接复杂问题、数据或任务。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:break-down#s3",
+      "pos": "短语",
+      "glossZh": "出故障；停止运转",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s8",
+        "w:down#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-down#e-54664f026ee23d87",
+          "text": "I was halfway across Indiana headed home to Kentucky when my car broke down.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 75
+          },
+          "parts": [
+            [
+              65,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-04eb6c28341d1f28",
+          "text": "The only certainty is that you will get lost, you will get stuck and you will break down.”",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:grammar-fill:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 88
+          },
+          "parts": [
+            [
+              78,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-40cff7993632b52d",
+          "text": "Though expert in walking and jumping, they will break down instantly once a leg is lost.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          },
+          "parts": [
+            [
+              48,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              58
+            ]
+          ]
+        }
+      ],
+      "note": "主语常为车辆或设备。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:break-down#s4",
+      "pos": "短语",
+      "glossZh": "分解；使分解",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-down#e-0045ef7a66d0cb27",
+          "text": "This process helps break down cell walls, leading to what experts call a “jail break” for nutrients.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-ebe20b700647fd80",
+          "text": "It persists in the environment for many years, eventually hardening, cracking, and breaking down into microplastics.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 96
+          },
+          "parts": [
+            [
+              83,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-c9c70e48d92dc9ae",
+          "text": "Further, they found that the batteries can break down in soil in five months.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "可指物质自然分解，也可指消化过程中的分解。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:break-down#s5",
+      "pos": "短语",
+      "glossZh": "（谈判、关系等）破裂；失败",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-down#e-da791680e35359cb",
+          "text": "To do this, researchers need to know where the comparison breaks down.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-down#e-a40b5dd199eb7c2b",
+          "text": "It’s normal for healthy relationships to break down occasionally.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-down#s6",
+      "pos": "短语",
+      "glossZh": "（人）情绪崩溃；控制不住而哭泣",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 249
+    "mock": 66
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 137
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -235,6 +235,6 @@
       "reason": "印刷专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

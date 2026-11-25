@@ -1,0 +1,133 @@
+{
+  "entryId": "w:stick-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "out"
+      ],
+      [
+        "sticking",
+        "out"
+      ],
+      [
+        "sticks",
+        "out"
+      ],
+      [
+        "stuck",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stuck out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick (sth) out",
+  "senses": [
+    {
+      "senseId": "w:stick-out#s1",
+      "pos": "短语",
+      "glossZh": "凸出；露在外面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stick-out#e-4d54e9c381827728",
+          "text": "He soon fell ill and grew alarmingly weak – his ribs stuck out, his eyes swelled, and his fur dulled.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 62
+          },
+          "parts": [
+            [
+              53,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stick-out#s2",
+      "pos": "短语",
+      "glossZh": "伸出（舌头、手臂等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stick-out#s3",
+      "pos": "短语",
+      "glossZh": "显眼；引人注意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

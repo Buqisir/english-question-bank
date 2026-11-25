@@ -1,0 +1,133 @@
+{
+  "entryId": "w:level-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "levels up"
+  ],
+  "pattern": {
+    "tokens": [
+      "level",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "level",
+        "up"
+      ],
+      [
+        "levels",
+        "up"
+      ],
+      [
+        "leveled",
+        "up"
+      ],
+      [
+        "leveling",
+        "up"
+      ],
+      [
+        "levelled",
+        "up"
+      ],
+      [
+        "levelling",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "leveling up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "level up",
+  "senses": [
+    {
+      "senseId": "w:level-up#s1",
+      "pos": "短语",
+      "glossZh": "（在游戏或分级系统中）升级",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:level#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:level-up#e-d4d9b75c3f124ae3",
+          "text": "What can users get by leveling up in Workshop mode?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-05-ninth:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:level-up#s2",
+      "pos": "短语",
+      "glossZh": "提高水平；把落后的对象提升到相当水平",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "在英国公共政策语境中，常指缩小地区发展差距。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,172 @@
+{
+  "entryId": "w:watch-out-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "watch",
+      "out",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "watch",
+        "out",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "watch out for",
+      "tags": []
+    },
+    {
+      "form": "watching out for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "watch out for sth",
+  "senses": [
+    {
+      "senseId": "w:watch-out-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "留神；提防",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:watch#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:watch-out-for-sth#e-6774bd7e640ca60c",
+          "text": "As prey animals, parrots are constantly watching out for danger and they instinctively（本能地）react to risks.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 56
+          },
+          "parts": [
+            [
+              40,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-out-for-sth#e-06df3339b2ab446c",
+          "text": "Watch Out for the Textalyzer",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-ii:31#option=B",
+              "option": "B",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-out-for-sth#e-eee2eb6e6f1e433c",
+          "text": "“Watch out for my raspberry plants by the fence,” another said, “I put signs by them.” Seriously?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 14
+          },
+          "parts": [
+            [
+              1,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,155 @@
+{
+  "entryId": "w:even-if",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "even",
+      "if"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "even",
+        "if"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "even if",
+  "senses": [
+    {
+      "senseId": "w:even-if#s1",
+      "pos": "短语",
+      "glossZh": "即使；哪怕",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:even#s3",
+        "w:if#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:even-if#e-6083247c0d0d2faa",
+          "text": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:even-if#e-16a25aa20b1eea01",
+          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 84
+          },
+          "parts": [
+            [
+              77,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:even-if#e-9d67fb85c8865aa1",
+          "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 10,
+        "mock": 57
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

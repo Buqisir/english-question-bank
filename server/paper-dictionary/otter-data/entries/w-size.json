@@ -59,8 +59,8 @@
     "mock": 125
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 122
+    "gaokao": 3,
+    "mock": 9
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 91
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -259,40 +259,6 @@
       ]
     },
     {
-      "senseId": "w:size#s4",
-      "pos": "短语",
-      "glossZh": "估量",
-      "pronunciationId": "w:size#p-main",
-      "note": "size up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:size#e-206054c69fac3015",
-          "text": "He sized up the situation and called for his daughter, who spoke English.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:size#s5",
       "pos": "v.",
       "glossZh": "按尺寸调整",
@@ -312,6 +278,11 @@
       "reason": "工艺术语、历史义或地区义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:size-up"
+  ]
 }

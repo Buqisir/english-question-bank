@@ -1,0 +1,199 @@
+{
+  "entryId": "w:do-ones-best",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "do",
+      {
+        "slot": "one's"
+      },
+      "best"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        {
+          "slot": "one's"
+        },
+        "best"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "did best",
+      "tags": []
+    },
+    {
+      "form": "do best",
+      "tags": []
+    },
+    {
+      "form": "doing best",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do one's best",
+  "senses": [
+    {
+      "senseId": "w:do-ones-best#s1",
+      "pos": "短语",
+      "glossZh": "尽力；竭尽全力",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s4",
+        "w:do#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:do-ones-best#e-f8691d1e4579c014",
+          "text": "I've learned a few things along the way though, which I hope you'll find encouraging if you're doing your best to figure out how you can make the",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 110
+          },
+          "parts": [
+            [
+              95,
+              100
+            ],
+            [
+              106,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              100
+            ],
+            [
+              106,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-ones-best#e-70789f59f6d9509b",
+          "text": "If a new duty comes around that’s more important than others, do your best to rearrange your to-do list.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 74
+          },
+          "parts": [
+            [
+              62,
+              64
+            ],
+            [
+              70,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              64
+            ],
+            [
+              70,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-ones-best#e-fcc6d6eb6231be54",
+          "text": "We did our best for him but he started to get depressed and fed up with life.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              6
+            ],
+            [
+              11,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              6
+            ],
+            [
+              11,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth，表示尽力做某事。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

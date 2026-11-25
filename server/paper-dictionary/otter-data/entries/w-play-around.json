@@ -1,0 +1,131 @@
+{
+  "entryId": "w:play-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing around"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "around"
+      ],
+      [
+        "playing",
+        "around"
+      ],
+      [
+        "played",
+        "around"
+      ],
+      [
+        "plays",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play around",
+  "senses": [
+    {
+      "senseId": "w:play-around#s1",
+      "pos": "短语",
+      "glossZh": "嬉闹；胡闹",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-around#e-d445a16ee45ab719",
+          "text": "Lovely animals such as deer or rabbits were playing around and cute birds were singing in trees.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 58
+          },
+          "parts": [
+            [
+              44,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:play-around#s2",
+      "pos": "短语",
+      "glossZh": "随意摆弄；试着摸索",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 play around with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-around#s3",
+      "pos": "短语",
+      "glossZh": "与伴侣以外的人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

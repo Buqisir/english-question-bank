@@ -1,0 +1,91 @@
+{
+  "entryId": "w:guess-what",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "guess",
+      "what"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "guess",
+        "what"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "guess what",
+  "senses": [
+    {
+      "senseId": "w:guess-what#s1",
+      "pos": "短语",
+      "glossZh": "你猜怎么着（用来引出接下来要说的消息）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:guess-what#e-1e5abae2630e6f01",
+          "text": "Guess what?",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "可引出意外消息，也可带着调侃或讽刺强调预料中的结果。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 78
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -123,16 +123,16 @@
       "pos": "n.",
       "glossZh": "令人瞩目的事物或人物",
       "pronunciationId": "w:phenomenon#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

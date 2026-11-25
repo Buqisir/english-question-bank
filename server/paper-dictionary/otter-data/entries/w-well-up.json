@@ -1,0 +1,280 @@
+{
+  "entryId": "w:well-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "well",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "well",
+        "up"
+      ],
+      [
+        "welled",
+        "up"
+      ],
+      [
+        "welling",
+        "up"
+      ],
+      [
+        "wells",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "welled up",
+      "tags": []
+    },
+    {
+      "form": "welling up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "well up",
+  "senses": [
+    {
+      "senseId": "w:well-up#s1",
+      "pos": "短语",
+      "glossZh": "（眼泪等液体）涌出；涌上来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:well-up#e-a45623a49832d8aa",
+          "text": "How am I supposed to compete tomorrow?” I slapped my leg repeatedly with bitterness as tears welled up in my eyes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 102
+          },
+          "parts": [
+            [
+              93,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:well-up#e-34ecdd1089a72887",
+          "text": "Just as hot tears of frustration welled up, the sound of tires approached.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:well-up#e-985170884ffb2eaa",
+          "text": "Staring at her half-finished painting, tears welled up in her eyes – trapped between her love for art and her parents’ expectations.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 54
+          },
+          "parts": [
+            [
+              45,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:well-up#s2",
+      "pos": "短语",
+      "glossZh": "（情感）从心底涌起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:well-up#e-33b3d64df72cd89d",
+          "text": "I shot a picture of the scene so I could remember the feeling welling up inside me.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:cloze:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:well-up#e-edf7cec056d7edd3",
+          "text": "For the first time in years, Sumi felt something well up in her chest – pride.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:writing-continuation:6",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          },
+          "parts": [
+            [
+              49,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:well-up#e-25168f79aba2c2cb",
+          "text": "Getting the streets cleaned early means everyone can start their day with a nicer sight, don’t you think?” Seeing the energy and kindness in the woman’s eyes, a warmth and deep respect welled up inside Emily.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:writing-continuation:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 194
+          },
+          "parts": [
+            [
+              185,
+              194
+            ]
+          ],
+          "highlightRanges": [
+            [
+              185,
+              194
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

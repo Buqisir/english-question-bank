@@ -1,0 +1,146 @@
+{
+  "entryId": "w:take-a-short-cut",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "a short cut",
+    "a shortcut"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "short",
+      "cut"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "short",
+        "cut"
+      ],
+      [
+        "take",
+        "a",
+        "shortcut"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken a shortcut",
+      "tags": []
+    },
+    {
+      "form": "taking a short cut",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a short cut",
+  "senses": [
+    {
+      "senseId": "w:take-a-short-cut#s1",
+      "pos": "动词短语",
+      "glossZh": "抄近路；走捷径",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s60",
+        "w:cut#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-short-cut#e-8de5cbc94a68c975",
+          "text": "Taking a short cut home.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-short-cut#e-075272d58010de2b",
+          "text": "He replayed the drive endlessly in his mind, and gradually, a different truth emerged: he had been tired, he’d taken a shortcut that he knew was poorly lit, and he had been checking a text message just moments before.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 127
+          },
+          "parts": [
+            [
+              111,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              127
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

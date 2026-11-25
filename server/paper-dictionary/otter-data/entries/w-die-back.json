@@ -1,0 +1,103 @@
+{
+  "entryId": "w:die-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "die",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "die",
+        "back"
+      ],
+      [
+        "died",
+        "back"
+      ],
+      [
+        "dies",
+        "back"
+      ],
+      [
+        "dying",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "die back",
+  "senses": [
+    {
+      "senseId": "w:die-back#s1",
+      "pos": "短语",
+      "glossZh": "（植物、林木等）逐渐枯萎、衰退",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:die-back#e-3ae9009994d97e7d",
+          "text": "Tropical forests will die back by 2035.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-import-20261026-n090:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

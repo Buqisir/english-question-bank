@@ -42,7 +42,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 3
   },
   "senses": [
     {
@@ -53,7 +53,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -117,54 +117,34 @@
       ]
     },
     {
-      "senseId": "w:sauce#s2",
-      "pos": "短语",
-      "glossZh": "成功的秘诀",
+      "senseId": "w:sauce#s3",
+      "pos": "n.",
+      "glossZh": "差劲的东西（用于 weak sauce）",
       "pronunciationId": "w:sauce#p-main",
-      "note": "secret sauce；special sauce。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:sauce#e-418dfc78d44386d0",
-          "text": "Datchuk said the “special sauce” is that students have to pay closer attention to how letters connect when they write.",
+          "exampleId": "w:sauce#e-9ed7f3be1ab77952",
+          "text": "“I am not interested in being some weak sauce kind of spokesperson,” he says.",
           "source": {
-            "paperId": "paper-mock-hubei-wuchang-2026-05",
-            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
-            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-b",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:4",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-b:2",
               "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:sauce#e-24ecbb4da685a559",
-          "text": "His secret sauce, which immediately carried like wildfire across the nation, is his genuine passion.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 16
+            "start": 40,
+            "end": 45
           }
         }
       ]
@@ -180,6 +160,12 @@
       "reason": "少见动词用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:secret-sauce",
+    "w:special-sauce"
+  ]
 }

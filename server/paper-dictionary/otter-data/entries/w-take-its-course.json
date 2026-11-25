@@ -1,0 +1,115 @@
+{
+  "entryId": "w:take-its-course",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking its course"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "its",
+      "course"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "its",
+        "course"
+      ],
+      [
+        "taking",
+        "its",
+        "course"
+      ],
+      [
+        "taken",
+        "its",
+        "course"
+      ],
+      [
+        "takes",
+        "its",
+        "course"
+      ],
+      [
+        "took",
+        "its",
+        "course"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take its course",
+  "senses": [
+    {
+      "senseId": "w:take-its-course#s1",
+      "pos": "短语",
+      "glossZh": "（事态）按其自然进程发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-its-course#e-4f480fa1ab9e1c29",
+          "text": "The reserve, once celebrated as a pioneering rewilding project for the principle of no human intervention, immediately set off a heated debate: Was it animal cruelty or just nature taking its course?",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 181,
+            "end": 198
+          },
+          "parts": [
+            [
+              181,
+              198
+            ]
+          ],
+          "highlightRanges": [
+            [
+              181,
+              198
+            ]
+          ]
+        }
+      ],
+      "note": "常用 let sth take its course 表示任其自然发展。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

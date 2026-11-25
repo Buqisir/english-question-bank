@@ -1,0 +1,125 @@
+{
+  "entryId": "w:im-fine",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I'm fine"
+  ],
+  "pattern": {
+    "tokens": [
+      "i'm",
+      "fine"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i'm",
+        "fine"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i'm fine",
+  "senses": [
+    {
+      "senseId": "w:im-fine#s1",
+      "pos": "短语",
+      "glossZh": "我挺好的；我没事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:im-fine#e-e6e0f297764c39c1",
+          "text": "Saying “I’m fine” quickly even if feeling stressed.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zj-2026-03-m171:30#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:im-fine#e-73a13ec79b5fd9fb",
+          "text": "“I’m fine!",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:10",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 9
+          },
+          "parts": [
+            [
+              1,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "可回应问候或表示自己无需担心。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

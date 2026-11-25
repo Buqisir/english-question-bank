@@ -1,0 +1,103 @@
+{
+  "entryId": "w:come-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come again",
+  "senses": [
+    {
+      "senseId": "w:come-again#s1",
+      "pos": "短语",
+      "glossZh": "你说什么？请再说一遍。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-again#e-d30b5084ac80d29a",
+          "text": "“Come again?",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-again#s2",
+      "pos": "短语",
+      "glossZh": "欢迎下次再来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,63 @@
+{
+  "entryId": "w:other-half",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "other",
+      "half"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "other",
+        "half"
+      ],
+      [
+        "other",
+        "halves"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "other half",
+  "senses": [
+    {
+      "senseId": "w:other-half#s1",
+      "pos": "短语",
+      "glossZh": "另一半；配偶",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 my/your other half 等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

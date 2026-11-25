@@ -1,0 +1,126 @@
+{
+  "entryId": "w:just-in-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "in",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "in",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just in time",
+  "senses": [
+    {
+      "senseId": "w:just-in-time#s1",
+      "pos": "固定短语",
+      "glossZh": "刚好来得及；及时赶上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:just#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:just-in-time#e-f479e2dd70d1ae23",
+          "text": "Finding nothing in the tank, she climbed out of the water just in time to see Katherine jumping in on the other side.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 70
+          },
+          "parts": [
+            [
+              58,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:just-in-time#e-70b889521f66d5bb",
+          "text": "I caught her just in time and noticed her swollen knee.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "常用 just in time to do sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

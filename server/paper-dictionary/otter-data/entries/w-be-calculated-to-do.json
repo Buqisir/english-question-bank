@@ -1,0 +1,68 @@
+{
+  "entryId": "w:be-calculated-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "calculated",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "calculated",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be calculated to do",
+  "senses": [
+    {
+      "senseId": "w:be-calculated-to-do#s1",
+      "pos": "短语",
+      "glossZh": "旨在产生某种效果；特意安排用来做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:calculate#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

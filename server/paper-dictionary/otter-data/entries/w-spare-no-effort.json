@@ -1,0 +1,100 @@
+{
+  "entryId": "w:spare-no-effort",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spare",
+      "no",
+      "effort"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spare",
+        "no",
+        "effort"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "spared no effort",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spare no effort",
+  "senses": [
+    {
+      "senseId": "w:spare-no-effort#s1",
+      "pos": "短语",
+      "glossZh": "不遗余力；竭尽全力",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:spare#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:spare-no-effort#e-a689b857bf1173da",
+          "text": "Faced with endless daily tests and heavy learning tasks, he spared no effort to make progress step by step.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 76
+          },
+          "parts": [
+            [
+              60,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              76
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

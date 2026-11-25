@@ -1,0 +1,105 @@
+{
+  "entryId": "w:something-like-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "something",
+      "like",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "something",
+        "like",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "something like that",
+  "senses": [
+    {
+      "senseId": "w:something-like-that#s1",
+      "pos": "短语",
+      "glossZh": "类似那样的东西或情况",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:something-like-that#e-9cfad82fdd7be784",
+          "text": "“I don’t know when I’ll see something like that again.” “I do,” I said.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 47
+          },
+          "parts": [
+            [
+              28,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:something-like-that#s2",
+      "pos": "短语",
+      "glossZh": "差不多是那样（用于含糊确认）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

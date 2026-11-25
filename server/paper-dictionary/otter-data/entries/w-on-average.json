@@ -1,0 +1,155 @@
+{
+  "entryId": "w:on-average",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "average"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "average"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on average",
+  "senses": [
+    {
+      "senseId": "w:on-average#s1",
+      "pos": "短语",
+      "glossZh": "平均而言；按平均值计算",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:average#s5",
+        "w:on#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-average#e-809773051e00a8a4",
+          "text": "Today, in Australia, most children on average fall 2,000 steps short of the physical activity they need to avoid being overweight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-average#e-562d96916400e6ae",
+          "text": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 86
+          },
+          "parts": [
+            [
+              76,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              86
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-average#e-0ae5ce48b7d67671",
+          "text": "It isn’t just that people are, on average, living longer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 27
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

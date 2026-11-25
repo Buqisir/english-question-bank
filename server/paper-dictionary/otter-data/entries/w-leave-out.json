@@ -1,0 +1,297 @@
+{
+  "entryId": "w:leave-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leaves out",
+    "leaving out"
+  ],
+  "pattern": {
+    "tokens": [
+      "leave",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leave",
+        "out"
+      ],
+      [
+        "leaves",
+        "out"
+      ],
+      [
+        "leaving",
+        "out"
+      ],
+      [
+        "left",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "left out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leave (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:leave-out#s1",
+      "pos": "短语",
+      "glossZh": "省略；漏掉（内容或要素）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-out#e-f080d49ba87d5069",
+          "text": "Perhaps due to standardized instruction, questions of why and for whom are often left out.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 89
+          },
+          "parts": [
+            [
+              81,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-out#e-3ae223f012515a24",
+          "text": "Leaving out the participant division.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-shandong-weifang-2026-04-second-mock:22#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-out#e-3ac8457015c7683f",
+          "text": "It leaves out real local factors.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:leave-out#s2",
+      "pos": "短语",
+      "glossZh": "把某人排除在外；不让某人参与",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-out#e-04e615bace76afb3",
+          "text": "Feeling left out, he made a decision.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-out#e-040ec54cc3020465",
+          "text": "They tend to feel left out.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          },
+          "parts": [
+            [
+              18,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-out#e-ed0372795b6f93c5",
+          "text": "She feared being left out.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zj-jinhua-2025-nov-m1:25#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "feel left out 表示觉得自己被冷落。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:leave-out#s3",
+      "pos": "短语",
+      "glossZh": "把某物留在外面；没有收起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

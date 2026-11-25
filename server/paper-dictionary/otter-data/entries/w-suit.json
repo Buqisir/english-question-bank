@@ -59,8 +59,8 @@
     "mock": 53
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 50
+    "gaokao": 3,
+    "mock": 11
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -104,7 +104,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -201,7 +201,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -276,113 +276,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:suit#s7",
-      "pos": "短语",
-      "glossZh": "照着做",
-      "pronunciationId": "w:suit#p-main",
-      "note": "follow suit。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:suit#e-61d005198780c72f",
-          "text": "The participants followed suit, taking more food than they normally would have.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:suit#e-5eb468e6de271a4c",
-          "text": "The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 74
-          }
-        },
-        {
-          "exampleId": "w:suit#e-9bd9820bcfc7524d",
-          "text": "But if a thin person eats a lot, I’ll follow suit.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:suit#s8",
-      "pos": "短语",
-      "glossZh": "强项",
-      "pronunciationId": "w:suit#p-main",
-      "note": "strong suit。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:suit#e-55e554474ff6daf0",
-          "text": "Athleticism just isn’t my strong suit.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -391,6 +284,12 @@
       "reason": "航海专义、历史用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:follow-suit",
+    "w:strong-suit"
+  ]
 }

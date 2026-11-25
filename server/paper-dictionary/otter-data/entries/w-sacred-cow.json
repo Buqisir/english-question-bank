@@ -1,0 +1,92 @@
+{
+  "entryId": "w:sacred-cow",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sacred",
+      "cow"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sacred",
+        "cow"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sacred cow",
+  "senses": [
+    {
+      "senseId": "w:sacred-cow#s1",
+      "pos": "短语",
+      "glossZh": "被奉为不容质疑的事物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cow#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sacred-cow#e-cdc8a246bbf2e5e7",
+          "text": "In many cities, preserving every old structure, no matter its function or relevance, has become something of a sacred cow, admired by all but discussed by few.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 121
+          },
+          "parts": [
+            [
+              111,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              121
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

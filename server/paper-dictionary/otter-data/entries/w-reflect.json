@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 203
+    "mock": 26
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -171,12 +171,12 @@
       "pos": "v.",
       "glossZh": "映出（影像）",
       "pronunciationId": "w:reflect#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -188,7 +188,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 3
+        "mock": 85
       },
       "folded": false,
       "examples": [
@@ -254,6 +254,9 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:reflect-upon"
+  ]
 }

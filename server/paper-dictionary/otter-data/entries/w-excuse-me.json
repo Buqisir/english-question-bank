@@ -1,0 +1,179 @@
+{
+  "entryId": "w:excuse-me",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "Excuse me"
+  ],
+  "pattern": {
+    "tokens": [
+      "excuse",
+      "me"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "excuse",
+        "me"
+      ],
+      [
+        "excuse",
+        "mes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "excuse me",
+  "senses": [
+    {
+      "senseId": "w:excuse-me#s1",
+      "pos": "短语",
+      "glossZh": "打扰一下；劳驾",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:excuse#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:excuse-me#e-869415030b80d02f",
+          "text": "“Excuse me,” she asked the stand attendant, “are there any more plates in the back?” The man shook his head, barely looking up from his newspaper.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "提问或提出请求前用来引起注意。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s2",
+      "pos": "短语",
+      "glossZh": "请再说一遍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s3",
+      "pos": "短语",
+      "glossZh": "借过；请让一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s4",
+      "pos": "短语",
+      "glossZh": "对不起；请原谅",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如无意中碰到别人或打断别人时。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s5",
+      "pos": "短语",
+      "glossZh": "失陪一下；请容我先离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s6",
+      "pos": "短语",
+      "glossZh": "什么？你说什么？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用质问语气表示震惊或不满。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:excuse-me#s7",
+      "pos": "短语",
+      "glossZh": "跳舞时不断交换舞伴的旧式舞蹈",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

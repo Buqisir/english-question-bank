@@ -58,8 +58,8 @@
     "mock": 165
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 157
+    "gaokao": 4,
+    "mock": 27
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -212,7 +212,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -310,59 +310,6 @@
       ]
     },
     {
-      "senseId": "w:hit#s5",
-      "pos": "短语",
-      "glossZh": "使人深切明白（某事）",
-      "pronunciationId": "w:hit#p-main",
-      "note": "hit home。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hit#e-a73f2eb43c224050",
-          "text": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:hit#e-8caffdb9b4d8952d",
-          "text": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 108,
-            "end": 111
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hit#s6",
       "pos": "v.",
       "glossZh": "达到（数字或限度）",
@@ -370,7 +317,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -422,7 +369,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -467,40 +414,6 @@
       ]
     },
     {
-      "senseId": "w:hit#s8",
-      "pos": "短语",
-      "glossZh": "偶然想到",
-      "pronunciationId": "w:hit#p-main",
-      "note": "hit on an idea。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hit#e-430ae6a471121bc0",
-          "text": "It was during one visit that Andrew hit on the perfect idea: The animal shelter had 40 dog kennels that were always full.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hit#s9",
       "pos": "v.",
       "glossZh": "按下（按钮）",
@@ -508,7 +421,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -538,12 +451,12 @@
       "pos": "n.",
       "glossZh": "大受欢迎的人或事物",
       "pronunciationId": "w:hit#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 16
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -558,6 +471,328 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:hit#s12",
+      "pos": "n.",
+      "glossZh": "成功的尝试",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-7d6936abc4589f6d",
+          "text": "We had hits and misses but mostly hits.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s13",
+      "pos": "v.",
+      "glossZh": "去；前往（某处）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-19037a6443a11adb",
+          "text": "Michael hit the market: Mrs. Hernandez’s warm meat pies; Mr. Patel’s spicy mango sauce and buttery cookies.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:hit#e-a5e7735fca1eb28d",
+          "text": "We were looking forward to hitting the bike trails and the beach.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:hit#e-4565e6e7178f4973",
+          "text": "He’ll hit a new gym.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s14",
+      "pos": "v.",
+      "glossZh": "上市；在……上架销售",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-80ed61d30ef782fb",
+          "text": "The fruit, sold sliced and marketed, could hit lots of mid-western grocery stores.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:hit#e-55fd7fcc66e9c5d5",
+          "text": "While new, highly-effective weight-loss drugs have hit the market, their price label and numerous side effects mean other weight-loss interventions are still needed.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s15",
+      "pos": "v.",
+      "glossZh": "投中（篮球）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-2904c98332a13a0e",
+          "text": "Academy freshman Lily Payne hit a 3-point to top Apache by a point.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:hit#e-96da7c44f180081d",
+          "text": "Ultimately, they hit a 3-point buzzer-beater (压哨球) to top Apache by a point.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s16",
+      "pos": "v.",
+      "glossZh": "冲上（滑雪跳台等）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-2ffb9a37fd180438",
+          "text": "Whether it’s seeing how fast he can get to the bottom, fitting in a certain number of turns, which jump to hit, whether to dip into a set of trees – the terrain（地形）is familiar, yet new.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s17",
+      "pos": "phr.",
+      "glossZh": "（hit the spot）正合心意；恰好满足需要",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:hit#s18",
+      "pos": "n.",
+      "glossZh": "一次短暂的刺激或快感",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-298c64179366c63f",
+          "text": "It’s a dopamine hit, but not one I usually get from just scrolling（刷屏）stream media.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s19",
+      "pos": "v.",
+      "glossZh": "奏出；唱出（音符）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-699f7baf03515949",
+          "text": "It’s like learning to play an instrument: at first you may hit the wrong notes, misunderstand the rhythm, or feel awkward.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 62
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -566,6 +801,18 @@
       "reason": "俚语或体育专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hit-a-wall",
+    "w:hit-home",
+    "w:hit-on",
+    "w:hit-on-an-idea",
+    "w:hit-the-road",
+    "w:hit-the-spot",
+    "w:hit-up",
+    "w:hit-upon"
+  ]
 }

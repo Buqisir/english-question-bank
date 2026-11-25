@@ -1,0 +1,195 @@
+{
+  "entryId": "w:free-sb-sth-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "free sb up"
+  ],
+  "pattern": {
+    "tokens": [
+      "free",
+      {
+        "slot": "sb/sth"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "free",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "free",
+        "up"
+      ],
+      [
+        "free",
+        {
+          "slot": "sb"
+        },
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "free up",
+      "tags": []
+    },
+    {
+      "form": "freeing up",
+      "tags": []
+    },
+    {
+      "form": "frees up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "free sb/sth up",
+  "senses": [
+    {
+      "senseId": "w:free-sb-sth-up#s1",
+      "pos": "短语",
+      "glossZh": "使某人腾出时间或精力；腾出（时间、空间、资源等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:free#s9",
+        "w:up#s62"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:free-sb-sth-up#e-fac30e1f97445694",
+          "text": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 159
+          },
+          "parts": [
+            [
+              145,
+              152
+            ],
+            [
+              157,
+              159
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              152
+            ],
+            [
+              157,
+              159
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:free-sb-sth-up#e-5c97a371a01ed16a",
+          "text": "Politely declining these invitations frees up more time for what truly matters to you.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 45
+          },
+          "parts": [
+            [
+              37,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:free-sb-sth-up#e-1f06929d4fb8171d",
+          "text": "In fact, it can free up cognitive resources for more complex tasks.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

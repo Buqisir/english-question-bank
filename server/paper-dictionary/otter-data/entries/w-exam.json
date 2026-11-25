@@ -51,7 +51,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 108
+    "mock": 2
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 103
       },
       "folded": false,
       "examples": [
@@ -135,7 +135,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -187,6 +187,6 @@
       "reason": "该意义通常不用 exam"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

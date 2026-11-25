@@ -1,0 +1,90 @@
+{
+  "entryId": "w:ill-will",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ill",
+      "will"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ill",
+        "will"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ill will",
+  "senses": [
+    {
+      "senseId": "w:ill-will#s1",
+      "pos": "短语",
+      "glossZh": "恶意；怨恨",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ill-will#e-5f2a4c9564439b17",
+          "text": "The common fear that a friend secretly dislikes us often reflects internal insecurities rather than actual ill will.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 115
+          },
+          "parts": [
+            [
+              107,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

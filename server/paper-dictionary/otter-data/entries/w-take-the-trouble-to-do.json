@@ -1,0 +1,112 @@
+{
+  "entryId": "w:take-the-trouble-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take the trouble",
+    "take the trouble to do sth",
+    "taking the trouble"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "trouble",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "trouble",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taking the trouble to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the trouble to do",
+  "senses": [
+    {
+      "senseId": "w:take-the-trouble-to-do#s1",
+      "pos": "短语",
+      "glossZh": "特意费心做某事；不嫌麻烦去做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s57",
+        "w:trouble#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-the-trouble-to-do#e-48c43db21a271afb",
+          "text": "However, taking the trouble to find a pen and write a letter produces a stronger signal of true gratitude precisely because it takes more effort.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 30
+          },
+          "parts": [
+            [
+              9,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

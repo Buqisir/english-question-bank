@@ -1,0 +1,114 @@
+{
+  "entryId": "w:cross-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cross one’s mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "cross",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cross",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cross mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cross one's mind",
+  "senses": [
+    {
+      "senseId": "w:cross-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "掠过某人心头；被某人想到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cross#s3",
+        "w:mind#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cross-ones-mind#e-f960198f57fc291f",
+          "text": "When you were trying to figure out what to buy for the environmentalist on your holiday list, fur probably didn’t cross your mind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 129
+          },
+          "parts": [
+            [
+              114,
+              119
+            ],
+            [
+              125,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              119
+            ],
+            [
+              125,
+              129
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

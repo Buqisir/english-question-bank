@@ -1,0 +1,125 @@
+{
+  "entryId": "w:on-all-fours",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "all",
+      "fours"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "all",
+        "fours"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on all fours",
+  "senses": [
+    {
+      "senseId": "w:on-all-fours#s1",
+      "pos": "短语",
+      "glossZh": "四肢着地；用手和膝盖或脚支撑身体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:four#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-all-fours#e-77b160fd4c1f17e9",
+          "text": "This involved patiently imitating them – chewing wild grass, making deep sounds, and walking on all fours – as a way to build mutual understanding.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 105
+          },
+          "parts": [
+            [
+              93,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-all-fours#e-f683b0081415556a",
+          "text": "Steep rocks forced me to crawl on all fours.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

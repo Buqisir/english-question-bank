@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 292
+    "mock": 105
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 26,
-        "mock": 0
+        "mock": 85
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -295,7 +295,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -341,7 +341,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -401,11 +401,10 @@
       "examples": []
     },
     {
-      "senseId": "w:leave#s8",
-      "pos": "短语",
-      "glossZh": "不打扰",
+      "senseId": "w:leave#s9",
+      "pos": "v.",
+      "glossZh": "错失可获得的好处（leave sth on the table）",
       "pronunciationId": "w:leave#p-main",
-      "note": "leave sb alone。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -414,22 +413,56 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:leave#e-1a4ee49b9591f4a4",
-          "text": "Many people are still doing exactly that, so rather than “finger-wagging” about performative reading, next time you see someone with a book at a coffee shop or the park, just leave them alone, because “this is not for you”, they're simply “enjoying the moment”.",
+          "exampleId": "w:leave#e-25f9a7433d7e6fb7",
+          "text": "You might be leaving some happiness on the table by doing your everyday activities all by yourself.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-c",
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:cloze",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-c:7",
-              "sentence": 3
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:cloze:1",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 175,
-            "end": 180
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leave#s10",
+      "pos": "v.",
+      "glossZh": "遗漏；省去（leave sth out）",
+      "pronunciationId": "w:leave#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leave#e-f012a0d40a83697c",
+          "text": "It may leave clues out.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 12
           }
         }
       ]
@@ -441,6 +474,19 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:leave-behind",
+    "w:leave-home",
+    "w:leave-on",
+    "w:leave-out",
+    "w:leave-over",
+    "w:leave-sb-alone",
+    "w:leave-sb-in-the-dust",
+    "w:take-it-or-leave-it",
+    "w:up-and-leave"
+  ]
 }

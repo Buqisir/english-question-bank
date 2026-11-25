@@ -1,0 +1,70 @@
+{
+  "entryId": "w:ask-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ask",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ask",
+        "after"
+      ],
+      [
+        "asked",
+        "after"
+      ],
+      [
+        "asking",
+        "after"
+      ],
+      [
+        "asks",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ask after sb",
+  "senses": [
+    {
+      "senseId": "w:ask-after#s1",
+      "pos": "短语",
+      "glossZh": "问起某人的近况或健康状况",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

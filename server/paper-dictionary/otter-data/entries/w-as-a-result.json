@@ -1,0 +1,158 @@
+{
+  "entryId": "w:as-a-result",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "a",
+      "result"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "a",
+        "result"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as a result",
+  "senses": [
+    {
+      "senseId": "w:as-a-result#s1",
+      "pos": "短语",
+      "glossZh": "因此；结果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s12",
+        "w:result#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-a-result#e-dc3e70e4ec1cbbd0",
+          "text": "It is so easy to let an online course slide, but your grades will suffer as a result.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 84
+          },
+          "parts": [
+            [
+              73,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-result#e-766f1250ed5c38ea",
+          "text": "As a result, each year they received something they wanted.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:31#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-result#e-6dde763a3d2e24cd",
+          "text": "As a result, there was a lot of leftover cheese brine.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 40
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

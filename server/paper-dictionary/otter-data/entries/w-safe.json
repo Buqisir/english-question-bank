@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 184
+    "mock": 10
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 170
       },
       "folded": false,
       "examples": [
@@ -231,12 +231,12 @@
       "pos": "adj.",
       "glossZh": "保险的（不大可能失败的）",
       "pronunciationId": "w:safe#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -246,6 +246,11 @@
       "reason": "大写 SAFE 缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:better-safe-than-sorry",
+    "w:play-it-safe",
+    "w:safe-and-sound"
+  ]
 }

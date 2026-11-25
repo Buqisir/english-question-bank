@@ -1,0 +1,108 @@
+{
+  "entryId": "w:come-to-light",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "light"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "light"
+      ],
+      [
+        "came",
+        "to",
+        "light"
+      ],
+      [
+        "comes",
+        "to",
+        "light"
+      ],
+      [
+        "coming",
+        "to",
+        "light"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to light",
+  "senses": [
+    {
+      "senseId": "w:come-to-light#s1",
+      "pos": "短语",
+      "glossZh": "被发现；为人所知",
+      "note": "常用于事实、真相、证据等。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-to-light#e-b33ee60d99c8c0ce",
+          "text": "With each discovery we made on the walk, new things would come to light, inspiring unexpected connections.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 71
+          },
+          "parts": [
+            [
+              58,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -145,6 +145,10 @@
       "reason": "同形的低频或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:he-or-she",
+    "w:he-said-she-said"
+  ]
 }

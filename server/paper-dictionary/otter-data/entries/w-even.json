@@ -48,8 +48,8 @@
     "mock": 1000
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 1000
+    "gaokao": 27,
+    "mock": 839
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 75,
-        "mock": 0
+        "mock": 143
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -195,290 +195,6 @@
       ]
     },
     {
-      "senseId": "w:even#s3",
-      "pos": "短语",
-      "glossZh": "即使",
-      "pronunciationId": "w:even#p-main",
-      "note": "even if。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:even#e-66c58af48304e7b1",
-          "text": "Even if there isn’t a registry, a good housewarming gift is something to decorate the new house with, like a piece of art or a plant.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:even#e-7c07221d709e9a52",
-          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:even#e-28827f1312563320",
-          "text": "He suggested I think about the difference between endings that I wanted for the characters and endings that were right for the characters, endings that satisfied the story even if they didn’t have a traditionally positive outcome.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 172,
-            "end": 176
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:even#s4",
-      "pos": "短语",
-      "glossZh": "虽然",
-      "pronunciationId": "w:even#p-main",
-      "note": "even though。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:even#e-6852192bdd1c5f77",
-          "text": "Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:even#e-87f9bfef186fd1d9",
-          "text": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:even#e-ebb7a8acc7c94425",
-          "text": "Even though Britain has a reputation for less-than-impressive cuisine, it is producing more top class chefs who appear frequently on our television screens and whose recipe books frequently top the best seller lists.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:even#s5",
-      "pos": "短语",
-      "glossZh": "即便在……时",
-      "pronunciationId": "w:even#p-main",
-      "note": "even when。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:even#e-c277490555cf53f2",
-          "text": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:even#e-ce4c619948e2ef45",
-          "text": "Even when you win, you end up no better off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:even#e-f27a3c01239f634f",
-          "text": "Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:even#s6",
-      "pos": "短语",
-      "glossZh": "即便如此",
-      "pronunciationId": "w:even#p-main",
-      "note": "even so。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:even#e-367a029861ef6b66",
-          "text": "Even so, how quickly your child develops into a social creature may also depend on his temperament（性格）.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:even#s7",
-      "pos": "短语",
-      "glossZh": "正当……时",
-      "pronunciationId": "w:even#p-main",
-      "note": "even as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:even#e-1f3b9efa1e7613b7",
-          "text": "Grizzly bears, which may grow to about 2.5 m long and weigh over 400 kg, occupy a conflicted corner of the American psyche-we revere (敬畏) them even as they give us frightening dreams.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 143,
-            "end": 147
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:even#s8",
       "pos": "adj.",
       "glossZh": "平整的",
@@ -535,26 +251,12 @@
       "pos": "adj.",
       "glossZh": "平稳的",
       "pronunciationId": "w:even#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:even#s13",
-      "pos": "短语",
-      "glossZh": "平衡下来",
-      "pronunciationId": "w:even#p-main",
-      "note": "even out。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -568,6 +270,17 @@
       "reason": "古旧名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:even-as",
+    "w:even-if",
+    "w:even-out",
+    "w:even-so",
+    "w:even-though",
+    "w:even-worse",
+    "w:get-even"
+  ]
 }

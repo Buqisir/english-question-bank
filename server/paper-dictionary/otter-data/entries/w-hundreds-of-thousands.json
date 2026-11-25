@@ -1,0 +1,163 @@
+{
+  "entryId": "w:hundreds-of-thousands",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hundreds",
+      "of",
+      "thousands"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hundreds",
+        "of",
+        "thousands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hundreds of thousands",
+  "senses": [
+    {
+      "senseId": "w:hundreds-of-thousands#s1",
+      "pos": "短语",
+      "glossZh": "数十万；几十万",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hundreds-of-thousands#e-122d9fe9ac9ecf32",
+          "text": "The Bajau, as these people are known, number in the hundreds of thousands in Indonesia, Malaysia and the Philippines.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 73
+          },
+          "parts": [
+            [
+              52,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hundreds-of-thousands#e-ee47e2d474811bf1",
+          "text": "The AI was trained on hundreds of thousands of retinal images previously labeled by eye doctors.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 43
+          },
+          "parts": [
+            [
+              22,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hundreds-of-thousands#e-3a8e662980be51a6",
+          "text": "When CalATBI started, Grinter’s team collected hundreds of thousands of insects, covering tens of thousands of miles.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 68
+          },
+          "parts": [
+            [
+              47,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              68
+            ]
+          ]
+        }
+      ],
+      "note": "可单用，或在 of 后接所计数的人或事物。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [
+    {
+      "legacySenseIds": [
+        "w:hundred#s2"
+      ],
+      "glossZh": "数以百计",
+      "reason": "旧义对应 hundreds of，数量级与整个短语的数十万不同。"
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

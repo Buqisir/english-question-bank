@@ -59,63 +59,10 @@
     "mock": 8
   },
   "unassignedCounts": {
-    "gaokao": 0,
+    "gaokao": 1,
     "mock": 5
   },
   "senses": [
-    {
-      "senseId": "w:butter#s1",
-      "pos": "短语",
-      "glossZh": "花生酱",
-      "pronunciationId": "w:butter#p-main",
-      "note": "peanut butter",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:butter#e-ac424b61ff45b802",
-          "text": "They offered the dog some of her favorite peanut butter treats.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:butter#e-1506119a66fd3df9",
-          "text": "Yet all it took to turn this little rebel into a perfect gentleman was a spoonful of peanut butter (花生酱) or his old tennis ball.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
-            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
-            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 92,
-            "end": 98
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:butter#s2",
       "pos": "n.",
@@ -124,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -201,6 +148,8 @@
       "reason": "运动、行业用法或同形义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

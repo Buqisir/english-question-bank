@@ -1,0 +1,103 @@
+{
+  "entryId": "w:a-change-is-as-good-as-a-rest",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "change",
+      "is",
+      "as",
+      "good",
+      "as",
+      "a",
+      "rest"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "change",
+        "is",
+        "as",
+        "good",
+        "as",
+        "a",
+        "rest"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a change is as good as a rest",
+  "senses": [
+    {
+      "senseId": "w:a-change-is-as-good-as-a-rest#s1",
+      "pos": "短语",
+      "glossZh": "换件事做，也能像休息一样恢复精神",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-change-is-as-good-as-a-rest#e-7ea8ec049d60d867",
+          "text": "A change is as good as a rest.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-heze-2026-05-second-mock:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 29
+          },
+          "parts": [
+            [
+              0,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

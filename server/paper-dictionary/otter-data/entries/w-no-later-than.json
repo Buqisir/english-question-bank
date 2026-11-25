@@ -1,0 +1,124 @@
+{
+  "entryId": "w:no-later-than",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "later",
+      "than"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "later",
+        "than"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no later than",
+  "senses": [
+    {
+      "senseId": "w:no-later-than#s1",
+      "pos": "短语",
+      "glossZh": "不迟于；最晚在",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-later-than#e-c708253b2b7411b7",
+          "text": "In order to finalize your reservation, you must pay for the permit at the garage manager’s office no later than the first day of the permit month that you are applying for.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 111
+          },
+          "parts": [
+            [
+              98,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-later-than#e-6af1815cd7e6f698",
+          "text": "Leave work no later than 5.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 24
+          },
+          "parts": [
+            [
+              11,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

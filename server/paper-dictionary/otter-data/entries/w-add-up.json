@@ -1,0 +1,195 @@
+{
+  "entryId": "w:add-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "add",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "add",
+        "up"
+      ],
+      [
+        "added",
+        "up"
+      ],
+      [
+        "adding",
+        "up"
+      ],
+      [
+        "adds",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "add up",
+  "senses": [
+    {
+      "senseId": "w:add-up#s1",
+      "pos": "短语",
+      "glossZh": "逐渐累积；积少成多",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:add#s3",
+        "w:up#s63"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:add-up#e-9c740b998010164f",
+          "text": "This routine may be short but do it enough times throughout the day and the calories will add up!",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 96
+          },
+          "parts": [
+            [
+              90,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:add-up#e-b0c4f7565c61cf9e",
+          "text": "Although the £15 payments seem insignificant, they quickly add up.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          },
+          "parts": [
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:add-up#e-7c2ecf17c4e6c2e8",
+          "text": "Small things, but they add up.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:seven-choices:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 29
+          },
+          "parts": [
+            [
+              23,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:add-up#s2",
+      "pos": "短语",
+      "glossZh": "把各项数字加起来；求和",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "add sth up 或 add up sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:add-up#s3",
+      "pos": "短语",
+      "glossZh": "说得通；前后一致",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于否定句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

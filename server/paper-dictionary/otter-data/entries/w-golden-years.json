@@ -1,0 +1,104 @@
+{
+  "entryId": "w:golden-years",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "golden",
+      "years"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "golden",
+        "years"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "golden years",
+  "senses": [
+    {
+      "senseId": "w:golden-years#s1",
+      "pos": "短语",
+      "glossZh": "晚年；退休后的岁月",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:golden-years#e-636c17eff407de01",
+          "text": "As our dogs enter their golden years, what they need for their continued comfort and happiness will change.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "语气积极，也可用于年老的宠物。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:golden-years#s2",
+      "pos": "短语",
+      "glossZh": "黄金时期；最兴盛的年月",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

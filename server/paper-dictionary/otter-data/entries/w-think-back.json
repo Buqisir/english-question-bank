@@ -1,0 +1,103 @@
+{
+  "entryId": "w:think-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "think",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "back"
+      ],
+      [
+        "thinking",
+        "back"
+      ],
+      [
+        "thinks",
+        "back"
+      ],
+      [
+        "thought",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think back",
+  "senses": [
+    {
+      "senseId": "w:think-back#s1",
+      "pos": "短语",
+      "glossZh": "回想；追忆",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-back#e-862e924067b42ee4",
+          "text": "When people ask whether I miss my smartphone, I think back to the height of my addiction.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          },
+          "parts": [
+            [
+              48,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              58
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to，后面说明回想的时段或经历。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

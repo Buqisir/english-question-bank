@@ -1,0 +1,125 @@
+{
+  "entryId": "w:where-are-you-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "where",
+      "are",
+      "you",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "where",
+        "are",
+        "you",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "where are you from",
+  "senses": [
+    {
+      "senseId": "w:where-are-you-from#s1",
+      "pos": "短语",
+      "glossZh": "你来自哪里？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:where-are-you-from#e-f5e943d16eff8dd4",
+          "text": "How does the author usually respond to “Where are you from”?",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-taian-2026-04-second-round-test:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 58
+          },
+          "parts": [
+            [
+              40,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:where-are-you-from#e-b6591170e82b0eba",
+          "text": "After ten years in London, I recently relocated to Berlin, and as is customary when making new friends, the question “Where are you from?” tends to come up.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 136
+          },
+          "parts": [
+            [
+              118,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              136
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

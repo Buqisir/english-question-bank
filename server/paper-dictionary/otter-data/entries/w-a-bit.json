@@ -1,0 +1,170 @@
+{
+  "entryId": "w:a-bit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "bit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "bit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a bit",
+  "senses": [
+    {
+      "senseId": "w:a-bit#s1",
+      "pos": "短语",
+      "glossZh": "稍微；有点儿",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bit#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-bit#e-a1f5598ecc659c47",
+          "text": "For the first few days, Kynan was always a bit disappointed that the cubs weren’t there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          },
+          "parts": [
+            [
+              41,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit#e-07ed106dcd4162cc",
+          "text": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          },
+          "parts": [
+            [
+              34,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit#e-3629eea4076e5250",
+          "text": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          },
+          "parts": [
+            [
+              66,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 37
+      }
+    },
+    {
+      "senseId": "w:a-bit#s2",
+      "pos": "短语",
+      "glossZh": "一点儿；少量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bit#s2"
+      ],
+      "examples": [],
+      "note": "可单独指少量，也可用 a bit of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

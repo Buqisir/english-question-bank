@@ -1,0 +1,101 @@
+{
+  "entryId": "w:sing-a-different-tune",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sing",
+      "a",
+      "different",
+      "tune"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sing",
+        "a",
+        "different",
+        "tune"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sang a different tune",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sing a different tune",
+  "senses": [
+    {
+      "senseId": "w:sing-a-different-tune#s1",
+      "pos": "短语",
+      "glossZh": "改变态度；换了一套说法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tune#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sing-a-different-tune#e-4d1d1e41af412db2",
+          "text": "However, they sang a different tune.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 35
+          },
+          "parts": [
+            [
+              14,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

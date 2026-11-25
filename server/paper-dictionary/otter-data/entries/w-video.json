@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 222
+    "mock": 26
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 133
       },
       "folded": false,
       "examples": [
@@ -223,12 +223,12 @@
       "pos": "v.",
       "glossZh": "用摄像机录制",
       "pronunciationId": "w:video#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -246,6 +246,6 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

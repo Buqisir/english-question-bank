@@ -1,0 +1,103 @@
+{
+  "entryId": "w:come-around-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "come around to"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "around",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "around",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come around to sth",
+  "senses": [
+    {
+      "senseId": "w:come-around-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "改变看法，逐渐接受……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:around#s9",
+        "w:come#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-around-to-sth#e-5f0664e07bfb366f",
+          "text": "Model Paige Morgan says,” To give people a guilt-free option that they can wear without someone throwing paint on them – I think that’s going to be a massive thing, at least here in New York.” Designer Jennifer Anderson admits it took her a while to come around to the opinion that using nutria fur for her creations is morally acceptable.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 250,
+            "end": 264
+          },
+          "parts": [
+            [
+              250,
+              264
+            ]
+          ],
+          "highlightRanges": [
+            [
+              250,
+              264
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

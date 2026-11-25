@@ -1,0 +1,73 @@
+{
+  "entryId": "w:change-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "changes over"
+  ],
+  "pattern": {
+    "tokens": [
+      "change",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "change",
+        "over"
+      ],
+      [
+        "changes",
+        "over"
+      ],
+      [
+        "changed",
+        "over"
+      ],
+      [
+        "changing",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "change over",
+  "senses": [
+    {
+      "senseId": "w:change-over#s1",
+      "pos": "短语",
+      "glossZh": "改用；转换到另一套系统或做法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 to，指出改用的对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

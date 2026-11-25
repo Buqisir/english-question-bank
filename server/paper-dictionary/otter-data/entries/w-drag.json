@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 31
+    "mock": 15
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -142,74 +142,6 @@
       ]
     },
     {
-      "senseId": "w:drag#s2",
-      "pos": "短语",
-      "glossZh": "拖延；拖得太久",
-      "pronunciationId": "w:drag#p-main",
-      "note": "drag on。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:drag#e-9ca1243059548878",
-          "text": "The same three-hour journey seems to drag on between layovers (中途停留), traffic and rest-stop food.",
-          "source": {
-            "paperId": "paper-mock-chongqing-nankai-2026-m2",
-            "paperTitle": "重庆市高2026届高三第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:1",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:drag#s3",
-      "pos": "短语",
-      "glossZh": "使沮丧；拖累",
-      "pronunciationId": "w:drag#p-main",
-      "note": "drag sb down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:drag#e-fed73fe3c2826d7d",
-          "text": "If something is annoying you in your day-to-day life, you had better address these things and keep them from dragging you down further.",
-          "source": {
-            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
-            "paperTitle": "惠州市2026届高三第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 116,
-            "end": 124
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:drag#s4",
       "pos": "n.",
       "glossZh": "吸一口烟",
@@ -251,7 +183,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -296,6 +228,12 @@
       "reason": "行业和运动专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:drag-on",
+    "w:drag-sb-down"
+  ]
 }

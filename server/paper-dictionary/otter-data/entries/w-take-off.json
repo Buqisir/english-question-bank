@@ -1,0 +1,809 @@
+{
+  "entryId": "w:take-off",
+  "headword": "take (sth) off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes off",
+    "taking off",
+    "took off"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "off"
+      ],
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "takes",
+        "off"
+      ],
+      [
+        "taking",
+        "off"
+      ],
+      [
+        "took",
+        "off"
+      ],
+      [
+        "taken",
+        "off"
+      ],
+      [
+        "takes",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "taking",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "took",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "taken",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take off",
+      "tags": []
+    },
+    {
+      "form": "taken off",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:take-off#s1",
+      "pos": "短语",
+      "glossZh": "起飞；飞离",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s12",
+        "w:take#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-c8bd68aa860932af",
+          "text": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 80
+          },
+          "parts": [
+            [
+              72,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-79a7fc7083d1d49f",
+          "text": "What many need is a bit more freedom: time to explore, to ride aimlessly – until they’re ready to take off.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 106
+          },
+          "parts": [
+            [
+              98,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-b70532e2b9dd2e3f",
+          "text": "Paragraph 1: As the bittern took off, Corinne and Ashley watched in awe.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:take-off#s2",
+      "pos": "短语",
+      "glossZh": "去掉；解除",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s53"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-a7317de43b8fd808",
+          "text": "Took the pressure off me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-ii:24#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              18,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              18,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-030f261f24f478d3",
+          "text": "Sometimes, having even the smallest thing taken off your plate can make a big difference.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 51
+          },
+          "parts": [
+            [
+              42,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-e045581813d146f5",
+          "text": "For you, it might look like asking for reassurance before a decision, scrolling on your phone to tune out your thoughts, pouring a drink to take the edge off, or checking your emails five times for mistakes.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 157
+          },
+          "parts": [
+            [
+              140,
+              144
+            ],
+            [
+              154,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              144
+            ],
+            [
+              154,
+              157
+            ]
+          ]
+        }
+      ],
+      "note": "如去掉压力、从清单中移除。"
+    },
+    {
+      "senseId": "w:take-off#s3",
+      "pos": "短语",
+      "glossZh": "迅速走红；很快成功",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s13",
+        "w:take#s26"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-14ddbc92392dfd24",
+          "text": "As artificial intelligence (AI) takes off, how do we efficiently integrate it into our lives and our work?",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-c8f9aadd855f90e1",
+          "text": "In the 1990s, Sega designed motion-tracking gaming headsets, but they never took off.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 84
+          },
+          "parts": [
+            [
+              76,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-ec4464d0b2ac23bc",
+          "text": "From this experience, Chinnery’s career as a sound artist took off.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 66
+          },
+          "parts": [
+            [
+              58,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              66
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:take-off#s4",
+      "pos": "短语",
+      "glossZh": "脱下；取下",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-5aee142e2e898614",
+          "text": "Not only was her paper gone, but a beautiful, prize-worthy rose from her front garden bed had been taken clean off.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 114
+          },
+          "parts": [
+            [
+              99,
+              104
+            ],
+            [
+              111,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              104
+            ],
+            [
+              111,
+              114
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-403c2b690acd54c4",
+          "text": "“Within five minutes, they begged to take them off.”",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 50
+          },
+          "parts": [
+            [
+              37,
+              41
+            ],
+            [
+              47,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              41
+            ],
+            [
+              47,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-6c2853914abde5d2",
+          "text": "Taking off her shoes at the door.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:take-off#s5",
+      "pos": "短语",
+      "glossZh": "请假；休息",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-7c06cbdc300fe094",
+          "text": "Well, when I take some time off, I fear starting again.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 31
+          },
+          "parts": [
+            [
+              13,
+              17
+            ],
+            [
+              28,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              17
+            ],
+            [
+              28,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-f681f84d3194553d",
+          "text": "Take some days off and rest at home.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              15,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-466123e364f77127",
+          "text": "He often takes days off.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              14
+            ],
+            [
+              20,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              14
+            ],
+            [
+              20,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 take time/days off。"
+    },
+    {
+      "senseId": "w:take-off#s6",
+      "pos": "短语",
+      "glossZh": "移开（目光）；使不再想（烦恼等）",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-off#e-31314fb39506c53b",
+          "text": "They found that even the quickest task – adjusting temperature – took drivers’ eyes off the road for an average of 3.5 seconds.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 87
+          },
+          "parts": [
+            [
+              65,
+              69
+            ],
+            [
+              84,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              69
+            ],
+            [
+              84,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-off#e-6dd5b75010a5546a",
+          "text": "It took my mind off my troubles.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 19
+          },
+          "parts": [
+            [
+              3,
+              7
+            ],
+            [
+              16,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              7
+            ],
+            [
+              16,
+              19
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

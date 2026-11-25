@@ -1,0 +1,155 @@
+{
+  "entryId": "w:other-than",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "other",
+      "than"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "other",
+        "than"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "other than",
+  "senses": [
+    {
+      "senseId": "w:other-than#s1",
+      "pos": "短语",
+      "glossZh": "除……以外；不同于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:other#s6",
+        "w:than#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:other-than#e-e2be164d33bbe781",
+          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 60
+          },
+          "parts": [
+            [
+              50,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:other-than#e-1d74f9e2bdc0efaf",
+          "text": "Other than Mason’s dad, who loved everything Mason’s mom made, it seemed that the entire town felt the way Mason did.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:other-than#e-085ac82399bb1f09",
+          "text": "The type of carbohydrate (碳水化合物) in the diet is more important than the amount of carbohydrate, because some sources – like vegetables (other than potatoes), fruits, whole grains, and beans – are healthier than others.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 146
+          },
+          "parts": [
+            [
+              136,
+              146
+            ]
+          ],
+          "highlightRanges": [
+            [
+              136,
+              146
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 109
+    "mock": 10
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -245,12 +245,12 @@
       "pos": "n.",
       "glossZh": "饲料",
       "pronunciationId": "w:feed#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 8
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -314,7 +314,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -347,7 +347,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -411,11 +411,10 @@
       ]
     },
     {
-      "senseId": "w:feed#s8",
-      "pos": "短语",
-      "glossZh": "厌烦",
+      "senseId": "w:feed#s9",
+      "pos": "v.",
+      "glossZh": "满足（需求）",
       "pronunciationId": "w:feed#p-main",
-      "note": "be fed up with sth。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -424,22 +423,75 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:feed#e-b386045f7a3d5abe",
-          "text": "We did our best for him but he started to get depressed and fed up with life.",
+          "exampleId": "w:feed#e-395e79b6d8ff0541",
+          "text": "So reclaiming or improving your attention requires feeding all these needs.",
           "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:4",
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices:9",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:feed#s10",
+      "pos": "v.",
+      "glossZh": "助长；强化",
+      "pronunciationId": "w:feed#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feed#e-eb62698435c49906",
+          "text": "Starving distractions and feeding focus is a nice idea.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:36",
+              "option": "D",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 60,
-            "end": 63
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:feed#e-927be090f3b36238",
+          "text": "Social comparison is a deeply human nature, but when fed by algorithms (算法) and polished selfies, it goes full Black Mirror.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 56
           }
         }
       ]
@@ -451,6 +503,13 @@
       "reason": "表演专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:feed-back",
+    "w:feed-into",
+    "w:feed-on"
+  ]
 }

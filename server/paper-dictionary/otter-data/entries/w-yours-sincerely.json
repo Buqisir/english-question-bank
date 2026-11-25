@@ -1,0 +1,96 @@
+{
+  "entryId": "w:yours-sincerely",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "Yours sincerely"
+  ],
+  "pattern": {
+    "tokens": [
+      "yours",
+      "sincerely"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "yours",
+        "sincerely"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "yours sincerely",
+  "senses": [
+    {
+      "senseId": "w:yours-sincerely#s1",
+      "pos": "短语",
+      "glossZh": "谨致问候（信末署名前的敬语）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sincerely#s2",
+        "w:yours#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:yours-sincerely#e-50c77ae75ec403cd",
+          "text": "Yours sincerely,",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "writing-application-8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "英式书信中通常用于知道收信人姓名时。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 21
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

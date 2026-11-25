@@ -42,8 +42,8 @@
     "mock": 153
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 150
+    "gaokao": 2,
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 152
       },
       "folded": false,
       "examples": [
@@ -117,40 +117,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:battery#s2",
-      "pos": "短语",
-      "glossZh": "一组；一连串",
-      "pronunciationId": "w:battery#p-main",
-      "note": "a battery of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:battery#e-d16d993e52c1fd09",
-          "text": "Researchers from the University of Leipzig in Germany gathered more than 1, 000 retired workers who were over age 75 and assessed the volunteers’ memory and thinking skills through a battery of tests.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 183,
-            "end": 190
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -159,6 +125,11 @@
       "reason": "军事、法律、体育专门义或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-battery-of-sth"
+  ]
 }

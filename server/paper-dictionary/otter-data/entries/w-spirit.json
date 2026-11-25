@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 74
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -128,7 +128,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -304,20 +304,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:spirit#s7",
-      "pos": "短语",
-      "glossZh": "迅速秘密地带走",
-      "pronunciationId": "w:spirit#p-main",
-      "note": "spirit away。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -326,6 +312,11 @@
       "reason": "历史或专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:spirit-away"
+  ]
 }

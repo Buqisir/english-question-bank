@@ -1,0 +1,99 @@
+{
+  "entryId": "w:bad-guy",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bad",
+      "guy"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bad",
+        "guy"
+      ],
+      [
+        "bad",
+        "guys"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bad guys",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bad guy",
+  "senses": [
+    {
+      "senseId": "w:bad-guy#s1",
+      "pos": "短语",
+      "glossZh": "反派；坏人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bad-guy#e-8d06ae29b5f58081",
+          "text": "We’ve all seen this happen in a science-fiction movie: The super heroes jump into a shaky spaceship and escape the bad guys by flying through the asteroid (小行星) belt, where huge rocks fall and spin so close that the crew has to duck and dive to avoid being broken into pieces.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 123
+          },
+          "parts": [
+            [
+              115,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:old-saw",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "old",
+      "saw"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "old",
+        "saw"
+      ],
+      [
+        "old",
+        "saws"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "old saw",
+  "senses": [
+    {
+      "senseId": "w:old-saw#s1",
+      "pos": "短语",
+      "glossZh": "老生常谈；反复引用的老话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:old-saw#e-597d216b65a44f07",
+          "text": "The old saw about the evil stepparent certainly didn’t apply to Roger McElroy.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          },
+          "parts": [
+            [
+              4,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

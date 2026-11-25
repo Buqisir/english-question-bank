@@ -1,0 +1,82 @@
+{
+  "entryId": "w:run-out-of-road",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running out of road"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "out",
+      "of",
+      "road"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "out",
+        "of",
+        "road"
+      ],
+      [
+        "running",
+        "out",
+        "of",
+        "road"
+      ],
+      [
+        "ran",
+        "out",
+        "of",
+        "road"
+      ],
+      [
+        "runs",
+        "out",
+        "of",
+        "road"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run out of road",
+  "senses": [
+    {
+      "senseId": "w:run-out-of-road#s1",
+      "pos": "短语",
+      "glossZh": "走到尽头；没有余地继续下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

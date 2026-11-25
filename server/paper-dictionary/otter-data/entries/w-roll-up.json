@@ -1,0 +1,200 @@
+{
+  "entryId": "w:roll-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "up"
+      ],
+      [
+        "rolled",
+        "up"
+      ],
+      [
+        "rolling",
+        "up"
+      ],
+      [
+        "rolls",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "roll up",
+      "tags": []
+    },
+    {
+      "form": "rolled up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll (sth) up",
+  "senses": [
+    {
+      "senseId": "w:roll-up#s1",
+      "pos": "短语",
+      "glossZh": "卷起来；把……卷成一卷",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:roll-up#e-506bc5953e123136",
+          "text": "Get ready to roll up your sleeves (袖子) and contribute to the biodiversity of the park in this event!",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:roll-up#e-5ebb5ff473695290",
+          "text": "For an earthworm, a fallen leaf is a snack to be rolled up and pulled down into the soil.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:roll-up#e-7d693f8427dcbad5",
+          "text": "When you’re ready to roll up your sleeves, cook mode gives you step-by-step instructions and keeps your screen live.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          },
+          "parts": [
+            [
+              21,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:roll-up#s2",
+      "pos": "短语",
+      "glossZh": "摇上（车窗）；卷起（卷帘）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-up#s3",
+      "pos": "短语",
+      "glossZh": "到达；出现",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常指乘车来到。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

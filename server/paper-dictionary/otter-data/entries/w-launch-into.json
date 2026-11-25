@@ -1,0 +1,140 @@
+{
+  "entryId": "w:launch-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "launch",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "launch",
+        "into"
+      ],
+      [
+        "launched",
+        "into"
+      ],
+      [
+        "launches",
+        "into"
+      ],
+      [
+        "launching",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "launches into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "launch into",
+  "senses": [
+    {
+      "senseId": "w:launch-into#s1",
+      "pos": "短语",
+      "glossZh": "一下子开始（讲话、表演等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:launch#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:launch-into#e-1abb25fafe9d16f2",
+          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 115
+          },
+          "parts": [
+            [
+              102,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:launch-into#e-aadf6d471dc86d2d",
+          "text": "What a lovely surprise!” Before she could launch into her prepared speech about community respect and property, her eyes slid past him into the hallway.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          },
+          "parts": [
+            [
+              42,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

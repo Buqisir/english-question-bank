@@ -1,0 +1,166 @@
+{
+  "entryId": "w:turn-sth-upside-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      {
+        "slot": "sth"
+      },
+      "upside",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        {
+          "slot": "sth"
+        },
+        "upside",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned upside down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn sth upside down",
+  "senses": [
+    {
+      "senseId": "w:turn-sth-upside-down#s1",
+      "pos": "短语",
+      "glossZh": "把……弄得一团乱",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-upside-down#e-8e0bce0109e34b4f",
+          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 72
+          },
+          "parts": [
+            [
+              45,
+              51
+            ],
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              51
+            ],
+            [
+              61,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-sth-upside-down#s2",
+      "pos": "短语",
+      "glossZh": "把某处翻个底朝天；到处翻找",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-upside-down#e-a0e533dbe00fd747",
+          "text": "We turned the place upside down, but it was nowhere to be found.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 31
+          },
+          "parts": [
+            [
+              3,
+              9
+            ],
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ],
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

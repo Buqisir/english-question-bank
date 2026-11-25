@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 21,
-    "mock": 610
+    "mock": 418
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 132
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -221,6 +221,224 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:understand#s4",
+      "pos": "adj.",
+      "glossZh": "善解人意的；体谅的",
+      "pronunciationId": "w:understand#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:understand#e-8b27e3f816236a01",
+          "text": "Understanding and cooperative.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:understand#e-87ed7b5fdf5188e9",
+          "text": "Thoughtful and understanding.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:understand#e-dfaaa872b8cb394c",
+          "text": "As a travel lover, she has become pretty understanding when seeing the crowds again.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-08-first:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:understand#s5",
+      "pos": "n.",
+      "glossZh": "理解；认识",
+      "pronunciationId": "w:understand#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 39
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:understand#e-88f8d4bb329e5669",
+          "text": "Tharp's maps, and the evidence they provided, became a cornerstone of the modern understanding of geology.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:understand#e-1437dc8d81a56492",
+          "text": "Researchers believe comparing these TP53 variants could advance our understanding of cancer defense.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:understand#e-4dd7450ff6595f03",
+          "text": "Develop a better understanding of the power of thinking routines.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:understand#s6",
+      "pos": "n.",
+      "glossZh": "对他人的理解与体谅",
+      "pronunciationId": "w:understand#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:understand#e-ab8d36aab6ade16c",
+          "text": "To promote understanding between people.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:understand#e-a61cf3a9f71185cb",
+          "text": "Getting mutual understanding.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:understand#e-86b0c9038a265f32",
+          "text": "My frustration softened into understanding, and then, into love.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -233,6 +451,6 @@
       "reason": "过时用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

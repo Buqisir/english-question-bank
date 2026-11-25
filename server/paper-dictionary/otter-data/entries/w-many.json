@@ -48,8 +48,8 @@
     "mock": 987
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 987
+    "gaokao": 4,
+    "mock": 790
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 126,
-        "mock": 0
+        "mock": 123
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 37,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -265,113 +265,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:many#s4",
-      "pos": "短语",
-      "glossZh": "多达",
-      "pronunciationId": "w:many#p-main",
-      "note": "as many as 后接具体数字。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:many#e-b554c737df524ba3",
-          "text": "Instead, as many as 800, 000 crowded the roads to the bridge.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:many#s5",
-      "pos": "短语",
-      "glossZh": "同样多",
-      "pronunciationId": "w:many#p-main",
-      "note": "as many … as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:many#e-ad5abfb7924b64bf",
-          "text": "\"I often send postcards to family and friends,\" he says to China Daily, \"but you can imagine that after a while, you never receive as many as you send, and you realize that not everyone is into it __32__” Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 134,
-            "end": 138
-          }
-        },
-        {
-          "exampleId": "w:many#e-2c98198d7162aef9",
-          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:many#e-4aba064731641ae5",
-          "text": "Make as many notes as possible.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -380,6 +273,13 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-many-as",
+    "w:as-many-as-phrase",
+    "w:many-hands-make-light-work"
+  ]
 }

@@ -42,8 +42,8 @@
     "mock": 275
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 273
+    "gaokao": 7,
+    "mock": 82
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 154
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -262,81 +262,6 @@
       ]
     },
     {
-      "senseId": "w:role#s4",
-      "pos": "短语",
-      "glossZh": "榜样",
-      "pronunciationId": "w:role#p-main",
-      "note": "role model。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:role#e-0b0b1a74c9327b1f",
-          "text": "A role model in her family.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
-            "locator": {
-              "question": 20,
-              "questionId": "question:listening:20",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:role#e-99acd39ef15b5303",
-          "text": "David Bond: A Role Model for Children",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jun:27",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:role#e-af2036bb10488d1a",
-          "text": "Children need role models.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2026-i:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:role#s5",
       "pos": "n.",
       "glossZh": "职位",
@@ -344,7 +269,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -395,6 +320,11 @@
       "reason": "历史专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:play-a-role"
+  ]
 }

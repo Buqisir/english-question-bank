@@ -1,0 +1,119 @@
+{
+  "entryId": "w:go-for-the-gold",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "for",
+      "the",
+      "gold"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "for",
+        "the",
+        "gold"
+      ],
+      [
+        "goes",
+        "for",
+        "the",
+        "gold"
+      ],
+      [
+        "going",
+        "for",
+        "the",
+        "gold"
+      ],
+      [
+        "gone",
+        "for",
+        "the",
+        "gold"
+      ],
+      [
+        "went",
+        "for",
+        "the",
+        "gold"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go for the gold",
+  "senses": [
+    {
+      "senseId": "w:go-for-the-gold#s1",
+      "pos": "短语",
+      "glossZh": "力争夺金；全力争取最好成绩",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-for-the-gold#e-389ba09ae866f32c",
+          "text": "His plan to go for the gold.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 27
+          },
+          "parts": [
+            [
+              12,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

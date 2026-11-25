@@ -1,0 +1,181 @@
+{
+  "entryId": "w:why-not",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "why",
+      "not"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "why",
+        "not"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "why not",
+  "senses": [
+    {
+      "senseId": "w:why-not#s1",
+      "pos": "短语",
+      "glossZh": "何不……呢？（用于提建议）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:why#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:why-not#e-5397e83e2c74b7d4",
+          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 83
+          },
+          "parts": [
+            [
+              76,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:why-not#e-17a1c79b9582e3db",
+          "text": "Paragraph 1: “Why not look up the correct way to free a trapped fox online?” suggested Mr. Green.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:why-not#e-783fd417dbe61ea3",
+          "text": "Why not immerse (沉浸) yourself in a fruit-filled year, and enjoy each season with us?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "why not + 动词原形",
+      "counts": {
+        "gaokao": 1,
+        "mock": 24
+      }
+    },
+    {
+      "senseId": "w:why-not#s2",
+      "pos": "短语",
+      "glossZh": "为什么不呢？（追问理由）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:why-not#s3",
+      "pos": "短语",
+      "glossZh": "好啊；可以啊（接受邀请或建议）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

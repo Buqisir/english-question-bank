@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 1
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -207,6 +207,6 @@
       "reason": "专业义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

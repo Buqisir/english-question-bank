@@ -1,0 +1,123 @@
+{
+  "entryId": "w:day-and-night",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "day",
+      "and",
+      "night"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "day",
+        "and",
+        "night"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "day and night",
+  "senses": [
+    {
+      "senseId": "w:day-and-night#s1",
+      "pos": "短语",
+      "glossZh": "日夜不停；不分昼夜地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-and-night#e-aaf82f87e67c334e",
+          "text": "The people celebrated with drums, but cruel rulers banned the instruments, wanting them to work day and night.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 109
+          },
+          "parts": [
+            [
+              96,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:day-and-night#e-0d841f79954ff24e",
+          "text": "Walking around university campuses day and night, students can easily see glowing blue emergency phones spread over every functional area.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 48
+          },
+          "parts": [
+            [
+              35,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

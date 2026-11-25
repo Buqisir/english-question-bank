@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 637
+    "mock": 442
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 99
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 38,
-        "mock": 0
+        "mock": 75
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -254,6 +254,10 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:god-helps-those-who-help-themselves",
+    "w:one-of-those-days"
+  ]
 }

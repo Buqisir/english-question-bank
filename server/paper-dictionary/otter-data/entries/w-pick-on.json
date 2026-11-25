@@ -1,0 +1,120 @@
+{
+  "entryId": "w:pick-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "on"
+      ],
+      [
+        "picked",
+        "on"
+      ],
+      [
+        "picking",
+        "on"
+      ],
+      [
+        "picks",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "picked on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick on sb",
+  "senses": [
+    {
+      "senseId": "w:pick-on#s1",
+      "pos": "短语",
+      "glossZh": "欺负某人；找某人的茬",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-on#e-82c150601cabd38e",
+          "text": "He hated seeing little kids get picked on.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pick-on#s2",
+      "pos": "短语",
+      "glossZh": "单独点名让某人做事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

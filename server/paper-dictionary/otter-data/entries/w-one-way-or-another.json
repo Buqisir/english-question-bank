@@ -1,0 +1,107 @@
+{
+  "entryId": "w:one-way-or-another",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "way",
+      "or",
+      "another"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "way",
+        "or",
+        "another"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one way or another",
+  "senses": [
+    {
+      "senseId": "w:one-way-or-another#s1",
+      "pos": "短语",
+      "glossZh": "以这样或那样的方式",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:one-way-or-another#e-9acf6b2525d56023",
+          "text": "We are all suffering in one way or another at one time or another.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 42
+          },
+          "parts": [
+            [
+              24,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:one-way-or-another#s2",
+      "pos": "短语",
+      "glossZh": "无论用什么办法；想方设法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

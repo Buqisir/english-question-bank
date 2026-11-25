@@ -1,0 +1,186 @@
+{
+  "entryId": "w:sweet-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sweet",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sweet",
+        "spot"
+      ],
+      [
+        "sweet",
+        "spots"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sweet spot",
+  "senses": [
+    {
+      "senseId": "w:sweet-spot#s1",
+      "pos": "短语",
+      "glossZh": "最有利的时机或条件组合；最佳平衡点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:spot#s8",
+        "w:sweet#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sweet-spot#e-3ce2983a0aeb57fb",
+          "text": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sweet-spot#e-b9080ecd0d1a400e",
+          "text": "“So there might be a sweet spot where we can target these big migration nights and give these birds safe passage.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 31
+          },
+          "parts": [
+            [
+              21,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sweet-spot#e-aba9ab81c34a6037",
+          "text": "What does the underlined phrase “a sweet spot” refer to?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:sweet-spot#s2",
+      "pos": "短语",
+      "glossZh": "能产生最佳效果的位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如球拍的最佳击球点、镜头的最佳成像区域。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sweet-spot#s3",
+      "pos": "短语",
+      "glossZh": "能引起性快感的敏感部位",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

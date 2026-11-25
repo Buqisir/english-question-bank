@@ -1,0 +1,234 @@
+{
+  "entryId": "w:give-way-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "give way to sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "way",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "way",
+        "to"
+      ],
+      [
+        "give",
+        "way",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gave way to",
+      "tags": []
+    },
+    {
+      "form": "give way to",
+      "tags": []
+    },
+    {
+      "form": "given way to",
+      "tags": []
+    },
+    {
+      "form": "gives way to",
+      "tags": []
+    },
+    {
+      "form": "giving way to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give way to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:give-way-to#s1",
+      "pos": "短语",
+      "glossZh": "让位于……；被……取代",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:give#s12",
+        "w:way#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-way-to#e-255084f09cfe0df6",
+          "text": "When I finally finished it, the thought of winning had given way to the enjoyment of writing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-way-to#e-951a168da6a24c9e",
+          "text": "I felt a burst of delight as my line first hit the water, sending tiny circles spreading across the surface, but that excitement soon gave way to restlessness.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 145
+          },
+          "parts": [
+            [
+              134,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              134,
+              145
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-way-to#e-da95b3d400192de5",
+          "text": "Printed Playbills Giving Way to QR Codes",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:31#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 31
+          },
+          "parts": [
+            [
+              18,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:give-way-to#s2",
+      "pos": "短语",
+      "glossZh": "给其他车辆或行人让路；让其先行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-way-to#e-4fd99b9f4c665a53",
+          "text": "As drivers exiting the parking garage should give way to vehicles on the main road, I was found to be at fault.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 56
+          },
+          "parts": [
+            [
+              45,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

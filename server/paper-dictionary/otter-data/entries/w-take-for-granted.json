@@ -1,0 +1,232 @@
+{
+  "entryId": "w:take-for-granted",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take for"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "for",
+      "granted"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "for",
+        "granted"
+      ],
+      [
+        "taken",
+        "for",
+        "granted"
+      ],
+      [
+        "takes",
+        "for",
+        "granted"
+      ],
+      [
+        "taking",
+        "for",
+        "granted"
+      ],
+      [
+        "took",
+        "for",
+        "granted"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take for granted",
+      "tags": []
+    },
+    {
+      "form": "taken for granted",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sb/sth for granted",
+  "senses": [
+    {
+      "senseId": "w:take-for-granted#s1",
+      "pos": "短语",
+      "glossZh": "把……视为理所当然，因而不加珍惜",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-for-granted#e-c05b67cd8f19ed18",
+          "text": "The beautiful mountains and fresh air, once taken for granted, now seemed full of potential.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 61
+          },
+          "parts": [
+            [
+              44,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-for-granted#e-8e8d380f275231f2",
+          "text": "They were taken for granted.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 27
+          },
+          "parts": [
+            [
+              10,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-for-granted#e-bad51daa0d8622fd",
+          "text": "But ants represent a huge part of the Earth’s biomass and do all of the dirty work that we take for granted, like turning soil, spreading seeds, and cleaning out ecosystems.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 107
+          },
+          "parts": [
+            [
+              91,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:take-for-granted#s2",
+      "pos": "短语",
+      "glossZh": "想当然地认定；默认……成立",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-for-granted#e-3b4ef5f45546eb31",
+          "text": "Now, a team in China has demonstrated the technique in real city conditions, an advance that could clear the way for a secure quantum internet in which trust is taken for granted.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 161,
+            "end": 178
+          },
+          "parts": [
+            [
+              161,
+              178
+            ]
+          ],
+          "highlightRanges": [
+            [
+              161,
+              178
+            ]
+          ]
+        }
+      ],
+      "note": "也可用 take it for granted that …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

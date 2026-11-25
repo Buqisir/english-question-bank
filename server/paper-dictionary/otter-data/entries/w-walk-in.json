@@ -1,0 +1,184 @@
+{
+  "entryId": "w:walk-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking in"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "in"
+      ],
+      [
+        "walking",
+        "in"
+      ],
+      [
+        "walked",
+        "in"
+      ],
+      [
+        "walks",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk in",
+  "senses": [
+    {
+      "senseId": "w:walk-in#s1",
+      "pos": "短语",
+      "glossZh": "走进来；走进去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-in#e-fe650d55e532bad0",
+          "text": "When the instructor walked in and introduced the course, I realized my mistake.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-in#e-c1c4e33e6cb16689",
+          "text": "The bell above the second-hand shop door gave a weak ring as I walked in.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-in#e-d2cda1d39a83f855",
+          "text": "Soon, Ethan walked in, and she hurriedly hid it in one of her side pockets of her schoolbag, not knowing there was a hole at the bottom.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:walk-in#s2",
+      "pos": "短语",
+      "glossZh": "无需预约直接到场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

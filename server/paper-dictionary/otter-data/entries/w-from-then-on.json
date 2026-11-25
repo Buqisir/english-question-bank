@@ -1,0 +1,156 @@
+{
+  "entryId": "w:from-then-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "then",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "then",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from then on",
+  "senses": [
+    {
+      "senseId": "w:from-then-on#s1",
+      "pos": "短语",
+      "glossZh": "从那时起；从那以后",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:then#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:from-then-on#e-f1681d70530456db",
+          "text": "From then on, if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-then-on#e-b637bbe33809613c",
+          "text": "Then someone said, “Now you can use your Grandma’s Box.” From then on instead of coming to ask their possessions back, the students would say, “That’s okay.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-then-on#e-2be1d8a2e89920c9",
+          "text": "From then on, I avoided the cafeteria entirely, seeking shelter anywhere quiet.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

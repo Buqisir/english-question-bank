@@ -1,0 +1,177 @@
+{
+  "entryId": "w:come-at-a-cost",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "comes at a cost"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "at",
+      "a",
+      "cost"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "at",
+        "a",
+        "cost"
+      ],
+      [
+        "comes",
+        "at",
+        "a",
+        "cost"
+      ],
+      [
+        "came",
+        "at",
+        "a",
+        "cost"
+      ],
+      [
+        "coming",
+        "at",
+        "a",
+        "cost"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come at a cost",
+  "senses": [
+    {
+      "senseId": "w:come-at-a-cost#s1",
+      "pos": "短语",
+      "glossZh": "需要付出代价；伴随损失或不利后果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-at-a-cost#e-39d0425f20fd2fd3",
+          "text": "But as a recent study by researchers at the Massachusetts Institute of Technology(MIT) suggests, that help may come at a cost.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 125
+          },
+          "parts": [
+            [
+              111,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-at-a-cost#e-a31b74e63e695f85",
+          "text": "But the cooling technology behind it comes at a cost.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 52
+          },
+          "parts": [
+            [
+              37,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-at-a-cost#e-3f038d9550183105",
+          "text": "Ignoring Emotions Comes at a Cost",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-05-ninth:31#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 33
+          },
+          "parts": [
+            [
+              18,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

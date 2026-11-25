@@ -1,0 +1,171 @@
+{
+  "entryId": "w:come-into-play",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "comes into play"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "into",
+      "play"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "into",
+        "play"
+      ],
+      [
+        "comes",
+        "into",
+        "play"
+      ],
+      [
+        "came",
+        "into",
+        "play"
+      ],
+      [
+        "coming",
+        "into",
+        "play"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come into play",
+  "senses": [
+    {
+      "senseId": "w:come-into-play#s1",
+      "pos": "短语",
+      "glossZh": "开始发挥作用；开始产生影响",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-into-play#e-e68810b6c7ec2284",
+          "text": "That’s where this collection of the best travel camera equipment comes into play.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 80
+          },
+          "parts": [
+            [
+              65,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-into-play#e-84d550fcc111d330",
+          "text": "This is where questioning techniques come into play in reading instruction.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 51
+          },
+          "parts": [
+            [
+              37,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-into-play#e-cd3e5e1826d11383",
+          "text": "In reality, there are lots of things that come into play.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 56
+          },
+          "parts": [
+            [
+              42,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

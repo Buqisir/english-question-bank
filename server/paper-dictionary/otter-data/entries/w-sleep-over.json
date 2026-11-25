@@ -1,0 +1,72 @@
+{
+  "entryId": "w:sleep-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sleeping over"
+  ],
+  "pattern": {
+    "tokens": [
+      "sleep",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sleep",
+        "over"
+      ],
+      [
+        "sleeping",
+        "over"
+      ],
+      [
+        "sleeps",
+        "over"
+      ],
+      [
+        "slept",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sleep over",
+  "senses": [
+    {
+      "senseId": "w:sleep-over#s1",
+      "pos": "短语",
+      "glossZh": "在别人家过夜；留宿",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

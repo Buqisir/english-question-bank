@@ -1,0 +1,111 @@
+{
+  "entryId": "w:cash-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cash",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cash",
+        "in"
+      ],
+      [
+        "cashed",
+        "in"
+      ],
+      [
+        "cashes",
+        "in"
+      ],
+      [
+        "cashing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cash (sth) in",
+  "senses": [
+    {
+      "senseId": "w:cash-in#s1",
+      "pos": "短语",
+      "glossZh": "把（筹码、票券等）兑成现金",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cash-in#s2",
+      "pos": "短语",
+      "glossZh": "结清账目",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cash-in#s3",
+      "pos": "短语",
+      "glossZh": "趁机获利",
+      "note": "常用 cash in on sth。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cash-in#s4",
+      "pos": "短语",
+      "glossZh": "去世",
+      "note": "俚语。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

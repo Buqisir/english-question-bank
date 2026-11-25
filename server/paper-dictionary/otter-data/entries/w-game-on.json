@@ -1,0 +1,118 @@
+{
+  "entryId": "w:game-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "games on"
+  ],
+  "pattern": {
+    "tokens": [
+      "game",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "game",
+        "on"
+      ],
+      [
+        "games",
+        "on"
+      ],
+      [
+        "gamed",
+        "on"
+      ],
+      [
+        "gaming",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "game on",
+  "senses": [
+    {
+      "senseId": "w:game-on#s1",
+      "pos": "短语",
+      "glossZh": "来吧，开始吧；接受挑战，准备开场",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:game-on#e-b31ea954823c8160",
+          "text": "A booth (摊位) named “Game On!” had a line of students waiting to play balloon-shooting.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:game-on#s2",
+      "pos": "短语",
+      "glossZh": "算计（某人）；从某人身上骗取好处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见的地域用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

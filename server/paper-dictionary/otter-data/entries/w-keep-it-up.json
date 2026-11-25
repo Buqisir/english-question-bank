@@ -1,0 +1,144 @@
+{
+  "entryId": "w:keep-it-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "it",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "it",
+        "up"
+      ],
+      [
+        "keeping",
+        "it",
+        "up"
+      ],
+      [
+        "keeps",
+        "it",
+        "up"
+      ],
+      [
+        "kept",
+        "it",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kept it up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep it up",
+  "senses": [
+    {
+      "senseId": "w:keep-it-up#s1",
+      "pos": "短语",
+      "glossZh": "坚持做下去；继续保持",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-it-up#e-715abbadab7cc51c",
+          "text": "But helicopter flying in Britain is very expensive, and I knew I couldn’t keep it up forever as just a hobby.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 84
+          },
+          "parts": [
+            [
+              74,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-it-up#e-c43d75ec306f0dc2",
+          "text": "What if I kept it up?",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "祈使句 Keep it up! 常用于鼓励对方继续努力。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

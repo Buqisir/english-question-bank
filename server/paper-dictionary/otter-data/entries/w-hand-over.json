@@ -1,0 +1,194 @@
+{
+  "entryId": "w:hand-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hand",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hand",
+        "over"
+      ],
+      [
+        "handed",
+        "over"
+      ],
+      [
+        "handing",
+        "over"
+      ],
+      [
+        "hands",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hand over",
+      "tags": []
+    },
+    {
+      "form": "handed over",
+      "tags": []
+    },
+    {
+      "form": "handing over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hand (sb/sth) over",
+  "senses": [
+    {
+      "senseId": "w:hand-over#s1",
+      "pos": "短语",
+      "glossZh": "交出；移交（物品、职责或控制权）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s16",
+        "w:over#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hand-over#e-2e35153c4f216658",
+          "text": "When using cash, they count and hand over notes and coins, making spending more noticeable.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-over#e-5bdbf92ea596beff",
+          "text": "Paragraph 2: Mike handed over the eight dollars, smiling as if the cookies were treasure.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-over#e-cd1114c29545944e",
+          "text": "But it’s natural to have mixed feelings about handing over a credit card in your name.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-third:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    },
+    {
+      "senseId": "w:hand-over#s2",
+      "pos": "短语",
+      "glossZh": "把某人交给当局或对方处置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

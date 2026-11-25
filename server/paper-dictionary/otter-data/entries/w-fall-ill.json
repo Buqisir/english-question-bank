@@ -1,0 +1,173 @@
+{
+  "entryId": "w:fall-ill",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "ill"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "ill"
+      ],
+      [
+        "fallen",
+        "ill"
+      ],
+      [
+        "falling",
+        "ill"
+      ],
+      [
+        "falls",
+        "ill"
+      ],
+      [
+        "fell",
+        "ill"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fell ill",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall ill",
+  "senses": [
+    {
+      "senseId": "w:fall-ill#s1",
+      "pos": "短语",
+      "glossZh": "生病；患病",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-ill#e-4d54e9c381827728",
+          "text": "He soon fell ill and grew alarmingly weak – his ribs stuck out, his eyes swelled, and his fur dulled.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-ill#e-aac90c279d927269",
+          "text": "My friend Karen and her husband David were acquainted with an elderly lady, Rose, who fell ill with no one to help her.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 94
+          },
+          "parts": [
+            [
+              86,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-ill#e-ef530e8e9eed0dd2",
+          "text": "“My mom suddenly fell ill, and I have to stay with her.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

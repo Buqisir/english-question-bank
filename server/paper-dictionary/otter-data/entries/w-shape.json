@@ -62,8 +62,8 @@
     "mock": 261
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 258
+    "gaokao": 5,
+    "mock": 89
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 112
       },
       "folded": false,
       "examples": [
@@ -262,141 +262,16 @@
       ]
     },
     {
-      "senseId": "w:shape#s4",
-      "pos": "短语",
-      "glossZh": "身体状态良好",
-      "pronunciationId": "w:shape#p-main",
-      "note": "in shape。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shape#e-be8839a4c0dd9748",
-          "text": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 120,
-            "end": 125
-          }
-        },
-        {
-          "exampleId": "w:shape#e-3eab473806aec50e",
-          "text": "Running is a great way to get in shape and just about everyone can do it.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shape#s5",
-      "pos": "短语",
-      "glossZh": "逐渐成形",
-      "pronunciationId": "w:shape#p-main",
-      "note": "take shape。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shape#e-e258fa65db4deacb",
-          "text": "The working harbor（港口）took shape in 1774.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-a",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:shape#e-af937265675b79e7",
-          "text": "Appropriately, the book took shape during a summer spent between sea and mountains.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:shape#e-08c86fa239bfc73f",
-          "text": "Beyond the runway, a new initiative is taking shape.",
-          "source": {
-            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
-            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
-            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 46,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:shape#s6",
       "pos": "n.",
       "glossZh": "状况",
       "pronunciationId": "w:shape#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -406,6 +281,15 @@
       "reason": "计算机专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-in-shape",
+    "w:get-into-shape",
+    "w:in-shape",
+    "w:shape-up",
+    "w:take-shape"
+  ]
 }

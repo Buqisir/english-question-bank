@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 73
+    "mock": 7
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -270,7 +270,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -341,7 +341,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -412,7 +412,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -458,7 +458,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -488,13 +488,59 @@
       "pos": "n.",
       "glossZh": "印痕",
       "pronunciationId": "w:print#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:print#s10",
+      "pos": "n.",
+      "glossZh": "冲印的照片",
+      "pronunciationId": "w:print#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:print#s11",
+      "pos": "n.",
+      "glossZh": "（织物上的）印花图案",
+      "pronunciationId": "w:print#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:print#e-734214cf7902c310",
+          "text": "Led by artist Kim Chin, you can design your own prints for fashion, and take turns using one printing machine to bring your designs to life on fabric.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -507,6 +553,10 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:in-print",
+    "w:print-out"
+  ]
 }

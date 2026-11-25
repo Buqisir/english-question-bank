@@ -42,8 +42,8 @@
     "mock": 120
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 119
+    "gaokao": 3,
+    "mock": 4
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 100
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -149,60 +149,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:himself#s3",
-      "pos": "短语",
-      "glossZh": "他独自；他独力",
-      "pronunciationId": "w:himself#p-main",
-      "note": "by himself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:himself#e-1c7e885a9e47e25b",
-          "text": "I looked around and finally spotted David, who was standing by himself off to the side by a fence.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "writing-continuation-3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:himself#e-59afa53640dab87d",
-          "text": "He wanted to read it by himself.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2022-ii:25",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 31
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -211,6 +157,11 @@
       "reason": "爱尔兰英语地区用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-himself"
+  ]
 }

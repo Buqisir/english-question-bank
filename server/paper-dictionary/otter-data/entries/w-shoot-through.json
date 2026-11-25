@@ -1,0 +1,170 @@
+{
+  "entryId": "w:shoot-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shoot",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shoot",
+        "through"
+      ],
+      [
+        "shooting",
+        "through"
+      ],
+      [
+        "shoots",
+        "through"
+      ],
+      [
+        "shot",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shoot through",
+      "tags": []
+    },
+    {
+      "form": "shot through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shoot through (sth)",
+  "senses": [
+    {
+      "senseId": "w:shoot-through#s1",
+      "pos": "短语",
+      "glossZh": "（疼痛、电流等）猛地传遍；迅速穿过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shoot-through#e-5d6d78ecf9828828",
+          "text": "Instantly, he felt a blast of electric shock shoot through his body.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 58
+          },
+          "parts": [
+            [
+              45,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shoot-through#e-c15cd2480a3c3001",
+          "text": "A sharp pain shot through my ankle, so intense that I screamed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:shoot-through#s2",
+      "pos": "短语",
+      "glossZh": "匆匆离开；溜走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "澳大利亚、新西兰非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shoot-through#s3",
+      "pos": "短语",
+      "glossZh": "去世",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "澳大利亚、新西兰非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

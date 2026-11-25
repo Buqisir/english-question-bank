@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 17
+    "mock": 6
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -169,6 +169,6 @@
       "reason": "常见结构为 guilty verdict，guilty 作形容词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

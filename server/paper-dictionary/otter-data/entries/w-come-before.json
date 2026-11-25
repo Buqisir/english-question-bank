@@ -1,0 +1,202 @@
+{
+  "entryId": "w:come-before",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came before",
+    "comes before"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "before"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "before"
+      ],
+      [
+        "came",
+        "before"
+      ],
+      [
+        "comes",
+        "before"
+      ],
+      [
+        "coming",
+        "before"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "come before",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come before (sb/sth)",
+  "senses": [
+    {
+      "senseId": "w:come-before#s1",
+      "pos": "短语",
+      "glossZh": "先于；排在……前面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-before#e-2ad33be7addeda02",
+          "text": "The result can be spatial disorientation – not merely not knowing where you are, but not knowing who you are in relation to those who came before.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 145
+          },
+          "parts": [
+            [
+              134,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              134,
+              145
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-before#e-cfa5c847aefda3ad",
+          "text": "For example, this one can help you with the position of adjectives, “Adjectives come before nouns just as ‘A’ comes before ‘N’.” And this one can help you learn about the use of apostrophes(撇号), “Apostrophes show possession.”",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 91
+          },
+          "parts": [
+            [
+              80,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "可指时间先后或排列顺序。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:come-before#s2",
+      "pos": "短语",
+      "glossZh": "优先于；比……更重要",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-before#e-29c0d6d91b2c3ee9",
+          "text": "Environmental protection should come before economic development.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zj-hangzhou2-2026-mar:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-before#s3",
+      "pos": "短语",
+      "glossZh": "到庭或到场接受听审；被提交审议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "主语可为当事人、案件或议题，before 后常接法院、法官或委员会。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

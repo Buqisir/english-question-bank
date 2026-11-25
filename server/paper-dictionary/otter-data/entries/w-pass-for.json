@@ -1,0 +1,83 @@
+{
+  "entryId": "w:pass-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "for"
+      ],
+      [
+        "passed",
+        "for"
+      ],
+      [
+        "passes",
+        "for"
+      ],
+      [
+        "passing",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:pass-for#s1",
+      "pos": "短语",
+      "glossZh": "被误认为是……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-for#s2",
+      "pos": "短语",
+      "glossZh": "勉强可算作……；凑合能充当……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

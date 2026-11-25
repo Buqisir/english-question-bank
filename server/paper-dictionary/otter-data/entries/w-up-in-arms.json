@@ -1,0 +1,136 @@
+{
+  "entryId": "w:up-in-arms",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "in",
+      "arms"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "in",
+        "arms"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up in arms",
+  "senses": [
+    {
+      "senseId": "w:up-in-arms#s1",
+      "pos": "短语",
+      "glossZh": "愤怒地表示强烈反对",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-in-arms#e-b99983e824d18148",
+          "text": "What do the underlined words “up in arms” in paragraph 2 mean?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-weifang-2026-05-third-mock-exam:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-in-arms#e-855ec9509fc47a70",
+          "text": "That changed in 2017 when Netflix presented an all-new adaptation of the novels as Anne with an E. As opposed to almost every other adaptation of the books, Netflix dug into the story’s implied darkness and went with an “edgy” (前卫的) approach to the story that had its devoted fans up in arms.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 281,
+            "end": 291
+          },
+          "parts": [
+            [
+              281,
+              291
+            ]
+          ],
+          "highlightRanges": [
+            [
+              281,
+              291
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:up-in-arms#s2",
+      "pos": "短语",
+      "glossZh": "拿起武器准备作战",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 85
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -266,7 +266,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -290,20 +290,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:bottle#s5",
-      "pos": "短语",
-      "glossZh": "压抑、克制（感情）",
-      "pronunciationId": "w:bottle#p-main",
-      "note": "bottle up",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -312,6 +298,12 @@
       "reason": "地区俚语或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bottle-out",
+    "w:bottle-up"
+  ]
 }

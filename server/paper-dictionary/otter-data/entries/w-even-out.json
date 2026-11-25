@@ -1,0 +1,87 @@
+{
+  "entryId": "w:even-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "evening out"
+  ],
+  "pattern": {
+    "tokens": [
+      "even",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "even",
+        "out"
+      ],
+      [
+        "evening",
+        "out"
+      ],
+      [
+        "evened",
+        "out"
+      ],
+      [
+        "evens",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "even (sth) out",
+  "senses": [
+    {
+      "senseId": "w:even-out#s1",
+      "pos": "短语",
+      "glossZh": "（使）趋于平稳或均匀；抹平起伏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:even#s13"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:even-out#s2",
+      "pos": "短语",
+      "glossZh": "（使）差距缩小；（使）趋于相等",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

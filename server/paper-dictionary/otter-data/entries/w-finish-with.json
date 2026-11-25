@@ -1,0 +1,236 @@
+{
+  "entryId": "w:finish-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "finish",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "finish",
+        "with"
+      ],
+      [
+        "finished",
+        "with"
+      ],
+      [
+        "finishes",
+        "with"
+      ],
+      [
+        "finishing",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "finish with",
+      "tags": []
+    },
+    {
+      "form": "finished with",
+      "tags": []
+    },
+    {
+      "form": "finishing with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "finish with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:finish-with#s1",
+      "pos": "短语",
+      "glossZh": "以……收尾；最后加上……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:finish-with#e-fafd06f102c40ec9",
+          "text": "This vibrant vegetable and chicken one-pot, finished with lemon and fresh herbs, has you covered, whatever your mood.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 57
+          },
+          "parts": [
+            [
+              44,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:finish-with#e-7a42a2e2258df9b3",
+          "text": "You finish with a broad smile, imagining readers applauding your brilliance.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:finish-with#e-f1243399351c345e",
+          "text": "Over ten short chapters the author explains its global spread, starting with the origin of English and finishing with an overview of how the language looks today, including its use in an increasingly digital world.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 117
+          },
+          "parts": [
+            [
+              103,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              117
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:finish-with#s2",
+      "pos": "短语",
+      "glossZh": "做完、用完某物；不再继续接触某事物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:finish-with#e-89f28aae269c8498",
+          "text": "It’s always possible to go back to a destination that you don’t feel finished with – one of the reasons why I’ve visited Australia six times and will probably never feel finished with that country.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 82
+          },
+          "parts": [
+            [
+              69,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              82
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 be finished with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:finish-with#s3",
+      "pos": "短语",
+      "glossZh": "与某人分手；不再同某人来往",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

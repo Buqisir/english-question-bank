@@ -1,0 +1,178 @@
+{
+  "entryId": "w:bear-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bear",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bear",
+        "down"
+      ],
+      [
+        "bearing",
+        "down"
+      ],
+      [
+        "bears",
+        "down"
+      ],
+      [
+        "bore",
+        "down"
+      ],
+      [
+        "borne",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bore down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bear down",
+  "senses": [
+    {
+      "senseId": "w:bear-down#s1",
+      "pos": "短语",
+      "glossZh": "气势汹汹地逼近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bear-down#e-9640bafe6bf7fb43",
+          "text": "Days earlier, as the worst winter storm in decades bore down, Yvonne had repeatedly warned Joey not to leave his group home.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          },
+          "parts": [
+            [
+              51,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              60
+            ]
+          ]
+        }
+      ],
+      "note": "可接 on 或 upon 表示逼近的对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bear-down#s2",
+      "pos": "短语",
+      "glossZh": "向下用力；往下压",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "也指分娩等情形下腹部向下使力。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-down#s3",
+      "pos": "短语",
+      "glossZh": "加紧努力；集中力量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-down#s4",
+      "pos": "短语",
+      "glossZh": "压倒；击败",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-down#s5",
+      "pos": "短语",
+      "glossZh": "（航海）从上风处驶近；转向下风",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-down#s6",
+      "pos": "短语",
+      "glossZh": "（旧）在争论中顶住对方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

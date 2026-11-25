@@ -42,8 +42,8 @@
     "mock": 152
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 151
+    "gaokao": 8,
+    "mock": 30
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 108
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -189,89 +189,17 @@
       ]
     },
     {
-      "senseId": "w:sea#s3",
-      "pos": "短语",
-      "glossZh": "海平面",
-      "pronunciationId": "w:sea#p-main",
-      "note": "sea level。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sea#e-5b94d8feaab3593c",
-          "text": "The peak of Mount Qomolangma, 8,849 meters above sea level.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 52
-          }
-        },
-        {
-          "exampleId": "w:sea#e-5e3b43981f131e79",
-          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:sea#e-c2bc5c4641b373f8",
-          "text": "This is how I began my search for the conceptual history of sea level.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sea#s4",
       "pos": "n.",
       "glossZh": "大量涌现的人或物",
       "pronunciationId": "w:sea#p-main",
       "note": "a sea of。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -281,6 +209,8 @@
       "reason": "天文学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

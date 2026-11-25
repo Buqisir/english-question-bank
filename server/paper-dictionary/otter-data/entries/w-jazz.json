@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 11
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -131,34 +131,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:jazz#s3",
-      "pos": "短语",
-      "glossZh": "诸如此类",
-      "pronunciationId": "w:jazz#p-main",
-      "note": "and all that jazz，非正式。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:jazz#s4",
-      "pos": "短语",
-      "glossZh": "使更加生动",
-      "pronunciationId": "w:jazz#p-main",
-      "note": "jazz sth up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -167,6 +139,12 @@
       "reason": "专名，m5 和 m9–m11 留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:and-all-that-jazz",
+    "w:jazz-sth-up"
+  ]
 }

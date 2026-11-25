@@ -1,0 +1,128 @@
+{
+  "entryId": "w:sail-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sail",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sail",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sailed through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sail through",
+  "senses": [
+    {
+      "senseId": "w:sail-through#s1",
+      "pos": "短语",
+      "glossZh": "轻松通过（检查、考试等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sail#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sail-through#e-989394b21080797a",
+          "text": "“We have neuroscience（神经科学）tell us children learn through play.” In June the school sailed through its Ofsted inspection.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 98
+          },
+          "parts": [
+            [
+              84,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sail-through#e-f59e181fd5ac9582",
+          "text": "“We have neuroscience（神经科学） to know children learn through play.” In June the school sailed through its Ofsted inspection.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 99
+          },
+          "parts": [
+            [
+              85,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

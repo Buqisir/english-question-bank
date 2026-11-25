@@ -1,0 +1,129 @@
+{
+  "entryId": "w:bear-fruit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bear",
+      "fruit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bear",
+        "fruit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bore fruit",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bear fruit",
+  "senses": [
+    {
+      "senseId": "w:bear-fruit#s1",
+      "pos": "习语",
+      "glossZh": "（努力、计划等）取得成果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fruit#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bear-fruit#e-fa4caeffeae40fa2",
+          "text": "That willpower bore fruit when Jennifer graduated from University of Wisconsin-Eau Claire and became the first in her large family to earn a bachelor's degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bear-fruit#e-75e39b7a556e759a",
+          "text": "Scientific visions take time to bear fruit.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:35#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -48,8 +48,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 56
+    "gaokao": 9,
+    "mock": 15
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -202,7 +202,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -266,63 +266,16 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:peace#s4",
-      "pos": "短语",
-      "glossZh": "白鹤芋",
-      "pronunciationId": "w:peace#p-main",
-      "note": "peace lily。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:peace#e-69915c7bc15dfb0c",
-          "text": "Aloe vera, peace lilies and spider plants are some of the species that are easy to grow indoors.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:peace#e-bf7997decc367daa",
-          "text": "Plants like peace lilies and devil’s ivy are among the best",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-national-b:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:make-peace",
+    "w:peace-and-quiet",
+    "w:peace-of-mind"
+  ]
 }

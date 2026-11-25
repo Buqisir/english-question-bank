@@ -1,0 +1,213 @@
+{
+  "entryId": "w:fall-in-love-with-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fall in love with"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "in",
+      "love",
+      "with",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "in",
+        "love",
+        "with",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall in love with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:fall-in-love-with-sb#s1",
+      "pos": "短语",
+      "glossZh": "深深喜欢上（某事物、活动等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-in-love-with-sb#e-a0bc2352b76d84e2",
+          "text": "The great thing is that parents can help kids fall in love with healthier alternatives.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 63
+          },
+          "parts": [
+            [
+              46,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-in-love-with-sb#e-7bb0f5ea2d62e64c",
+          "text": "But allowing students to select their books can help them fall in love with reading.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 75
+          },
+          "parts": [
+            [
+              58,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-in-love-with-sb#e-ea4002574438caf8",
+          "text": "If there’s one sound which represents everything there is to fall in love with on safari (观兽旅行), it’s the roar of a lion at nightfall.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 78
+          },
+          "parts": [
+            [
+              61,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:fall-in-love-with-sb#s2",
+      "pos": "短语",
+      "glossZh": "爱上某人；对某人产生爱意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s11",
+        "w:love#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-in-love-with-sb#e-1f0bacc0848a6af8",
+          "text": "I just want to share with people that if we truly celebrate who we are, accept who we are, fall in love with who we are, then we can be more confident,” he said.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 108
+          },
+          "parts": [
+            [
+              91,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

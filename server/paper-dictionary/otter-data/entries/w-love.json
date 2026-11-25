@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 483
+    "mock": 307
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 59,
-        "mock": 0
+        "mock": 97
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -322,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -395,7 +395,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -492,11 +492,10 @@
       ]
     },
     {
-      "senseId": "w:love#s8",
-      "pos": "短语",
-      "glossZh": "很想",
+      "senseId": "w:love#s10",
+      "pos": "n.",
+      "glossZh": "爱心表态（社交平台）",
       "pronunciationId": "w:love#p-main",
-      "note": "would love to。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -505,75 +504,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:love#e-de70966e76851820",
-          "text": "I would love to see a trend toward zoos’ phasing out species that",
+          "exampleId": "w:love#e-cd4c2388d6c00286",
+          "text": "This score is got by multiplying the probability you’ll perform each engagement – likes, loves, etc.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
-            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c",
             "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:9",
-              "sentence": 2
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c:2",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 8,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:love#s9",
-      "pos": "短语",
-      "glossZh": "爱上",
-      "pronunciationId": "w:love#p-main",
-      "note": "fall in love with。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:love#e-b7f4f7fab2b39488",
-          "text": "If there’s one sound which represents everything there is to fall in love with on safari (观兽旅行), it’s the roar of a lion at nightfall.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 69,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:love#e-445d4e2449ec7d05",
-          "text": "My elder son Harvey soon fell deeply in love with this exciting game, and we have returned to the stadium to watch matches together many times since then.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 40,
-            "end": 44
+            "start": 89,
+            "end": 94
           }
         }
       ]
@@ -585,6 +531,17 @@
       "reason": "专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fall-in-love",
+    "w:fall-in-love-with-sb",
+    "w:first-love",
+    "w:i-love-you",
+    "w:in-love-with",
+    "w:lots-of-love",
+    "w:would-love-to"
+  ]
 }

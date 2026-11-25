@@ -1,0 +1,209 @@
+{
+  "entryId": "w:think-of-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "think of ... as",
+    "thought of ... as",
+    "thought of … as"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "of",
+      {
+        "slot": "…"
+      },
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "of",
+        {
+          "slot": "…"
+        },
+        "as"
+      ],
+      [
+        "thought",
+        "of",
+        {
+          "slot": "…"
+        },
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "think of as",
+      "tags": []
+    },
+    {
+      "form": "thought of as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think of … as",
+  "senses": [
+    {
+      "senseId": "w:think-of-as#s1",
+      "pos": "短语",
+      "glossZh": "把……看作；认为……是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:think#s5",
+        "w:thought#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:think-of-as#e-ebae1d642446fdd7",
+          "text": "Think of your first draft as a path cut out of the jungle – as part of an exploration, not as a complete highway.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 28
+          },
+          "parts": [
+            [
+              0,
+              8
+            ],
+            [
+              26,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ],
+            [
+              26,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of-as#e-fb423413961ed8e8",
+          "text": "He likes to think of sending postcards as a family-friendly hobby",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 41
+          },
+          "parts": [
+            [
+              12,
+              20
+            ],
+            [
+              39,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ],
+            [
+              39,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of-as#e-9d164f723cacc8b3",
+          "text": "David had a brain disease which prevented him from walking or running like other children, but at school his classmates thought of him as a regular kid.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 137
+          },
+          "parts": [
+            [
+              120,
+              130
+            ],
+            [
+              135,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              130
+            ],
+            [
+              135,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 17
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

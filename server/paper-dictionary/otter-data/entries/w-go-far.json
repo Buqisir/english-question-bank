@@ -1,0 +1,122 @@
+{
+  "entryId": "w:go-far",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes far",
+    "went far"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "far"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "far"
+      ],
+      [
+        "goes",
+        "far"
+      ],
+      [
+        "went",
+        "far"
+      ],
+      [
+        "going",
+        "far"
+      ],
+      [
+        "gone",
+        "far"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go far",
+  "senses": [
+    {
+      "senseId": "w:go-far#s1",
+      "pos": "短语",
+      "glossZh": "大有前途；取得很大成就",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-far#e-3e57d1e410844ccd",
+          "text": "After graduating in the top 10 percent of her class at high school, Taylor had the potential to go far, but she lacked proper guidance.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 102
+          },
+          "parts": [
+            [
+              96,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              102
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-far#s2",
+      "pos": "短语",
+      "glossZh": "（钱或物资）经用；能用很久",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

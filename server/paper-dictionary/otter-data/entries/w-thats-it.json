@@ -1,0 +1,286 @@
+{
+  "entryId": "w:thats-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "that's",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "that's",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "that's it",
+  "senses": [
+    {
+      "senseId": "w:thats-it#s1",
+      "pos": "短语",
+      "glossZh": "就这些；到此为止",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:thats-it#e-fa0ceb5a1ac34478",
+          "text": "This young student described arriving at the University of California at Berkeley with just a trash bag, not knowing that dorm rooms are spartan: a desk, a chair, a bed with an oddly sized mattress – and that’s it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 204,
+            "end": 213
+          },
+          "parts": [
+            [
+              204,
+              213
+            ]
+          ],
+          "highlightRanges": [
+            [
+              204,
+              213
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:thats-it#s2",
+      "pos": "短语",
+      "glossZh": "对，就是这个；说得没错",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:thats-it#e-8cab495840116c28",
+          "text": "That’s it exactly.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:thats-it#e-b38685a498fa8154",
+          "text": "Suddenly, my father’s eyes lit up with pure joy – he pointed at the Sandies and exclaimed, “That’s it!” He then sheepishly explained that he’d named them after his childhood babysitter, Nadine, and had called them “Nadine’s” for decades.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 101
+          },
+          "parts": [
+            [
+              92,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:thats-it#s3",
+      "pos": "短语",
+      "glossZh": "有了！就是这个办法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:thats-it#e-b2cba0bdba13e510",
+          "text": "“That’s it!” he breathed, a warm light of hope returning to his eyes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:thats-it#e-e78537fe442a3b13",
+          "text": "“That’s it!” My husband warned, my kids sighed, but I had my answer.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:thats-it#e-6f4b06938430a1f1",
+          "text": "“That’s it,” I thought aloud, pulling on my slippers.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:thats-it#s4",
+      "pos": "短语",
+      "glossZh": "够了！我受够了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

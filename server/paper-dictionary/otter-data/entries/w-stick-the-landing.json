@@ -1,0 +1,109 @@
+{
+  "entryId": "w:stick-the-landing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "the",
+      "landing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "the",
+        "landing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick the landing",
+  "senses": [
+    {
+      "senseId": "w:stick-the-landing#s1",
+      "pos": "短语",
+      "glossZh": "漂亮地收尾；出色地完成最后一步",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:land#s7",
+        "w:stick#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stick-the-landing#e-beecfc048c5dd8d2",
+          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 122
+          },
+          "parts": [
+            [
+              105,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              122
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stick-the-landing#s2",
+      "pos": "短语",
+      "glossZh": "稳稳落地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于体操等项目，指落地时站稳。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,269 @@
+{
+  "entryId": "w:turn-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turned out",
+    "turns out"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "out"
+      ],
+      [
+        "turns",
+        "out"
+      ],
+      [
+        "turned",
+        "out"
+      ],
+      [
+        "turning",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn out",
+  "senses": [
+    {
+      "senseId": "w:turn-out#s1",
+      "pos": "短语",
+      "glossZh": "结果是；后来发现或证明是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s5",
+        "w:turn#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-out#e-9c751fa2283dbdf1",
+          "text": "First, it turned out that at least one can use a comb.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-out#e-48dce10dacabff47",
+          "text": "A bright spot for me turned out to be reading.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 31
+          },
+          "parts": [
+            [
+              21,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-out#e-84ae30ca161071cc",
+          "text": "They turned out largely ineffective.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2025-i:30#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          },
+          "parts": [
+            [
+              5,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "常用 turn out to be 或 It turns out (that) …。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 38
+      }
+    },
+    {
+      "senseId": "w:turn-out#s3",
+      "pos": "短语",
+      "glossZh": "生产；制造出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-out#e-96447473c600f58e",
+          "text": "“The process tends to drag on for hours to turn out usable water, unable to meet urgent needs in water-starved regions.”",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-out#s2",
+      "pos": "短语",
+      "glossZh": "到场；出席",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-out#s4",
+      "pos": "短语",
+      "glossZh": "关掉（灯）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-out#s5",
+      "pos": "短语",
+      "glossZh": "倒出；腾空",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-out#s6",
+      "pos": "短语",
+      "glossZh": "赶走；撵出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

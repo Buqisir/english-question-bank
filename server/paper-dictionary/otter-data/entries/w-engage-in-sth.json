@@ -1,0 +1,177 @@
+{
+  "entryId": "w:engage-in-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "engage",
+      "in",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "engage",
+        "in",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "engage in",
+      "tags": []
+    },
+    {
+      "form": "engaged in",
+      "tags": []
+    },
+    {
+      "form": "engages in",
+      "tags": []
+    },
+    {
+      "form": "engaging in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "engage in sth",
+  "senses": [
+    {
+      "senseId": "w:engage-in-sth#s1",
+      "pos": "短语",
+      "glossZh": "从事；参与（活动、工作等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:engage#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:engage-in-sth#e-2db979a6f0086390",
+          "text": "He co-founded the Frank Lloyd Wright Building Conservancy, an organization engaged in the preservation of all of Wright’s remaining buildings.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-in-sth#e-e4f9a5abebdd937f",
+          "text": "When I let them see an aspect of my life outside of school, some students who were also interested in cars connected with me more and became more engaged in my courses.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 156
+          },
+          "parts": [
+            [
+              146,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              156
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-in-sth#e-45e85e7587f621de",
+          "text": "This can include doing puzzles, engaging in conversations or taking different routes to challenge your mind.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 57
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

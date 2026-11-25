@@ -68,8 +68,8 @@
     "mock": 137
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 132
+    "gaokao": 4,
+    "mock": 26
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -164,7 +164,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -235,7 +235,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -278,94 +278,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:wonder#s5",
-      "pos": "短语",
-      "glossZh": "难怪",
-      "pronunciationId": "w:wonder#p-main",
-      "note": "little wonder / no wonder。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wonder#e-75f28abc510a03e0",
-          "text": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:wonder#e-4d5d1eb937098791",
-          "text": "It’s no wonder researchers refer to this as a fundamental human contradiction: we start out in life as curious explorers, eager as possible to absorb whatever knowledge we can.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:wonder#s6",
-      "pos": "短语",
-      "glossZh": "产生奇效",
-      "pronunciationId": "w:wonder#p-main",
-      "note": "work wonders。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wonder#e-693f067602bda3e9",
-          "text": "Old garden plots work WONDERS",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:31",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 29
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -374,6 +286,12 @@
       "reason": "地域用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:little-wonder",
+    "w:no-wonder"
+  ]
 }

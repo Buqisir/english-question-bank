@@ -67,8 +67,8 @@
     "mock": 1075
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 1075
+    "gaokao": 24,
+    "mock": 904
   },
   "senses": [
     {
@@ -79,7 +79,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 112,
-        "mock": 0
+        "mock": 143
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -223,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -295,7 +295,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -394,302 +394,35 @@
       ]
     },
     {
-      "senseId": "w:know#s6",
-      "pos": "短语",
-      "glossZh": "被称作",
+      "senseId": "w:know#s12",
+      "pos": "v.",
+      "glossZh": "不受……限制（know no bounds 等）",
       "pronunciationId": "w:know#p-main",
-      "note": "be known as。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 7,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:know#e-b7c2b409f7299b28",
-          "text": "These lights, known as adaptive signals, have led to significant declines in both the trouble and cost of travels between work and home.",
+          "exampleId": "w:know#e-040e61ef2d26e3ba",
+          "text": "Education knows no boundaries.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:know#e-8ed246b4af468899",
-          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "question": 27,
+              "questionId": "question:paper-mock-fujian-putian-2026-01-first-quality-test:27",
+              "option": "D",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 113,
-            "end": 118
-          }
-        },
-        {
-          "exampleId": "w:know#e-f1eaa55eb6cbfdb1",
-          "text": "“You enter the fare gates（检票口）and you’ll see a kiosk that is lit up and it tells you you can get a one-minute, a three-minute, or a five-minute story,\" says Alicia Trost, the chief communications officer for the San Francisco Bay Area Rapid Transit - known as BART.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 251,
-            "end": 256
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:know#s7",
-      "pos": "短语",
-      "glossZh": "因……而著名",
-      "pronunciationId": "w:know#p-main",
-      "note": "be known for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:know#e-493a384489fdcca5",
-          "text": "And officials at Port Lympne were delighted with the new arrival, especially as black rhinos are known for being difficult to breed in captivity (圈养).",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 97,
-            "end": 102
-          }
-        },
-        {
-          "exampleId": "w:know#e-a3934923ce21e0f2",
-          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:know#e-bbc702a4c8f29221",
-          "text": "It’s known for its flower festival.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-a",
-            "locator": {
-              "question": 22,
-              "questionId": "question:paper-gaokao-2025-ii:22",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:know#s8",
-      "pos": "短语",
-      "glossZh": "被……所知",
-      "pronunciationId": "w:know#p-main",
-      "note": "be known to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:know#e-ca1e004352e4b041",
-          "text": "Why are more geniuses known to the public?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-gaokao-2021-national-a:34",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:know#s9",
-      "pos": "短语",
-      "glossZh": "听说过",
-      "pronunciationId": "w:know#p-main",
-      "note": "know of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:know#e-aa820d46e70919e4",
-          "text": "That said, we know of many postcrossing members, including Chinese, who have actually improved their English skills through their use of postcrossing,\" Paulo says.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:know#s10",
-      "pos": "短语",
-      "glossZh": "告诉；让知晓",
-      "pronunciationId": "w:know#p-main",
-      "note": "let sb know。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:know#e-378249fa35f5e4e1",
-          "text": "He was __44__, and his crying let the whole campground know it.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "cloze-2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        },
-        {
-          "exampleId": "w:know#e-15a4800a281f362f",
-          "text": "Let their teacher know.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
-            "locator": {
-              "question": 20,
-              "questionId": "question:listening:20",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:know#s11",
-      "pos": "短语",
-      "glossZh": "你知道的（口语插入语）",
-      "pronunciationId": "w:know#p-main",
-      "note": "you know。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:know#e-08a4eee8b9aa2441",
-          "text": "But she came forth and walked forward, and I walked forward, and my feelings and tears and the chemical in my brain, you know, it was like a nuclear fusion（核聚变）.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 121,
-            "end": 125
+            "start": 10,
+            "end": 15
           }
         }
       ]
@@ -701,6 +434,20 @@
       "reason": "通常见于 in the know，无真题例证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-to-know",
+    "w:i-know-it-when-i-see-it",
+    "w:know-better",
+    "w:know-of",
+    "w:let-sb-know",
+    "w:what-do-you-know",
+    "w:you-know",
+    "w:you-know-it",
+    "w:you-know-what",
+    "w:you-never-know"
+  ]
 }

@@ -1,0 +1,64 @@
+{
+  "entryId": "w:in-the-neighbourhood-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "neighbourhood",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "neighbourhood",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the neighbourhood of",
+  "senses": [
+    {
+      "senseId": "w:in-the-neighbourhood-of#s1",
+      "pos": "短语",
+      "glossZh": "约为……；在……左右（指数量）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:neighbourhood#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

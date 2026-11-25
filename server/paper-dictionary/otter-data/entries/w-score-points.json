@@ -1,0 +1,115 @@
+{
+  "entryId": "w:score-points",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "score",
+      "points"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "score",
+        "points"
+      ],
+      [
+        "scored",
+        "points"
+      ],
+      [
+        "scores",
+        "points"
+      ],
+      [
+        "scoring",
+        "points"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "score points",
+  "senses": [
+    {
+      "senseId": "w:score-points#s1",
+      "pos": "短语",
+      "glossZh": "（在比赛或计分活动中）得分",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:score-points#e-bd16f6244a7b5e4f",
+          "text": "Walkers must complete one trip (either upwards or downwards) within one hour to score points.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 92
+          },
+          "parts": [
+            [
+              80,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:score-points#s2",
+      "pos": "短语",
+      "glossZh": "博取好感或支持；在争论中占上风",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,177 @@
+{
+  "entryId": "w:decide-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "decide",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "decide",
+        "on"
+      ],
+      [
+        "decided",
+        "on"
+      ],
+      [
+        "decides",
+        "on"
+      ],
+      [
+        "deciding",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "decide on",
+      "tags": []
+    },
+    {
+      "form": "decided on",
+      "tags": []
+    },
+    {
+      "form": "deciding on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "decide on sth",
+  "senses": [
+    {
+      "senseId": "w:decide-on#s1",
+      "pos": "短语",
+      "glossZh": "选定；决定采用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:decide-on#e-67c54a4ac97e8e81",
+          "text": "What made Ginni decide on the trip to Antarctica?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-national-a:29",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:decide-on#e-ea24fc55808809ff",
+          "text": "And so I decided on the Metropolitan Museum of Art, a treasure house within walking distance of my apartment – seven minutes, I timed it.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:decide-on#e-48742ace23e693c2",
+          "text": "What should a buyer do after deciding on an Inspired Gift?",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

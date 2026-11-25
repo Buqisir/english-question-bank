@@ -1,0 +1,159 @@
+{
+  "entryId": "w:and-so-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "so on"
+  ],
+  "pattern": {
+    "tokens": [
+      "and",
+      "so",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "and",
+        "so",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "and so on",
+  "senses": [
+    {
+      "senseId": "w:and-so-on#s1",
+      "pos": "短语",
+      "glossZh": "等等；诸如此类",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:and#s8",
+        "w:so#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:and-so-on#e-6ab9a527180a5a7d",
+          "text": "Could operations, such as addition, subtraction, multiplication and so on, stand in for verbs?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          },
+          "parts": [
+            [
+              64,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:and-so-on#e-64496ea05054419a",
+          "text": "Walrond herself has tried many new activities: swimming, calligraphy, surfing, night photography, and so on.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 107
+          },
+          "parts": [
+            [
+              98,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              107
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:and-so-on#e-5d9126152ac43106",
+          "text": "Poems must effectively use imagery, metaphors, similes (明喻), personification and so on.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 86
+          },
+          "parts": [
+            [
+              77,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

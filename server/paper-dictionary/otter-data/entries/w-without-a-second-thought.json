@@ -1,0 +1,159 @@
+{
+  "entryId": "w:without-a-second-thought",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "without",
+      "a",
+      "second",
+      "thought"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "without",
+        "a",
+        "second",
+        "thought"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "without a second thought",
+  "senses": [
+    {
+      "senseId": "w:without-a-second-thought#s1",
+      "pos": "短语",
+      "glossZh": "不假思索地；毫不犹豫地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:second#s5",
+        "w:thought#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:without-a-second-thought#e-c23fb9c86c8fddf9",
+          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 145
+          },
+          "parts": [
+            [
+              121,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              145
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:without-a-second-thought#e-0b23d753f83d67e8",
+          "text": "The easy, simple talk that other parents seem to enjoy without a second thought felt like a dream.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 79
+          },
+          "parts": [
+            [
+              55,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:without-a-second-thought#e-d84556cea4e3cdd8",
+          "text": "Without a second thought, I turned",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation:11",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 24
+          },
+          "parts": [
+            [
+              0,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

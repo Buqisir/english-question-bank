@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 282
+    "mock": 93
   },
   "senses": [
     {
@@ -48,7 +48,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -120,7 +120,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -193,7 +193,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -257,11 +257,10 @@
       ]
     },
     {
-      "senseId": "w:enough#s4",
-      "pos": "短语",
-      "glossZh": "受够了",
+      "senseId": "w:enough#s6",
+      "pos": "adv.",
+      "glossZh": "用于评注，表示“说来……”",
       "pronunciationId": "w:enough#p-main",
-      "note": "enough is enough。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -270,62 +269,36 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:enough#e-60be3c2af6b819e3",
-          "text": "In April 2024, Dudley decided enough was enough.",
+          "exampleId": "w:enough#e-a75fdc661f20fa95",
+          "text": "William Stanley Jevons, an English economist, noticed in 1865 that the overall consumption of coal actually increased when technological progress improved the efficiency of steam engines, strangely enough.",
           "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:3",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-d:1",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 30,
-            "end": 36
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:enough#s5",
-      "pos": "短语",
-      "glossZh": "很快就",
-      "pronunciationId": "w:enough#p-main",
-      "note": "soon enough。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:enough#e-5e57713bf6459ddc",
-          "text": "Soon enough she is transported to the playground of her youth, offering cheerfully-recalled anecdotes from when she learnt double dutch with friends as her mother could not afford to buy her a Sindy doll.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 5,
-            "end": 11
+            "start": 198,
+            "end": 204
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cant-get-enough",
+    "w:enough-is-enough",
+    "w:soon-enough",
+    "w:sure-enough"
+  ]
 }

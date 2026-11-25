@@ -1,0 +1,171 @@
+{
+  "entryId": "w:make-up-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "up",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "up",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made up for",
+      "tags": []
+    },
+    {
+      "form": "make up for",
+      "tags": []
+    },
+    {
+      "form": "making up for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make up for sth",
+  "senses": [
+    {
+      "senseId": "w:make-up-for#s1",
+      "pos": "短语",
+      "glossZh": "弥补；补偿（损失、不足或过失）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s11",
+        "w:up#s42"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-up-for#e-3501dff2a612db08",
+          "text": "Regression is a crutch (拐杖) that allows you to make up for wasted time.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up-for#e-9ec3c8cd65e5e53a",
+          "text": "make up for",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-gaokao-2024-ii:52#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up-for#e-4f761acc000b6c0f",
+          "text": "This combination can make up for seasonal drops in water or sunlight, ensuring a more stable yearly output.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,154 @@
+{
+  "entryId": "w:to-this-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "this",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "this",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to this day",
+  "senses": [
+    {
+      "senseId": "w:to-this-day#s1",
+      "pos": "短语",
+      "glossZh": "一直到今天；至今",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:to-this-day#e-4de7833800ec0493",
+          "text": "It’s about hope.” Gloria said that even to this day, several people are still inspired by Breton’s artwork.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 51
+          },
+          "parts": [
+            [
+              40,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-this-day#e-b0383c9ba9fd12e3",
+          "text": "On April 8, 1973, Picasso passed away in the city of Mougins, France, leaving behind a treasure of art that is celebrated still to this day.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 139
+          },
+          "parts": [
+            [
+              128,
+              139
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              139
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-this-day#e-1b8a3c3cab2de089",
+          "text": "To this day, it is a classic representation of war horrors.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

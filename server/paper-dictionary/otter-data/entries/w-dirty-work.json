@@ -1,0 +1,134 @@
+{
+  "entryId": "w:dirty-work",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dirty",
+      "work"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dirty",
+        "work"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dirty work",
+  "senses": [
+    {
+      "senseId": "w:dirty-work#s1",
+      "pos": "短语",
+      "glossZh": "又脏又累或没人愿做的活儿",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dirty-work#e-a6fd1b5befa8888c",
+          "text": "It was dusty, dirty work, but with the trees providing shade and the only noise coming from my team and the local birds, there wasn’t any place I’d rather be.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          },
+          "parts": [
+            [
+              14,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dirty-work#e-bad51daa0d8622fd",
+          "text": "But ants represent a huge part of the Earth’s biomass and do all of the dirty work that we take for granted, like turning soil, spreading seeds, and cleaning out ecosystems.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 82
+          },
+          "parts": [
+            [
+              72,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              82
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:dirty-work#s2",
+      "pos": "短语",
+      "glossZh": "替人做的不光彩的差事；见不得光的勾当",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

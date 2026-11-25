@@ -1,0 +1,76 @@
+{
+  "entryId": "w:have-sth-in-common",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "have something in common"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      {
+        "slot": "sth"
+      },
+      "in",
+      "common"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        {
+          "slot": "sth"
+        },
+        "in",
+        "common"
+      ],
+      [
+        "have",
+        "something",
+        "in",
+        "common"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have sth in common",
+  "senses": [
+    {
+      "senseId": "w:have-sth-in-common#s1",
+      "pos": "短语",
+      "glossZh": "有某个共同点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:common#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

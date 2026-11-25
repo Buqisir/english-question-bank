@@ -1,0 +1,412 @@
+{
+  "entryId": "w:make-up",
+  "headword": "make (sth) up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes up",
+    "making up"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "make",
+        "up"
+      ],
+      [
+        "make",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "makes",
+        "up"
+      ],
+      [
+        "making",
+        "up"
+      ],
+      [
+        "made",
+        "up"
+      ],
+      [
+        "makes",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "making",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "made",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made up",
+      "tags": []
+    },
+    {
+      "form": "make up",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:make-up#s1",
+      "pos": "短语",
+      "glossZh": "构成；占（比例）",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 8
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s10",
+        "w:up#s82"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-up#e-6863c0fad0ee556b",
+          "text": "It’s one of 47 that make up the peaceful mid-20th-century modern village of Usonia.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up#e-2e9f5a9cd113e78b",
+          "text": "How many parts is a student’s final grade made up of?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2022-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          },
+          "parts": [
+            [
+              42,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up#e-73ee008f51c1f8f9",
+          "text": "They make up half of all shoppers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "be made up of 表示“由……组成”。"
+    },
+    {
+      "senseId": "w:make-up#s2",
+      "pos": "短语",
+      "glossZh": "调配；配制",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s32",
+        "w:up#s46"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-up#e-fe20bdce8fae628e",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:make-up#s3",
+      "pos": "短语",
+      "glossZh": "编造；虚构",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-up#e-1d0ae0a437ca23d3",
+          "text": "They didn’t know that some of the choices were made up.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2026-04-second:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up#e-67670e9e29144119",
+          "text": "Play-based learning – letting children move around, make up games and explore within loosely guided activities – usually stops when they attend primary school.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
+          },
+          "parts": [
+            [
+              52,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up#e-2ef9c49053fd395b",
+          "text": "Making up typical characters.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:make-up#s4",
+      "pos": "短语",
+      "glossZh": "和好；和解",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-up#e-586db55ede575e96",
+          "text": "It’s the making up and repairing part that’s important.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          },
+          "parts": [
+            [
+              9,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              18
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 134
+    "mock": 9
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -191,12 +191,12 @@
       "pos": "v.",
       "glossZh": "招致（不良结果）",
       "pronunciationId": "w:invite#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -205,16 +205,49 @@
       "glossZh": "请柬",
       "pronunciationId": "w:invite#p-main",
       "note": "非正式用法。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:invite#s5",
+      "pos": "adj.",
+      "glossZh": "吸引人的；诱人的（inviting）",
+      "pronunciationId": "w:invite#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:invite#e-207e6df6ca5ef6ae",
+          "text": "He couldn’t imagine the street without its warm, inviting light.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,115 @@
+{
+  "entryId": "w:have-the-last-laugh",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "the",
+      "last",
+      "laugh"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "the",
+        "last",
+        "laugh"
+      ],
+      [
+        "had",
+        "the",
+        "last",
+        "laugh"
+      ],
+      [
+        "has",
+        "the",
+        "last",
+        "laugh"
+      ],
+      [
+        "having",
+        "the",
+        "last",
+        "laugh"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have the last laugh",
+  "senses": [
+    {
+      "senseId": "w:have-the-last-laugh#s1",
+      "pos": "短语",
+      "glossZh": "笑到最后；在受到怀疑或嘲笑后最终获胜",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:last#s10",
+        "w:laugh#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:have-the-last-laugh#e-c80b5e3e3f04b71a",
+          "text": "But Farber is certain he’ll have the last laugh.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 47
+          },
+          "parts": [
+            [
+              28,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

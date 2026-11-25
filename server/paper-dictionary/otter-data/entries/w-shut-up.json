@@ -1,0 +1,146 @@
+{
+  "entryId": "w:shut-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shut",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shut",
+        "up"
+      ],
+      [
+        "shuts",
+        "up"
+      ],
+      [
+        "shutting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shut up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shut (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:shut-up#s1",
+      "pos": "短语",
+      "glossZh": "闭嘴；让某人别再说话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shut#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shut-up#e-3ca85fb947b51da3",
+          "text": "So I better just shut up, look smart, and use an O and an F.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        }
+      ],
+      "note": "用作命令时常显得粗鲁。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:shut-up#s2",
+      "pos": "短语",
+      "glossZh": "不会吧！真的吗？（表示惊讶）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "熟人之间的非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shut-up#s3",
+      "pos": "短语",
+      "glossZh": "关好房屋；关店歇业",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shut-up#s4",
+      "pos": "短语",
+      "glossZh": "把人或物关起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

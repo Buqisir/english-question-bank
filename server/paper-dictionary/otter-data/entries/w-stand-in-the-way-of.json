@@ -1,0 +1,103 @@
+{
+  "entryId": "w:stand-in-the-way-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "in",
+      "the",
+      "way",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "in",
+        "the",
+        "way",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "standing in the way of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand in the way of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:stand-in-the-way-of#s1",
+      "pos": "短语",
+      "glossZh": "阻碍某人做事或妨碍某事进展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stand#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stand-in-the-way-of#e-77710e813b1b1ed2",
+          "text": "As her former assistant said, she was “standing in the way of certain individuals making money”.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:14",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 61
+          },
+          "parts": [
+            [
+              39,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

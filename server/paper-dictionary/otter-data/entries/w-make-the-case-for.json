@@ -1,0 +1,166 @@
+{
+  "entryId": "w:make-the-case-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes the case for"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "case",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "case",
+        "for"
+      ],
+      [
+        "makes",
+        "the",
+        "case",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the case for",
+  "senses": [
+    {
+      "senseId": "w:make-the-case-for#s1",
+      "pos": "短语",
+      "glossZh": "为……提出论据；论证……值得支持",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s36"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-the-case-for#e-0e29c40ebaa11e5f",
+          "text": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 45
+          },
+          "parts": [
+            [
+              28,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-case-for#e-f7a43f2e1940599f",
+          "text": "“It comes from the Latin, meaning ‘one who loves’.” Her new book In Defense of Dabbling makes the case for “intentional amateurism”: finding an activity we’re drawn to but not necessarily naturally good at, and sticking with it anyway.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 106
+          },
+          "parts": [
+            [
+              88,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-case-for#e-6de7b44581b21938",
+          "text": "“It comes from the Latin, meaning ‘one who loves’.” Her new book In Defense of Dabbling (随性) makes the case for “intentional amateurism”: finding an activity we’re drawn to but not necessarily naturally good at, and sticking with it anyway.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 111
+          },
+          "parts": [
+            [
+              93,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              111
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

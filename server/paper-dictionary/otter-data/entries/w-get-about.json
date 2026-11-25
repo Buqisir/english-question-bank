@@ -1,0 +1,121 @@
+{
+  "entryId": "w:get-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "got about"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "about"
+      ],
+      [
+        "got",
+        "about"
+      ],
+      [
+        "gets",
+        "about"
+      ],
+      [
+        "getting",
+        "about"
+      ],
+      [
+        "gotten",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get about",
+  "senses": [
+    {
+      "senseId": "w:get-about#s1",
+      "pos": "短语",
+      "glossZh": "四处走动；外出活动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-about#e-7cdbac51717d878b",
+          "text": "I use a small tractor to get about.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-about#s2",
+      "pos": "短语",
+      "glossZh": "（消息、传闻等）传开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

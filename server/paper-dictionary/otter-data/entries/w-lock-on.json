@@ -1,0 +1,165 @@
+{
+  "entryId": "w:lock-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lock",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lock",
+        "on"
+      ],
+      [
+        "locked",
+        "on"
+      ],
+      [
+        "locking",
+        "on"
+      ],
+      [
+        "locks",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "locked on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lock on",
+  "senses": [
+    {
+      "senseId": "w:lock-on#s1",
+      "pos": "短语",
+      "glossZh": "目光紧盯着；视线牢牢停在",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lock-on#e-e98353d25afb891d",
+          "text": "“Everyone else got one,” my daughter said to me, her eyes locked on the floor.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          },
+          "parts": [
+            [
+              58,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lock-on#e-b6a3891c614c2758",
+          "text": "But Emma, once eager to lead our dance, now stayed away from the group during practices, her movements slow, her eyes locked on the floor.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 127
+          },
+          "parts": [
+            [
+              118,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              127
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 one's eyes (are) locked on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lock-on#s2",
+      "pos": "短语",
+      "glossZh": "锁定并跟踪目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lock-on#s3",
+      "pos": "短语",
+      "glossZh": "把自己固定在某处以示抗议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

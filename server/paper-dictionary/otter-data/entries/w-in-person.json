@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-person",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "person"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "person"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in person",
+  "senses": [
+    {
+      "senseId": "w:in-person#s1",
+      "pos": "短语",
+      "glossZh": "亲自；当面；线下到场",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s51",
+        "w:person#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-person#e-150f0ac06931b404",
+          "text": "Professor Alex Davidson teaches the same course in person and online.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 57
+          },
+          "parts": [
+            [
+              48,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-person#e-5a87c2383a4b212d",
+          "text": "Talk to Sara in person.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-person#e-04d5c3d673cf3ae2",
+          "text": "Instead of following the polished versions of one another’s lives, they could get together in person",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:seven-choices:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 8,
+        "mock": 21
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

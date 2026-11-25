@@ -140,6 +140,9 @@
       "reason": "法律、语言学或软件专业义"
     }
   ],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bad-actor"
+  ]
 }

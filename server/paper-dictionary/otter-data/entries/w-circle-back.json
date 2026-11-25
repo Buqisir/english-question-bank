@@ -1,0 +1,190 @@
+{
+  "entryId": "w:circle-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "circle",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "circle",
+        "back"
+      ],
+      [
+        "circled",
+        "back"
+      ],
+      [
+        "circles",
+        "back"
+      ],
+      [
+        "circling",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "circled back",
+      "tags": []
+    },
+    {
+      "form": "circling back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "circle back",
+  "senses": [
+    {
+      "senseId": "w:circle-back#s1",
+      "pos": "短语",
+      "glossZh": "绕回来；折返",
+      "note": "也可比喻回到先前的状态或环节。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:circle#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:circle-back#e-e0d9b771b4aa4dfe",
+          "text": "I left my daughter at the swimming center, circled back and found the cow standing at the grassy edge of a side street, breathing heavily.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:circle-back#e-c54995ce3a3e3f1c",
+          "text": "Nature and nurture aren’t separate forces – they’re a Möbius strip (莫比乌斯环), endlessly circling back on each other.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 99
+          },
+          "parts": [
+            [
+              86,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:circle-back#e-30d11e25e2a95d5e",
+          "text": "One Tuesday afternoon, I pretended to leave for work but quietly circled back and peered through the living room window.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 77
+          },
+          "parts": [
+            [
+              65,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:circle-back#s2",
+      "pos": "短语",
+      "glossZh": "回头再谈；稍后再跟进",
+      "note": "常用 circle back to sth。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

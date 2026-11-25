@@ -1,0 +1,119 @@
+{
+  "entryId": "w:make-up-for-lost-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making up for lost time"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "up",
+      "for",
+      "lost",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "up",
+        "for",
+        "lost",
+        "time"
+      ],
+      [
+        "making",
+        "up",
+        "for",
+        "lost",
+        "time"
+      ],
+      [
+        "made",
+        "up",
+        "for",
+        "lost",
+        "time"
+      ],
+      [
+        "makes",
+        "up",
+        "for",
+        "lost",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make up for lost time",
+  "senses": [
+    {
+      "senseId": "w:make-up-for-lost-time#s1",
+      "pos": "短语",
+      "glossZh": "弥补耽搁的时间；追回落下的进度",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-up-for-lost-time#e-66b2fc1dd0a3f352",
+          "text": "Students can change majors, but remember that there’s no re-living a certain semester (学期), and there’s no making up for lost time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 130
+          },
+          "parts": [
+            [
+              107,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

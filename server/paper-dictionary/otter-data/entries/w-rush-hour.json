@@ -1,0 +1,155 @@
+{
+  "entryId": "w:rush-hour",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rush",
+      "hour"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rush",
+        "hour"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rush hour",
+  "senses": [
+    {
+      "senseId": "w:rush-hour#s1",
+      "pos": "短语",
+      "glossZh": "交通高峰期",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hour#s3",
+        "w:rush#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:rush-hour#e-80c0ded246144cac",
+          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 156
+          },
+          "parts": [
+            [
+              147,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              147,
+              156
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rush-hour#e-c9388c0bc160e94e",
+          "text": "Yet at rush hour, some say the lanes are too crowded to enjoy the wave.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rush-hour#e-b2a075db80ffd283",
+          "text": "It was a little after the morning rush hour.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

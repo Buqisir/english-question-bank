@@ -1,0 +1,155 @@
+{
+  "entryId": "w:at-ease",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "ease"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "ease"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at ease",
+  "senses": [
+    {
+      "senseId": "w:at-ease#s1",
+      "pos": "短语",
+      "glossZh": "自在；放松；不紧张",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s18",
+        "w:ease#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-ease#e-6ba296b4ff137f89",
+          "text": "I would feel completely at ease doing my homework in bed, with light music on.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          },
+          "parts": [
+            [
+              24,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-ease#e-5043623116220c4b",
+          "text": "He put Heidi at ease, and she seemed to hardly notice when he gave her a shot and stitched her up（缝合）.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-ease#e-65a2b8b082f43ae3",
+          "text": "The point is to have a space that makes you feel at ease the second you see it.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          },
+          "parts": [
+            [
+              49,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

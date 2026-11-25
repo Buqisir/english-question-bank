@@ -1,0 +1,154 @@
+{
+  "entryId": "w:complete-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "complete",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "complete",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "complete with",
+  "senses": [
+    {
+      "senseId": "w:complete-with#s1",
+      "pos": "短语",
+      "glossZh": "还配有；还附带",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:complete#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:complete-with#e-bb2f8baab3ec4b0b",
+          "text": "A long, negative review of a hotel, complete with lots of information, tended to convince participants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 49
+          },
+          "parts": [
+            [
+              36,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:complete-with#e-366fc0b4379597d3",
+          "text": "You’ll leave home technically alone but join a group at your destination, complete with a guide and driver.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 87
+          },
+          "parts": [
+            [
+              74,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:complete-with#e-0d1b93905148c4ef",
+          "text": "He will guide you through the process of building a multiple choice quiz styled as an interactive board game experience, complete with dynamic question delivery.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 134
+          },
+          "parts": [
+            [
+              121,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

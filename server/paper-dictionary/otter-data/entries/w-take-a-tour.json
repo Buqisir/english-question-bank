@@ -1,0 +1,94 @@
+{
+  "entryId": "w:take-a-tour",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "tour"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "tour"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a tour",
+  "senses": [
+    {
+      "senseId": "w:take-a-tour#s1",
+      "pos": "短语",
+      "glossZh": "参观；游览",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s47"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-tour#e-dd42a59dc2951a94",
+          "text": "Take a tour of his Lakeland cottage, walk through his hillside garden and explore the riches of the collection in the Museum.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:18",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

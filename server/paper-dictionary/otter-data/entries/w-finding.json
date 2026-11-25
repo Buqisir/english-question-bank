@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 17,
-    "mock": 323
+    "mock": 137
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 118
       },
       "folded": false,
       "examples": [
@@ -130,6 +130,304 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:finding#s3",
+      "pos": "v.",
+      "glossZh": "找到；寻得",
+      "pronunciationId": "w:finding#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 41
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finding#e-52f434ba37cf9d18",
+          "text": "My full-time job now was finding a full-time job.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:finding#e-c11a72517ce2e722",
+          "text": "However, finding real-world examples of science content relatable to students’ lives can be tricky.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:finding#e-67f486e01f1b1ace",
+          "text": "During the 20-minute walk, she focused solely on finding green, and the tightness in her chest gradually faded.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:finding#s4",
+      "pos": "v.",
+      "glossZh": "发现；发觉",
+      "pronunciationId": "w:finding#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finding#e-928245de1409f552",
+          "text": "This Schneider Award-winning book celebrates pushing past your comfort zone, finding beauty, and the lasting joy of art.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:finding#e-91e5740c64dc786b",
+          "text": "“And what we’re finding is that we’re losing key players and instruments from the orchestra, so the music that they’re generating is becoming poorer.” The reason for this shift, according to Butler, is the rapid decline in bird communities, both in number and variation.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:finding#e-446535c887e1a20e",
+          "text": "Researchers are also studying old texts with AI, finding forgotten herb(草药) mixes.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:finding#s5",
+      "pos": "v.",
+      "glossZh": "获得；感受到",
+      "pronunciationId": "w:finding#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finding#e-59f497041ff58b54",
+          "text": "I began daily meditation, finding peace and reflection.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:finding#e-ea30e077227258d3",
+          "text": "True success isn’t about working harder; it’s about working smarter and finding balance.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:finding#e-f24db73386be383d",
+          "text": "That starts with finding the courage to be honest about our own flaws(瑕疵).",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:finding#s6",
+      "pos": "v.",
+      "glossZh": "抽出（时间）",
+      "pronunciationId": "w:finding#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finding#e-0509157336f2d875",
+          "text": "With midterms and finals nearing, finding time to work out between all the studying and classes can be a challenge.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:finding#s7",
+      "pos": "v.",
+      "glossZh": "找到路；设法到达",
+      "pronunciationId": "w:finding#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finding#e-7cf0d509fa6793d9",
+          "text": "I reserve it for emergency, but the paper map gives me something more: the memory of finding my way.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:finding#e-e6ab939c29340236",
+          "text": "On rooftops, in alleyways and through the tiniest cracks in the pavement, biodiversity is finding its way back in the heart of the metropolis.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 97
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -142,6 +440,6 @@
       "reason": "行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 35
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -258,80 +258,6 @@
       ]
     },
     {
-      "senseId": "w:phase#s4",
-      "pos": "短语",
-      "glossZh": "逐步淘汰",
-      "pronunciationId": "w:phase#p-main",
-      "note": "phase out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:phase#e-345f09c49bac0e0f",
-          "text": "I would love to see a trend toward zoos’ phasing out species that",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
-            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:9",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 41,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:phase#e-160bfafc9cb65ee7",
-          "text": "She supported phasing out stuffers.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
-            "locator": {
-              "question": 30,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:30",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 21
-          }
-        },
-        {
-          "exampleId": "w:phase#e-e5b722650761fd22",
-          "text": "A scientific guide to phasing out fossil fuels.",
-          "source": {
-            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
-            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
-            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d",
-            "locator": {
-              "question": 35,
-              "questionId": "question:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:35",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:phase#s5",
       "pos": "v.",
       "glossZh": "分阶段进行",
@@ -366,6 +292,11 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:phase-out"
+  ]
 }

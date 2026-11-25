@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 33,
-    "mock": 422
+    "mock": 231
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 89
       },
       "folded": false,
       "examples": [
@@ -122,12 +122,12 @@
       "pos": "n.",
       "glossZh": "身体感觉",
       "pronunciationId": "w:feeling#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -136,12 +136,12 @@
       "glossZh": "直觉",
       "pronunciationId": "w:feeling#p-main",
       "note": "常接 that 从句。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -150,12 +150,12 @@
       "glossZh": "看法",
       "pronunciationId": "w:feeling#p-main",
       "note": "feelings about sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -163,13 +163,255 @@
       "pos": "n.",
       "glossZh": "爱意",
       "pronunciationId": "w:feeling#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:feeling#s6",
+      "pos": "v.",
+      "glossZh": "感到；体验到（某种状态或情绪）",
+      "pronunciationId": "w:feeling#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 77
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feeling#e-c9e6609a3d1bc84f",
+          "text": "Researchers explained as children grow older, they become more concerned with feeling at ease – even if their actions might not be moral.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:feeling#e-f7382557c58fb6e5",
+          "text": "Feeling exhausted prevents the body from pushing past its limits.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:feeling#e-44acfe7a2cdc5cfb",
+          "text": "Maybe it’s time we stopped feeling guilty about our occasional obsessions and started seeing them for what they are: the catalysts that make our steady progress meaningful.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:feeling#s7",
+      "pos": "v.",
+      "glossZh": "感知；察觉",
+      "pronunciationId": "w:feeling#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feeling#e-87aebffa85816a40",
+          "text": "Walking the streets, seeing the landscapes and feeling the atmosphere of a novel’s setting deepens my understanding of the story.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:feeling#e-f0c828e39a34bc59",
+          "text": "Travel is not simply about seeing farther; it is also about feeling where you stand.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:feeling#s8",
+      "pos": "v.",
+      "glossZh": "用触觉感知",
+      "pronunciationId": "w:feeling#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feeling#e-89b4e87f3e3298d9",
+          "text": "The researchers say it could add a new input layer to mobile devices that could be used for a wide variety of tasks, from looking through digital maps to playing games and “feeling” the hardness of products virtually.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 180
+          }
+        },
+        {
+          "exampleId": "w:feeling#e-c5810664fcaa26b8",
+          "text": "That afternoon, I stuck it into my pocket, feeling it heavier than usual.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:feeling#s9",
+      "pos": "v.",
+      "glossZh": "觉得；认为",
+      "pronunciationId": "w:feeling#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feeling#e-f5a0f62152f75681",
+          "text": "As Sandstrom, a well-known psychologist, explains, “That sense of community is a huge thing we get from talking to strangers – it’s just feeling there’s this shared humanity and that we are seen by other people and valued by other people.” This feeling helps people recognize themselves as part of a community.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 144
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:feeling#s10",
+      "pos": "v.",
+      "glossZh": "给人……的感觉",
+      "pronunciationId": "w:feeling#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:feeling#e-58d4a6b74aa42d74",
+          "text": "Slowly, the idea that he might actually help me stopped feeling so terrifying.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 63
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -178,6 +420,6 @@
       "reason": "动词命中留在 feel 词头下"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

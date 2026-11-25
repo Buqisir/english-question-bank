@@ -1,0 +1,183 @@
+{
+  "entryId": "w:good-morning",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "morning"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "morning"
+      ],
+      [
+        "good",
+        "mornings"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good morning",
+  "senses": [
+    {
+      "senseId": "w:good-morning#s1",
+      "pos": "短语",
+      "glossZh": "早上好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:good-morning#e-af6da2a3a0b4d111",
+          "text": "He’d say, “Listen, Mario, the ocean’s saying good morning.” The lapping waves would whisper: O-mor-ning.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 57
+          },
+          "parts": [
+            [
+              45,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-morning#e-8024de967cc34d77",
+          "text": "“Good morning, Miss Bolz.” A friendly man in his early twenties greeted me as he placed my breakfast on the table next to my bed.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 13
+          },
+          "parts": [
+            [
+              1,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-morning#e-f381847cdb148ec6",
+          "text": "Every morning, Ling would say, “Good morning, Tom!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          },
+          "parts": [
+            [
+              32,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:good-morning#s2",
+      "pos": "短语",
+      "glossZh": "早晨道别时说的再见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:good-morning#s3",
+      "pos": "短语",
+      "glossZh": "早安式俯身（髋部屈伸训练）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

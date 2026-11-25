@@ -1,0 +1,157 @@
+{
+  "entryId": "w:get-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting at",
+    "got at"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "at"
+      ],
+      [
+        "getting",
+        "at"
+      ],
+      [
+        "got",
+        "at"
+      ],
+      [
+        "gets",
+        "at"
+      ],
+      [
+        "gotten",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get at sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-at#s1",
+      "pos": "短语",
+      "glossZh": "够到；设法拿到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s2",
+      "pos": "短语",
+      "glossZh": "查明；弄清事实或根源",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s3",
+      "pos": "短语",
+      "glossZh": "意指；暗示",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 What are you getting at? 询问对方想表达什么。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s4",
+      "pos": "短语",
+      "glossZh": "老是挑某人的毛病；挖苦某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s5",
+      "pos": "短语",
+      "glossZh": "收买或威胁某人以影响其决定",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s6",
+      "pos": "短语",
+      "glossZh": "着手处理",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-at#s7",
+      "pos": "短语",
+      "glossZh": "联系上某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美式俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

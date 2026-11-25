@@ -1,0 +1,137 @@
+{
+  "entryId": "w:get-moving",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "moving"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "moving"
+      ],
+      [
+        "gets",
+        "moving"
+      ],
+      [
+        "getting",
+        "moving"
+      ],
+      [
+        "got",
+        "moving"
+      ],
+      [
+        "gotten",
+        "moving"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get moving",
+  "senses": [
+    {
+      "senseId": "w:get-moving#s1",
+      "pos": "短语",
+      "glossZh": "赶紧行动；动起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-moving#e-dc23102cd01b4f2d",
+          "text": "Our mind and body are trying to tell us to get moving, to find a way to bring the unpleasant delay to an end.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-moving#e-4cb47a1dfbf6f767",
+          "text": "③ GET MOVING",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

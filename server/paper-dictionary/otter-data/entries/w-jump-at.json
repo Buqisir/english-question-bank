@@ -1,0 +1,70 @@
+{
+  "entryId": "w:jump-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "at"
+      ],
+      [
+        "jumped",
+        "at"
+      ],
+      [
+        "jumping",
+        "at"
+      ],
+      [
+        "jumps",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump at",
+  "senses": [
+    {
+      "senseId": "w:jump-at#s1",
+      "pos": "短语",
+      "glossZh": "欣然接受（提议）；立刻抓住（机会）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

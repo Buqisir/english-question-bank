@@ -1,0 +1,124 @@
+{
+  "entryId": "w:you-know-what",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "know",
+      "what"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "know",
+        "what"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you know what",
+  "senses": [
+    {
+      "senseId": "w:you-know-what#s1",
+      "pos": "短语",
+      "glossZh": "你知道吗？我跟你说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:you-know-what#e-4ff4b01317b66b0f",
+          "text": "Imagine climbing a mountain and getting half way up and saying to yourself, “You know what, I’m going to climb back down and finish this later.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 90
+          },
+          "parts": [
+            [
+              77,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:you-know-what#e-96ed504a02cab1a6",
+          "text": "And you know what?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "口语中用于引出消息、看法或刚作出的决定。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

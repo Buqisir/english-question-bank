@@ -1,0 +1,146 @@
+{
+  "entryId": "w:burn-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "burn",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "burn",
+        "down"
+      ],
+      [
+        "burned",
+        "down"
+      ],
+      [
+        "burning",
+        "down"
+      ],
+      [
+        "burns",
+        "down"
+      ],
+      [
+        "burnt",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "burned down",
+      "tags": []
+    },
+    {
+      "form": "burning down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "burn (sth) down",
+  "senses": [
+    {
+      "senseId": "w:burn-down#s1",
+      "pos": "短语",
+      "glossZh": "烧毁（建筑物等）；被大火烧毁",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:burn-down#e-c231a205a1dda607",
+          "text": "When the library of Alexandria burned down, books and knowledge were lost.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burn-down#e-0d543d1e3314f230",
+          "text": "She began capturing and questioning illegal hunters, burning down their camps, and pretending to use black magic to make locals believe she was a witch.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:7",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 65
+          },
+          "parts": [
+            [
+              53,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,136 @@
+{
+  "entryId": "w:on-and-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "and",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "and",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on and off",
+  "senses": [
+    {
+      "senseId": "w:on-and-off#s1",
+      "pos": "短语",
+      "glossZh": "时开时关；忽亮忽灭",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-and-off#e-e57d4068b7d7a1fa",
+          "text": "Specifically, they flashed each monster on and off at eight frequencies, ranging from 2 to 30 hertz.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-and-off#e-fd69da1de63a3d41",
+          "text": "But there were problems: the sizzle, the smell, the mosquitoes, and one green bulb(灯泡) that went on and off for no reason.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 107
+          },
+          "parts": [
+            [
+              97,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:on-and-off#s2",
+      "pos": "短语",
+      "glossZh": "断断续续地；时有时无地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

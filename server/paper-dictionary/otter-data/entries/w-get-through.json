@@ -1,0 +1,392 @@
+{
+  "entryId": "w:get-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "through"
+      ],
+      [
+        "gets",
+        "through"
+      ],
+      [
+        "getting",
+        "through"
+      ],
+      [
+        "got",
+        "through"
+      ],
+      [
+        "gotten",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting through",
+      "tags": []
+    },
+    {
+      "form": "got through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get through",
+  "senses": [
+    {
+      "senseId": "w:get-through#s1",
+      "pos": "短语",
+      "glossZh": "熬过；挺过（难关）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s25",
+        "w:through#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-through#e-27f3cfb647b6c641",
+          "text": "This is especially true when someone is focused on “getting through” rather than feeling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 67
+          },
+          "parts": [
+            [
+              52,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-through#e-54ed5488e5f8406f",
+          "text": "May found the courage to get through hellos and small talk without turning bright red.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-through#e-9b73839aeeb72b11",
+          "text": "It’s going to be difficult for anyone to get through for the next few days,” he said.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 52
+          },
+          "parts": [
+            [
+              41,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-through#s2",
+      "pos": "短语",
+      "glossZh": "成功联系上某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-through#e-49aaef3f451cd5bb",
+          "text": "It was amazing, but somehow, I got through to someone who could help me.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "常用 get through to sb，可指打通电话。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-through#s3",
+      "pos": "短语",
+      "glossZh": "使某人听进去；让某人理解",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-through#e-48250f265e8aaf05",
+          "text": "With this in mind, if there’s someone in your life who tends towards social loafing, highlighting the goal of what you want to achieve together could be a way of getting through to them.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 162,
+            "end": 177
+          },
+          "parts": [
+            [
+              162,
+              177
+            ]
+          ],
+          "highlightRanges": [
+            [
+              162,
+              177
+            ]
+          ]
+        }
+      ],
+      "note": "用 get through to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-through#s4",
+      "pos": "短语",
+      "glossZh": "完成；做完",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-through#e-d0daa4672ab9f732",
+          "text": "How can anyone get through a 500-page book when our brain is addicted to bite-sized content?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-through#e-e63b05e28a91d2dd",
+          "text": "That way, you can get through seemingly difficult tasks, but also avoid sliding through all of the simple ones first.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-through#e-c9b0ed389d961f82",
+          "text": "I like to get through the easy tasks on my to-do list first, since they can be checked off more quickly, making me feel a lot more accomplished in the process.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 21
+          },
+          "parts": [
+            [
+              10,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-through#s5",
+      "pos": "短语",
+      "glossZh": "用完；耗尽",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

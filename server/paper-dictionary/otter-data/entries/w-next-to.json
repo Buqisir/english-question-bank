@@ -1,0 +1,193 @@
+{
+  "entryId": "w:next-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "next",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "next",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "next to",
+  "senses": [
+    {
+      "senseId": "w:next-to#s1",
+      "pos": "短语",
+      "glossZh": "在……旁边；紧挨着",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:next-to#e-abc6fe537651096c",
+          "text": "He may also book you in a sleeping car that's right next to the diner.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 59
+          },
+          "parts": [
+            [
+              52,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:next-to#e-2d4e76615145eb63",
+          "text": "I was assigned (分配) to serve the salad with the lady next to me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:next-to#e-01b3d639ee5fda70",
+          "text": "We sat down next to each other, but David wouldn’t look at me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "writing-continuation-11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          },
+          "parts": [
+            [
+              12,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 13,
+        "mock": 41
+      }
+    },
+    {
+      "senseId": "w:next-to#s2",
+      "pos": "短语",
+      "glossZh": "几乎；差不多",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 next to impossible、next to nothing。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:next-to#s3",
+      "pos": "短语",
+      "glossZh": "仅次于",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:next-to#s4",
+      "pos": "短语",
+      "glossZh": "与……相比",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 13,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,112 @@
+{
+  "entryId": "w:hit-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "on"
+      ],
+      [
+        "hits",
+        "on"
+      ],
+      [
+        "hitting",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit on",
+  "senses": [
+    {
+      "senseId": "w:hit-on#s1",
+      "pos": "短语",
+      "glossZh": "突然想到（主意、办法）；偶然发现（答案）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hit-on#e-859b7f5c0c275159",
+          "text": "It was during one visit that Andrew hit on the perfect idea: The animal shelter had 40 dog kennels that were always full.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          },
+          "parts": [
+            [
+              36,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hit-on#s2",
+      "pos": "短语",
+      "glossZh": "向某人搭讪示好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "搭配 hit on sb，常带有调情的意味。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

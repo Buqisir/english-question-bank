@@ -1,0 +1,95 @@
+{
+  "entryId": "w:now-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "now",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "now",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "now for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "now for sth",
+  "senses": [
+    {
+      "senseId": "w:now-for#s1",
+      "pos": "短语",
+      "glossZh": "接下来是……；现在该进行……了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:now-for#e-0d0cad56f3edd238",
+          "text": "“Now for the finishing touch,” Mareya said, taking out her face-paint kit to paint tiger whiskers（胡须）on her cheeks.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

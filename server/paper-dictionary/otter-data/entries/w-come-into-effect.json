@@ -1,0 +1,77 @@
+{
+  "entryId": "w:come-into-effect",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "into",
+      "effect"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "into",
+        "effect"
+      ],
+      [
+        "came",
+        "into",
+        "effect"
+      ],
+      [
+        "comes",
+        "into",
+        "effect"
+      ],
+      [
+        "coming",
+        "into",
+        "effect"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come into effect",
+  "senses": [
+    {
+      "senseId": "w:come-into-effect#s1",
+      "pos": "短语",
+      "glossZh": "（法律、规定等）生效；开始施行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:effect#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

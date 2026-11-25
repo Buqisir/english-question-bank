@@ -1,0 +1,70 @@
+{
+  "entryId": "w:vote-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "vote",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "vote",
+        "in"
+      ],
+      [
+        "voted",
+        "in"
+      ],
+      [
+        "votes",
+        "in"
+      ],
+      [
+        "voting",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "vote (sb) in",
+  "senses": [
+    {
+      "senseId": "w:vote-in#s1",
+      "pos": "短语",
+      "glossZh": "投票选某人入职或进入某组织",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

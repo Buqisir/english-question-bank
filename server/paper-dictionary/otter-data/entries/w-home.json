@@ -42,8 +42,8 @@
     "mock": 777
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 776
+    "gaokao": 16,
+    "mock": 590
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 93,
-        "mock": 0
+        "mock": 122
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 31,
-        "mock": 0
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -267,7 +267,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -338,7 +338,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -425,7 +425,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -489,237 +489,6 @@
       ]
     },
     {
-      "senseId": "w:home#s8",
-      "pos": "短语",
-      "glossZh": "是……的栖息地",
-      "pronunciationId": "w:home#p-main",
-      "note": "be home to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:home#e-f25d387fada56d2f",
-          "text": "His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 85
-          }
-        },
-        {
-          "exampleId": "w:home#e-70e8115f729409ed",
-          "text": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:home#e-333b11ad16235550",
-          "text": "The gardens are beautifully laid out with two lakes, which are home to a vast collection of fish.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:home#s9",
-      "pos": "短语",
-      "glossZh": "是……的所在地",
-      "pronunciationId": "w:home#p-main",
-      "note": "be home to 或 be the home of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:home#e-7a29f14d6f0c403d",
-          "text": "With an impressive 2,000-seat concert hall, St David’s Hall is home to the annual Welsh Proms Cardiff.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:home#e-eb756f031a5c65db",
-          "text": "It's also home to an ancient library.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:home#e-9b0a1caeb8c5effa",
-          "text": "The D. C. area is home to many outstanding Chinese restaurants, but diners willing to travel outside the city limits will also be rewarded.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:home#s10",
-      "pos": "短语",
-      "glossZh": "自在；像在家一样",
-      "pronunciationId": "w:home#p-main",
-      "note": "feel at home。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:home#e-65fe5d344e0c7277",
-          "text": "Everyone was so __40__ and like-minded that it was very __41__ to feel at home.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:home#s11",
-      "pos": "短语",
-      "glossZh": "使人深切明白",
-      "pronunciationId": "w:home#p-main",
-      "note": "hit home。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:home#e-5fd43a0281a39887",
-          "text": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:home#e-89b6927918ef864c",
-          "text": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 112,
-            "end": 116
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:home#s12",
       "pos": "adj.",
       "glossZh": "主场的",
@@ -747,18 +516,70 @@
       "examples": []
     },
     {
-      "senseId": "w:home#s14",
-      "pos": "短语",
-      "glossZh": "瞄准目标；将注意力集中于",
+      "senseId": "w:home#s15",
+      "pos": "n.",
+      "glossZh": "（棋盘游戏中棋子的）终点区",
       "pronunciationId": "w:home#p-main",
-      "note": "home in on。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:home#e-43f4ee478b626d06",
+          "text": "To be the first player to get all four of your pawns (棋子) from your color START to your color HOME.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:home#s16",
+      "pos": "adv.",
+      "glossZh": "到达预定位置；到位",
+      "pronunciationId": "w:home#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:home#e-a16b8d5c450e6820",
+          "text": "Speeding up and flying over a car while switching hands with a between-the-legs movement to throw the ball home, Chen Dengxing, aged 39 and standing 1.76 meters, made history by becoming the first athlete from China to win the dunk（扣篮） contest of the world’s biggest streetball competition in 2025.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 111
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -767,6 +588,21 @@
       "reason": "游戏专门义或按键名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-home-to",
+    "w:be-the-home-of",
+    "w:bring-home",
+    "w:close-to-home",
+    "w:feel-at-home",
+    "w:hit-home",
+    "w:home-in",
+    "w:home-in-on",
+    "w:leave-home",
+    "w:take-home",
+    "w:welcome-home"
+  ]
 }

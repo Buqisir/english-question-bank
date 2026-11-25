@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 200
+    "mock": 5
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 106
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -241,7 +241,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -275,7 +275,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -318,9 +318,126 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:against#s6",
+      "pos": "prep.",
+      "glossZh": "与……对照；以……为衡量依据",
+      "pronunciationId": "w:against#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:against#e-c0d535d526439d72",
+          "text": "By comparing this fingerprint against AI-generated content, it can determine how much the new content overlaps（重合）with the original, offering a percentage-based match.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:against#e-7c918faad2063a59",
+          "text": "Any honest review must weigh CO₂’s benefits against heat stress, water stress, and the emergence of new pests.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:against#e-3728d5d0f6df7337",
+          "text": "For answers, researchers turn to benchmarks（基准）: standardized sets of questions or tasks that help measure an AI’s efficiency and reliability and compare it against other models.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 164
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:against#s7",
+      "pos": "prep.",
+      "glossZh": "尽管有重重困难（against all odds）",
+      "pronunciationId": "w:against#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:against#e-6460bc7aba139277",
+          "text": "Against all odds, they had survived.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:go-against",
+    "w:go-against-the-grain",
+    "w:go-up-against",
+    "w:guard-against",
+    "w:hold-against",
+    "w:race-against-time",
+    "w:react-against-sth",
+    "w:set-against",
+    "w:stand-up-against",
+    "w:turn-against",
+    "w:up-against"
+  ]
 }

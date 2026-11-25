@@ -1,0 +1,270 @@
+{
+  "entryId": "w:lets-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "let's",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let's",
+        "go"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let's go",
+  "senses": [
+    {
+      "senseId": "w:lets-go#s1",
+      "pos": "短语",
+      "glossZh": "我们走吧；一起出发吧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lets-go#e-b5890975c21c1795",
+          "text": "“Let’s go.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 9
+          },
+          "parts": [
+            [
+              1,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lets-go#e-0a7c3dd0f5618ee0",
+          "text": "Let’s go.”",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lets-go#e-8801b881120903a1",
+          "text": "I stood up and told my guide, “Let’s go.” He nodded, then silently handed me a small bottle of hot water – the first real gesture of warmth he had offered beyond his necessary instructions since we started.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          },
+          "parts": [
+            [
+              31,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:lets-go#s2",
+      "pos": "短语",
+      "glossZh": "开始吧；我们行动吧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lets-go#e-b51bac6ccc24bbd8",
+          "text": "He would often say, “Well, what would you like to do?” or “Let’s go do this; you’ll like this.” I started to notice what a struggle it was for him to just want something for himself.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 67
+          },
+          "parts": [
+            [
+              59,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lets-go#e-a5d0d4a2681645d2",
+          "text": "Let’s go.”",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation:4",
+              "sentence": 12
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lets-go#s3",
+      "pos": "短语",
+      "glossZh": "快点！赶紧行动！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于催促。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lets-go#s4",
+      "pos": "短语",
+      "glossZh": "来吧！放马过来！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于应战。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lets-go#s5",
+      "pos": "短语",
+      "glossZh": "太棒了！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于欢呼庆祝。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

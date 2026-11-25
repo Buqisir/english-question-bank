@@ -1,0 +1,245 @@
+{
+  "entryId": "w:step-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "forward"
+      ],
+      [
+        "stepped",
+        "forward"
+      ],
+      [
+        "stepping",
+        "forward"
+      ],
+      [
+        "steps",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stepped forward",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step forward",
+  "senses": [
+    {
+      "senseId": "w:step-forward#s1",
+      "pos": "短语",
+      "glossZh": "主动站出来（发言、参与或提供帮助）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-forward#e-fb9d3841b20a83b4",
+          "text": "The tofu vendor’s daughter, who had watched silently for weeks on end, finally stepped forward to borrow a comic.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 94
+          },
+          "parts": [
+            [
+              79,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-forward#e-e2dba687052da2aa",
+          "text": "“They just need sun and water!” Lila stepped forward, her voice steady.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 52
+          },
+          "parts": [
+            [
+              37,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-forward#e-442940ef98d54923",
+          "text": "Paragraph 1: Amazingly, Rose stepped forward to break the ice.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 44
+          },
+          "parts": [
+            [
+              29,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:step-forward#s2",
+      "pos": "短语",
+      "glossZh": "向前迈一步；走上前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-forward#e-998f99d74bfd0bb9",
+          "text": "Paragraph 1: Just as the dirt was about to cover the capsules, Mia suddenly stepped forward.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 91
+          },
+          "parts": [
+            [
+              76,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-forward#e-f2c4047819ed4740",
+          "text": "The Poodle, whom I recognized as Princess, stepped forward and dropped a high-quality, expensive dog biscuit at the edge of the bed.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 58
+          },
+          "parts": [
+            [
+              43,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

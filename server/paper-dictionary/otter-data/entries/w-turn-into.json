@@ -1,0 +1,283 @@
+{
+  "entryId": "w:turn-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turning into",
+    "turns into"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "into"
+      ],
+      [
+        "turning",
+        "into"
+      ],
+      [
+        "turns",
+        "into"
+      ],
+      [
+        "turned",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn into",
+      "tags": []
+    },
+    {
+      "form": "turned into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn (sth) into",
+  "senses": [
+    {
+      "senseId": "w:turn-into#s1",
+      "pos": "短语",
+      "glossZh": "变成；演变为",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-into#e-4c170ccb0cfe7c76",
+          "text": "Four years later, those beautiful 10 acres of fields had turned into 20 acres filled with over 400,000 sunflowers.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 68
+          },
+          "parts": [
+            [
+              57,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-into#e-649c2f90ab047056",
+          "text": "It is where dead leaves turn into food for the trees and other forest life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-into#e-988227559d8d3a82",
+          "text": "One lap turned into two, then three, then four.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 43
+      }
+    },
+    {
+      "senseId": "w:turn-into#s2",
+      "pos": "短语",
+      "glossZh": "把……变成；把……改造成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-into#e-1cd84be5fd6b718b",
+          "text": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 163
+          },
+          "parts": [
+            [
+              152,
+              163
+            ]
+          ],
+          "highlightRanges": [
+            [
+              152,
+              163
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-into#e-6afc64ffbf0455e8",
+          "text": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-into#e-f6f343133540eb1a",
+          "text": "the energy created as the ball moved, which could then be turned into electricity.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 55
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

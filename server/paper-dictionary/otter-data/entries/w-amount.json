@@ -42,8 +42,8 @@
     "mock": 103
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 103
+    "gaokao": 1,
+    "mock": 2
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 101
       },
       "folded": false,
       "examples": [
@@ -117,40 +117,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:amount#s2",
-      "pos": "短语",
-      "glossZh": "总计；等于；相当于",
-      "pronunciationId": "w:amount#p-main",
-      "note": "amount to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:amount#e-9e060b228566cb77",
-          "text": "much it would amount to.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -159,6 +125,11 @@
       "reason": "已过时的动词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:amount-to-sth"
+  ]
 }

@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 116
+    "mock": 20
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -200,7 +200,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -234,7 +234,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -305,7 +305,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -377,7 +377,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -449,7 +449,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -482,7 +482,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -515,7 +515,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -565,80 +565,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:fit#s12",
-      "pos": "短语",
-      "glossZh": "融入",
-      "pronunciationId": "w:fit#p-main",
-      "note": "fit in。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fit#e-c218057144c6d917",
-          "text": "To help them fit in socially.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-mock-cq-nankai-2026-05-ninth-quality-test:25",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:fit#e-42a8f625054de0f7",
-          "text": "Should he hide who he is to fit in, or can he find a way to live openly without fear?",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:fit#e-0fd9064928001d4b",
-          "text": "Fitting in with young students.",
-          "source": {
-            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
-            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
-            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -647,6 +573,15 @@
       "reason": "缩写 FIT"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fit-for-a-king",
+    "w:fit-for-purpose",
+    "w:fit-in",
+    "w:fit-into",
+    "w:keep-fit"
+  ]
 }

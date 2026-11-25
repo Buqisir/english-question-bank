@@ -1,0 +1,229 @@
+{
+  "entryId": "w:in-favor-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in favour of"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "favor",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "favor",
+        "of"
+      ],
+      [
+        "in",
+        "favour",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in favor of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in favor of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:in-favor-of#s1",
+      "pos": "短语",
+      "glossZh": "支持；赞成",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:favour#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-favor-of#e-445da5203a4bc06a",
+          "text": "The governor was in favor of it, and so were the powerful state commissions that would have to approve it.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-favor-of#e-7c1975ade6dedd34",
+          "text": "When I counted the point in favor of one of them, the other player told me, ‘Do not get",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-favor-of#e-59427ec64adf0aef",
+          "text": "Those in favour of hunting point out that Australia earns $175m from it annually.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 18
+          },
+          "parts": [
+            [
+              6,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:in-favor-of#s2",
+      "pos": "短语",
+      "glossZh": "转而选择；以……代替",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:favour#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-favor-of#e-075dc0319b96e542",
+          "text": "On our final morning, after a night of rain, I skipped the game drive in favor of a coffee on the deck.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 81
+          },
+          "parts": [
+            [
+              70,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:in-favor-of#s3",
+      "pos": "短语",
+      "glossZh": "以某人为受益人或收款人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于票据或法律文书。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

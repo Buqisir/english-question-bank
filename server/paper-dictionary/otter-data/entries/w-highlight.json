@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 194
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 148
       },
       "folded": false,
       "examples": [
@@ -244,12 +244,25 @@
       "pos": "v.",
       "glossZh": "用醒目颜色标出",
       "pronunciationId": "w:highlight#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:highlight#s5",
+      "pos": "v.",
+      "glossZh": "给头发挑染",
+      "pronunciationId": "w:highlight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -259,6 +272,6 @@
       "reason": "美发或绘画专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

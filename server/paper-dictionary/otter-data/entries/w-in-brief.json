@@ -1,0 +1,93 @@
+{
+  "entryId": "w:in-brief",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "brief"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "brief"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in brief",
+  "senses": [
+    {
+      "senseId": "w:in-brief#s1",
+      "pos": "短语",
+      "glossZh": "简而言之；简要地说",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:brief#s3",
+        "w:in#s57"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-brief#e-7be274e0c901c991",
+          "text": "In brief, ruins lay behind her.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

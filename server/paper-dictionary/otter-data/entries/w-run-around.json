@@ -1,0 +1,258 @@
+{
+  "entryId": "w:run-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran around",
+    "running around"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "around"
+      ],
+      [
+        "ran",
+        "around"
+      ],
+      [
+        "running",
+        "around"
+      ],
+      [
+        "runs",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run around",
+  "senses": [
+    {
+      "senseId": "w:run-around#s1",
+      "pos": "短语",
+      "glossZh": "到处跑；跑来跑去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-around#e-ec9e96aa114a3447",
+          "text": "I didn’t want Toby to be running around in the house, and my brother wasn’t happy with driving home with a wet dog.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 39
+          },
+          "parts": [
+            [
+              25,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-around#e-3920bd9301092b45",
+          "text": "My daughter Heidi ran around the backyard in the summer sunshine, being her usual silly three-year-old self.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          },
+          "parts": [
+            [
+              18,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-around#e-db75f2c1f36e5203",
+          "text": "My three-year-old daughter Heidi ran around the backyard.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:run-around#s2",
+      "pos": "短语",
+      "glossZh": "为办事四处奔波；忙得团团转",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-around#e-ba07fc75b9163279",
+          "text": "I was running around stressed most of the day.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-wuhan-2026-03-sanyue-diaoyan:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 20
+          },
+          "parts": [
+            [
+              6,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-around#e-d1bd04233ab9dfb3",
+          "text": "I’m running around stressed most of the day.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:run-around#s3",
+      "pos": "短语",
+      "glossZh": "对伴侣不忠",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常用 run around on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

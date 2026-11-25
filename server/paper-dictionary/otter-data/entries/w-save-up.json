@@ -1,0 +1,174 @@
+{
+  "entryId": "w:save-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "save",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "save",
+        "up"
+      ],
+      [
+        "saved",
+        "up"
+      ],
+      [
+        "saves",
+        "up"
+      ],
+      [
+        "saving",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "save up",
+      "tags": []
+    },
+    {
+      "form": "saved up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "save (sth) up",
+  "senses": [
+    {
+      "senseId": "w:save-up#s1",
+      "pos": "短语",
+      "glossZh": "攒钱；为某个目标存钱",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:save-up#e-71c68651f9e213da",
+          "text": "A month later, I saved up my pocket money and bought a tin of authentic UK shortbread as a gift.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:save-up#e-1cd8be4f6c583069",
+          "text": "I have to save up some of the money myself to buy the 3D printer.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:writing-continuation:3",
+              "sentence": 12
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:save-up#e-ace1a50b77c9c660",
+          "text": "She saved up for a bike.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          },
+          "parts": [
+            [
+              4,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常用 save up for sth 或 save up to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

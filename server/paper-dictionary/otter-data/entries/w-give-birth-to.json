@@ -1,0 +1,181 @@
+{
+  "entryId": "w:give-birth-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "give",
+      "birth",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "birth",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gave birth to",
+      "tags": []
+    },
+    {
+      "form": "given birth to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give birth to",
+  "senses": [
+    {
+      "senseId": "w:give-birth-to#s1",
+      "pos": "短语",
+      "glossZh": "生下；产下（孩子或幼崽）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:birth#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-birth-to#e-368c6a52a0f770c6",
+          "text": "The she-wolf had just given birth to a litter of wolf cubs, and the wolf king ran out to hunt for her, but unfortunately mistakenly fell into the herders’ trap and was eventually killed.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 36
+          },
+          "parts": [
+            [
+              22,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:give-birth-to#s2",
+      "pos": "短语",
+      "glossZh": "催生；使……产生",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:birth#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-birth-to#e-f5817107c3122a88",
+          "text": "He, along with Georges Braque, gave birth to cubism – one of the most revolutionary movements in modern art, paving the way for nearly all abstract art that followed.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 44
+          },
+          "parts": [
+            [
+              31,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-birth-to#e-8af9a5190c527ca6",
+          "text": "Thus, in the world’s most advanced industries, the delicate cooperation between humans and machines will give birth to products that are safe, reliable and truly world-class, fully demonstrating the enduring power of craftsmanship.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 118
+          },
+          "parts": [
+            [
+              105,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              118
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

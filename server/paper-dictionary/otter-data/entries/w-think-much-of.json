@@ -1,0 +1,127 @@
+{
+  "entryId": "w:think-much-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "think",
+      "much",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "much",
+        "of"
+      ],
+      [
+        "thinking",
+        "much",
+        "of"
+      ],
+      [
+        "thinks",
+        "much",
+        "of"
+      ],
+      [
+        "thought",
+        "much",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "think much of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think much of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:think-much-of#s1",
+      "pos": "短语",
+      "glossZh": "没多想；没把……放在心上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-much-of#e-700f8826852fd598",
+          "text": "I thought we’d get a heater long before winter, so I didn’t think much of them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 73
+          },
+          "parts": [
+            [
+              60,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "用于 not think much of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:think-much-of#s2",
+      "pos": "短语",
+      "glossZh": "看重；对……评价很高",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "在评价语境中，否定式表示评价不高。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

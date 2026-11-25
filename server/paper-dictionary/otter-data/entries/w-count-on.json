@@ -1,0 +1,228 @@
+{
+  "entryId": "w:count-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "count",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "count",
+        "on"
+      ],
+      [
+        "counted",
+        "on"
+      ],
+      [
+        "counting",
+        "on"
+      ],
+      [
+        "counts",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "count on",
+      "tags": []
+    },
+    {
+      "form": "counted on",
+      "tags": []
+    },
+    {
+      "form": "counting on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "count on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:count-on#s1",
+      "pos": "短语",
+      "glossZh": "依靠；指望某人帮忙",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:count#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:count-on#e-aeacf94689e7c28e",
+          "text": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 71
+          },
+          "parts": [
+            [
+              63,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:count-on#e-e1ee74ff131b147c",
+          "text": "Count on the latest dietary advice.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-08-stage-training:31#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:count-on#e-330908585e19e7f0",
+          "text": "It counted on direct observation.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:28#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:count-on#s2",
+      "pos": "短语",
+      "glossZh": "预料某事会发生；把……考虑在内",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:count#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:count-on#e-e32765a4b4700986",
+          "text": "There was just one thing I hadn’t counted on: My brother chose to bring his dog Toby, a 50-pound ball of fire.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 44
+          },
+          "parts": [
+            [
+              34,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

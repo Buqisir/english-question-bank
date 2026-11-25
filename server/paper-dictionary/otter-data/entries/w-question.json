@@ -59,8 +59,8 @@
     "mock": 478
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 476
+    "gaokao": 5,
+    "mock": 287
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 34,
-        "mock": 0
+        "mock": 111
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -246,7 +246,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -315,12 +315,12 @@
       "pos": "v.",
       "glossZh": "询问",
       "pronunciationId": "w:question#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -332,7 +332,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -356,40 +356,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:question#s7",
-      "pos": "短语",
-      "glossZh": "所谈到的",
-      "pronunciationId": "w:question#p-main",
-      "note": "in question。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:question#e-9d329eb26f433a22",
-          "text": "It took him a few tries to find the word in question.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 52
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -398,6 +364,13 @@
       "reason": "历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-question",
+    "w:leading-question",
+    "w:no-question"
+  ]
 }

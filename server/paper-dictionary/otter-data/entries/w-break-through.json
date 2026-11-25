@@ -1,0 +1,218 @@
+{
+  "entryId": "w:break-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "broke through"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "through"
+      ],
+      [
+        "broke",
+        "through"
+      ],
+      [
+        "breaking",
+        "through"
+      ],
+      [
+        "breaks",
+        "through"
+      ],
+      [
+        "broken",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break through",
+  "senses": [
+    {
+      "senseId": "w:break-through#s1",
+      "pos": "短语",
+      "glossZh": "冲破；突破阻碍",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-through#e-910cd28964099ee8",
+          "text": "And, because no one can outrun their emotions forever, they seem even bigger when they break through.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 100
+          },
+          "parts": [
+            [
+              87,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-through#e-1fd9d156d9229f7f",
+          "text": "But recently, I’ve found myself recalling how my friend’s voice broke through loneliness.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 77
+          },
+          "parts": [
+            [
+              64,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-through#e-1bd38b85cc3cfb3d",
+          "text": "When it was finally his turn, he lifted the camera and pressed the button just as sunlight broke through the clouds.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 104
+          },
+          "parts": [
+            [
+              91,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              104
+            ]
+          ]
+        }
+      ],
+      "note": "可指阳光穿透云层，也可指冲破无形的阻碍。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:break-through#s2",
+      "pos": "短语",
+      "glossZh": "取得突破性成功；开始获得广泛认可",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-through#e-710d09dfb4b96a65",
+          "text": "Though it took determination to keep going, he ultimately broke through with Tales from the Farm, which aired on Canada’s CBC Television as a miniseries largely shaped by the original cartoonist himself.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 71
+          },
+          "parts": [
+            [
+              58,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

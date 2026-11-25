@@ -1,0 +1,73 @@
+{
+  "entryId": "w:talk-shop",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "shop"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "shop"
+      ],
+      [
+        "talked",
+        "shop"
+      ],
+      [
+        "talking",
+        "shop"
+      ],
+      [
+        "talks",
+        "shop"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk shop",
+  "senses": [
+    {
+      "senseId": "w:talk-shop#s1",
+      "pos": "短语",
+      "glossZh": "谈论自己的工作或同行才熟悉的话题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shop#s5"
+      ],
+      "examples": [],
+      "note": "常指在社交场合聊工作。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

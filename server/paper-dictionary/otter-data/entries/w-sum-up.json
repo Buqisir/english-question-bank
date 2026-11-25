@@ -1,0 +1,97 @@
+{
+  "entryId": "w:sum-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sum",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sum",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "summed up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sum (sth) up",
+  "senses": [
+    {
+      "senseId": "w:sum-up#s1",
+      "pos": "短语",
+      "glossZh": "总结；概括",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sum#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sum-up#e-f0377574f3939106",
+          "text": "Early in my teaching career, students complained about my accent, and my department chair once summed up my performance: Dr. Sun was a good teacher, but he had an accent.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 104
+          },
+          "parts": [
+            [
+              95,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

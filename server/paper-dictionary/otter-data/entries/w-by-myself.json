@@ -1,0 +1,167 @@
+{
+  "entryId": "w:by-myself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "myself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "myself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by myself",
+  "senses": [
+    {
+      "senseId": "w:by-myself#s1",
+      "pos": "短语",
+      "glossZh": "我独自一人；无人陪伴",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:myself#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-myself#e-6ec5d636a8035c45",
+          "text": "With no other kids of my age in the neighborhood, I had to spend hours by myself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 80
+          },
+          "parts": [
+            [
+              71,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-myself#e-501c81a7801a7ac8",
+          "text": "“Everything OK, Kellie?” Mrs Melville asked me when I was sitting by myself.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 75
+          },
+          "parts": [
+            [
+              66,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-myself#e-4a3129e35cc49d0d",
+          "text": "I was 31 and finally lived by myself.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:by-myself#s2",
+      "pos": "短语",
+      "glossZh": "我靠自己；独力完成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

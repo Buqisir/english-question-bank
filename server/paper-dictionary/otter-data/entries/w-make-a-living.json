@@ -1,0 +1,179 @@
+{
+  "entryId": "w:make-a-living",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making a living"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "a",
+      "living"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "a",
+        "living"
+      ],
+      [
+        "making",
+        "a",
+        "living"
+      ],
+      [
+        "made",
+        "a",
+        "living"
+      ],
+      [
+        "makes",
+        "a",
+        "living"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made a living",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make a living",
+  "senses": [
+    {
+      "senseId": "w:make-a-living#s1",
+      "pos": "短语",
+      "glossZh": "谋生；靠某项工作或活动维持生计",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-a-living#e-1d6e1512330e4245",
+          "text": "They made a living as divers, spearfishing or harvesting shellfish.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 18
+          },
+          "parts": [
+            [
+              5,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-a-living#e-3da6a65fcd2466e0",
+          "text": "Millions of people make a living in the fishing industry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 32
+          },
+          "parts": [
+            [
+              19,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-a-living#e-47194c259576fe7d",
+          "text": "An idea began to form: what if he could build a future here, not just make a living there?",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 83
+          },
+          "parts": [
+            [
+              70,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              83
+            ]
+          ]
+        }
+      ],
+      "note": "常接 as、by 或 from，说明职业或收入来源。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

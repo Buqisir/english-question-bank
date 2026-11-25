@@ -1,0 +1,92 @@
+{
+  "entryId": "w:best-of-luck",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "best",
+      "of",
+      "luck"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "best",
+        "of",
+        "luck"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "best of luck",
+  "senses": [
+    {
+      "senseId": "w:best-of-luck#s1",
+      "pos": "短语",
+      "glossZh": "祝你好运！祝你一切顺利！",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:best-of-luck#e-fc5ad9ed23062939",
+          "text": "Best of luck with yours learning kung fu in China.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,76 @@
+{
+  "entryId": "w:here-and-now",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "here",
+      "and",
+      "now"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "here",
+        "and",
+        "now"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "here and now",
+  "senses": [
+    {
+      "senseId": "w:here-and-now#s1",
+      "pos": "短语",
+      "glossZh": "就在此时此地；当场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:here#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:here-and-now#s2",
+      "pos": "短语",
+      "glossZh": "当下的现实或生活",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作名词短语时常用 the here and now。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

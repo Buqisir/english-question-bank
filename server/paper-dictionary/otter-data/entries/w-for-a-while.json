@@ -1,0 +1,155 @@
+{
+  "entryId": "w:for-a-while",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "a",
+      "while"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "a",
+        "while"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for a while",
+  "senses": [
+    {
+      "senseId": "w:for-a-while#s1",
+      "pos": "短语",
+      "glossZh": "一会儿；一段时间",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:for-a-while#e-04e7236c7f068f0b",
+          "text": "She drove on for a while and found herself on an unfamiliar road toward a Canadian town.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 24
+          },
+          "parts": [
+            [
+              13,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-a-while#e-2254cf38b4de634f",
+          "text": "Turn it off for a while.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-a-while#e-5f7f0215ad3d5649",
+          "text": "For example, one participant’s experience of “We sat and listened to the waves at the beach for a while” was assigned the categories “sitting at beach” and “listening to waves.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 103
+          },
+          "parts": [
+            [
+              92,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

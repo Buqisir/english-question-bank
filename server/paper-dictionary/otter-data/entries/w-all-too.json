@@ -1,0 +1,154 @@
+{
+  "entryId": "w:all-too",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "too"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "too"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all too",
+  "senses": [
+    {
+      "senseId": "w:all-too#s1",
+      "pos": "短语",
+      "glossZh": "实在太……；未免太……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-too#e-fdefa2ddbdf7b1d7",
+          "text": "For theatergoers, it produces an all too familiar sinking feeling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          },
+          "parts": [
+            [
+              33,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-too#e-80b2319a52bd9a18",
+          "text": "And Mom knew that all too well.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-too#e-a4c42a76d42ddfc7",
+          "text": "All too often",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:cloze",
+            "locator": {
+              "question": 42,
+              "questionId": "question:paper-mock-hunan-yali-2026-second:42#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "常带有遗憾或无奈的语气，如 all too well、all too familiar。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

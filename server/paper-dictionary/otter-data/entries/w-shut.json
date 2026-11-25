@@ -51,8 +51,8 @@
     "mock": 42
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 34
+    "gaokao": 1,
+    "mock": 28
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -134,7 +134,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -180,128 +180,6 @@
       ]
     },
     {
-      "senseId": "w:shut#s3",
-      "pos": "短语",
-      "glossZh": "停止运行",
-      "pronunciationId": "w:shut#p-main",
-      "note": "shut down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shut#e-9a4317cee1b054ab",
-          "text": "After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:shut#e-ef9c1fc6439dee25",
-          "text": "It shuts down randomly.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:listening.long-form",
-            "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shut#s4",
-      "pos": "短语",
-      "glossZh": "屏蔽",
-      "pronunciationId": "w:shut#p-main",
-      "note": "shut out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shut#e-5445d360eeb637a2",
-          "text": "It’s also about shutting out distraction, because I think that whatever is happening around me is disturbing, at the very least extraneous to my central purpose, which is getting from A to B.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shut#s5",
-      "pos": "短语",
-      "glossZh": "闭嘴",
-      "pronunciationId": "w:shut#p-main",
-      "note": "shut up，命令语气可显得粗鲁。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shut#e-6ec5f054e8095b82",
-          "text": "So I better just shut up, look smart, and use an O and an F.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
-            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:shut#s6",
       "pos": "v.",
       "glossZh": "把……关在某处",
@@ -341,6 +219,14 @@
       "reason": "语言学、工艺或方言义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:put-up-or-shut-up",
+    "w:shut-down",
+    "w:shut-out",
+    "w:shut-up"
+  ]
 }

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:or-so",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "or",
+      "so"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "or",
+        "so"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "or so",
+  "senses": [
+    {
+      "senseId": "w:or-so#s1",
+      "pos": "短语",
+      "glossZh": "大约；左右",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:or#s5",
+        "w:so#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:or-so#e-2ddbb413fbed9200",
+          "text": "In the last century or so, these changes have accelerated.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 25
+          },
+          "parts": [
+            [
+              20,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:or-so#e-c1aff513a6499948",
+          "text": "However, in this case, I was a woman all alone, in a strange neighborhood, at night, and there were twenty or so very large men – all wearing insignia（徽章） that indicated they were in some sort of club – standing before me.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 112
+          },
+          "parts": [
+            [
+              107,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              112
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:or-so#e-b91233d67ee215de",
+          "text": "For decades, researchers argued that humans all share a set of a half-dozen or so basic emotions.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 81
+          },
+          "parts": [
+            [
+              76,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              81
+            ]
+          ]
+        }
+      ],
+      "note": "放在数字或数量之后。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

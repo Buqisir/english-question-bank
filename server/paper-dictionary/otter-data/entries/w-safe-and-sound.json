@@ -1,0 +1,124 @@
+{
+  "entryId": "w:safe-and-sound",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "safe",
+      "and",
+      "sound"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "safe",
+        "and",
+        "sound"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "safe and sound",
+  "senses": [
+    {
+      "senseId": "w:safe-and-sound#s1",
+      "pos": "短语",
+      "glossZh": "平安无恙",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:safe-and-sound#e-f3ce84242330dc37",
+          "text": "Paragraph 1: Minutes later, Dad arrived, relieved to see Olly safe and sound.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 76
+          },
+          "parts": [
+            [
+              62,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:safe-and-sound#e-0cca29636e01d878",
+          "text": "The fear of not staying safe and sound.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:25#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 38
+          },
+          "parts": [
+            [
+              24,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

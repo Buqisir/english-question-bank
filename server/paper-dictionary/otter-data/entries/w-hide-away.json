@@ -1,0 +1,87 @@
+{
+  "entryId": "w:hide-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hide",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hide",
+        "away"
+      ],
+      [
+        "hid",
+        "away"
+      ],
+      [
+        "hidden",
+        "away"
+      ],
+      [
+        "hides",
+        "away"
+      ],
+      [
+        "hiding",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hide (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:hide-away#s1",
+      "pos": "短语",
+      "glossZh": "躲起来；藏身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hide-away#s2",
+      "pos": "短语",
+      "glossZh": "把人或东西藏到隐蔽处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

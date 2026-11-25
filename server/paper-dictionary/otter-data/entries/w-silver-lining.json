@@ -1,0 +1,156 @@
+{
+  "entryId": "w:silver-lining",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "silver",
+      "lining"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "silver",
+        "lining"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "silver lining",
+  "senses": [
+    {
+      "senseId": "w:silver-lining#s1",
+      "pos": "短语",
+      "glossZh": "坏事中好的一面；困境中的一线希望",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:line#s12",
+        "w:silver#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:silver-lining#e-e795a20d291f5da2",
+          "text": "Martin sees a silver lining, however: She believes that anthropomorphism（拟人化）“provides an opportunity to change stereotypes.” When women are put into positions of leadership like running companies, it reduces negative stereotypes about women.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 27
+          },
+          "parts": [
+            [
+              14,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:silver-lining#e-43130fbc348ee959",
+          "text": "Interestingly, there exists a silver lining.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zj-2026-xinzhendi-2:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 43
+          },
+          "parts": [
+            [
+              30,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:silver-lining#e-28e4bbbfcbdb8c6d",
+          "text": "There is a silver lining, fortunately.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 24
+          },
+          "parts": [
+            [
+              11,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

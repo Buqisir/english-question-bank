@@ -42,8 +42,8 @@
     "mock": 100
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 99
+    "gaokao": 17,
+    "mock": 85
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -118,78 +118,6 @@
       ]
     },
     {
-      "senseId": "w:bit#s2",
-      "pos": "短语",
-      "glossZh": "一点；一些；稍微",
-      "pronunciationId": "w:bit#p-main",
-      "note": "a bit、a bit of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bit#e-3bc0263ef5f476bb",
-          "text": "Always make your presentation just a bit shorter than anticipated.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:bit#e-152724bff0e10707",
-          "text": "For the first few days, Kynan was always a bit disappointed that the cubs weren’t there.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:bit#e-4a902dd2643c9817",
-          "text": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:bit#s3",
       "pos": "n.",
       "glossZh": "比特；二进制位",
@@ -239,6 +167,16 @@
       "reason": "历史、俚语或罕见用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-bit",
+    "w:a-bit-of-sth",
+    "w:a-little-bit",
+    "w:bit-by-bit",
+    "w:bit-player",
+    "w:every-bit"
+  ]
 }

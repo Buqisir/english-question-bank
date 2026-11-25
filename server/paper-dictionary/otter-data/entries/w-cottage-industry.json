@@ -1,0 +1,124 @@
+{
+  "entryId": "w:cottage-industry",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cottage",
+      "industry"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cottage",
+        "industry"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cottage industry",
+  "senses": [
+    {
+      "senseId": "w:cottage-industry#s1",
+      "pos": "短语",
+      "glossZh": "家庭手工业",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cottage#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cottage-industry#e-a63ad7551bd3511a",
+          "text": "However, technology changed everything: one machine outperformed 10-20 handweavers, ending cottage industry.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 107
+          },
+          "parts": [
+            [
+              91,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              107
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cottage-industry#e-8f7d0edd5c4b0ad1",
+          "text": "The closure of cottage industry.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:33#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 31
+          },
+          "parts": [
+            [
+              15,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

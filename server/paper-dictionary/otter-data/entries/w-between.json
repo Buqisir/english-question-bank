@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 692
+    "mock": 492
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 45,
-        "mock": 0
+        "mock": 178
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -304,20 +304,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:between#s5",
-      "pos": "短语",
-      "glossZh": "只在彼此间保密；私下说",
-      "pronunciationId": "w:between#p-main",
-      "note": "between you and me。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -326,6 +312,15 @@
       "reason": "针具专门名称。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:between-you-and-me",
+    "w:get-between",
+    "w:in-between",
+    "w:read-between-the-lines",
+    "w:stand-between"
+  ]
 }

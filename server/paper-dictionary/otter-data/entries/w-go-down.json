@@ -1,0 +1,367 @@
+{
+  "entryId": "w:go-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going down",
+    "went down"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "down"
+      ],
+      [
+        "going",
+        "down"
+      ],
+      [
+        "went",
+        "down"
+      ],
+      [
+        "goes",
+        "down"
+      ],
+      [
+        "gone",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go down",
+  "senses": [
+    {
+      "senseId": "w:go-down#s1",
+      "pos": "短语",
+      "glossZh": "（价格、水平等）下降；降低",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-down#e-56552a24c691eed1",
+          "text": "If, for whatever reasons, people’s errors become correlated or dependent, the accuracy of the estimate will go down.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 115
+          },
+          "parts": [
+            [
+              108,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-down#e-93b0c7b3d1199f9e",
+          "text": "The stamp price has gone down.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-i:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-down#e-520540c0d3c2d500",
+          "text": "Aislinn gradually remembered when she had got a swollen ankle, Grandfather had told her to keep ice on it, and the swelling had gone down.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:5",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 137
+          },
+          "parts": [
+            [
+              128,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-down#s2",
+      "pos": "短语",
+      "glossZh": "下去；往低处走",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-down#e-b82f0d3f34c1b7d2",
+          "text": "The alarm rang at 6 a.m. The pair went down the stairs quietly to the kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-down#e-12c6be30f17650c6",
+          "text": "He went down to the port and screamed at the ocean.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-down#e-6a00c3ad3d05ad6c",
+          "text": "Going down does the opposite.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-down#s3",
+      "pos": "短语",
+      "glossZh": "（太阳）落下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-down#s4",
+      "pos": "短语",
+      "glossZh": "受到某种反响；被接受",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 go down well/badly。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-down#s5",
+      "pos": "短语",
+      "glossZh": "作为……被记载或铭记",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "go down in history 或 go down as sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-down#s6",
+      "pos": "短语",
+      "glossZh": "发生",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-down#s7",
+      "pos": "短语",
+      "glossZh": "（系统或网络）停止运行；离线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-down#s8",
+      "pos": "短语",
+      "glossZh": "被判入狱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

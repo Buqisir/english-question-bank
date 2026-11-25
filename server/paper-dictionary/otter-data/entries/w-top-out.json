@@ -1,0 +1,110 @@
+{
+  "entryId": "w:top-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "top",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "top",
+        "out"
+      ],
+      [
+        "topped",
+        "out"
+      ],
+      [
+        "topping",
+        "out"
+      ],
+      [
+        "tops",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "top out",
+  "senses": [
+    {
+      "senseId": "w:top-out#s1",
+      "pos": "短语",
+      "glossZh": "达到最高点；达到上限",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 top out at 接最高数值。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:top-out#s2",
+      "pos": "短语",
+      "glossZh": "在事业巅峰时退出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:top-out#s3",
+      "pos": "短语",
+      "glossZh": "（建筑）封顶",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:top-out#s4",
+      "pos": "短语",
+      "glossZh": "（攀岩）爬到并翻过顶端",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

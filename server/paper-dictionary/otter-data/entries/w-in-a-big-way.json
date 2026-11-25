@@ -1,0 +1,98 @@
+{
+  "entryId": "w:in-a-big-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "a",
+      "big",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "a",
+        "big",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in a big way",
+  "senses": [
+    {
+      "senseId": "w:in-a-big-way#s1",
+      "pos": "短语",
+      "glossZh": "程度很大地；以夸张的方式",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:big#s7",
+        "w:way#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-a-big-way#e-cf948978c54d0c55",
+          "text": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 113
+          },
+          "parts": [
+            [
+              101,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              113
+            ]
+          ]
+        }
+      ],
+      "note": "形容表达情绪时，指表现得格外强烈或夸张。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

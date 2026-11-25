@@ -1,0 +1,140 @@
+{
+  "entryId": "w:golden-age",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "golden",
+      "age"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "golden",
+        "age"
+      ],
+      [
+        "golden",
+        "ages"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "golden age",
+  "senses": [
+    {
+      "senseId": "w:golden-age#s1",
+      "pos": "短语",
+      "glossZh": "黄金时代；最繁荣或最兴盛的时期",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:golden-age#e-cf00d9ff8178cd35",
+          "text": "Travel back to the golden age of cultural exchange through timeless music storytelling.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:golden-age#e-1faec271b1ae0365",
+          "text": "A golden age film.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常用 the golden age of 指某领域的鼎盛时期，也可指被怀念的美好时代。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:golden-age#s2",
+      "pos": "短语",
+      "glossZh": "（古典神话中）人类最初的幸福时代",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-general",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "general"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "general"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in general",
+  "senses": [
+    {
+      "senseId": "w:in-general#s1",
+      "pos": "短语",
+      "glossZh": "总的来说；一般而言",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:general#s7",
+        "w:in#s56"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-general#e-f29389bea3ab6404",
+          "text": "Therefore, they can work for longer, consume more and in general be a boost to the economy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 64
+          },
+          "parts": [
+            [
+              54,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-general#e-7d72220417d532f9",
+          "text": "Evans also adds that kids with DMDD need more empathy and understanding in general.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 82
+          },
+          "parts": [
+            [
+              72,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-general#e-96eb18553f6dacf9",
+          "text": "Interestingly, the study showed that older adults who spoke more slowly in general were also slower at naming these pictures.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 82
+          },
+          "parts": [
+            [
+              72,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              82
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

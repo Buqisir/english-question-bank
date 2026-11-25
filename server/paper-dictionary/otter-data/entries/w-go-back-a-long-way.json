@@ -1,0 +1,139 @@
+{
+  "entryId": "w:go-back-a-long-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes back a long way"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "back",
+      "a",
+      "long",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "back",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "goes",
+        "back",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "going",
+        "back",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "gone",
+        "back",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "went",
+        "back",
+        "a",
+        "long",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go back a long way",
+  "senses": [
+    {
+      "senseId": "w:go-back-a-long-way#s1",
+      "pos": "短语",
+      "glossZh": "由来已久；可追溯到很久以前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-back-a-long-way#e-39c0b24e793ac84a",
+          "text": "The idea of homework goes back a long way.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 41
+          },
+          "parts": [
+            [
+              21,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-back-a-long-way#s2",
+      "pos": "短语",
+      "glossZh": "相识已久；有多年的交情",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,155 @@
+{
+  "entryId": "w:the-moment",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "moment"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "moment"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the moment",
+  "senses": [
+    {
+      "senseId": "w:the-moment#s1",
+      "pos": "短语",
+      "glossZh": "一……就……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:moment#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-moment#e-07ed106dcd4162cc",
+          "text": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 87
+          },
+          "parts": [
+            [
+              77,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-moment#e-c23fb9c86c8fddf9",
+          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-moment#e-c25685ab082550d3",
+          "text": "The moment the door opened, I blurted out（脱口而出）, “Do you have any idea how much noise you’re making?”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "引导时间状语从句。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

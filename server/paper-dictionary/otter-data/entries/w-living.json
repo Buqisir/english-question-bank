@@ -42,8 +42,8 @@
     "mock": 343
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 341
+    "gaokao": 10,
+    "mock": 168
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 95
       },
       "folded": false,
       "examples": [
@@ -127,7 +127,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -160,7 +160,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -231,7 +231,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -304,7 +304,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -366,113 +366,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:living#s6",
-      "pos": "短语",
-      "glossZh": "客厅",
-      "pronunciationId": "w:living#p-main",
-      "note": "living room。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:living#e-5a967bcdd661ba9d",
-          "text": "They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:living#e-98a54fb974bbc781",
-          "text": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said, sitting in the bright open living room of the home designed by the famous architect.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 141,
-            "end": 147
-          }
-        },
-        {
-          "exampleId": "w:living#e-e332d1304d569928",
-          "text": "Sometimes, a cleaner living room is the best reward.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-ii:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:living#s7",
-      "pos": "短语",
-      "glossZh": "实现（梦想）",
-      "pronunciationId": "w:living#p-main",
-      "note": "live out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:living#e-b40d3d87f01bdd41",
-          "text": "Now, I’m living out that dream indirectly by helping the panda keepers do their job in English.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -481,6 +374,13 @@
       "reason": "历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:living-in-the-moment",
+    "w:living-proof",
+    "w:make-a-living"
+  ]
 }

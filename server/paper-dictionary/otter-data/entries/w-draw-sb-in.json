@@ -1,0 +1,289 @@
+{
+  "entryId": "w:draw-sb-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "draw in",
+    "drawing in"
+  ],
+  "pattern": {
+    "tokens": [
+      "draw",
+      {
+        "slot": "sb"
+      },
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "draw",
+        {
+          "slot": "sb"
+        },
+        "in"
+      ],
+      [
+        "draw",
+        "in"
+      ],
+      [
+        "drawing",
+        "in"
+      ],
+      [
+        "drawn",
+        "in"
+      ],
+      [
+        "draws",
+        "in"
+      ],
+      [
+        "drew",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draws in",
+      "tags": []
+    },
+    {
+      "form": "drew in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw sb in",
+  "senses": [
+    {
+      "senseId": "w:draw-sb-in#s1",
+      "pos": "短语",
+      "glossZh": "吸引某人；引起某人的兴趣",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s75"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-sb-in#e-06d84b99d5dfee7e",
+          "text": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity and gradually pulls them into deeper thoughts on desire, loneliness, and aging.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 63
+          },
+          "parts": [
+            [
+              47,
+              52
+            ],
+            [
+              61,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              52
+            ],
+            [
+              61,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sb-in#e-a18e2b9f2d7de6a2",
+          "text": "We fell into a short, easy discussion about design and what drew a reader in.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 76
+          },
+          "parts": [
+            [
+              60,
+              64
+            ],
+            [
+              74,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              64
+            ],
+            [
+              74,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sb-in#e-6b5a0eee5caaf797",
+          "text": "“But it was not just the food that drew me in; it was the people, their kindness, and the customs passed down through generations,” he added.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              39
+            ],
+            [
+              43,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              39
+            ],
+            [
+              43,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:draw-sb-in#s3",
+      "pos": "短语",
+      "glossZh": "吸入（空气等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:draw-sb-in#e-d8e11905696934c8",
+          "text": "The device draws in air, adds water vapor with a humidifier, and cools it to turn air into small drops.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 19
+          },
+          "parts": [
+            [
+              11,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "draw sth in，也可用 draw in sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:draw-sb-in#s2",
+      "pos": "短语",
+      "glossZh": "使某人加入；把某人卷入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:draw-sb-in#s4",
+      "pos": "短语",
+      "glossZh": "（夜晚）渐渐降临；（随季节变化）天黑得越来越早",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "不及物用法 draw in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

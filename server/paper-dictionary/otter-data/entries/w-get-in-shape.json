@@ -1,0 +1,161 @@
+{
+  "entryId": "w:get-in-shape",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "in",
+      "shape"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "in",
+        "shape"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting in shape",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get in shape",
+  "senses": [
+    {
+      "senseId": "w:get-in-shape#s1",
+      "pos": "短语",
+      "glossZh": "通过锻炼使身体达到良好状态",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s44"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-in-shape#e-1fa719cca09e81f5",
+          "text": "Running is a great way to get in shape and just about everyone can do it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in-shape#e-a7c27ef78f2fb11b",
+          "text": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 125
+          },
+          "parts": [
+            [
+              109,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in-shape#e-4bb4646a8d0cc9ce",
+          "text": "We want to get in shape and join a gym, but we soon stop going and end up spending our evenings on the couch instead.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

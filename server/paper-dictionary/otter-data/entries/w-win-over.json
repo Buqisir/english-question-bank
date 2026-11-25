@@ -1,0 +1,173 @@
+{
+  "entryId": "w:win-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "win",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "win",
+        "over"
+      ],
+      [
+        "winning",
+        "over"
+      ],
+      [
+        "wins",
+        "over"
+      ],
+      [
+        "won",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "win over",
+      "tags": []
+    },
+    {
+      "form": "won over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "win sb over",
+  "senses": [
+    {
+      "senseId": "w:win-over#s1",
+      "pos": "短语",
+      "glossZh": "赢得某人的好感或支持；说服某人接受",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:win-over#e-e436f283a7bd1186",
+          "text": "Gradually, his well-designed methods and undeniable evidence won over the community.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          },
+          "parts": [
+            [
+              61,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:win-over#e-0fc4221190e54181",
+          "text": "Ted’s charm has won over many in the audience, particularly the older ladies.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:win-over#e-1db7f9a2372510d6",
+          "text": "To deal with the strong flavor of many fermented foods, some companies are even creating milder versions to win over more people.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 116
+          },
+          "parts": [
+            [
+              108,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              116
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

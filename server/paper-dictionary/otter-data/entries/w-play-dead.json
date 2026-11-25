@@ -1,0 +1,116 @@
+{
+  "entryId": "w:play-dead",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "dead"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "dead"
+      ],
+      [
+        "played",
+        "dead"
+      ],
+      [
+        "playing",
+        "dead"
+      ],
+      [
+        "plays",
+        "dead"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play dead",
+  "senses": [
+    {
+      "senseId": "w:play-dead#s1",
+      "pos": "短语",
+      "glossZh": "装死",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-dead#e-dc56b913494832bf",
+          "text": "To play dead.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:25#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-dead#s2",
+      "pos": "短语",
+      "glossZh": "假装落败以使对手放松警惕",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

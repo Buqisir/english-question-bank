@@ -59,8 +59,8 @@
     "mock": 200
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 196
+    "gaokao": 6,
+    "mock": 33
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 73
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -281,12 +281,12 @@
       "pos": "n.",
       "glossZh": "斑点",
       "pronunciationId": "w:spot#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -294,12 +294,12 @@
       "pos": "n.",
       "glossZh": "污渍",
       "pronunciationId": "w:spot#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -316,113 +316,161 @@
       "examples": []
     },
     {
-      "senseId": "w:spot#s7",
+      "senseId": "w:spot#s11",
       "pos": "短语",
-      "glossZh": "令人欣慰的事情",
+      "glossZh": "正合心意；恰好解馋",
       "pronunciationId": "w:spot#p-main",
-      "note": "bright spot。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:spot#e-b5d5e2366cfb21ff",
-          "text": "A bright spot for me turned out to be reading.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
+      "examples": []
     },
     {
-      "senseId": "w:spot#s8",
+      "senseId": "w:spot#s12",
       "pos": "短语",
-      "glossZh": "最佳点",
+      "glossZh": "认识或判断上的盲点",
       "pronunciationId": "w:spot#p-main",
-      "note": "sweet spot。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:spot#e-90877c54bd9a6adf",
-          "text": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
+          "exampleId": "w:spot#e-d3deb0f3b4288225",
+          "text": "Scientific evidence shows that seeking advice often improves decision quality: Others can point out blind spots, share useful experience, and help avoid mental prejudices.",
           "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-c",
             "locator": {
               "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s13",
+      "pos": "adj.",
+      "glossZh": "有斑点的",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-b61ff3170018f287",
+          "text": "The spotted patterns on their bodies.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "B",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 11,
-            "end": 15
+            "start": 4,
+            "end": 11
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:spot#s9",
-      "pos": "短语",
-      "glossZh": "当场",
-      "pronunciationId": "w:spot#p-main",
-      "note": "on the spot。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:spot#e-1e86ca0be9e94075",
-          "text": "She named it “Comet” (彗星) on the spot.",
+          "exampleId": "w:spot#e-91de4c79d3f0543b",
+          "text": "The scientists began by training an AI language model – DolphinGemma, which used 40 years of data from Atlantic spotted dolphins in the Bahamas.",
           "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-c",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:2",
-              "sentence": 7
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-c:2",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 33,
-            "end": 37
+            "start": 112,
+            "end": 119
           }
         }
       ]
     },
     {
-      "senseId": "w:spot#s10",
+      "senseId": "w:spot#s14",
       "pos": "短语",
-      "glossZh": "使某人陷入窘境",
+      "glossZh": "特别喜爱；对……情有独钟",
       "pronunciationId": "w:spot#p-main",
-      "note": "put somebody on the spot。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-59e72510c2fe85ba",
+          "text": "He then mentioned that Kevin had a soft spot for Oreos (奥利奥饼干).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:spot#e-a509cc58619d587f",
+          "text": "I just have a soft spot for kids – all kids, especially kids who are born with physical problems.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s15",
+      "pos": "n.",
+      "glossZh": "处境；境况",
+      "pronunciationId": "w:spot#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -431,22 +479,88 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:spot#e-08da38b962022cba",
-          "text": "Before I knew it, the truth __49__: she always put me on the spot like this all the time and never asked me __50__!",
+          "exampleId": "w:spot#e-75af0fa68e3e7096",
+          "text": "We had been through many rough spots during the past two years.",
           "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze",
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation",
             "locator": {
               "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze:4",
-              "sentence": 2
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation:4",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 61,
-            "end": 65
+            "start": 31,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s16",
+      "pos": "v.",
+      "glossZh": "使留下斑点",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-788689eb6ec461db",
+          "text": "The beautiful cover was now spotted with mud.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s17",
+      "pos": "v.",
+      "glossZh": "在旁保护（做动作的人）",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-6934b3f8888fccd8",
+          "text": "Mum would spot me, her hands ready to catch me if I fell.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
           }
         }
       ]
@@ -458,6 +572,18 @@
       "reason": "专名或技术义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:blind-spot",
+    "w:bright-spot",
+    "w:hit-the-spot",
+    "w:hot-spot",
+    "w:on-the-spot",
+    "w:put-sb-on-the-spot",
+    "w:spot-on",
+    "w:sweet-spot"
+  ]
 }

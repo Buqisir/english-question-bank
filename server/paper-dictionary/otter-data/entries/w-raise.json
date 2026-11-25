@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 186
+    "mock": 8
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -362,7 +362,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -434,7 +434,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -486,7 +486,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -584,6 +584,104 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:raise#s9",
+      "pos": "v.",
+      "glossZh": "种植；培育（植物等）",
+      "pronunciationId": "w:raise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:raise#e-4197ecfa856b71ee",
+          "text": "Then I tried raising irises, with no luck,” she says.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:raise#e-4c69637cb7ff3e89",
+          "text": "It uses tiny pieces of plant tissue, called explants (外植体), from a “mother plant” and raises them in a clean lab with nutrient-rich media, under controlled light, temperature, and humidity.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:raise#s10",
+      "pos": "adj.",
+      "glossZh": "隆起的；凸起的",
+      "pronunciationId": "w:raise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:raise#s11",
+      "pos": "n.",
+      "glossZh": "抬举（身体部位）的练习动作",
+      "pronunciationId": "w:raise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:raise#e-a916ced97cd80c48",
+          "text": "Perform 10 to 15 repetitions of pointing and bending each foot, seated toe raises and marching in place.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -596,6 +694,6 @@
       "reason": "金融法律专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

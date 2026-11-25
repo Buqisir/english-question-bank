@@ -1,0 +1,106 @@
+{
+  "entryId": "w:around-the-corner",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "around",
+      "the",
+      "corner"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "around",
+        "the",
+        "corner"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "around the corner",
+  "senses": [
+    {
+      "senseId": "w:around-the-corner#s2",
+      "pos": "短语",
+      "glossZh": "就在附近；拐个弯就到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:around-the-corner#e-593f436d67fb4c8e",
+          "text": "Around the corner.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:around-the-corner#s1",
+      "pos": "短语",
+      "glossZh": "即将到来；马上就要发生",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

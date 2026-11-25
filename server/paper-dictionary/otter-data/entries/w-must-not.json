@@ -1,0 +1,153 @@
+{
+  "entryId": "w:must-not",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "must",
+      "not"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "must",
+        "not"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "must not",
+  "senses": [
+    {
+      "senseId": "w:must-not#s1",
+      "pos": "短语",
+      "glossZh": "不得；一定不能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:must-not#e-9cc707949a393f5e",
+          "text": "Format: MP3 or WAV format; background music is allowed but must not overshadow the speaker’s voice.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 67
+          },
+          "parts": [
+            [
+              59,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:must-not#e-2dd0eda8c5c44c47",
+          "text": "The back cover states: “The UK government must not legalize book theft to benefit AI companies.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:must-not#e-e4477ec43b707556",
+          "text": "Nevertheless, both approaches must follow a common principle: labels must not be misleading.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:seven-choices:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 77
+          },
+          "parts": [
+            [
+              69,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              77
+            ]
+          ]
+        }
+      ],
+      "note": "表示禁止或要求避免某事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

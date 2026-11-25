@@ -1,0 +1,98 @@
+{
+  "entryId": "w:see-daylight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "see",
+      "daylight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "daylight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "seen daylight",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see daylight",
+  "senses": [
+    {
+      "senseId": "w:see-daylight#s1",
+      "pos": "短语",
+      "glossZh": "见到天光；（物品）被拿出来见光",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:see#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:see-daylight#e-69a5bff49edec058",
+          "text": "One August afternoon, I sat in my kitchen staring at a glass vase that hadn’t seen daylight since my wedding.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 91
+          },
+          "parts": [
+            [
+              78,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "真题用否定式形容花瓶一直收着，没拿出来用。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

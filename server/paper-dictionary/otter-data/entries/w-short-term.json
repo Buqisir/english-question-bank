@@ -1,0 +1,157 @@
+{
+  "entryId": "w:short-term",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "short",
+      "term"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "short",
+        "term"
+      ],
+      [
+        "short",
+        "terms"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "short term",
+  "senses": [
+    {
+      "senseId": "w:short-term#s1",
+      "pos": "短语",
+      "glossZh": "短期；近期",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:short-term#e-c66371e78221518e",
+          "text": "By avoiding knowledge, people protect themselves, at least in the short term, from negative emotions.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 76
+          },
+          "parts": [
+            [
+              66,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-term#e-154a7f71d83f61f3",
+          "text": "Putting in that work may demand more of parents in the short term.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 65
+          },
+          "parts": [
+            [
+              55,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-term#e-05a4f498238a4431",
+          "text": "A single invasive (侵入的) species may replace native ones and accomplish an ecosystem function in the short term, but a disease would more easily wipe it out in the future.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 110
+          },
+          "parts": [
+            [
+              100,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              110
+            ]
+          ]
+        }
+      ],
+      "note": "常用 in the short term，意为“在短期内”。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

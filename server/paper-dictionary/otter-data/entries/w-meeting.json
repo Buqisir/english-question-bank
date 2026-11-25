@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 197
+    "mock": 17
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 132
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -202,6 +202,422 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:meeting#s4",
+      "pos": "v.",
+      "glossZh": "与……见面；会见",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-e2306df2ccccee75",
+          "text": "What did the Shenzhou 14 team do after meeting the new arrivals?",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-b21a55291714513c",
+          "text": "When the package finally arrives, opening it feels like meeting an old friend.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-cdd14900595a8425",
+          "text": "“Even better if you are doing an activity, you really enjoy or meeting a good friend there.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:seven-choices:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s5",
+      "pos": "v.",
+      "glossZh": "遇到；结识",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-95704eaa68a06da1",
+          "text": "The MBTI personality test may show something you don’t know about yourself and can even be a fun ice-breaker question when meeting new friends.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-154eed0af4b29d74",
+          "text": "Before meeting my “tinder”, I was an emotionally isolated, cocky senior executive.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-a95306098b34a2e8",
+          "text": "The 3,000 wishes granted (实现) so far include a World War II war hero returning to the beaches of Normandy, a woman writing and performing a play based on her life story, and a former Air Force captain meeting the Rolling Stones.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 201,
+            "end": 208
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s6",
+      "pos": "v.",
+      "glossZh": "满足；达到；符合",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-17ad0f837e69054b",
+          "text": "Given the energy consumption, AI adoption won’t slow as firms view it as essential, so a smart strategy is needed to employ AI’s benefits while meeting sustainable goals.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 144,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-1f70913461af7e28",
+          "text": "The latest data indicates that 31 percent of adults worldwide aren’t meeting physical activity guidelines, a 5-percentage-point increase from 26 percent in 2010.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-c9fb5d5a62cd7f84",
+          "text": "By the time autumn arrived, Maya’s “Fog Harps” were reliably producing plenty of fresh water every day, partly meeting the daily water needs of the village.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 118
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s7",
+      "pos": "v.",
+      "glossZh": "支付；偿付（费用）",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-67173803fdfc0b32",
+          "text": "“The profession of artist can't aid a person in meeting his daily expenses,” she would say.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s8",
+      "pos": "v.",
+      "glossZh": "应对；迎接",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-972c1706bbbb9158",
+          "text": "The secret to meeting this challenge?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-8e9e843308bf6110",
+          "text": "Our craft was not just a pastime – it was our quiet way of mending, making, and meeting whatever came our way.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s9",
+      "pos": "v.",
+      "glossZh": "相接；交汇",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-88c2279e137b8f26",
+          "text": "No resorts or chain stores spoiled its wild beauty – just dramatic cliffs meeting rough seas.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s10",
+      "pos": "v.",
+      "glossZh": "从对方的现状或习惯出发与其沟通",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-901b1ebf8f495c67",
+          "text": "Moving quickly and meeting audiences “where they’re at,” Shah says, enables Meet Cute to be “part of the conversation.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meeting#s11",
+      "pos": "v.",
+      "glossZh": "迎上（某人的目光）；与……对视",
+      "pronunciationId": "w:meeting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meeting#e-3a388f7a490477ef",
+          "text": "“I promise, Lily,” I insisted, leaning forward, meeting her worried gaze (凝视).",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:meeting#e-a518f7bd711e1759",
+          "text": "Vivian gave a sigh of relief, meeting the woman’s beautiful eyes.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -214,6 +630,6 @@
       "reason": "宗教专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

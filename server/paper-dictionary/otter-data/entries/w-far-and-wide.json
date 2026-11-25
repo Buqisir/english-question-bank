@@ -1,0 +1,60 @@
+{
+  "entryId": "w:far-and-wide",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "far",
+      "and",
+      "wide"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "far",
+        "and",
+        "wide"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "far and wide",
+  "senses": [
+    {
+      "senseId": "w:far-and-wide#s1",
+      "pos": "短语",
+      "glossZh": "到处；遍及各地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

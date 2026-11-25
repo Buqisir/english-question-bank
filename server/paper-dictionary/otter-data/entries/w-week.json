@@ -125,6 +125,10 @@
       "reason": "拟声词同形"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:all-week",
+    "w:any-day-of-the-week"
+  ]
 }

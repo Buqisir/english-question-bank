@@ -1,0 +1,486 @@
+{
+  "entryId": "w:go-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes through",
+    "going through",
+    "went through"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "through"
+      ],
+      [
+        "goes",
+        "through"
+      ],
+      [
+        "going",
+        "through"
+      ],
+      [
+        "went",
+        "through"
+      ],
+      [
+        "gone",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go through",
+  "senses": [
+    {
+      "senseId": "w:go-through#s1",
+      "pos": "短语",
+      "glossZh": "经历；经受",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s26",
+        "w:through#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-through#e-cffbeae7ed759b41",
+          "text": "However, most produce at the store went through weeks of travel and covered hundreds of miles before reaching the table.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-b92b5b6afde400ff",
+          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 130,
+            "end": 142
+          },
+          "parts": [
+            [
+              130,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              130,
+              142
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-f82a92428a511ea1",
+          "text": "She went through trials.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2023-national-b:22#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 16
+          },
+          "parts": [
+            [
+              4,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:go-through#s2",
+      "pos": "短语",
+      "glossZh": "穿过；（寒意等）掠过全身",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-through#e-e05bee5864869665",
+          "text": "A cold wave went through me.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-f67be4ccbaf57665",
+          "text": "“Go through this gate and you’ll be at Platform 3 directly,” the driver said, handing me a crumpled（褶皱的）tram ticket.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-59d0c3350d88ffc2",
+          "text": "“Before visitors go through the entrance, they create their ‘sense of humor profile,’” says executive director Journey Gunderson.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-through#s3",
+      "pos": "短语",
+      "glossZh": "逐一查看；翻阅；翻查",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s32",
+        "w:through#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-through#e-1ba196d7880e367a",
+          "text": "Go through a reading list.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-8851efd2954012ca",
+          "text": "While going through the pages, he kept saying, wide-eyed: “How can there be this many words?” After a while, he looked at me and asked, “Do you know all these words, Mom?” I smiled.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-through#e-d457161f3dbb339a",
+          "text": "The next day, my sister and I were going through his old clothes when something fell out and hit the floor – it was a 1928 Wheat penny.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 48
+          },
+          "parts": [
+            [
+              35,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-through#s4",
+      "pos": "短语",
+      "glossZh": "通过（安检等程序）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-through#e-a4177d4925188b06",
+          "text": "Going through security.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-through#s5",
+      "pos": "短语",
+      "glossZh": "用掉；耗完",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-through#s6",
+      "pos": "短语",
+      "glossZh": "（申请、交易等）获批或顺利完成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-through#s7",
+      "pos": "短语",
+      "glossZh": "晋级；进入下一轮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

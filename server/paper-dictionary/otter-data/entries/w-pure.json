@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 0
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -176,7 +176,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -292,6 +292,6 @@
       "reason": "土质专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

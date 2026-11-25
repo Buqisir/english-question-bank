@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 23
+    "mock": 7
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -272,40 +272,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:length#s5",
-      "pos": "短语",
-      "glossZh": "详尽地",
-      "pronunciationId": "w:length#p-main",
-      "note": "at length。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:length#e-64e18d5db878ad3a",
-          "text": "When asked for a reasoning or answer to a question, do you find yourself needing to explain your thoughts at length, going into too much detail to ensure that your points are made?",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
-            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 109,
-            "end": 115
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -314,6 +280,11 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-length"
+  ]
 }

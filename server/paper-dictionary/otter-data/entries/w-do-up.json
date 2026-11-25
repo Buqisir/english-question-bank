@@ -1,0 +1,156 @@
+{
+  "entryId": "w:do-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "do",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "up"
+      ],
+      [
+        "did",
+        "up"
+      ],
+      [
+        "does",
+        "up"
+      ],
+      [
+        "doing",
+        "up"
+      ],
+      [
+        "done",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do sth up",
+  "senses": [
+    {
+      "senseId": "w:do-up#s1",
+      "pos": "短语",
+      "glossZh": "扣好；系紧；拧紧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接纽扣、拉链、鞋带或螺母。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s2",
+      "pos": "短语",
+      "glossZh": "翻修；重新装修（房屋等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s3",
+      "pos": "短语",
+      "glossZh": "包好；扎牢（包裹等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s4",
+      "pos": "短语",
+      "glossZh": "彻底完成（工作等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s5",
+      "pos": "短语",
+      "glossZh": "给衣物上浆并熨平",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s6",
+      "pos": "短语",
+      "glossZh": "痛打某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，do sb up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:do-up#s7",
+      "pos": "短语",
+      "glossZh": "把头发盘起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

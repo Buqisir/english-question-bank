@@ -1,0 +1,92 @@
+{
+  "entryId": "w:better-known-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "better",
+      "known",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "better",
+        "known",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "better known as",
+  "senses": [
+    {
+      "senseId": "w:better-known-as#s1",
+      "pos": "短语",
+      "glossZh": "更为人熟知的名字是……；俗称……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:better-known-as#e-d9304ea4879ca4d1",
+          "text": "Many towns and cities along the Blues Trail have planned festivals, exhibitions and live music to mark the 100th birthday of Riley B. King, better known as B.B. King, who won 15 Grammy Awards and died in 2015.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 155
+          },
+          "parts": [
+            [
+              140,
+              155
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              155
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -65,8 +65,8 @@
     "mock": 976
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 976
+    "gaokao": 19,
+    "mock": 784
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 77,
-        "mock": 0
+        "mock": 148
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -272,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -343,7 +343,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -408,148 +408,6 @@
       ]
     },
     {
-      "senseId": "w:start#s6",
-      "pos": "短语",
-      "glossZh": "开始某段经历",
-      "pronunciationId": "w:start#p-main",
-      "note": "start out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:start#e-b9c2ece4c7a6a895",
-          "text": "With everything ready, Bernard started out on his new business.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:start#e-135000646a1250be",
-          "text": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 56
-          }
-        },
-        {
-          "exampleId": "w:start#e-c7a1340ba3c72691",
-          "text": "If you’re just starting out",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:start#s7",
-      "pos": "短语",
-      "glossZh": "起初",
-      "pronunciationId": "w:start#p-main",
-      "note": "to start with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:start#e-6f77a1e1b840db20",
-          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:start#s8",
-      "pos": "短语",
-      "glossZh": "使开始",
-      "pronunciationId": "w:start#p-main",
-      "note": "start something off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:start#e-ab742e182925f664",
-          "text": "Going to the cafe starts her day off good and gets her ready for class.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2025-i:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:start#s9",
       "pos": "n.",
       "glossZh": "突然一惊",
@@ -587,6 +445,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:start#s12",
+      "pos": "v.",
+      "glossZh": "动身；开始移动",
+      "pronunciationId": "w:start#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:start#e-ec4a8548b54bfeb0",
+          "text": "As they started towards us, we recovered enough to shout and wave our hiking poles.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -595,6 +486,17 @@
       "reason": "专义、缩写或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:head-start",
+    "w:start-on",
+    "w:start-out",
+    "w:start-over",
+    "w:start-sth-off",
+    "w:start-up",
+    "w:to-start-with"
+  ]
 }

@@ -1,0 +1,120 @@
+{
+  "entryId": "w:block-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "block",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "block",
+        "off"
+      ],
+      [
+        "blocked",
+        "off"
+      ],
+      [
+        "blocking",
+        "off"
+      ],
+      [
+        "blocks",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "blocked off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "block sth off",
+  "senses": [
+    {
+      "senseId": "w:block-off#s1",
+      "pos": "短语",
+      "glossZh": "封堵；阻断通行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:block-off#e-53aba182bb392270",
+          "text": "That sudden drop aligns with human activities on the river, especially dam construction in the 1950s that blocked off the porpoise’s movement to and from the river’s main channel.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 117
+          },
+          "parts": [
+            [
+              106,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              117
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:block-off#s2",
+      "pos": "短语",
+      "glossZh": "预留一段时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

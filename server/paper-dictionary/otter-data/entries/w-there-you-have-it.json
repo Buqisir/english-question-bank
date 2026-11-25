@@ -1,0 +1,96 @@
+{
+  "entryId": "w:there-you-have-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "there",
+      "you",
+      "have",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "there",
+        "you",
+        "have",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "there you have it",
+  "senses": [
+    {
+      "senseId": "w:there-you-have-it#s1",
+      "pos": "短语",
+      "glossZh": "事情就是这样；这就是结果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:there#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:there-you-have-it#e-1735df104474d8ce",
+          "text": "And there you have it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 21
+          },
+          "parts": [
+            [
+              4,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

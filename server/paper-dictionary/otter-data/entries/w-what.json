@@ -35,7 +35,7 @@
     "mock": 7262
   },
   "unassignedCounts": {
-    "gaokao": 1009,
+    "gaokao": 1014,
     "mock": 7262
   },
   "senses": [
@@ -195,113 +195,6 @@
       "examples": []
     },
     {
-      "senseId": "w:what#s4",
-      "pos": "短语",
-      "glossZh": "如果……怎么办",
-      "pronunciationId": "w:what#p-main",
-      "note": "what if …?",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:what#e-a316f0403fdaa40e",
-          "text": "Before starting the __44__, he added, “What if I keep it long?”",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:what#e-1add7c0db3379b18",
-          "text": "“What if he has told the truth?” he thought to himself.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 1,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:what#s5",
-      "pos": "短语",
-      "glossZh": "那么……呢",
-      "pronunciationId": "w:what#p-main",
-      "note": "what about …?",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:what#e-715f41936cf4db84",
-          "text": "And what about that other dinner-party killer: awkward silence?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:what#e-41ce21e642cf3b4a",
-          "text": "What about that person who has had too much to drink or won’t stop talking",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-national-b:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:what#s6",
       "pos": "感叹词",
       "glossZh": "什么？（没听清时请对方重复）",
@@ -321,6 +214,31 @@
       "reason": "现代常用表达不同"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:come-what-may",
+    "w:guess-what",
+    "w:ill-tell-you-what",
+    "w:no-matter-what",
+    "w:or-what",
+    "w:say-what",
+    "w:so-what",
+    "w:tell-you-what",
+    "w:what-about",
+    "w:what-date-is-it-today",
+    "w:what-day-is-it-today",
+    "w:what-do-you-know",
+    "w:what-gives",
+    "w:what-if",
+    "w:what-is-your-name",
+    "w:what-it-takes",
+    "w:what-not",
+    "w:what-now",
+    "w:what-time-is-it",
+    "w:what-would-you-like",
+    "w:you-know-what"
+  ]
 }

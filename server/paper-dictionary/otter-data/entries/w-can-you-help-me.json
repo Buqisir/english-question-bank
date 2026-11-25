@@ -1,0 +1,95 @@
+{
+  "entryId": "w:can-you-help-me",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "can",
+      "you",
+      "help",
+      "me"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can",
+        "you",
+        "help",
+        "me"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can you help me",
+  "senses": [
+    {
+      "senseId": "w:can-you-help-me#s1",
+      "pos": "短语",
+      "glossZh": "你能帮我一下吗？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:can-you-help-me#e-b626003b6f706d2e",
+          "text": "try “Can you help me with this because I’m on a tight deadline?”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 20
+          },
+          "parts": [
+            [
+              5,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "可接 with sth 说明需要帮忙的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,115 @@
+{
+  "entryId": "w:ride-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ride",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ride",
+        "off"
+      ],
+      [
+        "rides",
+        "off"
+      ],
+      [
+        "riding",
+        "off"
+      ],
+      [
+        "rode",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ride off",
+  "senses": [
+    {
+      "senseId": "w:ride-off#s1",
+      "pos": "短语",
+      "glossZh": "骑着马或乘车离开",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ride-off#e-8812272f4892771a",
+          "text": "Now, the dog and the mailman would ride off to retirement together.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          },
+          "parts": [
+            [
+              35,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ride-off#s2",
+      "pos": "短语",
+      "glossZh": "（马球）骑马挤开对手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:left-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "left",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "left",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "left over",
+  "senses": [
+    {
+      "senseId": "w:left-over#s1",
+      "pos": "短语",
+      "glossZh": "剩下的；没用完的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:over#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:left-over#e-2df75813401fea66",
+          "text": "Donate whatever clothes are left over",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-a:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 37
+          },
+          "parts": [
+            [
+              28,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:left-over#e-1c6bd13c0dffa1b8",
+          "text": "That moment proves complex, especially when another child complains, “If that kid’s dream comes true, mine won’t.” Hanley-Dafoe builds this into a revealing lesson: in a world damaged by the lack of resources and an “us-vs-them mentality,” many believe that “if something good happened to someone else, there won’t be any good left over for others.”",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 327,
+            "end": 336
+          },
+          "parts": [
+            [
+              327,
+              336
+            ]
+          ],
+          "highlightRanges": [
+            [
+              327,
+              336
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

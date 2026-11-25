@@ -1,0 +1,240 @@
+{
+  "entryId": "w:building-block",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "building",
+      "block"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "building",
+        "block"
+      ],
+      [
+        "building",
+        "blocks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "building blocks",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "building block",
+  "senses": [
+    {
+      "senseId": "w:building-block#s1",
+      "pos": "短语",
+      "glossZh": "基本组成部分；基础单元",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:block#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:building-block#e-b2a7fb0739304654",
+          "text": "The procedure involved transplanting thousands of grafts – the essential building blocks of hair growth.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 88
+          },
+          "parts": [
+            [
+              73,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:building-block#e-afc1d138a1a59757",
+          "text": "“We see BlinkWise not just as a health monitor, but as a building block for glasses that are truly intelligent.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 71
+          },
+          "parts": [
+            [
+              57,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:building-block#e-1690cbc028fc3b25",
+          "text": "The PV cell is the basic building block of a PV system.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 39
+          },
+          "parts": [
+            [
+              25,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:building-block#s2",
+      "pos": "短语",
+      "glossZh": "砌块；搭建用的块状部件",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:building-block#e-5a569845b1d006cd",
+          "text": "Putting together building blocks.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 32
+          },
+          "parts": [
+            [
+              17,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:building-block#e-aa7659cf15772568",
+          "text": "Think of it like building blocks.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 32
+          },
+          "parts": [
+            [
+              17,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

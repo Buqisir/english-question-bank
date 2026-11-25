@@ -42,8 +42,8 @@
     "mock": 81
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 80
+    "gaokao": 2,
+    "mock": 8
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -170,62 +170,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:opinion#s3",
-      "pos": "短语",
-      "glossZh": "在我看来",
-      "pronunciationId": "w:opinion#p-main",
-      "note": "in my opinion。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:opinion#e-a52d2fa99ff6e840",
-          "text": "In my opinion, where in trouble, we should seek help from those we trust mostly.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
-              "sentence": 9
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:opinion#e-9e16a6f9ad6682ed",
-          "text": "In my opinion, students can benefit a lot doing some housework.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 13
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-my-opinion"
+  ]
 }

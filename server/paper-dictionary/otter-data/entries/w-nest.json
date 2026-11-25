@@ -65,8 +65,8 @@
     "mock": 27
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 23
+    "gaokao": 1,
+    "mock": 0
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -193,40 +193,6 @@
       ]
     },
     {
-      "senseId": "w:nest#s3",
-      "pos": "短语",
-      "glossZh": "子女离开父母家独立生活",
-      "pronunciationId": "w:nest#p-main",
-      "note": "fly the nest。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nest#e-6b2b3106b0b768f8",
-          "text": "When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:nest#s4",
       "pos": "v.",
       "glossZh": "层层套叠",
@@ -246,6 +212,11 @@
       "reason": "专业用法或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fly-the-nest"
+  ]
 }

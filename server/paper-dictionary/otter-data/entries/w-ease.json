@@ -58,8 +58,8 @@
     "mock": 91
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 84
+    "gaokao": 1,
+    "mock": 15
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -278,54 +278,72 @@
       ]
     },
     {
-      "senseId": "w:ease#s4",
-      "pos": "短语",
-      "glossZh": "自在；放松",
+      "senseId": "w:ease#s5",
+      "pos": "v.",
+      "glossZh": "使更容易；使更顺利",
       "pronunciationId": "w:ease#p-main",
-      "note": "at ease。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 3
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:ease#e-72b770c3930d1a7b",
-          "text": "I would feel completely at ease doing my homework in bed, with light music on.",
+          "exampleId": "w:ease#e-115071d4b88437b5",
+          "text": "That might ease acceptance of their use, said Paul Carini of the University of Arizona, who was not involved in the research.",
           "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 3
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d:4",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 27,
-            "end": 31
+            "start": 11,
+            "end": 15
           }
         },
         {
-          "exampleId": "w:ease#e-89b5ac2b036f11a5",
-          "text": "Researchers explained as children grow older, they become more concerned with feeling at ease – even if their actions might not be moral.",
+          "exampleId": "w:ease#e-d0b6a7ac1585bd2b",
+          "text": "Underwater, it lives up to its fame – thousands of fish species and crystal-clear waters ease wildlife viewing.",
           "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:3",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:4",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
             "start": 89,
             "end": 93
+          }
+        },
+        {
+          "exampleId": "w:ease#e-34a7e09254e20511",
+          "text": "● Convenience: Friends or family can share location temporarily, easing coordination and meetups.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
           }
         }
       ]
@@ -337,6 +355,11 @@
       "reason": "法律专门或旧式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-ease"
+  ]
 }

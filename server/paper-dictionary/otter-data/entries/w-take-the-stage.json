@@ -1,0 +1,110 @@
+{
+  "entryId": "w:take-the-stage",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "stage"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "stage"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "takes the stage",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the stage",
+  "senses": [
+    {
+      "senseId": "w:take-the-stage#s1",
+      "pos": "短语",
+      "glossZh": "登台（表演或发言）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-stage#e-410e92980b08f87f",
+          "text": "Joanna Ampil takes the stage as Carlotta, the second female lead.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 28
+          },
+          "parts": [
+            [
+              13,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-the-stage#s2",
+      "pos": "短语",
+      "glossZh": "成为公众关注的焦点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

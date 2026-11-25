@@ -59,8 +59,8 @@
     "mock": 98
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 96
+    "gaokao": 12,
+    "mock": 32
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -135,78 +135,6 @@
       ]
     },
     {
-      "senseId": "w:couple#s2",
-      "pos": "短语",
-      "glossZh": "两个；几个；少数几个",
-      "pronunciationId": "w:couple#p-main",
-      "note": "a couple of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 12,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:couple#e-81001726657dec8e",
-          "text": "A couple of years ago film-maker David Bond realised that his children, then aged five and three, were attached to screens to the point where he was able to say “chocolate” into his three-year-old son’s ear without getting a response.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:couple#e-07b4fc877ee6a97e",
-          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 118,
-            "end": 124
-          }
-        },
-        {
-          "exampleId": "w:couple#e-64eb9c844bdd377f",
-          "text": "A couple of messages came in, one wanting additional __46__, another asking for a price cut.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:couple#s3",
       "pos": "v.",
       "glossZh": "连接；结合；与……同时发生",
@@ -215,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -258,6 +186,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:couple#s4",
+      "pos": "n.",
+      "glossZh": "耦合；相互连接（coupling）",
+      "pronunciationId": "w:couple#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:couple#e-9c970558c8e0a9f9",
+          "text": "All the movement emerges from the tight coupling between body and environment.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:3",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -266,6 +227,12 @@
       "reason": "物理或行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-couple-of",
+    "w:power-couple"
+  ]
 }

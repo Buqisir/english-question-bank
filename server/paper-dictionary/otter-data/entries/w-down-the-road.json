@@ -1,0 +1,95 @@
+{
+  "entryId": "w:down-the-road",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "down",
+      "the",
+      "road"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "down",
+        "the",
+        "road"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "down the road",
+  "senses": [
+    {
+      "senseId": "w:down-the-road#s1",
+      "pos": "短语",
+      "glossZh": "今后；过些时候",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s10",
+        "w:road#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:down-the-road#e-925b50c99c3dedab",
+          "text": "Volunteers will wash, cut, and freeze or dry them for use in meals down the road.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 80
+          },
+          "parts": [
+            [
+              67,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

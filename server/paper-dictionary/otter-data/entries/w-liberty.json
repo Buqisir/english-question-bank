@@ -71,20 +71,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:liberty#s3",
-      "pos": "短语",
-      "glossZh": "擅自做某事",
-      "pronunciationId": "w:liberty#p-main",
-      "note": "take the liberty of doing sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -97,6 +83,11 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-the-liberty-of-doing-sth"
+  ]
 }

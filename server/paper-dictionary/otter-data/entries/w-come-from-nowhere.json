@@ -1,0 +1,94 @@
+{
+  "entryId": "w:come-from-nowhere",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "from",
+      "nowhere"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "from",
+        "nowhere"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come from nowhere",
+  "senses": [
+    {
+      "senseId": "w:come-from-nowhere#s1",
+      "pos": "短语",
+      "glossZh": "突然冒出来；毫无铺垫地出现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nowhere#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-from-nowhere#e-13c3849366cbb189",
+          "text": "You have to balance creating an ending that’s unpredictable, but doesn’t seem to come from nowhere, one that fits what’s right for the characters.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 98
+          },
+          "parts": [
+            [
+              81,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

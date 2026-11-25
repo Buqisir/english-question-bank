@@ -1,0 +1,246 @@
+{
+  "entryId": "w:more-of-a",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "more",
+      "of",
+      "a",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "more",
+        "of",
+        "a",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "more of a",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "more of a …",
+  "senses": [
+    {
+      "senseId": "w:more-of-a#s1",
+      "pos": "短语",
+      "glossZh": "更像是……；更接近于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:more-of-a#e-064d554e4090577f",
+          "text": "What started as an experiment is now more of a philosophy.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          },
+          "parts": [
+            [
+              37,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-of-a#e-fddf216999ffcaa1",
+          "text": "For example, when presented with the odor of coffee, they wrongly perceived grey to be more of a red-brown color than true neutral grey.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 96
+          },
+          "parts": [
+            [
+              87,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-of-a#e-f0ce24339ee76ac4",
+          "text": "Loneliness is more of a feeling than a fact.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-cq-nankai-2025-12-fourth-quality-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 more of a … than … 比较两种性质或类别。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:more-of-a#s2",
+      "pos": "短语",
+      "glossZh": "更大的……；程度更强的……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:more-of-a#e-72a8857ea2f3b67f",
+          "text": "Moving patterns, where each dot followed its own path around the screen, were more of a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 87
+          },
+          "parts": [
+            [
+              78,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-of-a#e-10f49b3cdc09576e",
+          "text": "I felt more of a connection with others there than at any organized twenty-something social event I’ve attended.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "如 more of a challenge，表示挑战更大。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

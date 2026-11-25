@@ -1,0 +1,75 @@
+{
+  "entryId": "w:come-in-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "in",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "in",
+        "for"
+      ],
+      [
+        "came",
+        "in",
+        "for"
+      ],
+      [
+        "comes",
+        "in",
+        "for"
+      ],
+      [
+        "coming",
+        "in",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come in for sth",
+  "senses": [
+    {
+      "senseId": "w:come-in-for#s1",
+      "pos": "短语",
+      "glossZh": "受到；招致（批评、指责等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,161 @@
+{
+  "entryId": "w:fight-back-tears",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fight",
+      "back",
+      "tears"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fight",
+        "back",
+        "tears"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fighting back tears",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fight back tears",
+  "senses": [
+    {
+      "senseId": "w:fight-back-tears#s1",
+      "pos": "短语",
+      "glossZh": "强忍泪水；竭力不哭",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fight#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fight-back-tears#e-856ad415fe445205",
+          "text": "My cheeks burned, and I slid my notebook into my desk, fighting back tears.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 74
+          },
+          "parts": [
+            [
+              55,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fight-back-tears#e-ec6738c1a05971b8",
+          "text": "The heat rushed to my face, and I stared at my tray, fighting back tears.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 72
+          },
+          "parts": [
+            [
+              53,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fight-back-tears#e-c1d606110153f65b",
+          "text": "“None,” I whispered, fighting back tears.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 40
+          },
+          "parts": [
+            [
+              21,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

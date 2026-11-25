@@ -1,0 +1,192 @@
+{
+  "entryId": "w:all-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all around",
+  "senses": [
+    {
+      "senseId": "w:all-around#s1",
+      "pos": "短语",
+      "glossZh": "在四周；遍及各处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-around#e-2d12e2283e293b6a",
+          "text": "But after a long wait – and looking all around our house for signs of a nest or a mother – we realized the tiny squirrel was lost.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          },
+          "parts": [
+            [
+              36,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-around#e-756700706b5fc1df",
+          "text": "All around the world, there are small changes taking place.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-around#e-b918ec814064fc97",
+          "text": "Here is a picture of Dorothy Woodruff, on her horse, looking down from a hill top: “When the sun slipped behind the mountains, it shed a rosy glow all around them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 157
+          },
+          "parts": [
+            [
+              147,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              147,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:all-around#s2",
+      "pos": "短语",
+      "glossZh": "从各方面来看；各方面都",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-around#s3",
+      "pos": "短语",
+      "glossZh": "全面的；多方面的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作定语通常写作 all-around。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-around#s4",
+      "pos": "短语",
+      "glossZh": "给在场的每个人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

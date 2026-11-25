@@ -1,0 +1,148 @@
+{
+  "entryId": "w:have-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "had it",
+    "having it"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "it"
+      ],
+      [
+        "had",
+        "it"
+      ],
+      [
+        "having",
+        "it"
+      ],
+      [
+        "has",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have it",
+  "senses": [
+    {
+      "senseId": "w:have-it#s1",
+      "pos": "短语",
+      "glossZh": "受够了；忍无可忍",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-it#e-44fed514d3590b52",
+          "text": "My tutor had finally had it, and started yelling at me in front of the entire crowd of kids (each with their own private tutor).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          },
+          "parts": [
+            [
+              21,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "用完成式 have had it，可加 with sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:have-it#s2",
+      "pos": "短语",
+      "glossZh": "声称；据说",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 Rumour has it that ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-it#s3",
+      "pos": "短语",
+      "glossZh": "接受；容忍（某种行为或说法）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于否定式，如 won't have it、wasn't having it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:have-it#s4",
+      "pos": "短语",
+      "glossZh": "仍有本事或魅力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 still have it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

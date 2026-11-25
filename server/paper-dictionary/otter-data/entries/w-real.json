@@ -60,8 +60,8 @@
     "mock": 349
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 345
+    "gaokao": 8,
+    "mock": 165
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 144
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -279,146 +279,6 @@
       ]
     },
     {
-      "senseId": "w:real#s4",
-      "pos": "短语",
-      "glossZh": "实时地",
-      "pronunciationId": "w:real#p-main",
-      "note": "in real time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:real#e-28037131a32bb768",
-          "text": "Bellevue, a fast-growing city just east of Seattle, uses a system that is gaining popularity around the US: intersection(十字路口) signals that can adjust in real time to traffic conditions.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 154,
-            "end": 158
-          }
-        },
-        {
-          "exampleId": "w:real#e-094afae3594792c0",
-          "text": "Also, there is a convenient app that provides growing data in real time.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:real#s5",
-      "pos": "短语",
-      "glossZh": "当真的",
-      "pronunciationId": "w:real#p-main",
-      "note": "for real。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:real#e-3dc6f0e31296fe18",
-          "text": "I mean social for real.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:real#s6",
-      "pos": "短语",
-      "glossZh": "房地产",
-      "pronunciationId": "w:real#p-main",
-      "note": "real estate。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:real#e-b385b4b98ab12d09",
-          "text": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:real#e-182235da0896a217",
-          "text": "Yet the tendency has moral issues: lawyers demanding harsher initial sentences often secure longer sentences, while real estate agents controlling listing prices can artificially push up market values.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 116,
-            "end": 120
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:real#s7",
       "pos": "adj.",
       "glossZh": "扣除通胀影响的",
@@ -442,6 +302,15 @@
       "reason": "货币名称，同形异词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-real",
+    "w:in-real-time",
+    "w:real-estate",
+    "w:real-live",
+    "w:real-talk"
+  ]
 }

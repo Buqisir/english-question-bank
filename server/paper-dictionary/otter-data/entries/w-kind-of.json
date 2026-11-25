@@ -1,0 +1,153 @@
+{
+  "entryId": "w:kind-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kind",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kind",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kind of",
+  "senses": [
+    {
+      "senseId": "w:kind-of#s1",
+      "pos": "短语",
+      "glossZh": "有点；有几分；算是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:kind-of#e-d997089ac1c18066",
+          "text": "“Life on Earth is kind of a box of spare parts for the inventor,” he says.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kind-of#e-60f9a65538e5864d",
+          "text": "One where I kind of knew what was going to happen, historical fiction.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          },
+          "parts": [
+            [
+              12,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kind-of#e-c4c9fbe860c4e4d9",
+          "text": "“We’re still kind of trapped in this idea of AI versus human, and which one’s better,” he says.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "用于口语中缓和语气。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

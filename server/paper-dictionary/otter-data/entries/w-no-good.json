@@ -1,0 +1,105 @@
+{
+  "entryId": "w:no-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no good",
+  "senses": [
+    {
+      "senseId": "w:no-good#s1",
+      "pos": "短语",
+      "glossZh": "不好；不够好，不能接受",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-good#e-a2f56d911316937a",
+          "text": "If both Blake and Chris reject Alex’s initial chop, then there must be at least one piece they both thought was no good.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 119
+          },
+          "parts": [
+            [
+              112,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              119
+            ]
+          ]
+        }
+      ],
+      "note": "形容人时可指品行不端或不可靠。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:no-good#s2",
+      "pos": "短语",
+      "glossZh": "没有用；不起作用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 it’s no good doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

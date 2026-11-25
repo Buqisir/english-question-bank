@@ -90,7 +90,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 66
+    "mock": 6
   },
   "senses": [
     {
@@ -101,7 +101,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -173,7 +173,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -245,7 +245,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -298,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -351,18 +351,89 @@
       "examples": []
     },
     {
-      "senseId": "w:black#s7",
+      "senseId": "w:black#s8",
       "pos": "短语",
-      "glossZh": "白纸黑字；以书面形式",
+      "glossZh": "内部机制难以看清的系统（black box）",
       "pronunciationId": "w:black#p-main",
-      "note": "in black and white；也可指「黑白的」。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:black#e-1bf0007a14717663",
+          "text": "Calling this hidden logic a “black box problem,” Dr Randazzo said decisions made by deep-learning or machine-learning processes were impossible for humans to track, making it difficult for users to determine if and why an AI model has disregarded their rights and dignity and seek justice where necessary.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:black#e-1b294496755492f8",
+          "text": "“AI can feel like a black box.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:black#s9",
+      "pos": "短语",
+      "glossZh": "吞噬时间或资源的事物（black hole）",
+      "pronunciationId": "w:black#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:black#e-c53d74cb924f680a",
+          "text": "Conducting a simple time audit（审计） helps you find these hidden black holes in your schedule, which might be taking precious moments away from more critical tasks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -371,6 +442,12 @@
       "reason": "专门义或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:black-and-white",
+    "w:in-black-and-white"
+  ]
 }

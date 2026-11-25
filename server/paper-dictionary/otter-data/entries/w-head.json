@@ -59,8 +59,8 @@
     "mock": 285
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 283
+    "gaokao": 6,
+    "mock": 88
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -401,88 +401,6 @@
       ]
     },
     {
-      "senseId": "w:head#s6",
-      "pos": "短语",
-      "glossZh": "离开；动身",
-      "pronunciationId": "w:head#p-main",
-      "note": "head off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
-    },
-    {
-      "senseId": "w:head#s7",
-      "pos": "短语",
-      "glossZh": "使某人自满",
-      "pronunciationId": "w:head#p-main",
-      "note": "go to sb’s head。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:head#e-0d3fe3f5f39dfb26",
-          "text": "I promise not to let it go to my head.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:head#s8",
-      "pos": "短语",
-      "glossZh": "勉强应付困难",
-      "pronunciationId": "w:head#p-main",
-      "note": "keep one’s head above water。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:head#e-c8f7fe4055b72e61",
-          "text": "Eva spent the first week of high school trying to keep her head above water.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:head#s9",
       "pos": "n.",
       "glossZh": "（植物的）头状顶部",
@@ -490,7 +408,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -521,12 +439,12 @@
       "glossZh": "顶部；前端",
       "pronunciationId": "w:head#p-main",
       "note": "如 at the head of the table。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -547,12 +465,12 @@
       "pos": "v.",
       "glossZh": "用头顶（球）",
       "pronunciationId": "w:head#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -587,6 +505,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:head#s14",
+      "pos": "n.",
+      "glossZh": "人（用于按人数计算）",
+      "pronunciationId": "w:head#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:head#e-daecf87650694a9a",
+          "text": "A definition of economic growth that can be found in many publications is “an increase in the amount of goods and services produced per head of the population over a period of time.” There is one example of how growth is possible and what economic growth is.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 140
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -599,6 +550,18 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-to-ones-head",
+    "w:head-off",
+    "w:head-out",
+    "w:head-start",
+    "w:head-up",
+    "w:keep-ones-head-above-water",
+    "w:shake-ones-head",
+    "w:turn-on-its-head"
+  ]
 }

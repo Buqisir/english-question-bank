@@ -1,0 +1,126 @@
+{
+  "entryId": "w:bad-actor",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bad",
+      "actor"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bad",
+        "actor"
+      ],
+      [
+        "bad",
+        "actors"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bad actors",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bad actor",
+  "senses": [
+    {
+      "senseId": "w:bad-actor#s1",
+      "pos": "短语",
+      "glossZh": "故意行骗、破坏或作恶的人或机构",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bad-actor#e-ed9bc589fc9b1bd1",
+          "text": "Though fake （伪造的） research existed before Generative AI, this new technology has facilitated its expansion, driving a transition from individual bad actors to illegal businesses.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 155
+          },
+          "parts": [
+            [
+              145,
+              155
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              155
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bad-actor#s2",
+      "pos": "短语",
+      "glossZh": "有违法或违规记录的人或机构",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "多见于法律或监管语境。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bad-actor#s3",
+      "pos": "短语",
+      "glossZh": "品行恶劣的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

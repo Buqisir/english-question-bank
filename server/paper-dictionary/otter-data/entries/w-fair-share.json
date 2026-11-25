@@ -1,0 +1,136 @@
+{
+  "entryId": "w:fair-share",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fair",
+      "share"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fair",
+        "share"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fair share",
+  "senses": [
+    {
+      "senseId": "w:fair-share#s1",
+      "pos": "短语",
+      "glossZh": "应得或应分担的合理份额",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fair-share#e-eba67344094c9d1b",
+          "text": "His teammate isn’t doing his fair share.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fair-share#e-f11cba7385c5d2c8",
+          "text": "The world’s wealthiest individuals have already consumed their entire fair share of carbon emissions（排放） for the year 2026, which dramatically contrasts with the carbon footprints of the majority.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 80
+          },
+          "parts": [
+            [
+              70,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fair-share#s2",
+      "pos": "短语",
+      "glossZh": "相当多的数量或经历",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于 have had one's fair share of。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

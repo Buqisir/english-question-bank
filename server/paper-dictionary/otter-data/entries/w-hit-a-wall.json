@@ -1,0 +1,133 @@
+{
+  "entryId": "w:hit-a-wall",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "a",
+      "wall"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "a",
+        "wall"
+      ],
+      [
+        "hits",
+        "a",
+        "wall"
+      ],
+      [
+        "hitting",
+        "a",
+        "wall"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit a wall",
+  "senses": [
+    {
+      "senseId": "w:hit-a-wall#s1",
+      "pos": "短语",
+      "glossZh": "遇到难以突破的障碍；陷入瓶颈",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hit-a-wall#e-c828db5acb6e14cd",
+          "text": "What does the underlined phrase “hit a wall” in Paragraph 5 mean?",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:27",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hit-a-wall#e-7c8a26d78e245701",
+          "text": "He counts a creative practice of handling multiple projects at once, an approach that offsets the trap that many artists fall into when they hit a wall on a major project.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 151
+          },
+          "parts": [
+            [
+              141,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              141,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 200
+    "mock": 6
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 192
       },
       "folded": false,
       "examples": [
@@ -139,13 +139,65 @@
       "pos": "n.",
       "glossZh": "揭晓",
       "pronunciationId": "w:reveal#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:reveal#s3",
+      "pos": "adj.",
+      "glossZh": "能揭示真相或内情的",
+      "pronunciationId": "w:reveal#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reveal#e-6f55601374497f46",
+          "text": "Hanley-Dafoe builds this into a revealing lesson: in a world damaged by the lack of resources and an “us-vs-them mentality,” many believe that “if something good happened to someone else, there won’t be any good left over for others.”",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:reveal#e-e50cee8562ff432c",
+          "text": "Even more revealing was the fact that we all overestimate our abilities when using AI, regardless of our intelligence, with the gap between high- and low-skill users reducing.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -154,6 +206,6 @@
       "reason": "建筑专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,97 @@
+{
+  "entryId": "w:here-today-gone-tomorrow",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "here",
+      "today",
+      ",",
+      "gone",
+      "tomorrow"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "here",
+        "today",
+        ",",
+        "gone",
+        "tomorrow"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "here today, gone tomorrow",
+  "senses": [
+    {
+      "senseId": "w:here-today-gone-tomorrow#s1",
+      "pos": "短语",
+      "glossZh": "转瞬即逝；很快消失",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:here-today-gone-tomorrow#e-1131bb6f24ff5c03",
+          "text": "Most apps let shared photos and life experiences be “Here today, gone tomorrow.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 78
+          },
+          "parts": [
+            [
+              53,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

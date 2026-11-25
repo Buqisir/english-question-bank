@@ -1,0 +1,142 @@
+{
+  "entryId": "w:call-for-help",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "call",
+      "for",
+      "help"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "for",
+        "help"
+      ],
+      [
+        "calls",
+        "for",
+        "help"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call for help",
+  "senses": [
+    {
+      "senseId": "w:call-for-help#s1",
+      "pos": "动词短语",
+      "glossZh": "呼救；打电话求助",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-for-help#e-59a5c8ce3f7e1a37",
+          "text": "She tried to call for help but found no signal on her phone.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-for-help#s2",
+      "pos": "名词短语",
+      "glossZh": "求救的呼喊；求助信号",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-for-help#e-d8241019cf683a3a",
+          "text": "His voice was a desperate call for help.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 39
+          },
+          "parts": [
+            [
+              26,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

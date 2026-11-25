@@ -1,0 +1,350 @@
+{
+  "entryId": "w:shut-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shut",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "shut",
+        "down"
+      ],
+      [
+        "shut",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "shuts",
+        "down"
+      ],
+      [
+        "shutting",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shut down",
+      "tags": []
+    },
+    {
+      "form": "shuts down",
+      "tags": []
+    },
+    {
+      "form": "shutting down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shut (sth) down",
+  "senses": [
+    {
+      "senseId": "w:shut-down#s1",
+      "pos": "短语",
+      "glossZh": "关掉（机器、系统等）；停止运转",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s5",
+        "w:shut#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shut-down#e-6224cf2be0bc57bd",
+          "text": "After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shut-down#e-8d8a4a67fccbe3f1",
+          "text": "Your brain accordingly shuts down its creative problem-solving centers.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shut-down#e-8e2b3aa47cbbf1d1",
+          "text": "Shutting down other systems unquestioningly.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:30#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:shut-down#s2",
+      "pos": "短语",
+      "glossZh": "关闭（机构、场所等）；使活动停止",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shut-down#e-27839ccbf2d66404",
+          "text": "Travel bans had shut down almost all traffic across the city, and there was no sign of people on the street.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shut-down#e-4c68c4af17f30f4b",
+          "text": "The old airport shut down after a new, modern one was built nearby.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:shut-down#s3",
+      "pos": "短语",
+      "glossZh": "封闭自己；停止与人交流",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shut-down#e-a57150017c20694a",
+          "text": "Self-esteem is also not being completely shut down by a mistake.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shut-down#e-cb6f7ce2d55abc6f",
+          "text": "I shut down and closed myself off.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:shut-down#s4",
+      "pos": "短语",
+      "glossZh": "压制；驳回（意见或提议）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

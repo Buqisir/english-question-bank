@@ -35,8 +35,8 @@
     "mock": 74
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 74
+    "gaokao": 2,
+    "mock": 0
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -184,40 +184,6 @@
       ]
     },
     {
-      "senseId": "w:whatever#s3",
-      "pos": "短语",
-      "glossZh": "或诸如此类",
-      "pronunciationId": "w:whatever#p-main",
-      "note": "or whatever。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:whatever#e-6faa56a07c151196",
-          "text": "Maybe you say “go,” or turn on a certain song, or whatever.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:whatever#s4",
       "pos": "adv.",
       "glossZh": "丝毫（用于加强否定）",
@@ -250,6 +216,11 @@
       "reason": "g8 为混用，惯用 whenever necessary 或 whatever is necessary，视原意而定"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:or-whatever"
+  ]
 }

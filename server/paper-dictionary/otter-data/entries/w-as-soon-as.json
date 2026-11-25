@@ -1,0 +1,170 @@
+{
+  "entryId": "w:as-soon-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "soon",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "soon",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as soon as",
+  "senses": [
+    {
+      "senseId": "w:as-soon-as#s1",
+      "pos": "短语",
+      "glossZh": "一……就……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-soon-as#e-d5307aa5d561e892",
+          "text": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-soon-as#e-1aa625631c42ede8",
+          "text": "I resigned myself to spending the evening in my hotel room, but as soon as I got back to my room I felt restless and bored.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 74
+          },
+          "parts": [
+            [
+              64,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-soon-as#e-60e9249b353dbc2d",
+          "text": "More research taught us how much to feed him, how to estimate his age, how and when to wean (断奶) him, and that we should let him go as soon as he could survive on his own.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 142
+          },
+          "parts": [
+            [
+              132,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              132,
+              142
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 20
+      }
+    },
+    {
+      "senseId": "w:as-soon-as#s2",
+      "pos": "短语",
+      "glossZh": "最早可在……；早至……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "后接具体时间。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

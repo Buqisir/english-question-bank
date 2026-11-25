@@ -1,0 +1,90 @@
+{
+  "entryId": "w:bad-language",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bad",
+      "language"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bad",
+        "language"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bad language",
+  "senses": [
+    {
+      "senseId": "w:bad-language#s1",
+      "pos": "短语",
+      "glossZh": "脏话；粗俗的言语",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bad-language#e-cdf90e17151255d7",
+          "text": "I used bad language, hung around with other “bad” boys, skipped school and ran through the fields.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

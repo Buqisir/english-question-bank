@@ -1,0 +1,187 @@
+{
+  "entryId": "w:play-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing out",
+    "plays out"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "out"
+      ],
+      [
+        "playing",
+        "out"
+      ],
+      [
+        "plays",
+        "out"
+      ],
+      [
+        "played",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "played out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play out",
+  "senses": [
+    {
+      "senseId": "w:play-out#s1",
+      "pos": "短语",
+      "glossZh": "（事情、情形等）展开；演变；在现实中呈现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:play#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:play-out#e-434d51c7149d040c",
+          "text": "I find that doing so energizes my instruction, engages my students, and demonstrates to them how abstract concepts play out in the real world.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 123
+          },
+          "parts": [
+            [
+              115,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:play-out#e-0670a04431f8de4b",
+          "text": "Paragraph 2: Soon, similar scenes of support were playing out all over the city.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:play-out#e-339c79f0eeba410d",
+          "text": "Naturally, we wanted to figure out why this awkward dynamic plays out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 69
+          },
+          "parts": [
+            [
+              60,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 17
+      }
+    },
+    {
+      "senseId": "w:play-out#s2",
+      "pos": "短语",
+      "glossZh": "把（比赛或游戏）进行到底",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

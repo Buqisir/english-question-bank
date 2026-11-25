@@ -35,8 +35,8 @@
     "mock": 1646
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 1644
+    "gaokao": 13,
+    "mock": 1459
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 91,
-        "mock": 0
+        "mock": 97
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 50,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -331,7 +331,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -364,7 +364,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -397,7 +397,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -468,7 +468,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -533,167 +533,6 @@
       ]
     },
     {
-      "senseId": "w:into#s9",
-      "pos": "短语",
-      "glossZh": "将……纳入考虑",
-      "pronunciationId": "w:into#p-main",
-      "note": "take sth into consideration / account。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:into#e-0002f8bacbcbe224",
-          "text": "What did Levine take into consideration when designing her experiment?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2020-national-ii:25",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:into#e-970995b61804773c",
-          "text": "None of these facts has been taken into account by the fishing industry.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:into#e-9e466180a2306002",
-          "text": "The main temperature value represents how hot or cold the air is, but the second temperature takes the strength of the wind into account.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-a:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 124,
-            "end": 128
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:into#s10",
-      "pos": "短语",
-      "glossZh": "把……付诸实践",
-      "pronunciationId": "w:into#p-main",
-      "note": "put sth into practice / action。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:into#e-bdad6e46f80e36b0",
-          "text": "It pays to put theory into practice.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:into#e-2eca38af9a8585b9",
-          "text": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 113
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:into#s11",
-      "pos": "短语",
-      "glossZh": "使……接触到",
-      "pronunciationId": "w:into#p-main",
-      "note": "bring sb into contact with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:into#e-12bf42261d712db2",
-          "text": "Artist Michael Craig-Martin said: “Andria’s brilliant project to bring artists from all fields into direct contact with children is particularly welcome at a time when the arts are being downgraded in schools.\" It was a mistake to see the arts as unnecessary, he added.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 95,
-            "end": 99
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:into#s12",
       "pos": "prep.",
       "glossZh": "归入",
@@ -701,7 +540,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -763,6 +602,78 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:into#s13",
+      "pos": "prep.",
+      "glossZh": "（劝说、诱骗等）使某人做某事",
+      "pronunciationId": "w:into#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:into#e-2fe8ec08865dd07c",
+          "text": "At dinnertime, if I’m anywhere near my favourite restaurant, there’s not a chance you can talk me into going somewhere else – I want to eat at China Fun.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:into#e-b021b09590d2a7cf",
+          "text": "AI may generate wrong answers, and chatbots can sometimes coax vulnerable adolescents into harmful behaviors.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:into#e-1137c264ce1bab44",
+          "text": "He was cheated into transferring money.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -771,6 +682,57 @@
       "reason": "专门用法或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:book-into",
+    "w:break-into",
+    "w:bring-sb-into-contact-with",
+    "w:build-into",
+    "w:burst-into",
+    "w:check-into",
+    "w:come-into",
+    "w:come-into-being",
+    "w:come-into-effect",
+    "w:come-into-ones-mind",
+    "w:come-into-play",
+    "w:dive-into-sth",
+    "w:draw-into",
+    "w:drop-into",
+    "w:enter-into",
+    "w:enter-into-a-contract",
+    "w:enter-into-conversation",
+    "w:fall-back-into-sth",
+    "w:fall-into",
+    "w:fall-into-place",
+    "w:feed-into",
+    "w:fit-into",
+    "w:get-into",
+    "w:get-into-a-panic",
+    "w:get-into-shape",
+    "w:get-into-the-habit",
+    "w:get-into-trouble",
+    "w:go-into",
+    "w:grow-into",
+    "w:jump-into-action",
+    "w:launch-into",
+    "w:light-into",
+    "w:log-into",
+    "w:look-into",
+    "w:make-into",
+    "w:move-into",
+    "w:pull-into",
+    "w:put-sth-into-practice",
+    "w:run-into-sth",
+    "w:spring-into-action",
+    "w:step-into",
+    "w:strike-fear-into-ones-heart",
+    "w:take-into-account",
+    "w:take-sth-into-consideration",
+    "w:throw-oneself-into",
+    "w:turn-into",
+    "w:walk-into"
+  ]
 }

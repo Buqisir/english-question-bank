@@ -59,8 +59,8 @@
     "mock": 50
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 38
+    "gaokao": 1,
+    "mock": 14
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -123,7 +123,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -266,7 +266,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -328,78 +328,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:log#s5",
-      "pos": "短语",
-      "glossZh": "登录",
-      "pronunciationId": "w:log#p-main",
-      "note": "log in / log into。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:log#e-e81f708b6b10a2d0",
-          "text": "To obtain the article or chapter, click on the link provided in the email and log into your ILL account.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:log#e-672049e107ba10b6",
-          "text": "The morning after I activated Cora, I logged in with nervousness.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:13",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 38,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:log#e-d369ebf81644024b",
-          "text": "For the best user experience, you should use Google Chrome, Mozilla Firefox, Microsoft Edge or Safari to log in to the Volunteer Portal.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
-            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
-            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a:8",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 105,
-            "end": 108
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -408,6 +336,12 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:log-in",
+    "w:log-into"
+  ]
 }

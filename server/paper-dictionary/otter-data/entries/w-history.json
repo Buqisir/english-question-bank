@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 326
+    "mock": 140
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 140
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -270,7 +270,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -323,7 +323,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -356,6 +356,9 @@
       "reason": "口语中多见于 be history，语料无证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:make-history"
+  ]
 }

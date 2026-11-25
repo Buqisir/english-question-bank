@@ -1,0 +1,105 @@
+{
+  "entryId": "w:look-back-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "look",
+      "back",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "back",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looking back on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look back on sth",
+  "senses": [
+    {
+      "senseId": "w:look-back-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "回顾；回想",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-back-on-sth#e-7092d6a5c6265aa2",
+          "text": "Still, looking back on the photos, they are some of my best shots though they could have been so much better if I had been prepared and managed my time wisely.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 22
+          },
+          "parts": [
+            [
+              7,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

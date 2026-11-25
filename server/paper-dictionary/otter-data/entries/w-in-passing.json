@@ -1,0 +1,93 @@
+{
+  "entryId": "w:in-passing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "passing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "passing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in passing",
+  "senses": [
+    {
+      "senseId": "w:in-passing#s1",
+      "pos": "短语",
+      "glossZh": "顺便；附带地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pass#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-passing#e-37c3eb337560b7e4",
+          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 93
+          },
+          "parts": [
+            [
+              83,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              93
+            ]
+          ]
+        }
+      ],
+      "note": "也常用于顺带提到某事。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:think-little-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "thinking little of"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "little",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "little",
+        "of"
+      ],
+      [
+        "thinking",
+        "little",
+        "of"
+      ],
+      [
+        "thinks",
+        "little",
+        "of"
+      ],
+      [
+        "thought",
+        "little",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thought little of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think little of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:think-little-of#s1",
+      "pos": "短语",
+      "glossZh": "轻视；对……评价不高",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-little-of#e-ccbaf0f67824f2be",
+          "text": "Berthelot’s work is thought little of.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 37
+          },
+          "parts": [
+            [
+              20,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:think-little-of#s2",
+      "pos": "短语",
+      "glossZh": "不把做某事当回事；毫无顾忌地做",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "这一用法可接 doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

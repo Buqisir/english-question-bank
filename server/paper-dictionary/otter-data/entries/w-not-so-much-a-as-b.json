@@ -1,0 +1,125 @@
+{
+  "entryId": "w:not-so-much-a-as-b",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "not so much",
+    "not so much A as B"
+  ],
+  "pattern": {
+    "tokens": [
+      "not",
+      "so",
+      "much",
+      {
+        "slot": "…"
+      },
+      "as",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "so",
+        "much",
+        {
+          "slot": "…"
+        },
+        "as",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "not so much as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not so much a as b",
+  "senses": [
+    {
+      "senseId": "w:not-so-much-a-as-b#s1",
+      "pos": "短语",
+      "glossZh": "与其说……，不如说……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:much#s13",
+        "w:so#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-so-much-a-as-b#e-94466d22e4501ec1",
+          "text": "Divergent thinking is not so much about finding answers as it is about asking the question to get to those answers.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 58
+          },
+          "parts": [
+            [
+              22,
+              33
+            ],
+            [
+              56,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ],
+            [
+              56,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

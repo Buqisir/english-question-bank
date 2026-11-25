@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 53
+    "mock": 5
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -178,12 +178,12 @@
       "pos": "v.",
       "glossZh": "吸引（注意力）",
       "pronunciationId": "w:grab#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -194,7 +194,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -227,7 +227,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -253,40 +253,6 @@
       ]
     },
     {
-      "senseId": "w:grab#s6",
-      "pos": "短语",
-      "glossZh": "可供争取",
-      "pronunciationId": "w:grab#p-main",
-      "note": "up for grabs。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grab#e-73e277655dc6f581",
-          "text": "Volunteer Positions up for Grabs",
-          "source": {
-            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
-            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
-            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:grab#s7",
       "pos": "n.",
       "glossZh": "突然一抓",
@@ -306,6 +272,8 @@
       "reason": "历史船型名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,145 @@
+{
+  "entryId": "w:two-way-street",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "two-way",
+      "street"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "two-way",
+        "street"
+      ],
+      [
+        "two-way",
+        "streets"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "two-way streets",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "two-way street",
+  "senses": [
+    {
+      "senseId": "w:two-way-street#s1",
+      "pos": "短语",
+      "glossZh": "需要双方都付出或回应的关系",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:two-way-street#e-6da7dd20390d43fc",
+          "text": "Microconnections are also two-way streets.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-jinan-2026-05-third:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 41
+          },
+          "parts": [
+            [
+              26,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:two-way-street#e-c8cc8ee07ccabce8",
+          "text": "Trust is a two-way street.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-shandong-jining-2026-04-second-mock:35#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 25
+          },
+          "parts": [
+            [
+              11,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:two-way-street#s2",
+      "pos": "短语",
+      "glossZh": "双向通行的街道",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

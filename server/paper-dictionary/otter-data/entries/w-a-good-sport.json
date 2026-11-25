@@ -1,0 +1,62 @@
+{
+  "entryId": "w:a-good-sport",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "good",
+      "sport"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "good",
+        "sport"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a good sport",
+  "senses": [
+    {
+      "senseId": "w:a-good-sport#s1",
+      "pos": "短语",
+      "glossZh": "输得起、开得起玩笑的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sport#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

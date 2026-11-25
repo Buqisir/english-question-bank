@@ -1,0 +1,247 @@
+{
+  "entryId": "w:sit-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting back"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "back"
+      ],
+      [
+        "sitting",
+        "back"
+      ],
+      [
+        "sat",
+        "back"
+      ],
+      [
+        "sits",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sat back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit back",
+  "senses": [
+    {
+      "senseId": "w:sit-back#s1",
+      "pos": "短语",
+      "glossZh": "袖手旁观；坐等事态发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-back#e-c575f757bea1fa93",
+          "text": "Your siblings (兄弟姐妹) and I will back you up – no one ever got any place by sitting back.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:8",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 87
+          },
+          "parts": [
+            [
+              75,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-back#e-606e56cc300214b7",
+          "text": "But businesses don't have time to sit back and see how it unfolds.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 42
+          },
+          "parts": [
+            [
+              34,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-back#e-d90ad4e8253d78d8",
+          "text": "Retailers(零售商), however, are not sitting back.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 45
+          },
+          "parts": [
+            [
+              33,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:sit-back#s2",
+      "pos": "短语",
+      "glossZh": "向后靠坐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-back#e-81dd38e166a609b2",
+          "text": "she cried, throwing the bell onto the grass and sitting back beside it, defeated.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-back#e-3c96692418cde8d0",
+          "text": "As the speaker stood in front of the entire grade, attempting to get our attention, my friends and I sat back, prepared to sit through another boring speech, but as soon as she started talking, I snapped to attention (立即站立).",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 109
+          },
+          "parts": [
+            [
+              101,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

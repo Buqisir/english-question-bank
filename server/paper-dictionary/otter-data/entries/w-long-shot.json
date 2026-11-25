@@ -1,0 +1,121 @@
+{
+  "entryId": "w:long-shot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "long",
+      "shot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "long",
+        "shot"
+      ],
+      [
+        "long",
+        "shots"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "long shot",
+  "senses": [
+    {
+      "senseId": "w:long-shot#s1",
+      "pos": "短语",
+      "glossZh": "希望渺茫的尝试；不大可能实现的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:long-shot#e-b5fbc0b25f304480",
+          "text": "But in his heart of hearts, he feels it’s a long shot that they’ll ever truly know.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 53
+          },
+          "parts": [
+            [
+              44,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:long-shot#s2",
+      "pos": "短语",
+      "glossZh": "向远处目标的一次射击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:long-shot#s3",
+      "pos": "短语",
+      "glossZh": "远景镜头",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "影视用语，常用来交代人物所处的整体环境。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

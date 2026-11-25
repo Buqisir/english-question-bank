@@ -59,8 +59,8 @@
     "mock": 71
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 68
+    "gaokao": 2,
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -130,40 +130,6 @@
           "target": {
             "start": 106,
             "end": 110
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:skin#s2",
-      "pos": "短语",
-      "glossZh": "设身处地",
-      "pronunciationId": "w:skin#p-main",
-      "note": "in another’s skin。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:skin#e-7fb6364271cf98a7",
-          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 180,
-            "end": 184
           }
         }
       ]
@@ -273,6 +239,11 @@
       "reason": "俚语、专门义或罕见义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-anothers-skin"
+  ]
 }

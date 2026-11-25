@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -205,108 +205,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:needle#s6",
-      "pos": "短语",
-      "glossZh": "带来可见的进展",
-      "pronunciationId": "w:needle#p-main",
-      "note": "move the needle。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:needle#e-356d41175324d45f",
-          "text": "It’s Sunday evening, and you’re reviewing another week of progress on five different goals without truly moving the needle on any.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 116,
-            "end": 122
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:needle#s7",
-      "pos": "短语",
-      "glossZh": "如坐针毡",
-      "pronunciationId": "w:needle#p-main",
-      "note": "on pins and needles。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:needle#e-123c55f3b9d8ba76",
-          "text": "Just as I was sitting on pins and needles, my phone rang.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
-            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:needle#s8",
-      "pos": "短语",
-      "glossZh": "极难找到的东西",
-      "pronunciationId": "w:needle#p-main",
-      "note": "a needle in a haystack。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:needle#e-6ccd9449a14accfa",
-          "text": "While mapping a mouse’s genome (基因组) today takes only days, back then it was like looking for a needle in a huge pile of straw.",
-          "source": {
-            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
-            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 96,
-            "end": 102
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -315,6 +213,12 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-needle-in-a-haystack",
+    "w:move-the-needle"
+  ]
 }

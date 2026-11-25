@@ -1,0 +1,309 @@
+{
+  "entryId": "w:give-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gives back",
+    "giving back"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "give",
+        "back"
+      ],
+      [
+        "give",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "gives",
+        "back"
+      ],
+      [
+        "giving",
+        "back"
+      ],
+      [
+        "gave",
+        "back"
+      ],
+      [
+        "given",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give back",
+  "senses": [
+    {
+      "senseId": "w:give-back#s1",
+      "pos": "短语",
+      "glossZh": "归还；使重新获得",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-back#e-9a1f516356e25269",
+          "text": "The Caribbean Taino, the Australian Aboriginals, the African people of Benin and the Incas, all of whom appear in this book, can speak to us now of their past achievements most powerfully through the objects they made: a history told through things gives them back a voice.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 249,
+            "end": 264
+          },
+          "parts": [
+            [
+              249,
+              254
+            ],
+            [
+              260,
+              264
+            ]
+          ],
+          "highlightRanges": [
+            [
+              249,
+              254
+            ],
+            [
+              260,
+              264
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back#e-81e820dfd2ba95ef",
+          "text": "A tree lives for 100 years and then dies and gives the carbon back to the atmosphere.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 66
+          },
+          "parts": [
+            [
+              45,
+              50
+            ],
+            [
+              62,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              50
+            ],
+            [
+              62,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back#e-8c861d2d65e7488b",
+          "text": "He added that in about a year, we’d give Shyla back to The Seeing Eye.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 51
+          },
+          "parts": [
+            [
+              36,
+              40
+            ],
+            [
+              47,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              40
+            ],
+            [
+              47,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:give-back#s2",
+      "pos": "短语",
+      "glossZh": "回馈；回报他人或社会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-back#e-04747bd3eaf27e85",
+          "text": "Run by Society of London Theatre, a not-for-profit organization, Theatre Tokens are a gift that gives back.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 106
+          },
+          "parts": [
+            [
+              96,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back#e-ef16c1f1d493ef53",
+          "text": "We had thrived here for nineteen years, and now it was time to give back.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back#e-8ce5328353c8460a",
+          "text": "Paragraph 2: With the money he earned, Nick chose to give back.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 62
+          },
+          "parts": [
+            [
+              53,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 25
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

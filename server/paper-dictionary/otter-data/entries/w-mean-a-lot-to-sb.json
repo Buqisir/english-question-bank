@@ -1,0 +1,107 @@
+{
+  "entryId": "w:mean-a-lot-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mean",
+      "a",
+      "lot",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mean",
+        "a",
+        "lot",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "meant a lot to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mean a lot to sb",
+  "senses": [
+    {
+      "senseId": "w:mean-a-lot-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "对某人很重要；对某人意义重大",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mean#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mean-a-lot-to-sb#e-729d67d3712ca12e",
+          "text": "Though old and a bit worn, it meant a lot to him.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 44
+          },
+          "parts": [
+            [
+              30,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -54,8 +54,8 @@
     "mock": 44
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 36
+    "gaokao": 2,
+    "mock": 6
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -170,7 +170,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -326,7 +326,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -384,74 +384,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:sweet#s8",
-      "pos": "短语",
-      "glossZh": "最佳点",
-      "pronunciationId": "w:sweet#p-main",
-      "note": "sweet spot。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sweet#e-03b6ecb3eca48348",
-          "text": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sweet#s9",
-      "pos": "短语",
-      "glossZh": "红薯",
-      "pronunciationId": "w:sweet#p-main",
-      "note": "sweet potato。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sweet#e-60a2f47ed4878b70",
-          "text": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 51
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -460,6 +392,12 @@
       "reason": "专名或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:have-a-sweet-tooth",
+    "w:sweet-spot"
+  ]
 }

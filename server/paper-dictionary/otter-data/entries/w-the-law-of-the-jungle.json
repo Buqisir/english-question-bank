@@ -1,0 +1,66 @@
+{
+  "entryId": "w:the-law-of-the-jungle",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "law",
+      "of",
+      "the",
+      "jungle"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "law",
+        "of",
+        "the",
+        "jungle"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the law of the jungle",
+  "senses": [
+    {
+      "senseId": "w:the-law-of-the-jungle#s1",
+      "pos": "短语",
+      "glossZh": "丛林法则；弱肉强食的规则",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:law#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

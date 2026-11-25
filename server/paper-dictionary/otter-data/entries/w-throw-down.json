@@ -1,0 +1,176 @@
+{
+  "entryId": "w:throw-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "throw",
+        "down"
+      ],
+      [
+        "threw",
+        "down"
+      ],
+      [
+        "throwing",
+        "down"
+      ],
+      [
+        "thrown",
+        "down"
+      ],
+      [
+        "throws",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "threw down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw (sth) down",
+  "senses": [
+    {
+      "senseId": "w:throw-down#s1",
+      "pos": "短语",
+      "glossZh": "把……用力扔下；猛地摔在地上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-down#e-5be2e12dbd1b7be4",
+          "text": "Halfway through, Lucas threw down his shovel in frustration (沮丧).",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:throw-down#s2",
+      "pos": "短语",
+      "glossZh": "推倒；拆毁（建筑物等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-down#s3",
+      "pos": "短语",
+      "glossZh": "大显身手；表现出色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-down#s4",
+      "pos": "短语",
+      "glossZh": "猛喝；痛饮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-down#s5",
+      "pos": "短语",
+      "glossZh": "打起来；正面对抗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-down#s6",
+      "pos": "短语",
+      "glossZh": "出自己的一份力或钱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

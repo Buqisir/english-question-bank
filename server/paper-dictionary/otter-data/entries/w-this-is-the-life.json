@@ -1,0 +1,62 @@
+{
+  "entryId": "w:this-is-the-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "this",
+      "is",
+      "the",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "this",
+        "is",
+        "the",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "this is the life",
+  "senses": [
+    {
+      "senseId": "w:this-is-the-life#s1",
+      "pos": "短语",
+      "glossZh": "这日子真惬意！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

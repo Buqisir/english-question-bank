@@ -1,0 +1,155 @@
+{
+  "entryId": "w:he-or-she",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "he",
+      "or",
+      "she"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "he",
+        "or",
+        "she"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "he or she",
+  "senses": [
+    {
+      "senseId": "w:he-or-she#s1",
+      "pos": "短语",
+      "glossZh": "他或她（指性别未明确的一个人）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:he-or-she#e-52ea8374b52ede8f",
+          "text": "He or she is the person who is feeling the weight of that awkwardness the most",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-b:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:he-or-she#e-066d528ac83b7b14",
+          "text": "If a child with so-called risky genes is in a good school and has much support, he or she can really flourish.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 89
+          },
+          "parts": [
+            [
+              80,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:he-or-she#e-782b51c3dfdf6a25",
+          "text": "Teacher’s Details: Name and the subject he or she taught.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          },
+          "parts": [
+            [
+              40,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

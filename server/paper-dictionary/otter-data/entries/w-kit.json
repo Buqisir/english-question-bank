@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -223,40 +223,6 @@
       ]
     },
     {
-      "senseId": "w:kit#s4",
-      "pos": "短语",
-      "glossZh": "为……配齐用品",
-      "pronunciationId": "w:kit#p-main",
-      "note": "kit sb out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:kit#e-7afad16afb3e5097",
-          "text": "The program works with more than 140 foster youth headed to college, hosting an annual event in July to kit out each student with sheet sets, pillows and connections to other people in the same situation.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 104,
-            "end": 107
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:kit#s5",
       "pos": "n.",
       "glossZh": "某些小动物的幼崽",
@@ -277,6 +243,11 @@
       "reason": "专名或低频专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:kit-sb-out"
+  ]
 }

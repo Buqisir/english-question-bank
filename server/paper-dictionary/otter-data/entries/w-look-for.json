@@ -1,0 +1,172 @@
+{
+  "entryId": "w:look-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking for",
+    "looks for"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "for"
+      ],
+      [
+        "looking",
+        "for"
+      ],
+      [
+        "looks",
+        "for"
+      ],
+      [
+        "looked",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look for",
+  "senses": [
+    {
+      "senseId": "w:look-for#s1",
+      "pos": "短语",
+      "glossZh": "寻找；寻求",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-for#e-f7cab350405a706a",
+          "text": "If you are looking for the best comedies on tour and brilliant live music, you should start here.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-for#e-0d0458a83d04c021",
+          "text": "However, another way the cats are able to distinguish between situations is by looking for familiar smells.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 90
+          },
+          "parts": [
+            [
+              79,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-for#e-08c75315dc9fca40",
+          "text": "The prison was looking for new activities to improve the mental health of those serving long-term sentences.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 26,
+        "mock": 128
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 26,
+    "mock": 128
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

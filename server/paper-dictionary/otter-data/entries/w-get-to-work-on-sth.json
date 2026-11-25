@@ -1,0 +1,107 @@
+{
+  "entryId": "w:get-to-work-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "to",
+      "work",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "to",
+        "work",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get to work on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get to work on sth",
+  "senses": [
+    {
+      "senseId": "w:get-to-work-on-sth#s1",
+      "pos": "动词短语",
+      "glossZh": "着手做某事；开始处理某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:work#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-to-work-on-sth#e-9bacaa870da2f171",
+          "text": "They bring these to the surface and float on their backs as they get to work on opening and eating their snacks.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 79
+          },
+          "parts": [
+            [
+              65,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

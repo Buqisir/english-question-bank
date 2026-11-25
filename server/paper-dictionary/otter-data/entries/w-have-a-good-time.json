@@ -1,0 +1,181 @@
+{
+  "entryId": "w:have-a-good-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "good",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "good",
+        "time"
+      ],
+      [
+        "had",
+        "a",
+        "good",
+        "time"
+      ],
+      [
+        "has",
+        "a",
+        "good",
+        "time"
+      ],
+      [
+        "having",
+        "a",
+        "good",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had a good time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a good time",
+  "senses": [
+    {
+      "senseId": "w:have-a-good-time#s1",
+      "pos": "短语",
+      "glossZh": "玩得开心；过得愉快",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:good#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:have-a-good-time#e-7d203e6d5a705783",
+          "text": "I’m surely you’ll have a good time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 34
+          },
+          "parts": [
+            [
+              18,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-a-good-time#e-dadbb69adc5d267d",
+          "text": "In that story, everybody had a good time.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 40
+          },
+          "parts": [
+            [
+              25,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-a-good-time#e-97dbd1da2462c602",
+          "text": "“We want to get answers, but it's also important that participants have a good time and a good impression of science,” said Yaelan Jung, first author of the study.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 83
+          },
+          "parts": [
+            [
+              67,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

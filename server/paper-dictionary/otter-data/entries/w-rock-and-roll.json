@@ -1,0 +1,144 @@
+{
+  "entryId": "w:rock-and-roll",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rock",
+      "and",
+      "roll"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rock",
+        "and",
+        "roll"
+      ],
+      [
+        "rock",
+        "and",
+        "rolled"
+      ],
+      [
+        "rock",
+        "and",
+        "rolling"
+      ],
+      [
+        "rock",
+        "and",
+        "rolls"
+      ],
+      [
+        "rocked",
+        "and",
+        "rolled"
+      ],
+      [
+        "rocking",
+        "and",
+        "rolling"
+      ],
+      [
+        "rocks",
+        "and",
+        "rolls"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rock and roll",
+  "senses": [
+    {
+      "senseId": "w:rock-and-roll#s1",
+      "pos": "短语",
+      "glossZh": "摇滚乐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:roll#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rock-and-roll#s2",
+      "pos": "短语",
+      "glossZh": "摇滚舞",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rock-and-roll#s3",
+      "pos": "短语",
+      "glossZh": "摇滚精神；摇滚文化",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rock-and-roll#s4",
+      "pos": "短语",
+      "glossZh": "演奏摇滚乐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rock-and-roll#s5",
+      "pos": "短语",
+      "glossZh": "（口语）开始行动；动起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

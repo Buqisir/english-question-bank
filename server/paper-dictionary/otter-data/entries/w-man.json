@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1260
+    "mock": 1060
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 142,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -259,6 +259,10 @@
       "reason": "缩写或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:family-man",
+    "w:man-of-few-words"
+  ]
 }

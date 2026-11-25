@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 36
+    "mock": 6
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -334,59 +334,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:net#s8",
-      "pos": "短语",
-      "glossZh": "安全保障",
-      "pronunciationId": "w:net#p-main",
-      "note": "safety net。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:net#e-f3a228d9aee0fecf",
-          "text": "Procrastination had become a safety net; staying still meant avoiding being seen and possibly found lacking.",
-          "source": {
-            "paperId": "paper-mock-guangdong-2026-03-first",
-            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
-            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:3",
-              "sentence": 7
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:net#e-c8b987ec49420c55",
-          "text": "During tough times – whether personal struggles or global crises – nostalgia acts like an emotional safety net.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
-            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 107,
-            "end": 110
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -395,6 +342,11 @@
       "reason": "数学或医学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:safety-net"
+  ]
 }

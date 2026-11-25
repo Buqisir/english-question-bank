@@ -1,0 +1,107 @@
+{
+  "entryId": "w:to-start-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "start",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "start",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to start with",
+  "senses": [
+    {
+      "senseId": "w:to-start-with#s1",
+      "pos": "短语",
+      "glossZh": "起初；一开始",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:start#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:to-start-with#e-3f2739b98dd23533",
+          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 57
+          },
+          "parts": [
+            [
+              44,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:to-start-with#s2",
+      "pos": "短语",
+      "glossZh": "首先；先说第一点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

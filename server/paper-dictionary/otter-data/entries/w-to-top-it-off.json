@@ -1,0 +1,97 @@
+{
+  "entryId": "w:to-top-it-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "top it off"
+  ],
+  "pattern": {
+    "tokens": [
+      "to",
+      "top",
+      "it",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "top",
+        "it",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to top it off",
+  "senses": [
+    {
+      "senseId": "w:to-top-it-off#s1",
+      "pos": "短语",
+      "glossZh": "最后还……；更妙的是／更糟的是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:to-top-it-off#e-3391bfb95cba4036",
+          "text": "To top it off, accommodation options range from restored historic buildings to luxurious hotels that combine Khorezmian style with international service.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "note": "补充最后一件事，使前面说的好处或坏处更突出。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

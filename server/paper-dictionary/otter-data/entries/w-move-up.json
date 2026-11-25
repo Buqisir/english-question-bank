@@ -1,0 +1,159 @@
+{
+  "entryId": "w:move-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "up"
+      ],
+      [
+        "moved",
+        "up"
+      ],
+      [
+        "moves",
+        "up"
+      ],
+      [
+        "moving",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:move-up#s1",
+      "pos": "短语",
+      "glossZh": "向前移动；往前挪",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-up#e-a479a86febf96ce3",
+          "text": "I watched as David moved up to the starting line with the other runners.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "writing-continuation-12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-up#s2",
+      "pos": "短语",
+      "glossZh": "向上移动；把……往上移",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-up#s3",
+      "pos": "短语",
+      "glossZh": "（使职位、排名等）上升",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-up#s4",
+      "pos": "短语",
+      "glossZh": "把（会议、期限等）提前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:move-up#s5",
+      "pos": "短语",
+      "glossZh": "挪一挪给人腾位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

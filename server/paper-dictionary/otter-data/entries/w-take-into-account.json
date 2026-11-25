@@ -1,0 +1,190 @@
+{
+  "entryId": "w:take-into-account",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took into account"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "into",
+      "account"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "into",
+        "account"
+      ],
+      [
+        "took",
+        "into",
+        "account"
+      ],
+      [
+        "taken",
+        "into",
+        "account"
+      ],
+      [
+        "takes",
+        "into",
+        "account"
+      ],
+      [
+        "taking",
+        "into",
+        "account"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take into account",
+      "tags": []
+    },
+    {
+      "form": "taken into account",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sth) into account",
+  "senses": [
+    {
+      "senseId": "w:take-into-account#s1",
+      "pos": "短语",
+      "glossZh": "把……考虑进去；考虑到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-into-account#e-ec40748ff9c50a1f",
+          "text": "None of these facts has been taken into account by the fishing industry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 47
+          },
+          "parts": [
+            [
+              29,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-into-account#e-b312b8750392922e",
+          "text": "taken into account",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "question": 43,
+              "questionId": "question:paper-gaokao-2021-national-b:43#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-into-account#e-ba0e0028deb56c44",
+          "text": "“Therefore, the best algorithm should take into account how a human will interact with the information it provides,” Spiess says.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 55
+          },
+          "parts": [
+            [
+              38,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              55
+            ]
+          ]
+        }
+      ],
+      "note": "较长的宾语常放在 into account 之后。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

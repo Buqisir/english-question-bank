@@ -1,0 +1,221 @@
+{
+  "entryId": "w:end-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ending in"
+  ],
+  "pattern": {
+    "tokens": [
+      "end",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "in"
+      ],
+      [
+        "ending",
+        "in"
+      ],
+      [
+        "ended",
+        "in"
+      ],
+      [
+        "ends",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "end in",
+      "tags": []
+    },
+    {
+      "form": "ended in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end in sth",
+  "senses": [
+    {
+      "senseId": "w:end-in#s1",
+      "pos": "短语",
+      "glossZh": "以……告终；最后导致（某结果）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:end-in#e-34998ecf58926c33",
+          "text": "I spent years avoiding activities that I was sure would end in misfortune.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 62
+          },
+          "parts": [
+            [
+              56,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:end-in#e-5b16571c8ddc2af3",
+          "text": "On December 26, 1985, her lonely struggle ended in violence.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:14",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:end-in#e-9758e32f76282aa0",
+          "text": "Now, mornings that once began in tears end in joy.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-foshan-2026-01-first:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 45
+          },
+          "parts": [
+            [
+              39,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:end-in#s2",
+      "pos": "短语",
+      "glossZh": "以（某字母、字样等）结尾",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:end-in#e-96bd307e55cf6814",
+          "text": "It is not enough to tell young people that they should be careful online, or to trust sites that end in “.org” instead of “.com”.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 103
+          },
+          "parts": [
+            [
+              97,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

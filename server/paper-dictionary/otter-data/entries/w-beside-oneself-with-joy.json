@@ -1,0 +1,64 @@
+{
+  "entryId": "w:beside-oneself-with-joy",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beside",
+      "oneself",
+      "with",
+      "joy"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "beside",
+        "oneself",
+        "with",
+        "joy"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beside oneself with joy",
+  "senses": [
+    {
+      "senseId": "w:beside-oneself-with-joy#s1",
+      "pos": "短语",
+      "glossZh": "欣喜若狂；高兴得不能自已",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:beside#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

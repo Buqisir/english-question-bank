@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 170
+    "mock": 10
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -191,12 +191,12 @@
       "pos": "n.",
       "glossZh": "上衣",
       "pronunciationId": "w:top#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -272,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -344,7 +344,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -397,7 +397,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -436,11 +436,10 @@
       "examples": []
     },
     {
-      "senseId": "w:top#s10",
-      "pos": "短语",
-      "glossZh": "此外",
+      "senseId": "w:top#s11",
+      "pos": "v.",
+      "glossZh": "登上……的顶峰",
       "pronunciationId": "w:top#p-main",
-      "note": "on top of that。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -449,22 +448,55 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:top#e-14eb90fb25150a3e",
-          "text": "On top of that, increased screen time is often tied to rising levels of social anxiety and loneliness, which can lead kids to withdraw even further into their digital worlds, cutting off real-life social opportunities.",
+          "exampleId": "w:top#e-6e2e8d046fc5d75b",
+          "text": "With this climb, he became the youngest person ever to top all 14 of the world’s 8,000-meter peaks.",
           "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-b",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:3",
-              "sentence": 3
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-b:1",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 3,
-            "end": 6
+            "start": 55,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:top#s12",
+      "pos": "n.",
+      "glossZh": "加在食物表面的配料（topping）",
+      "pronunciationId": "w:top#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:top#e-2069c6b9cb9d409b",
+          "text": "Sauerkraut (酸菜) has long been a bit player in the American diet, just serving as a side topping on the sandwich.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
           }
         }
       ]
@@ -476,6 +508,15 @@
       "reason": "特定领域用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-top-of",
+    "w:on-top-of-that",
+    "w:race-to-the-top",
+    "w:to-top-it-off",
+    "w:top-out"
+  ]
 }

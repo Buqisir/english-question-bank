@@ -1,0 +1,76 @@
+{
+  "entryId": "w:take-sth-by-storm",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take something by storm"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "sth"
+      },
+      "by",
+      "storm"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "by",
+        "storm"
+      ],
+      [
+        "take",
+        "something",
+        "by",
+        "storm"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sth by storm",
+  "senses": [
+    {
+      "senseId": "w:take-sth-by-storm#s1",
+      "pos": "短语",
+      "glossZh": "迅速在某地或某领域走红；大获成功",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:storm#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,170 @@
+{
+  "entryId": "w:when-it-comes-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "when it comes to"
+  ],
+  "pattern": {
+    "tokens": [
+      "when",
+      "it",
+      "comes",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "when",
+        "it",
+        "comes",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "when it comes to sth",
+  "senses": [
+    {
+      "senseId": "w:when-it-comes-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "说到……；就……而言",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s9",
+        "w:when#s4",
+        "w:come#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:when-it-comes-to-sth#e-c0c1df1d1464c3b1",
+          "text": "Terri Bolton is a dab hand when it comes to DIY (do-it-yourself).",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 43
+          },
+          "parts": [
+            [
+              27,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:when-it-comes-to-sth#e-0cd70bda8caa60e2",
+          "text": "When it comes to public speaking, less is usually more.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:when-it-comes-to-sth#e-eec0b263bde3b5fe",
+          "text": "We all know fresh is best when it comes to food.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 42
+          },
+          "parts": [
+            [
+              26,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "to 后可接名词或动名词。",
+      "counts": {
+        "gaokao": 8,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

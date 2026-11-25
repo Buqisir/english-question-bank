@@ -1,0 +1,94 @@
+{
+  "entryId": "w:read-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "reading in"
+  ],
+  "pattern": {
+    "tokens": [
+      "read",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "read",
+        "in"
+      ],
+      [
+        "reading",
+        "in"
+      ],
+      [
+        "reads",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "read (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:read-in#s1",
+      "pos": "短语",
+      "glossZh": "把（文件或数据）读入系统",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:read-in#s2",
+      "pos": "短语",
+      "glossZh": "让某人获准知悉机密",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:read-in#s3",
+      "pos": "短语",
+      "glossZh": "通过解释将未明文规定的内容纳入法条",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

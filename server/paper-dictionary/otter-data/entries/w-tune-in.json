@@ -1,0 +1,107 @@
+{
+  "entryId": "w:tune-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tune",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tune",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tune in",
+  "senses": [
+    {
+      "senseId": "w:tune-in#s2",
+      "pos": "短语",
+      "glossZh": "留心感受；把注意力转向……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tune-in#e-25d366bb81e77085",
+          "text": "To tune out is to tune in.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-jining-2026-04-second-mock:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "常用 tune in to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:tune-in#s1",
+      "pos": "短语",
+      "glossZh": "调到指定频道收听或收看",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:tune#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,104 @@
+{
+  "entryId": "w:real-talk",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "real",
+      "talk"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "real",
+        "talk"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "real talk",
+  "senses": [
+    {
+      "senseId": "w:real-talk#s1",
+      "pos": "短语",
+      "glossZh": "认真坦诚的交流；推心置腹的谈话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:real-talk#e-7309b84a084bb210",
+          "text": "That’s why young users who want real talk about their appearance and personal style are now looking elsewhere.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:real-talk#s2",
+      "pos": "短语",
+      "glossZh": "说真的；说实话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中常独立使用，引出直率的话。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

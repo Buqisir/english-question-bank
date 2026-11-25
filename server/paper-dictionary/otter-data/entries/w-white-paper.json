@@ -1,0 +1,112 @@
+{
+  "entryId": "w:white-paper",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "white",
+      "paper"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "white",
+        "paper"
+      ],
+      [
+        "white",
+        "papers"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "white papers",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "white paper",
+  "senses": [
+    {
+      "senseId": "w:white-paper#s1",
+      "pos": "短语",
+      "glossZh": "白皮书（说明某议题或解决方案的正式报告）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:white-paper#e-71aae52ee72a5cb2",
+          "text": "To build an evidence base, the researchers investigated relevant studies and white papers published worldwide.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 89
+          },
+          "parts": [
+            [
+              77,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:white-paper#s2",
+      "pos": "短语",
+      "glossZh": "政府白皮书（阐述或提出政策的正式文件）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

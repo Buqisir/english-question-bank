@@ -42,8 +42,8 @@
     "mock": 41
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 38
+    "gaokao": 1,
+    "mock": 8
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -210,52 +210,37 @@
       "examples": []
     },
     {
-      "senseId": "w:wing#s6",
-      "pos": "短语",
-      "glossZh": "飞起来",
+      "senseId": "w:wing#s8",
+      "pos": "n.",
+      "glossZh": "水翼",
       "pronunciationId": "w:wing#p-main",
-      "note": "take wing。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 4
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:wing#e-b59bcea562e49355",
-          "text": "I stopped, and she soon took wing but did not immediately fly away.",
+          "exampleId": "w:wing#e-9fa1eabdce8ae43a",
+          "text": "The Candela C-8 is supported by three thin, red struts(支柱), which are linked to two underwater wings that turn forward motion into lift.",
           "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:5",
-              "sentence": 2
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-c:3",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 29,
-            "end": 33
+            "start": 95,
+            "end": 100
           }
         }
       ]
-    },
-    {
-      "senseId": "w:wing#s7",
-      "pos": "短语",
-      "glossZh": "临场应付",
-      "pronunciationId": "w:wing#p-main",
-      "note": "wing it。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -264,6 +249,12 @@
       "reason": "专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-wing",
+    "w:wing-it"
+  ]
 }

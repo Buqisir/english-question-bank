@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 61
+    "mock": 6
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -204,7 +204,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -241,6 +241,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:friendly#s5",
+      "pos": "adj.",
+      "glossZh": "适合……的；欢迎……的",
+      "pronunciationId": "w:friendly#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friendly#e-1de40a925524301c",
+          "text": "Yet many people with pets say they don’t believe any accommodation is truly pet friendly, signalling a trust gap.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -249,6 +282,9 @@
       "reason": "数学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:friendly-fire"
+  ]
 }

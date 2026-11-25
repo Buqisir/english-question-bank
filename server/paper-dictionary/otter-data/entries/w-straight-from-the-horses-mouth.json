@@ -1,0 +1,100 @@
+{
+  "entryId": "w:straight-from-the-horses-mouth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "straight from the horse’s mouth"
+  ],
+  "pattern": {
+    "tokens": [
+      "straight",
+      "from",
+      "the",
+      "horse's",
+      "mouth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "straight",
+        "from",
+        "the",
+        "horse's",
+        "mouth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "straight from the horse's mouth",
+  "senses": [
+    {
+      "senseId": "w:straight-from-the-horses-mouth#s1",
+      "pos": "短语",
+      "glossZh": "直接来自当事人；由知情者亲口说出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mouth#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:straight-from-the-horses-mouth#e-d9b16d5395107ce7",
+          "text": "My story would come straight from the horse’s mouth.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 51
+          },
+          "parts": [
+            [
+              20,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

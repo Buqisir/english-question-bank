@@ -1,0 +1,167 @@
+{
+  "entryId": "w:look-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "look to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looking to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look to do sth",
+  "senses": [
+    {
+      "senseId": "w:look-to-do#s1",
+      "pos": "短语",
+      "glossZh": "打算做……；寻求做……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-to-do#e-680cafca221cdfae",
+          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-to-do#e-0d839c3926235433",
+          "text": "Parrots are prey animals, which means that other predators（捕食者）in the wild, such as hawks or snakes, are looking to make them into a meal.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 115
+          },
+          "parts": [
+            [
+              105,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-to-do#e-44d52e1c270f6bc4",
+          "text": "Her content breaks down her tips and tricks for viewers looking to tidy up their lives.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 66
+          },
+          "parts": [
+            [
+              56,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

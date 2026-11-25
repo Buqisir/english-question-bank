@@ -1,0 +1,243 @@
+{
+  "entryId": "w:nothing-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nothing",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nothing",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nothing like",
+  "senses": [
+    {
+      "senseId": "w:nothing-like#s1",
+      "pos": "短语",
+      "glossZh": "和……一点也不像；与……完全不同",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nothing-like#e-c13751de7a4cf625",
+          "text": "I stood confused, for this cold, mechanical pattern felt nothing like the lively faces I knew in real life.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-like#e-b94b50c8816ce1c8",
+          "text": "“Welcome,” the class recited in a chorus that sounded nothing like my pronunciation.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 66
+          },
+          "parts": [
+            [
+              54,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-like#e-d42141a9313ee9e8",
+          "text": "The reality was nothing like he had expected.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 28
+          },
+          "parts": [
+            [
+              16,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:nothing-like#s2",
+      "pos": "短语",
+      "glossZh": "没有什么比得上……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nothing-like#e-f823e17852546a20",
+          "text": "There’s nothing like fresh-cut flowers to brighten up your space.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 20
+          },
+          "parts": [
+            [
+              8,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-like#e-a4eaf173d31dfa20",
+          "text": "But nothing like the gloves.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 16
+          },
+          "parts": [
+            [
+              4,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "常用 there's nothing like sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:nothing-like#s3",
+      "pos": "短语",
+      "glossZh": "远没有那么……；远未达到……程度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 nothing like enough、nothing like as easy。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

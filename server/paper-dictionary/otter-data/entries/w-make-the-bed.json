@@ -1,0 +1,174 @@
+{
+  "entryId": "w:make-the-bed",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making the bed"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "bed"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "bed"
+      ],
+      [
+        "making",
+        "the",
+        "bed"
+      ],
+      [
+        "made",
+        "the",
+        "bed"
+      ],
+      [
+        "makes",
+        "the",
+        "bed"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the bed",
+  "senses": [
+    {
+      "senseId": "w:make-the-bed#s1",
+      "pos": "短语",
+      "glossZh": "铺床；整理床铺",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-the-bed#e-a1fa100e73ca46a4",
+          "text": "By making the bed.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 17
+          },
+          "parts": [
+            [
+              3,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-bed#e-31f2abb6b7ad55bf",
+          "text": "Making the bed.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-bed#e-4f3b0b6f43af85e4",
+          "text": "Make the bed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

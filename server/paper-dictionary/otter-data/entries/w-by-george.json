@@ -1,0 +1,61 @@
+{
+  "entryId": "w:by-george",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "by George"
+  ],
+  "pattern": {
+    "tokens": [
+      "by",
+      "george"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "george"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by george",
+  "senses": [
+    {
+      "senseId": "w:by-george#s1",
+      "pos": "感叹语",
+      "glossZh": "天哪；好家伙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式感叹语，通常写作 by George。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

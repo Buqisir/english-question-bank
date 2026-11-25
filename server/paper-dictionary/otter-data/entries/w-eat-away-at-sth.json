@@ -1,0 +1,82 @@
+{
+  "entryId": "w:eat-away-at-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "eat",
+      "away",
+      "at",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eat",
+        "away",
+        "at",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eat away at sth",
+  "senses": [
+    {
+      "senseId": "w:eat-away-at-sth#s1",
+      "pos": "短语",
+      "glossZh": "逐渐侵蚀；逐渐损坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:eat#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-away-at-sth#s2",
+      "pos": "短语",
+      "glossZh": "逐渐削弱或消耗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用于信心、储蓄等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

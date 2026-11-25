@@ -1,0 +1,95 @@
+{
+  "entryId": "w:get-on-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "on",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "on",
+        "to"
+      ],
+      [
+        "gets",
+        "on",
+        "to"
+      ],
+      [
+        "getting",
+        "on",
+        "to"
+      ],
+      [
+        "got",
+        "on",
+        "to"
+      ],
+      [
+        "gotten",
+        "on",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get on to",
+  "senses": [
+    {
+      "senseId": "w:get-on-to#s1",
+      "pos": "短语",
+      "glossZh": "联系某人谈或处理某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get on to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-on-to#s2",
+      "pos": "短语",
+      "glossZh": "转而谈论或着手处理下一件事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get on to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,142 @@
+{
+  "entryId": "w:pull-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "on"
+      ],
+      [
+        "pulled",
+        "on"
+      ],
+      [
+        "pulling",
+        "on"
+      ],
+      [
+        "pulls",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulled on",
+      "tags": []
+    },
+    {
+      "form": "pulling on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull sth on",
+  "senses": [
+    {
+      "senseId": "w:pull-on#s1",
+      "pos": "短语",
+      "glossZh": "拉上或套上（衣物、鞋等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-on#e-48267139377c82cf",
+          "text": "Paragraph 1: Aislinn pulled on her sweater and boots and hurried down the hallway.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-on#e-6f4b06938430a1f1",
+          "text": "“That’s it,” I thought aloud, pulling on my slippers.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

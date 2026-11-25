@@ -1,0 +1,132 @@
+{
+  "entryId": "w:take-a-turn-for-the-worse",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took a turn for the worse"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "turn",
+      "for",
+      "the",
+      "worse"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "turn",
+        "for",
+        "the",
+        "worse"
+      ],
+      [
+        "took",
+        "a",
+        "turn",
+        "for",
+        "the",
+        "worse"
+      ],
+      [
+        "taken",
+        "a",
+        "turn",
+        "for",
+        "the",
+        "worse"
+      ],
+      [
+        "takes",
+        "a",
+        "turn",
+        "for",
+        "the",
+        "worse"
+      ],
+      [
+        "taking",
+        "a",
+        "turn",
+        "for",
+        "the",
+        "worse"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a turn for the worse",
+  "senses": [
+    {
+      "senseId": "w:take-a-turn-for-the-worse#s1",
+      "pos": "短语",
+      "glossZh": "（情况或健康状况）开始恶化",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-turn-for-the-worse#e-341fb9393ebded2b",
+          "text": "However, things took a turn for the worse.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 41
+          },
+          "parts": [
+            [
+              16,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,110 @@
+{
+  "entryId": "w:leave-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leaves on",
+    "leaving on"
+  ],
+  "pattern": {
+    "tokens": [
+      "leave",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leave",
+        "on"
+      ],
+      [
+        "leaves",
+        "on"
+      ],
+      [
+        "leaving",
+        "on"
+      ],
+      [
+        "left",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "left on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leave sth on",
+  "senses": [
+    {
+      "senseId": "w:leave-on#s1",
+      "pos": "短语",
+      "glossZh": "让灯、电器等继续开着",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-on#e-77e42e2299908d70",
+          "text": "Plugs such as the Eve Energy are able to give you remote access to your devices and appliances through your smartphone and switch off any that have been left on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 160
+          },
+          "parts": [
+            [
+              153,
+              160
+            ]
+          ],
+          "highlightRanges": [
+            [
+              153,
+              160
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

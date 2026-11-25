@@ -1,0 +1,92 @@
+{
+  "entryId": "w:by-itself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "itself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "itself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by itself",
+  "senses": [
+    {
+      "senseId": "w:by-itself#s1",
+      "pos": "短语",
+      "glossZh": "单独地；就其本身而言",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:itself#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-itself#e-f4e41b50008dc894",
+          "text": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 18
+          },
+          "parts": [
+            [
+              9,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

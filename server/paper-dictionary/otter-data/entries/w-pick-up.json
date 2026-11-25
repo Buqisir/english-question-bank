@@ -1,0 +1,1124 @@
+{
+  "entryId": "w:pick-up",
+  "headword": "pick (sb/sth) up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "pick it up"
+  ],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "pick",
+        "up"
+      ],
+      [
+        "pick",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "picked",
+        "up"
+      ],
+      [
+        "picking",
+        "up"
+      ],
+      [
+        "picks",
+        "up"
+      ],
+      [
+        "picked",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "picking",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "picks",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pick up",
+      "tags": []
+    },
+    {
+      "form": "picked up",
+      "tags": []
+    },
+    {
+      "form": "picking up",
+      "tags": []
+    },
+    {
+      "form": "picks up",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 102
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pick-up#s1",
+      "pos": "短语",
+      "glossZh": "拿起；捡起；抱起",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 39
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s52"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-c70518ca72f3d6d2",
+          "text": "However, what my children want to do after school is pick up a screen – any screen – and stare at it for hours.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-c3e106becce8c309",
+          "text": "Join the Harvard Undergraduate Knitting Circle to make pom-poms and tassels out of thread, or pick up a pair of needles and learn to knit（编织）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 101
+          },
+          "parts": [
+            [
+              94,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-1ef9e4f7a5bb7077",
+          "text": "She ceased her struggle the instant I picked her up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 51
+          },
+          "parts": [
+            [
+              38,
+              44
+            ],
+            [
+              49,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              44
+            ],
+            [
+              49,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s2",
+      "pos": "短语",
+      "glossZh": "顺手买下；顺便买来",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 5
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s23"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-e2490252ba1ab6ea",
+          "text": "The invitation is clear: Weiner wants you to pick up a coffee or tea and sit down with this book.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-73351e31b11a079f",
+          "text": "You run into the grocery store to pick up one bottle of water.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-f3de4cb7253bfa77",
+          "text": "In addition, I have an old two-volume copy of the Shorter Oxford Dictionary, picked up a few years ago in a bookshop sale for just 99 pence.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 86
+          },
+          "parts": [
+            [
+              77,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              86
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s3",
+      "pos": "短语",
+      "glossZh": "偶然学会；学会",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 17
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-8feec722fd9ed281",
+          "text": "Retired Workers Can Pick Up New Skills",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-afd16895e4a22e45",
+          "text": "It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 149,
+            "end": 158
+          },
+          "parts": [
+            [
+              149,
+              158
+            ]
+          ],
+          "highlightRanges": [
+            [
+              149,
+              158
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-dca66dfbd76a92ec",
+          "text": "This is why children can pick up a new language without an accent, while adults, no matter how dedicated, cannot.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s4",
+      "pos": "短语",
+      "glossZh": "领取；取走",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 13
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s90"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-143fbf34a77366e1",
+          "text": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 19
+          },
+          "parts": [
+            [
+              10,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-14338a7d328f586f",
+          "text": "Pick it up at the lending library.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:22#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              8,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-9de48e8731f276c4",
+          "text": "You will be messaged when they are ready to pick up (approximately 2 weeks from class date).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s5",
+      "pos": "短语",
+      "glossZh": "（开车）接某人",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s100"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-acd83600b8301f21",
+          "text": "To pick up Kevin.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-a00589ae9f0618ee",
+          "text": "Pick up Billy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-af0783e0b7a130d2",
+          "text": "I would leave the elephant in the office parking lot, and then pick him up at the end of the day.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:7",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              67
+            ],
+            [
+              72,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              67
+            ],
+            [
+              72,
+              74
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s6",
+      "pos": "短语",
+      "glossZh": "拿起（书等）来读",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s102"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-f1681d70530456db",
+          "text": "From then on, if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 79
+          },
+          "parts": [
+            [
+              72,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-126d8e4332209096",
+          "text": "If I wanted an ending I couldn’t guess, I’d pick up a mystery（悬疑小说）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-8e923806f92fa94a",
+          "text": "They're signalling they have the “taste and attention span” to “pick up a physical book”.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s7",
+      "pos": "短语",
+      "glossZh": "开始从事（活动）",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-cd32a4a8bc0c48ac",
+          "text": "He recalls how picking up a guitar at 8 changed his life, giving a shy boy a voice.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-edf3c28cd7cb9390",
+          "text": "I have plenty of memories of thinking I was going to pick up something new and stick with it, whether it be playing the piano, or drawing.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-1070901a0cfcff84",
+          "text": "The first time I picked up the trumpet (小号) was 15 years ago.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s8",
+      "pos": "短语",
+      "glossZh": "察觉到（气味等）",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-8f74b3dddc18619c",
+          "text": "Then they kicked it around to see if the flashlight would pick up the charge (电",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-b:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          },
+          "parts": [
+            [
+              58,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-9d8d6a1fd888390c",
+          "text": "Once it learns that, the machine can “smell” urine samples too – by picking up those same tiny molecules floating in the air.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 78
+          },
+          "parts": [
+            [
+              68,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-74f62c33cc313797",
+          "text": "When you look at it the next day, you’ll not only pick up yesterday’s reserve but also see room for improvement with a fresh mind.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          },
+          "parts": [
+            [
+              50,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              57
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s9",
+      "pos": "短语",
+      "glossZh": "接电话",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-77ec4fc8c5022e28",
+          "text": "I’m only picking up because our patient, Sarah, came in through emergency,” stated the woman.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:pick-up#s10",
+      "pos": "短语",
+      "glossZh": "增强；加快",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s101"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up#e-5aa23629138756ee",
+          "text": "A probe falling directly towards the Sun would likely pick up so much speed in its fall that it would either crash or be thrown in the opposite direction.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          },
+          "parts": [
+            [
+              54,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up#e-b2e600efc210366a",
+          "text": "By picking up much more speed.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:33#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

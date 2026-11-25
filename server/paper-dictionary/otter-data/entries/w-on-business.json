@@ -1,0 +1,155 @@
+{
+  "entryId": "w:on-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on business",
+  "senses": [
+    {
+      "senseId": "w:on-business#s1",
+      "pos": "短语",
+      "glossZh": "因公；出差",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:business#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-business#e-28c4f7768308c5ef",
+          "text": "His mother was at work, and his father had been away on business.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 64
+          },
+          "parts": [
+            [
+              53,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-business#e-f5d1ae0b95fce9ce",
+          "text": "We learned that the farmer was away on business and wouldn’t be able to return until the next day.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-business#e-7c26cd0164935fe6",
+          "text": "She has to travel on business.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -82,8 +82,8 @@
     "mock": 837
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 837
+    "gaokao": 26,
+    "mock": 668
   },
   "senses": [
     {
@@ -94,7 +94,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -166,7 +166,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -237,7 +237,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 53,
-        "mock": 0
+        "mock": 98
       },
       "folded": false,
       "examples": [
@@ -309,7 +309,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -372,239 +372,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:long#s5",
-      "pos": "短语",
-      "glossZh": "不再",
-      "pronunciationId": "w:long#p-main",
-      "note": "no longer 或 not … any longer。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:long#e-94a4e84f0c60ea5c",
-          "text": "I wasn't alone any longer.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:31",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:long#e-b3d1ac594801bbb8",
-          "text": "A few years later, as I stood in the lunch line with my kindergarten class in a school in Brooklyn, I realized things were no longer that simple.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 126,
-            "end": 132
-          }
-        },
-        {
-          "exampleId": "w:long#e-e800b0b3443836cb",
-          "text": "As it has been many years since I last used one, I should hardly be surprised that there are no longer any public telephones near my house.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:long#s6",
-      "pos": "短语",
-      "glossZh": "只要",
-      "pronunciationId": "w:long#p-main",
-      "note": "as long as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:long#e-c05f6b91e9a24d43",
-          "text": "Magic shows are entertaining as long as the audience does not discover how the tricks are done.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:long#e-e9131b2ec4017d19",
-          "text": "“As long as I get close",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:long#s7",
-      "pos": "短语",
-      "glossZh": "长远来看",
-      "pronunciationId": "w:long#p-main",
-      "note": "in the long run。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:long#e-0e263fe6eba61d4d",
-          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 72,
-            "end": 76
-          }
-        },
-        {
-          "exampleId": "w:long#e-fe8355cda9d58ee8",
-          "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 167,
-            "end": 171
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:long#s8",
-      "pos": "短语",
-      "glossZh": "很有帮助",
-      "pronunciationId": "w:long#p-main",
-      "note": "go a long way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:long#e-383253ab251eb5b7",
-          "text": "Although technology might make day-to-day communication possible, extra effort goes a long way on special days.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 86,
-            "end": 90
-          }
-        },
-        {
-          "exampleId": "w:long#e-075492248904ee11",
-          "text": "A little self-forgiveness also goes a long way.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-i:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 42
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -613,6 +380,22 @@
       "reason": "行业或区域用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-long-game",
+    "w:art-is-long-life-is-short",
+    "w:as-long-as",
+    "w:come-a-long-way",
+    "w:go-a-long-way",
+    "w:go-back-a-long-way",
+    "w:in-the-long-run",
+    "w:long-for",
+    "w:long-shot",
+    "w:long-term",
+    "w:so-long",
+    "w:so-long-as"
+  ]
 }

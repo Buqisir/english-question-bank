@@ -1,0 +1,72 @@
+{
+  "entryId": "w:price-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "prices in"
+  ],
+  "pattern": {
+    "tokens": [
+      "price",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "price",
+        "in"
+      ],
+      [
+        "prices",
+        "in"
+      ],
+      [
+        "priced",
+        "in"
+      ],
+      [
+        "pricing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "price sth in",
+  "senses": [
+    {
+      "senseId": "w:price-in#s1",
+      "pos": "短语",
+      "glossZh": "把预期的成本、风险等计入价格或估值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

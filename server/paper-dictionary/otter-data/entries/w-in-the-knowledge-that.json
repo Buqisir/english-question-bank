@@ -1,0 +1,65 @@
+{
+  "entryId": "w:in-the-knowledge-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "knowledge",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "knowledge",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the knowledge that",
+  "senses": [
+    {
+      "senseId": "w:in-the-knowledge-that#s1",
+      "pos": "短语",
+      "glossZh": "知道……而（放心行事等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:knowledge#s2"
+      ],
+      "examples": [],
+      "note": "常见于 safe in the knowledge that。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

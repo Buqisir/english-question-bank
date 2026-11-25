@@ -1,0 +1,297 @@
+{
+  "entryId": "w:believe-in-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "believe",
+      "in",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "believe",
+        "in",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "believe in",
+      "tags": []
+    },
+    {
+      "form": "believed in",
+      "tags": []
+    },
+    {
+      "form": "believes in",
+      "tags": []
+    },
+    {
+      "form": "believing in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "believe in sb/sth",
+  "senses": [
+    {
+      "senseId": "w:believe-in-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "相信某人的能力；对某人有信心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:believe#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:believe-in-sb-sth#e-63325b63dbf84910",
+          "text": "I’ve seen your potential, and I believe in you even when you might not believe in yourself.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:believe-in-sb-sth#e-f09e9fe01ac0a4c6",
+          "text": "But Ms. White reassured her, saying she believed in her ability and encouraged her to think it over and let her know her decision after school.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 51
+          },
+          "parts": [
+            [
+              40,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:believe-in-sb-sth#e-227353f009a22bd8",
+          "text": "“I’m glad she believed in me.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:believe-in-sb-sth#s2",
+      "pos": "短语",
+      "glossZh": "认可……的价值；相信……是对的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:believe-in-sb-sth#e-bfff6e0363f8353b",
+          "text": "Many people believe in the compliment sandwich – burying criticism between two pieces of praise.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 22
+          },
+          "parts": [
+            [
+              12,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:believe-in-sb-sth#e-6bfd86a7cfe1327f",
+          "text": "I believe in the misspelling of the word “of” and the necessity for each generation to question the assumptions of the previous.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:believe-in-sb-sth#e-89110dc26a94a4da",
+          "text": "While Turnbull believes in the value of being uncomfortable in the service of progress, whether in his career or on the slopes（滑雪坡）, the challenge isn’t always about finding a mountain that’s higher or sharper.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:believe-in-sb-sth#s3",
+      "pos": "短语",
+      "glossZh": "相信……的存在",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

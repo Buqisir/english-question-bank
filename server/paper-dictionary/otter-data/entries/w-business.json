@@ -42,8 +42,8 @@
     "mock": 236
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 234
+    "gaokao": 8,
+    "mock": 54
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -243,78 +243,6 @@
       ]
     },
     {
-      "senseId": "w:business#s4",
-      "pos": "短语",
-      "glossZh": "出差；因公",
-      "pronunciationId": "w:business#p-main",
-      "note": "on business 或 business trip",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:business#e-79facb0f68617a24",
-          "text": "Burchill was __41__ at the hotel on business and planning to __42__ some friends in the area.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:business#e-42eac782845705d7",
-          "text": "Where will George go after the business trip?",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 8,
-              "questionId": "question:listening:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:business#e-5f576c1d71ff36e5",
-          "text": "His mother was at work, and his father had been away on business.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:business#s5",
       "pos": "adj.",
       "glossZh": "商业的；办公的",
@@ -322,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -346,143 +274,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:business#s6",
-      "pos": "短语",
-      "glossZh": "工作日；营业日",
-      "pronunciationId": "w:business#p-main",
-      "note": "business day",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:business#e-fc18980ab48e58cf",
-          "text": "Once the registration form is received and processed, we will send a confirmation email within two business days.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 17,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:17",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 99,
-            "end": 107
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:business#s7",
-      "pos": "短语",
-      "glossZh": "日常事务",
-      "pronunciationId": "w:business#p-main",
-      "note": "go about one's business",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:business#e-b05d9b1386ea8222",
-          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 122
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:business#s8",
-      "pos": "短语",
-      "glossZh": "可以开始运作了；准备就绪",
-      "pronunciationId": "w:business#p-main",
-      "note": "in business",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:business#e-10b34dbdf830bef4",
-          "text": "We rolled it over and put his jack on top, and we were in business.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:business#s9",
-      "pos": "短语",
-      "glossZh": "停业；倒闭",
-      "pronunciationId": "w:business#p-main",
-      "note": "out of business",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:business#e-f59b2ece4a8431bc",
-          "text": "Her former employer was out of business.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:21",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 39
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -491,6 +282,17 @@
       "reason": "行业用法或少见偏义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-in-business",
+    "w:do-business",
+    "w:get-down-to-business",
+    "w:go-about-ones-business",
+    "w:in-business",
+    "w:on-business",
+    "w:out-of-business"
+  ]
 }

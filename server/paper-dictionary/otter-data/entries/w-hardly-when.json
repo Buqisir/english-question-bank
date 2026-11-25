@@ -1,0 +1,73 @@
+{
+  "entryId": "w:hardly-when",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hardly",
+      {
+        "slot": "…"
+      },
+      "when",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hardly",
+        {
+          "slot": "…"
+        },
+        "when",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hardly … when …",
+  "senses": [
+    {
+      "senseId": "w:hardly-when#s1",
+      "pos": "短语",
+      "glossZh": "刚……就……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:hardly#s2"
+      ],
+      "examples": [],
+      "note": "hardly 置于句首时，前一分句用部分倒装。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

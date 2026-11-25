@@ -480,6 +480,11 @@
       "reason": "专名或旧义"
     }
   ],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:act-on",
+    "w:act-out",
+    "w:act-up"
+  ]
 }

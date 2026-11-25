@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 175
+    "mock": 3
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 163
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -206,6 +206,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:boy#s4",
+      "pos": "n.",
+      "glossZh": "对雄性宠物的昵称",
+      "pronunciationId": "w:boy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boy#e-8cf0b91b1f2344e4",
+          "text": "His repeated words include “You’re a good boy!” “Hey, baby!” and “Kentucky Fried Parrot,” and he recently learned to meow.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:boy#e-d878ca46c647b8ed",
+          "text": "Noticing Teddy waiting patiently by the door, she added softly that the eggs currently required a great deal of her attention – much like Lily – but Teddy understood he was still her good boy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 188,
+            "end": 191
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -214,6 +266,9 @@
       "reason": "旧义、俚语或冒犯义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:bad-boy"
+  ]
 }

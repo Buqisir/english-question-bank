@@ -42,8 +42,8 @@
     "mock": 163
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 157
+    "gaokao": 15,
+    "mock": 72
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -189,155 +189,10 @@
       ]
     },
     {
-      "senseId": "w:carbon#s3",
-      "pos": "短语",
-      "glossZh": "二氧化碳",
+      "senseId": "w:carbon#s8",
+      "pos": "n.",
+      "glossZh": "（carbon copy）一模一样的复制品",
       "pronunciationId": "w:carbon#p-main",
-      "note": "carbon dioxide",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carbon#e-bb534b2830ee33e4",
-          "text": "Rainforests are the lungs of the planet-storing vast quantities of carbon dioxide and producing a significant amount of the world’s oxygen.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:carbon#e-15c33469daf33303",
-          "text": "There is also research showing that pot plants can clean the air around them by removing harmful gases, such as carbon dioxide.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 112,
-            "end": 118
-          }
-        },
-        {
-          "exampleId": "w:carbon#e-a102e9139b1dfe12",
-          "text": "Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 88,
-            "end": 94
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:carbon#s4",
-      "pos": "短语",
-      "glossZh": "碳足迹",
-      "pronunciationId": "w:carbon#p-main",
-      "note": "carbon footprint",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carbon#e-5ed5c4516c60cbdf",
-          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:carbon#e-6c3fd5d1fdab5212",
-          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 88,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:carbon#e-4e7d512280c379b8",
-          "text": "Which of the following helps reduce our carbon footprint according to the author?",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:26",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:carbon#s5",
-      "pos": "短语",
-      "glossZh": "碳纤维",
-      "pronunciationId": "w:carbon#p-main",
-      "note": "carbon fiber",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -346,109 +201,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:carbon#e-1bba5a0f11eb236a",
-          "text": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+          "exampleId": "w:carbon#e-0b1f16d678cca229",
+          "text": "And every single day, for years, the response was a carbon copy: “Fine, fine.” It was always delivered to the dashboard, to the window, to anywhere but me.",
           "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
-            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 4,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:carbon#s6",
-      "pos": "短语",
-      "glossZh": "碳排放",
-      "pronunciationId": "w:carbon#p-main",
-      "note": "carbon emissions",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carbon#e-ac9cd6ea253fd79d",
-          "text": "Installing (安装) solar panels is a practical way to cut electricity bills and reduce household carbon emissions.",
-          "source": {
-            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
-            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
-            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-a:1",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:2",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 94,
-            "end": 100
-          }
-        },
-        {
-          "exampleId": "w:carbon#e-5f121f28ab3932d4",
-          "text": "In China, refrigeration accounts for nearly 20% of the nation’s electricity use and 7.8% of its carbon emissions(碳排放).",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
-            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 96,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:carbon#s7",
-      "pos": "短语",
-      "glossZh": "碳中和",
-      "pronunciationId": "w:carbon#p-main",
-      "note": "carbon neutrality",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carbon#e-9c9be4fc52584694",
-          "text": "While nuclear, wind, and solar energy have played significant roles as alternatives to fossil fuels, hydrogen energy is emerging as a key player in achieving carbon neutrality (碳中和).",
-          "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
-            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 158,
-            "end": 164
+            "start": 52,
+            "end": 58
           }
         }
       ]
@@ -460,6 +228,8 @@
       "reason": "旧式办公、行业或冷僻用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

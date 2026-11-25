@@ -1,0 +1,98 @@
+{
+  "entryId": "w:shake-hands",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shake",
+      "hands"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shake",
+        "hands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shaking hands",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shake hands",
+  "senses": [
+    {
+      "senseId": "w:shake-hands#s1",
+      "pos": "短语",
+      "glossZh": "握手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shake#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shake-hands#e-ad801f3fe587deea",
+          "text": "Are they just sitting together or are they shaking hands?” Clement declined to share how the cells connect or the mechanical properties of the resulting wood.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 56
+          },
+          "parts": [
+            [
+              43,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "常接 with sb；也可借握手比喻彼此接合。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

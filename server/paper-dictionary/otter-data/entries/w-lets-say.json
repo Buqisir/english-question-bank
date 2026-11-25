@@ -1,0 +1,212 @@
+{
+  "entryId": "w:lets-say",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "let's",
+      "say"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let's",
+        "say"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let's say",
+  "senses": [
+    {
+      "senseId": "w:lets-say#s1",
+      "pos": "短语",
+      "glossZh": "比如说；比方说",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lets-say#e-2789c32909053733",
+          "text": "Fortunately, nowadays it is much easier to make eco-friendly lifestyle choices than, let’s say, 20 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 94
+          },
+          "parts": [
+            [
+              85,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              94
+            ]
+          ]
+        }
+      ],
+      "note": "可插在句中，引出一个例子或大致的数值。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lets-say#s2",
+      "pos": "短语",
+      "glossZh": "假设……；假定……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lets-say#e-82b02688b7d04626",
+          "text": "But let’s say you’re not a sniper, or don’t spend your weekends as a living statue.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          },
+          "parts": [
+            [
+              4,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lets-say#e-e83799c224d01af3",
+          "text": "Let’s say Alex, Blake and Chris are sharing a cake.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lets-say#e-715dc084039a63fb",
+          "text": "Let’s say we have Person A, B, and C. They don't know each other, but all are friends with Person D who is highly sociable – sincere, yet so flooded with dates.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:lets-say#s3",
+      "pos": "短语",
+      "glossZh": "姑且说是……吧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用来委婉地作出评价，有时带讽刺意味。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

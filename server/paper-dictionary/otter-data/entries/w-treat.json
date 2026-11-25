@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 171
+    "mock": 9
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 79
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -205,7 +205,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -258,7 +258,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -292,7 +292,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -363,7 +363,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -387,6 +387,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:treat#s7",
+      "pos": "n.",
+      "glossZh": "请客；做东",
+      "pronunciationId": "w:treat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:treat#e-d5f36438cebbbeb2",
+          "text": "It’s my treat!” Li Wei insisted, his hand grabbing Mark’s arm with surprising strength.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -395,6 +428,6 @@
       "reason": "过时或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

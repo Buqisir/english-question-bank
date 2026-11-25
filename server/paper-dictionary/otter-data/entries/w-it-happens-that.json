@@ -1,0 +1,62 @@
+{
+  "entryId": "w:it-happens-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it",
+      "happens",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it",
+        "happens",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it happens that",
+  "senses": [
+    {
+      "senseId": "w:it-happens-that#s1",
+      "pos": "短语",
+      "glossZh": "碰巧……；恰好……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:it#s13"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 4
   },
   "senses": [
     {
@@ -137,7 +137,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -283,40 +283,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:tape#s6",
-      "pos": "短语",
-      "glossZh": "繁琐的官僚手续",
-      "pronunciationId": "w:tape#p-main",
-      "note": "red tape。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:tape#e-54a8dfe178a4f6aa",
-          "text": "After years of development, protest and regulatory red tape, the first genetically modified (转基因的), non-browning apples under the brand Arctic Apple, will soon go on sale in the United States.",
-          "source": {
-            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
-            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
-            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -325,6 +291,11 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:red-tape"
+  ]
 }

@@ -48,8 +48,8 @@
     "mock": 4080
   },
   "unassignedCounts": {
-    "gaokao": 197,
-    "mock": 4078
+    "gaokao": 280,
+    "mock": 4080
   },
   "senses": [
     {
@@ -441,759 +441,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:as#s7",
-      "pos": "短语",
-      "glossZh": "而且；以及；也",
-      "pronunciationId": "w:as#p-main",
-      "note": "as well、as well as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 25,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-8c96c2122e596190",
-          "text": "His judgment and references are decidedly American, as well as his delicate stomach.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:as#e-0f97565b55968bda",
-          "text": ", the number of snakes had declined as well.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:as#e-fd7bb9335b4bb464",
-          "text": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 139,
-            "end": 141
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s8",
-      "pos": "短语",
-      "glossZh": "比如；例如",
-      "pronunciationId": "w:as#p-main",
-      "note": "such as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 18,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-2b305093535318fd",
-          "text": "“This research also helps to prove that characteristics such as persistence -- which can be taught -- are key to a child’s life success.”",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 63
-          }
-        },
-        {
-          "exampleId": "w:as#e-8590892d02ebbd6a",
-          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 80
-          }
-        },
-        {
-          "exampleId": "w:as#e-6483263c6703105b",
-          "text": "\"We can rule out that the dogs simply distinguish between the pictures based on a simple cue, such as the sight of teeth,\" said study author Corsin Muller.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 99,
-            "end": 101
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s9",
-      "pos": "短语",
-      "glossZh": "好像；仿佛",
-      "pronunciationId": "w:as#p-main",
-      "note": "as if、as though。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-9b4d7e941d5339b1",
-          "text": "I always read, using different voices, as though I were acting out the stories with my voice and they loved it!",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:as#e-02f981b17006d8d2",
-          "text": "He looked at me as though I weren’t there.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:as#e-c30de7b471206177",
-          "text": "Indoor plants might look as if they just sit around not doing much, but in many ways they are the unsung heroes of the home.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s10",
-      "pos": "短语",
-      "glossZh": "只要",
-      "pronunciationId": "w:as#p-main",
-      "note": "as long as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-6c960c458d6d6a79",
-          "text": "Magic shows are entertaining as long as the audience does not discover how the tricks are done.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s11",
-      "pos": "短语",
-      "glossZh": "一……就……",
-      "pronunciationId": "w:as#p-main",
-      "note": "as soon as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 12,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-82820702bf4019f8",
-          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 69
-          }
-        },
-        {
-          "exampleId": "w:as#e-83e4a20a7937722a",
-          "text": "I resigned myself to spending the evening in my hotel room, but as soon as I got back to my room I felt restless and bored.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:as#e-9513804f573136eb",
-          "text": "As soon as we arrived, I had this incredible revelation.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s12",
-      "pos": "短语",
-      "glossZh": "因此；结果",
-      "pronunciationId": "w:as#p-main",
-      "note": "as a result。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-a2e183de367bd290",
-          "text": "As a result, there was a lot of leftover cheese brine.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:as#e-0a48819c01297200",
-          "text": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:as#e-601ae5bb8281f810",
-          "text": "It is so easy to let an online course slide, but your grades will suffer as a result.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 73,
-            "end": 75
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s13",
-      "pos": "短语",
-      "glossZh": "像平常一样；照例",
-      "pronunciationId": "w:as#p-main",
-      "note": "as usual、as always。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-671f7f500c261539",
-          "text": "Poppy welcomed them home as usual but when she saw the box, she stopped.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s14",
-      "pos": "短语",
-      "glossZh": "就……而言；在……范围内",
-      "pronunciationId": "w:as#p-main",
-      "note": "as far as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-fbfee4b1d3a899ca",
-          "text": "As far as I can remember, I’ve always been a night owl.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s15",
-      "pos": "短语",
-      "glossZh": "以整体来看；作为一个整体",
-      "pronunciationId": "w:as#p-main",
-      "note": "as a whole。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-d4d976aa12022cdc",
-          "text": "Without batting an eye, he would __48__ a translated Emerson passage before asking about the literary influence of American __49__ as a whole.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 131,
-            "end": 133
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s16",
-      "pos": "短语",
-      "glossZh": "截至；自……起",
-      "pronunciationId": "w:as#p-main",
-      "note": "as of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-a501e63fafe59b54",
-          "text": "“We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest,” Trost says.“And as of right now, we’ve received about 120 submissions.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 123,
-            "end": 125
-          }
-        },
-        {
-          "exampleId": "w:as#e-4ffe7317b68f32c2",
-          "text": "I am touched by the interest, curiosity, and support that these people – strangers as of an hour ago – show toward me.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 83,
-            "end": 85
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s17",
-      "pos": "短语",
-      "glossZh": "至于；说到",
-      "pronunciationId": "w:as#p-main",
-      "note": "as for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-30ebb5fe4def2636",
-          "text": "As for Bailey, she is more __51__ about why her act is considered a big __52__.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s18",
-      "pos": "短语",
-      "glossZh": "由于；因为",
-      "pronunciationId": "w:as#p-main",
-      "note": "as a result of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-378bc946f9bd4d58",
-          "text": "Short writings missed as a result of an excused absence will be accepted.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "reading-a-11",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s19",
-      "pos": "短语",
-      "glossZh": "在……这一点上",
-      "pronunciationId": "w:as#p-main",
-      "note": "in so far as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-45fb7720f0ac7034",
-          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 97,
-            "end": 99
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s20",
-      "pos": "短语",
-      "glossZh": "如此……以至于……",
-      "pronunciationId": "w:as#p-main",
-      "note": "so … as to do。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-03905df1c4c18a76",
-          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 95
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s21",
-      "pos": "短语",
-      "glossZh": "结果是；原来",
-      "pronunciationId": "w:as#p-main",
-      "note": "as it turned out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-e2528686d9a6c586",
-          "text": "As it turned out, Douglas did __50__ what she needed to do to become Olympic champion when she __51__ two Russians.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:as#s22",
-      "pos": "短语",
-      "glossZh": "像……这样的……",
-      "pronunciationId": "w:as#p-main",
-      "note": "such … as …；no such thing as … 表示「没有……这回事」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:as#e-e9320ab1577f0789",
-          "text": "Remember—there’s no such thing as a stupid question.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 40
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -1202,6 +449,74 @@
       "reason": "历史用法或同形缩写。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-change-is-as-good-as-a-rest",
+    "w:also-known-as",
+    "w:as-a-result",
+    "w:as-a-result-of",
+    "w:as-a-whole",
+    "w:as-always",
+    "w:as-ever",
+    "w:as-far-as",
+    "w:as-fate-would-have-it",
+    "w:as-follows",
+    "w:as-for",
+    "w:as-good-as",
+    "w:as-if",
+    "w:as-in",
+    "w:as-is",
+    "w:as-it-is",
+    "w:as-it-turned-out",
+    "w:as-long-as",
+    "w:as-luck-would-have-it",
+    "w:as-many-as",
+    "w:as-many-as-phrase",
+    "w:as-much-as",
+    "w:as-much-as-possible",
+    "w:as-much-slot-as-slot",
+    "w:as-of",
+    "w:as-opposed-to",
+    "w:as-per",
+    "w:as-sb-puts-it",
+    "w:as-soon-as",
+    "w:as-soon-as-possible",
+    "w:as-such",
+    "w:as-the-saying-goes",
+    "w:as-they-say",
+    "w:as-though",
+    "w:as-to",
+    "w:as-usual",
+    "w:as-well",
+    "w:as-well-as",
+    "w:as-with",
+    "w:as-you-like",
+    "w:be-known-as",
+    "w:better-known-as",
+    "w:come-off-as",
+    "w:double-as-sth",
+    "w:dress-up-as-sb",
+    "w:even-as",
+    "w:in-so-far-as",
+    "w:just-as-well",
+    "w:mark-as",
+    "w:may-as-well",
+    "w:no-such-thing-as",
+    "w:no-such-thing-as-slot",
+    "w:not-so-much-a-as-b",
+    "w:refer-to-a-as-b",
+    "w:right-as-rain",
+    "w:so-as-to",
+    "w:so-long-as",
+    "w:so-much-as",
+    "w:so-slot-as-to-slot",
+    "w:strike-sb-as",
+    "w:such-as",
+    "w:such-slot-as-slot",
+    "w:think-about-as",
+    "w:think-of-as"
+  ]
 }

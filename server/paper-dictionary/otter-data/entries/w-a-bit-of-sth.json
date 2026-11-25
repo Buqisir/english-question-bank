@@ -1,0 +1,275 @@
+{
+  "entryId": "w:a-bit-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "bit",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "bit",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "a bit of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a bit of sth",
+  "senses": [
+    {
+      "senseId": "w:a-bit-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "一点儿；少量的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bit#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-bit-of-sth#e-4e2c67c7ae3243f3",
+          "text": "I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          },
+          "parts": [
+            [
+              58,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit-of-sth#e-6bc3034e356bd9d5",
+          "text": "“Without anybody left in the house but us, this place could use a bit of fun.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          },
+          "parts": [
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit-of-sth#e-0745dcaa955f854c",
+          "text": "To save resources (and a bit of cash), it’s best to foster (培养) a good relationship with local shops.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:a-bit-of-sth#s2",
+      "pos": "短语",
+      "glossZh": "有点像……；多少算是……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-bit-of-sth#e-fe20bdce8fae628e",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit-of-sth#e-df97cfbd16c0d394",
+          "text": "“I think it’s a bit of a cop-out to say the public wants to see x, y, or z,” says Onnie Byers, chair of the",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-bit-of-sth#e-ab1f1886782062b6",
+          "text": "For gardeners who love neatness, autumn is a bit of a mixed blessing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        }
+      ],
+      "note": "用 a bit of a/an 加单数可数名词。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

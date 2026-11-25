@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 102
+    "mock": 10
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -161,7 +161,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -303,7 +303,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -352,16 +352,87 @@
       "pos": "n.",
       "glossZh": "破产",
       "pronunciationId": "w:failure#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:failure#s7",
+      "pos": "n.",
+      "glossZh": "失败者",
+      "pronunciationId": "w:failure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:failure#e-ca49f17e7e1bda5c",
+          "text": "Crucially, Opal also allows users to suspend the block for short periods of time without feeling like failures; when the scheduled break time elapses, the blockage automatically continues.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:failure#e-33d39f69e89cd3e2",
+          "text": "If you don’t start shaping up soon, you’ll end up being a failure.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:failure#e-2dc015f320344b57",
+          "text": "Bella kept her eyes shut, hoping no customers would come and pretending she wasn’t a total failure.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation:5",
+              "sentence": 12
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 98
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

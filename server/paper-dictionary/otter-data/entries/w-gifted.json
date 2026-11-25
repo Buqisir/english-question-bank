@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 6
+    "mock": 1
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -156,6 +156,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:gifted#s3",
+      "pos": "v.",
+      "glossZh": "赠予；给予",
+      "pronunciationId": "w:gifted#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gifted#e-aa487923bb38441a",
+          "text": "As Wineburg once wrote, “Investing critical thinking in sources that should have been ignored in the first place means that ill-intentioned people have been gifted what they wanted – our attention.”",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-d:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 163
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -164,6 +197,6 @@
       "reason": "m1 是赠予，归 gift"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

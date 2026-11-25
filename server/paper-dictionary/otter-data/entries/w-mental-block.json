@@ -1,0 +1,112 @@
+{
+  "entryId": "w:mental-block",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mental",
+      "block"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mental",
+        "block"
+      ],
+      [
+        "mental",
+        "blocks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "mental blocks",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mental block",
+  "senses": [
+    {
+      "senseId": "w:mental-block#s1",
+      "pos": "短语",
+      "glossZh": "妨碍思考或学习的心理障碍；思路卡住",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:mental-block#e-53d11a07889c9721",
+          "text": "Barbara Oakley’s Mindshift works like a wise guide, helping us remove these mental blocks.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 89
+          },
+          "parts": [
+            [
+              76,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:mental-block#s2",
+      "pos": "短语",
+      "glossZh": "让人难以想起或面对痛苦经历的心理阻碍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

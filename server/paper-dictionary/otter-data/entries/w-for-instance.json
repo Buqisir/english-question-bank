@@ -1,0 +1,159 @@
+{
+  "entryId": "w:for-instance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "instance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "instance"
+      ],
+      [
+        "for",
+        "instances"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for instance",
+  "senses": [
+    {
+      "senseId": "w:for-instance#s1",
+      "pos": "短语",
+      "glossZh": "例如；举例来说",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:for#s20",
+        "w:instance#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-instance#e-456d8fd05c7e2d91",
+          "text": "My given name Qiuyu（秋雨）, for instance, happened to be a great challenge for many of them.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 37
+          },
+          "parts": [
+            [
+              25,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-instance#e-4edd82eb65d305b7",
+          "text": "For instance, almost all animals have distinct vocals（声音）that they rely on to either ask for help, scare away any dangerous animals or look for shelter.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-instance#e-8e079af7a06a5996",
+          "text": "For instance, if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 81
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 81
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

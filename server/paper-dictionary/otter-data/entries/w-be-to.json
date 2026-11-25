@@ -1,0 +1,587 @@
+{
+  "entryId": "w:be-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are to",
+      "tags": []
+    },
+    {
+      "form": "is to",
+      "tags": []
+    },
+    {
+      "form": "was to",
+      "tags": []
+    },
+    {
+      "form": "were to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be to",
+  "senses": [
+    {
+      "senseId": "w:be-to#s1",
+      "pos": "短语",
+      "glossZh": "若要；如果想要",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-8d0babb727cf2292",
+          "text": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          },
+          "parts": [
+            [
+              6,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-4fa698eadd74e413",
+          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          },
+          "parts": [
+            [
+              74,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-492f700f25599c24",
+          "text": "If robots are to share space with people, they must be able to signal their intentions clearly.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          },
+          "parts": [
+            [
+              10,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "用于 if 从句，主句说明实现目标所需的条件。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:be-to#s2",
+      "pos": "短语",
+      "glossZh": "按计划将要；定于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-8c05870069a340ce",
+          "text": "The arugula (芝麻菜)was to make a nice green salad, rounding out a roast chicken dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          },
+          "parts": [
+            [
+              17,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-73543a6b93656c65",
+          "text": "The ceremony was to be held in a large auditorium downtown on a damp December afternoon.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          },
+          "parts": [
+            [
+              13,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-9ea2de7a7087f8e9",
+          "text": "On the graduation day, there would be a ceremony（典礼）which was to be held in a large church downtown I’d never visited.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 64
+          },
+          "parts": [
+            [
+              58,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:be-to#s4",
+      "pos": "短语",
+      "glossZh": "后来注定会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-7a011f3fe76777c4",
+          "text": "These gentle, lovely gatekeepers welcomed her and kick-started what was to be a trip Ginni would never forget.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 74
+          },
+          "parts": [
+            [
+              68,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-a851ca601e25ae6f",
+          "text": "I will call the police every ten minutes.” She was to make the day hard.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          },
+          "parts": [
+            [
+              47,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "用 was/were to 从过去的时间点回顾后来的发展。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:be-to#s3",
+      "pos": "短语",
+      "glossZh": "按规定必须；应当",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-e763d6ed7c98b76f",
+          "text": "The pair of return flights are to be booked together by December 31, 2026 (at least 28 days before departure).",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          },
+          "parts": [
+            [
+              27,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-f75ba2d7eadda44d",
+          "text": "The clinicians are to shape our future society.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hunan-changjun-2025-11-monthly-exam-3:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          },
+          "parts": [
+            [
+              15,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-1a1d8e6418b7b582",
+          "text": "Kids’ exploring abilities are to be enhanced.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:30#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          },
+          "parts": [
+            [
+              26,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "也用于询问该怎么做。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:be-to#s5",
+      "pos": "短语",
+      "glossZh": "假如将来……；假如真的……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-48ea4251e4787db1",
+          "text": "Microplastic and nanoplastic pollution in the environment is certain to grow, the researchers warn – for even if we were to cease plastic production tomorrow, existing plastic would still be around to break down into tiny and then super tiny pieces.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 123
+          },
+          "parts": [
+            [
+              116,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              123
+            ]
+          ]
+        }
+      ],
+      "note": "if sb were to do sth 用来设想不确定的情形。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:be-to#s6",
+      "pos": "短语",
+      "glossZh": "能够；可能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-to#e-0665c8345ade77d7",
+          "text": "One of the features of London is the number of big stores, most of which are to be found in or near the West End.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 79
+          },
+          "parts": [
+            [
+              73,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to#e-e4a0013fd8f4d09a",
+          "text": "Meanwhile, people in the 1950s thought the good old days were to be found in the 1920s, when experts warned that rising divorce rates then threatened the family.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        }
+      ],
+      "note": "常用于疑问句（如 How am I to know?）或否定的被动结构。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

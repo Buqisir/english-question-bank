@@ -1,0 +1,86 @@
+{
+  "entryId": "w:sit-right",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting right"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "right"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "right"
+      ],
+      [
+        "sitting",
+        "right"
+      ],
+      [
+        "sat",
+        "right"
+      ],
+      [
+        "sits",
+        "right"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit right",
+  "senses": [
+    {
+      "senseId": "w:sit-right#s1",
+      "pos": "短语",
+      "glossZh": "让人觉得合适或能接受",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用否定式 not sit right with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sit-right#s2",
+      "pos": "短语",
+      "glossZh": "（食物或饮料）吃喝下去后没有引起肠胃不适",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

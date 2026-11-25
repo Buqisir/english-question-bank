@@ -1,0 +1,150 @@
+{
+  "entryId": "w:boil-down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "boil",
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "boil",
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "boil down to",
+      "tags": []
+    },
+    {
+      "form": "boils down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "boil (sth) down to sth",
+  "senses": [
+    {
+      "senseId": "w:boil-down-to#s1",
+      "pos": "短语",
+      "glossZh": "归结为；关键在于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:boil#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:boil-down-to#e-5c8b8c78c7920f76",
+          "text": "The mismatch can boil down to the fact that we are weighed down by our day-to-day responsibilities, leaving our schedule packed.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 29
+          },
+          "parts": [
+            [
+              17,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:boil-down-to#e-5798ff49d8d54eb1",
+          "text": "To improve willpower, it boils down to just trying harder.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 38
+          },
+          "parts": [
+            [
+              25,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:boil-down-to#s2",
+      "pos": "短语",
+      "glossZh": "把……概括为几个要点",
+      "note": "用作 boil sth down to sth。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:boil#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

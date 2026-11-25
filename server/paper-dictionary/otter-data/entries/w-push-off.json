@@ -1,0 +1,134 @@
+{
+  "entryId": "w:push-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "off"
+      ],
+      [
+        "pushed",
+        "off"
+      ],
+      [
+        "pushes",
+        "off"
+      ],
+      [
+        "pushing",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pushing off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push off",
+  "senses": [
+    {
+      "senseId": "w:push-off#s1",
+      "pos": "短语",
+      "glossZh": "推迟；把……拖到以后",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-off#e-048dc120ff345b29",
+          "text": "Procrastination troubles us all, though some of us report a more long-lasting experience of pushing off un-fun tasks to the final hour or never completing them at all.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 103
+          },
+          "parts": [
+            [
+              92,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-off#s2",
+      "pos": "短语",
+      "glossZh": "离开；走开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作命令时语气较重。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:push-off#s3",
+      "pos": "短语",
+      "glossZh": "推开防守者以摆脱防守（篮球犯规）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

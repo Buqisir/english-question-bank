@@ -1,0 +1,59 @@
+{
+  "entryId": "w:as-is",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "is"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "is"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as is",
+  "senses": [
+    {
+      "senseId": "w:as-is#s1",
+      "pos": "短语",
+      "glossZh": "照原样；按现状",
+      "note": "常用于按现状出售或接收物品，交付前不作修理或改动。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

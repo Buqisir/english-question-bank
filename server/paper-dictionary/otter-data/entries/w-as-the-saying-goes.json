@@ -1,0 +1,125 @@
+{
+  "entryId": "w:as-the-saying-goes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "the",
+      "saying",
+      "goes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "the",
+        "saying",
+        "goes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as the saying goes",
+  "senses": [
+    {
+      "senseId": "w:as-the-saying-goes#s1",
+      "pos": "短语",
+      "glossZh": "常言道；正如俗话所说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-the-saying-goes#e-2d02c24f049086ed",
+          "text": "As the saying goes, “Time flies when you’re having fun.” Perhaps time crawls when you’re depressed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-the-saying-goes#e-c63c8a119831b889",
+          "text": "“As the saying goes, ‘Catch them young.’”",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:cloze:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 19
+          },
+          "parts": [
+            [
+              1,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

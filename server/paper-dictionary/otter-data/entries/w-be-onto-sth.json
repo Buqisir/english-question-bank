@@ -1,0 +1,158 @@
+{
+  "entryId": "w:be-onto-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "be onto something"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "onto",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "onto",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "be",
+        "onto",
+        "something"
+      ],
+      [
+        "been",
+        "onto",
+        "something"
+      ],
+      [
+        "being",
+        "onto",
+        "something"
+      ],
+      [
+        "is",
+        "onto",
+        "something"
+      ],
+      [
+        "was",
+        "onto",
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be onto sth",
+  "senses": [
+    {
+      "senseId": "w:be-onto-sth#s1",
+      "pos": "短语",
+      "glossZh": "发现有价值的线索；找对方向",
+      "note": "常用 be onto something。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:onto#s3",
+        "w:something#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-onto-sth#e-2ceb6d133ac295ce",
+          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 118
+          },
+          "parts": [
+            [
+              101,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              118
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-onto-sth#e-7f70cd12f67a3588",
+          "text": "Many live by the motto, “Tudo bem,” which means “It's all good.” Honestly, they seem to be onto something.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 105
+          },
+          "parts": [
+            [
+              88,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              105
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

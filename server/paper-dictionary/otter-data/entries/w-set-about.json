@@ -1,0 +1,112 @@
+{
+  "entryId": "w:set-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "about"
+      ],
+      [
+        "sets",
+        "about"
+      ],
+      [
+        "setting",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set about",
+  "senses": [
+    {
+      "senseId": "w:set-about#s1",
+      "pos": "短语",
+      "glossZh": "着手做；开始处理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-about#e-4c0e8d52cd72e8ff",
+          "text": "Inspired and excited, Amanda set about her plan with several friends.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        }
+      ],
+      "note": "后接名词或动词 -ing 形式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-about#s2",
+      "pos": "短语",
+      "glossZh": "扑上去攻击（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

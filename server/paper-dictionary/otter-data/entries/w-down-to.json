@@ -1,0 +1,301 @@
+{
+  "entryId": "w:down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "down to",
+  "senses": [
+    {
+      "senseId": "w:down-to#s1",
+      "pos": "短语",
+      "glossZh": "归因于；是由于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:down-to#e-b6bf44b158f2ad66",
+          "text": "She said it was all down to some key aspects.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be down to sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:down-to#s2",
+      "pos": "短语",
+      "glossZh": "降至；减少到；只剩",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:down-to#e-7c6d89ea8b8d92d0",
+          "text": "Less traffic at 9:37am could push it down to 135.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 44
+          },
+          "parts": [
+            [
+              37,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:down-to#e-3c56574703229552",
+          "text": "The carbon fiber model weighs just under three pounds and can fold down to the size of a water bottle.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-a:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:down-to#s4",
+      "pos": "短语",
+      "glossZh": "细到；直至最小的细节",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:down-to#e-5802992168e85c69",
+          "text": "By matching these measurements with high-speed videos, the scientists tracked the woodpeckers’ taps down to every four milliseconds.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 107
+          },
+          "parts": [
+            [
+              100,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              107
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:down-to#e-7f744166953d1c94",
+          "text": "The price was calculated down to the smallest detail (namely, him).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:down-to#e-ff783a534bc4163e",
+          "text": "“She’s just like me!” Anne cried to her mother, Nicole, who smiled as the little girl examined every detail, right down to the doll’s curved spine.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 122
+          },
+          "parts": [
+            [
+              115,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              122
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:down-to#s3",
+      "pos": "短语",
+      "glossZh": "由……负责；由……决定",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:down-to#s5",
+      "pos": "短语",
+      "glossZh": "愿意做；愿意参加",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语用法，如 be down to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

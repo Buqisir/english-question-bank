@@ -1,0 +1,139 @@
+{
+  "entryId": "w:go-for-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "for",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "for",
+        "it"
+      ],
+      [
+        "goes",
+        "for",
+        "it"
+      ],
+      [
+        "going",
+        "for",
+        "it"
+      ],
+      [
+        "gone",
+        "for",
+        "it"
+      ],
+      [
+        "went",
+        "for",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go for it",
+  "senses": [
+    {
+      "senseId": "w:go-for-it#s1",
+      "pos": "短语",
+      "glossZh": "尽管去做吧；大胆试试吧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-for-it#e-ba03cfc53295cbff",
+          "text": "The volunteers, aware of his new idea, encouraged, “Go for it!",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        }
+      ],
+      "note": "作祈使句，表示鼓励或许可。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-for-it#s2",
+      "pos": "短语",
+      "glossZh": "决定放手一试",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-for-it#s3",
+      "pos": "短语",
+      "glossZh": "全力争取目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

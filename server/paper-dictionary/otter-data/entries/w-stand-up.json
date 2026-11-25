@@ -1,0 +1,213 @@
+{
+  "entryId": "w:stand-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing up",
+    "stands up"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "up"
+      ],
+      [
+        "standing",
+        "up"
+      ],
+      [
+        "stands",
+        "up"
+      ],
+      [
+        "stood",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stood up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand up",
+  "senses": [
+    {
+      "senseId": "w:stand-up#s1",
+      "pos": "短语",
+      "glossZh": "站起来；起身",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stand#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stand-up#e-c9d868daef5881cf",
+          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-up#e-e92070c3ed5d316c",
+          "text": "The man stood up in a panic, then ran through the house toward the window and jumped out.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-up#e-ab5abc2a548bc1df",
+          "text": "Stand Up and Exercise, Everybody!",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:stand-up#s2",
+      "pos": "短语",
+      "glossZh": "（物品等）耐用；经受得住使用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-up#s3",
+      "pos": "短语",
+      "glossZh": "（说法、论点等）站得住脚；经得起检验",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-up#s4",
+      "pos": "短语",
+      "glossZh": "站出来表态；公开发声",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

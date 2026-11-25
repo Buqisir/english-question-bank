@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 261
+    "mock": 66
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 181
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -174,26 +174,12 @@
       "pos": "n.",
       "glossZh": "一则新闻",
       "pronunciationId": "w:item#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:item#s4",
-      "pos": "短语",
-      "glossZh": "情侣",
-      "pronunciationId": "w:item#p-main",
-      "note": "be an item，非正式用法。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -203,6 +189,11 @@
       "reason": "专门用法或旧词性"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-an-item"
+  ]
 }

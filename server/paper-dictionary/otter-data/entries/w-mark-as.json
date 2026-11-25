@@ -1,0 +1,120 @@
+{
+  "entryId": "w:mark-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mark",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mark",
+        "as"
+      ],
+      [
+        "marked",
+        "as"
+      ],
+      [
+        "marking",
+        "as"
+      ],
+      [
+        "marks",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "marked as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mark sb/sth as sth",
+  "senses": [
+    {
+      "senseId": "w:mark-as#s1",
+      "pos": "短语",
+      "glossZh": "把某人或某物标记为某类或某种状态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:mark-as#e-51b31f2dab6147db",
+          "text": "If a particular area of the LLM lights up whenever it produces words like rabbit, then that gets marked as being related to rabbits.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 106
+          },
+          "parts": [
+            [
+              97,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:mark-as#s2",
+      "pos": "短语",
+      "glossZh": "显示某人或某物具有某种身份或特征",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

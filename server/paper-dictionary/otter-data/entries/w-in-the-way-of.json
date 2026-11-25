@@ -1,0 +1,95 @@
+{
+  "entryId": "w:in-the-way-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "way",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "way",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the way of",
+  "senses": [
+    {
+      "senseId": "w:in-the-way-of#s1",
+      "pos": "短语",
+      "glossZh": "就……而言；在……方面；属于……一类",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-way-of#e-2395bf1575099c3b",
+          "text": "For my husband and me, this rings especially true: he’s retired early and I work part-time as an editor, which gives us plenty of time and freedom but not much in the way of funds.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 160,
+            "end": 173
+          },
+          "parts": [
+            [
+              160,
+              173
+            ]
+          ],
+          "highlightRanges": [
+            [
+              160,
+              173
+            ]
+          ]
+        }
+      ],
+      "note": "常接在 much、little、anything 等词后，说明所指的东西属于哪一类。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

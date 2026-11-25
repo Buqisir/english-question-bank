@@ -1,0 +1,114 @@
+{
+  "entryId": "w:take-a-stand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes a stand"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "stand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "stand"
+      ],
+      [
+        "takes",
+        "a",
+        "stand"
+      ],
+      [
+        "taken",
+        "a",
+        "stand"
+      ],
+      [
+        "taking",
+        "a",
+        "stand"
+      ],
+      [
+        "took",
+        "a",
+        "stand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a stand",
+  "senses": [
+    {
+      "senseId": "w:take-a-stand#s1",
+      "pos": "短语",
+      "glossZh": "明确表明并坚持立场",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-stand#e-30647466404984f2",
+          "text": "When you talk with someone who takes a stand, ask them to give you a reason for their view and spell out their argument fully.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 44
+          },
+          "parts": [
+            [
+              31,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

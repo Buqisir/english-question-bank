@@ -1,0 +1,156 @@
+{
+  "entryId": "w:as-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as for",
+  "senses": [
+    {
+      "senseId": "w:as-for#s1",
+      "pos": "短语",
+      "glossZh": "至于……；说到……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s17",
+        "w:for#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-for#e-27a450704e65ae60",
+          "text": "as for",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "question": 45,
+              "questionId": "question:paper-gaokao-2022-i:45#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-for#e-f4cfeb79fa324faa",
+          "text": "As for the extreme heat, the Parker Probe used a strategy that is like sitting under a beach umbrella.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-for#e-00c5f5460fb4de03",
+          "text": "As for cats, tests of whether they returned to containers where they were previously fed lend",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 17
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

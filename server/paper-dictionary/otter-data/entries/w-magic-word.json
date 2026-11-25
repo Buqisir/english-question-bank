@@ -1,0 +1,141 @@
+{
+  "entryId": "w:magic-word",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "magic",
+      "word"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "magic",
+        "word"
+      ],
+      [
+        "magic",
+        "words"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "magic words",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "magic word",
+  "senses": [
+    {
+      "senseId": "w:magic-word#s3",
+      "pos": "短语",
+      "glossZh": "能起关键作用的词语",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:magic-word#e-a3b46def672d8898",
+          "text": "Why magic words fail to do wonders.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-cq-nankai-2025-11-third-quality-test:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:magic-word#s1",
+      "pos": "短语",
+      "glossZh": "咒语；据说能产生魔法的词",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-word#s2",
+      "pos": "短语",
+      "glossZh": "礼貌用语",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "尤指请别人帮忙时说的 please。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-word#s4",
+      "pos": "短语",
+      "glossZh": "触发预设操作的特殊字符串",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "技术用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

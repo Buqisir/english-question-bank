@@ -1,0 +1,160 @@
+{
+  "entryId": "w:what-now",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what",
+      "now"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "now"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what now",
+  "senses": [
+    {
+      "senseId": "w:what-now#s1",
+      "pos": "短语",
+      "glossZh": "接下来怎么办？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-now#e-847c919063d23475",
+          "text": "“Well, what now?” Siya muttered to herself, feeling disappointed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 15
+          },
+          "parts": [
+            [
+              7,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:what-now#e-3e78e91f069cb603",
+          "text": "So, what now?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          },
+          "parts": [
+            [
+              4,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:what-now#s2",
+      "pos": "短语",
+      "glossZh": "接下来又会出什么岔子？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:what-now#s3",
+      "pos": "短语",
+      "glossZh": "你又想干什么？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:what-now#s4",
+      "pos": "短语",
+      "glossZh": "你刚才说什么？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

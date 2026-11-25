@@ -42,7 +42,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 58
+    "mock": 4
   },
   "senses": [
     {
@@ -53,7 +53,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -124,7 +124,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -187,6 +187,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:rhythm#s3",
+      "pos": "n.",
+      "glossZh": "视觉节奏；画面元素的规律变化",
+      "pronunciationId": "w:rhythm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rhythm#e-17a878d76f333da1",
+          "text": "The book is loaded with a remarkable amount of written content, surprising for a comic essay, filled with hand-drawn letters that create an extraordinary rhythm between the illustrations.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 154,
+            "end": 160
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -195,6 +228,6 @@
       "reason": "少见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

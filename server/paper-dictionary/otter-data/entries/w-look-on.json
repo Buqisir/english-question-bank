@@ -1,0 +1,187 @@
+{
+  "entryId": "w:look-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking on",
+    "looks on"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "on"
+      ],
+      [
+        "looking",
+        "on"
+      ],
+      [
+        "looks",
+        "on"
+      ],
+      [
+        "looked",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look on",
+  "senses": [
+    {
+      "senseId": "w:look-on#s1",
+      "pos": "短语",
+      "glossZh": "在一旁观看；旁观",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-on#e-98b7028d5844258f",
+          "text": "I looked on as he walked out the door.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-on#e-1dc372b2fd704eaa",
+          "text": "Looking on fondly is Jill Fraser, 68, the founder of Kissing it Better (KiB), a charity working to reduce isolation in the elderly through intergenerational friendships.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:look-on#s2",
+      "pos": "短语",
+      "glossZh": "看待；把……视为",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-on#e-bea879646febb89d",
+          "text": "And not only that – they’re likely to look on us favorably, to enable us, free us.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          },
+          "parts": [
+            [
+              38,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "常用 look on sb/sth favorably 或 look on sb/sth as sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

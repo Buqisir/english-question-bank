@@ -1,0 +1,136 @@
+{
+  "entryId": "w:catch-a-glimpse-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "a",
+      "glimpse",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "a",
+        "glimpse",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catch a glimpse of",
+      "tags": []
+    },
+    {
+      "form": "caught a glimpse of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch a glimpse of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:catch-a-glimpse-of#s1",
+      "pos": "短语",
+      "glossZh": "瞥见；短暂地看见",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:catch#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-a-glimpse-of#e-57bfe26cd71794f6",
+          "text": "In the era of AI and digital art, people across the world still go out of their way to museums to catch a glimpse of some of the masterpieces that were painted years ago.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 116
+          },
+          "parts": [
+            [
+              98,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-a-glimpse-of#e-cd576f4e1bb2af47",
+          "text": "And then, through the wind, I caught a glimpse of distant glaciers (冰川), their edges glowing faintly even in the deep dark, a silent promise that the sunrise was on its way.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 49
+          },
+          "parts": [
+            [
+              30,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

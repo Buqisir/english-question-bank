@@ -1,0 +1,305 @@
+{
+  "entryId": "w:in-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in place",
+  "senses": [
+    {
+      "senseId": "w:in-place#s1",
+      "pos": "短语",
+      "glossZh": "在应在的位置；固定在位",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-place#e-04677ab0d495dc00",
+          "text": "Paragraph 2: With the new curtains finally in place, the doorbell rang.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-place#e-299647573689162e",
+          "text": "It can even open a bottle while holding it in place.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-place#e-235966df1bb6a6f7",
+          "text": "A board to keep broken bones in place.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-12-survey:34#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:in-place#s2",
+      "pos": "短语",
+      "glossZh": "已设立；已落实或生效",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-place#e-47152a9b43708cf0",
+          "text": "Most countries have laws in place preventing construction work from taking place between certain times.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-place#e-e362564ea9414b5e",
+          "text": "Right now, plans are in place to make the vaccine on a large scale to help koala groups at risk.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-place#e-2a3e94cb104ea73c",
+          "text": "For a solution to work, policies and regulations need to be in place and enforced.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:in-place#s3",
+      "pos": "短语",
+      "glossZh": "在原地（踏步、跑步等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-place#e-25b2d2e18d9cc9d1",
+          "text": "Perform 10 to 15 repetitions of pointing and bending each foot, seated toe raises and marching in place.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 103
+          },
+          "parts": [
+            [
+              95,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,139 @@
+{
+  "entryId": "w:no-such-thing-as-slot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "such",
+      "thing",
+      "as",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "such",
+        "thing",
+        "as",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "no such thing as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no such thing as …",
+  "senses": [
+    {
+      "senseId": "w:no-such-thing-as-slot#s1",
+      "pos": "短语",
+      "glossZh": "根本没有……这种事物；没有……这回事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-such-thing-as-slot#e-68d37b45b323d3bf",
+          "text": "But Carl Jung, who coined these terms, said that there is no such thing as a “pure” introvert or extrovert.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 74
+          },
+          "parts": [
+            [
+              58,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-such-thing-as-slot#e-497ee8f5509c4674",
+          "text": "By using tools like advanced brain imaging and studying babies and people from relatively isolated cultures, she has concluded there’s no such thing as a basic emotional palette (调色板).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 135,
+            "end": 151
+          },
+          "parts": [
+            [
+              135,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              135,
+              151
+            ]
+          ]
+        }
+      ],
+      "note": "常用 there is no such thing as ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

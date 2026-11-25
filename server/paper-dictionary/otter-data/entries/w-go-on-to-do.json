@@ -1,0 +1,173 @@
+{
+  "entryId": "w:go-on-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "go on to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "on",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "on",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go on to",
+      "tags": []
+    },
+    {
+      "form": "went on to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go on to do",
+  "senses": [
+    {
+      "senseId": "w:go-on-to-do#s1",
+      "pos": "短语",
+      "glossZh": "接着做另一件事；后来又做了某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s33"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-on-to-do#e-51d916bdaae4d429",
+          "text": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-on-to-do#e-da05e07d1eba6559",
+          "text": "Although his father hoped he would go on to study for a Master’s degree, Ricky was determined to learn computer skills.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          },
+          "parts": [
+            [
+              35,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-on-to-do#e-5f03de27aa279b81",
+          "text": "He went on to win a silver medal",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b:15",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

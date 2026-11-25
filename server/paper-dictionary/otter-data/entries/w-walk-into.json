@@ -1,0 +1,201 @@
+{
+  "entryId": "w:walk-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking into"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "into"
+      ],
+      [
+        "walking",
+        "into"
+      ],
+      [
+        "walked",
+        "into"
+      ],
+      [
+        "walks",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walk into",
+      "tags": []
+    },
+    {
+      "form": "walked into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk into sth",
+  "senses": [
+    {
+      "senseId": "w:walk-into#s1",
+      "pos": "短语",
+      "glossZh": "走进；步行进入",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-into#e-fbf828a60f92b155",
+          "text": "I walked into class believing that writing is important as a means of communication.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 13
+          },
+          "parts": [
+            [
+              2,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-into#e-2209b30f4d0811cf",
+          "text": "May had just finished gluing two eyes onto her new craft（手工艺品） when Mom walked into her room.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 83
+          },
+          "parts": [
+            [
+              72,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-into#e-dedcffa402eb264b",
+          "text": "Ten years later, I walked into a radio station, hoping to become a broadcast journalist.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:walk-into#s2",
+      "pos": "短语",
+      "glossZh": "走路时撞上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-into#s3",
+      "pos": "短语",
+      "glossZh": "不慎落入（圈套或困境）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

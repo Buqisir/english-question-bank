@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 6,
-    "mock": 49
+    "mock": 22
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -222,7 +222,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -246,59 +246,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:excuse#s5",
-      "pos": "短语",
-      "glossZh": "打扰一下",
-      "pronunciationId": "w:excuse#p-verb",
-      "note": "Excuse me. 可用于提问前引起注意。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:excuse#e-e53535f90051699c",
-          "text": "“Excuse me,” she asked the stand attendant, “are there any more plates in the back?” The man shook his head, barely looking up from his newspaper.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 1,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:excuse#e-8fd09a422d8cba9f",
-          "text": "Once, a film crew __43__ the entrance with heavy tripods (三脚架), and when I lifted my phone to record them, a man __44__, “Excuse me, do you mind?” I snapped back, “Do you mind?",
-          "source": {
-            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
-            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
-            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 122,
-            "end": 128
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -307,6 +254,11 @@
       "reason": "少见贬义，多见于 a poor excuse for sth"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:excuse-me"
+  ]
 }

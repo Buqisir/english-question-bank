@@ -35,8 +35,8 @@
     "mock": 233
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 231
+    "gaokao": 1,
+    "mock": 37
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -379,40 +379,6 @@
       ]
     },
     {
-      "senseId": "w:under#s6",
-      "pos": "短语",
-      "glossZh": "受到猛烈批评",
-      "pronunciationId": "w:under#p-main",
-      "note": "come under fire。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:under#e-d6b55c61127a029d",
-          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 101,
-            "end": 106
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:under#s7",
       "pos": "prep.",
       "glossZh": "在……条件下",
@@ -420,7 +386,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -469,13 +435,201 @@
       "pos": "adv.",
       "glossZh": "在下方",
       "pronunciationId": "w:under#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:under#s9",
+      "pos": "短语",
+      "glossZh": "身体不适",
+      "pronunciationId": "w:under#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:under#s10",
+      "pos": "prep.",
+      "glossZh": "以……的名称或标签",
+      "pronunciationId": "w:under#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:under#e-0bd1fdede665c55b",
+          "text": "Once he descended, Nima shared the video online under the tag (标签) “Sherpapower”, spreading the message that his people were athletes in their own right, not just guides of foreign climbers.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:under#e-4946d5305597037f",
+          "text": "• The following are not permitted to enter the contest, neither under their legal names nor pen names: employees of Active Interest Media (AIM); Writer’s Digest Books authors; Grand Prize Winners from the previous three years.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:under#e-9746eba8031fcc71",
+          "text": "Maya complied, studying spreadsheets by day, but at night, she fed a blog under a false name.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:under#s11",
+      "pos": "adv.",
+      "glossZh": "低于所述年龄或数值",
+      "pronunciationId": "w:under#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:under#e-beb9f895d52c7618",
+          "text": "The competition is open to anyone aged 17 and under from around the world.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:under#e-303adef566801400",
+          "text": "Kids 12 and under who live or go to school in New York State can receive a physical library card by submitting an application signed by their parent or guardian.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:under#e-42f853de265b95f8",
+          "text": "Kids 5 & under Free.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:under#s12",
+      "pos": "短语",
+      "glossZh": "已经开始；正在进行",
+      "pronunciationId": "w:under#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:under#e-949fe38cd709bd66",
+          "text": "A clinical trial involving 26 people is already under way.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -484,6 +638,18 @@
       "reason": "专门用法或特定词形的用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-snowed-under",
+    "w:bring-under",
+    "w:come-under",
+    "w:come-under-fire",
+    "w:go-under",
+    "w:under-ones-belt",
+    "w:under-the-watchful-eye-of",
+    "w:under-the-weather"
+  ]
 }

@@ -1,0 +1,212 @@
+{
+  "entryId": "w:lose-ones-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lose one’s way",
+    "lost one's way",
+    "lost one’s way"
+  ],
+  "pattern": {
+    "tokens": [
+      "lose",
+      {
+        "slot": "one's"
+      },
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        {
+          "slot": "one's"
+        },
+        "way"
+      ],
+      [
+        "lost",
+        {
+          "slot": "one's"
+        },
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lose way",
+      "tags": []
+    },
+    {
+      "form": "losing way",
+      "tags": []
+    },
+    {
+      "form": "lost way",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose one's way",
+  "senses": [
+    {
+      "senseId": "w:lose-ones-way#s1",
+      "pos": "短语",
+      "glossZh": "迷路；找不到该走的路",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lose#s4",
+        "w:lost#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lose-ones-way#e-1ced68ad0f837b2d",
+          "text": "They have lost their way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 24
+          },
+          "parts": [
+            [
+              10,
+              14
+            ],
+            [
+              21,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              14
+            ],
+            [
+              21,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-ones-way#e-a70db92932e2ba39",
+          "text": "Lose their way.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-ii:25#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              11,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              11,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-ones-way#e-5f23cf33633304ad",
+          "text": "Even losing my way enhances this connection.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-mingxiao-2025-11-midterm:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 18
+          },
+          "parts": [
+            [
+              5,
+              11
+            ],
+            [
+              15,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              11
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,70 @@
+{
+  "entryId": "w:crowd-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "crowd",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "crowd",
+        "in"
+      ],
+      [
+        "crowded",
+        "in"
+      ],
+      [
+        "crowding",
+        "in"
+      ],
+      [
+        "crowds",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "crowd in",
+  "senses": [
+    {
+      "senseId": "w:crowd-in#s1",
+      "pos": "动词短语",
+      "glossZh": "（众人）挤进去；涌入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

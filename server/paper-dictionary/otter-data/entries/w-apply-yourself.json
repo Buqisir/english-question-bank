@@ -1,0 +1,93 @@
+{
+  "entryId": "w:apply-yourself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "apply",
+      "yourself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "apply",
+        "yourself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "apply yourself",
+  "senses": [
+    {
+      "senseId": "w:apply-yourself#s1",
+      "pos": "短语",
+      "glossZh": "专心投入；认真下功夫",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:yourself#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:apply-yourself#e-294397c9ea394d0a",
+          "text": "If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "可接 to sth，反身代词随主语变化。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

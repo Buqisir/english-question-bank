@@ -59,8 +59,8 @@
     "mock": 156
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 153
+    "gaokao": 9,
+    "mock": 47
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -206,194 +206,16 @@
       ]
     },
     {
-      "senseId": "w:forward#s3",
-      "pos": "短语",
-      "glossZh": "期待",
-      "pronunciationId": "w:forward#p-main",
-      "note": "look forward to sth/doing sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:forward#e-8f07fde5b2c7d961",
-          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 124,
-            "end": 131
-          }
-        },
-        {
-          "exampleId": "w:forward#e-f6906c710b3cf6e5",
-          "text": "We are looking forward to the benefits and fun the project can bring to people here.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "reading-c-7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:forward#e-0cb2f2e0b217c00d",
-          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:forward#s4",
-      "pos": "短语",
-      "glossZh": "提出",
-      "pronunciationId": "w:forward#p-main",
-      "note": "put forward。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:forward#e-32232504c524e3e4",
-          "text": "Why does Robert put forward the suggestion?",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 12,
-              "questionId": "question:listening:12",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:forward#e-e8418008277dc901",
-          "text": "As inventor William Petty observed, “When a new invention is first put forward, in the beginning every man objects...not one of a hundred (inventor) outlives this torture.” This was true for vaccinations (疫苗) and railroads, which all met strong resistance, just as anxieties now surround innovations like AI.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 71,
-            "end": 78
-          }
-        },
-        {
-          "exampleId": "w:forward#e-568fbe84d49d8794",
-          "text": "Axiom Math’s goal is to develop a real “AI Mathematician” with logical reasoning ability, and Hong even hopes that “AI mathematicians” will put forward brand-new mathematical conjectures (猜想) in the future.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 144,
-            "end": 151
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:forward#s5",
-      "pos": "短语",
-      "glossZh": "快进到",
-      "pronunciationId": "w:forward#p-main",
-      "note": "fast forward。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:forward#e-bc9b0389e06759e5",
-          "text": "Fast forward to my first year of college.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:forward#s6",
       "pos": "v.",
       "glossZh": "转发",
       "pronunciationId": "w:forward#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -401,12 +223,12 @@
       "pos": "adj.",
       "glossZh": "前方的",
       "pronunciationId": "w:forward#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -429,6 +251,20 @@
       "reason": "金融专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:carry-forward",
+    "w:fast-forward",
+    "w:fast-forward-to",
+    "w:look-forward-to",
+    "w:look-forward-to-doing-sth",
+    "w:move-forward",
+    "w:pay-it-forward",
+    "w:push-forward",
+    "w:put-forward",
+    "w:step-forward"
+  ]
 }

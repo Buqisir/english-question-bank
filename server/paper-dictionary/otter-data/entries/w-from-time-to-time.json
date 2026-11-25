@@ -1,0 +1,162 @@
+{
+  "entryId": "w:from-time-to-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "time to time"
+  ],
+  "pattern": {
+    "tokens": [
+      "from",
+      "time",
+      "to",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "time",
+        "to",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from time to time",
+  "senses": [
+    {
+      "senseId": "w:from-time-to-time#s1",
+      "pos": "短语",
+      "glossZh": "偶尔；有时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:from#s13",
+        "w:time#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:from-time-to-time#e-098e30d46aa1b63c",
+          "text": "Changing the pot of your plant from time to time will also help",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-b:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 48
+          },
+          "parts": [
+            [
+              31,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-time-to-time#e-0da6bc9f94c5ef93",
+          "text": "Additionally, from time to time I will assign group work to be completed in class or short assignments to be completed at home, both of which will be graded.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 31
+          },
+          "parts": [
+            [
+              14,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-time-to-time#e-63bd4dc9a7760a81",
+          "text": "Screens drain energy too, so it’s important to move away from your screen from time to time.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 91
+          },
+          "parts": [
+            [
+              74,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

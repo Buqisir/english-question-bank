@@ -1,0 +1,283 @@
+{
+  "entryId": "w:all-right",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "right"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "right"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all right",
+  "senses": [
+    {
+      "senseId": "w:all-right#s1",
+      "pos": "短语",
+      "glossZh": "好；行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-right#e-0c85c7cd1170901a",
+          "text": "“All right, sir, I’ll be there.”",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-right#e-94ce328c24615d9e",
+          "text": "“All right,” he said.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "用于表示同意或答应。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:all-right#s2",
+      "pos": "短语",
+      "glossZh": "好；那么",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-right#e-22703da8c4325509",
+          "text": "“All right, class, settle down!” my teacher, Ms. Garcia, announced.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 10
+          },
+          "parts": [
+            [
+              1,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "在开始讲话或活动、转入下一步时引起注意，也可用于整理思路。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:all-right#s3",
+      "pos": "短语",
+      "glossZh": "没问题；还可以；还算顺利",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-right#e-1a97d99a3b159d7d",
+          "text": "“Your grades are slipping lately,” her teacher’s concerned voice echoed in her memory, “Is everything all right at home?”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 111
+          },
+          "parts": [
+            [
+              102,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "用于描述情况正常、结果可以接受或事情进展顺利。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:all-right#s4",
+      "pos": "短语",
+      "glossZh": "没事；身体无恙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-right#s5",
+      "pos": "短语",
+      "glossZh": "确实；的确",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常放在句末，加强肯定语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-right#s6",
+      "pos": "短语",
+      "glossZh": "好极了！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用兴奋的语气表示喝彩。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-right#s7",
+      "pos": "短语",
+      "glossZh": "行了；够了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用不耐烦的语气让对方停下。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:all-right#s8",
+      "pos": "短语",
+      "glossZh": "你好；最近怎么样？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式非正式问候。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

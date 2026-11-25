@@ -1,0 +1,156 @@
+{
+  "entryId": "w:take-care",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking care",
+    "took care"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "care"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "care"
+      ],
+      [
+        "taking",
+        "care"
+      ],
+      [
+        "took",
+        "care"
+      ],
+      [
+        "taken",
+        "care"
+      ],
+      [
+        "takes",
+        "care"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take care",
+  "senses": [
+    {
+      "senseId": "w:take-care#s1",
+      "pos": "短语",
+      "glossZh": "保重",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-care#e-b94d0a71f40cd5c4",
+          "text": "Stay warm, stay active, and take care!",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          },
+          "parts": [
+            [
+              28,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "常用于告别。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-care#s2",
+      "pos": "短语",
+      "glossZh": "小心；当心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-care#e-4a3f9d6543e0ad5c",
+          "text": "She gave me an oil-paper wrapped candy: “Young man, take care – these stairs are slippery.” I thanked her quickly and hurried on.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        }
+      ],
+      "note": "也见于 take care to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

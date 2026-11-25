@@ -1,0 +1,99 @@
+{
+  "entryId": "w:be-in-order",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "in",
+      "order"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "in",
+        "order"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "was in order",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be in order",
+  "senses": [
+    {
+      "senseId": "w:be-in-order#s1",
+      "pos": "短语",
+      "glossZh": "合乎情理；在当时的情况下有此必要",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s86"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-in-order#e-ad02097315b13fbb",
+          "text": "So a trip to the local store for milk and supplies was in order.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

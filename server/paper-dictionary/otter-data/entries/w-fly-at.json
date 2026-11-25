@@ -1,0 +1,87 @@
+{
+  "entryId": "w:fly-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fly",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fly",
+        "at"
+      ],
+      [
+        "flew",
+        "at"
+      ],
+      [
+        "flies",
+        "at"
+      ],
+      [
+        "flown",
+        "at"
+      ],
+      [
+        "flying",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fly at sb",
+  "senses": [
+    {
+      "senseId": "w:fly-at#s1",
+      "pos": "短语",
+      "glossZh": "突然扑向某人并发动攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fly-at#s2",
+      "pos": "短语",
+      "glossZh": "突然厉声斥责某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -59,8 +59,8 @@
     "mock": 23
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 19
+    "gaokao": 2,
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -198,40 +198,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:dust#s4",
-      "pos": "短语",
-      "glossZh": "把某人远远甩在后面",
-      "pronunciationId": "w:dust#p-main",
-      "note": "leave sb in the dust。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dust#e-be64ae740ede9d15",
-          "text": "When Coach Pitt blew his whistle(哨子), Eva figured she would be left in the dust.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 75,
-            "end": 79
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -240,6 +206,12 @@
       "reason": "专业或同形用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-left-in-the-dust",
+    "w:leave-sb-in-the-dust"
+  ]
 }

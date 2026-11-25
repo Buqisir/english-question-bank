@@ -1,0 +1,169 @@
+{
+  "entryId": "w:pay-attention",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "paying attention"
+  ],
+  "pattern": {
+    "tokens": [
+      "pay",
+      "attention"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pay",
+        "attention"
+      ],
+      [
+        "paying",
+        "attention"
+      ],
+      [
+        "paid",
+        "attention"
+      ],
+      [
+        "pays",
+        "attention"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pay attention",
+  "senses": [
+    {
+      "senseId": "w:pay-attention#s1",
+      "pos": "短语",
+      "glossZh": "集中注意力；注意；留心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pay#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pay-attention#e-6f4a367f5734e585",
+          "text": "It means paying attention to your surroundings and having a constant awareness of the environment.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 25
+          },
+          "parts": [
+            [
+              9,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-attention#e-53b25164f48623cc",
+          "text": "As the climate continues to change, paying attention to the needs of ocean animals is important.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 52
+          },
+          "parts": [
+            [
+              36,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pay-attention#e-5c3a888d2f9770fe",
+          "text": "You just need to give yourself opportunities to explore and pay attention to your surroundings.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 73
+          },
+          "parts": [
+            [
+              60,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "指出关注对象时用 pay attention to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 35
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

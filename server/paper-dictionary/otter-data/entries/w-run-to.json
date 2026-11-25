@@ -1,0 +1,98 @@
+{
+  "entryId": "w:run-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran to"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "to"
+      ],
+      [
+        "ran",
+        "to"
+      ],
+      [
+        "running",
+        "to"
+      ],
+      [
+        "runs",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:run-to#s1",
+      "pos": "短语",
+      "glossZh": "（数量、篇幅、费用等）达到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-to#s2",
+      "pos": "短语",
+      "glossZh": "（预算、能力等）足以应付或负担",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-to#s3",
+      "pos": "短语",
+      "glossZh": "跑去找某人求助",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

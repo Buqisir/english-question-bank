@@ -1,0 +1,191 @@
+{
+  "entryId": "w:look-forward-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "look forward to sth",
+    "looking forward",
+    "looking forward to",
+    "looks forward to"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "forward",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "forward",
+        "to"
+      ],
+      [
+        "looking",
+        "forward",
+        "to"
+      ],
+      [
+        "looks",
+        "forward",
+        "to"
+      ],
+      [
+        "look",
+        "forward",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "looked",
+        "forward",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked forward to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look forward to",
+  "senses": [
+    {
+      "senseId": "w:look-forward-to#s1",
+      "pos": "短语",
+      "glossZh": "期待；盼望",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:to#s18",
+        "w:forward#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-forward-to#e-cc616e6ac2d65b6f",
+          "text": "We are looking forward to the benefits and fun the project can bring to people here.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "reading-c-7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 25
+          },
+          "parts": [
+            [
+              7,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-forward-to#e-34aa59cfd287c913",
+          "text": "It was tiring work, but I looked forward to the pay, even though I wasn’t sure how",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 43
+          },
+          "parts": [
+            [
+              26,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-forward-to#e-48c1a9ca7a4c0067",
+          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "to 是介词，后接名词、代词或动名词。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 24
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

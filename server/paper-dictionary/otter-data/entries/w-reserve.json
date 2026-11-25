@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 84
+    "mock": 13
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -353,7 +353,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -378,6 +378,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:reserve#s7",
+      "pos": "n.",
+      "glossZh": "图书馆为课程保留的资料",
+      "pronunciationId": "w:reserve#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reserve#e-6f42046d44495db8",
+          "text": "What is the total fine for a course reserve item that is one month overdue?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -386,6 +419,6 @@
       "reason": "印花专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

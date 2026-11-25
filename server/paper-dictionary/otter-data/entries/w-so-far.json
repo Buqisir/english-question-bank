@@ -1,0 +1,201 @@
+{
+  "entryId": "w:so-far",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "so",
+      "far"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "so",
+        "far"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "so far",
+  "senses": [
+    {
+      "senseId": "w:so-far#s1",
+      "pos": "短语",
+      "glossZh": "到目前为止；迄今",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:far#s5",
+        "w:so#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:so-far#e-a3cd5d8f078ccd09",
+          "text": "So far, Mr. Lewis is pleased with the results of his experiment.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:so-far#e-e8411b0cdeb81947",
+          "text": "For the biggest stadiums in the world, we have used data supplied by the World Atlas list so far, which ranks them by their stated permanent capacity, as well as updated information from official stadium websites.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          },
+          "parts": [
+            [
+              90,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:so-far#e-3a6a74c3910300a7",
+          "text": "So far, it has raised more than £ 100,000 for Guide Dogs charity and sponsored 11 dogs in training.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 20
+      }
+    },
+    {
+      "senseId": "w:so-far#s2",
+      "pos": "短语",
+      "glossZh": "到某个限度；只到这一步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:so-far#e-855cf3bbf6ec1b15",
+          "text": "But these current orbital tricks can only get us so far.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          },
+          "parts": [
+            [
+              49,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              55
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 only go so far。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

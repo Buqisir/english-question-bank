@@ -1,0 +1,160 @@
+{
+  "entryId": "w:out-of-the-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "the",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "the",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of the way",
+  "senses": [
+    {
+      "senseId": "w:out-of-the-way#s1",
+      "pos": "短语",
+      "glossZh": "已经处理完；已经办妥",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of-the-way#e-de79ebe2104596d3",
+          "text": "By arriving before opening, you get your waiting out of the way when other activities are not yet open.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 63
+          },
+          "parts": [
+            [
+              49,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              63
+            ]
+          ]
+        }
+      ],
+      "note": "常用于 get sth out of the way，指先把某事做完。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:out-of-the-way#s2",
+      "pos": "短语",
+      "glossZh": "让开；避开通道或行进路线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-the-way#s3",
+      "pos": "短语",
+      "glossZh": "偏僻的；远离常走路线的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-the-way#s4",
+      "pos": "短语",
+      "glossZh": "不寻常的；少见的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-the-way#s5",
+      "pos": "短语",
+      "glossZh": "不妥的；冒犯的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:out-of-the-way#s6",
+      "pos": "短语",
+      "glossZh": "异常地；过分地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

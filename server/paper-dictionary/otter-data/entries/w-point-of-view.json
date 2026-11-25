@@ -1,0 +1,318 @@
+{
+  "entryId": "w:point-of-view",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "point",
+      "of",
+      "view"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "point",
+        "of",
+        "view"
+      ],
+      [
+        "points",
+        "of",
+        "view"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "points of view",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "point of view",
+  "senses": [
+    {
+      "senseId": "w:point-of-view#s1",
+      "pos": "短语",
+      "glossZh": "看待问题的角度；观察视角",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:point-of-view#e-36011e32c9387300",
+          "text": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:point-of-view#e-87f6444fa14780f4",
+          "text": "This is a great way to teach bias（偏见）and point of view, especially in ELA or social studies.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 54
+          },
+          "parts": [
+            [
+              41,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:point-of-view#e-56a05c0fe8349ac6",
+          "text": "Watching his playful nature every day, his owner Mikaela thought it might be fun to capture the world from Elvis’s point of view.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 128
+          },
+          "parts": [
+            [
+              115,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              128
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:point-of-view#s2",
+      "pos": "短语",
+      "glossZh": "观点；看法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:point#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:point-of-view#e-90171ff64908b0bc",
+          "text": "Dictionaries enable us to write not with fail-safe convenience but with originality and a point of view.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 103
+          },
+          "parts": [
+            [
+              90,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:point-of-view#e-2ef32a0d4872b57f",
+          "text": "They’ve been far more willing to consider opposing points of view than many adults.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 65
+          },
+          "parts": [
+            [
+              51,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:point-of-view#e-6ad6a536ceed5793",
+          "text": "Understanding and respecting others’ point of view is a rare quality.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 50
+          },
+          "parts": [
+            [
+              37,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:point-of-view#s3",
+      "pos": "短语",
+      "glossZh": "叙事视角",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:point-of-view#e-7420667a28204eb1",
+          "text": "Learning the types and forms of fiction, where to find fiction ideas, and the basics of creating a story – characters, plots, and points of view",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "cell:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a:ocr-916a21169272a7ae:3:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 144
+          },
+          "parts": [
+            [
+              130,
+              144
+            ]
+          ],
+          "highlightRanges": [
+            [
+              130,
+              144
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

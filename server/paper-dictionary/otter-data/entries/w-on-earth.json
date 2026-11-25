@@ -1,0 +1,61 @@
+{
+  "entryId": "w:on-earth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "earth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "earth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on earth",
+  "senses": [
+    {
+      "senseId": "w:on-earth#s1",
+      "pos": "短语",
+      "glossZh": "究竟；到底",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:earth#s4"
+      ],
+      "examples": [],
+      "note": "置于疑问词后，加强语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

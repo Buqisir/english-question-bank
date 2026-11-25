@@ -1,0 +1,455 @@
+{
+  "entryId": "w:break-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking up",
+    "broke up"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "up"
+      ],
+      [
+        "breaking",
+        "up"
+      ],
+      [
+        "broke",
+        "up"
+      ],
+      [
+        "breaks",
+        "up"
+      ],
+      [
+        "broken",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "break up",
+      "tags": []
+    },
+    {
+      "form": "broken up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break (sth) up",
+  "senses": [
+    {
+      "senseId": "w:break-up#s3",
+      "pos": "短语",
+      "glossZh": "散会；解散；使集体活动结束",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-up#e-37c3eb337560b7e4",
+          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-4f2ca29ae3c94fed",
+          "text": "It’s about to break up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-168ac12903d89df6",
+          "text": "Over 540 days, he and his team made 12 expeditions into the uninhabited wilds of Kekexili, breaking up 8 poaching gangs and seizing 12 vehicles.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 102
+          },
+          "parts": [
+            [
+              91,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              102
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:break-up#s1",
+      "pos": "短语",
+      "glossZh": "使活动中断；打断连续的过程或规律",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s98"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-up#e-a87f39a6253c85b9",
+          "text": "Break up your time spent being inactive by walking around your home or standing up from your chair when you are on the phone.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-2e6b63281b0da78f",
+          "text": "Putting “try something new” in my diary once a week broke up the work-commute-collapse cycle I had accidentally built my life around.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          },
+          "parts": [
+            [
+              52,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-9d28cee318bfd1a8",
+          "text": "They break up seasonal patterns.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:30#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:break-up#s2",
+      "pos": "短语",
+      "glossZh": "分割；拆散；碎裂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-up#e-e8a9ac735043166f",
+          "text": "In Britain, however, 97% of rivers are broken up by artificial barriers.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 48
+          },
+          "parts": [
+            [
+              39,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-8aa4a2490437cb4b",
+          "text": "Researchers hope that one day, toys will stop being broken up by gender and will instead be categorized by type, like puzzle toys, dolls or children’s bikes.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-up#e-8454d823b7b5917e",
+          "text": "Break up your time schedule.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-guangdong-shantou-2026-01-final:23#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:break-up#s4",
+      "pos": "短语",
+      "glossZh": "分手；结束恋爱关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:break#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-up#s5",
+      "pos": "短语",
+      "glossZh": "通话声音或信号断断续续",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-up#s6",
+      "pos": "短语",
+      "glossZh": "学期结束并开始放假",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-up#s7",
+      "pos": "短语",
+      "glossZh": "把打斗者拉开；制止打斗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

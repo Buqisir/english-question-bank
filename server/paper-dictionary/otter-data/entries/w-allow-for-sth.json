@@ -1,0 +1,264 @@
+{
+  "entryId": "w:allow-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "allow for",
+    "allowing for",
+    "allows for"
+  ],
+  "pattern": {
+    "tokens": [
+      "allow",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "allow",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "allow",
+        "for"
+      ],
+      [
+        "allowing",
+        "for"
+      ],
+      [
+        "allows",
+        "for"
+      ],
+      [
+        "allowed",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "allowed for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "allow for sth",
+  "senses": [
+    {
+      "senseId": "w:allow-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "使……成为可能；为……提供条件",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:allow#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:allow-for-sth#e-e450810a02091397",
+          "text": "The train’s equipment allows for basic checkups.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 32
+          },
+          "parts": [
+            [
+              22,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:allow-for-sth#e-24b4c46e712b348a",
+          "text": "This capability allows for timely restoration.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:allow-for-sth#e-771bfc653cbe7803",
+          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 130
+          },
+          "parts": [
+            [
+              121,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:allow-for-sth#s2",
+      "pos": "短语",
+      "glossZh": "把……考虑在内；为……预留余地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:allow#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:allow-for-sth#e-e42e3c9c76a39400",
+          "text": "It must establish its identity as a book, yet allow for the reality that the work has only just started.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:allow-for-sth#e-705ad8ac50bc166f",
+          "text": "This is especially relevant for the brain’s visual system which, subjected to information overload, has to rank in order of importance, allowing for limited resources.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 148
+          },
+          "parts": [
+            [
+              136,
+              148
+            ]
+          ],
+          "highlightRanges": [
+            [
+              136,
+              148
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

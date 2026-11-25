@@ -1,0 +1,268 @@
+{
+  "entryId": "w:break-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking out",
+    "broke out"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "out"
+      ],
+      [
+        "breaking",
+        "out"
+      ],
+      [
+        "broke",
+        "out"
+      ],
+      [
+        "breaks",
+        "out"
+      ],
+      [
+        "broken",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "breaks out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break out",
+  "senses": [
+    {
+      "senseId": "w:break-out#s1",
+      "pos": "短语",
+      "glossZh": "突然爆发；突然开始",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-out#e-f75da71d68e9a25f",
+          "text": "monsters from all stores because of the risk of fights breaking out between customers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-out#e-1abb25fafe9d16f2",
+          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-out#e-233ae97c1ab2c04e",
+          "text": "Before he could sit down, a big boy named Bob pressed his fist to his mouth and made a strange sound – “Gobble-gobble!” Laughter broke out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 138
+          },
+          "parts": [
+            [
+              129,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              138
+            ]
+          ]
+        }
+      ],
+      "note": "常用于火灾、战争、风暴等骤然发生的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:break-out#s2",
+      "pos": "短语",
+      "glossZh": "逃出；摆脱束缚",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-out#e-b1cf91b5c14b371c",
+          "text": "Break out of your shell.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-jining-2026-03-first:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "常接 of，break out of one's shell 指摆脱羞怯、变得开朗。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:break-out#s3",
+      "pos": "短语",
+      "glossZh": "帮某人逃脱；把某人救出来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "break sb out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-out#s4",
+      "pos": "短语",
+      "glossZh": "拿出存放的东西来使用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "break sth out 或 break out sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-out#s5",
+      "pos": "短语",
+      "glossZh": "突然起疹子或长痘",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 break out in a rash。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:living-in-the-moment",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "living",
+      "in",
+      "the",
+      "moment"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "living",
+        "in",
+        "the",
+        "moment"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "living in the moment",
+  "senses": [
+    {
+      "senseId": "w:living-in-the-moment#s1",
+      "pos": "短语",
+      "glossZh": "活在当下；专注于眼前的体验",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:living-in-the-moment#e-b5efd25e27fae2e4",
+          "text": "This isn’t laziness, but a cultural preference for living in the moment.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 71
+          },
+          "parts": [
+            [
+              51,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

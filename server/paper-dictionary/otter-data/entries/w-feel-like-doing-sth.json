@@ -1,0 +1,285 @@
+{
+  "entryId": "w:feel-like-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "like",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "like",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "feel like",
+      "tags": []
+    },
+    {
+      "form": "feeling like",
+      "tags": []
+    },
+    {
+      "form": "feels like",
+      "tags": []
+    },
+    {
+      "form": "felt like",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel like doing sth",
+  "senses": [
+    {
+      "senseId": "w:feel-like-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "想做……；有做……的念头",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:feel#s9",
+        "w:like#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:feel-like-doing-sth#e-3efdd65779b875f4",
+          "text": "But next time you feel like opening a grocery app, try walking to your local shop instead.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like-doing-sth#e-f1348188b11a3af5",
+          "text": "When we have self-control, we can resist unhealthy impulses and persevere when we feel like quitting, experts say.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 91
+          },
+          "parts": [
+            [
+              82,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like-doing-sth#e-c3c38d263da69eb3",
+          "text": "“Grandma, I really don’t feel like being in the show,” I said.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:feel-like-doing-sth#s2",
+      "pos": "短语",
+      "glossZh": "感觉像是在做……；感觉仿佛经历了……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feel-like-doing-sth#e-3589b521a3f32cab",
+          "text": "Years ago, as a shy and uncertain post-graduate, I took a decent job but felt like wearing ill-fitting shoes.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 82
+          },
+          "parts": [
+            [
+              73,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like-doing-sth#e-62167f39dcbfdbe0",
+          "text": "For many kids, setting a big goal and achieving it can feel like climbing a slippery hill.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 64
+          },
+          "parts": [
+            [
+              55,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feel-like-doing-sth#e-3b66eebea1fedbb1",
+          "text": "When the package finally arrives, opening it feels like meeting an old friend.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 55
+          },
+          "parts": [
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

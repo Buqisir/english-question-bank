@@ -58,55 +58,21 @@
     "mock": 4
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 4
+    "gaokao": 1,
+    "mock": 3
   },
   "senses": [
-    {
-      "senseId": "w:resign#s1",
-      "pos": "短语",
-      "glossZh": "无奈地接受",
-      "pronunciationId": "w:resign#p-main",
-      "note": "resign oneself to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:resign#e-1c11c6bd5ef4badc",
-          "text": "I resigned myself to spending the evening in my hotel room, but as soon as I got back to my room I felt restless and bored.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 10
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:resign#s2",
       "pos": "v.",
       "glossZh": "辞职",
       "pronunciationId": "w:resign#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -116,6 +82,11 @@
       "reason": "旧式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:resign-oneself-to-sth"
+  ]
 }

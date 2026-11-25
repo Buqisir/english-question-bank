@@ -1,0 +1,169 @@
+{
+  "entryId": "w:be-crazy-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "crazy",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "crazy",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "is crazy about",
+      "tags": []
+    },
+    {
+      "form": "was crazy about",
+      "tags": []
+    },
+    {
+      "form": "were crazy about",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be crazy about",
+  "senses": [
+    {
+      "senseId": "w:be-crazy-about#s1",
+      "pos": "短语",
+      "glossZh": "非常喜欢；对……着迷",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:crazy#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-crazy-about#e-2074532207433914",
+          "text": "After breakfast, when I told Ollie about the dream, he was crazy about the idea of a dragon.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 70
+          },
+          "parts": [
+            [
+              55,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-crazy-about#e-ab32e6d4e383c785",
+          "text": "Peter and Oliver were crazy about basketball.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 33
+          },
+          "parts": [
+            [
+              17,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-crazy-about#e-ade697ad3211c2b9",
+          "text": "This season, Avisard is crazy about growing a taller pelargonium （天竺葵）, a clumped-flower （簇状花） cousin to the geranium （老鹳草） that Monet famously planted in several red and pink beds in front of his pink house.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n123:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

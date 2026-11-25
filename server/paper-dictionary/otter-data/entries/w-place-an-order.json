@@ -1,0 +1,180 @@
+{
+  "entryId": "w:place-an-order",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "place",
+      "an",
+      "order"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "place",
+        "an",
+        "order"
+      ],
+      [
+        "placed",
+        "an",
+        "order"
+      ],
+      [
+        "places",
+        "an",
+        "order"
+      ],
+      [
+        "placing",
+        "an",
+        "order"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "placed an order",
+      "tags": []
+    },
+    {
+      "form": "placing an order",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "place an order",
+  "senses": [
+    {
+      "senseId": "w:place-an-order#s1",
+      "pos": "短语",
+      "glossZh": "下单；向商家订购",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:place-an-order#e-ffab22baf5fd9438",
+          "text": "Placing an order.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:place-an-order#e-0e81cb4395a0cd9c",
+          "text": "Kelly Schilling needed a few last-minute groceries before the weekend and placed an order through an online platform.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 89
+          },
+          "parts": [
+            [
+              74,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:place-an-order#e-ae70458db788cc0e",
+          "text": "Place an order earlier next time.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

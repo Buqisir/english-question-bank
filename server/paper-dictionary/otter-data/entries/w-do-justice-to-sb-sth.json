@@ -1,0 +1,120 @@
+{
+  "entryId": "w:do-justice-to-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "do justice"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "justice",
+      "to",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "justice",
+        "to",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "done justice to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do justice to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:do-justice-to-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "充分体现……的价值或特点；恰当地呈现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:justice#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:do-justice-to-sb-sth#e-fc1ad2d5734791c5",
+          "text": "Although my book is a work of fiction, I hope I’ve done justice to this incredible and inspiring woman.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 66
+          },
+          "parts": [
+            [
+              51,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:do-justice-to-sb-sth#s2",
+      "pos": "短语",
+      "glossZh": "尽情享用（食物或饮品）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

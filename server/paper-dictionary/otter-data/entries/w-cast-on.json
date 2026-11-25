@@ -1,0 +1,70 @@
+{
+  "entryId": "w:cast-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cast",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cast",
+        "on"
+      ],
+      [
+        "casted",
+        "on"
+      ],
+      [
+        "casting",
+        "on"
+      ],
+      [
+        "casts",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cast on",
+  "senses": [
+    {
+      "senseId": "w:cast-on#s1",
+      "pos": "短语",
+      "glossZh": "（编织时）起针",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

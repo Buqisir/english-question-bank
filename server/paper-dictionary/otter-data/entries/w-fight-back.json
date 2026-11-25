@@ -1,0 +1,200 @@
+{
+  "entryId": "w:fight-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fighting back"
+  ],
+  "pattern": {
+    "tokens": [
+      "fight",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fight",
+        "back"
+      ],
+      [
+        "fighting",
+        "back"
+      ],
+      [
+        "fights",
+        "back"
+      ],
+      [
+        "fought",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fought back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fight back",
+  "senses": [
+    {
+      "senseId": "w:fight-back#s1",
+      "pos": "短语",
+      "glossZh": "反击；起来抵抗",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fight#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fight-back#e-14cea70061900d3b",
+          "text": "Some communities fought back.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fight-back#e-0d7e75ea9fdec76e",
+          "text": "But in the 1970s, people fought back with mass bike protests that pushed the city to build a wide network of cycle lanes (车道).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fight-back#s2",
+      "pos": "短语",
+      "glossZh": "（在比赛中）奋力追赶；力图扭转落后局面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fight-back#e-3bac28bef83afcc1",
+          "text": "Point by point, we fought back, each of us doing our part, the score climbing to 24 - 18.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-170",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fight-back#s3",
+      "pos": "短语",
+      "glossZh": "强忍（眼泪、情绪等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,180 @@
+{
+  "entryId": "w:at-ones-expense",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "at sb's expense"
+  ],
+  "pattern": {
+    "tokens": [
+      "at",
+      {
+        "slot": "one's"
+      },
+      "expense"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        {
+          "slot": "one's"
+        },
+        "expense"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "at expense",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at one's expense",
+  "senses": [
+    {
+      "senseId": "w:at-ones-expense#s1",
+      "pos": "短语",
+      "glossZh": "拿某人取笑；让某人难堪",
+      "note": "常与 laugh 或 joke 连用。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:expense#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-ones-expense#e-422c3f58e7310c3a",
+          "text": "The boy would put his head down on his desk in shame, but the attackers only laughed and continued the cruelty until the entire room was laughing at his expense.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 160
+          },
+          "parts": [
+            [
+              146,
+              148
+            ],
+            [
+              153,
+              160
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              148
+            ],
+            [
+              153,
+              160
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:at-ones-expense#s2",
+      "pos": "短语",
+      "glossZh": "以损害某人的利益为代价",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-ones-expense#e-716b83d3264a83e8",
+          "text": "Zero-sum beliefs can also be interpersonally detrimental, such as when negotiators who believe that their counterparts gain at their expense overlook opportunities for mutually beneficial deals.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 140
+          },
+          "parts": [
+            [
+              124,
+              126
+            ],
+            [
+              133,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              126
+            ],
+            [
+              133,
+              140
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:at-ones-expense#s3",
+      "pos": "短语",
+      "glossZh": "由某人付费；费用由某人承担",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

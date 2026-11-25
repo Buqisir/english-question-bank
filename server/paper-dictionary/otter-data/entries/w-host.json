@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 120
+    "mock": 16
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -333,40 +333,6 @@
       ]
     },
     {
-      "senseId": "w:host#s5",
-      "pos": "短语",
-      "glossZh": "许多；大量",
-      "pronunciationId": "w:host#p-main",
-      "note": "a host of。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:host#e-82c07455785418f2",
-          "text": "The new year has brought a host of exciting and inventive exhibitions, including – but not limited to – the following four:",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
-            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-a:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:host#s6",
       "pos": "n.",
       "glossZh": "宿主",
@@ -374,7 +340,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -407,7 +373,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -445,6 +411,148 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:host#s9",
+      "pos": "v.",
+      "glossZh": "作为栖息地或载体容纳",
+      "pronunciationId": "w:host#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:host#e-1be2f176a1435ccc",
+          "text": "Though artificial, reservoirs host lots of water life that floatovoltaics can interact with.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:host#e-56d8d1cea61e89f7",
+          "text": "Recent observations even suggest spiral galaxies can host two or more crossing waves travelling at different speeds.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:host#e-b71b68dead75be86",
+          "text": "Some astronomers believe the planet was once much more hospitable, but a recent research by Tereza Constantinou, a PhD student from the University of Cambridge, has now dealt a blow to the idea that it ever hosted life as we know it.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 207,
+            "end": 213
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:host#s10",
+      "pos": "v.",
+      "glossZh": "接待；为……提供场地或住处",
+      "pronunciationId": "w:host#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:host#e-65bdd7a1811fd22b",
+          "text": "How to do it: Workshops host just 10 participants and include breakfast and lunch.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:host#e-2f98f56c8e79cd23",
+          "text": "During my high school exchange year in France, I was hosted by the Miller family in a small town in Lyon.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:host#e-177b70c0c3b94630",
+          "text": "Our parents hosted an emergency safe house for children taken in by social services.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -453,6 +561,11 @@
       "reason": "宗教专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-host-of"
+  ]
 }

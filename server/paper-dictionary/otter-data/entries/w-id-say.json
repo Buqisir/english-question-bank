@@ -1,0 +1,93 @@
+{
+  "entryId": "w:id-say",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I'd say"
+  ],
+  "pattern": {
+    "tokens": [
+      "i'd",
+      "say"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i'd",
+        "say"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i'd say",
+  "senses": [
+    {
+      "senseId": "w:id-say#s1",
+      "pos": "句型",
+      "glossZh": "我觉得；我估计",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:id-say#e-84767c68d53e04b4",
+          "text": "Age isn’t the only factor; I’d say it’s also to do with the makeup of your household.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          },
+          "parts": [
+            [
+              27,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "通常写作 I'd say，用于较委婉地提出看法或估计。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

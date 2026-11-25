@@ -1,0 +1,127 @@
+{
+  "entryId": "w:pick-up-the-phone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "up",
+      "the",
+      "phone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "up",
+        "the",
+        "phone"
+      ],
+      [
+        "picked",
+        "up",
+        "the",
+        "phone"
+      ],
+      [
+        "picking",
+        "up",
+        "the",
+        "phone"
+      ],
+      [
+        "picks",
+        "up",
+        "the",
+        "phone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick up the phone",
+  "senses": [
+    {
+      "senseId": "w:pick-up-the-phone#s1",
+      "pos": "短语",
+      "glossZh": "接听电话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s29"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pick-up-the-phone#e-ca064638200db381",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 167,
+            "end": 184
+          },
+          "parts": [
+            [
+              167,
+              184
+            ]
+          ],
+          "highlightRanges": [
+            [
+              167,
+              184
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pick-up-the-phone#s2",
+      "pos": "短语",
+      "glossZh": "拿起电话准备拨打",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

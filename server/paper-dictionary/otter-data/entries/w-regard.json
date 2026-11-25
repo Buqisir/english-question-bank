@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 52
+    "mock": 8
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -301,7 +301,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -346,40 +346,6 @@
       ]
     },
     {
-      "senseId": "w:regard#s6",
-      "pos": "短语",
-      "glossZh": "在这方面",
-      "pronunciationId": "w:regard#p-main",
-      "note": "in this regard。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:regard#e-86faa658c1a714df",
-          "text": "Although booking platforms signal the sustainability of hotels that have third-party certifications, hotel websites often don’t provide much explanation in this regard.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
-            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
-            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 161,
-            "end": 167
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:regard#s7",
       "pos": "v.",
       "glossZh": "注视",
@@ -391,6 +357,59 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:regard#s8",
+      "pos": "短语",
+      "glossZh": "关于；就……而言（in regard to）",
+      "pronunciationId": "w:regard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regard#e-e33f060e5cd6cc75",
+          "text": "Barrett notes that differences between men and women in regard to dream recall are “modest” and that there are greater differences within each gender than between the genders.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:regard#e-a3b77f55a8be4956",
+          "text": "In regard to this phenomenon, researchers have identified several scientific explanations.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -399,6 +418,11 @@
       "reason": "旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-this-regard"
+  ]
 }

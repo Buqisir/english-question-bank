@@ -35,8 +35,8 @@
     "mock": 402
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 402
+    "gaokao": 9,
+    "mock": 307
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 33,
-        "mock": 0
+        "mock": 95
       },
       "folded": false,
       "examples": [
@@ -109,81 +109,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:instead#s2",
-      "pos": "短语",
-      "glossZh": "代替……",
-      "pronunciationId": "w:instead#p-main",
-      "note": "instead of 后接名词、代词或 -ing 形式。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:instead#e-88bbeced5b99eab0",
-          "text": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 85
-          }
-        },
-        {
-          "exampleId": "w:instead#e-326f7b20c9a7962f",
-          "text": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 153,
-            "end": 160
-          }
-        },
-        {
-          "exampleId": "w:instead#e-033efb01d4aac6f8",
-          "text": "Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:instead-of"
+  ]
 }

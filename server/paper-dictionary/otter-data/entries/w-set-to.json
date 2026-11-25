@@ -1,0 +1,189 @@
+{
+  "entryId": "w:set-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "to"
+      ],
+      [
+        "sets",
+        "to"
+      ],
+      [
+        "setting",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set to",
+  "senses": [
+    {
+      "senseId": "w:set-to#s1",
+      "pos": "短语",
+      "glossZh": "按计划将要；预计会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-to#e-22f036105cbbcbca",
+          "text": "This system, designed to encourage bike travel, is now set to expand to 15 more routes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          },
+          "parts": [
+            [
+              55,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-to#e-1ee8108489122753",
+          "text": "Last weekend, our school painting club was set to host a major exhibition on Monday.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          },
+          "parts": [
+            [
+              43,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-to#e-1208d58a2e4acbea",
+          "text": "Like past world-changing tools such as mechanical cloth-making machines, AI is set to reshape the workplace greatly.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 85
+          },
+          "parts": [
+            [
+              79,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              85
+            ]
+          ]
+        }
+      ],
+      "note": "be set to do sth，set to do sth 也可作后置修饰语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:set-to#s2",
+      "pos": "短语",
+      "glossZh": "着手干起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 set to work。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-to#s3",
+      "pos": "短语",
+      "glossZh": "动手打斗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

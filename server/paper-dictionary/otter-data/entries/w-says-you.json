@@ -1,0 +1,59 @@
+{
+  "entryId": "w:says-you",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "says",
+      "you"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "says",
+        "you"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "says you",
+  "senses": [
+    {
+      "senseId": "w:says-you#s1",
+      "pos": "短语",
+      "glossZh": "你说得倒轻巧；这只是你自己这么说",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中用于反驳或质疑对方，常带讽刺语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,243 @@
+{
+  "entryId": "w:work-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "working through",
+    "works through"
+  ],
+  "pattern": {
+    "tokens": [
+      "work",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "work",
+        "through"
+      ],
+      [
+        "working",
+        "through"
+      ],
+      [
+        "works",
+        "through"
+      ],
+      [
+        "worked",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "work through",
+  "senses": [
+    {
+      "senseId": "w:work-through#s1",
+      "pos": "短语",
+      "glossZh": "按步骤处理；逐项做完",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:work-through#e-11ef2e139435a371",
+          "text": "For a college student who consistently uses AI to work through problems, I question",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-d",
+            "locator": {
+              "paragraph": 22,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-d:22",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-through#e-0de780af30fc9b2c",
+          "text": "I had also seen her patiently help another student work through a difficult passage, never showing the slightest impatience.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:work-through#s2",
+      "pos": "短语",
+      "glossZh": "逐步解决（难题）；慢慢理清并消化（情绪）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:work-through#e-053be7994366eb3e",
+          "text": "Instead of paying for an official service, they sit down with volunteers and work through the problem together.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 89
+          },
+          "parts": [
+            [
+              77,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-through#e-2f7b7e7413c7fe07",
+          "text": "Put simply, their research shows that dreams are the brain’s innate way to work through our inner struggles and make sense of our memories.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 87
+          },
+          "parts": [
+            [
+              75,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-through#e-91f99a4aaaafb1cc",
+          "text": "Whether you’re revising for an exam, feeling stuck on a school project or working through a friendship problem, going for a walk could help.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 89
+          },
+          "parts": [
+            [
+              74,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

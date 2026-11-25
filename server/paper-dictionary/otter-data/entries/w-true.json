@@ -60,8 +60,8 @@
     "mock": 236
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 235
+    "gaokao": 11,
+    "mock": 55
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 116
       },
       "folded": false,
       "examples": [
@@ -208,114 +208,6 @@
       ]
     },
     {
-      "senseId": "w:true#s3",
-      "pos": "短语",
-      "glossZh": "实现",
-      "pronunciationId": "w:true#p-main",
-      "note": "come true。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:true#e-1230c1357b680a27",
-          "text": "I just didn’t know what to say, because I never thought seeing my mother would ever come true.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 89,
-            "end": 93
-          }
-        },
-        {
-          "exampleId": "w:true#e-2f74e74c24d13707",
-          "text": "It made her childhood dream come true.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jun:23",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:true#s4",
-      "pos": "短语",
-      "glossZh": "依然成立",
-      "pronunciationId": "w:true#p-main",
-      "note": "hold true 或 be true of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:true#e-2c5c5fa02f59611c",
-          "text": "The results held true even after the scientists accounted for the participants’ overall health status.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        },
-        {
-          "exampleId": "w:true#e-e2f8f097b87aa3fd",
-          "text": "That's particularly true during busy summer months.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:true#s5",
       "pos": "adj.",
       "glossZh": "忠实于",
@@ -324,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -348,6 +240,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:true#s6",
+      "pos": "adv.",
+      "glossZh": "诚然；的确",
+      "pronunciationId": "w:true#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:true#e-9f8529499a05a610",
+          "text": "True, the answer to both of these problems is slippers.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -356,6 +281,16 @@
       "reason": "专门用法或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-true-of",
+    "w:come-true",
+    "w:dream-come-true",
+    "w:hold-true",
+    "w:ring-true",
+    "w:too-good-to-be-true"
+  ]
 }

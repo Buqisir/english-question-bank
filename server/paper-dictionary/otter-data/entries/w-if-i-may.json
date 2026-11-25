@@ -1,0 +1,94 @@
+{
+  "entryId": "w:if-i-may",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "if I may"
+  ],
+  "pattern": {
+    "tokens": [
+      "if",
+      "i",
+      "may"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "if",
+        "i",
+        "may"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "if I may",
+  "senses": [
+    {
+      "senseId": "w:if-i-may#s1",
+      "pos": "短语",
+      "glossZh": "如果您允许的话；请容我……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:if-i-may#e-02727a637fcfd63a",
+          "text": "If I may speak sincerely, the combination of app, language school, Jim, evenings out, and a choice book or two proved extremely effective.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

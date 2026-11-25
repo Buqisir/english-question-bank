@@ -1,0 +1,241 @@
+{
+  "entryId": "w:be-good-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is good for"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "good",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "good",
+        "for"
+      ],
+      [
+        "is",
+        "good",
+        "for"
+      ],
+      [
+        "been",
+        "good",
+        "for"
+      ],
+      [
+        "being",
+        "good",
+        "for"
+      ],
+      [
+        "was",
+        "good",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are good for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be good for",
+  "senses": [
+    {
+      "senseId": "w:be-good-for#s1",
+      "pos": "短语",
+      "glossZh": "适合（某种用途或活动）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-good-for#e-197026e3d4d227ff",
+          "text": "This place is good for a candlelit dinner or a work meeting with colleagues who appreciate fine food.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:be-good-for#s2",
+      "pos": "短语",
+      "glossZh": "对……有益",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-good-for#e-e7ae0e5a33ade791",
+          "text": "What biochemicals are good for health.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 30
+          },
+          "parts": [
+            [
+              18,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-good-for#e-d65b2609d611f1af",
+          "text": "The deep, thoughtful, quiet reading of great books is good for mental health.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 62
+          },
+          "parts": [
+            [
+              51,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-good-for#e-7cce76589797eeb8",
+          "text": "Night singing is good for their vocal system.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hunan-zhuzhou-2026-01-first:29#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:be-good-for#s3",
+      "pos": "短语",
+      "glossZh": "在（某段时间）内仍可使用；足以维持（某段时间）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

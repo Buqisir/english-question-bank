@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 7
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -116,40 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:candle#s2",
-      "pos": "短语",
-      "glossZh": "远远比不上",
-      "pronunciationId": "w:candle#p-main",
-      "note": "not hold a candle to",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:candle#e-c1957562e97e3871",
-          "text": "And while all those connections have become dear to me since, none of them hold a candle to the bond I found in my then-56-year-old castmate, who brought his own objects to rehearsal and made references I didn’t understand.",
-          "source": {
-            "paperId": "paper-mock-tianyu-2026-m4",
-            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
-            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 82,
-            "end": 88
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -158,6 +124,11 @@
       "reason": "旧计量单位或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-hold-a-candle-to"
+  ]
 }

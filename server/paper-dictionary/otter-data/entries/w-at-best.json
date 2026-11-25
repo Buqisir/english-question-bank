@@ -1,0 +1,155 @@
+{
+  "entryId": "w:at-best",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "best"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "best"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at best",
+  "senses": [
+    {
+      "senseId": "w:at-best#s1",
+      "pos": "短语",
+      "glossZh": "充其量；往最好处说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-best#e-a236f8f029af41cf",
+          "text": "Many societies tend to view fat as soft body tissue that keeps us warm at best, if not something annoying to be rid of.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 78
+          },
+          "parts": [
+            [
+              71,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-best#e-7b3463b4a23fb415",
+          "text": "It was boring at best and stressful at worst.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-best#e-ae8a76a66d89a45b",
+          "text": "While, at best, sugarcoating can be an attempt at kindness, at worst, it could be viewed as a form of manipulation – trying to communicate in a way that controls the other person’s experience, instead of allowing them to have their own real reaction.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          },
+          "parts": [
+            [
+              7,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "常与 at worst 对举。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

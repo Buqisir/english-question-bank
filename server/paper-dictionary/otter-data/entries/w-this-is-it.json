@@ -1,0 +1,150 @@
+{
+  "entryId": "w:this-is-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "this",
+      "is",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "this",
+        "is",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "this is it",
+  "senses": [
+    {
+      "senseId": "w:this-is-it#s1",
+      "pos": "句型",
+      "glossZh": "就是这个；要找的就是它",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:this-is-it#e-381726aa62ff4175",
+          "text": "AI will affect us all, and if you only read one book on the subject, this is it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 79
+          },
+          "parts": [
+            [
+              69,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:this-is-it#s3",
+      "pos": "句型",
+      "glossZh": "到此为止；就剩这一个了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:this-is-it#e-c8628ddb44af45e0",
+          "text": "“I guess this is it,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:this-is-it#s2",
+      "pos": "句型",
+      "glossZh": "关键时刻到了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

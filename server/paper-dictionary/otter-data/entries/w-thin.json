@@ -70,8 +70,8 @@
     "mock": 51
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 42
+    "gaokao": 2,
+    "mock": 5
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -257,7 +257,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -362,65 +362,10 @@
       ]
     },
     {
-      "senseId": "w:thin#s8",
-      "pos": "短语",
-      "glossZh": "逐渐减少",
+      "senseId": "w:thin#s10",
+      "pos": "adj.",
+      "glossZh": "因分担过多而精力不足的（stretch oneself thin）",
       "pronunciationId": "w:thin#p-main",
-      "note": "thin out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thin#e-19024c293a1cb257",
-          "text": "A feeling of helplessness washed over me as I saw the bus queue thinning out.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 72
-          }
-        },
-        {
-          "exampleId": "w:thin#e-4b30c77982ecfb2a",
-          "text": "Thins out.",
-          "source": {
-            "paperId": "paper-mock-hubei-tengyun-2025-08",
-            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
-            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-mock-hubei-tengyun-2025-08:25",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:thin#s9",
-      "pos": "短语",
-      "glossZh": "不畏艰难",
-      "pronunciationId": "w:thin#p-main",
-      "note": "through thick and thin。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -429,22 +374,74 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:thin#e-1fc9a4679e7f5b2b",
-          "text": "Through thick and thin, Dion and Gobi survived together and had no intentions of parting ways at the finish line.",
+          "exampleId": "w:thin#e-216990868a1f376c",
+          "text": "Is it something you can complete without stretching yourself too thin?",
           "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
-            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:2",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:thin#s11",
+      "pos": "v.",
+      "glossZh": "使减少或减弱",
+      "pronunciationId": "w:thin#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:thin#e-154185f7a575018f",
+          "text": "You only have to look at the thinning of A-level syllabuses (教学大纲) and the tendency to assign works because they’re shorter,” Bate said.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-c:3",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 18,
-            "end": 22
+            "start": 29,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:thin#e-cf561f9bbe0cf5b3",
+          "text": "Over generations, that reinforcing cycle can thin people’s relationship with the natural world, posing greater challenges for conservation efforts that depend on public support.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 49
           }
         }
       ]
@@ -456,6 +453,12 @@
       "reason": "集邮或运动专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:thin-out",
+    "w:through-thick-and-thin"
+  ]
 }

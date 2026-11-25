@@ -1,0 +1,68 @@
+{
+  "entryId": "w:show-sb-the-ropes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "show",
+      {
+        "slot": "sb"
+      },
+      "the",
+      "ropes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "show",
+        {
+          "slot": "sb"
+        },
+        "the",
+        "ropes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "show sb the ropes",
+  "senses": [
+    {
+      "senseId": "w:show-sb-the-ropes#s1",
+      "pos": "短语",
+      "glossZh": "教某人入门；告诉某人做事的门道",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:rope#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

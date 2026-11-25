@@ -61,8 +61,8 @@
     "mock": 219
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 217
+    "gaokao": 1,
+    "mock": 32
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -331,40 +331,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:seek#s5",
-      "pos": "短语",
-      "glossZh": "捉迷藏",
-      "pronunciationId": "w:seek#p-main",
-      "note": "hide and seek。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:seek#e-fc925ff04c735924",
-          "text": "Young children across the globe enjoy playing games of hide and seek.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 68
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -373,6 +339,13 @@
       "reason": "计算机专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hide-and-seek",
+    "w:seek-for",
+    "w:seek-out"
+  ]
 }

@@ -1,0 +1,118 @@
+{
+  "entryId": "w:go-with-the-flow",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "with",
+      "the",
+      "flow"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "with",
+        "the",
+        "flow"
+      ],
+      [
+        "goes",
+        "with",
+        "the",
+        "flow"
+      ],
+      [
+        "going",
+        "with",
+        "the",
+        "flow"
+      ],
+      [
+        "gone",
+        "with",
+        "the",
+        "flow"
+      ],
+      [
+        "went",
+        "with",
+        "the",
+        "flow"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go with the flow",
+  "senses": [
+    {
+      "senseId": "w:go-with-the-flow#s1",
+      "pos": "短语",
+      "glossZh": "顺其自然；顺应形势",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-with-the-flow#e-35e0db965541ea43",
+          "text": "Sometimes, the best thing for a penguin is to go with the flow.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 62
+          },
+          "parts": [
+            [
+              46,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

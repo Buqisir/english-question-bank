@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 87
+    "mock": 2
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -223,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -312,6 +312,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:gas#s6",
+      "pos": "n.",
+      "glossZh": "油门",
+      "pronunciationId": "w:gas#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gas#e-b46c8e9eee3d3d4a",
+          "text": "This Summer, It's All Gas, No Breaks!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 25
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -320,6 +353,6 @@
       "reason": "加密货币专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

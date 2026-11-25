@@ -71,8 +71,8 @@
     "mock": 284
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 280
+    "gaokao": 2,
+    "mock": 83
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -296,7 +296,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -360,40 +360,6 @@
       ]
     },
     {
-      "senseId": "w:second#s5",
-      "pos": "短语",
-      "glossZh": "毫不犹豫",
-      "pronunciationId": "w:second#p-main",
-      "note": "without a second thought。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:second#e-b9af00b0bb82bff2",
-          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 131,
-            "end": 137
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:second#s6",
       "pos": "adv.",
       "glossZh": "其次",
@@ -401,7 +367,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -465,12 +431,12 @@
       "glossZh": "补添的一份食物",
       "pronunciationId": "w:second#p-main",
       "note": "用复数 seconds。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -478,12 +444,12 @@
       "pos": "v.",
       "glossZh": "附议",
       "pronunciationId": "w:second#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -498,6 +464,40 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:second#s11",
+      "pos": "adj.",
+      "glossZh": "次于……的",
+      "pronunciationId": "w:second#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-b7c8993aa5d833b3",
+          "text": "It is second to oil-based plastics in shapability.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:32",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -506,6 +506,13 @@
       "reason": "音乐专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:second-nature",
+    "w:split-second",
+    "w:without-a-second-thought"
+  ]
 }

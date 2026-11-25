@@ -1,0 +1,218 @@
+{
+  "entryId": "w:break-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking off",
+    "broke off"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "off"
+      ],
+      [
+        "breaking",
+        "off"
+      ],
+      [
+        "broke",
+        "off"
+      ],
+      [
+        "breaks",
+        "off"
+      ],
+      [
+        "broken",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "break off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break (sth) off",
+  "senses": [
+    {
+      "senseId": "w:break-off#s1",
+      "pos": "短语",
+      "glossZh": "掰下；折断脱离",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-off#e-931a7612288aa057",
+          "text": "Paragraph 2: Ella broke off a square of chocolate as usual and handed it to Theo.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-off#e-1aea810d6352fcd9",
+          "text": "At some point during all of this (before the age of keyless entry and remote start), Mom had managed to break off her key in the car door.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 113
+          },
+          "parts": [
+            [
+              104,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-off#s2",
+      "pos": "短语",
+      "glossZh": "脱离；分离出去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-off#e-ed68a49db6200df4",
+          "text": "Scotland’s breaking off from Norway.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 break off from 表示脱离某群体或政权。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:break-off#s3",
+      "pos": "短语",
+      "glossZh": "突然中断（谈话、谈判等）；断绝（关系）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-off#s4",
+      "pos": "短语",
+      "glossZh": "（台球、斯诺克等）开球",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

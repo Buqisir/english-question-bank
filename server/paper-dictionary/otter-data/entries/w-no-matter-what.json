@@ -1,0 +1,155 @@
+{
+  "entryId": "w:no-matter-what",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "matter",
+      "what"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "matter",
+        "what"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no matter what",
+  "senses": [
+    {
+      "senseId": "w:no-matter-what#s1",
+      "pos": "短语",
+      "glossZh": "无论什么；无论如何",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-matter-what#e-3e814faf332bceff",
+          "text": "No matter what subject I’m teaching, I find ways to bring my hobbies into the classroom.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-matter-what#e-edaad93d6e9f211a",
+          "text": "I decided to stick to it no matter what.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 39
+          },
+          "parts": [
+            [
+              25,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-matter-what#e-d404f7b397fc8447",
+          "text": "Comments and seconds watched, no matter what quality and kind, tell TikTok’s algorithm one thing: “Give me more videos like this.”",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 44
+          },
+          "parts": [
+            [
+              30,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "可引出让步从句，也可独立放在句末，表示无论发生什么。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

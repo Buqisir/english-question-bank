@@ -1,0 +1,96 @@
+{
+  "entryId": "w:too-good-to-be-true",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "too",
+      "good",
+      "to",
+      "be",
+      "true"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "too",
+        "good",
+        "to",
+        "be",
+        "true"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "too good to be true",
+  "senses": [
+    {
+      "senseId": "w:too-good-to-be-true#s1",
+      "pos": "短语",
+      "glossZh": "好得让人难以相信是真的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:too-good-to-be-true#e-c131d4dddd161c3e",
+          "text": "He spent 2017 on a plan for a sourdough café, inspired by the success of the pizza chain Franco Manca, but shelved the idea because “the market seemed a little too good to be true”.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 160,
+            "end": 179
+          },
+          "parts": [
+            [
+              160,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              160,
+              179
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

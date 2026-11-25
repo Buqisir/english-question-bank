@@ -1,0 +1,142 @@
+{
+  "entryId": "w:throw-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "throw",
+        "up"
+      ],
+      [
+        "threw",
+        "up"
+      ],
+      [
+        "throwing",
+        "up"
+      ],
+      [
+        "thrown",
+        "up"
+      ],
+      [
+        "throws",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw up",
+  "senses": [
+    {
+      "senseId": "w:throw-up#s1",
+      "pos": "短语",
+      "glossZh": "呕吐；吐出吃下的东西",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:throw#s10"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-up#s2",
+      "pos": "短语",
+      "glossZh": "向上抛起；猛地举起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 throw up one's hands。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-up#s3",
+      "pos": "短语",
+      "glossZh": "扬起尘土；溅起水花",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-up#s4",
+      "pos": "短语",
+      "glossZh": "在过程中产生或暴露出问题等",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-up#s5",
+      "pos": "短语",
+      "glossZh": "匆忙搭起或筑起某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-up#s6",
+      "pos": "短语",
+      "glossZh": "放弃正在做的事；辞去工作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

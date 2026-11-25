@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 45
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -106,7 +106,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -168,6 +168,58 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:agreement#s3",
+      "pos": "n.",
+      "glossZh": "一致；相符（不同事物之间）",
+      "pronunciationId": "w:agreement#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:agreement#e-9ee4fdb781457562",
+          "text": "Take some time to teach explicitly the concept of “agreement”, or matching what the viewer sees to what they hear in the script.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:agreement#e-e960c8a114e13f24",
+          "text": "Emotional agreement means matching your feelings with your desired outcome.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 19
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -176,6 +228,6 @@
       "reason": "语言学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

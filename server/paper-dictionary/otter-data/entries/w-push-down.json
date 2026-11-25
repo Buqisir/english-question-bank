@@ -1,0 +1,120 @@
+{
+  "entryId": "w:push-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "down"
+      ],
+      [
+        "pushed",
+        "down"
+      ],
+      [
+        "pushes",
+        "down"
+      ],
+      [
+        "pushing",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pushed down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push sth down",
+  "senses": [
+    {
+      "senseId": "w:push-down#s1",
+      "pos": "短语",
+      "glossZh": "向下推；按下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-down#e-afe407f39a3fce7d",
+          "text": "When pushed down, it slowly bends, storing energy until it suddenly turns into its second form.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-down#s2",
+      "pos": "短语",
+      "glossZh": "压低（价格、数量等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

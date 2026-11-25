@@ -1,0 +1,115 @@
+{
+  "entryId": "w:take-a-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took a chance"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "chance"
+      ],
+      [
+        "took",
+        "a",
+        "chance"
+      ],
+      [
+        "taken",
+        "a",
+        "chance"
+      ],
+      [
+        "takes",
+        "a",
+        "chance"
+      ],
+      [
+        "taking",
+        "a",
+        "chance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a chance",
+  "senses": [
+    {
+      "senseId": "w:take-a-chance#s1",
+      "pos": "短语",
+      "glossZh": "冒险一试；碰运气",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-chance#e-916019252199b141",
+          "text": "Now I’m 28 and Ken is 60, and our connection has grown into something I couldn’t replace because we took a chance on each other, a choice that research increasingly suggests people across generations would benefit from making.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 113
+          },
+          "parts": [
+            [
+              100,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              113
+            ]
+          ]
+        }
+      ],
+      "note": "take a chance on sb/sth 表示在没有把握时仍愿意相信某人或尝试某事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

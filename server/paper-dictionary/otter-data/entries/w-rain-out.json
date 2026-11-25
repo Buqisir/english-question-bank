@@ -1,0 +1,71 @@
+{
+  "entryId": "w:rain-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rain",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rain",
+        "out"
+      ],
+      [
+        "rained",
+        "out"
+      ],
+      [
+        "raining",
+        "out"
+      ],
+      [
+        "rains",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rain sth out",
+  "senses": [
+    {
+      "senseId": "w:rain-out#s1",
+      "pos": "短语",
+      "glossZh": "使比赛或活动因雨取消",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用被动形式 be rained out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

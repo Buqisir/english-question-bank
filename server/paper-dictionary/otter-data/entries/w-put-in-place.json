@@ -1,0 +1,100 @@
+{
+  "entryId": "w:put-in-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "in",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "in",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put in place",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth in place",
+  "senses": [
+    {
+      "senseId": "w:put-in-place#s1",
+      "pos": "短语",
+      "glossZh": "建立（制度）；落实（措施）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:place#s13",
+        "w:put#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-in-place#e-4fa698eadd74e413",
+          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

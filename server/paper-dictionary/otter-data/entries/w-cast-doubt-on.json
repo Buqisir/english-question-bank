@@ -1,0 +1,166 @@
+{
+  "entryId": "w:cast-doubt-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cast",
+      "doubt",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cast",
+        "doubt",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cast doubt on",
+      "tags": []
+    },
+    {
+      "form": "casts doubt on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cast doubt on sth",
+  "senses": [
+    {
+      "senseId": "w:cast-doubt-on#s1",
+      "pos": "短语",
+      "glossZh": "对……提出质疑；使……受到怀疑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cast#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cast-doubt-on#e-b0f1985ee57476f6",
+          "text": "Recent research has cast doubt on the universality of Darley and Latané’s classic bystander effect theory.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cast-doubt-on#e-d5b0ce9cd5cfac26",
+          "text": "My friends cast doubt on the plan, for the market was crowded with noisy vendors (小贩) and filled with pungent food smells.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 24
+          },
+          "parts": [
+            [
+              11,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cast-doubt-on#e-725d03ed148b7128",
+          "text": "Casts doubt on.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:34#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,239 @@
+{
+  "entryId": "w:hold-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "holding out"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "out"
+      ],
+      [
+        "holding",
+        "out"
+      ],
+      [
+        "held",
+        "out"
+      ],
+      [
+        "holds",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold (sth) out",
+  "senses": [
+    {
+      "senseId": "w:hold-out#s1",
+      "pos": "短语",
+      "glossZh": "伸出（手）；递出（物品）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-out#e-e281eb19259facf1",
+          "text": "Paragraph 2: At the top, as I struggled with my camera for a photo, my guide held out his hand.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          },
+          "parts": [
+            [
+              77,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-out#e-365f4f27be79b6c6",
+          "text": "To her surprise, the girl smiled instead of crying and held out a tool to Ben, inviting Ben to join her, “Sand’s soft!",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          },
+          "parts": [
+            [
+              55,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-out#e-b361eb6b5a898828",
+          "text": "One afternoon, I finally gathered the courage to approach him, holding out a book about pirates I couldn’t understand.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:hold-out#s2",
+      "pos": "短语",
+      "glossZh": "给人以希望；提供某种可能性",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 hope、promise 或 prospect。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-out#s3",
+      "pos": "短语",
+      "glossZh": "坚持不接受，等待更好的条件",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hold out for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-out#s4",
+      "pos": "短语",
+      "glossZh": "撑住；坚持下去；（供应品）维持一段时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-out#s5",
+      "pos": "短语",
+      "glossZh": "故意不给；刻意隐瞒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 hold out on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-out#s6",
+      "pos": "短语",
+      "glossZh": "留出一部分备用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

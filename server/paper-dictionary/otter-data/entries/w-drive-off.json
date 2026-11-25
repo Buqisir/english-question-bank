@@ -1,0 +1,189 @@
+{
+  "entryId": "w:drive-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "driving off"
+  ],
+  "pattern": {
+    "tokens": [
+      "drive",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drive",
+        "off"
+      ],
+      [
+        "driving",
+        "off"
+      ],
+      [
+        "driven",
+        "off"
+      ],
+      [
+        "drives",
+        "off"
+      ],
+      [
+        "drove",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drove off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drive off",
+  "senses": [
+    {
+      "senseId": "w:drive-off#s1",
+      "pos": "短语",
+      "glossZh": "开车离开；驶离",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drive-off#e-cb1b6f7bec395837",
+          "text": "Instead of driving off immediately, he picked up an old radio handset and spoke rapidly in Portuguese.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drive-off#e-6e1c0ff5600ff70a",
+          "text": "I placed her walker and bags into my trunk, helped her inside, and drove off.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 76
+          },
+          "parts": [
+            [
+              67,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drive-off#e-c1a483a07f1e6b5e",
+          "text": "“We need to drive off and wait out this storm.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:drive-off#s2",
+      "pos": "短语",
+      "glossZh": "赶走；驱离",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "及物用法，如 drive sb/sth off。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

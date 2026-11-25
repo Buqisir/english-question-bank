@@ -1,0 +1,172 @@
+{
+  "entryId": "w:face-to-face",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "face",
+      "to",
+      "face"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "face",
+        "to",
+        "face"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "face to face",
+  "senses": [
+    {
+      "senseId": "w:face-to-face#s1",
+      "pos": "短语",
+      "glossZh": "面对面地；当面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:face#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:face-to-face#e-196f8812214d74f3",
+          "text": "Link with Students: To help organize and engage in mentor and mentee（学员）meetings both online and face to face.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 109
+          },
+          "parts": [
+            [
+              97,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:face-to-face#e-1eac62f7fb3dea78",
+          "text": "Face to face in a coffee shop.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:face-to-face#e-1212224f3ed8701c",
+          "text": "Only share tips face to face.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 28
+          },
+          "parts": [
+            [
+              16,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:face-to-face#s2",
+      "pos": "短语",
+      "glossZh": "直面（困难、危险或事实）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 come face to face with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

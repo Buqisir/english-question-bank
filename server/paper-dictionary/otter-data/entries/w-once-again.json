@@ -1,0 +1,154 @@
+{
+  "entryId": "w:once-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "once",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "once",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "once again",
+  "senses": [
+    {
+      "senseId": "w:once-again#s1",
+      "pos": "短语",
+      "glossZh": "再一次；又一次",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:once#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:once-again#e-9317945cf2b35822",
+          "text": "Paris, a city known for abundant museums, has once again proven itself as a cultural hotspot.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:once-again#e-dc02bead65b5d430",
+          "text": "Another exam had just ended, and the result was, once again, a failure.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:once-again#e-53c22b83a6c949a0",
+          "text": "The world once again seemed manageable.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

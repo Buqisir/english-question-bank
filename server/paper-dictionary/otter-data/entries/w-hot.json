@@ -48,8 +48,8 @@
     "mock": 94
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 93
+    "gaokao": 1,
+    "mock": 3
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 81
       },
       "folded": false,
       "examples": [
@@ -124,40 +124,6 @@
       ]
     },
     {
-      "senseId": "w:hot#s2",
-      "pos": "短语",
-      "glossZh": "热衷于……",
-      "pronunciationId": "w:hot#p-main",
-      "note": "be hot on sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hot#e-4cb5f62f06bd335b",
-          "text": "In fact, Hollywood has been hot on live animals lately.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hot#s3",
       "pos": "adj.",
       "glossZh": "辣的",
@@ -175,12 +141,12 @@
       "pos": "adj.",
       "glossZh": "热门的；抢手的",
       "pronunciationId": "w:hot#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 8
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -216,6 +182,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:hot#s6",
+      "pos": "短语",
+      "glossZh": "畅销（sell like hot cakes）",
+      "pronunciationId": "w:hot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hot#e-b4b0fdf6de357496",
+          "text": "And they sell like hot cakes.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -224,6 +223,14 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-hot-on-sth",
+    "w:hot-dog",
+    "w:hot-on",
+    "w:hot-spot"
+  ]
 }

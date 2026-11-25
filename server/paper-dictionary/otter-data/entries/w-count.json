@@ -62,8 +62,8 @@
     "mock": 84
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 75
+    "gaokao": 4,
+    "mock": 22
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -263,93 +263,6 @@
       ]
     },
     {
-      "senseId": "w:count#s4",
-      "pos": "短语",
-      "glossZh": "指望；依靠",
-      "pronunciationId": "w:count#p-main",
-      "note": "count on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:count#e-65e5a547f1cb66df",
-          "text": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 68
-          }
-        },
-        {
-          "exampleId": "w:count#e-e8210763f5f3baa7",
-          "text": "I could always count on my grandfather to show me a __43__ way of seeing things.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:count#s5",
-      "pos": "短语",
-      "glossZh": "预料到；把……考虑在内",
-      "pronunciationId": "w:count#p-main",
-      "note": "count on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:count#e-6a5f94727b6d24d4",
-          "text": "There was just one thing I hadn’t counted on: My brother chose to bring his dog Toby, a 50-pound ball of fire.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:count#s6",
       "pos": "n.",
       "glossZh": "计数；总数",
@@ -357,7 +270,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -446,6 +359,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:count#s9",
+      "pos": "v.",
+      "glossZh": "包含；共有（若干）",
+      "pronunciationId": "w:count#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:count#e-0224df4ca5403eec",
+          "text": "This calendar counted 13 months of 20 days each.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -454,6 +400,13 @@
       "reason": "专业名称或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:count-down",
+    "w:count-in",
+    "w:count-on"
+  ]
 }

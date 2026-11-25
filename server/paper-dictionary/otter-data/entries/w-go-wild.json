@@ -1,0 +1,169 @@
+{
+  "entryId": "w:go-wild",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went wild"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "wild"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "wild"
+      ],
+      [
+        "went",
+        "wild"
+      ],
+      [
+        "goes",
+        "wild"
+      ],
+      [
+        "going",
+        "wild"
+      ],
+      [
+        "gone",
+        "wild"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go wild",
+  "senses": [
+    {
+      "senseId": "w:go-wild#s1",
+      "pos": "短语",
+      "glossZh": "兴奋不已；变得狂热",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-wild#e-c524f47074b54257",
+          "text": "But on Easter morning, the kids went wild for a simple egg hunt in our cheap motel room, thrilled to search every corner.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        }
+      ],
+      "note": "go wild for sth 指对某事物格外兴奋或着迷。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-wild#s2",
+      "pos": "短语",
+      "glossZh": "放开手脚；尽情发挥",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-wild#e-06dd9da4327ff249",
+          "text": "It’s also a good idea to go wild with fun phrases like “potato wonderland”.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "go wild with sth 指不受拘束地使用或发挥某种东西。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:go-wild#s3",
+      "pos": "短语",
+      "glossZh": "（球、飞行物等）大幅偏离目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

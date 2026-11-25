@@ -1,0 +1,191 @@
+{
+  "entryId": "w:get-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "along"
+      ],
+      [
+        "gets",
+        "along"
+      ],
+      [
+        "getting",
+        "along"
+      ],
+      [
+        "got",
+        "along"
+      ],
+      [
+        "gotten",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gotten along",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get along",
+  "senses": [
+    {
+      "senseId": "w:get-along#s1",
+      "pos": "短语",
+      "glossZh": "相处；相处融洽",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:along#s4",
+        "w:get#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-along#e-3573c1b86702cfa7",
+          "text": "They may fail to get along.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-along#e-552d77f2e5248864",
+          "text": "Summer and I have not gotten along well ever since we quarreled over a chair in the kindergarten.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-along#e-e1a44c5e6b0a0057",
+          "text": "Since Limazati studied child psychology, she specializes in helping kids and dogs get along.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 91
+          },
+          "parts": [
+            [
+              82,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "可接 with sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-along#s2",
+      "pos": "短语",
+      "glossZh": "设法过活；应付下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

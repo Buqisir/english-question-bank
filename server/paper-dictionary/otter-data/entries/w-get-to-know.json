@@ -1,0 +1,187 @@
+{
+  "entryId": "w:get-to-know",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting to know"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "to",
+      "know"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "to",
+        "know"
+      ],
+      [
+        "getting",
+        "to",
+        "know"
+      ],
+      [
+        "gets",
+        "to",
+        "know"
+      ],
+      [
+        "got",
+        "to",
+        "know"
+      ],
+      [
+        "gotten",
+        "to",
+        "know"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get to know",
+      "tags": []
+    },
+    {
+      "form": "gotten to know",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get to know sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-to-know#s1",
+      "pos": "短语",
+      "glossZh": "逐渐认识；渐渐熟悉或了解",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-to-know#e-e947cc79bb82a44e",
+          "text": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 130
+          },
+          "parts": [
+            [
+              119,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              130
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to-know#e-de0d731cfcacdbec",
+          "text": "Getting to Know the Plants Around Us",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-to-know#e-916131e4929deb1f",
+          "text": "The other side of the coin is equally a deprivation: for health and well-being, as well as lost opportunities（机会）for children to get to know their local surroundings.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 140
+          },
+          "parts": [
+            [
+              129,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              140
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

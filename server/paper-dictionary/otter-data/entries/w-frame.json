@@ -58,8 +58,8 @@
     "mock": 45
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 32
+    "gaokao": 4,
+    "mock": 8
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -193,7 +193,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -226,7 +226,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -266,131 +266,6 @@
           "target": {
             "start": 34,
             "end": 40
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:frame#s5",
-      "pos": "短语",
-      "glossZh": "参照系",
-      "pronunciationId": "w:frame#p-main",
-      "note": "frame of reference。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:frame#e-78359f005b592404",
-          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 131,
-            "end": 136
-          }
-        },
-        {
-          "exampleId": "w:frame#e-aec25a8a75f43c68",
-          "text": "This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 72,
-            "end": 77
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:frame#s6",
-      "pos": "短语",
-      "glossZh": "时间范围",
-      "pronunciationId": "w:frame#p-main",
-      "note": "time frame。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:frame#e-9ae333ae909e475c",
-          "text": "To make some of my landscape shots, I have traveled up to four hours away to shoot within a 10-minute time frame.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 112
-          }
-        },
-        {
-          "exampleId": "w:frame#e-7f30a9c66e5e6fee",
-          "text": "If you wish to remain on the list, you may have to email back within a certain time frame ( it'll say in the email) to keep your spot.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:11",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 84,
-            "end": 89
-          }
-        },
-        {
-          "exampleId": "w:frame#e-d9feffadc1860355",
-          "text": "Items outside the 30-day time frame",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
-            "locator": {
-              "paragraph": 16,
-              "paragraphId": "cell:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:ocr-916a21169272a7ae:2:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 35
           }
         }
       ]
@@ -436,7 +311,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -544,6 +419,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:frame#s11",
+      "pos": "v.",
+      "glossZh": "围在……四周或两侧",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-dc063a19150e2c30",
+          "text": "Taroko Gorge Road in Chinese Taiwan is framed by rock on one side and sheer cliff drops on the other.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -552,6 +460,11 @@
       "reason": "体育专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:frame-of-reference"
+  ]
 }

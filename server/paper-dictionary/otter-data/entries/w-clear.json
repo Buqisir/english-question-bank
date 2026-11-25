@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 372
+    "mock": 188
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 123
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -309,7 +309,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -393,12 +393,12 @@
       "pos": "v.",
       "glossZh": "批准；准许通行",
       "pronunciationId": "w:clear#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -439,6 +439,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:clear#s11",
+      "pos": "adj.",
+      "glossZh": "（砍伐）不留树木的",
+      "pronunciationId": "w:clear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clear#e-95270c83e3c8c791",
+          "text": "● Selective logging and replanting – introduced in Malaysia (Figure 1) – avoids the completely destructive clear felling (砍伐).",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clear#s12",
+      "pos": "adv.",
+      "glossZh": "一直；远至",
+      "pronunciationId": "w:clear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clear#e-ea231cec77231c5c",
+          "text": "After thousands of years, some fragments might be clear across the Sun, but their distance from the Sun and the shape and direction of their orbits remain similar.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -451,6 +517,11 @@
       "reason": "通常应独立查 clearing"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:clear-away",
+    "w:clear-out",
+    "w:clear-up"
+  ]
 }

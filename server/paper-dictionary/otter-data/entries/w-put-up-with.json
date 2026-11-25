@@ -1,0 +1,111 @@
+{
+  "entryId": "w:put-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting up with"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "up",
+        "with"
+      ],
+      [
+        "putting",
+        "up",
+        "with"
+      ],
+      [
+        "puts",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put up with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put up with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:put-up-with#s1",
+      "pos": "短语",
+      "glossZh": "忍受；容忍（使人不快的人或事）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-up-with#e-67396093fcc39ec6",
+          "text": "We learn to put up with feelings like increased heart rate without mistaking them for signs that something is wrong.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

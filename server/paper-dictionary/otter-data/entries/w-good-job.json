@@ -1,0 +1,76 @@
+{
+  "entryId": "w:good-job",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "job"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "job"
+      ],
+      [
+        "good",
+        "jobs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good job",
+  "senses": [
+    {
+      "senseId": "w:good-job#s1",
+      "pos": "短语",
+      "glossZh": "做得好！干得漂亮！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:good-job#s2",
+      "pos": "短语",
+      "glossZh": "幸好；所幸",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式英语中常用 It's a good job (that) ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

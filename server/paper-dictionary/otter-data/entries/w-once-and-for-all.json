@@ -1,0 +1,126 @@
+{
+  "entryId": "w:once-and-for-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "once",
+      "and",
+      "for",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "once",
+        "and",
+        "for",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "once and for all",
+  "senses": [
+    {
+      "senseId": "w:once-and-for-all#s1",
+      "pos": "短语",
+      "glossZh": "彻底地；一劳永逸地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:once-and-for-all#e-6797c6749cf5c662",
+          "text": "It works once and for all.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:35#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 25
+          },
+          "parts": [
+            [
+              9,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:once-and-for-all#e-405d36dbe3cc5667",
+          "text": "But that is no longer true: as AI promises to transform how we work, and the four-day-workweek movement gains steam, it is time to admit once and for all that working more does not make you more productive.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 153
+          },
+          "parts": [
+            [
+              137,
+              153
+            ]
+          ],
+          "highlightRanges": [
+            [
+              137,
+              153
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

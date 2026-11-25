@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 334
+    "mock": 143
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 180
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -156,12 +156,12 @@
       "glossZh": "主体；主要部分",
       "pronunciationId": "w:body#p-main",
       "note": "如 the body of a letter。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -169,12 +169,12 @@
       "pos": "n.",
       "glossZh": "团体；机构",
       "pronunciationId": "w:body#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -183,12 +183,12 @@
       "glossZh": "一大片；相连的一片",
       "pronunciationId": "w:body#p-main",
       "note": "如 a body of water。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -205,11 +205,81 @@
       "examples": []
     },
     {
-      "senseId": "w:body#s7",
-      "pos": "短语",
-      "glossZh": "肢体语言",
+      "senseId": "w:body#s8",
+      "pos": "n.",
+      "glossZh": "（著作、研究等的）总汇",
       "pronunciationId": "w:body#p-main",
-      "note": "body language。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:body#e-eba06797f065c549",
+          "text": "“There’s a huge body of literature, but we can’t refer to it because no one’s using the same methods,” explained Eva Bianchi, a Stanford PhD graduate.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:body#e-cfae3f1cbe31f1eb",
+          "text": "A growing body of scientific research is finding that fermented foods benefit health.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:body#e-af9c1ba006b07e8e",
+          "text": "A growing body of research highlights the potential of underwater forests – specifically, seaweed farms – to fight against climate change.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:body#s9",
+      "pos": "n.",
+      "glossZh": "人；个体",
+      "pronunciationId": "w:body#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -218,22 +288,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:body#e-f5f9541d06b9a291",
-          "text": "● Mind Your Words and Body Language",
+          "exampleId": "w:body#e-e36aa1964dcf3a8f",
+          "text": "Five bodies showed up at my triage desk, a pale woman and four small children in somewhat rumpled clothing.",
           "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:7",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:4",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 22,
-            "end": 26
+            "start": 5,
+            "end": 11
           }
         }
       ]
@@ -245,6 +315,8 @@
       "reason": "技术或俚语用法及专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

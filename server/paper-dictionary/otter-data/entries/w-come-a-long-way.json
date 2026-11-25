@@ -1,0 +1,112 @@
+{
+  "entryId": "w:come-a-long-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "a",
+      "long",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "came",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "comes",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "coming",
+        "a",
+        "long",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come a long way",
+  "senses": [
+    {
+      "senseId": "w:come-a-long-way#s1",
+      "pos": "短语",
+      "glossZh": "取得长足进步；有了很大发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-a-long-way#e-4fbdef4b8c3c5a54",
+          "text": "From black and white strips to illustrated graphic novels, this transformation has come a long way.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 98
+          },
+          "parts": [
+            [
+              83,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

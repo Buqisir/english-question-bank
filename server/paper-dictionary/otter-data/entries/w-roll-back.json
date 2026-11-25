@@ -1,0 +1,109 @@
+{
+  "entryId": "w:roll-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "back"
+      ],
+      [
+        "rolled",
+        "back"
+      ],
+      [
+        "rolling",
+        "back"
+      ],
+      [
+        "rolls",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll back",
+  "senses": [
+    {
+      "senseId": "w:roll-back#s1",
+      "pos": "短语",
+      "glossZh": "撤回已做的改动；恢复到先前状态",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-back#s2",
+      "pos": "短语",
+      "glossZh": "推迟（原定时间或活动）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-back#s3",
+      "pos": "短语",
+      "glossZh": "（发动机）推力自行减小",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-back#s4",
+      "pos": "短语",
+      "glossZh": "向后移动；后撤",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

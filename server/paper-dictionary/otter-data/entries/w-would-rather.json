@@ -1,0 +1,94 @@
+{
+  "entryId": "w:would-rather",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "would",
+      "rather"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "would",
+        "rather"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "would rather",
+  "senses": [
+    {
+      "senseId": "w:would-rather#s1",
+      "pos": "短语",
+      "glossZh": "宁愿；更愿意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rather#s4",
+        "w:would#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:would-rather#e-add5a345ba76af02",
+          "text": "“I would rather die planting trees than live buried by the desert,” she said, beginning a lifelong battle against the harsh environment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "would rather do A than do B 表示宁愿做 A，也不愿做 B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

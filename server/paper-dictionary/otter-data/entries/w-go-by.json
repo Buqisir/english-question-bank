@@ -1,0 +1,248 @@
+{
+  "entryId": "w:go-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes by",
+    "going by",
+    "went by"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "by"
+      ],
+      [
+        "goes",
+        "by"
+      ],
+      [
+        "going",
+        "by"
+      ],
+      [
+        "went",
+        "by"
+      ],
+      [
+        "gone",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go by",
+  "senses": [
+    {
+      "senseId": "w:go-by#s1",
+      "pos": "短语",
+      "glossZh": "（时间）过去；流逝",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-by#e-63420a248ee806c1",
+          "text": "The years went by, and my first grandchild Gordon was born.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-by#e-0f4321fd002016f6",
+          "text": "In times gone by, soundscapes would've consisted of the sounds of nature, such as birdcalls and the sound of crashing waves.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          },
+          "parts": [
+            [
+              9,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-by#e-20e6ea3af8d5112d",
+          "text": "As the days went by, Mia found herself struggling less to keep her patience.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          },
+          "parts": [
+            [
+              12,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 12
+      }
+    },
+    {
+      "senseId": "w:go-by#s2",
+      "pos": "短语",
+      "glossZh": "（人或物）从旁边经过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-by#e-0bd391489f3fb0e0",
+          "text": "I love the whooshing sound they make as they go by.” This captures my own feelings as I’ve just submitted my 9,200-word first draft – a moment of mixed relief and anxiety.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 50
+          },
+          "parts": [
+            [
+              45,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-by#s3",
+      "pos": "短语",
+      "glossZh": "使用（某个名字或称呼）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-by#s4",
+      "pos": "短语",
+      "glossZh": "根据；以……为依据",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

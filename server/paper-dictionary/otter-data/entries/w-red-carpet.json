@@ -1,0 +1,92 @@
+{
+  "entryId": "w:red-carpet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "red",
+      "carpet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "red",
+        "carpet"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "red carpet",
+  "senses": [
+    {
+      "senseId": "w:red-carpet#s1",
+      "pos": "短语",
+      "glossZh": "红毯（用于迎宾或典礼）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:carpet#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:red-carpet#e-a42c467bd6d6b663",
+          "text": "Scarlett Johansson and June Squibb on the red carpet together is a moment waiting to happen.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 52
+          },
+          "parts": [
+            [
+              42,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

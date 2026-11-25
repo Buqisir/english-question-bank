@@ -1,0 +1,107 @@
+{
+  "entryId": "w:chicken-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "chicken",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chicken",
+        "out"
+      ],
+      [
+        "chickened",
+        "out"
+      ],
+      [
+        "chickening",
+        "out"
+      ],
+      [
+        "chickens",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "chickening out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chicken out",
+  "senses": [
+    {
+      "senseId": "w:chicken-out#s1",
+      "pos": "短语",
+      "glossZh": "因害怕而临阵退缩",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:chicken-out#e-6512340a90e4e27c",
+          "text": "actually wanted to drop the class at one point, but stopped short because I didn’t want to give him the satisfaction of my chickening out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 137
+          },
+          "parts": [
+            [
+              123,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

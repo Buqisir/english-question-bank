@@ -80,8 +80,8 @@
     "mock": 146
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 138
+    "gaokao": 5,
+    "mock": 35
   },
   "senses": [
     {
@@ -92,7 +92,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -177,7 +177,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -241,146 +241,6 @@
       ]
     },
     {
-      "senseId": "w:strike#s4",
-      "pos": "短语",
-      "glossZh": "给某人某种印象",
-      "pronunciationId": "w:strike#p-main",
-      "note": "strike somebody as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:strike#e-01ce5e2e5c5d1486",
-          "text": "His comment struck me as strange.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:strike#e-e5b2437562f04d73",
-          "text": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 106,
-            "end": 112
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:strike#s5",
-      "pos": "短语",
-      "glossZh": "达成协议",
-      "pronunciationId": "w:strike#p-main",
-      "note": "strike a deal。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:strike#e-805796c9d3f6c168",
-          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 102
-          }
-        },
-        {
-          "exampleId": "w:strike#e-e1488c555d603c3b",
-          "text": "OpenAI has struck deals with Shopify and Etsy, an online marketplace for artisanal wares(手工制品), to allow merchants to sell their products through its chatbot in return for a fee.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:strike#s6",
-      "pos": "短语",
-      "glossZh": "令某人害怕",
-      "pronunciationId": "w:strike#p-main",
-      "note": "strike fear into somebody’s heart。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:strike#e-d67dcec4607bb27f",
-          "text": "Few things strike fear into a child’s heart like the prospect of failing.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:strike#s7",
       "pos": "adj.",
       "glossZh": "引人注目的",
@@ -389,7 +249,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -484,12 +344,12 @@
       "pos": "n.",
       "glossZh": "袭击",
       "pronunciationId": "w:strike#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -506,45 +366,62 @@
       "examples": []
     },
     {
-      "senseId": "w:strike#s12",
+      "senseId": "w:strike#s14",
       "pos": "短语",
-      "glossZh": "开始交谈",
+      "glossZh": "引起共鸣（strike a chord）",
       "pronunciationId": "w:strike#p-main",
-      "note": "strike up a conversation。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:strike#e-881cb3bbea0e1dc0",
-          "text": "Fraser’s team of volunteers prepared the items as recollection is thought to be a powerful tool for striking up much-needed conversation in the elderly.",
+          "exampleId": "w:strike#e-008b8417885d6f38",
+          "text": "Mark Twain’s words strike a deep chord (心弦) with writers, “The difference between the right word and the almost right word is the difference between lightning and a lightning bug.” This quote shows the tiring process of rewriting a novel.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:strike#e-147f9b6134b40ed2",
+          "text": "Its words struck a chord: “Self-awareness grows when we face our doubts, not flee from them.”",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation:4",
               "sentence": 4
             }
           },
           "tier": "mock",
           "target": {
-            "start": 100,
-            "end": 108
+            "start": 10,
+            "end": 16
           }
         }
       ]
     },
     {
-      "senseId": "w:strike#s13",
-      "pos": "短语",
-      "glossZh": "取得平衡",
+      "senseId": "w:strike#s15",
+      "pos": "v.",
+      "glossZh": "发出某种音调",
       "pronunciationId": "w:strike#p-main",
-      "note": "strike a balance。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -553,22 +430,74 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:strike#e-65971a07b12636d2",
-          "text": "The HEV, striking a practical balance between these two extremes, certainly deserves a closer look.",
+          "exampleId": "w:strike#e-fecefcf48a99bf08",
+          "text": "I recently noticed that when I say the word “no,” my voice strikes an uncomfortable register.",
           "source": {
-            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
-            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:5",
-              "sentence": 2
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b:3",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 9,
-            "end": 17
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s16",
+      "pos": "n.",
+      "glossZh": "击打；撞击",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-74ccfce6e2bc1fb7",
+          "text": "It turns out that the birds tense up their entire body to smash through wood, letting out short, explosive grunts with each strike, report Brown University biologist Nicholas Antonson and his colleagues in the Journal of Experimental Biology.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:strike#e-ec88c9effb9c9164",
+          "text": "People have a hard time understanding the chances of an asteroid strike.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
           }
         }
       ]
@@ -580,6 +509,17 @@
       "reason": "误配或专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:strike-a-balance",
+    "w:strike-a-deal",
+    "w:strike-down",
+    "w:strike-fear-into-ones-heart",
+    "w:strike-sb-as",
+    "w:strike-up",
+    "w:strike-up-a-conversation"
+  ]
 }

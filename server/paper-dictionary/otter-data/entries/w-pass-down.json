@@ -1,0 +1,178 @@
+{
+  "entryId": "w:pass-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing down"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "down"
+      ],
+      [
+        "passing",
+        "down"
+      ],
+      [
+        "passed",
+        "down"
+      ],
+      [
+        "passes",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pass down",
+      "tags": []
+    },
+    {
+      "form": "passed down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass (sth) down",
+  "senses": [
+    {
+      "senseId": "w:pass-down#s1",
+      "pos": "短语",
+      "glossZh": "把（物品、技艺或传统）传给后辈；传承",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pass-down#e-5dfdb30b34b47428",
+          "text": "passing down",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
+            "locator": {
+              "question": 37,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:37#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-down#e-f5c2018dfe1d54e6",
+          "text": "These communities serve as guardians of an ancient wisdom and heritage passed down through generations.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 82
+          },
+          "parts": [
+            [
+              71,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-down#e-1a7cfc8433bcdf10",
+          "text": "“It was passed down to me by your great-grandfather.” I glared at the box, and crossed my arms.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

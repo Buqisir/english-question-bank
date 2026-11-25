@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 652
+    "mock": 452
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 113,
-        "mock": 0
+        "mock": 198
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 42,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -232,6 +232,9 @@
       "reason": "编程专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:a-friend-in-need-is-a-friend-indeed"
+  ]
 }

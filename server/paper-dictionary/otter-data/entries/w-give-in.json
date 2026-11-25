@@ -1,0 +1,186 @@
+{
+  "entryId": "w:give-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gave in",
+    "giving in"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "in"
+      ],
+      [
+        "gave",
+        "in"
+      ],
+      [
+        "giving",
+        "in"
+      ],
+      [
+        "given",
+        "in"
+      ],
+      [
+        "gives",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give in",
+  "senses": [
+    {
+      "senseId": "w:give-in#s1",
+      "pos": "短语",
+      "glossZh": "让步；屈服；不再抵抗",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-in#e-593533b7b7802f97",
+          "text": "As I have shown in the past, getting happier very often requires you not to give in to natural tendencies.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 83
+          },
+          "parts": [
+            [
+              76,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-in#e-193c27b8256bcf78",
+          "text": "《疯狂动物城2》主题曲“Try Everything”中有一句歌词“I won’t give in until I reach the end and then I’ll start again.”假如你是李华，请向校英文报Opinion专栏写一封投稿，内容包括：",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-application",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-application:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 49
+          },
+          "parts": [
+            [
+              42,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-in#e-b7ce53cfc87c1050",
+          "text": "Yet, instead of giving in to despair, she immediately set out to fix the problem by reinforcing the entire structure with durable steel wires.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "give in to 可接压力、诱惑、绝望等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:give-in#s2",
+      "pos": "短语",
+      "glossZh": "交上；递交（作业、文件等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式英语，give sth in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

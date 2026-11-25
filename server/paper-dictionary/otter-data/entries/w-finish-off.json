@@ -1,0 +1,120 @@
+{
+  "entryId": "w:finish-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "finish",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "finish",
+        "off"
+      ],
+      [
+        "finished",
+        "off"
+      ],
+      [
+        "finishes",
+        "off"
+      ],
+      [
+        "finishing",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "finished off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "finish (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:finish-off#s1",
+      "pos": "短语",
+      "glossZh": "杀死；使彻底灭绝",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:finish-off#e-29f2dd7ddc62b856",
+          "text": "While killer asteroids have hit before, such as the one that finished off the dinosaurs 66 million years ago, Nugent says a similar situation is not expected to occur in the future.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 73
+          },
+          "parts": [
+            [
+              61,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:finish-off#s2",
+      "pos": "短语",
+      "glossZh": "把剩下的做完、吃完或用完",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

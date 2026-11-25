@@ -1,0 +1,180 @@
+{
+  "entryId": "w:next-door",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "next",
+      "door"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "next",
+        "door"
+      ],
+      [
+        "more",
+        "next",
+        "door"
+      ],
+      [
+        "most",
+        "next",
+        "door"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "next door",
+  "senses": [
+    {
+      "senseId": "w:next-door#s1",
+      "pos": "短语",
+      "glossZh": "在隔壁；到隔壁",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:door#s2",
+        "w:next#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:next-door#e-01a6783b921df0db",
+          "text": "Therefore, he was left in the care of Mrs. Hill, an old lady who lived next door.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 80
+          },
+          "parts": [
+            [
+              71,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:next-door#e-f581f5adb1a3b8ad",
+          "text": "He had company: a serious-looking Poodle from next door and a skeptical Beagle from down the street.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:next-door#e-da04fb7881e30492",
+          "text": "Three months after moving into the old community, I’d only met Grandma Chen next door once.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 85
+          },
+          "parts": [
+            [
+              76,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              85
+            ]
+          ]
+        }
+      ],
+      "note": "也可放在名词后表示位于隔壁，放在名词前通常写作 next-door。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:next-door#s2",
+      "pos": "短语",
+      "glossZh": "紧挨着……；在……隔壁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "直接接地点名词的用法多见于方言或旧式英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

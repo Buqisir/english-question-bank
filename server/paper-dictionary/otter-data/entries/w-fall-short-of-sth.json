@@ -1,0 +1,175 @@
+{
+  "entryId": "w:fall-short-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fall short of"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "short",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "short",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "falling short of",
+      "tags": []
+    },
+    {
+      "form": "falls short of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall short of sth",
+  "senses": [
+    {
+      "senseId": "w:fall-short-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "未达到（标准、要求等）；未能兑现（承诺）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s12",
+        "w:short#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-short-of-sth#e-df451f404c38a9c7",
+          "text": "When he wasn’t doing all that, Jim was running across a checkerboard of green lawns（草坪） to ensure the local postal service did not fall short of its daily promise.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 144
+          },
+          "parts": [
+            [
+              131,
+              144
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              144
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-short-of-sth#e-faf0ad6086dcfa7b",
+          "text": "The light supply may fall short of demand.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:33#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 34
+          },
+          "parts": [
+            [
+              21,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-short-of-sth#e-ba469d7acce764e7",
+          "text": "While this study lays valuable groundwork for future research, its reliance on picture-based word tasks falls short of grasping the essence of real-world language use.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 118
+          },
+          "parts": [
+            [
+              104,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              118
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

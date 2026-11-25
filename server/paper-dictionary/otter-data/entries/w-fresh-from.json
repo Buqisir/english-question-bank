@@ -1,0 +1,92 @@
+{
+  "entryId": "w:fresh-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fresh",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fresh",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fresh from",
+  "senses": [
+    {
+      "senseId": "w:fresh-from#s1",
+      "pos": "短语",
+      "glossZh": "刚从……来的；刚结束……的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fresh#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fresh-from#e-e9c0c28a540581ee",
+          "text": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 134,
+            "end": 144
+          },
+          "parts": [
+            [
+              134,
+              144
+            ]
+          ],
+          "highlightRanges": [
+            [
+              134,
+              144
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

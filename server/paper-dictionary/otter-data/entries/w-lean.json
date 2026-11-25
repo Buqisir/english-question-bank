@@ -77,7 +77,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 2
   },
   "senses": [
     {
@@ -88,7 +88,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -159,7 +159,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -230,7 +230,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -346,6 +346,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:lean#s8",
+      "pos": "v.",
+      "glossZh": "积极参与；投入（lean in）",
+      "pronunciationId": "w:lean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lean#e-3c0f9fb8346305c8",
+          "text": "It’s a tapestry (绣帷) made by people who lean in, love, and let go.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lean#s9",
+      "pos": "v.",
+      "glossZh": "主动接纳并发挥……的作用（lean into）",
+      "pronunciationId": "w:lean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lean#e-dd3e4801cb498b9c",
+          "text": "It has taken me a while to lean into the power of this.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -354,6 +420,6 @@
       "reason": "行业用法或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

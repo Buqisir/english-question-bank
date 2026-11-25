@@ -1,0 +1,196 @@
+{
+  "entryId": "w:put-sth-into-practice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sth"
+      },
+      "into",
+      "practice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sth"
+        },
+        "into",
+        "practice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put into practice",
+      "tags": []
+    },
+    {
+      "form": "putting into practice",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth into practice",
+  "senses": [
+    {
+      "senseId": "w:put-sth-into-practice#s1",
+      "pos": "短语",
+      "glossZh": "把（理论、计划等）付诸实践",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:into#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-sth-into-practice#e-c7b9aeab8db150a7",
+          "text": "It pays to put theory into practice.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 35
+          },
+          "parts": [
+            [
+              11,
+              14
+            ],
+            [
+              22,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              14
+            ],
+            [
+              22,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-sth-into-practice#e-230442a38979e7e0",
+          "text": "However, putting it into practice has sparked unexpected and fierce opposition.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 33
+          },
+          "parts": [
+            [
+              9,
+              16
+            ],
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ],
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-sth-into-practice#e-4c6729567f22050b",
+          "text": "What does membrane fail to do to put osmotic energy into practice?",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-wuchang-2026-05:28",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 65
+          },
+          "parts": [
+            [
+              33,
+              36
+            ],
+            [
+              52,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              36
+            ],
+            [
+              52,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

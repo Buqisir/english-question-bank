@@ -1,0 +1,214 @@
+{
+  "entryId": "w:all-the-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "the",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "the",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all the way",
+  "senses": [
+    {
+      "senseId": "w:all-the-way#s1",
+      "pos": "短语",
+      "glossZh": "一路；一直到（终点或范围的另一端）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:way#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-the-way#e-94274b9817f29d11",
+          "text": "Imagine wandering through a dark forest for hours, then traveling all the way home – in a straight line.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-the-way#e-bd136650e3ab6cc7",
+          "text": "It’s a great place to hike, wander, or cycle, with a ton of trails that range from beginner all the way to advanced.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 103
+          },
+          "parts": [
+            [
+              92,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-the-way#e-ab67f327ca9d8696",
+          "text": "We were coming all the way across Western Australia to get there – not exactly a “lap of the map”, but still a big trip.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:all-the-way#s2",
+      "pos": "短语",
+      "glossZh": "彻底地；坚持到底",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-the-way#e-6ba74622315b0aa5",
+          "text": "In two and a half hours, I got all the way through the book.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:all-the-way#s3",
+      "pos": "短语",
+      "glossZh": "（点餐时）配料全加",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,265 @@
+{
+  "entryId": "w:at-once",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "once"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "once"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at once",
+  "senses": [
+    {
+      "senseId": "w:at-once#s1",
+      "pos": "短语",
+      "glossZh": "同时；一并",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s9",
+        "w:once#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-once#e-ea1f94495f159e29",
+          "text": "The story is one of scores in To Forgive Design: Understanding Failure, a book that is at once a love letter to engineering and a paean (赞歌) to its breakdowns.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 94
+          },
+          "parts": [
+            [
+              87,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-once#e-25fc0719ce41489e",
+          "text": "You have to make sure you don’t turn two pages at once and make sure you find the repeats in the music when you have to go back to the right spot.” Mr Titterton explained.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-once#e-cfdfeea06293085e",
+          "text": "Overcommitment occurs when you push your boundaries and take on more duties than you can handle at once.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 103
+          },
+          "parts": [
+            [
+              96,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:at-once#s2",
+      "pos": "短语",
+      "glossZh": "立刻；马上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s25",
+        "w:once#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-once#e-2e9b41eba69fae82",
+          "text": "He asked his mother for a pair of swimming goggles (护目镜) and headed back to the bay at once.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 91
+          },
+          "parts": [
+            [
+              84,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-once#e-23dd2df29845f8e9",
+          "text": "Whenever he tried to memorize key knowledge or focus on difficult exercises, the noisy sounds would distract him at once.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 120
+          },
+          "parts": [
+            [
+              113,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-once#e-c77afe2868a95ec4",
+          "text": "Liam did not answer at once, but the eager light in his eyes said everything.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

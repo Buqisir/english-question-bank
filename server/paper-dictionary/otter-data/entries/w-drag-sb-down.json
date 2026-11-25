@@ -1,0 +1,130 @@
+{
+  "entryId": "w:drag-sb-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drag",
+      {
+        "slot": "sb"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "drag",
+        {
+          "slot": "sb"
+        },
+        "down"
+      ],
+      [
+        "drag",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drags down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drag sb down",
+  "senses": [
+    {
+      "senseId": "w:drag-sb-down#s1",
+      "pos": "短语",
+      "glossZh": "拖累某人；妨碍某人发挥",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drag#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drag-sb-down#e-8e71a68d9fcd1134",
+          "text": "This leg drags me down!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 22
+          },
+          "parts": [
+            [
+              9,
+              14
+            ],
+            [
+              18,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              14
+            ],
+            [
+              18,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:drag-sb-down#s2",
+      "pos": "短语",
+      "glossZh": "使某人心情低落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:drag#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

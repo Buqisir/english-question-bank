@@ -1,0 +1,128 @@
+{
+  "entryId": "w:hit-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hits up"
+  ],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "up"
+      ],
+      [
+        "hits",
+        "up"
+      ],
+      [
+        "hitting",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit sb/sth up",
+  "senses": [
+    {
+      "senseId": "w:hit-up#s1",
+      "pos": "短语",
+      "glossZh": "去某处参加活动；光顾某地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hit-up#e-d3f531e502cf9018",
+          "text": "The friend who hits up the gym five times a week.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          },
+          "parts": [
+            [
+              15,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              22
+            ]
+          ]
+        }
+      ],
+      "note": "非正式用法，如 hit up the gym。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:hit-up#s2",
+      "pos": "短语",
+      "glossZh": "主动联系某人；去找某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hit-up#s3",
+      "pos": "短语",
+      "glossZh": "向某人索要（钱等）；找某人帮忙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hit sb up for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

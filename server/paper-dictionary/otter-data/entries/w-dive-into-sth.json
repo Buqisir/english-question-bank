@@ -1,0 +1,181 @@
+{
+  "entryId": "w:dive-into-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dive",
+      "into",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dive",
+        "into",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dive into",
+      "tags": []
+    },
+    {
+      "form": "dived into",
+      "tags": []
+    },
+    {
+      "form": "dives into",
+      "tags": []
+    },
+    {
+      "form": "diving into",
+      "tags": []
+    },
+    {
+      "form": "dove into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dive into sth",
+  "senses": [
+    {
+      "senseId": "w:dive-into-sth#s1",
+      "pos": "短语",
+      "glossZh": "一头投入（活动）；深入探究（话题）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dive#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dive-into-sth#e-d852117551fa9362",
+          "text": "Good Vibrations: Dive into the wonderful world of sound with tuning forks, musical instruments and more.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "cell:paper-mock-import-20261026-n090:reading-a:ocr-916a21169272a7ae:1:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dive-into-sth#e-1c6f879a81b8e63d",
+          "text": "Dive into the wild heart of Alaska for an unequal encounter with brown bears in their natural environment.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dive-into-sth#e-b593e7c7e31e3c2f",
+          "text": "Diving into research, he learned that before human settlement, the Southeast was home to expansive grasslands.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

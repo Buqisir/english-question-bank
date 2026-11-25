@@ -1,0 +1,170 @@
+{
+  "entryId": "w:think-twice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "thinking twice"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "twice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "twice"
+      ],
+      [
+        "thinking",
+        "twice"
+      ],
+      [
+        "thinks",
+        "twice"
+      ],
+      [
+        "thought",
+        "twice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think twice",
+  "senses": [
+    {
+      "senseId": "w:think-twice#s1",
+      "pos": "短语",
+      "glossZh": "三思；行动前仔细权衡",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:think#s8",
+        "w:twice#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:think-twice#e-0bf0da3d34a1823a",
+          "text": "Think twice.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-twice#e-2f3d4be35492f798",
+          "text": "Even the most non-traditional parent would think twice about exposing their son to that.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 54
+          },
+          "parts": [
+            [
+              43,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-twice#e-a2100bf2c7ad0630",
+          "text": "So back to bed I went, where I scrolled (刷屏), texted, and checked my phone like I normally would, without thinking twice about it.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 120
+          },
+          "parts": [
+            [
+              106,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              120
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

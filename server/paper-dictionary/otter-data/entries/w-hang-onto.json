@@ -1,0 +1,97 @@
+{
+  "entryId": "w:hang-onto",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "onto"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "onto"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hanging onto",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang onto",
+  "senses": [
+    {
+      "senseId": "w:hang-onto#s1",
+      "pos": "短语",
+      "glossZh": "紧紧抓住；抓牢",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:onto#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hang-onto#e-9e99112a6e675f34",
+          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 40
+          },
+          "parts": [
+            [
+              28,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

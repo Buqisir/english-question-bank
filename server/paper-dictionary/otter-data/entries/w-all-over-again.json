@@ -1,0 +1,154 @@
+{
+  "entryId": "w:all-over-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "over",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "over",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all over again",
+  "senses": [
+    {
+      "senseId": "w:all-over-again#s1",
+      "pos": "短语",
+      "glossZh": "从头再来一遍；重新经历一遍",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-over-again#e-6f72367565f5a375",
+          "text": "Then it starts all over again the next month.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 29
+          },
+          "parts": [
+            [
+              15,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-over-again#e-ab033a6f87abd39b",
+          "text": "Everything that once felt natural had to be learned all over again, like moving, standing, or even lifting his hands.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-over-again#e-bb3dbc9f6f351a44",
+          "text": "I cried like a child, feeling like losing him all over again.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 60
+          },
+          "parts": [
+            [
+              46,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

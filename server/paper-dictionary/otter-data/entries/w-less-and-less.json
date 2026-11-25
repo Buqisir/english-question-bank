@@ -1,0 +1,154 @@
+{
+  "entryId": "w:less-and-less",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "less",
+      "and",
+      "less"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "less",
+        "and",
+        "less"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "less and less",
+  "senses": [
+    {
+      "senseId": "w:less-and-less#s1",
+      "pos": "短语",
+      "glossZh": "越来越少；程度越来越低",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:less-and-less#e-37c92422d423b016",
+          "text": "The study reports the water sources that typically feed the sea are contributing less and less water.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 94
+          },
+          "parts": [
+            [
+              81,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:less-and-less#e-283b0a582e2ec60c",
+          "text": "“Today, your wellbeing is determined less and less by your personal biology and more and more by the cultural systems that surround you – your community, your nation, your technologies.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 50
+          },
+          "parts": [
+            [
+              37,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:less-and-less#e-eba202417debd1c8",
+          "text": "Since then, I also felt less and less willing to share my work: what if my writing isn't as good as everybody else’s?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 37
+          },
+          "parts": [
+            [
+              24,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

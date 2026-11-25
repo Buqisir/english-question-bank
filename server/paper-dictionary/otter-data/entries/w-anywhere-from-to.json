@@ -1,0 +1,119 @@
+{
+  "entryId": "w:anywhere-from-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "anywhere",
+      "from",
+      {
+        "slot": "…"
+      },
+      "to",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "anywhere",
+        "from",
+        {
+          "slot": "…"
+        },
+        "to",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "anywhere from to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "anywhere from … to …",
+  "senses": [
+    {
+      "senseId": "w:anywhere-from-to#s1",
+      "pos": "短语",
+      "glossZh": "从……到……不等",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:anywhere#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:anywhere-from-to#e-98859ca2fc922b4b",
+          "text": "The kids would stay with us anywhere from a week to a few months.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 51
+          },
+          "parts": [
+            [
+              28,
+              41
+            ],
+            [
+              49,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ],
+            [
+              49,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

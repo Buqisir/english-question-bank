@@ -1,0 +1,100 @@
+{
+  "entryId": "w:take-note-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "note",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "note",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "took note of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take note of sth",
+  "senses": [
+    {
+      "senseId": "w:take-note-of#s1",
+      "pos": "短语",
+      "glossZh": "留意某事；记下某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:note#s8",
+        "w:take#s54"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-note-of#e-1a8677cd936ac951",
+          "text": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 89
+          },
+          "parts": [
+            [
+              77,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

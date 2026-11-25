@@ -1,0 +1,189 @@
+{
+  "entryId": "w:piece-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "piece",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "piece",
+        "together"
+      ],
+      [
+        "pieced",
+        "together"
+      ],
+      [
+        "pieces",
+        "together"
+      ],
+      [
+        "piecing",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "piece together",
+      "tags": []
+    },
+    {
+      "form": "piecing together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "piece sth together",
+  "senses": [
+    {
+      "senseId": "w:piece-together#s1",
+      "pos": "短语",
+      "glossZh": "把零件或碎片拼成整体；组装",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:together#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:piece-together#e-347c307c9b4bb67a",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 50
+          },
+          "parts": [
+            [
+              34,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:piece-together#s2",
+      "pos": "短语",
+      "glossZh": "把零散信息拼凑起来；根据线索还原全貌",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:piece-together#e-ad31b8e339414caf",
+          "text": "Ultimately, I piece together the reasoning, try to empathize, and figure out why things happened that way.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 28
+          },
+          "parts": [
+            [
+              14,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:piece-together#e-bb8362ad11b4b0b4",
+          "text": "Word by word, they struggled to piece together a rough translation: “Life has taught me that anything is possible.”",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 46
+          },
+          "parts": [
+            [
+              32,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

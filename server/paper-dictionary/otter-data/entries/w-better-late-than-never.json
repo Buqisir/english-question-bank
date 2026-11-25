@@ -1,0 +1,95 @@
+{
+  "entryId": "w:better-late-than-never",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "better",
+      "late",
+      "than",
+      "never"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "better",
+        "late",
+        "than",
+        "never"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "better late than never",
+  "senses": [
+    {
+      "senseId": "w:better-late-than-never#s1",
+      "pos": "短语",
+      "glossZh": "迟做总比不做好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:better-late-than-never#e-9e097139e6f2ceac",
+          "text": "Better late than never.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-cq-nankai-2025-09-first-quality-test:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 22
+          },
+          "parts": [
+            [
+              0,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

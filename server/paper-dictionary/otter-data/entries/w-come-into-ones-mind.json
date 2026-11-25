@@ -1,0 +1,116 @@
+{
+  "entryId": "w:come-into-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "come into one’s mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "into",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "into",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "comes into mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come into one's mind",
+  "senses": [
+    {
+      "senseId": "w:come-into-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "浮现在某人脑海中；被某人想到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s16",
+        "w:mind#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-into-ones-mind#e-f6fd2dc9ab8e3fe1",
+          "text": "What comes into your mind when you think of British food?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 25
+          },
+          "parts": [
+            [
+              5,
+              15
+            ],
+            [
+              21,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              15
+            ],
+            [
+              21,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

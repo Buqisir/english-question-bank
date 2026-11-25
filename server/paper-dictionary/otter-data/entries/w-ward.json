@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 7
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -123,20 +123,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:ward#s4",
-      "pos": "短语",
-      "glossZh": "抵挡",
-      "pronunciationId": "w:ward#p-main",
-      "note": "ward sth off。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -145,6 +131,11 @@
       "reason": "专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:ward-sth-off"
+  ]
 }

@@ -1,0 +1,188 @@
+{
+  "entryId": "w:roll-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "down"
+      ],
+      [
+        "rolled",
+        "down"
+      ],
+      [
+        "rolling",
+        "down"
+      ],
+      [
+        "rolls",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rolled down",
+      "tags": []
+    },
+    {
+      "form": "rolling down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll (sth) down",
+  "senses": [
+    {
+      "senseId": "w:roll-down#s1",
+      "pos": "短语",
+      "glossZh": "摇下或降下车窗；车窗降下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:roll#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:roll-down#e-9937ce2ba614ade6",
+          "text": "When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:roll-down#e-ffad7552bed20f77",
+          "text": "She rolled down her window and called out to several homeless people, “Come by later!",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:roll-down#e-7b92d9dd34ab1c42",
+          "text": "A car slowed to a stop, its window rolling down to reveal a good-looking woman.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:roll-down#s2",
+      "pos": "短语",
+      "glossZh": "放下卷帘或卷帘门",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

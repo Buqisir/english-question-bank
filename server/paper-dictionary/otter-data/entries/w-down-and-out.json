@@ -1,0 +1,111 @@
+{
+  "entryId": "w:down-and-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "down",
+      "and",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "down",
+        "and",
+        "out"
+      ],
+      [
+        "down",
+        "and",
+        "outs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "down and out",
+  "senses": [
+    {
+      "senseId": "w:down-and-out#s1",
+      "pos": "短语",
+      "glossZh": "穷困潦倒的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:down-and-out#e-0932a8594e6a2a0c",
+          "text": "The raw despair reminded Armus of his own dark past – down and out, been to prison.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 66
+          },
+          "parts": [
+            [
+              54,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:down-and-out#s2",
+      "pos": "短语",
+      "glossZh": "穷困潦倒的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "名词常写作 down-and-out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

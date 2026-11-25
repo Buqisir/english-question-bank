@@ -1,0 +1,75 @@
+{
+  "entryId": "w:miss-the-bus",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "miss",
+      "the",
+      "bus"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "miss",
+        "the",
+        "bus"
+      ],
+      [
+        "missed",
+        "the",
+        "bus"
+      ],
+      [
+        "misses",
+        "the",
+        "bus"
+      ],
+      [
+        "missing",
+        "the",
+        "bus"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "miss the bus",
+  "senses": [
+    {
+      "senseId": "w:miss-the-bus#s1",
+      "pos": "短语",
+      "glossZh": "错失机会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

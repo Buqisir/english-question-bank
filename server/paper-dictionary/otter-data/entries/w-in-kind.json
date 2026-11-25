@@ -1,0 +1,73 @@
+{
+  "entryId": "w:in-kind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "kind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "kind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in kind",
+  "senses": [
+    {
+      "senseId": "w:in-kind#s1",
+      "pos": "短语",
+      "glossZh": "以实物或服务代替现金",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:kind#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:in-kind#s2",
+      "pos": "短语",
+      "glossZh": "以同样的方式回应",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

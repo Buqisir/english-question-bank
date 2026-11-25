@@ -1,0 +1,174 @@
+{
+  "entryId": "w:make-friends",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making friends"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "friends"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "friends"
+      ],
+      [
+        "making",
+        "friends"
+      ],
+      [
+        "made",
+        "friends"
+      ],
+      [
+        "makes",
+        "friends"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made friends",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make friends",
+  "senses": [
+    {
+      "senseId": "w:make-friends#s1",
+      "pos": "短语",
+      "glossZh": "交朋友；与某人成为朋友",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-friends#e-911ccb73ecd46426",
+          "text": "I soon made friends with the local skaters.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-friends#e-4d5ae42167b99916",
+          "text": "I made friends through a board-game club – three Danish students, one German, and two Icelandic students.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-friends#e-bbacfc5de3b830f1",
+          "text": "Mom had told May clubs could be a way to make friends with kids who shared her interests.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "指明对象时接 with sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

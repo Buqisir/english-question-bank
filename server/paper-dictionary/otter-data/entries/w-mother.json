@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 49,
-    "mock": 239
+    "mock": 42
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 188
       },
       "folded": false,
       "examples": [
@@ -146,12 +146,12 @@
       "glossZh": "根源；起因",
       "pronunciationId": "w:mother#p-main",
       "note": "如 necessity is the mother of invention。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -166,6 +166,111 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:mother#s4",
+      "pos": "adj.",
+      "glossZh": "自幼习得的（语言）",
+      "pronunciationId": "w:mother#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mother#e-2e367befd71a28ca",
+          "text": "Parents there spoke their mother tongues.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-third:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:mother#e-ef23509b69efd84b",
+          "text": "There is a term for the firm influence of one’s mother tongue: imprinting, an early, mostly unchangeable form of learning.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mother#s5",
+      "pos": "n.",
+      "glossZh": "母株；母树",
+      "pronunciationId": "w:mother#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mother#e-33b395946816e0d0",
+          "text": "Older “mother trees” often act as hubs, sending extra sugars to younger saplings struggling in shaded areas – a phenomenon called “forest family connections”.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:mother#e-839424090eede17b",
+          "text": "Besides planting seeds, a special method allows growing new plants from parts of other plants, like rose stems or potato tubers – these copies like the mother plant are called plant clones.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 158
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -174,6 +279,6 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

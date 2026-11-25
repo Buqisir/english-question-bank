@@ -1,0 +1,76 @@
+{
+  "entryId": "w:take-sth-off-ones-plate",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take sth off sb’s plate"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "sth"
+      },
+      "off",
+      {
+        "slot": "one's"
+      },
+      "plate"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "off",
+        {
+          "slot": "one's"
+        },
+        "plate"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sth off one's plate",
+  "senses": [
+    {
+      "senseId": "w:take-sth-off-ones-plate#s1",
+      "pos": "短语",
+      "glossZh": "替某人接手一件事，减轻其负担",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:plate#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

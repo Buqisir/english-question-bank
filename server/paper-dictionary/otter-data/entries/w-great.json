@@ -48,8 +48,8 @@
     "mock": 544
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 544
+    "gaokao": 9,
+    "mock": 348
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -274,7 +274,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -295,131 +295,6 @@
           "target": {
             "start": 83,
             "end": 88
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:great#s5",
-      "pos": "短语",
-      "glossZh": "大量",
-      "pronunciationId": "w:great#p-main",
-      "note": "a great deal (of)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:great#e-4186daa6b2aca111",
-          "text": "She spent a great deal of time visiting the poor.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:great#e-5d91a0ea3af1b562",
-          "text": "But if you have to read a great deal for study, you will appreciate the benefits of being able to read more quickly.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:great#e-3f32571d48684ff8",
-          "text": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as __50__ to a restaurant where the service is __51__, the menu is known in advance, and the meal is expected to be no __52__.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:great#s6",
-      "pos": "短语",
-      "glossZh": "户外的大自然",
-      "pronunciationId": "w:great#p-main",
-      "note": "the great outdoors。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:great#e-34339ce80a034be9",
-          "text": "His first few visits to the great outdoors were funny.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:great#e-019c5ceb43a8897b",
-          "text": "Emmanuel Chappard, an experienced guide, has a passion for making the great outdoors accessible to all.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:9",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 75
           }
         }
       ]
@@ -465,6 +340,14 @@
       "reason": "作品及地标专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-great-deal",
+    "w:a-great-deal-of",
+    "w:great-job",
+    "w:the-great-outdoors"
+  ]
 }

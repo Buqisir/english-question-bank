@@ -59,8 +59,8 @@
     "mock": 32
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 21
+    "gaokao": 2,
+    "mock": 3
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -291,93 +291,6 @@
       ]
     },
     {
-      "senseId": "w:sweep#s5",
-      "pos": "短语",
-      "glossZh": "清除",
-      "pronunciationId": "w:sweep#p-main",
-      "note": "sweep aside。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sweep#e-756146b5a25d258f",
-          "text": "Shirley Fitzgerald, the city’s official historian, told me that in its rush to modernity in the 1970s, Sydney swept aside much of its past, including many of its finest buildings.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sweep#s6",
-      "pos": "短语",
-      "glossZh": "被卷入",
-      "pronunciationId": "w:sweep#p-main",
-      "note": "get swept up in。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sweep#e-565c9511a82da6e6",
-          "text": "Instead of running down the clock on the sidelines, I got swept up in the game, rooting for my team to score.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
-            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
-            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:sweep#e-1ab2952285e6c017",
-          "text": "“We are completely swept up by the fast pace of life,” she said.",
-          "source": {
-            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
-            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
-            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sweep#s7",
       "pos": "adj.",
       "glossZh": "一览无余的",
@@ -470,6 +383,11 @@
       "reason": "专门义或固定用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sweep-aside"
+  ]
 }

@@ -1,0 +1,120 @@
+{
+  "entryId": "w:go-back-in-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going back in time"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "back",
+      "in",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "back",
+        "in",
+        "time"
+      ],
+      [
+        "going",
+        "back",
+        "in",
+        "time"
+      ],
+      [
+        "goes",
+        "back",
+        "in",
+        "time"
+      ],
+      [
+        "gone",
+        "back",
+        "in",
+        "time"
+      ],
+      [
+        "went",
+        "back",
+        "in",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go back in time",
+  "senses": [
+    {
+      "senseId": "w:go-back-in-time#s1",
+      "pos": "短语",
+      "glossZh": "回到过去；追溯往事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-back-in-time#e-6a315a35d2015173",
+          "text": "“Talking to them is like going back in time,” says 19-year-old Sagie Fruchter.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 43
+          },
+          "parts": [
+            [
+              25,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

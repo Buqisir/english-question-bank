@@ -1,0 +1,155 @@
+{
+  "entryId": "w:day-after-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "day",
+      "after",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "day",
+        "after",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "day after day",
+  "senses": [
+    {
+      "senseId": "w:day-after-day#s1",
+      "pos": "短语",
+      "glossZh": "日复一日；一天又一天",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-after-day#e-33367bf4e203cc6d",
+          "text": "Day after day, after class they sat in the same corner ） — the one by the window where the light fell soft.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:day-after-day#e-5ecd4ecb273c3ba5",
+          "text": "For this challenge, I needed a place I could easily visit, day after day.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zj-wenzhou-2026-m2:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 72
+          },
+          "parts": [
+            [
+              59,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:day-after-day#e-64c06e3e8478db86",
+          "text": "But day after day, they kept starting again as if nothing had occurred.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:7",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

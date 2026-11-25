@@ -1,0 +1,103 @@
+{
+  "entryId": "w:see-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sees to"
+  ],
+  "pattern": {
+    "tokens": [
+      "see",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "to"
+      ],
+      [
+        "sees",
+        "to"
+      ],
+      [
+        "saw",
+        "to"
+      ],
+      [
+        "seeing",
+        "to"
+      ],
+      [
+        "seen",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:see-to#s1",
+      "pos": "短语",
+      "glossZh": "负责处理；确保办妥",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-to#s2",
+      "pos": "短语",
+      "glossZh": "照料；招待",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-to#s3",
+      "pos": "短语",
+      "glossZh": "与某人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

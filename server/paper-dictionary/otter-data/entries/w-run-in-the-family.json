@@ -1,0 +1,114 @@
+{
+  "entryId": "w:run-in-the-family",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran in the family"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "in",
+      "the",
+      "family"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "in",
+        "the",
+        "family"
+      ],
+      [
+        "ran",
+        "in",
+        "the",
+        "family"
+      ],
+      [
+        "running",
+        "in",
+        "the",
+        "family"
+      ],
+      [
+        "runs",
+        "in",
+        "the",
+        "family"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run in the family",
+  "senses": [
+    {
+      "senseId": "w:run-in-the-family#s1",
+      "pos": "短语",
+      "glossZh": "（特征、才能等）为家族多名成员所共有",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-in-the-family#e-2518df0b4794053a",
+          "text": "Basketball ran in the family – his older brother Reggie was now playing at a top college, and Mark was expected to follow in his brother’s footsteps.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 28
+          },
+          "parts": [
+            [
+              11,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

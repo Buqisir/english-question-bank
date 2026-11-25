@@ -1,0 +1,165 @@
+{
+  "entryId": "w:way-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "way",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "way",
+        "out"
+      ],
+      [
+        "ways",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "way out",
+  "senses": [
+    {
+      "senseId": "w:way-out#s1",
+      "pos": "短语",
+      "glossZh": "出路；摆脱困境的办法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:way-out#e-eab5efd832541a05",
+          "text": "Paragraph 1: These realizations forced me to acknowledge that my mother was right – education was my only way out.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 113
+          },
+          "parts": [
+            [
+              106,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:way-out#e-d791a494829769c7",
+          "text": "Lena realized that the only way out of her confusion was to create something.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:way-out#s2",
+      "pos": "短语",
+      "glossZh": "出口；出去的路",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:way-out#s3",
+      "pos": "短语",
+      "glossZh": "另类的；出格的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作定语通常写作 way-out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:way-out#s4",
+      "pos": "短语",
+      "glossZh": "在很远的外面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

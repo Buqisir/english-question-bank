@@ -1,0 +1,93 @@
+{
+  "entryId": "w:help-yourself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "help",
+      "yourself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "help",
+        "yourself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "help yourself",
+  "senses": [
+    {
+      "senseId": "w:help-yourself#s1",
+      "pos": "短语",
+      "glossZh": "请自便；请自行取用",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:yourself#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:help-yourself#e-36c4443ed8618f27",
+          "text": "“Help yourself while I run into the other room and check on my little one.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 14
+          },
+          "parts": [
+            [
+              1,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "指出取用的东西时用 help yourself to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

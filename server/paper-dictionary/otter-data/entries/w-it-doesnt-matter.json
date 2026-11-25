@@ -1,0 +1,168 @@
+{
+  "entryId": "w:it-doesnt-matter",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it",
+      "doesn't",
+      "matter"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it",
+        "doesn't",
+        "matter"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it doesn't matter",
+  "senses": [
+    {
+      "senseId": "w:it-doesnt-matter#s1",
+      "pos": "短语",
+      "glossZh": "不要紧；没关系；……并不重要",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:it-doesnt-matter#e-759edf34dcc7f3a1",
+          "text": "“It doesn’t matter where people are now in their lives, they’ve had to work to get there.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 18
+          },
+          "parts": [
+            [
+              1,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:it-doesnt-matter#e-796f75784adbd0c8",
+          "text": "It doesn’t matter much, I suppose – this isn’t AI as existential threat.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:it-doesnt-matter#e-d996c5bd08473ed4",
+          "text": "It doesn’t matter how much you end up reading.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:it-doesnt-matter#s2",
+      "pos": "短语",
+      "glossZh": "算了；不用再说了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

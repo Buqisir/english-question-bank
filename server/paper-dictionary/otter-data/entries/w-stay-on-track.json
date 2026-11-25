@@ -1,0 +1,156 @@
+{
+  "entryId": "w:stay-on-track",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "on",
+      "track"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "on",
+        "track"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay on track",
+  "senses": [
+    {
+      "senseId": "w:stay-on-track#s1",
+      "pos": "短语",
+      "glossZh": "按计划推进；不偏离目标",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:track#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stay-on-track#e-f15c384838629a4a",
+          "text": "Jessica Pink, an undergraduate student, suggests taking online courses with a friend, so you can motivate each other to stay on track.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 133
+          },
+          "parts": [
+            [
+              120,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-on-track#e-24e630801c797430",
+          "text": "This study break exercise routine is all you need to stay on track for your fitness goals.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 66
+          },
+          "parts": [
+            [
+              53,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-on-track#e-fb5f13912b4f13a9",
+          "text": "“That can help people stay on track.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 35
+          },
+          "parts": [
+            [
+              22,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

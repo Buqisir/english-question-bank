@@ -58,8 +58,8 @@
     "mock": 81
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 75
+    "gaokao": 5,
+    "mock": 29
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -186,59 +186,6 @@
       ]
     },
     {
-      "senseId": "w:puzzle#s3",
-      "pos": "短语",
-      "glossZh": "填字游戏",
-      "pronunciationId": "w:puzzle#p-main",
-      "note": "crossword puzzle。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:puzzle#e-0a148ba43bab769c",
-          "text": "Read a book, knit, do a crossword puzzle, or simply watch the world unfold outside the window.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:puzzle#e-f7f831efb3466acd",
-          "text": "Some barely used, some worn-down, but each unfailingly functional, they remind me of his love of solving crossword puzzles.",
-          "source": {
-            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
-            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
-            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 115,
-            "end": 122
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:puzzle#s4",
       "pos": "v.",
       "glossZh": "使困惑",
@@ -246,7 +193,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -299,7 +246,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -342,6 +289,144 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:puzzle#s6",
+      "pos": "adj.",
+      "glossZh": "困惑的；显出困惑的",
+      "pronunciationId": "w:puzzle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:puzzle#e-d27c3ec9cad0f6b7",
+          "text": "Make people puzzled.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-guangdong-2025-12-second-joint-survey:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:puzzle#e-a60ff246d7c54af5",
+          "text": "At first, neighbors were puzzled.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:puzzle#e-7449b1ae594e79e3",
+          "text": "Players were puzzled: What did this mean for the rest of their tournament?",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:puzzle#s7",
+      "pos": "v.",
+      "glossZh": "苦思；琢磨",
+      "pronunciationId": "w:puzzle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:puzzle#e-ea67e999bcab3226",
+          "text": "Experts have puzzled for years over how to encourage eaters to show a little control.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:puzzle#s8",
+      "pos": "n.",
+      "glossZh": "玩拼图的活动",
+      "pronunciationId": "w:puzzle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:puzzle#e-6725d086ad54b88a",
+          "text": "And I’ve come to realize puzzling is not just for kids after all.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -350,6 +435,8 @@
       "reason": "少见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

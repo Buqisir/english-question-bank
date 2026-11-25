@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 106
+    "mock": 13
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 85
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -196,65 +196,17 @@
       ]
     },
     {
-      "senseId": "w:die#s3",
-      "pos": "短语",
-      "glossZh": "逐渐消失；灭绝",
-      "pronunciationId": "w:die#p-main",
-      "note": "die out；die down 表示「逐渐减弱」，die away 表示「逐渐消失」。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:die#e-a305be76d10856f0",
-          "text": "As it approaches the first house, the plants around it catch fire, but the house itself stubbornly refuses to do so: any small flames along its walls quickly die out.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
-            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
-            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 158,
-            "end": 161
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:die#s4",
-      "pos": "短语",
-      "glossZh": "非常渴望",
-      "pronunciationId": "w:die#p-main",
-      "note": "be dying for sth 或 be dying to do sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:die#s5",
       "pos": "n.",
       "glossZh": "骰子；模具",
       "pronunciationId": "w:die#p-main",
       "note": "骰子的复数通常用 dice。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -264,6 +216,14 @@
       "reason": "外语成分、行业术语或拼写变体"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:die-away",
+    "w:die-back",
+    "w:die-down",
+    "w:die-out"
+  ]
 }

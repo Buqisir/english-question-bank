@@ -1,0 +1,121 @@
+{
+  "entryId": "w:rise-above",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "rose above"
+  ],
+  "pattern": {
+    "tokens": [
+      "rise",
+      "above"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rise",
+        "above"
+      ],
+      [
+        "rose",
+        "above"
+      ],
+      [
+        "risen",
+        "above"
+      ],
+      [
+        "rises",
+        "above"
+      ],
+      [
+        "rising",
+        "above"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rise above",
+  "senses": [
+    {
+      "senseId": "w:rise-above#s1",
+      "pos": "短语",
+      "glossZh": "摆脱……的影响；克服（压力、挫折等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rise-above#e-ad9f75ab41d541fa",
+          "text": "As a senior three student struggling with college application stress and endless exams, she’d poured every ounce of frustration and hidden hope into the artwork – its blazing flames a metaphor for her desire to rise above overwhelming academic pressure.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 211,
+            "end": 221
+          },
+          "parts": [
+            [
+              211,
+              221
+            ]
+          ],
+          "highlightRanges": [
+            [
+              211,
+              221
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:rise-above#s2",
+      "pos": "短语",
+      "glossZh": "不为琐事或挑衅所动；保持应有的风度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

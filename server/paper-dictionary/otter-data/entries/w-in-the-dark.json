@@ -1,0 +1,63 @@
+{
+  "entryId": "w:in-the-dark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "dark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "dark"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the dark",
+  "senses": [
+    {
+      "senseId": "w:in-the-dark#s1",
+      "pos": "短语",
+      "glossZh": "不知情；蒙在鼓里",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:dark#s5"
+      ],
+      "examples": [],
+      "note": "常用 be in the dark about sth 或 keep sb in the dark。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 14
+    "mock": 3
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -223,12 +223,12 @@
       "pos": "n.",
       "glossZh": "弦",
       "pronunciationId": "w:string#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -297,20 +297,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:string#s6",
-      "pos": "短语",
-      "glossZh": "附加条件",
-      "pronunciationId": "w:string#p-main",
-      "note": "常见 no strings attached。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -319,6 +305,8 @@
       "reason": "专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

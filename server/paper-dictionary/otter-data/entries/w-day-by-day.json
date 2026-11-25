@@ -1,0 +1,139 @@
+{
+  "entryId": "w:day-by-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "day",
+      "by",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "day",
+        "by",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "day by day",
+  "senses": [
+    {
+      "senseId": "w:day-by-day#s1",
+      "pos": "短语",
+      "glossZh": "日渐；一天天地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-by-day#e-dff48da685d5e10d",
+          "text": "As the monthly exam approached, his stress built up day by day.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        }
+      ],
+      "note": "强调情况随时间逐步变化。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:day-by-day#s2",
+      "pos": "短语",
+      "glossZh": "逐日；一天一天地做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-by-day#e-7c0bc55989323959",
+          "text": "As I saved money day by day, I finally had enough to order the lens online a week before my birthday.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "强调按天持续做某事，如每天攒一点钱。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,154 @@
+{
+  "entryId": "w:at-most",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "most"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "most"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at most",
+  "senses": [
+    {
+      "senseId": "w:at-most#s1",
+      "pos": "短语",
+      "glossZh": "至多；最多",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:most#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-most#e-2cffe13707ceaf2f",
+          "text": "If an oven consumes 200 units of energy, how much can the air fryer save at most?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 80
+          },
+          "parts": [
+            [
+              73,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-most#e-2c965faa69670f71",
+          "text": "How much will an 8-week extern earn at most upon full completion?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-most#e-66d9e8206064ac76",
+          "text": "How many images can a 13-year-old participant submit at most?",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-05-second-mock:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

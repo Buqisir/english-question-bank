@@ -1,0 +1,171 @@
+{
+  "entryId": "w:write-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "wrote out"
+  ],
+  "pattern": {
+    "tokens": [
+      "write",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "write",
+        "out"
+      ],
+      [
+        "wrote",
+        "out"
+      ],
+      [
+        "writes",
+        "out"
+      ],
+      [
+        "writing",
+        "out"
+      ],
+      [
+        "written",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "write out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "write sth out",
+  "senses": [
+    {
+      "senseId": "w:write-out#s1",
+      "pos": "短语",
+      "glossZh": "把内容完整或明确地写下来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:write-out#e-cb7d79de88636444",
+          "text": "Write out your goals and values, and think hard about what kind of person you want to be.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:write-out#e-8cef01292af4e023",
+          "text": "At the end of the note, he said he had made a website just for me and wrote out the URL.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          },
+          "parts": [
+            [
+              70,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:write-out#s2",
+      "pos": "短语",
+      "glossZh": "填写；开具（支票、罚单等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:write-out#s3",
+      "pos": "短语",
+      "glossZh": "把某人从叙述中删去；安排某角色退出剧情",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 write sb out of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

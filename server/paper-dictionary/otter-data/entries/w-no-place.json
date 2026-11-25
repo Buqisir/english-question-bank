@@ -1,0 +1,119 @@
+{
+  "entryId": "w:no-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no place",
+  "senses": [
+    {
+      "senseId": "w:no-place#s1",
+      "pos": "短语",
+      "glossZh": "没有立足之地；某事物不应出现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-place#e-17b73e89113a891c",
+          "text": "Shame has no place in a conversation about health or healing.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:16",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "have no place in sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:no-place#s2",
+      "pos": "短语",
+      "glossZh": "出版地不详",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "书目用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:no-place#s3",
+      "pos": "短语",
+      "glossZh": "诺普莱斯（英格兰达勒姆郡村名）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作地名时写作 No Place。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

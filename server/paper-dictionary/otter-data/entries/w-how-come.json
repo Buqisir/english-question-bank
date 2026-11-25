@@ -1,0 +1,93 @@
+{
+  "entryId": "w:how-come",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "come"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "come"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how come",
+  "senses": [
+    {
+      "senseId": "w:how-come#s1",
+      "pos": "短语",
+      "glossZh": "为什么？怎么会……？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:how#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:how-come#e-d61f3dd4c660fba1",
+          "text": "How come they couldn’t see that?” I ran to my room and slammed the door.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "note": "后接陈述语序，常带有惊讶或不解的语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

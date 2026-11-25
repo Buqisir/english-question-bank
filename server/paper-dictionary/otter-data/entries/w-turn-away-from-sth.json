@@ -1,0 +1,216 @@
+{
+  "entryId": "w:turn-away-from-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "away",
+      "from",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "away",
+        "from",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turn away from",
+      "tags": []
+    },
+    {
+      "form": "turning away from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn away from sth",
+  "senses": [
+    {
+      "senseId": "w:turn-away-from-sth#s1",
+      "pos": "短语",
+      "glossZh": "不再采用；不再选择",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-away-from-sth#e-636a4a7ed79f419e",
+          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 101
+          },
+          "parts": [
+            [
+              84,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-away-from-sth#e-44015b48f5dadd3e",
+          "text": "Therefore, it may come as a surprise that Gen Z is turning away from screens and heading outdoors.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 68
+          },
+          "parts": [
+            [
+              51,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-away-from-sth#s2",
+      "pos": "短语",
+      "glossZh": "有意回避；拒绝面对",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-away-from-sth#e-edf57456b30895e1",
+          "text": "However, at times she seems to dare readers to turn away from her hope, as in a story about encouraging a child’s dream of playing in the NBA.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 61
+          },
+          "parts": [
+            [
+              47,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-away-from-sth#e-f807eb21b490a24a",
+          "text": "While untrue for the ostriches, it mirrors a common human behavior called “information avoidance” – the active choice to turn away from the freely available information highly relevant to ourselves.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 135
+          },
+          "parts": [
+            [
+              121,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              135
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

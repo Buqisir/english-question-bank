@@ -1,0 +1,156 @@
+{
+  "entryId": "w:because-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "because",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "because",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "because of",
+  "senses": [
+    {
+      "senseId": "w:because-of#s1",
+      "pos": "短语",
+      "glossZh": "因为；由于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:because#s2",
+        "w:of#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:because-of#e-e95c5b32d1dfa86c",
+          "text": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:because-of#e-f71cfa1fde1e9c1e",
+          "text": "So I absolutely think we will get more riders just because of short stories,\" she says.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          },
+          "parts": [
+            [
+              51,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:because-of#e-b37a8b3a8592e0c7",
+          "text": "Komodo National Park, officially recognized in 1980, is popular for ecotourism because of its unique biodiversity.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 89
+          },
+          "parts": [
+            [
+              79,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              89
+            ]
+          ]
+        }
+      ],
+      "note": "后接名词、代词或动名词。",
+      "counts": {
+        "gaokao": 6,
+        "mock": 76
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 76
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

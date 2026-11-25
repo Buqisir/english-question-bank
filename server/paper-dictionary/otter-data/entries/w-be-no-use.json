@@ -1,0 +1,133 @@
+{
+  "entryId": "w:be-no-use",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "no use"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "no",
+      "use"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "no",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "was no use",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be no use",
+  "senses": [
+    {
+      "senseId": "w:be-no-use#s1",
+      "pos": "短语",
+      "glossZh": "没用；不起作用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:use#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-no-use#e-03e7c79d9c64d06a",
+          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 131
+          },
+          "parts": [
+            [
+              121,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              131
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-no-use#e-382cf4efeb7da6f7",
+          "text": "She went right into the shower to washing it, but it was no use.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 63
+          },
+          "parts": [
+            [
+              53,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              63
+            ]
+          ]
+        }
+      ],
+      "note": "常用 it is no use doing sth 或 but it was no use。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

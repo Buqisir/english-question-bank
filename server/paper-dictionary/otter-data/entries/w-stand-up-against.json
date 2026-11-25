@@ -1,0 +1,109 @@
+{
+  "entryId": "w:stand-up-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stands up against"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "up",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "up",
+        "against"
+      ],
+      [
+        "stands",
+        "up",
+        "against"
+      ],
+      [
+        "standing",
+        "up",
+        "against"
+      ],
+      [
+        "stood",
+        "up",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand up against sb/sth",
+  "senses": [
+    {
+      "senseId": "w:stand-up-against#s1",
+      "pos": "短语",
+      "glossZh": "站出来反对；抵抗",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-up-against#e-273d10c2a3d96ef7",
+          "text": "“They could and they would,” said Mama, “unless somebody stands up against it and says no.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 74
+          },
+          "parts": [
+            [
+              57,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

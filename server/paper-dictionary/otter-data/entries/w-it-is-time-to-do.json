@@ -1,0 +1,172 @@
+{
+  "entryId": "w:it-is-time-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "it is time to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "it",
+      "is",
+      "time",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it",
+        "is",
+        "time",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "it is time to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it is time to do",
+  "senses": [
+    {
+      "senseId": "w:it-is-time-to-do#s1",
+      "pos": "短语",
+      "glossZh": "到该做……的时候了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:it-is-time-to-do#e-c3231d5ed96fd90e",
+          "text": "It is time to be serious about what you say.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:it-is-time-to-do#e-d7259fc7f79ff0c3",
+          "text": "But it is time to reshape that thinking.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:it-is-time-to-do#e-405d36dbe3cc5667",
+          "text": "But that is no longer true: as AI promises to transform how we work, and the four-day-workweek movement gains steam, it is time to admit once and for all that working more does not make you more productive.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 130
+          },
+          "parts": [
+            [
+              117,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

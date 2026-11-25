@@ -1,0 +1,88 @@
+{
+  "entryId": "w:drink-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drink",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drink",
+        "in"
+      ],
+      [
+        "drank",
+        "in"
+      ],
+      [
+        "drinking",
+        "in"
+      ],
+      [
+        "drinks",
+        "in"
+      ],
+      [
+        "drunk",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drink (sth) in",
+  "senses": [
+    {
+      "senseId": "w:drink-in#s1",
+      "pos": "短语",
+      "glossZh": "尽情欣赏；全神贯注地感受或吸收",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可接景色、声音或所听到的话。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:drink-in#s2",
+      "pos": "短语",
+      "glossZh": "（土壤等）吸收水分",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

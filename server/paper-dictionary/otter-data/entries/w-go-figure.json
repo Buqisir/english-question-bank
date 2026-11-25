@@ -1,0 +1,91 @@
+{
+  "entryId": "w:go-figure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "figure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "figure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go figure",
+  "senses": [
+    {
+      "senseId": "w:go-figure#s1",
+      "pos": "短语",
+      "glossZh": "真叫人想不通；你说怪不怪",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-figure#e-79954e5526fc5baa",
+          "text": "My friends and I decided to backpack around Tasmania in winter – go figure.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 74
+          },
+          "parts": [
+            [
+              65,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              74
+            ]
+          ]
+        }
+      ],
+      "note": "口语，常带调侃或无奈。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

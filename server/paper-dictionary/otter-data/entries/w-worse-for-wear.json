@@ -1,0 +1,137 @@
+{
+  "entryId": "w:worse-for-wear",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "worse",
+      "for",
+      "wear"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "worse",
+        "for",
+        "wear"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "worse for wear",
+  "senses": [
+    {
+      "senseId": "w:worse-for-wear#s1",
+      "pos": "短语",
+      "glossZh": "用旧了的；因劳累或折腾而状态变差的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:worse-for-wear#e-90e6e36c799e640f",
+          "text": "What does the underlined part “no worse for wear” in paragraph 1 mean?",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 48
+          },
+          "parts": [
+            [
+              34,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:worse-for-wear#e-6abbea8228e0e791",
+          "text": "But in recent years, scientists have discovered a rare group of people who consistently get little shut-eye and are no worse for wear.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 133
+          },
+          "parts": [
+            [
+              119,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              133
+            ]
+          ]
+        }
+      ],
+      "note": "no worse for wear 表示状态并未变差或并无大碍。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:worse-for-wear#s2",
+      "pos": "短语",
+      "glossZh": "喝醉而显得狼狈的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,131 @@
+{
+  "entryId": "w:ship-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "shipping out"
+  ],
+  "pattern": {
+    "tokens": [
+      "ship",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ship",
+        "out"
+      ],
+      [
+        "shipping",
+        "out"
+      ],
+      [
+        "shipped",
+        "out"
+      ],
+      [
+        "ships",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ship out",
+  "senses": [
+    {
+      "senseId": "w:ship-out#s1",
+      "pos": "短语",
+      "glossZh": "发运；把货物发出去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ship-out#e-8809904e65a3f3b2",
+          "text": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 56
+          },
+          "parts": [
+            [
+              44,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ship-out#s2",
+      "pos": "短语",
+      "glossZh": "出发；离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常指出海或离开驻地执行任务。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ship-out#s3",
+      "pos": "短语",
+      "glossZh": "把某人送走；赶走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

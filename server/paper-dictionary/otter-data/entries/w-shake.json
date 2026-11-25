@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 100
+    "mock": 60
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -117,7 +117,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -188,7 +188,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -214,175 +214,16 @@
       ]
     },
     {
-      "senseId": "w:shake#s4",
-      "pos": "短语",
-      "glossZh": "摇头",
+      "senseId": "w:shake#s7",
+      "pos": "v.",
+      "glossZh": "动摇",
       "pronunciationId": "w:shake#p-main",
-      "note": "shake one's head。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shake#e-468fb6826481f08a",
-          "text": "The man shook his head, barely looking up from his newspaper.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:shake#e-bde77369ce595b33",
-          "text": "Children swapped coins for stories, but Ruby shook her head.",
-          "source": {
-            "paperId": "paper-mock-chongqing-nankai-2026-m2",
-            "paperTitle": "重庆市高2026届高三第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:cloze:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 45,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:shake#e-5c2b53240a88248e",
-          "text": "“Oh, no,” I shook my head, my face flushing.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:5",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shake#s5",
-      "pos": "短语",
-      "glossZh": "握手",
-      "pronunciationId": "w:shake#p-main",
-      "note": "shake hands；shake sb's hand。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 2
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shake#e-588216454e12068f",
-          "text": "Are they just sitting together or are they shaking hands?” Clement declined to share how the cells connect or the mechanical properties of the resulting wood.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-d:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:shake#e-40e1ab72149a6cc0",
-          "text": "“Li Ming, from China,” I replied, shaking her hand tentatively.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:3",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shake#s6",
-      "pos": "短语",
-      "glossZh": "摆脱",
-      "pronunciationId": "w:shake#p-main",
-      "note": "shake off。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shake#e-cedb004f3f2ca0f3",
-          "text": "And I began to wonder how good it could feel to shake it off.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shake#s7",
-      "pos": "v.",
-      "glossZh": "动摇",
-      "pronunciationId": "w:shake#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
       "examples": []
     },
     {
@@ -390,12 +231,12 @@
       "pos": "n.",
       "glossZh": "摇动",
       "pronunciationId": "w:shake#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -410,6 +251,90 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:shake#s10",
+      "pos": "v.",
+      "glossZh": "使惊慌不安",
+      "pronunciationId": "w:shake#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:shake#s11",
+      "pos": "v.",
+      "glossZh": "打破常规、改变现状（shake up）",
+      "pronunciationId": "w:shake#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shake#e-6d94742a0f9176ac",
+          "text": "Another plus to shaking things up with your exercise routine, especially if you prefer one activity, is that it helps prevent the plateau (高原) effect.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:shake#e-4b53fb8a523efede",
+          "text": "Another area VR is shaking up is the gaming industry, as it enhances a game’s storytelling by making players part of its world.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:shake#e-2104915ea83f817c",
+          "text": "That’s why it’s important to shake things up every now and again.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -418,6 +343,14 @@
       "reason": "物理学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:shake-hands",
+    "w:shake-off",
+    "w:shake-ones-hand",
+    "w:shake-ones-head"
+  ]
 }

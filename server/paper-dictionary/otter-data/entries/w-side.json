@@ -71,8 +71,8 @@
     "mock": 161
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 156
+    "gaokao": 10,
+    "mock": 20
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -117,7 +117,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -331,7 +331,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -383,7 +383,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -447,113 +447,6 @@
       ]
     },
     {
-      "senseId": "w:side#s7",
-      "pos": "短语",
-      "glossZh": "支持某人",
-      "pronunciationId": "w:side#p-main",
-      "note": "be on somebody’s side。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:side#e-cb16aa2aaf1959f9",
-          "text": "Remember, your doctor and other caregivers are on your side.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-ii:36",
-              "option": "E",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:side#s8",
-      "pos": "短语",
-      "glossZh": "并排",
-      "pronunciationId": "w:side#p-main",
-      "note": "side by side。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:side#e-a8ec595f4aa914f8",
-          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 112,
-            "end": 116
-          }
-        },
-        {
-          "exampleId": "w:side#e-e32cd3cd6914c675",
-          "text": "I am running a half-marathon with my best friend soon and she has suggested we run side by side.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 90,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:side#e-1f13b5ff4d324de4",
-          "text": "Built on solid academic training and driven by a clear goal – to give AI true mathematical reasoning ability – she is leading Axiom Math toward a future where machines and mathematicians work side by side.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 192,
-            "end": 196
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:side#s9",
       "pos": "n.",
       "glossZh": "（几何图形的）边",
@@ -585,12 +478,12 @@
       "glossZh": "支持某一方",
       "pronunciationId": "w:side#p-main",
       "note": "side with。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -598,12 +491,12 @@
       "pos": "n.",
       "glossZh": "（家族的）一支",
       "pronunciationId": "w:side#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -617,6 +510,19 @@
       "reason": "专名或地区用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-on-ones-side",
+    "w:bright-side",
+    "w:look-on-the-bright-side",
+    "w:on-ones-side",
+    "w:on-the-other-side-of",
+    "w:side-by-side",
+    "w:side-with",
+    "w:the-other-side-of-the-coin",
+    "w:wrong-side-of-town"
+  ]
 }

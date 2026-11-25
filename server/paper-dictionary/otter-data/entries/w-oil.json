@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 33
+    "mock": 3
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -252,12 +252,12 @@
       "glossZh": "油彩",
       "pronunciationId": "w:oil#p-main",
       "note": "常以复数 oils 出现。oil painting 表示「油画」。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -298,13 +298,65 @@
       "pos": "v.",
       "glossZh": "给……上油",
       "pronunciationId": "w:oil#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:oil#s7",
+      "pos": "n.",
+      "glossZh": "油；油状液体",
+      "pronunciationId": "w:oil#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:oil#e-842330fccbdbd54a",
+          "text": "Within the container was her filtration system, Heller chose a reusable magnetic (磁性的) oil called ferrofluid to selectively bind to microplastics as water flows through her filtration system.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:oil#e-d545c80dcf698744",
+          "text": "To make the game more challenging, players apply oil to their bodies, making them slippery and hard to grab.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 52
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -313,6 +365,9 @@
       "reason": "孤立缩写，缺乏可辨词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:oil-and-water"
+  ]
 }

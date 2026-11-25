@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 163
+    "mock": 28
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -176,7 +176,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -209,7 +209,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -272,13 +272,59 @@
       "pos": "v.",
       "glossZh": "召回",
       "pronunciationId": "w:recall#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:recall#s7",
+      "pos": "v.",
+      "glossZh": "使人想起",
+      "pronunciationId": "w:recall#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:recall#s8",
+      "pos": "n.",
+      "glossZh": "犬只应召返回",
+      "pronunciationId": "w:recall#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 19
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recall#e-1864176973a8398e",
+          "text": "This can result in your recall becoming unreliable as soon as the dog finds something interesting to do, whether it's as simple as following a quiet path or as dangerous as running after small animals.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -291,6 +337,6 @@
       "reason": "政治专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

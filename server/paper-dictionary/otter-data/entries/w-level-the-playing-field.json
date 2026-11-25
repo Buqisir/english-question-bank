@@ -1,0 +1,132 @@
+{
+  "entryId": "w:level-the-playing-field",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "level",
+      "the",
+      "playing",
+      "field"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "level",
+        "the",
+        "playing",
+        "field"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "leveling the playing field",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "level the playing field",
+  "senses": [
+    {
+      "senseId": "w:level-the-playing-field#s1",
+      "pos": "短语",
+      "glossZh": "消除原有的劣势；创造公平竞争条件",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:level#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:level-the-playing-field#e-bf28f5095ac2e5fd",
+          "text": "Yet I wanted to level the playing field with one of the birthday presents I was expecting.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 39
+          },
+          "parts": [
+            [
+              16,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:level-the-playing-field#e-0db48a8334a18619",
+          "text": "“It’s just leveling the playing field,” said Shinbane.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 37
+          },
+          "parts": [
+            [
+              11,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,180 @@
+{
+  "entryId": "w:go-to-waste",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes to waste",
+    "went to waste"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "waste"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "waste"
+      ],
+      [
+        "goes",
+        "to",
+        "waste"
+      ],
+      [
+        "went",
+        "to",
+        "waste"
+      ],
+      [
+        "going",
+        "to",
+        "waste"
+      ],
+      [
+        "gone",
+        "to",
+        "waste"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to waste",
+  "senses": [
+    {
+      "senseId": "w:go-to-waste#s1",
+      "pos": "短语",
+      "glossZh": "白白浪费掉；没能得到利用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s42",
+        "w:waste#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-to-waste#e-d14e6a8e1860cb8c",
+          "text": "Like most of us, I try to be mindful of food that goes to waste.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 63
+          },
+          "parts": [
+            [
+              50,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-waste#e-8ecbde3b1e493eda",
+          "text": "“It’s nice,” says Charlton, “not to see things go to waste when they’ve got so much more life in them.”",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 58
+          },
+          "parts": [
+            [
+              47,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-waste#e-ce6246a3d12a1922",
+          "text": "We’re just watching them rot.” The old folks still farmed, but without a way to reach customers, their harvest went to waste.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 124
+          },
+          "parts": [
+            [
+              111,
+              124
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              124
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

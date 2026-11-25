@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-use",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "use"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in use",
+  "senses": [
+    {
+      "senseId": "w:in-use#s1",
+      "pos": "短语",
+      "glossZh": "在使用中；正在使用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s91",
+        "w:use#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-use#e-7c1dcf409cf58e40",
+          "text": "Staff in care homes have reported a reduction in the use of medicine where hens are in use.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-c-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 90
+          },
+          "parts": [
+            [
+              84,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-use#e-84662d507c89fd3d",
+          "text": "Begin by looking around your home for objects that are no longer in use.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
+          },
+          "parts": [
+            [
+              65,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-use#e-42af566134ce56ab",
+          "text": "Turning off location access when the app is not in use.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:22#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          },
+          "parts": [
+            [
+              48,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

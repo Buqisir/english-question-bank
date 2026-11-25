@@ -95,8 +95,8 @@
     "mock": 806
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 803
+    "gaokao": 18,
+    "mock": 625
   },
   "senses": [
     {
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -178,7 +178,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 68,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -391,7 +391,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -462,7 +462,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -533,7 +533,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -585,7 +585,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -649,294 +649,6 @@
       ]
     },
     {
-      "senseId": "w:back#s9",
-      "pos": "短语",
-      "glossZh": "往返；来回",
-      "pronunciationId": "w:back#p-main",
-      "note": "back and forth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:back#e-212636938099dd2c",
-          "text": "I spent the whole morning shuttling back and forth across the harbor.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:back#e-f919ec875da61c88",
-          "text": "Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:back#e-b482ecd2d6fd2812",
-          "text": "She goes back and forth between machines to make the drinks.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:back#s10",
-      "pos": "短语",
-      "glossZh": "回顾；回想",
-      "pronunciationId": "w:back#p-main",
-      "note": "look back (on sth)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:back#e-39d469f40231fca1",
-          "text": "I’m hands-on with them every day at the zoo, and I do look back very fondly on the time that we had them.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 63
-          }
-        },
-        {
-          "exampleId": "w:back#e-5dd034a9d74e280e",
-          "text": "You’ll want to look back on your journey to see how far you’ve come.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:back#e-c5074c62c174a310",
-          "text": "Still, looking back on the photos, they are some of my best shots though they could have been so much better if I had been prepared and managed my time wisely.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:back#s11",
-      "pos": "短语",
-      "glossZh": "使重新出现；使想起",
-      "pronunciationId": "w:back#p-main",
-      "note": "bring sth back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:back#e-8d82a0631f8bdd1f",
-          "text": "But some ecologists and fashion (时装)enthusiasts are trying to bring back the market for fur made from nutria(海狸鼠).",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 68,
-            "end": 72
-          }
-        },
-        {
-          "exampleId": "w:back#e-533d35152cfff986",
-          "text": "The experience brought back the pastime of going to the cinema – one that I think we should continue to enjoy.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 23,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:back#e-fa966a73302053a9",
-          "text": "Together, they brought the paper back to life; it’s now a successful publication featuring hundreds of stories in print and online from over 70 contributors.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:back#s12",
-      "pos": "短语",
-      "glossZh": "克制；抑制；阻挡",
-      "pronunciationId": "w:back#p-main",
-      "note": "hold back、bite back 等。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:back#e-506b20f0bc6b5e39",
-          "text": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 65
-          }
-        },
-        {
-          "exampleId": "w:back#e-5efa20ff74fade5f",
-          "text": "I bit back my frustration(懊恼).",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "writing-continuation-6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        },
-        {
-          "exampleId": "w:back#e-ceee5666203c331b",
-          "text": "I felt he treated me as though I would hold him back and probably make him fail to get an A in the course.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:back#s13",
       "pos": "v.",
       "glossZh": "支持；为……提供证据",
@@ -945,7 +657,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -1005,7 +717,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -1068,6 +780,104 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:back#s17",
+      "pos": "n.",
+      "glossZh": "支持；资助（backing）",
+      "pronunciationId": "w:back#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:back#e-bfd5b8a7babe2f48",
+          "text": "Later, Union Square contributed the first of $9.3 million in backing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:back#e-cd0ee6e3aca6225c",
+          "text": "Thanks to his backing, over 80 kids participate free of charge each summer for 4 weeks.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:back#s18",
+      "pos": "短语",
+      "glossZh": "减少；削减（cut back）",
+      "pronunciationId": "w:back#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:back#s19",
+      "pos": "短语",
+      "glossZh": "修剪（植物）；剪短（cut back）",
+      "pronunciationId": "w:back#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:back#e-1b69b488656c0780",
+          "text": "Cutting them back gives you new pieces to grow more plants.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -1076,6 +886,67 @@
       "reason": "专业、方言或历史用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:ask-back",
+    "w:back-and-forth",
+    "w:back-down",
+    "w:back-off",
+    "w:back-up",
+    "w:bite-back",
+    "w:bounce-back",
+    "w:bring-sth-back",
+    "w:call-back",
+    "w:choke-back",
+    "w:circle-back",
+    "w:come-back",
+    "w:cut-back",
+    "w:date-back",
+    "w:die-back",
+    "w:double-back",
+    "w:draw-back",
+    "w:drop-back",
+    "w:fall-back",
+    "w:fall-back-into-sth",
+    "w:feed-back",
+    "w:fight-back",
+    "w:fight-back-tears",
+    "w:get-back-to",
+    "w:get-sth-back",
+    "w:give-back",
+    "w:give-back-to",
+    "w:go-back",
+    "w:go-back-a-long-way",
+    "w:go-back-and-do-sth",
+    "w:go-back-and-forth",
+    "w:go-back-in-time",
+    "w:hang-back",
+    "w:hold-sb-sth-back",
+    "w:look-back",
+    "w:look-back-on-sth",
+    "w:make-it-back",
+    "w:on-the-back-of",
+    "w:pay-back",
+    "w:pull-back",
+    "w:push-back",
+    "w:put-back",
+    "w:reach-back-to-sth",
+    "w:roll-back",
+    "w:send-back",
+    "w:shoot-back",
+    "w:sit-back",
+    "w:stay-back",
+    "w:step-back",
+    "w:take-a-step-back",
+    "w:take-back",
+    "w:talk-back",
+    "w:think-back",
+    "w:throw-back",
+    "w:turn-back",
+    "w:turn-the-clock-back",
+    "w:way-back"
+  ]
 }

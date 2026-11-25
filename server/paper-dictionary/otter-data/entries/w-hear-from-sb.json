@@ -1,0 +1,229 @@
+{
+  "entryId": "w:hear-from-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hear from"
+  ],
+  "pattern": {
+    "tokens": [
+      "hear",
+      "from",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hear",
+        "from",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "hear",
+        "from"
+      ],
+      [
+        "heard",
+        "from"
+      ],
+      [
+        "hearing",
+        "from"
+      ],
+      [
+        "hears",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "heard from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hear from sb",
+  "senses": [
+    {
+      "senseId": "w:hear-from-sb#s1",
+      "pos": "短语",
+      "glossZh": "收到某人的来信、消息或回复",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hear#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hear-from-sb#e-ba7df02a9d773eae",
+          "text": "We’ve heard from many of you – even a note tied to a rock thrown through our window!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hear-from-sb#e-86d44a0427391a5a",
+          "text": "Last spring, I was waiting to hear from my editors about my second novel.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hear-from-sb#e-58a851114715223a",
+          "text": "I heard from many people who already made daily visits, or who liked the idea of making daily visits, to places such as: the beach, public library, hiking trails, and even a castle!",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:hear-from-sb#s2",
+      "pos": "短语",
+      "glossZh": "听某人介绍情况或发表意见",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hear-from-sb#e-93c714db7b795700",
+          "text": "Hear from accomplished Yale staff and leading practitioners about the most important and relevant topics in their fields.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "cell:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a:ocr-916a21169272a7ae:3:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "常用于介绍演讲、访谈等环节。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

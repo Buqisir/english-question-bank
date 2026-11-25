@@ -1,0 +1,156 @@
+{
+  "entryId": "w:as-opposed-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "opposed",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "opposed",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as opposed to",
+  "senses": [
+    {
+      "senseId": "w:as-opposed-to#s1",
+      "pos": "短语",
+      "glossZh": "而不是；与……相比有所不同",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:oppose#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-opposed-to#e-effce61eebf99a85",
+          "text": "Phrases like “I have limited access to email” and “I’ll respond as soon as I get back” sound like you’re being held against your will from working as opposed to making the most of your time off.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 160
+          },
+          "parts": [
+            [
+              147,
+              160
+            ]
+          ],
+          "highlightRanges": [
+            [
+              147,
+              160
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-opposed-to#e-c4191800d21f57be",
+          "text": "The use of a third party or generative artificial intelligence or machine learning software to develop an applicant’s work, as opposed to assisting their application to suggest minor edits or to identify grammatical errors, is forbidden.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a:18",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 137
+          },
+          "parts": [
+            [
+              124,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              137
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-opposed-to#e-855ec9509fc47a70",
+          "text": "That changed in 2017 when Netflix presented an all-new adaptation of the novels as Anne with an E. As opposed to almost every other adaptation of the books, Netflix dug into the story’s implied darkness and went with an “edgy” (前卫的) approach to the story that had its devoted fans up in arms.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 112
+          },
+          "parts": [
+            [
+              99,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              112
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 575
+    "mock": 381
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 107,
-        "mock": 0
+        "mock": 130
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -281,47 +281,13 @@
       "pos": "v.",
       "glossZh": "放置；埋设",
       "pronunciationId": "w:plant#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:plant#s5",
-      "pos": "短语",
-      "glossZh": "播下……的种子（使想法等形成）",
-      "pronunciationId": "w:plant#p-main",
-      "note": "plant the seed of。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:plant#e-b78c9aacfedfb35a",
-          "text": "On the walls hang the photos of the destructive 1966 Arno flood that planted the seed of her story.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 69,
-            "end": 76
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "senseId": "w:plant#s6",
@@ -343,6 +309,11 @@
       "reason": "期刊名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:plant-the-seed-of"
+  ]
 }

@@ -62,82 +62,10 @@
     "mock": 377
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 375
+    "gaokao": 15,
+    "mock": 204
   },
   "senses": [
-    {
-      "senseId": "w:care#s1",
-      "pos": "短语",
-      "glossZh": "照顾；照料；负责处理",
-      "pronunciationId": "w:care#p-main",
-      "note": "take care of",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:care#e-475e7c940bfbb6e1",
-          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 168,
-            "end": 172
-          }
-        },
-        {
-          "exampleId": "w:care#e-dec8c6b8c6c32a1b",
-          "text": "“You have to organize the activities of the children and take care of the bills and groceries.”",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:care#e-1922cf30937c0228",
-          "text": "Be invested in taking care of it, but if it dies, go get another one,” Detrinidad says.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:care#s2",
       "pos": "n.",
@@ -146,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 75
       },
       "folded": false,
       "examples": [
@@ -217,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -289,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -360,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -413,7 +341,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -491,6 +419,13 @@
       "reason": "专名或旧式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:care-for",
+    "w:take-care",
+    "w:take-care-of"
+  ]
 }

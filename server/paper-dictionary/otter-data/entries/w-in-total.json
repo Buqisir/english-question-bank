@@ -1,0 +1,154 @@
+{
+  "entryId": "w:in-total",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "total"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "total"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in total",
+  "senses": [
+    {
+      "senseId": "w:in-total#s1",
+      "pos": "短语",
+      "glossZh": "总共；合计",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:total#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-total#e-3019de361b8b3b89",
+          "text": "In total, the researchers used images of 18 bird species – six local and 12 non-local – as targets.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-total#e-6c60900530b7a6aa",
+          "text": "If there are 240 individual contestants, how many medals could be awarded in total?",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-guangdong-shenzhen-2026-03-first:23",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 82
+          },
+          "parts": [
+            [
+              74,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-total#e-ca443d82e24d8e58",
+          "text": "In total, 12 out of 20 health indicators fell to record levels for two years.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 23
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

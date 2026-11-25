@@ -1,0 +1,132 @@
+{
+  "entryId": "w:cut-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "it"
+      ],
+      [
+        "cuts",
+        "it"
+      ],
+      [
+        "cutting",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut it",
+  "senses": [
+    {
+      "senseId": "w:cut-it#s1",
+      "pos": "短语",
+      "glossZh": "够用；达到要求；奏效",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cut#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cut-it#e-f9b10dd390b6bbda",
+          "text": "What does the underlined phrase “cut it” in paragraph 1 probably mean?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          },
+          "parts": [
+            [
+              33,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-it#e-a7db246fc088f8be",
+          "text": "Andrew Duhe wanted to do something special to celebrate the 40th birthday of his wife, Jennifer Duhe, and jewelry or flowers would not cut it.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 135,
+            "end": 141
+          },
+          "parts": [
+            [
+              135,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              135,
+              141
+            ]
+          ]
+        }
+      ],
+      "note": "常用于否定句，如 won't cut it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

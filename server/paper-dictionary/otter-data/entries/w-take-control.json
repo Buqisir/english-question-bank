@@ -1,0 +1,172 @@
+{
+  "entryId": "w:take-control",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took control"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "control"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "control"
+      ],
+      [
+        "took",
+        "control"
+      ],
+      [
+        "taken",
+        "control"
+      ],
+      [
+        "takes",
+        "control"
+      ],
+      [
+        "taking",
+        "control"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take control",
+  "senses": [
+    {
+      "senseId": "w:take-control#s1",
+      "pos": "短语",
+      "glossZh": "掌握控制权；开始主导局面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-control#e-c8e285d07d11212e",
+          "text": "Always be the first to speak in a conversation to take control.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-control#e-6c769355673ba837",
+          "text": "She took control of the situation.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 16
+          },
+          "parts": [
+            [
+              4,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-control#e-752174130aa305fe",
+          "text": "“A teenager will want to be more independent and feel responsible for themselves, and having a space for themselves in their room allows them to take control,” he said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 157
+          },
+          "parts": [
+            [
+              145,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              157
+            ]
+          ]
+        }
+      ],
+      "note": "常用 take control of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

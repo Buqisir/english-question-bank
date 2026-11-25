@@ -1,0 +1,115 @@
+{
+  "entryId": "w:open-the-door",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "opening the door"
+  ],
+  "pattern": {
+    "tokens": [
+      "open",
+      "the",
+      "door"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "open",
+        "the",
+        "door"
+      ],
+      [
+        "opening",
+        "the",
+        "door"
+      ],
+      [
+        "opened",
+        "the",
+        "door"
+      ],
+      [
+        "opens",
+        "the",
+        "door"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "opens the door",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "open the door",
+  "senses": [
+    {
+      "senseId": "w:open-the-door#s1",
+      "pos": "短语",
+      "glossZh": "为……创造机会；使……成为可能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:open-the-door#e-13e2b6bda39f26a7",
+          "text": "Aside from relevancy, this personal contextualization opens the door for engaging with critical questions not usually covered by standards.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 68
+          },
+          "parts": [
+            [
+              54,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              68
+            ]
+          ]
+        }
+      ],
+      "note": "常用 open the door to sth 或 open the door for sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

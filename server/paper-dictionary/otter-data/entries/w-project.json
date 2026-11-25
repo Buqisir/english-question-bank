@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 10,
-    "mock": 522
+    "mock": 324
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 47,
-        "mock": 0
+        "mock": 141
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 1
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -270,12 +270,12 @@
       "pos": "v.",
       "glossZh": "投射（光或影像）",
       "pronunciationId": "w:project#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -283,12 +283,12 @@
       "pos": "v.",
       "glossZh": "预测",
       "pronunciationId": "w:project#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -296,12 +296,12 @@
       "pos": "v.",
       "glossZh": "展现（某种形象）",
       "pronunciationId": "w:project#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -309,12 +309,12 @@
       "pos": "v.",
       "glossZh": "把自己的感受归到别人身上",
       "pronunciationId": "w:project#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -328,6 +328,6 @@
       "reason": "神经科学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

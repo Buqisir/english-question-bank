@@ -42,8 +42,8 @@
     "mock": 212
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 212
+    "gaokao": 10,
+    "mock": 105
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 107
       },
       "folded": false,
       "examples": [
@@ -117,78 +117,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:fact#s2",
-      "pos": "短语",
-      "glossZh": "事实上",
-      "pronunciationId": "w:fact#p-main",
-      "note": "in fact。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fact#e-91a82247adf86746",
-          "text": "In fact,most people only absorb about 20 percent of a speaker’s message.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:fact#e-30c39ef23d5e0c4f",
-          "text": "In fact, Royte writes, “if food waste were a country, it would be the third largest producer of greenhouse gases in the world.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "reading-b-3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:fact#e-d1b5d85851f51d79",
-          "text": "In fact, building work ethic (道德) in kids doesn’t require military-style drills.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -197,6 +125,11 @@
       "reason": "旧式法律义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-fact"
+  ]
 }

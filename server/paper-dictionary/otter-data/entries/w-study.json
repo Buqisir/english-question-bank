@@ -62,8 +62,8 @@
     "mock": 1227
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 1226
+    "gaokao": 10,
+    "mock": 1033
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -341,7 +341,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 114,
-        "mock": 0
+        "mock": 97
       },
       "folded": false,
       "examples": [
@@ -413,7 +413,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -529,69 +529,16 @@
       ]
     },
     {
-      "senseId": "w:study#s8",
-      "pos": "短语",
-      "glossZh": "社会课",
-      "pronunciationId": "w:study#p-main",
-      "note": "social studies。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:study#e-cbd650281c9162a3",
-          "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:study#e-97f97f10af6d1d4b",
-          "text": "He turned and looked at his fellow students, who watched him expectantly as his social studies teacher, Ms. Hargrove, smiled at him reassuringly.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 87,
-            "end": 94
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:study#s9",
       "pos": "n.",
       "glossZh": "书房",
       "pronunciationId": "w:study#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -614,6 +561,8 @@
       "reason": "戏剧、棋艺或过时用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

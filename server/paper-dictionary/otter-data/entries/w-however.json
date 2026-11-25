@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 693
+    "mock": 495
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 71,
-        "mock": 0
+        "mock": 197
       },
       "folded": false,
       "examples": [
@@ -150,12 +150,12 @@
       "glossZh": "无论用什么方式",
       "pronunciationId": "w:however#p-main",
       "note": "如 However you do it, be careful。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -174,6 +174,6 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

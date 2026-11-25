@@ -35,8 +35,8 @@
     "mock": 614
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 614
+    "gaokao": 28,
+    "mock": 527
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -180,126 +180,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:such#s3",
-      "pos": "短语",
-      "glossZh": "例如",
-      "pronunciationId": "w:such#p-main",
-      "note": "such as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 26,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:such#e-70282516fc218c50",
-          "text": "This college-level course in creative storytelling functions as an introduction to a variety of storytelling techniques that appear in different forms of creative writing, such as short fiction and playwriting.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 172,
-            "end": 176
-          }
-        },
-        {
-          "exampleId": "w:such#e-be4c119b1d34e55e",
-          "text": "There are alternatives to constant written communication, such as leaving voice messages or having a group chat.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:such#e-db38c9d6a11a4041",
-          "text": "It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:such#s4",
-      "pos": "短语",
-      "glossZh": "使得",
-      "pronunciationId": "w:such#p-main",
-      "note": "such that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:such#e-149e82dfe8dd2479",
-          "text": "Then I can spare some time to learn it again, such that we can practice together on every day.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:such#s5",
-      "pos": "短语",
-      "glossZh": "因此",
-      "pronunciationId": "w:such#p-main",
-      "note": "as such，对前文明确的身份可译为以此身份。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -308,6 +188,18 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:and-such",
+    "w:as-such",
+    "w:no-such-luck",
+    "w:no-such-thing-as",
+    "w:no-such-thing-as-slot",
+    "w:such-as",
+    "w:such-slot-as-slot",
+    "w:such-that"
+  ]
 }

@@ -1,0 +1,166 @@
+{
+  "entryId": "w:give-back-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "give",
+      "back",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "back",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "give back to",
+      "tags": []
+    },
+    {
+      "form": "giving back to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give back to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:give-back-to#s1",
+      "pos": "短语",
+      "glossZh": "回馈（社区、社会等）；以行动作出贡献",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:give#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-back-to#e-62b75cc0b8458e49",
+          "text": "Consider giving back to the communities you’re visiting.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back-to#e-108220a8e3934127",
+          "text": "Volunteering as a group with Washington Trails Association (WTA) is a valuable way to give back to nature.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 98
+          },
+          "parts": [
+            [
+              86,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-back-to#e-f874ebddc272c702",
+          "text": "You want to give back to your community, but you may not know where to begin.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

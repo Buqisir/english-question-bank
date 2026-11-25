@@ -71,8 +71,8 @@
     "mock": 459
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 457
+    "gaokao": 3,
+    "mock": 260
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 37,
-        "mock": 0
+        "mock": 167
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -258,7 +258,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -322,40 +322,6 @@
       ]
     },
     {
-      "senseId": "w:mean#s5",
-      "pos": "短语",
-      "glossZh": "出于好意",
-      "pronunciationId": "w:mean#p-main",
-      "note": "mean well。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mean#e-0989513bfbdb1f69",
-          "text": "I knew the coach meant well – he thought he was doing the right thing.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "writing-continuation-6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:mean#s6",
       "pos": "adj.",
       "glossZh": "刻薄的；不友善的",
@@ -363,7 +329,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -462,18 +428,37 @@
       "examples": []
     },
     {
-      "senseId": "w:mean#s11",
-      "pos": "短语",
-      "glossZh": "对某人很重要",
+      "senseId": "w:mean#s12",
+      "pos": "adj.",
+      "glossZh": "微不足道的",
       "pronunciationId": "w:mean#p-main",
-      "note": "mean a lot to sb。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mean#e-eba340f55231a574",
+          "text": "Nowadays, meaningfully connecting with new people is no mean achievement.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -490,6 +475,15 @@
       "reason": "非正式用法，本批语料无证据"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:how-do-you-mean",
+    "w:mean-a-lot-to-sb",
+    "w:mean-everything-to",
+    "w:mean-to",
+    "w:mean-well"
+  ]
 }

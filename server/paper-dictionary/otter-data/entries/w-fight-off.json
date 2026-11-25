@@ -1,0 +1,166 @@
+{
+  "entryId": "w:fight-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fighting off"
+  ],
+  "pattern": {
+    "tokens": [
+      "fight",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fight",
+        "off"
+      ],
+      [
+        "fighting",
+        "off"
+      ],
+      [
+        "fights",
+        "off"
+      ],
+      [
+        "fought",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fight off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fight off sb/sth",
+  "senses": [
+    {
+      "senseId": "w:fight-off#s1",
+      "pos": "短语",
+      "glossZh": "抵抗病原体；抵御或战胜疾病",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fight-off#e-c4ae416ed57b8f3c",
+          "text": "Fighting Off Winter Illnesses",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fight-off#e-a240feaa536bf831",
+          "text": "Afterwards, Shimon linked their research to his own, proving that Foxp3 aids in the creation and the operation of regulatory T cells, ensuring that the immune system is strong enough to fight off microbes and at the same time controlled enough not to injure the body.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 186,
+            "end": 195
+          },
+          "parts": [
+            [
+              186,
+              195
+            ]
+          ],
+          "highlightRanges": [
+            [
+              186,
+              195
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fight-off#s2",
+      "pos": "短语",
+      "glossZh": "击退攻击者；挡住攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fight-off#s3",
+      "pos": "短语",
+      "glossZh": "竭力抵挡（睡意、情绪等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

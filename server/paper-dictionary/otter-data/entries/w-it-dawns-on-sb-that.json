@@ -1,0 +1,76 @@
+{
+  "entryId": "w:it-dawns-on-sb-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it",
+      "dawns",
+      "on",
+      {
+        "slot": "sb"
+      },
+      "that",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it",
+        "dawns",
+        "on",
+        {
+          "slot": "sb"
+        },
+        "that",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it dawns on sb that …",
+  "senses": [
+    {
+      "senseId": "w:it-dawns-on-sb-that#s1",
+      "pos": "短语",
+      "glossZh": "某人这才意识到……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:dawn#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

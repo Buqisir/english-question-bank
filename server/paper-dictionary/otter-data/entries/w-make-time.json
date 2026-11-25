@@ -1,0 +1,199 @@
+{
+  "entryId": "w:make-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making time"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "time"
+      ],
+      [
+        "making",
+        "time"
+      ],
+      [
+        "made",
+        "time"
+      ],
+      [
+        "makes",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make time",
+  "senses": [
+    {
+      "senseId": "w:make-time#s1",
+      "pos": "短语",
+      "glossZh": "（为某人或某事）腾出时间；抽空",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-time#e-906a3c57949cee4e",
+          "text": "I stopped making time for new hobbies or trying anything new.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 21
+          },
+          "parts": [
+            [
+              10,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-time#e-1115b014aad4f406",
+          "text": "Eating well, making time for physical activity, and sticking to a good sleep routine all help boost our ability to pay attention for longer.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 24
+          },
+          "parts": [
+            [
+              13,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-time#e-07ee4c22336dde88",
+          "text": "One family made time for a family backpacking adventure.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make time for sb/sth 或 make time to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:make-time#s2",
+      "pos": "短语",
+      "glossZh": "加紧赶路；赶回耽搁的时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-time#s3",
+      "pos": "短语",
+      "glossZh": "追求某人；向某人献殷勤",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式口语，常用 make time with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

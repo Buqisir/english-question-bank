@@ -1,0 +1,158 @@
+{
+  "entryId": "w:early-bird",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "early",
+      "bird"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "early",
+        "bird"
+      ],
+      [
+        "early",
+        "birds"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "early bird",
+  "senses": [
+    {
+      "senseId": "w:early-bird#s1",
+      "pos": "短语",
+      "glossZh": "早起的人；较早到达或抢先行动的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:early-bird#e-2fb74767411dcde5",
+          "text": "It’s true the early bird gets the worm, but we can’t forget the early worm gets caught.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          },
+          "parts": [
+            [
+              14,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:early-bird#e-1a223b97dd7362ec",
+          "text": "Early Bird: apply before May 18→20% off",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-a",
+            "locator": {
+              "paragraph": 29,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-a:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:early-bird#e-d687eb99026bc17d",
+          "text": "The early bird catches the worm.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:34#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "early bird discount 指给提前报名或购买的人提供的折扣。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

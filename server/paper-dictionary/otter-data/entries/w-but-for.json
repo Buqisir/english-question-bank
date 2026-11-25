@@ -1,0 +1,103 @@
+{
+  "entryId": "w:but-for",
+  "headword": "but for sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "but",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "but",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "but for",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:but-for#s1",
+      "pos": "短语",
+      "glossZh": "要不是；如果没有",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:but#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:but-for#e-aabd0b991df1da1b",
+          "text": "I glanced at his gentle-faced wife, and knew that but for this Cerberus I’d have a slice of that meat pie.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          },
+          "parts": [
+            [
+              50,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              57
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "mock",
+  "folded": false
+}

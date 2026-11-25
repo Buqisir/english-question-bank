@@ -1,0 +1,376 @@
+{
+  "entryId": "w:go-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes up",
+    "going up",
+    "went up"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "up"
+      ],
+      [
+        "goes",
+        "up"
+      ],
+      [
+        "going",
+        "up"
+      ],
+      [
+        "went",
+        "up"
+      ],
+      [
+        "gone",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go up",
+  "senses": [
+    {
+      "senseId": "w:go-up#s1",
+      "pos": "短语",
+      "glossZh": "（数值、价格等）上升；增加",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-up#e-b6d2f81475f5011e",
+          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 224,
+            "end": 229
+          },
+          "parts": [
+            [
+              224,
+              229
+            ]
+          ],
+          "highlightRanges": [
+            [
+              224,
+              229
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-up#e-035e5e895340ab21",
+          "text": "Many prices started going up in early 2021, nearly two years before the rapid growth AI.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          },
+          "parts": [
+            [
+              20,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-up#e-8cf23c795578178d",
+          "text": "Research found that multitasking goes up when meetings are remote or boring.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          },
+          "parts": [
+            [
+              33,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:go-up#s2",
+      "pos": "短语",
+      "glossZh": "走近；走上前去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-up#e-07fa638d4537bf10",
+          "text": "I went up to my new teammate and introduced myself.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          },
+          "parts": [
+            [
+              2,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-up#e-92455db16b9d614c",
+          "text": "I tried to put a $20 bill in the man’s hand, but he wouldn’t take it, so instead I went up to the truck and gave it to his wife as quietly as I could.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          },
+          "parts": [
+            [
+              83,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              90
+            ]
+          ]
+        }
+      ],
+      "note": "go up to sb/sth",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-up#s3",
+      "pos": "短语",
+      "glossZh": "向上移动；升高",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-up#e-10e3b19190590e81",
+          "text": "“I’m going up there!” I stormed to the third floor, playing my angry speech in my head, “Keep it down!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-up#e-289bf376609449f2",
+          "text": "Just a minute before the referee stopped the game, an Academy shot went up and rolled around the rim (篮圈).",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-up#e-43614be71a843b81",
+          "text": "The unique roof features stepped levels going up from the center, like the way mountains rise on either side of a valley.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:go-up#s4",
+      "pos": "短语",
+      "glossZh": "（建筑物等）搭建起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

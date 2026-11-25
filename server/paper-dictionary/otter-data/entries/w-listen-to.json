@@ -1,0 +1,275 @@
+{
+  "entryId": "w:listen-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "listen",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "listen",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "listened to",
+      "tags": []
+    },
+    {
+      "form": "listening to",
+      "tags": []
+    },
+    {
+      "form": "listens to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "listen to",
+  "senses": [
+    {
+      "senseId": "w:listen-to#s1",
+      "pos": "短语",
+      "glossZh": "听；倾听",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:to#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:listen-to#e-7509049b890c6f65",
+          "text": "And are listening to and viewing content as effective as reading the written word when covering the same material?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 20
+          },
+          "parts": [
+            [
+              8,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-to#e-5cf9619ca546b4b2",
+          "text": "People want to listen to someone who is interesting, relaxed and comfortable.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-to#e-6ba63c8e2f18f517",
+          "text": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 16,
+        "mock": 91
+      }
+    },
+    {
+      "senseId": "w:listen-to#s2",
+      "pos": "短语",
+      "glossZh": "听从；重视（建议或信号）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:listen-to#e-6440a7cd8f2a7f7a",
+          "text": "Remember: It doesn’t make you less of a runner if you listen to your body to keep it healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 63
+          },
+          "parts": [
+            [
+              54,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-to#e-8dd4a5d9909d0162",
+          "text": "Why should you listen to experts according to the speaker?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:listen-to#e-635092cee6d2625e",
+          "text": "Now, I see rest as an active process – one that requires listening to the body and responding with care.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "listen to your body 指留意身体发出的信号。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 20,
+    "mock": 97
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

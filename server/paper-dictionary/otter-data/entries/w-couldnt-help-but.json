@@ -1,0 +1,155 @@
+{
+  "entryId": "w:couldnt-help-but",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "couldn't",
+      "help",
+      "but"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "couldn't",
+        "help",
+        "but"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "couldn't help but",
+  "senses": [
+    {
+      "senseId": "w:couldnt-help-but#s1",
+      "pos": "短语",
+      "glossZh": "忍不住做某事；不由得……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:couldnt-help-but#e-4d973d9c4f889b99",
+          "text": "As he writes in his new book, A Long Way Home, Brierley couldn’t help but wonder about his hometown back in India.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 73
+          },
+          "parts": [
+            [
+              56,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:couldnt-help-but#e-538c54faef80c952",
+          "text": "Each detail brought her creation to life, and she couldn’t help but smile with pride.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 67
+          },
+          "parts": [
+            [
+              50,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:couldnt-help-but#e-b533efc8ed0bb0a0",
+          "text": "Although feeling sad, I couldn’t help but look forward to the doves’ visits.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 41
+          },
+          "parts": [
+            [
+              24,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              41
+            ]
+          ]
+        }
+      ],
+      "note": "but 后接动词原形。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

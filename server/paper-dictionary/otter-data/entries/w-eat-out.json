@@ -1,0 +1,175 @@
+{
+  "entryId": "w:eat-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "eating out"
+  ],
+  "pattern": {
+    "tokens": [
+      "eat",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eat",
+        "out"
+      ],
+      [
+        "eating",
+        "out"
+      ],
+      [
+        "ate",
+        "out"
+      ],
+      [
+        "eaten",
+        "out"
+      ],
+      [
+        "eats",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eat out",
+  "senses": [
+    {
+      "senseId": "w:eat-out#s1",
+      "pos": "短语",
+      "glossZh": "在外面吃饭；下馆子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eat#s2",
+        "w:out#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:eat-out#e-494c29b9d4538e88",
+          "text": "Eat out with Mark.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:eat-out#e-f514d0ceab246dd0",
+          "text": "Eat out.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:eat-out#e-1d6aa120d94e9db4",
+          "text": "Why doesn’t Daniel eat out often?",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          },
+          "parts": [
+            [
+              19,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

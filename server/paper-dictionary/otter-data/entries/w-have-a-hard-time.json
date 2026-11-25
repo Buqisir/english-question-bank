@@ -1,0 +1,196 @@
+{
+  "entryId": "w:have-a-hard-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "having a hard time"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "hard",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "hard",
+        "time"
+      ],
+      [
+        "having",
+        "a",
+        "hard",
+        "time"
+      ],
+      [
+        "had",
+        "a",
+        "hard",
+        "time"
+      ],
+      [
+        "has",
+        "a",
+        "hard",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had a hard time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a hard time",
+  "senses": [
+    {
+      "senseId": "w:have-a-hard-time#s1",
+      "pos": "短语",
+      "glossZh": "做某事很吃力；难以应付某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-a-hard-time#e-587853f40fce7df4",
+          "text": "His brother Johnny had died of cancer in 2008, and Romano had a hard time with sorrow.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 73
+          },
+          "parts": [
+            [
+              58,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-a-hard-time#e-3e3375a6a0d24077",
+          "text": "People have a hard time understanding the chances of an asteroid strike.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 23
+          },
+          "parts": [
+            [
+              7,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "have a hard time doing sth/with sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:have-a-hard-time#s2",
+      "pos": "短语",
+      "glossZh": "日子不好过；经历一段艰难时期",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-a-hard-time#e-1950af8de02247fb",
+          "text": "“They are having a hard time.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 28
+          },
+          "parts": [
+            [
+              10,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

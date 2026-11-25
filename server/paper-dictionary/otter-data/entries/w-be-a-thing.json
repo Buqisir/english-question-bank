@@ -1,0 +1,82 @@
+{
+  "entryId": "w:be-a-thing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is a thing"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "a",
+      "thing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "a",
+        "thing"
+      ],
+      [
+        "is",
+        "a",
+        "thing"
+      ],
+      [
+        "been",
+        "a",
+        "thing"
+      ],
+      [
+        "being",
+        "a",
+        "thing"
+      ],
+      [
+        "was",
+        "a",
+        "thing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be a thing",
+  "senses": [
+    {
+      "senseId": "w:be-a-thing#s1",
+      "pos": "短语",
+      "glossZh": "确有其事；已经成为一种现象",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

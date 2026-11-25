@@ -1,0 +1,197 @@
+{
+  "entryId": "w:feed-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feed",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feed",
+        "on"
+      ],
+      [
+        "fed",
+        "on"
+      ],
+      [
+        "feeding",
+        "on"
+      ],
+      [
+        "feeds",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "feed on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feed on sth",
+  "senses": [
+    {
+      "senseId": "w:feed-on#s1",
+      "pos": "短语",
+      "glossZh": "以……为食；从……获取养分",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:feed-on#e-001d068331ead9ad",
+          "text": "They feed on a diverse range of food.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:34#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feed-on#e-0883e67f2a8df5f7",
+          "text": "Animals, like dingoes, which feed on them, are becoming rare, so when the grass they eat is sufficient, their numbers jump.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:feed-on#e-9d595570a64d6877",
+          "text": "In Finland, Solar Foods operates a factory where micro-organisms in large tanks feed on gas and water, creating a protein-rich product called Solein.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 87
+          },
+          "parts": [
+            [
+              80,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:feed-on#s2",
+      "pos": "短语",
+      "glossZh": "从……获得动力或力量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:feed-on#s3",
+      "pos": "短语",
+      "glossZh": "靠别人的钱财或劳动供养生活",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "带贬义。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

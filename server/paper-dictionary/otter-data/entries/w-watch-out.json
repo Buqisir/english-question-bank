@@ -1,0 +1,189 @@
+{
+  "entryId": "w:watch-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "watching out"
+  ],
+  "pattern": {
+    "tokens": [
+      "watch",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "watch",
+        "out"
+      ],
+      [
+        "watching",
+        "out"
+      ],
+      [
+        "watched",
+        "out"
+      ],
+      [
+        "watches",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "watched out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "watch out",
+  "senses": [
+    {
+      "senseId": "w:watch-out#s2",
+      "pos": "短语",
+      "glossZh": "留意；提防",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:watch-out#e-67851d544445e699",
+          "text": "watched out for",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:cloze",
+            "locator": {
+              "question": 54,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:54#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-out#e-4295d25de58e456b",
+          "text": "watch out for",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze",
+            "locator": {
+              "question": 49,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:49#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-out#e-5e7fd55ecb5dd6d9",
+          "text": "watched out",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:cloze",
+            "locator": {
+              "question": 43,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:43#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "可接 for sb/sth，指出需要留意或提防的对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:watch-out#s1",
+      "pos": "短语",
+      "glossZh": "当心！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "单独用作紧急提醒。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

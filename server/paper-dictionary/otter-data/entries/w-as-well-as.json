@@ -1,0 +1,157 @@
+{
+  "entryId": "w:as-well-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "well",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "well",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as well as",
+  "senses": [
+    {
+      "senseId": "w:as-well-as#s1",
+      "pos": "短语",
+      "glossZh": "以及；除……之外还……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s7",
+        "w:well#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-well-as#e-9279cb843fa5d526",
+          "text": "Americans are still texting while driving, as well as using social networks and taking photos.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-well-as#e-9f21271ed14a1028",
+          "text": "His judgment and references are decidedly American, as well as his delicate stomach.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-well-as#e-484ec002a143dd94",
+          "text": "Campers learn technical skills of roasting, frying and cutting, as well as some recipes that they can take home and share with their families.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 74
+          },
+          "parts": [
+            [
+              64,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 8,
+        "mock": 47
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

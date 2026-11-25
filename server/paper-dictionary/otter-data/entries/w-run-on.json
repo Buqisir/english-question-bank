@@ -1,0 +1,315 @@
+{
+  "entryId": "w:run-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running on",
+    "runs on"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "on"
+      ],
+      [
+        "running",
+        "on"
+      ],
+      [
+        "runs",
+        "on"
+      ],
+      [
+        "ran",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run on",
+  "senses": [
+    {
+      "senseId": "w:run-on#s1",
+      "pos": "短语",
+      "glossZh": "以……为动力；靠……维持运转",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-on#e-e9c4309d8dc8c398",
+          "text": "He is building a four-wheeled robot that will run on solar and electric power.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 52
+          },
+          "parts": [
+            [
+              46,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-on#e-05098fef65f94d80",
+          "text": "A huge part of our day, from morning routine to work processes, runs on habits.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-2026-01-shandong-jinan-gaosan-first:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-on#e-4b17b15af74ccfa6",
+          "text": "First, these biological computers are incredibly energy-efficient, running on the same sugar nutrients the yeast uses to grow.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 77
+          },
+          "parts": [
+            [
+              67,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:run-on#s2",
+      "pos": "短语",
+      "glossZh": "（软件）在某设备或平台上运行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-on#e-73ebd7588045bc0d",
+          "text": "I can develop a personalized app running on the smartwatches,” he offered excitedly.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-on#e-ea3434b38afc7869",
+          "text": "Both iPhones and smartphones running on a recent Android operating system will soon include features to monitor, control and restrict your personal smartphone use for your own health.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:run-on#s5",
+      "pos": "短语",
+      "glossZh": "以某项主张或政绩作为竞选卖点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-on#e-adb9f86c07aea1c4",
+          "text": "And yet, “It’s not like we’ve seen any presidential candidates run on school being nine to five.”",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 69
+          },
+          "parts": [
+            [
+              63,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-on#s3",
+      "pos": "短语",
+      "glossZh": "持续下去；拖得很久",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-on#s4",
+      "pos": "短语",
+      "glossZh": "说个不停",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

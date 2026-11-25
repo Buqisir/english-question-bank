@@ -1,0 +1,179 @@
+{
+  "entryId": "w:for-real",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "real"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "real"
+      ],
+      [
+        "more",
+        "for",
+        "real"
+      ],
+      [
+        "most",
+        "for",
+        "real"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for real",
+  "senses": [
+    {
+      "senseId": "w:for-real#s1",
+      "pos": "短语",
+      "glossZh": "真的；认真地；实际地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:real#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-real#e-56548ea33b7303e6",
+          "text": "After university, having played at newspapers, I made the move to London to do it for real.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 90
+          },
+          "parts": [
+            [
+              82,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-real#e-89e5ddcdbc17b2f9",
+          "text": "Finally, when he was satisfied that I knew what to do with all the pieces, he said we were ready to play for real.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 113
+          },
+          "parts": [
+            [
+              105,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              113
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-real#e-ec7c28cd96b27714",
+          "text": "“I was coming to Shanghai with the impression that it’s like a city of the future, and so far, I feel like I’m seeing it for real,” said Picazo.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 129
+          },
+          "parts": [
+            [
+              121,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              129
+            ]
+          ]
+        }
+      ],
+      "note": "常放在动词短语后，强调亲身经历或正式去做。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:for-real#s2",
+      "pos": "短语",
+      "glossZh": "是真的；是认真的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可作 be 的表语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

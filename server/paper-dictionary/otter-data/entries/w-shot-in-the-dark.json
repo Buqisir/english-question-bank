@@ -1,0 +1,131 @@
+{
+  "entryId": "w:shot-in-the-dark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shot",
+      "in",
+      "the",
+      "dark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shot",
+        "in",
+        "the",
+        "dark"
+      ],
+      [
+        "shots",
+        "in",
+        "the",
+        "dark"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shot in the dark",
+  "senses": [
+    {
+      "senseId": "w:shot-in-the-dark#s1",
+      "pos": "短语",
+      "glossZh": "毫无把握的猜测或尝试",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shot-in-the-dark#e-39c30e883eaaa4db",
+          "text": "What does “a shot in the dark” in paragraph 2 mean?",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-12-survey:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 29
+          },
+          "parts": [
+            [
+              13,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shot-in-the-dark#e-76be6542c0258551",
+          "text": "The letters were a shot in the dark.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 35
+          },
+          "parts": [
+            [
+              19,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

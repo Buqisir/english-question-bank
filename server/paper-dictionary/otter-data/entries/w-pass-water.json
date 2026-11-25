@@ -1,0 +1,107 @@
+{
+  "entryId": "w:pass-water",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "water"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "water"
+      ],
+      [
+        "passed",
+        "water"
+      ],
+      [
+        "passes",
+        "water"
+      ],
+      [
+        "passing",
+        "water"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passing water",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass water",
+  "senses": [
+    {
+      "senseId": "w:pass-water#s1",
+      "pos": "短语",
+      "glossZh": "排尿；解小便",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-water#e-0efb9a329fd4690c",
+          "text": "There is no Tolerable Upper Intake Level for water because the body can usually remove the extra by passing water or sweating.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 113
+          },
+          "parts": [
+            [
+              100,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

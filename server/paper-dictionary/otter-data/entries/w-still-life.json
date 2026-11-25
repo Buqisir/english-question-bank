@@ -1,0 +1,151 @@
+{
+  "entryId": "w:still-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "still",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "still",
+        "life"
+      ],
+      [
+        "still",
+        "lifes"
+      ],
+      [
+        "still",
+        "lives"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "still lifes",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "still life",
+  "senses": [
+    {
+      "senseId": "w:still-life#s1",
+      "pos": "短语",
+      "glossZh": "静物画；静物作品",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:life#s6",
+        "w:still#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:still-life#e-37f1422e8f34affb",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:still-life#e-9053dca7958c4166",
+          "text": "He experimented with different styles of art and explored grounds like still life, portraits, mythological scenes, and landscapes.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 81
+          },
+          "parts": [
+            [
+              71,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:still-life#s2",
+      "pos": "短语",
+      "glossZh": "演化中保持不变的结构",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "细胞自动机术语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

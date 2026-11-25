@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 79
+    "mock": 2
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 78
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -195,6 +195,6 @@
       "reason": "专业或过时用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

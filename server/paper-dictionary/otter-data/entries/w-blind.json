@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 79
+    "mock": 10
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -206,7 +206,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -259,7 +259,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -311,7 +311,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -344,7 +344,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -377,7 +377,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -401,75 +401,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:blind#s8",
-      "pos": "短语",
-      "glossZh": "对……视而不见",
-      "pronunciationId": "w:blind#p-main",
-      "note": "turn a blind eye to sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blind#e-c2d653ebabb079d3",
-          "text": "A woman turns a blind eye to her credit card bills.",
-          "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
-            "locator": {
-              "question": 32,
-              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:32",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:blind#s9",
-      "pos": "短语",
-      "glossZh": "盲区；意识不到的问题",
-      "pronunciationId": "w:blind#p-main",
-      "note": "blind spot。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blind#e-67e5367f5eba3a74",
-          "text": "The study in the journal Open Mind reveals a new blind spot in our physical reasoning.",
-          "source": {
-            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
-            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
-            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 49,
-            "end": 54
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -478,6 +409,12 @@
       "reason": "行业用法或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:blind-spot",
+    "w:turn-a-blind-eye-to-sth"
+  ]
 }

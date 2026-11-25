@@ -1,0 +1,213 @@
+{
+  "entryId": "w:go-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going about",
+    "went about"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "about"
+      ],
+      [
+        "going",
+        "about"
+      ],
+      [
+        "went",
+        "about"
+      ],
+      [
+        "goes",
+        "about"
+      ],
+      [
+        "gone",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go about",
+  "senses": [
+    {
+      "senseId": "w:go-about#s1",
+      "pos": "短语",
+      "glossZh": "照常做（日常事务）；忙自己的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s28"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-about#e-82b4e1f0665290fc",
+          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 101
+          },
+          "parts": [
+            [
+              93,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-about#e-a0a267bafa3339b7",
+          "text": "In these “observational” studies, people track their diets while going about their lives.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 76
+          },
+          "parts": [
+            [
+              65,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-about#e-2deeb65ba4764fc3",
+          "text": "The study, published in the journal Current Biology, tested 100 healthy young adults as they went about their regular routines – running, studying, resting, and more.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 103
+          },
+          "parts": [
+            [
+              93,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-about#s2",
+      "pos": "短语",
+      "glossZh": "着手做；开始处理（问题或任务）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 go about doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-about#s3",
+      "pos": "短语",
+      "glossZh": "四处走动；到处活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-about#s4",
+      "pos": "短语",
+      "glossZh": "（帆船）迎风换舷",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

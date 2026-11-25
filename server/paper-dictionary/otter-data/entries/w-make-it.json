@@ -1,0 +1,362 @@
+{
+  "entryId": "w:make-it",
+  "headword": "make it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cannot make it",
+    "makes it",
+    "making it"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it"
+      ],
+      [
+        "makes",
+        "it"
+      ],
+      [
+        "making",
+        "it"
+      ],
+      [
+        "made",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made it",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:make-it#s1",
+      "pos": "短语",
+      "glossZh": "赶到；设法抵达",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s10",
+        "w:make#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it#e-8fb17cd9a24ab74c",
+          "text": "Gunter parked the taxi behind the bus, turned around, and looked at me with a big smile on his face.“We made it,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          },
+          "parts": [
+            [
+              104,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it#e-33f8f1ce64e574a7",
+          "text": "“We made it,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          },
+          "parts": [
+            [
+              4,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it#e-0ae0a62ebefdde64",
+          "text": "Somehow, I made it across, flooded with a rush of intense excitement and huge relief.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:make-it#s2",
+      "pos": "短语",
+      "glossZh": "活下来；挺过去",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s11",
+        "w:make#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it#e-8557c9d3b15319e0",
+          "text": "If you’re among the groups of people who are enjoying the mental and physical health benefits of surrounding yourself with plants, don’t beat yourself up if one (or a few!) doesn’t make it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 181,
+            "end": 188
+          },
+          "parts": [
+            [
+              181,
+              188
+            ]
+          ],
+          "highlightRanges": [
+            [
+              181,
+              188
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it#e-b576ee20b1653ae3",
+          "text": "Seeing Smith setting off with only $500, his dad warned him he wouldn’t make it more than two weeks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          },
+          "parts": [
+            [
+              72,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              79
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:make-it#s3",
+      "pos": "短语",
+      "glossZh": "成功；做到",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-it#e-1e152b677e44d1f9",
+          "text": "Then he went on with his movie-star dream, promising all our money troubles would end once he made it.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 101
+          },
+          "parts": [
+            [
+              94,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it#e-7f2ae5587aafb02c",
+          "text": "Unsurprisingly, when the team list came out on Monday, it showed that both of them made it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 90
+          },
+          "parts": [
+            [
+              83,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it#e-7bde4d02baa417fb",
+          "text": "What does the underlined expression “Just fake it until you make it” in paragraph 2 mean?",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          },
+          "parts": [
+            [
+              60,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

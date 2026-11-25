@@ -1,0 +1,152 @@
+{
+  "entryId": "w:deep-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "deep",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "deep",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "deep down",
+  "senses": [
+    {
+      "senseId": "w:deep-down#s1",
+      "pos": "短语",
+      "glossZh": "在内心深处；打心底里",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:deep-down#e-3b41c69dc96d566a",
+          "text": "When Mum told me to stay with Grandpa for a couple of hours, I was extremely unwilling deep down.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 96
+          },
+          "parts": [
+            [
+              87,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deep-down#e-5051044674955437",
+          "text": "Yet deep down, I held onto the faint hope that my months of effort might pay off somehow.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          },
+          "parts": [
+            [
+              4,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:deep-down#e-87a856a4f3c870e5",
+          "text": "She would roll her eyes, but deep down, a part of her smiled.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

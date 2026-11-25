@@ -1,0 +1,140 @@
+{
+  "entryId": "w:drop-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "by"
+      ],
+      [
+        "dropped",
+        "by"
+      ],
+      [
+        "dropping",
+        "by"
+      ],
+      [
+        "drops",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dropped by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop by",
+  "senses": [
+    {
+      "senseId": "w:drop-by#s1",
+      "pos": "短语",
+      "glossZh": "顺便来访；顺道去某处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drop#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drop-by#e-6e5b85d32e77be0a",
+          "text": "Why did the woman drop by George’s Garage?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drop-by#e-d4d5d4fbf4e8bcd3",
+          "text": "The next day, I dropped by again.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

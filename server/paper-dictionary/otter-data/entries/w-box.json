@@ -59,8 +59,8 @@
     "mock": 243
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 240
+    "gaokao": 7,
+    "mock": 48
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 181
       },
       "folded": false,
       "examples": [
@@ -135,113 +135,6 @@
       ]
     },
     {
-      "senseId": "w:box#s2",
-      "pos": "短语",
-      "glossZh": "售票处；（电影等的）票房",
-      "pronunciationId": "w:box#p-main",
-      "note": "box office",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:box#e-b1e7fc43f74f308c",
-          "text": "Checking information at the box office.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:box#e-21a6e6220ff7ecdc",
-          "text": "Walking into Dryden Theater, I felt as if I had stepped into a time machine – the traditional, old-timey box office, tons of old-style movie posters on the walls.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 105,
-            "end": 108
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:box#s3",
-      "pos": "短语",
-      "glossZh": "公用电话亭",
-      "pronunciationId": "w:box#p-main",
-      "note": "telephone box 或 phone box",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:box#e-7f96377bbd97c9df",
-          "text": "When was the last time you used a telephone box?",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:box#e-86f278577fdb35f8",
-          "text": "My mobile phone was inside, but luckily there was a telephone box across the street.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 65
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:box#s4",
       "pos": "n.",
       "glossZh": "（剧院等的）包厢",
@@ -279,12 +172,12 @@
       "pos": "n.",
       "glossZh": "（表格等的）方框；格子",
       "pronunciationId": "w:box#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -325,12 +218,12 @@
       "pos": "v.",
       "glossZh": "把……装箱；困住",
       "pronunciationId": "w:box#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -340,6 +233,11 @@
       "reason": "词源有别的植物义、俚语、技术义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:box-in"
+  ]
 }

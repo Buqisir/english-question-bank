@@ -1,0 +1,98 @@
+{
+  "entryId": "w:walk-of-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "of",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "of",
+        "life"
+      ],
+      [
+        "walks",
+        "of",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk of life",
+  "senses": [
+    {
+      "senseId": "w:walk-of-life#s1",
+      "pos": "短语",
+      "glossZh": "行业；社会领域或阶层",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-of-life#e-6a973365a71e048e",
+          "text": "In the blink of an eye, artificial intelligence (AI) has rapidly entered every walk of life, from self-driving taxis to software that reads X-rays, to virtual assistants that can schedule meetings and draft e-mails.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 91
+          },
+          "parts": [
+            [
+              79,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 every walk of life 或 all walks of life。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

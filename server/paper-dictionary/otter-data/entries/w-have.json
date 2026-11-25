@@ -55,7 +55,7 @@
     "mock": 5978
   },
   "unassignedCounts": {
-    "gaokao": 883,
+    "gaokao": 902,
     "mock": 5978
   },
   "senses": [
@@ -198,79 +198,6 @@
           "target": {
             "start": 50,
             "end": 53
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:have#s3",
-      "pos": "短语",
-      "glossZh": "必须；不得不",
-      "pronunciationId": "w:have#p-main",
-      "note": "have to do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 19,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:have#e-6c06b579804c1687",
-          "text": "“You have to organize the activities of the children and take care of the bills and groceries.”",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:have#e-b0f9c7e8593bfe13",
-          "text": "With no other kids of my age in the neighborhood, I had to spend hours by myself.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:have#e-9ae5cb2f36c3acbe",
-          "text": "She has to work.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 7
           }
         }
       ]
@@ -570,20 +497,6 @@
       "examples": []
     },
     {
-      "senseId": "w:have#s11",
-      "pos": "短语",
-      "glossZh": "最好",
-      "pronunciationId": "w:have#p-main",
-      "note": "had better do sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:have#s12",
       "pos": "v.",
       "glossZh": "喝",
@@ -647,6 +560,43 @@
       "reason": "地域、专门或低频用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-fate-would-have-it",
+    "w:as-luck-would-have-it",
+    "w:have-a-go",
+    "w:have-a-good-time",
+    "w:have-a-hard-time",
+    "w:have-a-heart",
+    "w:have-a-look",
+    "w:have-a-seat",
+    "w:have-a-sweet-tooth",
+    "w:have-a-word",
+    "w:have-an-accident",
+    "w:have-an-eye-for",
+    "w:have-at",
+    "w:have-butterflies-in-ones-stomach",
+    "w:have-fun",
+    "w:have-got",
+    "w:have-in-mind",
+    "w:have-it",
+    "w:have-it-all",
+    "w:have-it-right",
+    "w:have-little-time-for",
+    "w:have-no-idea",
+    "w:have-no-time-for",
+    "w:have-nothing-to-lose",
+    "w:have-on",
+    "w:have-over",
+    "w:have-sth-in-common",
+    "w:have-the-last-laugh",
+    "w:have-the-pleasure",
+    "w:have-to",
+    "w:have-to-do-with-sth",
+    "w:not-have-much-use-for-sth",
+    "w:there-you-have-it"
+  ]
 }

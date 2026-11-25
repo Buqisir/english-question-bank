@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 7
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -123,7 +123,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -175,7 +175,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -227,7 +227,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -302,6 +302,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:collapse#s6",
+      "pos": "v.",
+      "glossZh": "（多种可能状态）坍缩为单一确定状态",
+      "pronunciationId": "w:collapse#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:collapse#e-843aed497aa2bb8c",
+          "text": "Each time we observe reality, possibilities collapse into facts – a one-way process.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -310,6 +343,6 @@
       "reason": "数学或体育专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

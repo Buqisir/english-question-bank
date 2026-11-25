@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 11
+    "mock": 1
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -132,54 +132,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:chew#s2",
-      "pos": "短语",
-      "glossZh": "承担自己应付不了的事",
-      "pronunciationId": "w:chew#p-main",
-      "note": "bite off more than one can chew",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chew#e-c69eeea8eec5a264",
-          "text": "By 2 a. m., sitting on a cold rock with sweat freezing beneath my clothes, I felt I had bitten off more than I could chew – this mountain was too much for me.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
-            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 117,
-            "end": 121
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:chew#s3",
-      "pos": "短语",
-      "glossZh": "反复考虑；仔细琢磨",
-      "pronunciationId": "w:chew#p-main",
-      "note": "chew over",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -188,6 +140,12 @@
       "reason": "专门名词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bite-off-more-than-one-can-chew",
+    "w:chew-over"
+  ]
 }

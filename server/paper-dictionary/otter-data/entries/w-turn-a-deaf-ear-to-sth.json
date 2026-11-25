@@ -1,0 +1,110 @@
+{
+  "entryId": "w:turn-a-deaf-ear-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "a",
+      "deaf",
+      "ear",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "a",
+        "deaf",
+        "ear",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned a deaf ear to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn a deaf ear to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:turn-a-deaf-ear-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "对某人说的话或某事充耳不闻",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deaf#s2",
+        "w:ear#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-a-deaf-ear-to-sth#e-11b2ce8a20287d90",
+          "text": "Feel the water.” I turned a deaf ear to him.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 39
+          },
+          "parts": [
+            [
+              19,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,154 @@
+{
+  "entryId": "w:by-design",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "design"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "design"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by design",
+  "senses": [
+    {
+      "senseId": "w:by-design#s1",
+      "pos": "短语",
+      "glossZh": "有意地；出于刻意安排",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:design#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-design#e-77763d0d827f33d2",
+          "text": "What is a feature of AI by Design according to the text?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2024-ii:33",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-design#e-405e62ed41ba7394",
+          "text": "That is by design.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 17
+          },
+          "parts": [
+            [
+              8,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-design#e-71ac32da4b8c2593",
+          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 155
+          },
+          "parts": [
+            [
+              146,
+              155
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              155
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

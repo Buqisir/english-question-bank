@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 162
+    "mock": 14
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -176,7 +176,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -247,7 +247,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -319,7 +319,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -352,7 +352,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -382,12 +382,12 @@
       "pos": "v.",
       "glossZh": "松开",
       "pronunciationId": "w:release#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -395,13 +395,313 @@
       "pos": "v.",
       "glossZh": "解除（义务等）",
       "pronunciationId": "w:release#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:release#s9",
+      "pos": "v.",
+      "glossZh": "放出；使显现",
+      "pronunciationId": "w:release#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:release#e-aabab8b2c828f3e4",
+          "text": "But around the edges of the area, where he hadn’t sprayed or seeded, the additional sunlight released a beautiful surprise.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:release#e-aeb87c3ec11e0e11",
+          "text": "Release your creativity as a writer, while learning the tricks of the trade.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:release#e-43af7eee2a91be21",
+          "text": "“I opened a Pandora’s box and released a Frankenstein’s monster,” he reflected, underscoring the unforeseen consequences of creating a popular hybrid.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:release#s10",
+      "pos": "n.",
+      "glossZh": "新闻稿；通稿",
+      "pronunciationId": "w:release#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:release#e-e66f8aef8d7ea279",
+          "text": "“Initial data may become available within the next year,” said Wu in a press release.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:release#e-41faf0da79e93197",
+          "text": "“It's stimulating to explore how humans use different parts of the brain for complex behaviors and how that changes with age and experiences,” Jung said in a press release.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 164,
+            "end": 171
+          }
+        },
+        {
+          "exampleId": "w:release#e-b9e5368bd710bf67",
+          "text": "“Some Caspian Sea level decline appears unavoidable,” Simon Goodman from the University of Leeds said in a press release.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:release#s11",
+      "pos": "v.",
+      "glossZh": "释放或排解（情绪、压力等）",
+      "pronunciationId": "w:release#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:release#e-db5fdffc02d67922",
+          "text": "Releasing guilt and shame is essential for healing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:release#e-ccbcf7cea2f94711",
+          "text": "A sincere apology releases anger and brings back connection.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:release#e-996993c0a2a87e9b",
+          "text": "Journaling gives your mind a place to release those racing thoughts.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-zaozhuang-2026-05-third-mock:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:release#s12",
+      "pos": "n.",
+      "glossZh": "解除限制，使潜在变化得以显现",
+      "pronunciationId": "w:release#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:release#e-adcc9fe648fb5781",
+          "text": "“Hybridization is a real force in evolution that allows for the release of variation,” Knapp explains.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:release#e-fa76f8ff9d6f4646",
+          "text": "The constant availability of food waste and reduced animal hunters in nature create what ecologists call “urban ecological release.”",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 130
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:release#s13",
+      "pos": "n.",
+      "glossZh": "情绪的释放；宣泄",
+      "pronunciationId": "w:release#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:release#e-02fc72053f820d1c",
+          "text": "A third group, “dark copers”, finds an emotional release in fictional horror, using it to process real-life difficulties.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -414,6 +714,6 @@
       "reason": "音乐专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

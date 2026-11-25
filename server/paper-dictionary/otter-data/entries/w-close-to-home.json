@@ -1,0 +1,74 @@
+{
+  "entryId": "w:close-to-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "to",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "to",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close to home",
+  "senses": [
+    {
+      "senseId": "w:close-to-home#s1",
+      "pos": "短语",
+      "glossZh": "直接影响到自己或身边亲近的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:close-to-home#s2",
+      "pos": "短语",
+      "glossZh": "因切合自身经历而让人深受触动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hit close to home，可能有刺痛感。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

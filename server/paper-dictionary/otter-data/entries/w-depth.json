@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 15
+    "mock": 6
   },
   "senses": [
     {
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -259,60 +259,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:depth#s4",
-      "pos": "短语",
-      "glossZh": "深入地；全面地",
-      "pronunciationId": "w:depth#p-main",
-      "note": "in depth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:depth#e-77ec2fbad12ec1cf",
-          "text": "The focus on concerts can sometimes overshadow the opportunity to experience local culture in depth.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
-            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
-            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:grammar-fill:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 94,
-            "end": 99
-          }
-        },
-        {
-          "exampleId": "w:depth#e-fe11b4d473812182",
-          "text": "By analyzing economic theories in depth.",
-          "source": {
-            "paperId": "paper-mock-zj-2026-xinzhendi-2",
-            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
-            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-mock-zj-2026-xinzhendi-2:21",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -321,6 +267,11 @@
       "reason": "各领域专门术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-depth"
+  ]
 }

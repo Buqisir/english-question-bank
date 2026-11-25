@@ -1,0 +1,152 @@
+{
+  "entryId": "w:as-sb-puts-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      {
+        "slot": "sb"
+      },
+      "puts",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        {
+          "slot": "sb"
+        },
+        "puts",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "as puts it",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as sb puts it",
+  "senses": [
+    {
+      "senseId": "w:as-sb-puts-it#s1",
+      "pos": "短语",
+      "glossZh": "正如某人所说；用某人的话来说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-sb-puts-it#e-06407ef533ca34df",
+          "text": "As Marquez puts it: “In cyberspace, every click is a choice – and every choice has an ethical cost.”",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-sb-puts-it#e-5e79a5838c904fdb",
+          "text": "As Soh puts it, it’s a step toward “a more sustainable society” – proving even the smallest drops can light up our future.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              2
+            ],
+            [
+              7,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              2
+            ],
+            [
+              7,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

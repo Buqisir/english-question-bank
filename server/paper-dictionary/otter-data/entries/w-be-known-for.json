@@ -1,0 +1,169 @@
+{
+  "entryId": "w:be-known-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "known",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "known",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are known for",
+      "tags": []
+    },
+    {
+      "form": "is known for",
+      "tags": []
+    },
+    {
+      "form": "was known for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be known for",
+  "senses": [
+    {
+      "senseId": "w:be-known-for#s1",
+      "pos": "短语",
+      "glossZh": "因……而出名；以……为人所知",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:know#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-known-for#e-a5927756e677d59c",
+          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 18
+          },
+          "parts": [
+            [
+              5,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-for#e-a663eb8854f2a8ec",
+          "text": "And officials at Port Lympne were delighted with the new arrival, especially as black rhinos are known for being difficult to breed in captivity (圈养).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 106
+          },
+          "parts": [
+            [
+              93,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-for#e-272c59b006bd8fe8",
+          "text": "The Arena is known for its modern facilities and has become a well-known place for entertainment in Wales.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 22
+          },
+          "parts": [
+            [
+              10,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

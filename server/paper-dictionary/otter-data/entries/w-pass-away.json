@@ -1,0 +1,187 @@
+{
+  "entryId": "w:pass-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "away"
+      ],
+      [
+        "passed",
+        "away"
+      ],
+      [
+        "passes",
+        "away"
+      ],
+      [
+        "passing",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passed away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass away",
+  "senses": [
+    {
+      "senseId": "w:pass-away#s1",
+      "pos": "短语",
+      "glossZh": "去世",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:away#s10",
+        "w:pass#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pass-away#e-a106c26443d54d04",
+          "text": "He was facing health issues and his wife of thirty-five years had passed away a few months earlier.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-away#e-27655fad6820c0c9",
+          "text": "The necklace, made of shells(贝壳), was her most loved thing-a gift from Grandma before she passed away.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 101
+          },
+          "parts": [
+            [
+              90,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-away#e-ad38b335728669ed",
+          "text": "She explained that since her husband passed away last year, her garden had become her greatest comfort.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 48
+          },
+          "parts": [
+            [
+              37,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "委婉说法。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 21
+      }
+    },
+    {
+      "senseId": "w:pass-away#s2",
+      "pos": "短语",
+      "glossZh": "消逝；不复存在",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "多见于文学用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:one-of-those-days",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "of",
+      "those",
+      "days"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "of",
+        "those",
+        "days"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one of those days",
+  "senses": [
+    {
+      "senseId": "w:one-of-those-days#s1",
+      "pos": "短语",
+      "glossZh": "诸事不顺的一天；倒霉的一天",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:one-of-those-days#e-c82e47c2000c0c3d",
+          "text": "It was one of those days.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 24
+          },
+          "parts": [
+            [
+              7,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

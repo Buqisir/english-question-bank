@@ -1,0 +1,77 @@
+{
+  "entryId": "w:come-to-rest",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "coming to rest"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "rest"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "rest"
+      ],
+      [
+        "coming",
+        "to",
+        "rest"
+      ],
+      [
+        "came",
+        "to",
+        "rest"
+      ],
+      [
+        "comes",
+        "to",
+        "rest"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to rest",
+  "senses": [
+    {
+      "senseId": "w:come-to-rest#s1",
+      "pos": "短语",
+      "glossZh": "停下来；停稳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

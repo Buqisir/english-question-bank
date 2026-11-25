@@ -1,0 +1,115 @@
+{
+  "entryId": "w:wet-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wet",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wet",
+        "through"
+      ],
+      [
+        "wets",
+        "through"
+      ],
+      [
+        "wetted",
+        "through"
+      ],
+      [
+        "wetting",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wet through",
+  "senses": [
+    {
+      "senseId": "w:wet-through#s1",
+      "pos": "短语",
+      "glossZh": "湿透；浑身湿透",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wet-through#e-53849da302a726f7",
+          "text": "Rain soon poured and I was wet through.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:wet-through#s2",
+      "pos": "短语",
+      "glossZh": "使衣物或材料浸透",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

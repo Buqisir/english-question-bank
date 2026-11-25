@@ -1,0 +1,94 @@
+{
+  "entryId": "w:around-the-clock",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "around",
+      "the",
+      "clock"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "around",
+        "the",
+        "clock"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "around the clock",
+  "senses": [
+    {
+      "senseId": "w:around-the-clock#s1",
+      "pos": "短语",
+      "glossZh": "昼夜不停地；全天候",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:clock#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:around-the-clock#e-fdddb2d69aa513e3",
+          "text": "However, safety equipment arranged by schools alone cannot achieve full protection around the clock.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 99
+          },
+          "parts": [
+            [
+              83,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

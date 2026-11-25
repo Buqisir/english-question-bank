@@ -1,0 +1,274 @@
+{
+  "entryId": "w:get-out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets out of",
+    "getting out of"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "out",
+        "of"
+      ],
+      [
+        "gets",
+        "out",
+        "of"
+      ],
+      [
+        "getting",
+        "out",
+        "of"
+      ],
+      [
+        "got",
+        "out",
+        "of"
+      ],
+      [
+        "gotten",
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get out of sth",
+  "senses": [
+    {
+      "senseId": "w:get-out-of#s1",
+      "pos": "短语",
+      "glossZh": "摆脱（习惯或困境）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-out-of#e-f9a0c100434a2f8c",
+          "text": "My parents urged me to get out of this so-called unhealthy habit, but their repeated requests fell on deaf ears.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out-of#e-91bceb37cd26a2f8",
+          "text": "Social media was my way of getting out of the depression.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 41
+          },
+          "parts": [
+            [
+              27,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-out-of#s2",
+      "pos": "短语",
+      "glossZh": "从……出来；离开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-out-of#e-8f338eab35e59593",
+          "text": "“To find myself in a position where I could barely get out of the door was frustrating,” he recalls.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 61
+          },
+          "parts": [
+            [
+              51,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out-of#e-1f96d29136e249c3",
+          "text": "Getting out of the car, I placed her walker and bags into my trunk.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-out-of#e-2d7d8ed07012aae2",
+          "text": "Trying hard to ignore the pain in my stomach, I shook my head and replied, “Not today, sweetie.” These days, getting out of bed was a real struggle for me.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 123
+          },
+          "parts": [
+            [
+              109,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              123
+            ]
+          ]
+        }
+      ],
+      "note": "如 get out of the car、get out of bed。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-out-of#s3",
+      "pos": "短语",
+      "glossZh": "逃避（责任）；设法不做（某事）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

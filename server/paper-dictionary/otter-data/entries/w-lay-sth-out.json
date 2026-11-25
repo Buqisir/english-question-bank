@@ -1,0 +1,290 @@
+{
+  "entryId": "w:lay-sth-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lay out"
+  ],
+  "pattern": {
+    "tokens": [
+      "lay",
+      {
+        "slot": "sth"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "lay",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "lay",
+        "out"
+      ],
+      [
+        "laid",
+        "out"
+      ],
+      [
+        "laying",
+        "out"
+      ],
+      [
+        "lays",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "laid out",
+      "tags": []
+    },
+    {
+      "form": "laying out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lay sth out",
+  "senses": [
+    {
+      "senseId": "w:lay-sth-out#s1",
+      "pos": "短语",
+      "glossZh": "规划；布置（场地或版面）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lay-sth-out#e-afe21f690618c691",
+          "text": "The gardens are beautifully laid out with two lakes, which are home to a vast collection of fish.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lay-sth-out#e-135872e2ced5472d",
+          "text": "I laid out the book online, and it arrived a few days ago.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 10
+          },
+          "parts": [
+            [
+              2,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:lay-sth-out#s2",
+      "pos": "短语",
+      "glossZh": "摆开；陈列（物品）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lay-sth-out#e-7c3a4cef28de3044",
+          "text": "I laid out Lila’s favorite plates on the table and arranged her favorite flowers, hoping to please my little friend as much as I could.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 10
+          },
+          "parts": [
+            [
+              2,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lay-sth-out#e-e893e6ea405d2348",
+          "text": "“If you know you’re struggling with motivation, laying out all your kit – from your socks all the way up to the food you’re going to take – can be helpful,” he says.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          },
+          "parts": [
+            [
+              48,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lay-sth-out#s3",
+      "pos": "短语",
+      "glossZh": "列出；清楚说明（计划、事实等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lay#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lay-sth-out#e-741fc750479e61d0",
+          "text": "A good way to ensure that you are living a life of integrity is to lay out a list for yourself.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:lay-sth-out#s4",
+      "pos": "短语",
+      "glossZh": "花费；掏出（一笔钱）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

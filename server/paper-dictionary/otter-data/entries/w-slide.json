@@ -66,8 +66,8 @@
     "mock": 50
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 46
+    "gaokao": 1,
+    "mock": 0
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -194,40 +194,6 @@
       ]
     },
     {
-      "senseId": "w:slide#s3",
-      "pos": "短语",
-      "glossZh": "听任某事荒废",
-      "pronunciationId": "w:slide#p-main",
-      "note": "let something slide。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:slide#e-5f8de984c309859c",
-          "text": "It is so easy to let an online course slide, but your grades will suffer as a result.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:slide#s4",
       "pos": "n.",
       "glossZh": "幻灯片",
@@ -235,7 +201,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -265,12 +231,12 @@
       "pos": "n.",
       "glossZh": "滑梯",
       "pronunciationId": "w:slide#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -319,6 +285,11 @@
       "reason": "器件、表演专义或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:let-sth-slide"
+  ]
 }

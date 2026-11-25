@@ -1,0 +1,125 @@
+{
+  "entryId": "w:after-dark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "after",
+      "dark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "after",
+        "dark"
+      ],
+      [
+        "after",
+        "darks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "after dark",
+  "senses": [
+    {
+      "senseId": "w:after-dark#s1",
+      "pos": "短语",
+      "glossZh": "天黑以后；入夜后",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:after-dark#e-6fd871decad2b377",
+          "text": "They look out for one another during after-school outdoor activities and choose to move in groups instead of walking alone after dark.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 133
+          },
+          "parts": [
+            [
+              123,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:after-dark#e-1eb210f61896982e",
+          "text": "Most pedestrian deaths occur after dark.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

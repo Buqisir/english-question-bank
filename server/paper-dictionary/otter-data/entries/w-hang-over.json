@@ -1,0 +1,280 @@
+{
+  "entryId": "w:hang-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "over"
+      ],
+      [
+        "hanging",
+        "over"
+      ],
+      [
+        "hangs",
+        "over"
+      ],
+      [
+        "hung",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hanging over",
+      "tags": []
+    },
+    {
+      "form": "hung over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang over sb/sth",
+  "senses": [
+    {
+      "senseId": "w:hang-over#s1",
+      "pos": "短语",
+      "glossZh": "悬在……上方；搭在……上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hang-over#e-5fd1e3bd31716a94",
+          "text": "After we found a crazy-looking road that hung over a bunch of rocks, we decided to photograph the scene at sunset.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-over#e-4ee496a60c5ef903",
+          "text": "I returned home one afternoon to find him chatting with Thomas, who was hanging over the fence.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 84
+          },
+          "parts": [
+            [
+              72,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-over#e-e3c776786e97281a",
+          "text": "My brush felt heavy and lifeless in my hand, hanging over the palette (调色板) where paints were slowly drying into hard blobs (一团).",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 57
+          },
+          "parts": [
+            [
+              45,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:hang-over#s2",
+      "pos": "短语",
+      "glossZh": "（威胁、疑虑等）笼罩；持续给……带来压力",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hang-over#e-f80687e64c95c06f",
+          "text": "When I decided to join a Buy Nothing group, a thick fog of doubt hung over me.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 74
+          },
+          "parts": [
+            [
+              65,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-over#e-2790f3f834157e32",
+          "text": "Silence hung over the village like a dark, heavy cloud.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:writing-continuation:4",
+              "sentence": 11
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 17
+          },
+          "parts": [
+            [
+              8,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-over#e-532e29312e716d16",
+          "text": "The $300 loan hung over us like a storm cloud.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

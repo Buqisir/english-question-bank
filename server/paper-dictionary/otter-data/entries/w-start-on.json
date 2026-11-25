@@ -1,0 +1,129 @@
+{
+  "entryId": "w:start-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "start",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "start",
+        "on"
+      ],
+      [
+        "started",
+        "on"
+      ],
+      [
+        "starting",
+        "on"
+      ],
+      [
+        "starts",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "start on",
+  "senses": [
+    {
+      "senseId": "w:start-on#s1",
+      "pos": "短语",
+      "glossZh": "开始着手做；开始进行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:start-on#e-a528c4b7943ec30a",
+          "text": "Participants, rather than focusing on distance or pace, start on a reflective journey with a single, clear goal: to notice and appreciate the range of colors in their immediate environment.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          },
+          "parts": [
+            [
+              56,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:start-on#s2",
+      "pos": "短语",
+      "glossZh": "开始数落某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:start-on#s3",
+      "pos": "短语",
+      "glossZh": "开始就某话题发牢骚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 Don't start on ... 等口语表达。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

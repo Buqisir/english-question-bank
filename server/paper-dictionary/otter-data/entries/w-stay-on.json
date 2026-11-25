@@ -1,0 +1,167 @@
+{
+  "entryId": "w:stay-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "on"
+      ],
+      [
+        "stayed",
+        "on"
+      ],
+      [
+        "staying",
+        "on"
+      ],
+      [
+        "stays",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stayed on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay on",
+  "senses": [
+    {
+      "senseId": "w:stay-on#s1",
+      "pos": "短语",
+      "glossZh": "继续留下；留任",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stay#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stay-on#e-4a498a07d838ed8a",
+          "text": "Some participants even stay on to work at Mcvilly’s enterprise.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 30
+          },
+          "parts": [
+            [
+              23,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stay-on#s2",
+      "pos": "短语",
+      "glossZh": "（设备或灯光）保持开启",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stay-on#e-b5acf9cef7f49e18",
+          "text": "And the GoPro just stayed on the whole time!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          },
+          "parts": [
+            [
+              19,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stay-on#s3",
+      "pos": "短语",
+      "glossZh": "仍固定在原处；没有脱落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

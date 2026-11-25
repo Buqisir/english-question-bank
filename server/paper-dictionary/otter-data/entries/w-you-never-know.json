@@ -1,0 +1,123 @@
+{
+  "entryId": "w:you-never-know",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "never",
+      "know"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "never",
+        "know"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you never know",
+  "senses": [
+    {
+      "senseId": "w:you-never-know#s1",
+      "pos": "短语",
+      "glossZh": "很难说；说不定会有意想不到的结果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:you-never-know#e-ed3be0138b2dbcdd",
+          "text": "OpenAI’s CEO Sam Altman replied: “Tens of millions of dollars well spent – you never know.”",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 89
+          },
+          "parts": [
+            [
+              75,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:you-never-know#e-523da40d0797dcf1",
+          "text": "When asked whether there’s a cost to all this politeness, OpenAI CEO Sam Altman responded, “Tens of millions of dollars well spent – you never know.” In reality, of course, AI chatbots do not appreciate politeness; they lack consciousness, feelings or a need for social politeness.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 147
+          },
+          "parts": [
+            [
+              133,
+              147
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              147
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

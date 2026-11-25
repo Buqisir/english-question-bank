@@ -1,0 +1,140 @@
+{
+  "entryId": "w:will-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "will",
+      "do"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "will",
+        "do"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "would do",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "will do",
+  "senses": [
+    {
+      "senseId": "w:will-do#s1",
+      "pos": "短语",
+      "glossZh": "就够了；就能满足需要",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:will-do#e-6d8e1cf510ad7c6c",
+          "text": "Don’t use ten words when one will do.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:will-do#e-9188338d8711bcdd",
+          "text": "On school grounds, I walked past her without a greeting – paying a thousand euros as punishment would do!",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 104
+          },
+          "parts": [
+            [
+              96,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:will-do#s2",
+      "pos": "短语",
+      "glossZh": "好的，我会照办；没问题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于简短回应请求。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

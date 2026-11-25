@@ -1,0 +1,136 @@
+{
+  "entryId": "w:play-ball",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing ball"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "ball"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "ball"
+      ],
+      [
+        "playing",
+        "ball"
+      ],
+      [
+        "played",
+        "ball"
+      ],
+      [
+        "plays",
+        "ball"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "played ball",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play ball",
+  "senses": [
+    {
+      "senseId": "w:play-ball#s2",
+      "pos": "短语",
+      "glossZh": "玩球；打球",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-ball#e-bf9208d67b7fae89",
+          "text": "Stories were like air to me and while other kids played ball or went to parties, I lived out adventures through the books I checked out from the library.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 60
+          },
+          "parts": [
+            [
+              49,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-ball#s1",
+      "pos": "短语",
+      "glossZh": "愿意合作；配合",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-ball#s3",
+      "pos": "短语",
+      "glossZh": "开始比赛！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "棒球或垒球比赛的开赛口令。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

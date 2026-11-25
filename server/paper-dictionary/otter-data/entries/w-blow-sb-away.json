@@ -1,0 +1,161 @@
+{
+  "entryId": "w:blow-sb-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "blow away"
+  ],
+  "pattern": {
+    "tokens": [
+      "blow",
+      {
+        "slot": "sb"
+      },
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "blow",
+        {
+          "slot": "sb"
+        },
+        "away"
+      ],
+      [
+        "blow",
+        "away"
+      ],
+      [
+        "blew",
+        "away"
+      ],
+      [
+        "blowing",
+        "away"
+      ],
+      [
+        "blown",
+        "away"
+      ],
+      [
+        "blows",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "blew away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "blow sb away",
+  "senses": [
+    {
+      "senseId": "w:blow-sb-away#s1",
+      "pos": "短语",
+      "glossZh": "使惊叹；使深受震撼",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blow#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:blow-sb-away#e-80431b9959b2143c",
+          "text": "The experience blew her away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-zhuji-2025-12-first:26#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 28
+          },
+          "parts": [
+            [
+              15,
+              19
+            ],
+            [
+              24,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              19
+            ],
+            [
+              24,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:blow-sb-away#s2",
+      "pos": "短语",
+      "glossZh": "枪杀某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-sb-away#s3",
+      "pos": "短语",
+      "glossZh": "以压倒性优势击败对手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

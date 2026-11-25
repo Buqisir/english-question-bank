@@ -1,0 +1,61 @@
+{
+  "entryId": "w:apply-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "apply",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "apply",
+        "oneself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "apply oneself",
+  "senses": [
+    {
+      "senseId": "w:apply-oneself#s1",
+      "pos": "短语",
+      "glossZh": "专心致志；用心投入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:apply#s5"
+      ],
+      "examples": [],
+      "note": "常用 apply oneself to sth/doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

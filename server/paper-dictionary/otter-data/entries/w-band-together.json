@@ -1,0 +1,104 @@
+{
+  "entryId": "w:band-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "band",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "band",
+        "together"
+      ],
+      [
+        "banded",
+        "together"
+      ],
+      [
+        "banding",
+        "together"
+      ],
+      [
+        "bands",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "band together",
+  "senses": [
+    {
+      "senseId": "w:band-together#s1",
+      "pos": "短语",
+      "glossZh": "团结起来；联合行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:band#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:band-together#e-3bfe34031923ae7d",
+          "text": "It is about the adventures of a black cat, a yellow dog, and several other animals that band together to survive a catastrophic flood.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 101
+          },
+          "parts": [
+            [
+              88,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

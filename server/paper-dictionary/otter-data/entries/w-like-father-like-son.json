@@ -1,0 +1,97 @@
+{
+  "entryId": "w:like-father-like-son",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "like",
+      "father",
+      ",",
+      "like",
+      "son"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "like",
+        "father",
+        ",",
+        "like",
+        "son"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "like father, like son",
+  "senses": [
+    {
+      "senseId": "w:like-father-like-son#s1",
+      "pos": "短语",
+      "glossZh": "有其父必有其子",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:like-father-like-son#e-b48815e360f1a602",
+          "text": "Like father, like son.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

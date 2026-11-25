@@ -1,0 +1,162 @@
+{
+  "entryId": "w:lay-the-foundation",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lay",
+      "the",
+      "foundation"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lay",
+        "the",
+        "foundation"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lays the foundation",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lay the foundation",
+  "senses": [
+    {
+      "senseId": "w:lay-the-foundation#s1",
+      "pos": "短语",
+      "glossZh": "奠定基础",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lay#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lay-the-foundation#e-ac93f807ec1831e2",
+          "text": "Scientists believe this could lay the foundation for a revolution in cancer detection.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 48
+          },
+          "parts": [
+            [
+              30,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lay-the-foundation#e-2d92e48f1e8d6d3b",
+          "text": "He explains that the work lays the foundation for subsequent（随后的）protection efforts.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 45
+          },
+          "parts": [
+            [
+              26,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lay-the-foundation#e-a18e35754df5e93e",
+          "text": "Li emphasized that this technology lays the foundation for the commercialization of powerful, zero-emission refrigeration systems for industrial and home use, especially the next-generation artificial intelligence computing centers.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 54
+          },
+          "parts": [
+            [
+              35,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "常接 for，说明为哪件事打基础。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,232 @@
+{
+  "entryId": "w:rest-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "rest on"
+  ],
+  "pattern": {
+    "tokens": [
+      "rest",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rest",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "rest",
+        "on"
+      ],
+      [
+        "rested",
+        "on"
+      ],
+      [
+        "resting",
+        "on"
+      ],
+      [
+        "rests",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "resting on",
+      "tags": []
+    },
+    {
+      "form": "rests on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rest on sth",
+  "senses": [
+    {
+      "senseId": "w:rest-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "搁在……上；由……支撑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rest-on-sth#e-f7cb426be30b38ab",
+          "text": "With the pumpkin resting on the table, hole uppermost, I bent over and pressed my head against the opening.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rest-on-sth#e-69847ff897d212b9",
+          "text": "I was able to straighten up with the huge pumpkin resting on my shoulders.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 60
+          },
+          "parts": [
+            [
+              50,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rest-on-sth#e-d05d4ef0f43a32b2",
+          "text": "The girls inside were standing on their tiptoes (脚尖) like delicate butterflies gently resting on flowers.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 96
+          },
+          "parts": [
+            [
+              86,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              96
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:rest-on-sth#s2",
+      "pos": "短语",
+      "glossZh": "取决于……；以……为基础",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rest#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:rest-on-sth#e-36ce84c4662e93ff",
+          "text": "A crossword is complete – and gives one joy – with only so many words, and only when each word rests on elements from the others.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 103
+          },
+          "parts": [
+            [
+              95,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              103
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

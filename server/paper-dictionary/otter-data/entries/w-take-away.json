@@ -1,0 +1,528 @@
+{
+  "entryId": "w:take-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take it away",
+    "takes away",
+    "taking away"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "away"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "away"
+      ],
+      [
+        "takes",
+        "away"
+      ],
+      [
+        "taking",
+        "away"
+      ],
+      [
+        "taken",
+        "away"
+      ],
+      [
+        "took",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take away",
+      "tags": []
+    },
+    {
+      "form": "taken away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:take-away#s1",
+      "pos": "短语",
+      "glossZh": "拿走；带走；移走",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-away#e-ee1e50437f906daa",
+          "text": "He was taken away by a foreigner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-d7e53ee8f8d7c8ef",
+          "text": "Take the plate away.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 19
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              15,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              15,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-2f26885e62ccf8aa",
+          "text": "My first reaction was to take it away from him so he wouldn't accidentally choke – until he spoke.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 37
+          },
+          "parts": [
+            [
+              25,
+              29
+            ],
+            [
+              33,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              29
+            ],
+            [
+              33,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:take-away#s2",
+      "pos": "短语",
+      "glossZh": "夺走；剥夺；没收",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-away#e-abd5f7385bd5ee26",
+          "text": "If you can’t take their wine away, you should certainly try to take away their soapbox（讲台）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 33
+          },
+          "parts": [
+            [
+              13,
+              17
+            ],
+            [
+              29,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              17
+            ],
+            [
+              29,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-69fb90d5cc5bc501",
+          "text": "Then I would try to remember the different possessions I supposedly had taken away – since I seldom actually kept them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 82
+          },
+          "parts": [
+            [
+              72,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-96b8d429ed426fa7",
+          "text": "These cautious policies come from two fears: robotaxis might crash into people or cars and take away drivers’ jobs.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:take-away#s3",
+      "pos": "短语",
+      "glossZh": "把（注意力、时间等）从……转移开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-away#e-8622f3220bd7ca2f",
+          "text": "who is to blame for taking attention away from charities",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-08-first:34#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 41
+          },
+          "parts": [
+            [
+              20,
+              26
+            ],
+            [
+              37,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              26
+            ],
+            [
+              37,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-658fb573a80d080f",
+          "text": "Rising expenses can cause anxiety and lead people to focus too much on making or saving money, taking attention away from other important aspects of life.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 116
+          },
+          "parts": [
+            [
+              95,
+              101
+            ],
+            [
+              112,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              101
+            ],
+            [
+              112,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-away#e-6b37a0cd73b7f8fc",
+          "text": "Conducting a simple time audit（审计） helps you find these hidden black holes in your schedule, which might be taking precious moments away from more critical tasks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 136
+          },
+          "parts": [
+            [
+              108,
+              114
+            ],
+            [
+              132,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              114
+            ],
+            [
+              132,
+              136
+            ]
+          ]
+        }
+      ],
+      "note": "take sth away from sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:take-away#s5",
+      "pos": "短语",
+      "glossZh": "从经历中获得（认识、启发等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-away#e-aab9e6a349ef8d19",
+          "text": "By the end you will have a working module to share, a toolkit(工具包) of design techniques to take away and plenty of ideas for how to make Evolve projects more creative and fun.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-away#s4",
+      "pos": "短语",
+      "glossZh": "减去；扣除",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-away#s6",
+      "pos": "短语",
+      "glossZh": "请开始表演或发言",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作招呼语 Take it away!",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -35,8 +35,8 @@
     "mock": 401
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 400
+    "gaokao": 8,
+    "mock": 219
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 106
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -251,170 +251,20 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:once#s4",
-      "pos": "短语",
-      "glossZh": "同时；一起",
-      "pronunciationId": "w:once#p-main",
-      "note": "at once；all at once。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:once#e-1d616c3714a5d173",
-          "text": "The story is one of scores in To Forgive Design: Understanding Failure, a book that is at once a love letter to engineering and a paean (赞歌) to its breakdowns.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:once#e-df7d9df42743b850",
-          "text": "You have to make sure you don’t turn two pages at once and make sure you find the repeats in the music when you have to go back to the right spot.” Mr Titterton explained.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:once#e-2047565f0737024d",
-          "text": "For this work, titled “Truckload of Plastic,” Von Wong and a group of volunteers collected more than 10,000 pieces of plastic, which were then tied together to look like they’d been dumped（倾倒）from a truck all at once.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 212,
-            "end": 216
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:once#s5",
-      "pos": "短语",
-      "glossZh": "立刻；一下子",
-      "pronunciationId": "w:once#p-main",
-      "note": "at once；all at once。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:once#e-a9ad35acd1123743",
-          "text": "Finish it all at once.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
-            "locator": {
-              "question": 9,
-              "questionId": "question:listening:9",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        },
-        {
-          "exampleId": "w:once#e-55f381ba5e13e266",
-          "text": "He agreed at once.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:once#s6",
-      "pos": "短语",
-      "glossZh": "再一次",
-      "pronunciationId": "w:once#p-main",
-      "note": "once again。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:once#e-dc1402d018b6ed64",
-          "text": "Once again",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
-            "locator": {
-              "question": 47,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:47",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-at-once",
+    "w:at-once",
+    "w:once-again",
+    "w:once-and-for-all",
+    "w:once-more",
+    "w:once-or-twice",
+    "w:once-upon-a-time"
+  ]
 }

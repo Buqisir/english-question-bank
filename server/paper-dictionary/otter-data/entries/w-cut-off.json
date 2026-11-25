@@ -1,0 +1,436 @@
+{
+  "entryId": "w:cut-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cutting off"
+  ],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "cut",
+        "off"
+      ],
+      [
+        "cut",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "cutting",
+        "off"
+      ],
+      [
+        "cuts",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cut off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:cut-off#s1",
+      "pos": "短语",
+      "glossZh": "切下；剪掉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-off#e-4b741438c38280b5",
+          "text": "Then take a sharp knife and cut the feathery part off, leaving just a bare tube.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 53
+          },
+          "parts": [
+            [
+              28,
+              31
+            ],
+            [
+              50,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              31
+            ],
+            [
+              50,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-off#e-0be84e8dc293ebac",
+          "text": "Their stems were cut off.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:cut-off#s2",
+      "pos": "短语",
+      "glossZh": "切断联系；使与外界隔绝",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cut#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cut-off#e-222b3d2f31712e7f",
+          "text": "I’ve caged myself in a prison of my ambitions and expectations, cut off from many aspects of the world.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-off#e-98f680fb6eaa7f8e",
+          "text": "However, visitors must be cautious when entering the caves: A sudden high tide may cut them off.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 95
+          },
+          "parts": [
+            [
+              83,
+              86
+            ],
+            [
+              92,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              86
+            ],
+            [
+              92,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-off#e-02f2d0cf849ae494",
+          "text": "I caged myself in a prison of my own ambitions and expectations, cut off from many aspects of the world.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          },
+          "parts": [
+            [
+              65,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              72
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be cut off from sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:cut-off#s3",
+      "pos": "短语",
+      "glossZh": "切断供应、网络或通话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-off#e-a623857af189a0d3",
+          "text": "All in all, human activity has cut off about half the sand that would otherwise end up on the world’s beaches.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 38
+          },
+          "parts": [
+            [
+              31,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-off#e-0536938ce2b8c761",
+          "text": "Ecologically, it significantly reduces the use of chemicals, thereby cutting off a primary source of agricultural pollution.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 80
+          },
+          "parts": [
+            [
+              69,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-off#e-eb5c7a59ad81029f",
+          "text": "Cut off the Internet connection.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-zj-qiangji-2026-mar:23#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:cut-off#s5",
+      "pos": "短语",
+      "glossZh": "截住去路；驾车突然插到前面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-off#e-dc50743d95a5a608",
+          "text": "Imagine you’ve just been cut off in traffic.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          },
+          "parts": [
+            [
+              25,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cut-off#s4",
+      "pos": "短语",
+      "glossZh": "打断某人说话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

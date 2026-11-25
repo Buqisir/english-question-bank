@@ -1,0 +1,171 @@
+{
+  "entryId": "w:be-to-blame",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "to",
+      "blame"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "to",
+        "blame"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are to blame",
+      "tags": []
+    },
+    {
+      "form": "is to blame",
+      "tags": []
+    },
+    {
+      "form": "was to blame",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be to blame",
+  "senses": [
+    {
+      "senseId": "w:be-to-blame#s1",
+      "pos": "短语",
+      "glossZh": "应负责任；是造成问题的原因",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blame#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-to-blame#e-8341cf332c2f4ed1",
+          "text": "Both are to blame.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to-blame#e-1e7cf68121ddc716",
+          "text": "When the fruit trees he planted were not producing anything, he realized the absence of bees was to blame.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 105
+          },
+          "parts": [
+            [
+              93,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-to-blame#e-8622f3220bd7ca2f",
+          "text": "who is to blame for taking attention away from charities",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-08-first:34#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

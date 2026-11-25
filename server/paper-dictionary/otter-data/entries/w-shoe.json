@@ -66,8 +66,8 @@
     "mock": 64
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 63
+    "gaokao": 1,
+    "mock": 6
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 58
       },
       "folded": false,
       "examples": [
@@ -142,59 +142,6 @@
       ]
     },
     {
-      "senseId": "w:shoe#s2",
-      "pos": "短语",
-      "glossZh": "设身处地为他人着想",
-      "pronunciationId": "w:shoe#p-main",
-      "note": "put oneself in sb's shoes。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shoe#e-4fcacacb9f4d202d",
-          "text": "I tried to put myself in my brother’s shoes.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:shoe#e-9405b7e39e87ede5",
-          "text": "Sometimes, it’s simply about listening, acknowledging someone’s feelings and putting yourself in their shoes.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
-            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
-            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:shoe#s3",
       "pos": "n.",
       "glossZh": "马蹄铁",
@@ -227,6 +174,8 @@
       "reason": "赌场器具专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

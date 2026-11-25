@@ -55,7 +55,7 @@
     "mock": 6208
   },
   "unassignedCounts": {
-    "gaokao": 824,
+    "gaokao": 841,
     "mock": 6205
   },
   "senses": [
@@ -415,112 +415,6 @@
       ]
     },
     {
-      "senseId": "w:that#s6",
-      "pos": "短语",
-      "glossZh": "以便",
-      "pronunciationId": "w:that#p-main",
-      "note": "so that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:that#e-44038a59d2f345f5",
-          "text": "For postcrossing to work worldwide, a common communication language is needed so that everyone can understand each other.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 85
-          }
-        },
-        {
-          "exampleId": "w:that#e-44c64bff55727809",
-          "text": "With their ability to see ahead, they could signal any problem, so that fast-moving trains would be able to react in time.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 71
-          }
-        },
-        {
-          "exampleId": "w:that#e-b06b67cc4ea2c526",
-          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 91,
-            "end": 95
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:that#s7",
-      "pos": "短语",
-      "glossZh": "以便",
-      "pronunciationId": "w:that#p-main",
-      "note": "原句用 such that 表目的。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:that#e-40772dedca9be44e",
-          "text": "Then I can spare some time to learn it again, such that we can practice together on every day.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:that#s8",
       "pos": "pron.",
       "glossZh": "代替前面已提到的同类事物",
@@ -643,77 +537,36 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:that#s10",
-      "pos": "短语",
-      "glossZh": "以至于",
-      "pronunciationId": "w:that#p-main",
-      "note": "so … that … 表结果。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:that#e-b03cde225b1fc99a",
-          "text": "It was so tiny that we had to leave our suitcases in the hallway.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:that#s11",
-      "pos": "短语",
-      "glossZh": "唯恐",
-      "pronunciationId": "w:that#p-main",
-      "note": "for fear that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:that#e-b957e09b6be0690c",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 147,
-            "end": 151
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:and-all-that-jazz",
+    "w:copy-that",
+    "w:for-fear-that",
+    "w:in-that-case",
+    "w:in-the-hope-that",
+    "w:in-the-knowledge-that",
+    "w:it-dawns-on-sb-that",
+    "w:it-happens-that",
+    "w:it-turns-out-that",
+    "w:just-like-that",
+    "w:like-that",
+    "w:make-it-so-that",
+    "w:on-top-of-that",
+    "w:provided-that",
+    "w:so-that",
+    "w:so-that-phrase",
+    "w:something-like-that",
+    "w:such-that",
+    "w:that-being-said",
+    "w:that-is",
+    "w:that-said",
+    "w:thats-that",
+    "w:whats-that"
+  ]
 }

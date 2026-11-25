@@ -1,0 +1,246 @@
+{
+  "entryId": "w:sort-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sort",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sort",
+        "through"
+      ],
+      [
+        "sorted",
+        "through"
+      ],
+      [
+        "sorting",
+        "through"
+      ],
+      [
+        "sorts",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sorted through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sort through",
+  "senses": [
+    {
+      "senseId": "w:sort-through#s1",
+      "pos": "短语",
+      "glossZh": "逐一查看并筛选、整理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sort-through#e-44b52c8608678cc6",
+          "text": "The following Saturday morning, as David sorted through the cans, a new worry washed over him.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 55
+          },
+          "parts": [
+            [
+              41,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sort-through#e-ddac6c638a16f1ca",
+          "text": "To find a reforestation project that matches your interests, sort through the catalog using indicators from five key categories.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 73
+          },
+          "parts": [
+            [
+              61,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sort-through#e-d557212e5456812d",
+          "text": "Once the guardians of the answers are gone, we are more likely to be left with heaps of documents to sort through – birth certificates, DNA results, unlabeled photographs – rather than hours of stories.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 113
+          },
+          "parts": [
+            [
+              101,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:sort-through#s2",
+      "pos": "短语",
+      "glossZh": "逐步理清（想法、感受或问题）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sort-through#e-27fc1477835bef02",
+          "text": "Sharing your thoughts out loud can help you sort through them more clearly and ease the emotional burden.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 56
+          },
+          "parts": [
+            [
+              44,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sort-through#e-ade81b59d26da5c6",
+          "text": "Some people use self-talk to sort through a challenge.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiaxing-2026-apr-m179:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

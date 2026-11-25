@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 582
+    "mock": 385
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 61,
-        "mock": 0
+        "mock": 198
       },
       "folded": false,
       "examples": [
@@ -138,54 +138,6 @@
       ]
     },
     {
-      "senseId": "w:provide#s2",
-      "pos": "短语",
-      "glossZh": "只要",
-      "pronunciationId": "w:provide#p-main",
-      "note": "provided that，引出条件。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:provide#e-3b4df3fcf264bdba",
-          "text": "Pilots can see full-circle rainbows provided that weather conditions permit.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:provide#s3",
-      "pos": "短语",
-      "glossZh": "供养",
-      "pronunciationId": "w:provide#p-main",
-      "note": "provide for sb。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:provide#s4",
       "pos": "v.",
       "glossZh": "规定",
@@ -206,6 +158,11 @@
       "reason": "历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:provide-for-sb"
+  ]
 }

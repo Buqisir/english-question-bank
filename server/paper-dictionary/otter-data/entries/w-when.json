@@ -35,7 +35,7 @@
     "mock": 2540
   },
   "unassignedCounts": {
-    "gaokao": 305,
+    "gaokao": 308,
     "mock": 2539
   },
   "senses": [
@@ -253,41 +253,6 @@
       ]
     },
     {
-      "senseId": "w:when#s4",
-      "pos": "短语",
-      "glossZh": "说到……",
-      "pronunciationId": "w:when#p-main",
-      "note": "when it comes to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:when#e-bfa011733cfdcaf8",
-          "text": "When it comes to public speaking, less is usually more.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-i:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:when#s5",
       "pos": "conj.",
       "glossZh": "既然（引出与前述情况抵触的事实）",
@@ -307,6 +272,15 @@
       "reason": "少见独立用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hardly-when",
+    "w:i-know-it-when-i-see-it",
+    "w:say-when",
+    "w:since-when",
+    "w:when-it-comes-to-sth"
+  ]
 }

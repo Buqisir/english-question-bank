@@ -1,0 +1,96 @@
+{
+  "entryId": "w:wave-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wave",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wave",
+        "off"
+      ],
+      [
+        "waved",
+        "off"
+      ],
+      [
+        "waves",
+        "off"
+      ],
+      [
+        "waving",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wave (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:wave-off#s1",
+      "pos": "短语",
+      "glossZh": "挥手送别；挥手示意对方离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wave-off#s2",
+      "pos": "短语",
+      "glossZh": "（裁判）挥手示意得分无效",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wave-off#s3",
+      "pos": "短语",
+      "glossZh": "示意飞机停止降落并复飞",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

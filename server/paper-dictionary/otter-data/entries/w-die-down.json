@@ -1,0 +1,148 @@
+{
+  "entryId": "w:die-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "die",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "die",
+        "down"
+      ],
+      [
+        "died",
+        "down"
+      ],
+      [
+        "dies",
+        "down"
+      ],
+      [
+        "dying",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "died down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "die down",
+  "senses": [
+    {
+      "senseId": "w:die-down#s1",
+      "pos": "短语",
+      "glossZh": "逐渐减弱；平息",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:die-down#e-eedb0875c6f6dc7c",
+          "text": "The whispered questions died down.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:die-down#e-2e2edcc7f8bfc092",
+          "text": "died down",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "question": 49,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:49#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "常指声音、风势或情绪等渐弱。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [
+    {
+      "legacySenseIds": [
+        "w:die#s3"
+      ],
+      "glossZh": "逐渐消失；灭绝",
+      "reason": "原释义对应 die out，旧注把 die down 的减弱义另列为辨析。"
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

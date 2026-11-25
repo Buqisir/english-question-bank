@@ -1,0 +1,191 @@
+{
+  "entryId": "w:build-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "building up"
+  ],
+  "pattern": {
+    "tokens": [
+      "build",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "up"
+      ],
+      [
+        "building",
+        "up"
+      ],
+      [
+        "builds",
+        "up"
+      ],
+      [
+        "built",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "builds up",
+      "tags": []
+    },
+    {
+      "form": "built up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build up",
+  "senses": [
+    {
+      "senseId": "w:build-up#s1",
+      "pos": "短语",
+      "glossZh": "逐渐积累；逐步增强或使增强",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:build#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:build-up#e-6a3c8290ed57f9af",
+          "text": "This creates a self-adjusting way to stop water from building up that could affect performance.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 64
+          },
+          "parts": [
+            [
+              53,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-up#e-f2cf8782c98515f1",
+          "text": "It is thought that you can build a child’s willpower the way athletes build up muscles, through practice.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 78
+          },
+          "parts": [
+            [
+              70,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-up#e-cea7b306c25d862b",
+          "text": "“The way we irrigate fields with water containing plastic, we assume that the plastic builds up there,” he said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 95
+          },
+          "parts": [
+            [
+              86,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              95
+            ]
+          ]
+        }
+      ],
+      "note": "可指水分、压力逐渐积聚，也可指逐步建立信任、增强信心。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 22
+      }
+    },
+    {
+      "senseId": "w:build-up#s2",
+      "pos": "短语",
+      "glossZh": "逐层搭建；砌起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 20
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -172,20 +172,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:boot#s5",
-      "pos": "短语",
-      "glossZh": "而且；另外",
-      "pronunciationId": "w:boot#p-main",
-      "note": "to boot",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -194,6 +180,11 @@
       "reason": "历史、俚语或行业专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:to-boot"
+  ]
 }

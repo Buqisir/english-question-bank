@@ -1,0 +1,120 @@
+{
+  "entryId": "w:drop-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "back"
+      ],
+      [
+        "dropped",
+        "back"
+      ],
+      [
+        "dropping",
+        "back"
+      ],
+      [
+        "drops",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dropped back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop back",
+  "senses": [
+    {
+      "senseId": "w:drop-back#s1",
+      "pos": "短语",
+      "glossZh": "退到后面；放慢速度落到后方",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drop-back#e-42a773f702b5a563",
+          "text": "Ismael had immediately dropped back, his hand on my shoulder as we walked together across the finish line to echoing silence.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:drop-back#s2",
+      "pos": "短语",
+      "glossZh": "（美式橄榄球）开球后后撤准备传球；这样的后撤动作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

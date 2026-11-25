@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 128
+    "mock": 2
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 119
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -240,6 +240,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:extra#s6",
+      "pos": "n.",
+      "glossZh": "多余的部分",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:extra#e-61c45e6d60b6ff6d",
+          "text": "There is no Tolerable Upper Intake Level for water because the body can usually remove the extra by passing water or sweating.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -248,6 +281,6 @@
       "reason": "历史军事专用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

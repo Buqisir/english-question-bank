@@ -1,0 +1,165 @@
+{
+  "entryId": "w:get-down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting down to"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "down",
+        "to"
+      ],
+      [
+        "getting",
+        "down",
+        "to"
+      ],
+      [
+        "gets",
+        "down",
+        "to"
+      ],
+      [
+        "got",
+        "down",
+        "to"
+      ],
+      [
+        "gotten",
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get down to",
+  "senses": [
+    {
+      "senseId": "w:get-down-to#s1",
+      "pos": "短语",
+      "glossZh": "开始认真做；着手处理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-down-to#e-c66a526db92139cc",
+          "text": "Moved by gratitude and affection, I got down to planning a surprise birthday party for her after learning she and her mom were going out that morning and wouldn’t be back until noon.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "后接名词或动词 -ing 形式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-down-to#s2",
+      "pos": "短语",
+      "glossZh": "把范围缩小到；筛选到只剩",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-down-to#e-e42fbf3e9bbd3ba6",
+          "text": "Now repeat the process until you get down to one final choice.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 44
+          },
+          "parts": [
+            [
+              33,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

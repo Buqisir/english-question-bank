@@ -1,0 +1,97 @@
+{
+  "entryId": "w:circle-of-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "circle",
+      "of",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "circle",
+        "of",
+        "life"
+      ],
+      [
+        "circles",
+        "of",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "circle of life",
+  "senses": [
+    {
+      "senseId": "w:circle-of-life#s1",
+      "pos": "短语",
+      "glossZh": "生命的自然循环；生物繁衍、生长、死亡和世代更替的过程",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:circle-of-life#e-b58fa1c7f155458f",
+          "text": "It’s basically the circle of life.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-c:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 33
+          },
+          "parts": [
+            [
+              19,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

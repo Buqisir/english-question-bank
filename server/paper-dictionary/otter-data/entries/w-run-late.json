@@ -1,0 +1,169 @@
+{
+  "entryId": "w:run-late",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running late"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "late"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "late"
+      ],
+      [
+        "running",
+        "late"
+      ],
+      [
+        "ran",
+        "late"
+      ],
+      [
+        "runs",
+        "late"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run late",
+  "senses": [
+    {
+      "senseId": "w:run-late#s1",
+      "pos": "短语",
+      "glossZh": "晚点；比预定时间晚",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:run#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:run-late#e-47fcdaf003142ec1",
+          "text": "or I’m running late – that’s urgent information.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-late#e-32b13386f45373bc",
+          "text": "By then, we were already running late.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 37
+          },
+          "parts": [
+            [
+              25,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-late#e-93ce6fc54bc0e9d6",
+          "text": "Trains are running late.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,429 @@
+{
+  "entryId": "w:get-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "got into"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "into"
+      ],
+      [
+        "got",
+        "into"
+      ],
+      [
+        "gets",
+        "into"
+      ],
+      [
+        "getting",
+        "into"
+      ],
+      [
+        "gotten",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get into",
+  "senses": [
+    {
+      "senseId": "w:get-into#s1",
+      "pos": "短语",
+      "glossZh": "进入；上车并坐进去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-into#e-8e2996d0393af2c1",
+          "text": "And just like every day before, he got into the jump seat and they were off.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          },
+          "parts": [
+            [
+              35,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-255a87c567149936",
+          "text": "After they left, I got into my Jeep and opened the paper bag.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-a652f6f57d2b5559",
+          "text": "After Tom got into bed, Ling would tell his favorite tales about brave knights and magical lands.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:get-into#s2",
+      "pos": "短语",
+      "glossZh": "开始从事；对……产生兴趣",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-into#e-27a7f38ad1a77b2a",
+          "text": "Get into the spirit of Pi Day with a special meal that features round objects.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-4d2290bd83bc0c8d",
+          "text": "What drove Michelle to get into the show business?",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-8e748766da9600d0",
+          "text": "What made the speaker get into the field?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:get-into#s3",
+      "pos": "短语",
+      "glossZh": "陷入（麻烦、债务等）；卷入（争执等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-into#e-67b0aa495b227cc3",
+          "text": "Not wanting to get into an argument with this stranger, I suggested we exchange our insurance information.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-13e8bf7a8c21a3f1",
+          "text": "When two of James Johnson-Byrne’s friends got into an argument earlier this year, he didn’t know what to do.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into#e-241c045a9475a396",
+          "text": "During lunch, two kids got into a heated quarrel over a single slice of dessert.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-into#s4",
+      "pos": "短语",
+      "glossZh": "穿上（衣服）；挤进（紧身衣物）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-into#s5",
+      "pos": "短语",
+      "glossZh": "被（学校、团队等）录取",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-into#s6",
+      "pos": "短语",
+      "glossZh": "使某人一反常态",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于 What’s got into sb?",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,271 @@
+{
+  "entryId": "w:burst-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "burst",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "burst",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "burst into",
+      "tags": []
+    },
+    {
+      "form": "bursting into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "burst into sth",
+  "senses": [
+    {
+      "senseId": "w:burst-into#s1",
+      "pos": "短语",
+      "glossZh": "突然哭起来、笑起来、唱起来等",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:burst#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:burst-into#e-1d92b7aa8dd228c8",
+          "text": "The final bell’s echo still hung in the air as classmates burst into excited discussion around me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burst-into#e-fa69b0d41b16eb83",
+          "text": "He nuzzled it, immediately burst into a deep, loud purr, and gave me a perfectly content cat grin.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burst-into#e-fe4e08225dbaa7a3",
+          "text": "When I nervously asked him to repeat himself, the entire table burst into laughter.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 73
+          },
+          "parts": [
+            [
+              63,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "后接 tears、laughter、song 等名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:burst-into#s2",
+      "pos": "短语",
+      "glossZh": "突然冲进；闯入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:burst-into#e-9cfb2407a17bbacd",
+          "text": "I was lounging on the sofa, enjoying a cozy TV session with the kids, when my wife Lindsey burst into the room.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 101
+          },
+          "parts": [
+            [
+              91,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burst-into#e-61d772dfe4a6ac22",
+          "text": "Then it would slip, bursting into the birds’ feeding space and securing an exceptionally high hunting success rate.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burst-into#e-6c89c11feed01d6b",
+          "text": "Casey burst into our lives like a storm.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,139 @@
+{
+  "entryId": "w:stick-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "on"
+      ],
+      [
+        "sticking",
+        "on"
+      ],
+      [
+        "sticks",
+        "on"
+      ],
+      [
+        "stuck",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stuck on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick (sth) on",
+  "senses": [
+    {
+      "senseId": "w:stick-on#s1",
+      "pos": "短语",
+      "glossZh": "贴上；粘上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stick-on#e-eb68b3b67062ccca",
+          "text": "I folded brochures, stuck on labels and stamps, and mailed them after praying outside the post office.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          },
+          "parts": [
+            [
+              20,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stick-on#e-d2f48a3cf646306e",
+          "text": "There was a crumpled note stuck on the wall beside it, which read, “Sorry, my dog knocked your mailbox over accidentally.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "如 stick on a label 或 stick a label on。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

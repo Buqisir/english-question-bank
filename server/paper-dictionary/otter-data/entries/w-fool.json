@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 8
+    "mock": 1
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -216,40 +216,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:fool#s4",
-      "pos": "短语",
-      "glossZh": "使自己出丑",
-      "pronunciationId": "w:fool#p-main",
-      "note": "make a fool of oneself。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fool#e-129f10c1f082cbda",
-          "text": "Whispers spread – they laughed at him, betting he’d __48__ in mismatched clothes to make a fool of himself.",
-          "source": {
-            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
-            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
-            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 91,
-            "end": 95
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -258,6 +224,11 @@
       "reason": "地域性食品名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:make-a-fool-of-oneself"
+  ]
 }

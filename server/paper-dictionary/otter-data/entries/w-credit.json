@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 108
+    "mock": 21
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -127,7 +127,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -180,7 +180,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -251,7 +251,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -353,6 +353,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:credit#s8",
+      "pos": "n.",
+      "glossZh": "碳信用额度（carbon credit）",
+      "pronunciationId": "w:credit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:credit#e-8a91ed95fbad991a",
+          "text": "The path forward requires developing carbon credit rules and supportive regulations to make this solution work.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-c:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:credit#e-71a8d51f1a4e37e8",
+          "text": "Increasingly, Weaver, one of the scientists says, fossil (化石) fuel companies and major polluters are buying carbon credits to offset (抵消) their greenhouse gas emissions – but this reflects a faulty understanding of what it will take to achieve net-zero emissions and stop runaway warming.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 122
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -361,6 +413,6 @@
       "reason": "环保交易概念，常作 carbon credit"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

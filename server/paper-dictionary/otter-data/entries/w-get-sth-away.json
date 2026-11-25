@@ -1,0 +1,336 @@
+{
+  "entryId": "w:get-sth-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get away",
+    "getting away",
+    "got away"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      {
+        "slot": "sth"
+      },
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "get",
+        {
+          "slot": "sth"
+        },
+        "away"
+      ],
+      [
+        "get",
+        "away"
+      ],
+      [
+        "getting",
+        "away"
+      ],
+      [
+        "got",
+        "away"
+      ],
+      [
+        "gets",
+        "away"
+      ],
+      [
+        "gotten",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get (sth) away",
+  "senses": [
+    {
+      "senseId": "w:get-sth-away#s1",
+      "pos": "短语",
+      "glossZh": "把……赶走；使……远离",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s37"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-away#e-75800d6781184e76",
+          "text": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 128
+          },
+          "parts": [
+            [
+              106,
+              113
+            ],
+            [
+              124,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ],
+            [
+              124,
+              128
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-away#e-752b5caefb5c8a8b",
+          "text": "Get kids away from social media.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              3
+            ],
+            [
+              9,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              3
+            ],
+            [
+              9,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-sth-away#s2",
+      "pos": "短语",
+      "glossZh": "离开；暂时摆脱",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-away#e-7c9ae72815c8f4fe",
+          "text": "I left that school shortly afterwards, hoping to find a place where I could get away from the pain and find the greatness buried deep within me.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 84
+          },
+          "parts": [
+            [
+              76,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-away#e-0b2ce16ee3c494d7",
+          "text": "When people try to guess a number, they often start with the anchor and then change their answer only a little – never enough to get away from the anchor’s influence.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 137
+          },
+          "parts": [
+            [
+              129,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              137
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sth-away#e-d8bcca42f752b42a",
+          "text": "Dogs receive professional attention, while those special participants also benefit from making friends, getting away from computer screens, and exploring new careers like human handlers and so on.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 116
+          },
+          "parts": [
+            [
+              104,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              116
+            ]
+          ]
+        }
+      ],
+      "note": "常接 from。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-sth-away#s3",
+      "pos": "短语",
+      "glossZh": "逃掉；逃脱",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-sth-away#e-b35bf07b5897e569",
+          "text": "We were tired, hungry, and laughing about the fish that got away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          },
+          "parts": [
+            [
+              56,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-sth-away#s4",
+      "pos": "短语",
+      "glossZh": "抽身外出休息或度假",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

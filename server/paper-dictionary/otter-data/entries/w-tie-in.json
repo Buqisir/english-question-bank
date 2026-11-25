@@ -1,0 +1,83 @@
+{
+  "entryId": "w:tie-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tie",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tie",
+        "in"
+      ],
+      [
+        "tied",
+        "in"
+      ],
+      [
+        "ties",
+        "in"
+      ],
+      [
+        "tying",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tie in",
+  "senses": [
+    {
+      "senseId": "w:tie-in#s1",
+      "pos": "短语",
+      "glossZh": "衔接；协调一致",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tie-in#s2",
+      "pos": "短语",
+      "glossZh": "（地方电台）接入广播网转播节目",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

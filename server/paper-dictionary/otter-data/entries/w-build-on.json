@@ -1,0 +1,182 @@
+{
+  "entryId": "w:build-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "building on"
+  ],
+  "pattern": {
+    "tokens": [
+      "build",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "on"
+      ],
+      [
+        "building",
+        "on"
+      ],
+      [
+        "builds",
+        "on"
+      ],
+      [
+        "built",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "build on",
+      "tags": []
+    },
+    {
+      "form": "builds on",
+      "tags": []
+    },
+    {
+      "form": "built on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build on sth",
+  "senses": [
+    {
+      "senseId": "w:build-on#s1",
+      "pos": "短语",
+      "glossZh": "以……为基础；在……基础上继续发展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:build#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:build-on#e-d52ea8a280bc3282",
+          "text": "We’ve got a foundation built on ancient cultures but with a drive and dynamism of a young country.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-on#e-ba8a401ff21c5d1b",
+          "text": "A city built on ancient cultures is more dynamic.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2022-national-a:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 15
+          },
+          "parts": [
+            [
+              7,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-on#e-5ae5c15dd3c0395d",
+          "text": "The findings build on previous work that found women want taller men more than men want shorter women.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

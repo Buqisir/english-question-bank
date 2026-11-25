@@ -1,0 +1,274 @@
+{
+  "entryId": "w:shoot-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "shooting up"
+  ],
+  "pattern": {
+    "tokens": [
+      "shoot",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shoot",
+        "up"
+      ],
+      [
+        "shooting",
+        "up"
+      ],
+      [
+        "shoots",
+        "up"
+      ],
+      [
+        "shot",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shoots up",
+      "tags": []
+    },
+    {
+      "form": "shot up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shoot up",
+  "senses": [
+    {
+      "senseId": "w:shoot-up#s1",
+      "pos": "短语",
+      "glossZh": "猛地向上冲；一下子举起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shoot-up#e-815274f41333c597",
+          "text": "Paragraph 2: Minutes later, Ed's rocket blasted（轰鸣） skyward, shooting up as if unstoppable.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 72
+          },
+          "parts": [
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shoot-up#e-c6cf6b41f755031b",
+          "text": "Excited hands shot up.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shoot-up#e-c96f763ef79e1d73",
+          "text": "Hands shot up.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 13
+          },
+          "parts": [
+            [
+              6,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              13
+            ]
+          ]
+        }
+      ],
+      "note": "主语可为火箭、手等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:shoot-up#s2",
+      "pos": "短语",
+      "glossZh": "迅速长高；猛长",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shoot-up#e-8efc97ab95542382",
+          "text": "Bamboo shoots up when it rains.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:shoot-up#s3",
+      "pos": "短语",
+      "glossZh": "（价格、数量等）猛涨",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shoot-up#s4",
+      "pos": "短语",
+      "glossZh": "向某人或某处连续开火",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shoot-up#s5",
+      "pos": "短语",
+      "glossZh": "打光（弹药）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shoot-up#s6",
+      "pos": "短语",
+      "glossZh": "注射毒品",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

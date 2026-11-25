@@ -1,0 +1,124 @@
+{
+  "entryId": "w:straight-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "straight",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "straight",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "straight away",
+  "senses": [
+    {
+      "senseId": "w:straight-away#s1",
+      "pos": "短语",
+      "glossZh": "立刻；马上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:straight#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:straight-away#e-1bb86974208a5938",
+          "text": "I didn’t love everything straight away, but I stopped saying no before I had even begun.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 38
+          },
+          "parts": [
+            [
+              25,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:straight-away#e-96907296e3d1c025",
+          "text": "I didn’t love everything straight away.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 38
+          },
+          "parts": [
+            [
+              25,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,176 @@
+{
+  "entryId": "w:pull-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "into"
+      ],
+      [
+        "pulled",
+        "into"
+      ],
+      [
+        "pulling",
+        "into"
+      ],
+      [
+        "pulls",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulled into",
+      "tags": []
+    },
+    {
+      "form": "pulls into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull into",
+  "senses": [
+    {
+      "senseId": "w:pull-into#s1",
+      "pos": "短语",
+      "glossZh": "（车辆）驶入；进站",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pull#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pull-into#e-82b4e1f0665290fc",
+          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 31
+          },
+          "parts": [
+            [
+              21,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-into#e-d2eec9ef34bff455",
+          "text": "The moment they pulled into the driveway, she dashed toward the backyard, calling Pip’s name.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-into#e-a6b40ed3b96b0675",
+          "text": "Unfortunately, when D5122 pulled into Yibin, it was indeed late – but only by 2 minutes.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "常接车站、车道或停车位。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

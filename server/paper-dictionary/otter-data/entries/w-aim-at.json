@@ -1,0 +1,325 @@
+{
+  "entryId": "w:aim-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "aim",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "aim",
+        "at"
+      ],
+      [
+        "aimed",
+        "at"
+      ],
+      [
+        "aiming",
+        "at"
+      ],
+      [
+        "aims",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "aimed at",
+      "tags": []
+    },
+    {
+      "form": "aims at",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "aim at",
+  "senses": [
+    {
+      "senseId": "w:aim-at#s1",
+      "pos": "短语",
+      "glossZh": "旨在；力求；以……为目标",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:aim-at#e-56acc97289c68a1e",
+          "text": "What is Melville’s book aimed at?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          },
+          "parts": [
+            [
+              24,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aim-at#e-c46e0cb08bbf1938",
+          "text": "What is the book aimed at?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-i:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aim-at#e-fc57b2e4aa3a4042",
+          "text": "A joyful journey with an ordinary goal and a painful one aimed at a splendid achievement, which one is more worthwhile?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          },
+          "parts": [
+            [
+              57,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:aim-at#s2",
+      "pos": "短语",
+      "glossZh": "面向（特定受众）；以……为对象",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:aim-at#e-f87aba0913ad094b",
+          "text": "An idea for a “Garden Reading Corner” project, aimed at young readers, began to take shape.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          },
+          "parts": [
+            [
+              47,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aim-at#e-78d4c0f19a7d3a9a",
+          "text": "Aimed at smaller lawns (800m² rather than 1,200m²), the E15 is smart enough to detect",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:aim-at#e-dbf62b15a961cea8",
+          "text": "In another study aimed at young people, most participants cited a compelling (无法抗拒的) mission as their main motivation to give.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:aim-at#s3",
+      "pos": "短语",
+      "glossZh": "瞄准；对准",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:aim-at#e-fd490ffebc2c6c7e",
+          "text": "Imagine trying to aim at something a distance of a strand (股) of hair from a distance of 10 km.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          },
+          "parts": [
+            [
+              18,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

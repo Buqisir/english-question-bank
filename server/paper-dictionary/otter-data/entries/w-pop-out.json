@@ -1,0 +1,206 @@
+{
+  "entryId": "w:pop-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pop",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pop",
+        "out"
+      ],
+      [
+        "popped",
+        "out"
+      ],
+      [
+        "popping",
+        "out"
+      ],
+      [
+        "pops",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "popped out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pop out",
+  "senses": [
+    {
+      "senseId": "w:pop-out#s1",
+      "pos": "短语",
+      "glossZh": "突然冒出；（话）脱口而出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pop-out#e-c0fbed2a796f96a6",
+          "text": "“Out of my way!” popped out of my mouth, and I quickened my pace to avoid her intentionally.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pop-out#s2",
+      "pos": "短语",
+      "glossZh": "使某物弹出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pop-out#e-2d296f22ce8ea015",
+          "text": "Just press a button to pop out the bowl, even when moving.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 30
+          },
+          "parts": [
+            [
+              23,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "pop sth out",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pop-out#s3",
+      "pos": "短语",
+      "glossZh": "出去一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pop-out#s4",
+      "pos": "短语",
+      "glossZh": "（窗口、菜单等）弹出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pop-out#s5",
+      "pos": "短语",
+      "glossZh": "（棒球）打出内野高飞球被接杀出局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pop-out#s6",
+      "pos": "短语",
+      "glossZh": "生孩子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用语，常见于 pop out a baby。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,169 @@
+{
+  "entryId": "w:keep-track-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keep track"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "track",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "track",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keeping track of",
+      "tags": []
+    },
+    {
+      "form": "keeps track of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep track of",
+  "senses": [
+    {
+      "senseId": "w:keep-track-of#s1",
+      "pos": "短语",
+      "glossZh": "持续留意或记录，以掌握情况",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s11",
+        "w:keep#s13",
+        "w:track#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-track-of#e-1e264360be9e25e9",
+          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 42
+          },
+          "parts": [
+            [
+              28,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-track-of#e-c17bb91bb5d33ab6",
+          "text": "Keep track of how you are feeling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-track-of#e-57ca34a590d486a3",
+          "text": "Gardening season is in full bloom, but keeping track of which seedling (幼苗) is which can be really tricky.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 55
+          },
+          "parts": [
+            [
+              39,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

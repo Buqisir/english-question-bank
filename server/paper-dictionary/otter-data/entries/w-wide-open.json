@@ -1,0 +1,205 @@
+{
+  "entryId": "w:wide-open",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wide",
+      "open"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wide",
+        "open"
+      ],
+      [
+        "more",
+        "wide",
+        "open"
+      ],
+      [
+        "most",
+        "wide",
+        "open"
+      ],
+      [
+        "wider",
+        "open"
+      ],
+      [
+        "widest",
+        "open"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wide open",
+  "senses": [
+    {
+      "senseId": "w:wide-open#s1",
+      "pos": "短语",
+      "glossZh": "大敞着；完全打开的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wide-open#e-1871a761ad7c155f",
+          "text": "What will happen if a car’s windows are wide open while driving?",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-import-20261026-n123:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          },
+          "parts": [
+            [
+              40,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:wide-open#s2",
+      "pos": "短语",
+      "glossZh": "尚未定局的；仍有多种可能的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wide-open#e-be21722392de6ede",
+          "text": "The possibilities for cooperation between literature and medicine are wide open.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          },
+          "parts": [
+            [
+              70,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:wide-open#s3",
+      "pos": "短语",
+      "glossZh": "缺乏管制的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wide-open#s4",
+      "pos": "短语",
+      "glossZh": "毫无防备的；容易受到攻击的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wide-open#s5",
+      "pos": "短语",
+      "glossZh": "（比赛中）无人盯防的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wide-open#s6",
+      "pos": "短语",
+      "glossZh": "（金融市场）开盘时买卖报价差距很大的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,183 @@
+{
+  "entryId": "w:take-responsibility",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking responsibility"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "responsibility"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "responsibility"
+      ],
+      [
+        "taking",
+        "responsibility"
+      ],
+      [
+        "taken",
+        "responsibility"
+      ],
+      [
+        "takes",
+        "responsibility"
+      ],
+      [
+        "took",
+        "responsibility"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take responsibility",
+  "senses": [
+    {
+      "senseId": "w:take-responsibility#s1",
+      "pos": "短语",
+      "glossZh": "对自己的行为或过错负责；承担后果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-responsibility#e-91e6829d31b6f86a",
+          "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-responsibility#e-83c7df999874070f",
+          "text": "The most important element of emotional maturity is taking responsibility for your own emotions and actions.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 73
+          },
+          "parts": [
+            [
+              52,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-responsibility#e-7950f3f5ee53b105",
+          "text": "It also helped me take responsibility for my role in these conflicts and show empathy toward my siblings’ experiences.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 37
+          },
+          "parts": [
+            [
+              18,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:take-responsibility#s2",
+      "pos": "短语",
+      "glossZh": "接下职责；负责处理某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

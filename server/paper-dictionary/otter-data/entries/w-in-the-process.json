@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-the-process",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "process"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "process"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the process",
+  "senses": [
+    {
+      "senseId": "w:in-the-process#s1",
+      "pos": "短语",
+      "glossZh": "在此过程中；与此同时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:process#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-process#e-bc62ea3736bf6ce6",
+          "text": "And in the process, I’ve experienced things that really surprise me at times.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-process#e-9a16c093eca57799",
+          "text": "history, and he becomes part of that crowd in the process by decoding (解读) their messages and adding his own interpretation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 57
+          },
+          "parts": [
+            [
+              43,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-process#e-52de4fefa60f6dec",
+          "text": "In the process, we will sharpen our awareness, deepen our empathy (同理心), and actively expand our emotional intelligence.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "常用来引出过程中伴随发生的事或产生的结果。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

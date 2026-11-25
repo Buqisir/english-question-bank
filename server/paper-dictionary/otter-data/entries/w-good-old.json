@@ -1,0 +1,154 @@
+{
+  "entryId": "w:good-old",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "old"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "old"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good old",
+  "senses": [
+    {
+      "senseId": "w:good-old#s1",
+      "pos": "短语",
+      "glossZh": "熟悉而亲切的；一向靠得住的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:good-old#e-7c5d8796c42ee89f",
+          "text": "The future will not be perfect, but neither were the good old days.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 61
+          },
+          "parts": [
+            [
+              53,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-old#e-1af50692db5a19c0",
+          "text": "His good old days with his brother.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          },
+          "parts": [
+            [
+              4,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:good-old#e-9b0ab72ea0b1d1a2",
+          "text": "Why do “good old days” happen to be the time of people’s youth?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-cq-nankai-2026-01-fifth-quality-test:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "放在熟悉的人名或事物前，带有亲切或赞许的语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

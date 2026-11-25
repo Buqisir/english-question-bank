@@ -1,0 +1,112 @@
+{
+  "entryId": "w:pick-up-speed",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "up",
+      "speed"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "up",
+        "speed"
+      ],
+      [
+        "picked",
+        "up",
+        "speed"
+      ],
+      [
+        "picking",
+        "up",
+        "speed"
+      ],
+      [
+        "picks",
+        "up",
+        "speed"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "picks up speed",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick up speed",
+  "senses": [
+    {
+      "senseId": "w:pick-up-speed#s1",
+      "pos": "短语",
+      "glossZh": "提速；加快速度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up-speed#e-0fe935a79a639258",
+          "text": "Once it picks up speed, something extraordinary happens: the hull(船体) lifts entirely out of the water, “flying” half a meter above the surface.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 22
+          },
+          "parts": [
+            [
+              8,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

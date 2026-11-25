@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 114
+    "mock": 2
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 110
       },
       "folded": false,
       "examples": [
@@ -140,12 +140,12 @@
       "pos": "n.",
       "glossZh": "罚单",
       "pronunciationId": "w:ticket#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -194,6 +194,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:ticket#s5",
+      "pos": "n.",
+      "glossZh": "实现某事的途径或关键",
+      "pronunciationId": "w:ticket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ticket#e-c19630b5cb2f3cbb",
+          "text": "Psychologists have long believed willpower is the ticket to a good life.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -202,6 +235,6 @@
       "reason": "少见或特定领域用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

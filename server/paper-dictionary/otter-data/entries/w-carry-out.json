@@ -1,0 +1,195 @@
+{
+  "entryId": "w:carry-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "carrying out"
+  ],
+  "pattern": {
+    "tokens": [
+      "carry",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "carry",
+        "out"
+      ],
+      [
+        "carry",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "carrying",
+        "out"
+      ],
+      [
+        "carried",
+        "out"
+      ],
+      [
+        "carries",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "carried out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carry out",
+  "senses": [
+    {
+      "senseId": "w:carry-out#s1",
+      "pos": "短语",
+      "glossZh": "执行；实施；开展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:carry#s5",
+        "w:out#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:carry-out#e-23826f3a4a0a7958",
+          "text": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:carry-out#e-b5bca510dd8a8a5f",
+          "text": "A study carried out by some of its researchers several years ago concluded that city trees did release isoprene.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:carry-out#e-8836b3de26ec8849",
+          "text": "Why did Blue Hill carry out the experiment?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2025-ii:33",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "常接计划、任务、实验或研究。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 33
+      }
+    },
+    {
+      "senseId": "w:carry-out#s2",
+      "pos": "短语",
+      "glossZh": "把……搬出去；把……带出去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

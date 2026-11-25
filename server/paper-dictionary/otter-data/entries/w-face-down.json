@@ -1,0 +1,149 @@
+{
+  "entryId": "w:face-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "face",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "face",
+        "down"
+      ],
+      [
+        "faced",
+        "down"
+      ],
+      [
+        "faces",
+        "down"
+      ],
+      [
+        "facing",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "face down",
+  "senses": [
+    {
+      "senseId": "w:face-down#s1",
+      "pos": "短语",
+      "glossZh": "面朝下；正面朝下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:face#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:face-down#e-2a103141d30e94bf",
+          "text": "A group of about five people stood over a figure face down on the sidewalk.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:face-down#e-d3d5689a36cd4cb1",
+          "text": "Place them face down on “Place Pack Here” to form the Draw pile.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:face-down#s2",
+      "pos": "短语",
+      "glossZh": "以强硬态度面对并迫使对方退让",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "作动词短语时可用 face sb down。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

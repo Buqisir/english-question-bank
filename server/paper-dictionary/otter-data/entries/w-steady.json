@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 67
+    "mock": 6
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -185,7 +185,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -270,7 +270,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -321,6 +321,6 @@
       "reason": "运动或罕用名词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

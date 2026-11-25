@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 15
+    "mock": 3
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -182,6 +182,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:dare#s4",
+      "pos": "adj.",
+      "glossZh": "大胆的；敢于冒险的",
+      "pronunciationId": "w:dare#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dare#e-79f5d08aa18dc623",
+          "text": "His work was daring and he always preferred to use innovative perspective.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:dare#e-ce892d271354935c",
+          "text": "Using his savings and a small government grant, Zhang took a daring step.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -190,6 +242,6 @@
       "reason": "罕见旧义、专名或同形词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

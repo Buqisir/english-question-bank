@@ -1,0 +1,101 @@
+{
+  "entryId": "w:get-into-a-panic",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "into",
+      "a",
+      "panic"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "into",
+        "a",
+        "panic"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got into a panic",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get into a panic",
+  "senses": [
+    {
+      "senseId": "w:get-into-a-panic#s1",
+      "pos": "短语",
+      "glossZh": "惊慌起来；陷入恐慌",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s48"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-into-a-panic#e-03e7c79d9c64d06a",
+          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 18
+          },
+          "parts": [
+            [
+              2,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

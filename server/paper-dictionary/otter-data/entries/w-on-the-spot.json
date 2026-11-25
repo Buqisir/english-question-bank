@@ -1,0 +1,263 @@
+{
+  "entryId": "w:on-the-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "spot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the spot",
+  "senses": [
+    {
+      "senseId": "w:on-the-spot#s1",
+      "pos": "短语",
+      "glossZh": "在现场；就在那个地点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-the-spot#e-e527ebf9d8d7b303",
+          "text": "I have missed plenty of beautiful sunsets/sunrises due to being on the spot only five minutes before the best moment.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 75
+          },
+          "parts": [
+            [
+              64,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-spot#e-ec203f26a944ed10",
+          "text": "Paragraph 1: On Christmas Day, as Marla opened her gift bag, Barbara froze on the spot.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 86
+          },
+          "parts": [
+            [
+              75,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              86
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-spot#e-6a44d00ff4b8ad2b",
+          "text": "What can all students do on the spot?",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:on-the-spot#s2",
+      "pos": "短语",
+      "glossZh": "当场；立刻",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:spot#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-the-spot#e-60b4f095341fe30e",
+          "text": "I felt at home immediately and signed the rental contract on the spot.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-spot#e-01519240aa97ef00",
+          "text": "This forces you to process and understand the information on the spot.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-spot#e-ea0735ed28f91630",
+          "text": "It predicts what you will see next based on what you’re seeing now and builds virtual environments you can move through on the spot.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 131
+          },
+          "parts": [
+            [
+              120,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              131
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

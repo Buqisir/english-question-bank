@@ -1,0 +1,152 @@
+{
+  "entryId": "w:sure-enough",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sure",
+      "enough"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sure",
+        "enough"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sure enough",
+  "senses": [
+    {
+      "senseId": "w:sure-enough#s1",
+      "pos": "短语",
+      "glossZh": "果然；果不其然",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sure-enough#e-5b98e5c3b42131eb",
+          "text": "Sure enough, every time we ate dim sum at local cha lous, my immigrant (移民的) mother came alive.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sure-enough#e-47d12c1cb174f386",
+          "text": "I looked in the direction he was looking and, sure enough, there was a white dove (鸽子) landing in a rubber tree.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sure-enough#e-65f1303d29998fe8",
+          "text": "Paragraph 2: We hurried outside, and sure enough, snow was coming down in thick sheets.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 48
+          },
+          "parts": [
+            [
+              37,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

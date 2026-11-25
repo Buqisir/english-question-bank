@@ -1,0 +1,79 @@
+{
+  "entryId": "w:way-to-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "way",
+      "to",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "way",
+        "to",
+        "go"
+      ],
+      [
+        "ways",
+        "to",
+        "go"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "way to go",
+  "senses": [
+    {
+      "senseId": "w:way-to-go#s1",
+      "pos": "短语",
+      "glossZh": "干得好！好样的！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:way-to-go#s2",
+      "pos": "短语",
+      "glossZh": "可取的做法；合适的选择",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 the way to go。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

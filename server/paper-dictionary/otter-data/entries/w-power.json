@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 322
+    "mock": 137
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -201,7 +201,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -272,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -344,7 +344,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -393,12 +393,12 @@
       "pos": "n.",
       "glossZh": "强国",
       "pronunciationId": "w:power#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -409,7 +409,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -455,7 +455,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -526,7 +526,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -569,6 +569,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:power#s11",
+      "pos": "v.",
+      "glossZh": "发力完成；奋力挺过（power through）",
+      "pronunciationId": "w:power#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:power#e-c0d3a94c11d50b50",
+          "text": "The birds also perfectly paired their pecks with sharp exhalations “as another means of stabilizing their core muscles and powering through those strikes,” Antonson explains.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 131
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -581,6 +614,14 @@
       "reason": "历史性机械用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:knowledge-is-power",
+    "w:power-couple",
+    "w:power-on",
+    "w:power-up",
+    "w:soft-power",
+    "w:to-the-power-of"
+  ]
 }

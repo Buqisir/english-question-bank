@@ -1,0 +1,188 @@
+{
+  "entryId": "w:stress-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stress",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stress",
+        "out"
+      ],
+      [
+        "stressed",
+        "out"
+      ],
+      [
+        "stresses",
+        "out"
+      ],
+      [
+        "stressing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stressed out",
+      "tags": []
+    },
+    {
+      "form": "stressing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stress (sb) out",
+  "senses": [
+    {
+      "senseId": "w:stress-out#s1",
+      "pos": "短语",
+      "glossZh": "压力很大；焦虑不安",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stress-out#e-63b5c9a53d769726",
+          "text": "There’s no shame in getting a little extra help now and then, especially when you’re stressed out.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 97
+          },
+          "parts": [
+            [
+              85,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stress-out#e-f598718b8127c9d5",
+          "text": "She didn’t say anything about stars, but said, “When I go into this class, I am usually stressed out about my life.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 100
+          },
+          "parts": [
+            [
+              88,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stress-out#e-d7417004b90a50c5",
+          "text": "She was stressing out and didn’t know what to do.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-foshan-2026-01-first:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 21
+          },
+          "parts": [
+            [
+              8,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "表示所处状态时常用 be stressed out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:stress-out#s2",
+      "pos": "短语",
+      "glossZh": "使某人倍感压力；使某人焦虑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:you-cannot-please-everyone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "cannot",
+      "please",
+      "everyone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "cannot",
+        "please",
+        "everyone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you cannot please everyone",
+  "senses": [
+    {
+      "senseId": "w:you-cannot-please-everyone#s1",
+      "pos": "短语",
+      "glossZh": "不可能让所有人都满意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:you-cannot-please-everyone#e-d447fb83879ea434",
+          "text": "Remember, your time is limited, and you cannot please everyone while still taking care of yourself.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 62
+          },
+          "parts": [
+            [
+              36,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

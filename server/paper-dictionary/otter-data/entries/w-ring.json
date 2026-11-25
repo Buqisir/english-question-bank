@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 55
+    "mock": 4
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -227,7 +227,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -298,7 +298,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -331,7 +331,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -364,7 +364,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -394,12 +394,12 @@
       "pos": "n.",
       "glossZh": "铃声",
       "pronunciationId": "w:ring#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -420,12 +420,12 @@
       "pos": "n.",
       "glossZh": "拳击台",
       "pronunciationId": "w:ring#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -461,13 +461,46 @@
       "glossZh": "听起来（给人某种印象）",
       "pronunciationId": "w:ring#p-main",
       "note": "如 ring true。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:ring#s13",
+      "pos": "v.",
+      "glossZh": "（声音）回荡；响彻",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-1536f7b81dd1a152",
+          "text": "a continuous sound rings over Skwentna, a remote village in Alaska.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -480,6 +513,13 @@
       "reason": "历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:ring-a-bell",
+    "w:ring-in",
+    "w:ring-out",
+    "w:ring-true",
+    "w:ring-up"
+  ]
 }

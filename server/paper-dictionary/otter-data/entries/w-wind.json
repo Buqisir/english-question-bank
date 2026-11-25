@@ -79,7 +79,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 145
+    "mock": 7
   },
   "senses": [
     {
@@ -90,7 +90,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 110
       },
       "folded": false,
       "examples": [
@@ -162,7 +162,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -259,7 +259,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -327,12 +327,12 @@
       "pos": "v.",
       "glossZh": "缠绕",
       "pronunciationId": "w:wind#p-turn",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -360,20 +360,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:wind#s9",
-      "pos": "短语",
-      "glossZh": "听说；得知",
-      "pronunciationId": "w:wind#p-main",
-      "note": "get wind of sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -382,6 +368,13 @@
       "reason": "历史或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-wind-of-sth",
+    "w:wind-down",
+    "w:wind-up"
+  ]
 }

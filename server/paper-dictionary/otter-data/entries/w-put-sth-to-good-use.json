@@ -1,0 +1,70 @@
+{
+  "entryId": "w:put-sth-to-good-use",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sth"
+      },
+      "to",
+      "good",
+      "use"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sth"
+        },
+        "to",
+        "good",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth to good use",
+  "senses": [
+    {
+      "senseId": "w:put-sth-to-good-use#s1",
+      "pos": "短语",
+      "glossZh": "充分利用某物；使其发挥作用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:good#s21"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

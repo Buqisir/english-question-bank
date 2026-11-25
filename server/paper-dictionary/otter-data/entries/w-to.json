@@ -48,7 +48,7 @@
     "mock": 25738
   },
   "unassignedCounts": {
-    "gaokao": 3527,
+    "gaokao": 3634,
     "mock": 25734
   },
   "senses": [
@@ -617,330 +617,6 @@
       ]
     },
     {
-      "senseId": "w:to#s10",
-      "pos": "短语",
-      "glossZh": "按照",
-      "pronunciationId": "w:to#p-main",
-      "note": "according to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 47,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-76a835d020c1e93d",
-          "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:to#e-7018b1c0d5cf4239",
-          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:to#e-8cd32e7c2854edaf",
-          "text": "Led by the concept of “right plant, right place,” they match plants that enjoy the same soil, sun and weather conditions, and arrange them according to their patterns of growth.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 149,
-            "end": 151
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s11",
-      "pos": "短语",
-      "glossZh": "在……之前",
-      "pronunciationId": "w:to#p-main",
-      "note": "prior to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-fe0fb48d839e78b7",
-          "text": "Prior to SLEAP, tracking the physical characteristics of both plants and animals required a lot of labor that slowed the scientific process.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s12",
-      "pos": "短语",
-      "glossZh": "听",
-      "pronunciationId": "w:to#p-main",
-      "note": "listen to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-640141db2bfe25e8",
-          "text": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:to#e-dcee5549c4e50f15",
-          "text": "Whose speech did the woman listen to this morning?",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:to#e-929ee29d29e2ce94",
-          "text": "Listen to a lecture.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
-            "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s13",
-      "pos": "短语",
-      "glossZh": "过去常常",
-      "pronunciationId": "w:to#p-main",
-      "note": "used to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-6434632a67a97590",
-          "text": "\"There’s something about me,\" he thought – and it took him a few seconds but he finally remembered what she used to look like.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 113,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:to#e-b43383af1e3fdaba",
-          "text": "She said: “I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "reading-c-3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:to#e-07fe8dbc02bc3afc",
-          "text": "She used to be a health worker.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-gaokao-2023-ii:24",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s14",
-      "pos": "短语",
-      "glossZh": "习惯于",
-      "pronunciationId": "w:to#p-main",
-      "note": "be 或 get used to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-e72eb1f3dce7cd22",
-          "text": "While the younger generations prefer to communicate visually, for those used to working with traditional tools like email, it may feel like a learning curve(曲线).",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 79
-          }
-        },
-        {
-          "exampleId": "w:to#e-c2293770fb0461e9",
-          "text": "In the Digital Age, we’re used to having what we need immediately and right at our fingertips.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:to#e-26c47061972ca43f",
-          "text": "That day, I got __52__ by about 100 “local” bikers who were used to such roads.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:to#s15",
       "pos": "prep.",
       "glossZh": "紧挨着",
@@ -1015,294 +691,6 @@
       ]
     },
     {
-      "senseId": "w:to#s16",
-      "pos": "短语",
-      "glossZh": "因为",
-      "pronunciationId": "w:to#p-main",
-      "note": "due to 或 thanks to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-b6bd29cf1223321d",
-          "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:to#e-b8108eddaaf0153f",
-          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:to#e-2237f2bc3b22b315",
-          "text": "Due to a big storm, my flight had been delayed by an hour and a half.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s17",
-      "pos": "短语",
-      "glossZh": "导致",
-      "pronunciationId": "w:to#p-main",
-      "note": "lead to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 20,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-3a6ec2cc91b97b9a",
-          "text": "These lights, known as adaptive signals, have led to significant declines in both the trouble and cost of travels between work and home.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 52
-          }
-        },
-        {
-          "exampleId": "w:to#e-4ae1454594a7b11c",
-          "text": "A ground-breaking, five-year study shows that diet-related changes in human bite led to new speech sounds that are now found in half the world’s languages.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "reading-d-1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 85,
-            "end": 87
-          }
-        },
-        {
-          "exampleId": "w:to#e-3854547f1f7bc718",
-          "text": "Travel promotes understanding, expands our minds, makes us better people, and boosts local economies and communities, but the rapid growth of travel has led to overtourism in certain regions and destinations.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 157,
-            "end": 159
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s18",
-      "pos": "短语",
-      "glossZh": "盼望",
-      "pronunciationId": "w:to#p-main",
-      "note": "look forward to 后接名词或动名词。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-9b3295270d658873",
-          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 132,
-            "end": 134
-          }
-        },
-        {
-          "exampleId": "w:to#e-75266b79a06e7323",
-          "text": "We are looking forward to the benefits and fun the project can bring to people here.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "reading-c-7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:to#e-9fe08f15bf05e356",
-          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:to#s19",
-      "pos": "短语",
-      "glossZh": "除……之外（还）",
-      "pronunciationId": "w:to#p-main",
-      "note": "in addition to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:to#e-a4164decda4581c7",
-          "text": "In addition to saving money, cheese brine could also be a more eco-friendly option.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:to#e-4a9a63bd6b676ca8",
-          "text": "In addition to the problem of miscomprehension from both sides, there are victories accidentally or deliberately twisted, especially when only the victors know how to write.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:to#e-1a1f59d528efb46b",
-          "text": "In addition to being venues for buying and selling, daji are occasions for socializing and entertainment.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:to#s20",
       "pos": "prep.",
       "glossZh": "表示状态或程度的结果",
@@ -1344,6 +732,229 @@
       "reason": "缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:9-to-5",
+    "w:a-bitter-pill-to-swallow",
+    "w:a-hard-nut-to-crack",
+    "w:according-to",
+    "w:add-up-to",
+    "w:all-good-things-come-to-an-end",
+    "w:amount-to-sth",
+    "w:answer-to-sb",
+    "w:anywhere-from-to",
+    "w:apply-oneself-to-sth",
+    "w:as-opposed-to",
+    "w:as-to",
+    "w:attend-to-sb-sth",
+    "w:be-able-to",
+    "w:be-about-to-do",
+    "w:be-calculated-to-do",
+    "w:be-down-to-sth",
+    "w:be-dying-to-do",
+    "w:be-glued-to",
+    "w:be-going-to",
+    "w:be-hard-pressed-to-do",
+    "w:be-home-to",
+    "w:be-known-to",
+    "w:be-on-to",
+    "w:be-supposed-to",
+    "w:be-sure-to",
+    "w:be-to",
+    "w:be-to-blame",
+    "w:be-up-to-sb",
+    "w:be-up-to-the-task",
+    "w:be-used-to",
+    "w:bear-witness-to-sth",
+    "w:boil-down-to",
+    "w:boil-sth-down-to-sth",
+    "w:bring-sth-to-life",
+    "w:bring-sth-to-the-table",
+    "w:bring-to",
+    "w:bring-to-life",
+    "w:bring-to-mind",
+    "w:call-a-stop-to",
+    "w:call-to",
+    "w:cant-seem-to-do",
+    "w:cant-wait-to-do",
+    "w:chalk-sth-up-to-sth",
+    "w:close-to",
+    "w:close-to-home",
+    "w:close-to-the-mark",
+    "w:come-around-to-sth",
+    "w:come-down-to",
+    "w:come-to-a-conclusion",
+    "w:come-to-an-end",
+    "w:come-to-be",
+    "w:come-to-do-sth",
+    "w:come-to-life",
+    "w:come-to-light",
+    "w:come-to-mind",
+    "w:come-to-ones-rescue",
+    "w:come-to-rest",
+    "w:come-up-to",
+    "w:do-justice-to-sb-sth",
+    "w:door-to-door",
+    "w:down-to",
+    "w:drink-to-sb-sth",
+    "w:due-to",
+    "w:face-to-face",
+    "w:face-to-face-with-sb",
+    "w:face-up-to-sth",
+    "w:fall-to",
+    "w:fall-victim-to-sth",
+    "w:fast-forward-to",
+    "w:from-day-to-day",
+    "w:from-time-to-time",
+    "w:get-back-to",
+    "w:get-down-to",
+    "w:get-down-to-business",
+    "w:get-on-to",
+    "w:get-to",
+    "w:get-to-know",
+    "w:get-to-work-on-sth",
+    "w:get-up-to",
+    "w:get-up-to-mischief",
+    "w:get-used-to",
+    "w:give-back-to",
+    "w:give-birth-to",
+    "w:give-rise-to",
+    "w:give-way-to",
+    "w:go-from-strength-to-strength",
+    "w:go-on-to-do",
+    "w:go-to-bed",
+    "w:go-to-bed-with",
+    "w:go-to-ones-head",
+    "w:go-to-sleep",
+    "w:go-to-the-bathroom",
+    "w:go-to-the-movies",
+    "w:go-to-waste",
+    "w:hand-it-to",
+    "w:have-nothing-to-lose",
+    "w:have-to",
+    "w:have-to-do-with-sth",
+    "w:help-oneself-to-sth",
+    "w:here-to-stay",
+    "w:hold-on-to-sth",
+    "w:hold-to",
+    "w:in-addition-to",
+    "w:in-contrast-to",
+    "w:in-order-to",
+    "w:in-response-to",
+    "w:it-happens-to-the-best-of-us",
+    "w:it-is-time-to-do",
+    "w:jump-to",
+    "w:keep-to",
+    "w:keep-to-oneself",
+    "w:lay-sth-to-rest",
+    "w:lead-to",
+    "w:lead-up-to",
+    "w:lend-itself-to-sth",
+    "w:lie-to",
+    "w:listen-to",
+    "w:lock-to",
+    "w:look-ahead-to",
+    "w:look-forward-to",
+    "w:look-forward-to-doing-sth",
+    "w:look-to",
+    "w:look-to-do",
+    "w:look-up-to",
+    "w:lost-to-time",
+    "w:make-it-a-point-to-do",
+    "w:make-it-to",
+    "w:mean-a-lot-to-sb",
+    "w:mean-everything-to",
+    "w:mean-to",
+    "w:means-to-an-end",
+    "w:meant-to",
+    "w:meant-to-be",
+    "w:minister-to-sb-sth",
+    "w:move-on-to-sth",
+    "w:needless-to-say",
+    "w:next-to",
+    "w:nice-to-meet-you",
+    "w:nine-to-five",
+    "w:not-hold-a-candle-to",
+    "w:not-to-mention",
+    "w:not-to-say",
+    "w:not-to-worry",
+    "w:nothing-to-it",
+    "w:only-to-do",
+    "w:open-ones-eyes-to-sth",
+    "w:open-the-door-to-sth",
+    "w:ought-to",
+    "w:owing-to",
+    "w:place-to-be",
+    "w:play-to",
+    "w:prior-to",
+    "w:put-an-animal-to-sleep",
+    "w:put-down-to",
+    "w:put-sth-to-good-use",
+    "w:put-sth-to-use",
+    "w:put-to-sleep",
+    "w:put-to-the-test",
+    "w:race-to-the-top",
+    "w:reach-back-to-sth",
+    "w:reach-out-to-sb",
+    "w:ready-to-roll",
+    "w:refer-to",
+    "w:refer-to-a-as-b",
+    "w:remain-to-be-seen",
+    "w:resign-oneself-to-sth",
+    "w:rise-to-the-challenge",
+    "w:rules-are-made-to-be-broken",
+    "w:run-to",
+    "w:say-goodbye-to-sth",
+    "w:see-to",
+    "w:set-fire-to",
+    "w:set-out-to-do",
+    "w:set-to",
+    "w:set-to-work",
+    "w:so-as-to",
+    "w:so-slot-as-to-slot",
+    "w:stand-to",
+    "w:stand-up-to",
+    "w:stick-to",
+    "w:take-ones-hat-off-to-sb",
+    "w:take-the-trouble-to-do",
+    "w:take-to",
+    "w:talk-down-to",
+    "w:teach-to-the-test",
+    "w:thanks-to",
+    "w:tie-to",
+    "w:to-be-fair",
+    "w:to-be-honest",
+    "w:to-be-sure",
+    "w:to-begin-with",
+    "w:to-blame",
+    "w:to-boot",
+    "w:to-date",
+    "w:to-name-a-few",
+    "w:to-say-the-least",
+    "w:to-start-with",
+    "w:to-the-best-of-ones-ability",
+    "w:to-the-power-of",
+    "w:to-this-day",
+    "w:to-top-it-off",
+    "w:too-good-to-be-true",
+    "w:tune-in-to-sth",
+    "w:turn-a-blind-eye-to-sth",
+    "w:turn-a-deaf-ear-to-sth",
+    "w:turn-sth-over-to-sb",
+    "w:turn-to-sb-sth",
+    "w:up-to",
+    "w:up-to-now",
+    "w:used-to",
+    "w:used-to-do",
+    "w:waiting-to-happen",
+    "w:warm-to-sb-sth",
+    "w:way-to-go",
+    "w:welcome-to-the-club",
+    "w:when-it-comes-to-sth",
+    "w:with-an-eye-to",
+    "w:would-love-to"
+  ]
 }

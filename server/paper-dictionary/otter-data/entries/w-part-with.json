@@ -1,0 +1,182 @@
+{
+  "entryId": "w:part-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "parts with"
+  ],
+  "pattern": {
+    "tokens": [
+      "part",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "part",
+        "with"
+      ],
+      [
+        "parts",
+        "with"
+      ],
+      [
+        "parted",
+        "with"
+      ],
+      [
+        "parting",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "part with",
+      "tags": []
+    },
+    {
+      "form": "parted with",
+      "tags": []
+    },
+    {
+      "form": "parting with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "part with sth",
+  "senses": [
+    {
+      "senseId": "w:part-with#s1",
+      "pos": "短语",
+      "glossZh": "割舍；放弃持有；舍得交出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:part#s11",
+        "w:with#s27"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:part-with#e-c83b2a590e28ebae",
+          "text": "It was hard for us to finally part with them.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:part-with#e-45d797aaf9ccf33e",
+          "text": "The emotional difficulty of parting with these objects often stems from grief over unfulfilled intentions.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 40
+          },
+          "parts": [
+            [
+              28,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:part-with#e-0c8a273221a2b06f",
+          "text": "Any material good at capturing water doesn’t want to part with that water,” said the team leader Boriskina.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 62
+          },
+          "parts": [
+            [
+              53,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 66
+    "mock": 8
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -237,18 +237,57 @@
       "examples": []
     },
     {
-      "senseId": "w:storm#s5",
+      "senseId": "w:storm#s6",
       "pos": "短语",
-      "glossZh": "大获成功",
+      "glossZh": "小事引起的大风波（a storm in a teacup）",
       "pronunciationId": "w:storm#p-main",
-      "note": "take something by storm。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:storm#e-144a8aae16dd090f",
+          "text": "A storm in a teacup.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zj-2026-03-m171:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:storm#e-e67fdab191625b5c",
+          "text": "One is that it’s nothing more than a storm in a teacup.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -257,6 +296,14 @@
       "reason": "专业义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:eye-of-the-storm",
+    "w:storm-off",
+    "w:storm-out",
+    "w:take-sth-by-storm"
+  ]
 }

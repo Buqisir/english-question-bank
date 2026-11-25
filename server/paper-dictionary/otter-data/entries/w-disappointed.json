@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 62
+    "mock": 41
   },
   "senses": [
     {
@@ -61,7 +61,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -123,6 +123,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:disappointed#s2",
+      "pos": "v.",
+      "glossZh": "使失望",
+      "pronunciationId": "w:disappointed#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disappointed#e-835618e77177ac7e",
+          "text": "What disappointed the woman about the restaurant?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -131,6 +164,6 @@
       "reason": "属于 disappoint 的屈折形式"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

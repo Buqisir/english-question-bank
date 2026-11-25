@@ -120,7 +120,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 98
+    "mock": 3
   },
   "senses": [
     {
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -274,7 +274,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -345,6 +345,19 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:dry#s6",
+      "pos": "adj.",
+      "glossZh": "缺乏产出或灵感的",
+      "pronunciationId": "w:dry#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -353,6 +366,11 @@
       "reason": "政治、工程或编程专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:dry-off",
+    "w:dry-out",
+    "w:dry-up"
+  ]
 }

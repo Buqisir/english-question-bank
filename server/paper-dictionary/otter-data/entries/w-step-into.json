@@ -1,0 +1,188 @@
+{
+  "entryId": "w:step-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "steps into"
+  ],
+  "pattern": {
+    "tokens": [
+      "step",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "into"
+      ],
+      [
+        "steps",
+        "into"
+      ],
+      [
+        "stepped",
+        "into"
+      ],
+      [
+        "stepping",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stepped into",
+      "tags": []
+    },
+    {
+      "form": "stepping into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step into",
+  "senses": [
+    {
+      "senseId": "w:step-into#s1",
+      "pos": "短语",
+      "glossZh": "迈入；走进",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-into#e-eb3d27bc5fe4f665",
+          "text": "I stepped into St. Peter’s, where the silence was so heavy that my mouth fell open.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-into#e-8a4858ae9270bd31",
+          "text": "Paragraph 2: With determination, Mary stepped into the teachers’ office.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-into#e-b542886f2fd1a5b5",
+          "text": "Now, when I step into the elevator, I don’t automatically lower my eyes.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    },
+    {
+      "senseId": "w:step-into#s2",
+      "pos": "短语",
+      "glossZh": "接任；开始承担某个角色或职责",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,145 @@
+{
+  "entryId": "w:high-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "high",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "high",
+        "point"
+      ],
+      [
+        "high",
+        "points"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "high points",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "high point",
+  "senses": [
+    {
+      "senseId": "w:high-point#s1",
+      "pos": "名词短语",
+      "glossZh": "（地形的）高点；最高处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:high-point#e-ac2d132bb4f3a508",
+          "text": "Walking up a path through the forest towards Shutlingsloe, a local high point, I came across a small clearing and immediately noticed the dead yellow grasses set against the fresh snow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-2-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 77
+          },
+          "parts": [
+            [
+              67,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:high-point#s2",
+      "pos": "名词短语",
+      "glossZh": "最精彩的部分；最难忘的时刻",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:high-point#e-b0c9a27efafa1260",
+          "text": "Its last part lacks high points.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

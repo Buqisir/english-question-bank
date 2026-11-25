@@ -1,0 +1,97 @@
+{
+  "entryId": "w:strong-suit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strong",
+      "suit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strong",
+        "suit"
+      ],
+      [
+        "strong",
+        "suits"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strong suit",
+  "senses": [
+    {
+      "senseId": "w:strong-suit#s1",
+      "pos": "短语",
+      "glossZh": "强项；长处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:suit#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:strong-suit#e-f3fb26525648c65c",
+          "text": "Athleticism just isn’t my strong suit.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

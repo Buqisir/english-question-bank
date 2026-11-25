@@ -1,0 +1,108 @@
+{
+  "entryId": "w:have-a-word",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "word"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "word"
+      ],
+      [
+        "had",
+        "a",
+        "word"
+      ],
+      [
+        "has",
+        "a",
+        "word"
+      ],
+      [
+        "having",
+        "a",
+        "word"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a word",
+  "senses": [
+    {
+      "senseId": "w:have-a-word#s1",
+      "pos": "短语",
+      "glossZh": "找某人简短谈几句",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-a-word#e-133ac70daf6e6f06",
+          "text": "I must have a word with him.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "常用 have a word with sb，往往是私下谈，有时带提醒或责备的意味。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

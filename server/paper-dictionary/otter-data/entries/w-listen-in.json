@@ -1,0 +1,98 @@
+{
+  "entryId": "w:listen-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "listen",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "listen",
+        "in"
+      ],
+      [
+        "listened",
+        "in"
+      ],
+      [
+        "listening",
+        "in"
+      ],
+      [
+        "listens",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "listen in",
+  "senses": [
+    {
+      "senseId": "w:listen-in#s1",
+      "pos": "短语",
+      "glossZh": "旁听谈话或讨论",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 listen in on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:listen-in#s2",
+      "pos": "短语",
+      "glossZh": "偷听；窃听",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:listen-in#s3",
+      "pos": "短语",
+      "glossZh": "收听广播",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

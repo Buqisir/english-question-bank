@@ -1,0 +1,157 @@
+{
+  "entryId": "w:fast-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fast",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fast",
+        "forward"
+      ],
+      [
+        "fast",
+        "forwarded"
+      ],
+      [
+        "fast",
+        "forwarding"
+      ],
+      [
+        "fast",
+        "forwards"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fast forward",
+  "senses": [
+    {
+      "senseId": "w:fast-forward#s1",
+      "pos": "短语",
+      "glossZh": "（叙述中）直接跳到后来的时间点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:forward#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fast-forward#e-56edd7267bbf185b",
+          "text": "Fast forward thirty years.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fast-forward#s2",
+      "pos": "短语",
+      "glossZh": "（使音频、视频等）快进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fast-forward#s3",
+      "pos": "短语",
+      "glossZh": "（播放器的）快进功能或按钮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fast-forward#s4",
+      "pos": "短语",
+      "glossZh": "（使事情）迅速推进；加快进程",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fast-forward#s5",
+      "pos": "短语",
+      "glossZh": "（比喻）快速发展的状态",
+      "note": "常见于 in fast forward。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

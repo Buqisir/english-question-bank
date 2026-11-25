@@ -1,0 +1,153 @@
+{
+  "entryId": "w:to-blame",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "blame"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "blame"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to blame",
+  "senses": [
+    {
+      "senseId": "w:to-blame#s1",
+      "pos": "短语",
+      "glossZh": "应负责任；是过错或不良结果的原因",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:to-blame#e-4bd4bbd5f6e23e96",
+          "text": "Do scientists really not know what's good for us, or is the news report to blame for the confusion?",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 80
+          },
+          "parts": [
+            [
+              72,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-blame#e-aaf3e41e5fbdea8f",
+          "text": "One study suggests that a tsunami is likely to blame for the abandonment of the settlement.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 52
+          },
+          "parts": [
+            [
+              44,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-blame#e-aa1b0da1fe17da35",
+          "text": "Paragraph 2: Mom talked with me a week later, pointing out Dee wasn’t the one to blame.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 86
+          },
+          "parts": [
+            [
+              78,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              86
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be to blame for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

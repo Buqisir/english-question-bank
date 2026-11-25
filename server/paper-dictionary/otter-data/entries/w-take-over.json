@@ -1,0 +1,326 @@
+{
+  "entryId": "w:take-over",
+  "headword": "take (sth) over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes over",
+    "taking over",
+    "took over"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "over"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "over"
+      ],
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "over"
+      ],
+      [
+        "takes",
+        "over"
+      ],
+      [
+        "taking",
+        "over"
+      ],
+      [
+        "took",
+        "over"
+      ],
+      [
+        "taken",
+        "over"
+      ],
+      [
+        "takes",
+        {
+          "slot": "sth"
+        },
+        "over"
+      ],
+      [
+        "taking",
+        {
+          "slot": "sth"
+        },
+        "over"
+      ],
+      [
+        "took",
+        {
+          "slot": "sth"
+        },
+        "over"
+      ],
+      [
+        "taken",
+        {
+          "slot": "sth"
+        },
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take over",
+      "tags": []
+    },
+    {
+      "form": "taken over",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:take-over#s1",
+      "pos": "短语",
+      "glossZh": "接手；接替",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-over#e-b92b5b6afde400ff",
+          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 32
+          },
+          "parts": [
+            [
+              22,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-over#e-72d5c1b0be835fba",
+          "text": "When Clara took over her grandfather’s Brooklyn bookshop in 2018, the first thing she removed wasn’t the",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-over#e-b06354920793442a",
+          "text": "When Shane Voss took over as head of Mountain Middle School in Colorado, the school was facing serious problems.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:take-over#s2",
+      "pos": "短语",
+      "glossZh": "接管；控制；占据",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:over#s13",
+        "w:take#s39"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-over#e-c1d3ca3caa2d1bed",
+          "text": "Just see how cars have been taken over our cities.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:writing-short-error-correction:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 38
+          },
+          "parts": [
+            [
+              28,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-over#e-ba3afaa10053cad1",
+          "text": "What will remain of us when artificial intelligence takes over will be our creativity, and it is our creative spirit, our visionary sense of freshness, that has been our strength for centuries.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-over#e-ab221ec50a221f68",
+          "text": "Some worry AI could “take over the world,” while others appreciate its help as a learning assistant.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

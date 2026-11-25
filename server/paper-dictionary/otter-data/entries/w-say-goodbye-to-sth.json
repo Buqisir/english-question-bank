@@ -1,0 +1,189 @@
+{
+  "entryId": "w:say-goodbye-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "say",
+      "goodbye",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "say",
+        "goodbye",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "said goodbye to",
+      "tags": []
+    },
+    {
+      "form": "say goodbye to",
+      "tags": []
+    },
+    {
+      "form": "saying goodbye to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "say goodbye to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:say-goodbye-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "向某人道别；与某人告别",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:say-goodbye-to-sth#e-73875e35f871585f",
+          "text": "He said goodbye to the neighbors.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:say-goodbye-to-sth#e-d4026c69d09ab863",
+          "text": "I hear teenagers in school uniforms get off, saying goodbye to their friends.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 62
+          },
+          "parts": [
+            [
+              45,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:say-goodbye-to-sth#e-6c20b9fefbabda22",
+          "text": "When the boys had to move, they were heartbroken to say goodbye to Stevie.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:say-goodbye-to-sth#s2",
+      "pos": "短语",
+      "glossZh": "放弃某物；从此失去某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:goodbye#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

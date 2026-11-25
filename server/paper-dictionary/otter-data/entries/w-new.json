@@ -48,8 +48,8 @@
     "mock": 1743
   },
   "unassignedCounts": {
-    "gaokao": 47,
-    "mock": 1742
+    "gaokao": 49,
+    "mock": 1567
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 95,
-        "mock": 0
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 38,
-        "mock": 0
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -274,7 +274,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 31,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -345,7 +345,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -388,78 +388,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:new#s6",
-      "pos": "短语",
-      "glossZh": "新年",
-      "pronunciationId": "w:new#p-main",
-      "note": "New Year。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:new#e-39a31e10d089f739",
-          "text": "Decorating with Plants, Fruits and Flowers for Chinese New Year",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:grammar-fill:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:new#e-6eb7bace6df665b7",
-          "text": "What does Mike decide to do in the new year?",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 6,
-              "questionId": "question:listening:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:new#e-3798052173d9846a",
-          "text": "In February 2025, he spent 10 hours running 40 miles to create a snake in honor of the Lunar New Year.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 93,
-            "end": 96
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -468,6 +396,13 @@
       "reason": "地区义或固定专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:brand-new",
+    "w:new-normal",
+    "w:whats-new"
+  ]
 }

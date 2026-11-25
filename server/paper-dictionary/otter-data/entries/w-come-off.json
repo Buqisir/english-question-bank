@@ -1,0 +1,158 @@
+{
+  "entryId": "w:come-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came off"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "off"
+      ],
+      [
+        "came",
+        "off"
+      ],
+      [
+        "comes",
+        "off"
+      ],
+      [
+        "coming",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come off",
+  "senses": [
+    {
+      "senseId": "w:come-off#s1",
+      "pos": "短语",
+      "glossZh": "脱落；从原处掉下来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-off#e-0ddccd944b1510b2",
+          "text": "“Wheels come off Segway”",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:3:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-off#s2",
+      "pos": "短语",
+      "glossZh": "顺利实现；取得成功",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-off#s3",
+      "pos": "短语",
+      "glossZh": "给人某种印象；显得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 come off as。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-off#s4",
+      "pos": "短语",
+      "glossZh": "结果表现或处境如何",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 come off well 或 come off worse。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-off#s5",
+      "pos": "短语",
+      "glossZh": "停止服用（药物等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

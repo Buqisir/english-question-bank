@@ -1,0 +1,99 @@
+{
+  "entryId": "w:be-in-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "in",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "in",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "were in business",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be in business",
+  "senses": [
+    {
+      "senseId": "w:be-in-business#s1",
+      "pos": "短语",
+      "glossZh": "准备就绪，可以开始或继续干了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s85"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-in-business#e-1784ccfc9d33105b",
+          "text": "We rolled it over and put his jack on top, and we were in business.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 66
+          },
+          "parts": [
+            [
+              50,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,76 @@
+{
+  "entryId": "w:toy-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "toy",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "toy",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "toy with sth",
+  "senses": [
+    {
+      "senseId": "w:toy-with#s1",
+      "pos": "短语",
+      "glossZh": "随意摆弄某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:toy#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:toy-with#s2",
+      "pos": "短语",
+      "glossZh": "随便考虑某个想法，尚未认真打算实行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:toy#s3"
+      ],
+      "examples": [],
+      "note": "常用 toy with the idea of doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

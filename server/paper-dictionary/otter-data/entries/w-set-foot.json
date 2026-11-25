@@ -1,0 +1,161 @@
+{
+  "entryId": "w:set-foot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "foot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "foot"
+      ],
+      [
+        "sets",
+        "foot"
+      ],
+      [
+        "setting",
+        "foot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set foot",
+  "senses": [
+    {
+      "senseId": "w:set-foot#s1",
+      "pos": "短语",
+      "glossZh": "踏上；踏进某地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-foot#e-692dea52ff24237e",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-foot#e-e8d71a9e4a12e466",
+          "text": "The moment Michael Armus set foot into the Bank of the West in Woodland, California, to deposit a check, he felt the tension.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-foot#e-8a59c84fe072df41",
+          "text": "He’d just set foot into the bank, and felt the tension.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "地点常由 in、on 或 upon 引出。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,62 @@
+{
+  "entryId": "w:deep-state",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "deep",
+      "state"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "deep",
+        "state"
+      ],
+      [
+        "deep",
+        "states"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "deep state",
+  "senses": [
+    {
+      "senseId": "w:deep-state#s1",
+      "pos": "短语",
+      "glossZh": "深层政府（被认为在幕后影响政局的权力网络）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

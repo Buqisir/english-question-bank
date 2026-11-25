@@ -1,0 +1,152 @@
+{
+  "entryId": "w:nothing-but",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nothing",
+      "but"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nothing",
+        "but"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nothing but",
+  "senses": [
+    {
+      "senseId": "w:nothing-but#s1",
+      "pos": "短语",
+      "glossZh": "只有；不过是；只做……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nothing-but#e-90fb79d3974f2fce",
+          "text": "The cake, which he had planned to surprise his wife, was now nothing but a hard black rock.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 72
+          },
+          "parts": [
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-but#e-9a152d788b32b797",
+          "text": "“We shall soon be nothing but transparent piles of jelly (果冻) to each other,” a London writer moaned in 1897.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:nothing-but#e-54844cfce9a251c8",
+          "text": "A big fire destroyed Charlotte Tragos’s home in Los Angeles, leaving nothing but ashes.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 80
+          },
+          "parts": [
+            [
+              69,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

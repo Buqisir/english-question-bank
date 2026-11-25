@@ -1,0 +1,352 @@
+{
+  "entryId": "w:get-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting over"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "over"
+      ],
+      [
+        "getting",
+        "over"
+      ],
+      [
+        "gets",
+        "over"
+      ],
+      [
+        "got",
+        "over"
+      ],
+      [
+        "gotten",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get over",
+      "tags": []
+    },
+    {
+      "form": "got over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get over sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-over#s1",
+      "pos": "短语",
+      "glossZh": "从疾病或伤痛中恢复",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:over#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-over#e-629bd6f49afaa8cc",
+          "text": "Getting over an injury.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-over#s2",
+      "pos": "短语",
+      "glossZh": "从情绪打击中走出来；不再为某事介怀",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-over#e-fc1e0a4882a1afce",
+          "text": "Well, he’ll get over it, I reasoned.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          },
+          "parts": [
+            [
+              12,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-over#e-046cde29a0f5c50c",
+          "text": "“It took me a while to get over that,” she says.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-over#e-3c862b620822ef9a",
+          "text": "Getting over a rejection is hard.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-over#s3",
+      "pos": "短语",
+      "glossZh": "克服（困难、恐惧等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-over#e-203cc5cb16bcc047",
+          "text": "Parents might also talk to their children about their own fears of school and how they got over them, and their own enjoyment of school and school-like activities.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:seven-choices:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 95
+          },
+          "parts": [
+            [
+              87,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-over#e-e95d47d57f7b9226",
+          "text": "Its ability to get over obstacles.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-fj-2026-m1-v2:34#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-over#e-f15966690aac8a45",
+          "text": "Get over personal fear.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-over#s4",
+      "pos": "短语",
+      "glossZh": "把观点或信息讲清楚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get sth over to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

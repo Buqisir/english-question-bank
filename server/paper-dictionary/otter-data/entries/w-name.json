@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 317
+    "mock": 131
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -396,54 +396,6 @@
       ]
     },
     {
-      "senseId": "w:name#s7",
-      "pos": "短语",
-      "glossZh": "以我的名义",
-      "pronunciationId": "w:name#p-main",
-      "note": "in my name。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:name#s8",
-      "pos": "短语",
-      "glossZh": "以……的名字命名",
-      "pronunciationId": "w:name#p-main",
-      "note": "name A after B。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:name#e-d4ea0a82e0f67f02",
-          "text": "This contradiction is called Peto’s paradox (悖论), named after researcher Sir Richard Peto who identified it in the 1970s.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c:1",
-              "sentence": 7
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:name#s9",
       "pos": "v.",
       "glossZh": "指定；任命",
@@ -463,6 +415,20 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-household-name",
+    "w:by-name",
+    "w:in-my-name",
+    "w:in-the-name-of",
+    "w:my-name-is",
+    "w:name-a-after-b",
+    "w:name-after",
+    "w:pen-name",
+    "w:to-name-a-few",
+    "w:what-is-your-name"
+  ]
 }

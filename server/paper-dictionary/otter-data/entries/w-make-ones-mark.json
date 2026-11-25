@@ -1,0 +1,113 @@
+{
+  "entryId": "w:make-ones-mark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make one’s mark"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      {
+        "slot": "one's"
+      },
+      "mark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        {
+          "slot": "one's"
+        },
+        "mark"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "make mark",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make one's mark",
+  "senses": [
+    {
+      "senseId": "w:make-ones-mark#s1",
+      "pos": "短语",
+      "glossZh": "做出成就，留下自己的印记",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mark#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-ones-mark#e-7a2e76d51f804a03",
+          "text": "Tharp, however, was determined to make her mark.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 47
+          },
+          "parts": [
+            [
+              34,
+              38
+            ],
+            [
+              43,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              38
+            ],
+            [
+              43,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

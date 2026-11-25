@@ -59,8 +59,8 @@
     "mock": 304
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 303
+    "gaokao": 17,
+    "mock": 167
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 67,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -136,78 +136,6 @@
       ]
     },
     {
-      "senseId": "w:course#s2",
-      "pos": "短语",
-      "glossZh": "当然；自然",
-      "pronunciationId": "w:course#p-main",
-      "note": "of course。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:course#e-749a8af455843ee7",
-          "text": "Of course, our brains can decline as we grow older for lots of reasons-including other environmental influences or genetic factors.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:course#e-7514e3746daa05ab",
-          "text": "Of course, these days there are plenty of online dictionaries and thesauruses, but I’m old-fashioned enough to prefer a hard cover and pages I can leaf through with my fingers.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:course#e-197f5fd884fc52d1",
-          "text": "Of course, I would have preferred a different ending for Tom and Maggie Tulliver, but the ending they got did make the most sense for them.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:course#s3",
       "pos": "n.",
       "glossZh": "进程；经过；一段时间",
@@ -216,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -287,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -350,12 +278,12 @@
       "pos": "n.",
       "glossZh": "航向；路线；行动方向",
       "pronunciationId": "w:course#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -376,12 +304,12 @@
       "pos": "v.",
       "glossZh": "奔流；流淌",
       "pronunciationId": "w:course#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -391,6 +319,16 @@
       "reason": "航海、音乐或狩猎专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:course-of-action",
+    "w:crash-course",
+    "w:let-nature-take-its-course",
+    "w:of-course",
+    "w:off-course",
+    "w:take-its-course"
+  ]
 }

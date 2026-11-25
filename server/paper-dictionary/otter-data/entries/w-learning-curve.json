@@ -1,0 +1,92 @@
+{
+  "entryId": "w:learning-curve",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "learning",
+      "curve"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "learning",
+        "curve"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "learning curve",
+  "senses": [
+    {
+      "senseId": "w:learning-curve#s1",
+      "pos": "短语",
+      "glossZh": "学习曲线；学会新事物的过程",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:curve#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:learning-curve#e-3c2920cae3a28fad",
+          "text": "While the younger generations prefer to communicate visually, for those used to working with traditional tools like email, it may feel like a learning curve(曲线).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 142,
+            "end": 156
+          },
+          "parts": [
+            [
+              142,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              142,
+              156
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,8 +62,8 @@
     "mock": 186
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 184
+    "gaokao": 23,
+    "mock": 52
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -291,7 +291,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -359,12 +359,12 @@
       "pos": "n.",
       "glossZh": "命令",
       "pronunciationId": "w:order#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -372,150 +372,62 @@
       "pos": "v.",
       "glossZh": "命令",
       "pronunciationId": "w:order#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:order#s7",
-      "pos": "短语",
-      "glossZh": "为了",
+      "senseId": "w:order#s10",
+      "pos": "adj.",
+      "glossZh": "有条理的；井然有序的（ordered）",
       "pronunciationId": "w:order#p-main",
-      "note": "in order to。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 12,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:order#e-81b8fbe435f5d6f8",
-          "text": "In order to make surely all of us are in good health, and she makes specific plans for us.",
+          "exampleId": "w:order#e-5f6f73d411b6dc9e",
+          "text": "It thrives on a kind of wonderful mess that makes perfectly ordered cities seem boring.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:writing-short-error-correction:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:order#e-6035bff2deeb8421",
-          "text": "Here are some tips worth following in order to communicate more effectively.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:order#e-fdcc914093a36317",
-          "text": "“We’re not just ‘borrowing’ from different disciplines – we’re really putting them on equal footing in order to create something greater than the sum of its parts.”",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-b",
             "locator": {
               "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 103,
-            "end": 108
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:order#s8",
-      "pos": "短语",
-      "glossZh": "出故障；不能使用",
-      "pronunciationId": "w:order#p-main",
-      "note": "out of order。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:order#e-3d71ea37174a8171",
-          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-b:5",
               "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 113,
-            "end": 118
+            "start": 60,
+            "end": 67
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:order#s9",
-      "pos": "短语",
-      "glossZh": "合适；妥当",
-      "pronunciationId": "w:order#p-main",
-      "note": "in order。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:order#e-f14e7ec03b1df68c",
-          "text": "So a trip to the local store for milk and supplies was in order.",
+          "exampleId": "w:order#e-48804d684b65735b",
+          "text": "To Mrs. Henderson’s ordered mind, their home was a symphony of cheerful chaos: brightly colored plastic toys spreading across the yard, a tricycle lying on its side by the walkway, and the constant energetic screams of children at play.",
           "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
-              "sentence": 4
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:3",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 58,
-            "end": 63
+            "start": 20,
+            "end": 27
           }
         }
       ]
@@ -527,6 +439,18 @@
       "reason": "缺语境"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-in-order",
+    "w:in-order",
+    "w:in-order-for",
+    "w:in-order-to",
+    "w:on-the-order-of",
+    "w:order-in",
+    "w:out-of-order",
+    "w:place-an-order"
+  ]
 }

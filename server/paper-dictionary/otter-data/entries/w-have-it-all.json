@@ -1,0 +1,110 @@
+{
+  "entryId": "w:have-it-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "having it all"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "it",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "it",
+        "all"
+      ],
+      [
+        "having",
+        "it",
+        "all"
+      ],
+      [
+        "had",
+        "it",
+        "all"
+      ],
+      [
+        "has",
+        "it",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have it all",
+  "senses": [
+    {
+      "senseId": "w:have-it-all#s1",
+      "pos": "短语",
+      "glossZh": "在事业、家庭等方面样样如意",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-it-all#e-8f6689eeabd21ea6",
+          "text": "Sometimes I have a “having it all” fantasy.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

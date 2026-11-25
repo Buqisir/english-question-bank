@@ -1,0 +1,185 @@
+{
+  "entryId": "w:lie-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lying to"
+  ],
+  "pattern": {
+    "tokens": [
+      "lie",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lie",
+        "to"
+      ],
+      [
+        "lying",
+        "to"
+      ],
+      [
+        "lain",
+        "to"
+      ],
+      [
+        "lay",
+        "to"
+      ],
+      [
+        "lies",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lie to",
+  "senses": [
+    {
+      "senseId": "w:lie-to#s1",
+      "pos": "短语",
+      "glossZh": "对某人撒谎",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-to#e-e62148302c1bf4e5",
+          "text": "Mum and Dad were lying to each other for all those years; they must have known that it was all pretence.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-to#e-3076b7d9ff4e207d",
+          "text": "He felt embarrassed by lying to such a kind lady.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:19",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-to#e-367ef131ed54c018",
+          "text": "I’d sit on the hard bench the whole game, then lie to my dad about having fun, my heart aching to do my part for the team instead of just watching from the sidelines.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          },
+          "parts": [
+            [
+              47,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "lie to sb about sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:lie-to#s2",
+      "pos": "短语",
+      "glossZh": "（帆船）调帆稳住船身并基本停止前进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "航海用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

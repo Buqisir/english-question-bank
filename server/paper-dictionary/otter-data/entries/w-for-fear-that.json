@@ -1,0 +1,96 @@
+{
+  "entryId": "w:for-fear-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "fear",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "fear",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for fear that",
+  "senses": [
+    {
+      "senseId": "w:for-fear-that#s1",
+      "pos": "短语",
+      "glossZh": "唯恐；生怕……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fear#s3",
+        "w:for#s23",
+        "w:that#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-fear-that#e-f501d8f60be0507e",
+          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 151
+          },
+          "parts": [
+            [
+              138,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              138,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

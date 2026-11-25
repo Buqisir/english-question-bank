@@ -1,0 +1,93 @@
+{
+  "entryId": "w:place-to-be",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "place",
+      "to",
+      "be"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "place",
+        "to",
+        "be"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "place to be",
+  "senses": [
+    {
+      "senseId": "w:place-to-be#s1",
+      "pos": "短语",
+      "glossZh": "最值得去的地方；热门去处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:place-to-be#e-1e7d536d02770baa",
+          "text": "In addition to being one of the most beautiful train stations in the country after a complete restoration of its full Beaux Arts glory, the station is the place to be, even if you’re skipping the rail.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 166
+          },
+          "parts": [
+            [
+              155,
+              166
+            ]
+          ],
+          "highlightRanges": [
+            [
+              155,
+              166
+            ]
+          ]
+        }
+      ],
+      "note": "通常用 the place to be。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

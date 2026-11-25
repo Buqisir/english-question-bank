@@ -1,0 +1,172 @@
+{
+  "entryId": "w:take-notes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes notes",
+    "taking notes",
+    "took notes"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "notes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "notes"
+      ],
+      [
+        "takes",
+        "notes"
+      ],
+      [
+        "taking",
+        "notes"
+      ],
+      [
+        "took",
+        "notes"
+      ],
+      [
+        "taken",
+        "notes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take notes",
+  "senses": [
+    {
+      "senseId": "w:take-notes#s1",
+      "pos": "短语",
+      "glossZh": "记笔记；做记录",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-notes#e-14eea39bcf2cb008",
+          "text": "What should you pay most attention to when taking notes?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-notes#e-469554bb29d087a1",
+          "text": "The Cornell method of taking notes was developed by Dr. Walter Pauk of Cornell University in the 1950s.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-notes#e-7001f7a734c443d2",
+          "text": "In his college classroom, he sees students increasingly use tablets to take notes.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 81
+          },
+          "parts": [
+            [
+              71,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

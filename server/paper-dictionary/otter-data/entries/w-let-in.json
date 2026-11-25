@@ -1,0 +1,193 @@
+{
+  "entryId": "w:let-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "let",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        "in"
+      ],
+      [
+        "lets",
+        "in"
+      ],
+      [
+        "letting",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "let in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:let-in#s1",
+      "pos": "短语",
+      "glossZh": "让人进来；让光线、空气等进入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:let-in#e-c939b53cebde6aef",
+          "text": "He sprayed （喷洒） it with herbicide （除草剂）, put down seeds and cut down some trees to let in more light.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 89
+          },
+          "parts": [
+            [
+              83,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-in#e-37cc83bbb72fa767",
+          "text": "“Time for a break”, I opened the window to let in the fresh afternoon breeze and announced.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          },
+          "parts": [
+            [
+              43,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-in#e-05b49cb25401c9fc",
+          "text": "The overall structure of the buildings will remain the same, but with major additions: a lighter-colored exterior will replace the gray concrete from the 1960s, and old inefficient windows will be replaced by larger ones that let in more light per unit.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 226,
+            "end": 232
+          },
+          "parts": [
+            [
+              226,
+              232
+            ]
+          ],
+          "highlightRanges": [
+            [
+              226,
+              232
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:let-in#s2",
+      "pos": "短语",
+      "glossZh": "与某人交往；结交",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧时牛津大学俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:let-in#s3",
+      "pos": "短语",
+      "glossZh": "欺骗；坑害",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英国旧俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

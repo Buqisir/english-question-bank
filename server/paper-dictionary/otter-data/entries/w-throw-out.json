@@ -1,0 +1,260 @@
+{
+  "entryId": "w:throw-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "throw",
+        "out"
+      ],
+      [
+        "throw",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "threw",
+        "out"
+      ],
+      [
+        "throwing",
+        "out"
+      ],
+      [
+        "thrown",
+        "out"
+      ],
+      [
+        "throws",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "threw out",
+      "tags": []
+    },
+    {
+      "form": "throw out",
+      "tags": []
+    },
+    {
+      "form": "throwing out",
+      "tags": []
+    },
+    {
+      "form": "thrown out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:throw-out#s1",
+      "pos": "短语",
+      "glossZh": "扔掉；丢弃",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s12",
+        "w:throw#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:throw-out#e-f91c492ed83280fc",
+          "text": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 102
+          },
+          "parts": [
+            [
+              93,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:throw-out#e-60601a4f63908a78",
+          "text": "How old was Gallo when she threw out the bottle?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:throw-out#e-ab21cbee666963fb",
+          "text": "Clothing takes a huge amount of natural resources（资源）to make, and buying loads of new clothing ( or throwing out old clothing ) is not healthy for the environment.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 112
+          },
+          "parts": [
+            [
+              100,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              112
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:throw-out#s2",
+      "pos": "短语",
+      "glossZh": "赶走；开除",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-out#s3",
+      "pos": "短语",
+      "glossZh": "随口提出（想法或建议）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-out#s4",
+      "pos": "短语",
+      "glossZh": "驳回；拒绝采纳",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-out#s5",
+      "pos": "短语",
+      "glossZh": "发出（光、热等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-out#s6",
+      "pos": "短语",
+      "glossZh": "扭伤；弄伤（背部等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

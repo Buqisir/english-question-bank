@@ -1,0 +1,128 @@
+{
+  "entryId": "w:make-headlines",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "headlines"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "headlines"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made headlines",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make headlines",
+  "senses": [
+    {
+      "senseId": "w:make-headlines#s1",
+      "pos": "短语",
+      "glossZh": "登上新闻头条；成为新闻焦点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:headline#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-headlines#e-507a2147ff9d6169",
+          "text": "The case made headlines in The New York Times, which reported that 38 witnesses heard the attack but took no action.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-headlines#e-984e5507ef31ef49",
+          "text": "The grammar school boy from Stratford-Upon-Avon has made headlines again after a groundbreaking study showed that Shakespeare does benefit children’s literacy and emotional development, but only if they can act him out.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

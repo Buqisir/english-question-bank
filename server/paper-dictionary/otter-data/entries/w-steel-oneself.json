@@ -1,0 +1,61 @@
+{
+  "entryId": "w:steel-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "steel",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "steel",
+        "oneself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "steel oneself",
+  "senses": [
+    {
+      "senseId": "w:steel-oneself#s1",
+      "pos": "短语",
+      "glossZh": "鼓足勇气；为难以面对的事做好心理准备",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:steel#s2"
+      ],
+      "examples": [],
+      "note": "常接 for sth 或 to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

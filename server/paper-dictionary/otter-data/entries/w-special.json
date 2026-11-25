@@ -66,8 +66,8 @@
     "mock": 275
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 275
+    "gaokao": 4,
+    "mock": 86
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -285,59 +285,6 @@
       ]
     },
     {
-      "senseId": "w:special#s4",
-      "pos": "短语",
-      "glossZh": "特殊教育",
-      "pronunciationId": "w:special#p-main",
-      "note": "special education。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:special#e-0df3cde4b636a403",
-          "text": "As a special education teacher at the school, I was familiar with the challenges David faced and was proud of his strong determination.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "writing-continuation-7",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:special#e-5128024d49c158fb",
-          "text": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 84
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:special#s5",
       "pos": "n.",
       "glossZh": "特色菜",
@@ -375,12 +322,12 @@
       "pos": "n.",
       "glossZh": "特价商品",
       "pronunciationId": "w:special#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -403,6 +350,11 @@
       "reason": "游戏或行业特称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:special-sauce"
+  ]
 }

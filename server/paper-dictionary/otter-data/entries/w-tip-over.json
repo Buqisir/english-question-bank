@@ -1,0 +1,84 @@
+{
+  "entryId": "w:tip-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tip",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tip",
+        "over"
+      ],
+      [
+        "tipped",
+        "over"
+      ],
+      [
+        "tipping",
+        "over"
+      ],
+      [
+        "tips",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tip (sth) over",
+  "senses": [
+    {
+      "senseId": "w:tip-over#s1",
+      "pos": "短语",
+      "glossZh": "翻倒；使翻倒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tip-over#s2",
+      "pos": "短语",
+      "glossZh": "（足球守门员）把球托过横梁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 tip the ball over。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

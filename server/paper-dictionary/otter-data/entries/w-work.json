@@ -62,8 +62,8 @@
     "mock": 1914
   },
   "unassignedCounts": {
-    "gaokao": 260,
-    "mock": 1912
+    "gaokao": 265,
+    "mock": 1914
   },
   "senses": [
     {
@@ -532,165 +532,6 @@
       "examples": []
     },
     {
-      "senseId": "w:work#s11",
-      "pos": "短语",
-      "glossZh": "锻炼",
-      "pronunciationId": "w:work#p-main",
-      "note": "work out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:work#e-d95e3aaaebce2ef8",
-          "text": "Come and work out with our qualified personal trainer, Jodie McGregor, on the grounds of the Middleton Lodge estate.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:work#e-8157b773e7b2e2e6",
-          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        },
-        {
-          "exampleId": "w:work#e-665902dd2a8689b8",
-          "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:work#s12",
-      "pos": "短语",
-      "glossZh": "弄明白",
-      "pronunciationId": "w:work#p-main",
-      "note": "work out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:work#e-8fd66f51a34032ce",
-          "text": "The next step, according to the researchers, is to try and work out whether the cockatoos rely entirely on visual clues（线索）, or also use a sense of touch in making their shape selections.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:work#s13",
-      "pos": "短语",
-      "glossZh": "着手做某事",
-      "pronunciationId": "w:work#p-main",
-      "note": "get to work on sth / work on sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:work#e-a326ce2d432c8fae",
-          "text": "They bring these to the surface and float on their backs as they get to work on opening and eating their snacks.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 72,
-            "end": 76
-          }
-        },
-        {
-          "exampleId": "w:work#e-7cacadc98bbf825c",
-          "text": "I’m John Doe’s brother… I’m working on a new tech startup… I’d love to grab coffee with you.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:9",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 35
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:work#s14",
       "pos": "n.",
       "glossZh": "工作地点",
@@ -769,6 +610,25 @@
       "reason": "专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:busy-work",
+    "w:dirty-work",
+    "w:get-to-work-on-sth",
+    "w:many-hands-make-light-work",
+    "w:piece-of-work",
+    "w:set-to-work",
+    "w:work-around",
+    "w:work-in-progress",
+    "w:work-miracles",
+    "w:work-of-art",
+    "w:work-on-sth",
+    "w:work-out",
+    "w:work-over",
+    "w:work-through",
+    "w:work-wonders"
+  ]
 }

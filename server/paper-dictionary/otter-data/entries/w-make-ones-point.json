@@ -1,0 +1,153 @@
+{
+  "entryId": "w:make-ones-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make one’s point"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      {
+        "slot": "one's"
+      },
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        {
+          "slot": "one's"
+        },
+        "point"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "make point",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make one's point",
+  "senses": [
+    {
+      "senseId": "w:make-ones-point#s1",
+      "pos": "短语",
+      "glossZh": "把自己的观点讲清楚",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s35"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-ones-point#e-8e52fd7ced4d036c",
+          "text": "It’s the last chance to make your point.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 39
+          },
+          "parts": [
+            [
+              24,
+              28
+            ],
+            [
+              34,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              28
+            ],
+            [
+              34,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-ones-point#e-6de8ca60723ae458",
+          "text": "Struggling to make your point, set boundaries, or get people to agree with you?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 29
+          },
+          "parts": [
+            [
+              14,
+              18
+            ],
+            [
+              24,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              18
+            ],
+            [
+              24,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

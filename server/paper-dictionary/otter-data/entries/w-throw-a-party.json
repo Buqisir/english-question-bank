@@ -1,0 +1,113 @@
+{
+  "entryId": "w:throw-a-party",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "a",
+      "party"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "throw",
+        "a",
+        "party"
+      ],
+      [
+        "threw",
+        "a",
+        "party"
+      ],
+      [
+        "throwing",
+        "a",
+        "party"
+      ],
+      [
+        "thrown",
+        "a",
+        "party"
+      ],
+      [
+        "throws",
+        "a",
+        "party"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw a party",
+  "senses": [
+    {
+      "senseId": "w:throw-a-party#s1",
+      "pos": "短语",
+      "glossZh": "举办聚会；办派对",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-a-party#e-e3428bb04f339026",
+          "text": "Throw a party.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

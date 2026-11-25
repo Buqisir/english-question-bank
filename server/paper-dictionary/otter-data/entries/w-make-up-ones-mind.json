@@ -1,0 +1,157 @@
+{
+  "entryId": "w:make-up-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make up one’s mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "up",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "up",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made up mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make up one's mind",
+  "senses": [
+    {
+      "senseId": "w:make-up-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "下定决心；作出决定",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s22",
+        "w:mind#s11",
+        "w:up#s61"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-up-ones-mind#e-f49d9a8d0576be9b",
+          "text": "She had already made up her mind to say no. With that decision in mind, she quickened her pace and ran across the sports ground.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 32
+          },
+          "parts": [
+            [
+              16,
+              23
+            ],
+            [
+              28,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ],
+            [
+              28,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-up-ones-mind#e-e85fb5c9202b31fe",
+          "text": "From then on, he made up his mind to leave the town and go to the city.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 33
+          },
+          "parts": [
+            [
+              17,
+              24
+            ],
+            [
+              29,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ],
+            [
+              29,
+              33
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

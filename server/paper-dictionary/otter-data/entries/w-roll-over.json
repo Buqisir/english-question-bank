@@ -1,0 +1,136 @@
+{
+  "entryId": "w:roll-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "over"
+      ],
+      [
+        "rolled",
+        "over"
+      ],
+      [
+        "rolling",
+        "over"
+      ],
+      [
+        "rolls",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll (sb/sth) over",
+  "senses": [
+    {
+      "senseId": "w:roll-over#s1",
+      "pos": "短语",
+      "glossZh": "翻身；翻转；使翻转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-over#s2",
+      "pos": "短语",
+      "glossZh": "屈服；不再抵抗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-over#s3",
+      "pos": "短语",
+      "glossZh": "轻易压倒或击败对手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-over#s4",
+      "pos": "短语",
+      "glossZh": "把到期资金转入下一期投资；把未兑出的奖金累积到下一期",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-over#s5",
+      "pos": "短语",
+      "glossZh": "将鼠标指针移到……上方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "界面操作中用 roll over sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:roll-over#s6",
+      "pos": "短语",
+      "glossZh": "（计数器）达到上限后从头计数",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

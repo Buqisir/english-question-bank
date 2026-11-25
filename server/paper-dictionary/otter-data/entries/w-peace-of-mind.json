@@ -1,0 +1,154 @@
+{
+  "entryId": "w:peace-of-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "peace",
+      "of",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "peace",
+        "of",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "peace of mind",
+  "senses": [
+    {
+      "senseId": "w:peace-of-mind#s1",
+      "pos": "短语",
+      "glossZh": "安心；内心安宁",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:peace-of-mind#e-692a9bb50cc691d8",
+          "text": "Put another way, the home inspection fee is an investment in peace of mind.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 74
+          },
+          "parts": [
+            [
+              61,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:peace-of-mind#e-a214f8ba99447cd5",
+          "text": "This approach lets you explore with peace of mind, knowing your essentials are secured while leaving room for delightful surprises.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 49
+          },
+          "parts": [
+            [
+              36,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:peace-of-mind#e-a4dd5c2de7cedaa0",
+          "text": "To address this, experts recommend using self-exploration questions to cut through the noise, such as “Is it worth my peace of mind?”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 131
+          },
+          "parts": [
+            [
+              118,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              131
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

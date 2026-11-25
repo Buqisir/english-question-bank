@@ -1,0 +1,172 @@
+{
+  "entryId": "w:cant-wait",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "couldn't wait"
+  ],
+  "pattern": {
+    "tokens": [
+      "can't",
+      "wait"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can't",
+        "wait"
+      ],
+      [
+        "couldn't",
+        "wait"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can't wait",
+  "senses": [
+    {
+      "senseId": "w:cant-wait#s1",
+      "pos": "短语",
+      "glossZh": "迫不及待；热切盼望",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cant-wait#e-4ad9952a7a24790c",
+          "text": "After working at a stretch for months, she couldn’t wait to escape to the peaceful mountains.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 56
+          },
+          "parts": [
+            [
+              43,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-wait#e-e98c2aed932a3718",
+          "text": "Heart racing, I couldn’t wait to give a definite “Yes!”, picturing the big ocean of books Alicia once mentioned.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 29
+          },
+          "parts": [
+            [
+              16,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-wait#e-0b8ff5e16535cb78",
+          "text": "Paragraph 2: Marla couldn’t wait to show her jeans off at the School New Year’s Party.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 32
+          },
+          "parts": [
+            [
+              19,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth 或 for sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:cant-wait#s2",
+      "pos": "短语",
+      "glossZh": "（事情）不能再拖；必须马上处理",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

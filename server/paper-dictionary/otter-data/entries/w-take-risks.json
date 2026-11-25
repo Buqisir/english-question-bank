@@ -1,0 +1,156 @@
+{
+  "entryId": "w:take-risks",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "risks"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "risks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take risks",
+  "senses": [
+    {
+      "senseId": "w:take-risks#s1",
+      "pos": "短语",
+      "glossZh": "冒险；承担风险",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s46"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-risks#e-c9e1ff68a7f584b7",
+          "text": "Are you hoping to improve your confidence and willingness to take risks?",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 71
+          },
+          "parts": [
+            [
+              61,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-risks#e-155972b76a7c413a",
+          "text": "He is physically strong and willing to take risks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 49
+          },
+          "parts": [
+            [
+              39,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-risks#e-6c45f7075837672e",
+          "text": "It makes people afraid to take risks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 36
+          },
+          "parts": [
+            [
+              26,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

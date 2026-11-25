@@ -1,0 +1,166 @@
+{
+  "entryId": "w:as-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as in",
+  "senses": [
+    {
+      "senseId": "w:as-in#s1",
+      "pos": "短语",
+      "glossZh": "如在……中（用于举例或类比）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-in#e-e30a03a0b8e8972c",
+          "text": "This suggests that phone bans may fail, as in Swedish schools, because students simply switch to laptops.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 45
+          },
+          "parts": [
+            [
+              40,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-in#e-edf57456b30895e1",
+          "text": "However, at times she seems to dare readers to turn away from her hope, as in a story about encouraging a child’s dream of playing in the NBA.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 77
+          },
+          "parts": [
+            [
+              72,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-in#e-eab4fbc30b695243",
+          "text": "When the guessers chose the right answer, the same activation patterns were seen in the right hippocampal (海马的) region of the brain as in those who remembered, which implies the engrams of forgotten memories remained and were influencing their choices.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 137
+          },
+          "parts": [
+            [
+              132,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              132,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:as-in#s2",
+      "pos": "短语",
+      "glossZh": "这里指的是……；也就是说……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可借例子说明某个词采用的意思。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,70 @@
+{
+  "entryId": "w:kick-sb-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kick",
+      {
+        "slot": "sb"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "kick",
+        {
+          "slot": "sb"
+        },
+        "out"
+      ],
+      [
+        "kick",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kick sb out",
+  "senses": [
+    {
+      "senseId": "w:kick-sb-out#s1",
+      "pos": "短语",
+      "glossZh": "把某人赶出去；把某人逐出某团体",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:kick#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

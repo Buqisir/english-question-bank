@@ -1,0 +1,70 @@
+{
+  "entryId": "w:jazz-sth-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jazz",
+      {
+        "slot": "sth"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "jazz",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "jazz",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jazz sth up",
+  "senses": [
+    {
+      "senseId": "w:jazz-sth-up#s1",
+      "pos": "短语",
+      "glossZh": "使某物更生动、更吸引人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:jazz#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

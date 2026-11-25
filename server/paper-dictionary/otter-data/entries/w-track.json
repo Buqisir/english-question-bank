@@ -59,8 +59,8 @@
     "mock": 226
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 221
+    "gaokao": 4,
+    "mock": 60
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -243,12 +243,12 @@
       "pos": "n.",
       "glossZh": "足迹",
       "pronunciationId": "w:track#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -259,7 +259,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -292,7 +292,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -325,7 +325,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 123
       },
       "folded": false,
       "examples": [
@@ -390,160 +390,100 @@
       ]
     },
     {
-      "senseId": "w:track#s8",
-      "pos": "短语",
-      "glossZh": "持续了解",
+      "senseId": "w:track#s11",
+      "pos": "n.",
+      "glossZh": "棋盘上的行进路线",
       "pronunciationId": "w:track#p-main",
-      "note": "keep track of。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:track#e-512001127fc1371e",
-          "text": "●Keep track of how you are feeling.",
+          "exampleId": "w:track#e-6e216af0601938f7",
+          "text": "To move a pawn from your START out onto the track, you must draw either a 1 or a 2.",
           "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:track#e-6bdc85411143614b",
-          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:track#e-e2d1c82efe0330f8",
-          "text": "Gardening season is in full bloom, but keeping track of which seedling (幼苗) is which can be really tricky.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:1",
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:17",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 47,
-            "end": 52
+            "start": 44,
+            "end": 49
           }
         }
       ]
     },
     {
-      "senseId": "w:track#s9",
-      "pos": "短语",
-      "glossZh": "按计划推进",
+      "senseId": "w:track#s12",
+      "pos": "n.",
+      "glossZh": "分设的课程或活动方案",
       "pronunciationId": "w:track#p-main",
-      "note": "stay on track。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:track#e-ad59bf32e0fc8788",
+          "text": "Note: Those who finish all required tasks(whether for the 4-week track or the 8-week track) will be qualified for an additional reward.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:track#s13",
+      "pos": "v.",
+      "glossZh": "用鞋底把……带入",
+      "pronunciationId": "w:track#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:track#e-f616b7eb84fd5bad",
-          "text": "Jessica Pink, an undergraduate student, suggests taking online courses with a friend, so you can motivate each other to stay on track.",
+          "exampleId": "w:track#e-d0d8643323c01b73",
+          "text": "Students are closely connected to the outdoor settings of their colleges where pesticides can stay in the air, settle on picnic tables, and be tracked into dorm rooms.",
           "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-c",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 128,
-            "end": 133
-          }
-        },
-        {
-          "exampleId": "w:track#e-fa803c1e32cde4d3",
-          "text": "College is a crucial time for personal development, so make sure you stay on track and maintain a positive attitude.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
-              "sentence": 1
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-c:6",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 84,
-            "end": 89
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:track#s10",
-      "pos": "短语",
-      "glossZh": "当即阻止",
-      "pronunciationId": "w:track#p-main",
-      "note": "stop in its tracks。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:track#e-39db4d8f010614f1",
-          "text": "I wanted to stop the Sahara Desert in its tracks.” A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 48
+            "start": 143,
+            "end": 150
           }
         }
       ]
@@ -555,6 +495,16 @@
       "reason": "专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fast-track",
+    "w:keep-track-of",
+    "w:lose-track",
+    "w:stay-on-track",
+    "w:track-and-field",
+    "w:track-down"
+  ]
 }

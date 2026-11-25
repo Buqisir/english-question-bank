@@ -1,0 +1,100 @@
+{
+  "entryId": "w:set-foot-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "foot",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "foot",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set foot on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set foot on sth",
+  "senses": [
+    {
+      "senseId": "w:set-foot-on#s1",
+      "pos": "短语",
+      "glossZh": "踏上（某地）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:foot#s5",
+        "w:set#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-foot-on#e-de6dcef5b4e28275",
+          "text": "The cave appears reachable from an open pit (深坑) in the Mare Tranquillitatis, where the Apollo 11 astronauts Neil Armstrong and Buzz Aldrin first set foot on the moon.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 157
+          },
+          "parts": [
+            [
+              146,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

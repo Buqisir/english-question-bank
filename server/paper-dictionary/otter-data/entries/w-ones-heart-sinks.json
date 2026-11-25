@@ -1,0 +1,68 @@
+{
+  "entryId": "w:ones-heart-sinks",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "one’s heart sinks"
+  ],
+  "pattern": {
+    "tokens": [
+      {
+        "slot": "one's"
+      },
+      "heart",
+      "sinks"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        {
+          "slot": "one's"
+        },
+        "heart",
+        "sinks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one's heart sinks",
+  "senses": [
+    {
+      "senseId": "w:ones-heart-sinks#s1",
+      "pos": "短语",
+      "glossZh": "心里一沉；顿感失望或不安",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sink#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

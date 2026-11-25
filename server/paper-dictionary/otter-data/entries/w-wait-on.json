@@ -1,0 +1,182 @@
+{
+  "entryId": "w:wait-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wait",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wait",
+        "on"
+      ],
+      [
+        "waited",
+        "on"
+      ],
+      [
+        "waiting",
+        "on"
+      ],
+      [
+        "waits",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wait on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:wait-on#s1",
+      "pos": "短语",
+      "glossZh": "招待；服侍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常指为顾客提供服务。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s2",
+      "pos": "短语",
+      "glossZh": "等待某人或某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s3",
+      "pos": "短语",
+      "glossZh": "（命运、结果等）即将降临于某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s4",
+      "pos": "短语",
+      "glossZh": "登门拜访某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法，多出于礼节或公务。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s5",
+      "pos": "短语",
+      "glossZh": "（结果）随某种行为或状态而来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s6",
+      "pos": "短语",
+      "glossZh": "履行某项职责",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s7",
+      "pos": "短语",
+      "glossZh": "（猎鹰）盘旋等待猎物被惊起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "猎鹰术用法，可不带宾语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s8",
+      "pos": "短语",
+      "glossZh": "追求某人；向某人求爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美式旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wait-on#s9",
+      "pos": "短语",
+      "glossZh": "随侍某人并听从其吩咐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "古旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

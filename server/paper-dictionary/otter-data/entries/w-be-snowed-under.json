@@ -1,0 +1,62 @@
+{
+  "entryId": "w:be-snowed-under",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "snowed",
+      "under"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "snowed",
+        "under"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be snowed under",
+  "senses": [
+    {
+      "senseId": "w:be-snowed-under#s1",
+      "pos": "短语",
+      "glossZh": "忙不过来；被大量事务压得喘不过气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:snow#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 13
+    "mock": 2
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -260,6 +260,10 @@
       "reason": "罕见旧义或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:fall-ill",
+    "w:ill-will"
+  ]
 }

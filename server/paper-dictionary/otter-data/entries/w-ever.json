@@ -35,8 +35,8 @@
     "mock": 173
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 171
+    "gaokao": 6,
+    "mock": 37
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 95
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -214,182 +214,18 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:ever#s4",
-      "pos": "短语",
-      "glossZh": "比以往任何时候都更……",
-      "pronunciationId": "w:ever#p-main",
-      "note": "常见 more than ever。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ever#e-f7fa9a6f6b4b2023",
-          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 74
-          }
-        },
-        {
-          "exampleId": "w:ever#e-130d87f7e1cd498a",
-          "text": "Punishing heat waves and extreme weather events like hurricanes and floods are going to become more common as the climate crisis worsens, making it more important than ever before to produce accurate weather forecasts.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 168,
-            "end": 172
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:ever#s5",
-      "pos": "短语",
-      "glossZh": "从……起一直",
-      "pronunciationId": "w:ever#p-main",
-      "note": "ever since。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ever#e-975f8e0d9e7738cf",
-          "text": "Ever since her childhood, Ginni, now 71, has had a deep love for travel.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:ever#e-83a74af345997fc9",
-          "text": "Ever since he saw a poster at the local library announcing the “Great August Meteor Shower (流星雨)”, he had been fascinated.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:ever#s6",
-      "pos": "短语",
-      "glossZh": "非常",
-      "pronunciationId": "w:ever#p-main",
-      "note": "ever so，常见于英式口语。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ever#e-a32308c13e05c1e2",
-          "text": "Her tail began wagging（摆动）ever so slowly, then faster as she caught the smell.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:ever#e-e9f8905e3d149a52",
-          "text": "Why did they vary ever so slightly from one instrument to the next?",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:ever#s7",
-      "pos": "短语",
-      "glossZh": "一如既往",
-      "pronunciationId": "w:ever#p-main",
-      "note": "as ever。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-ever",
+    "w:ever-since",
+    "w:ever-so",
+    "w:if-ever",
+    "w:more-than-ever"
+  ]
 }

@@ -1,0 +1,146 @@
+{
+  "entryId": "w:follow-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "follow",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "follow",
+        "up"
+      ],
+      [
+        "followed",
+        "up"
+      ],
+      [
+        "following",
+        "up"
+      ],
+      [
+        "follows",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "follow up",
+      "tags": []
+    },
+    {
+      "form": "followed up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "follow (sth) up",
+  "senses": [
+    {
+      "senseId": "w:follow-up#s1",
+      "pos": "动词短语",
+      "glossZh": "跟进；采取后续行动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:follow#s14",
+        "w:up#s92"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:follow-up#e-95548cfa9227f895",
+          "text": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 98
+          },
+          "parts": [
+            [
+              89,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:follow-up#e-10f6bfc06e30e65d",
+          "text": "When it detected something of interest, they followed up with ERT, which sends electrical currents between a series of electrodes placed in the ground to create a three-dimensional model of subsurface structures based on how different materials conduct or resist electricity.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 56
+          },
+          "parts": [
+            [
+              45,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "follow up with questions 可表示接着提问。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

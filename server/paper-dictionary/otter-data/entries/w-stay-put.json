@@ -1,0 +1,136 @@
+{
+  "entryId": "w:stay-put",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "staying put"
+  ],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "put"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "put"
+      ],
+      [
+        "staying",
+        "put"
+      ],
+      [
+        "stayed",
+        "put"
+      ],
+      [
+        "stays",
+        "put"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay put",
+  "senses": [
+    {
+      "senseId": "w:stay-put#s1",
+      "pos": "短语",
+      "glossZh": "待在原处；不离开或移动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stay-put#e-622ccfa180df0edf",
+          "text": "He’d promised to stay put, but the familiar pull of his routine proved too strong.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-put#e-6f30bbe3ff63cf8d",
+          "text": "Staying put for financial security.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:35#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

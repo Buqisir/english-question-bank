@@ -1,0 +1,135 @@
+{
+  "entryId": "w:ask-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ask",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ask",
+        "back"
+      ],
+      [
+        "asked",
+        "back"
+      ],
+      [
+        "asking",
+        "back"
+      ],
+      [
+        "asks",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "asked back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ask back",
+  "senses": [
+    {
+      "senseId": "w:ask-back#s1",
+      "pos": "短语",
+      "glossZh": "回问；反过来问",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ask-back#e-ced28b6baae43651",
+          "text": "she asked back.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:ask-back#s2",
+      "pos": "短语",
+      "glossZh": "邀请某人回来参加下一轮面试",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "ask sb back。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ask-back#s3",
+      "pos": "短语",
+      "glossZh": "（约会后）邀请对方到自己家里",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式英语，ask sb back。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

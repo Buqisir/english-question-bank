@@ -1,0 +1,134 @@
+{
+  "entryId": "w:be-buried-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "buried",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "buried",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "was buried in",
+      "tags": []
+    },
+    {
+      "form": "were buried in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be buried in sth",
+  "senses": [
+    {
+      "senseId": "w:be-buried-in#s1",
+      "pos": "短语",
+      "glossZh": "埋头于；专心致志于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bury#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-buried-in#e-d4e0d6650c8ab8eb",
+          "text": "Tom, a hard-working junior high school student, was buried in thick review books and exercise papers all day long.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-buried-in#e-0478c782ee9b2b7a",
+          "text": "Most of the students were buried in a novel at their desks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

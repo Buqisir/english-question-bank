@@ -1,0 +1,174 @@
+{
+  "entryId": "w:pass-the-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "the",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "the",
+        "time"
+      ],
+      [
+        "passed",
+        "the",
+        "time"
+      ],
+      [
+        "passes",
+        "the",
+        "time"
+      ],
+      [
+        "passing",
+        "the",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passes the time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass the time",
+  "senses": [
+    {
+      "senseId": "w:pass-the-time#s1",
+      "pos": "短语",
+      "glossZh": "打发时间；消磨时间",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-the-time#e-7f1b62e511fac803",
+          "text": "To pass the time while waiting, Mrs. Cooper showed Olly the incubator (孵化器) where several eggs were kept.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 16
+          },
+          "parts": [
+            [
+              3,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-the-time#e-93fcfebe31728ed4",
+          "text": "I remember when I was 10, to pass the time, I was determined to complete a 1,000-piece puzzle.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-the-time#e-a4fb9b767fd91e21",
+          "text": "Small recommends introducing some novelty into the trip home to help pass the time.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 82
+          },
+          "parts": [
+            [
+              69,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              82
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

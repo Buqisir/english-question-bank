@@ -1,0 +1,134 @@
+{
+  "entryId": "w:go-towards",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes towards"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "towards"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "towards"
+      ],
+      [
+        "goes",
+        "towards"
+      ],
+      [
+        "going",
+        "towards"
+      ],
+      [
+        "gone",
+        "towards"
+      ],
+      [
+        "went",
+        "towards"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go towards",
+  "senses": [
+    {
+      "senseId": "w:go-towards#s1",
+      "pos": "短语",
+      "glossZh": "（钱或其他资源）用于某项开支或目标",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-towards#e-05fcc8b2a7855d7d",
+          "text": "Whatever you make, every cent goes towards your tablet.”",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:writing-continuation:8",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 42
+          },
+          "parts": [
+            [
+              30,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-towards#s2",
+      "pos": "短语",
+      "glossZh": "为取得某个结果作贡献；有助于",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-towards#s3",
+      "pos": "短语",
+      "glossZh": "朝某处或某个方向移动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

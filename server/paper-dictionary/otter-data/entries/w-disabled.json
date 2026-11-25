@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 15
+    "mock": 3
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -254,6 +254,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:disabled#s4",
+      "pos": "v.",
+      "glossZh": "使残疾；使身体部位失去功能",
+      "pronunciationId": "w:disabled#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disabled#e-d160c348ae56a66a",
+          "text": "Xia Yujie, owner of China’s first accessible pub – Pub HandyCup, had his left hand disabled in a middle school medical accident.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -262,6 +295,6 @@
       "reason": "法律专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

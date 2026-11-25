@@ -1,0 +1,155 @@
+{
+  "entryId": "w:dozens-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dozens",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dozens",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dozens of",
+  "senses": [
+    {
+      "senseId": "w:dozens-of#s1",
+      "pos": "短语",
+      "glossZh": "几十个；许多",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dozen#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dozens-of#e-c3527ad5ba6491da",
+          "text": "This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 70
+          },
+          "parts": [
+            [
+              61,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dozens-of#e-ce99d4243929885f",
+          "text": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          },
+          "parts": [
+            [
+              35,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dozens-of#e-ae251e564dc7868c",
+          "text": "He has written dozens of plays.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 20
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

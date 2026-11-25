@@ -73,8 +73,8 @@
     "mock": 585
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 585
+    "gaokao": 5,
+    "mock": 393
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 47,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -227,7 +227,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -291,112 +291,6 @@
       ]
     },
     {
-      "senseId": "w:better#s4",
-      "pos": "短语",
-      "glossZh": "境况更好；更有利",
-      "pronunciationId": "w:better#p-main",
-      "note": "better off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:better#e-80dc7b2c7f1395f7",
-          "text": "Some were better off than others, but they all needed a good meal and",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:better#e-351c5ee712ba2026",
-          "text": "However, research suggests that if we practiced patience, we’d be a whole lot better off.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 84
-          }
-        },
-        {
-          "exampleId": "w:better#e-f95deccc7d468ae8",
-          "text": "Even when you win, you end up no better off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:better#s5",
-      "pos": "短语",
-      "glossZh": "战胜；占上风",
-      "pronunciationId": "w:better#p-main",
-      "note": "get the better of sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:better#e-1b256bbcb56ab94d",
-          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 87,
-            "end": 93
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:better#s6",
       "pos": "prep.",
       "glossZh": "多于；超过",
@@ -431,31 +325,69 @@
       ]
     },
     {
-      "senseId": "w:better#s7",
-      "pos": "短语",
-      "glossZh": "最好还是；应该",
-      "pronunciationId": "w:better#p-main",
-      "note": "had better do sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:better#s8",
       "pos": "v.",
       "glossZh": "改善；超过",
       "pronunciationId": "w:better#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:better#s9",
+      "pos": "n.",
+      "glossZh": "更好的状况；好的一面",
+      "pronunciationId": "w:better#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:better#e-397da29c6f1f7ecb",
+          "text": "Once living in our backyards, many pets – for better and for worse – have now become spoiled “fur babies”, enjoying constant attention, special treatment, and comforts once reserved for human babies.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:better#e-afe5c715a76c52b4",
+          "text": "With AI assistants now able to take on much of the mental workload, studies suggest they could be changing how we think, perceive, focus and remember – not necessarily for the better.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 176,
+            "end": 182
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -464,6 +396,20 @@
       "reason": "旧式用法，常见于固定复数 one’s betters。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:better-and-better",
+    "w:better-known-as",
+    "w:better-late-than-never",
+    "w:better-off",
+    "w:better-safe-than-sorry",
+    "w:better-than-nothing",
+    "w:get-the-better-of-sb",
+    "w:had-better",
+    "w:had-better-do-sth",
+    "w:know-better"
+  ]
 }

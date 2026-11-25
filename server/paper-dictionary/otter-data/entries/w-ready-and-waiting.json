@@ -1,0 +1,92 @@
+{
+  "entryId": "w:ready-and-waiting",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ready",
+      "and",
+      "waiting"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ready",
+        "and",
+        "waiting"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ready and waiting",
+  "senses": [
+    {
+      "senseId": "w:ready-and-waiting#s1",
+      "pos": "短语",
+      "glossZh": "已准备好，正等着；随时可用",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ready-and-waiting#e-95b309ae2e978ae0",
+          "text": "Usually, her old friend would be ready and waiting, holding up his ancient mechanical watch as a joke when she arrived.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 50
+          },
+          "parts": [
+            [
+              33,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

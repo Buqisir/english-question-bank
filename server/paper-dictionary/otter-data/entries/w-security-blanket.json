@@ -1,0 +1,93 @@
+{
+  "entryId": "w:security-blanket",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "security",
+      "blanket"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "security",
+        "blanket"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "security blanket",
+  "senses": [
+    {
+      "senseId": "w:security-blanket#s1",
+      "pos": "短语",
+      "glossZh": "给人安全感或心理安慰的东西",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blanket#s3",
+        "w:security#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:security-blanket#e-4d2f3ab471819640",
+          "text": "necessary and they’re keeping it as a security blanket - 19 percent say they never use it while a further 13 percent keep it in case of emergencies.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 54
+          },
+          "parts": [
+            [
+              38,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,8 +62,8 @@
     "mock": 269
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 265
+    "gaokao": 10,
+    "mock": 65
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 2
+        "mock": 132
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -211,112 +211,10 @@
       ]
     },
     {
-      "senseId": "w:sleep#s3",
-      "pos": "短语",
-      "glossZh": "卧铺车厢",
-      "pronunciationId": "w:sleep#p-main",
-      "note": "sleeping car。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sleep#e-33a1ea7a6894c8d8",
-          "text": "Most long-distance trains, especially the sleeping car accommodations, sell out very quickly.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:sleep#e-760f853fa0a0f555",
-          "text": "He may also book you in a sleeping car that's right next to the diner.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sleep#s4",
-      "pos": "短语",
-      "glossZh": "给（动物）实施安乐死",
-      "pronunciationId": "w:sleep#p-main",
-      "note": "put an animal to sleep。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sleep#e-dac83a20ed5ef2d3",
-          "text": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 84
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sleep#s5",
       "pos": "v.",
       "glossZh": "可供……人住宿",
       "pronunciationId": "w:sleep#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:sleep#s6",
-      "pos": "短语",
-      "glossZh": "和某人发生性关系",
-      "pronunciationId": "w:sleep#p-main",
-      "note": "sleep with somebody。",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -332,6 +230,19 @@
       "reason": "罕用义、物理专义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:beauty-sleep",
+    "w:go-to-sleep",
+    "w:lose-sleep",
+    "w:put-an-animal-to-sleep",
+    "w:put-to-sleep",
+    "w:sleep-in",
+    "w:sleep-on",
+    "w:sleep-over",
+    "w:sleep-with-sb"
+  ]
 }

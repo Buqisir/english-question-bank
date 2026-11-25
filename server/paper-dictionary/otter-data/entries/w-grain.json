@@ -42,8 +42,8 @@
     "mock": 22
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 15
+    "gaokao": 1,
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -233,40 +233,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:grain#s5",
-      "pos": "短语",
-      "glossZh": "违背常理",
-      "pronunciationId": "w:grain#p-main",
-      "note": "go against the grain。例中指违背道德准则。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grain#e-7386862a12fe275a",
-          "text": "In a world where nearly 800 million people a year go hungry, “food waste goes against the moral grain,” as Elizabeth Royte writes in this month’s cover story.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "reading-b-2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 101
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -275,6 +241,11 @@
       "reason": "铸造术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-against-the-grain"
+  ]
 }

@@ -61,8 +61,8 @@
     "mock": 323
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 323
+    "gaokao": 10,
+    "mock": 129
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -189,70 +189,16 @@
       ]
     },
     {
-      "senseId": "w:add#s3",
-      "pos": "短语",
-      "glossZh": "累积见效；合起来造成或等于",
-      "pronunciationId": "w:add#p-main",
-      "note": "add up；add up to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:add#e-21892de5512f6ab8",
-          "text": "Every completion is a small victory that adds up in a big way.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 52
-          }
-        },
-        {
-          "exampleId": "w:add#e-79b88eb582bd89d1",
-          "text": "All this adds up to a state of hurry",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-national-a:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:add#s4",
       "pos": "v.",
       "glossZh": "相加；求和",
       "pronunciationId": "w:add#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -262,6 +208,14 @@
       "reason": "专业或异写缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:add-on",
+    "w:add-up",
+    "w:add-up-to",
+    "w:add-value"
+  ]
 }

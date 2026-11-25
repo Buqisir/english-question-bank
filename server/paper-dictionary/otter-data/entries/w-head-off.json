@@ -1,0 +1,111 @@
+{
+  "entryId": "w:head-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "head",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "head",
+        "off"
+      ],
+      [
+        "headed",
+        "off"
+      ],
+      [
+        "heading",
+        "off"
+      ],
+      [
+        "heads",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "head (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:head-off#s1",
+      "pos": "短语",
+      "glossZh": "动身；出发离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:head#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:head-off#s2",
+      "pos": "短语",
+      "glossZh": "拦截；截住（人、车辆等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:head-off#s3",
+      "pos": "短语",
+      "glossZh": "预先阻止（危机、冲突等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:head-off#s4",
+      "pos": "短语",
+      "glossZh": "（航海）转向远离来风的方向",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

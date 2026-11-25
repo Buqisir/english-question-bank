@@ -69,8 +69,8 @@
     "mock": 101
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 89
+    "gaokao": 3,
+    "mock": 8
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -205,7 +205,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -276,7 +276,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -325,12 +325,12 @@
       "pos": "v.",
       "glossZh": "催促",
       "pronunciationId": "w:press#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -347,74 +347,6 @@
       "examples": []
     },
     {
-      "senseId": "w:press#s7",
-      "pos": "短语",
-      "glossZh": "很难做到",
-      "pronunciationId": "w:press#p-main",
-      "note": "be hard pressed to do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:press#e-1646cede81e8fa6a",
-          "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:press#s8",
-      "pos": "短语",
-      "glossZh": "缺少；紧缺",
-      "pronunciationId": "w:press#p-main",
-      "note": "be pressed for time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:press#e-81a6311f0f00a592",
-          "text": "Families are pressed for time, many with both parents working to",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:press#s9",
       "pos": "adj.",
       "glossZh": "紧迫的",
@@ -423,7 +355,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -494,7 +426,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -527,7 +459,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -560,7 +492,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -584,6 +516,137 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:press#s13",
+      "pos": "v.",
+      "glossZh": "紧逼对手；施压",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-5b1388f1e181ba1a",
+          "text": "The opposing team seemed to realize what was happening and slowed down the pace, not pressing too hard.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s14",
+      "pos": "v.",
+      "glossZh": "从四周逼近；围拢（press in）",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-4209c9bbb22f5909",
+          "text": "I sat alone in my apartment, the cold air pressing in as my phone went dead.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:press#e-e5f6bf59aa7dc28b",
+          "text": "Wearily, I pushed myself upright, remounted my bike and started to double back in the hope of spotting clear trail markers, but this only made things worse: the trees seemed to press in around me as I desperately scanned for landmarks – and the cicadas (蝉) had erupted into a deafening chorus.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 177,
+            "end": 182
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s15",
+      "pos": "v.",
+      "glossZh": "把……强加给（press on）",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-6f208ace1771108b",
+          "text": "Growing up, I recognized the presence of these uvisms in the expectations and assumptions pressed on me by my surroundings.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s16",
+      "pos": "v.",
+      "glossZh": "压在心头；使烦扰",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -596,6 +659,11 @@
       "reason": "高尔夫专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:press-on"
+  ]
 }

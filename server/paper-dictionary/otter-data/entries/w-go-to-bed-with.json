@@ -1,0 +1,89 @@
+{
+  "entryId": "w:go-to-bed-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went to bed with"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "bed",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "bed",
+        "with"
+      ],
+      [
+        "went",
+        "to",
+        "bed",
+        "with"
+      ],
+      [
+        "goes",
+        "to",
+        "bed",
+        "with"
+      ],
+      [
+        "going",
+        "to",
+        "bed",
+        "with"
+      ],
+      [
+        "gone",
+        "to",
+        "bed",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to bed with sb",
+  "senses": [
+    {
+      "senseId": "w:go-to-bed-with#s1",
+      "pos": "短语",
+      "glossZh": "与某人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

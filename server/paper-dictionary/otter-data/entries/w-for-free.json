@@ -1,0 +1,155 @@
+{
+  "entryId": "w:for-free",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "free"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "free"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for free",
+  "senses": [
+    {
+      "senseId": "w:for-free#s1",
+      "pos": "短语",
+      "glossZh": "免费地；不收费地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:for#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-free#e-16a25aa20b1eea01",
+          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 75
+          },
+          "parts": [
+            [
+              67,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-free#e-d9760dacc11cfca7",
+          "text": "It provides phone service for free.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-free#e-144c54580eb9cc5d",
+          "text": "So he posted a message to an online group in Homer, Alaska, offering to fix people’s bikes for free.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          },
+          "parts": [
+            [
+              91,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

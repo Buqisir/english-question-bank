@@ -58,8 +58,8 @@
     "mock": 700
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 697
+    "gaokao": 5,
+    "mock": 505
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 46,
-        "mock": 0
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 39,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -265,7 +265,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -318,7 +318,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -351,7 +351,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -422,7 +422,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -456,7 +456,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -519,112 +519,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:last#s9",
-      "pos": "短语",
-      "glossZh": "终于",
-      "pronunciationId": "w:last#p-main",
-      "note": "at last。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:last#e-ac9bf2cfa4fe7306",
-          "text": "The big day came at last.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:last#e-91ac069735303033",
-          "text": "Paragraph 1: The pay arrived at last.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:last#e-acc389dc74b95ae1",
-          "text": "At last, an elderly couple agreed to take him in.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:last#s10",
-      "pos": "短语",
-      "glossZh": "笑到最后",
-      "pronunciationId": "w:last#p-main",
-      "note": "have the last laugh。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:last#e-4f3c6b1ac8da92be",
-          "text": "But Farber is certain he’ll have the last laugh.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -633,6 +527,15 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-last",
+    "w:have-the-last-laugh",
+    "w:last-but-one",
+    "w:last-minute",
+    "w:last-moment"
+  ]
 }

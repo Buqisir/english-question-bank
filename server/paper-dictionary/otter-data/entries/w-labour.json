@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 40
+    "mock": 3
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -290,6 +290,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:labour#s6",
+      "pos": "adj.",
+      "glossZh": "（呼吸等）费力的",
+      "pronunciationId": "w:labour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:labour#e-2386aec5d094dd4d",
+          "text": "Negative thoughts crowded my mind, echoing with every labored breath: You’re too fat, too unfit – a fool for even trying this.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -298,6 +331,6 @@
       "reason": "专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

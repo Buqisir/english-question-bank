@@ -48,8 +48,8 @@
     "mock": 39
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 35
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -193,59 +193,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:intelligent#s3",
-      "pos": "短语",
-      "glossZh": "情商高的",
-      "pronunciationId": "w:intelligent#p-main",
-      "note": "emotionally intelligent。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:intelligent#e-215f7e15922a5d77",
-          "text": "Being emotionally intelligent does not necessarily make one a moral person.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:intelligent#e-08261568dfd362c3",
-          "text": "In that moment, an emotionally intelligent approach is to pause and silently name what you feel: “frustration,” “a sense of disrespect.” __38__ It shifts the experience from a raw, automatic reaction into something you can observe and handle.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
-            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
-            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 31,
-            "end": 42
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -254,6 +201,11 @@
       "reason": "罕见词性"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:emotionally-intelligent"
+  ]
 }

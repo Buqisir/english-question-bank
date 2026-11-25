@@ -1,0 +1,155 @@
+{
+  "entryId": "w:on-and-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "and",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "and",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on and on",
+  "senses": [
+    {
+      "senseId": "w:on-and-on#s1",
+      "pos": "短语",
+      "glossZh": "不停地；没完没了地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-and-on#e-507be624a5c5b6b5",
+          "text": "There was ice in the fish crate (箱子) to keep the fish fresh, and the cold sea lay only a short walk away, with its waves rolling on and on toward the shore.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 138
+          },
+          "parts": [
+            [
+              129,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              138
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-and-on#e-ec5ed7fa1ee95622",
+          "text": "the list goes on and on.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-and-on#e-998a73712f574d71",
+          "text": "The list goes on and on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

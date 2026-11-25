@@ -1,0 +1,154 @@
+{
+  "entryId": "w:in-theory",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "theory"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "theory"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in theory",
+  "senses": [
+    {
+      "senseId": "w:in-theory#s1",
+      "pos": "短语",
+      "glossZh": "理论上；按道理说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:theory#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-theory#e-ba40564f8569679d",
+          "text": "If someone asked whether you like the arts, you’d probably say you do at least in theory.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 88
+          },
+          "parts": [
+            [
+              79,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-theory#e-68e2c169bdeee5f1",
+          "text": "Give a group of scientists the same data and the same research question, and they should come up with similar answers – in theory.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 129
+          },
+          "parts": [
+            [
+              120,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              129
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-theory#e-9d223eece84c790d",
+          "text": "The researchers also showed that in theory – and given about 23 years for data collection – they could have sent a key across 100 kilometers.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

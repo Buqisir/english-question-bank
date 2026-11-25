@@ -1,0 +1,154 @@
+{
+  "entryId": "w:to-date",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "date"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "date"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to date",
+  "senses": [
+    {
+      "senseId": "w:to-date#s1",
+      "pos": "短语",
+      "glossZh": "迄今为止；到目前为止",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:date#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:to-date#e-d64e396af7f3bacf",
+          "text": "The application of SLEAP to plants has already enabled researchers to establish the most extensive catalog (目录) of plant root phenotypes to date.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 137,
+            "end": 144
+          },
+          "parts": [
+            [
+              137,
+              144
+            ]
+          ],
+          "highlightRanges": [
+            [
+              137,
+              144
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-date#e-a7edf69a7e4fdfdd",
+          "text": "A project in D. C., which broke ground last month, is the largest such conversion(转化) in the city to date.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 105
+          },
+          "parts": [
+            [
+              98,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:to-date#e-b9fdb32f2ed4ad93",
+          "text": "A new systematic review published in Nature Human Behaviour offers the most comprehensive analysis of bias training to date.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 123
+          },
+          "parts": [
+            [
+              116,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

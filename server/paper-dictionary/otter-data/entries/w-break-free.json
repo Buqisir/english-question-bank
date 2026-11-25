@@ -1,0 +1,176 @@
+{
+  "entryId": "w:break-free",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "break",
+      "free"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "free"
+      ],
+      [
+        "breaking",
+        "free"
+      ],
+      [
+        "breaks",
+        "free"
+      ],
+      [
+        "broke",
+        "free"
+      ],
+      [
+        "broken",
+        "free"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "breaks free",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break free",
+  "senses": [
+    {
+      "senseId": "w:break-free#s1",
+      "pos": "短语",
+      "glossZh": "挣脱；摆脱束缚或限制",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-free#e-8453292d4b18af76",
+          "text": "Despite their loving intentions, Xiao Xin longs to find the courage to break free from fear.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 81
+          },
+          "parts": [
+            [
+              71,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-free#e-45f6f842805c6221",
+          "text": "The shifting shades of pink mirror her growing courage to break free from old ideas.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-free#e-11f883cf61233a66",
+          "text": "I rolled down the slope like a man trapped in a washing machine, unable to break free from the tossing and flipping.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        }
+      ],
+      "note": "常用 break free from sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,162 @@
+{
+  "entryId": "w:keep-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping away from"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "away",
+        "from"
+      ],
+      [
+        "keeping",
+        "away",
+        "from"
+      ],
+      [
+        "keeps",
+        "away",
+        "from"
+      ],
+      [
+        "kept",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep away from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep (sb/sth) away from",
+  "senses": [
+    {
+      "senseId": "w:keep-away-from#s1",
+      "pos": "短语",
+      "glossZh": "避开；远离；不接近",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-away-from#e-3dd0618d639fc16f",
+          "text": "Keeping away from.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-away-from#e-7088c3e1a5148a0f",
+          "text": "Keep away from her phone.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-away-from#s2",
+      "pos": "短语",
+      "glossZh": "使某人或某物远离……；不让其接近……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

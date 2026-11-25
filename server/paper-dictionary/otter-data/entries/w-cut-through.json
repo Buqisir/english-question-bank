@@ -1,0 +1,354 @@
+{
+  "entryId": "w:cut-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "cutting through"
+  ],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "through"
+      ],
+      [
+        "cutting",
+        "through"
+      ],
+      [
+        "cuts",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cut through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut through sth",
+  "senses": [
+    {
+      "senseId": "w:cut-through#s1",
+      "pos": "短语",
+      "glossZh": "（声音）穿透（嘈杂声或其他阻隔）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cut#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cut-through#e-4046be17abb68a93",
+          "text": "Hours later, he collapsed exhausted in a snowbank, his cries of pain cutting through the howling wind.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 84
+          },
+          "parts": [
+            [
+              69,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-through#e-1e35243478d8ad75",
+          "text": "“1, 2, 3, FIRE DRAGON!” I shouted, my voice cutting through the sweat-filled air as our team followed the call.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 59
+          },
+          "parts": [
+            [
+              44,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-through#e-046a97078d199729",
+          "text": "The sharp and continuous chirping cut through the quiet classroom again and again, easily breaking his train of thought.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 45
+          },
+          "parts": [
+            [
+              34,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:cut-through#s2",
+      "pos": "短语",
+      "glossZh": "径直穿过；抄近路穿过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cut#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cut-through#e-f53bfbe0bfcc8ea7",
+          "text": "For many, e-scooters have become the fastest, easiest way to cut through our increasingly crowded cities.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 72
+          },
+          "parts": [
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-through#e-3abe48c047f27456",
+          "text": "On a cold, damp evening in mid-November, a sharp wind cut through the streets, but Jack paid little attention to the chill.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:cut-through#s3",
+      "pos": "短语",
+      "glossZh": "突破层层障碍；直达要点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cut-through#e-a4dd5c2de7cedaa0",
+          "text": "To address this, experts recommend using self-exploration questions to cut through the noise, such as “Is it worth my peace of mind?”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 82
+          },
+          "parts": [
+            [
+              71,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-through#e-851a6e21ee0b784b",
+          "text": "Horace, the famous Roman poet who lived from 65 BC to 8 BC, once said, “The poet’s aim is to combine the delightful and the useful.” A poet will take insights into our world covered in fog and cut through that fog to reveal the truth beneath in their poetry.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 193,
+            "end": 204
+          },
+          "parts": [
+            [
+              193,
+              204
+            ]
+          ],
+          "highlightRanges": [
+            [
+              193,
+              204
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cut-through#e-1525c0e1738bb6a5",
+          "text": "While many science phenomena may be abstract, global, or layered, causing students to feel conflicted, expansive framing provides a means of cutting through those layers and gives students a deeper understanding of science, allowing more tangible connections with how science is applied.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 156
+          },
+          "parts": [
+            [
+              141,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              141,
+              156
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

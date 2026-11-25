@@ -1,0 +1,127 @@
+{
+  "entryId": "w:high-season",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "high",
+      "season"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "high",
+        "season"
+      ],
+      [
+        "high",
+        "seasons"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "high season",
+  "senses": [
+    {
+      "senseId": "w:high-season#s1",
+      "pos": "名词短语",
+      "glossZh": "旅游旺季",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:high#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:high-season#e-fee086624636f75d",
+          "text": "Open: High Season 1 Apr – 31 Oct: Mon to Sat 10.00 – 17.00, Sun 11.00 – 17.00.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 17
+          },
+          "parts": [
+            [
+              6,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:high-season#e-c8cde722c5bfd979",
+          "text": "Comfortable cottages and a quiet atmosphere make it a great escape from crowds in high season.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 93
+          },
+          "parts": [
+            [
+              82,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

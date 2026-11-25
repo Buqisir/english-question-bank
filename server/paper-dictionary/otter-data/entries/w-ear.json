@@ -48,8 +48,8 @@
     "mock": 41
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 38
+    "gaokao": 3,
+    "mock": 3
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -159,93 +159,6 @@
       ]
     },
     {
-      "senseId": "w:ear#s3",
-      "pos": "短语",
-      "glossZh": "充耳不闻",
-      "pronunciationId": "w:ear#p-main",
-      "note": "fall on deaf ears 或 turn a deaf ear to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ear#e-94cf4ee36e1aa06e",
-          "text": "My parents urged me to get out of this so-called unhealthy habit, but their repeated requests fell on deaf ears.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 111
-          }
-        },
-        {
-          "exampleId": "w:ear#e-7dbee50977d0d0e1",
-          "text": "I turned a deaf ear to him.",
-          "source": {
-            "paperId": "paper-mock-shandong-zibo-2026-03-first",
-            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:ear#s4",
-      "pos": "短语",
-      "glossZh": "全神贯注地听",
-      "pronunciationId": "w:ear#p-main",
-      "note": "be all ears。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ear#e-d83b0b66bf010e27",
-          "text": "He was all ears as I told him how my dad had been humorous and willing to __47__, reminding us not everyone sees the world the same way.",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
-            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:ear#s5",
       "pos": "n.",
       "glossZh": "谷穗；玉米棒",
@@ -265,6 +178,11 @@
       "reason": "专业或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:turn-a-deaf-ear-to-sth"
+  ]
 }

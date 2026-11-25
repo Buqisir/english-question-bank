@@ -1,0 +1,242 @@
+{
+  "entryId": "w:knock-sb-sth-down-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "knock",
+      {
+        "slot": "sb/sth"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "knock",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "knock",
+        "down"
+      ],
+      [
+        "knock",
+        {
+          "slot": "sb/sth"
+        },
+        "over"
+      ],
+      [
+        "knock",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "knock over",
+      "tags": []
+    },
+    {
+      "form": "knocked down",
+      "tags": []
+    },
+    {
+      "form": "knocked over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "knock sb/sth down/over",
+  "senses": [
+    {
+      "senseId": "w:knock-sb-sth-down-over#s1",
+      "pos": "短语",
+      "glossZh": "撞倒某人；碰倒、打翻某物",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:knock#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:knock-sb-sth-down-over#e-2f43f39ba1781620",
+          "text": "Though friendly, he could easily knock over my niece’s small boys and my six-month-old granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:knock-sb-sth-down-over#e-a5d70109e7233bc6",
+          "text": "Later I learned that this particular cow had come from at least seven miles away and, on the way, had knocked down several people.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 114
+          },
+          "parts": [
+            [
+              102,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              114
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:knock-sb-sth-down-over#e-5f7d35ca7bc6437a",
+          "text": "What should the students do if a chemical container is knocked over?",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:knock-sb-sth-down-over#s2",
+      "pos": "短语",
+      "glossZh": "重创；使遭受严重挫折",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:knock-sb-sth-down-over#e-366b1984dfec9051",
+          "text": "But as colonies damaged by human activities struggle to recover, a string of disasters has knocked them down.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 108
+          },
+          "parts": [
+            [
+              91,
+              98
+            ],
+            [
+              104,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              98
+            ],
+            [
+              104,
+              108
+            ]
+          ]
+        }
+      ],
+      "note": "此义用 knock sb/sth down。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

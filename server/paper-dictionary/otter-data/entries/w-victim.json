@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 20
+    "mock": 6
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -116,78 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:victim#s2",
-      "pos": "短语",
-      "glossZh": "遭受……之害",
-      "pronunciationId": "w:victim#p-main",
-      "note": "fall victim to sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:victim#e-2b59e1887ad7b371",
-          "text": "If so, you may have fallen victim to “rage bait (愤怒诱饵),” a term named as Oxford’s word of the year.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
-            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
-            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:victim#e-ad87f5f3dc210166",
-          "text": "The wildlife in the reserve thus fell victim to severe undernutrition in the hard winter.",
-          "source": {
-            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
-            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
-            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 38,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:victim#e-83d97a14fa2ae153",
-          "text": "We also meet the fictional Nero, who seems to understand the role of randomness in his professional life but falls victim to his own irrational foolishness.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
-            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
-            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 115,
-            "end": 121
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -196,6 +124,11 @@
       "reason": "宗教或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fall-victim-to-sth"
+  ]
 }

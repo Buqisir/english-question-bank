@@ -1,0 +1,167 @@
+{
+  "entryId": "w:shine-a-light-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shine",
+      "a",
+      "light",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shine",
+        "a",
+        "light",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shine a light on",
+      "tags": []
+    },
+    {
+      "form": "shined a light on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shine a light on sth",
+  "senses": [
+    {
+      "senseId": "w:shine-a-light-on#s1",
+      "pos": "短语",
+      "glossZh": "揭示；使人看清或关注某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shine#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shine-a-light-on#e-7ea54fa60bd103c8",
+          "text": "New research has shined a light on how these little creatures are important for helping to protect the planet against global warming.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 34
+          },
+          "parts": [
+            [
+              17,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-a-light-on#e-9920388c71a5eae2",
+          "text": "One firm, however, claims to be able to shine a light on the issue.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 56
+          },
+          "parts": [
+            [
+              40,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shine-a-light-on#e-d1d35d87525b5455",
+          "text": "After 5 years running their successful travel blogs, An Adventurous World and Wanderlust Chloe, they launched this site in 2020, to shine a light on their home country of Great Britain.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 148
+          },
+          "parts": [
+            [
+              132,
+              148
+            ]
+          ],
+          "highlightRanges": [
+            [
+              132,
+              148
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

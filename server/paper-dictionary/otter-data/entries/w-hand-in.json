@@ -1,0 +1,207 @@
+{
+  "entryId": "w:hand-in",
+  "headword": "hand sth in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hands in"
+  ],
+  "pattern": {
+    "tokens": [
+      "hand",
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "hand",
+        "in"
+      ],
+      [
+        "hand",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "hands",
+        "in"
+      ],
+      [
+        "handed",
+        "in"
+      ],
+      [
+        "handing",
+        "in"
+      ],
+      [
+        "hands",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "handed",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "handing",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hand in",
+      "tags": []
+    },
+    {
+      "form": "handed in",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hand-in#s1",
+      "pos": "短语",
+      "glossZh": "交上；提交",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 12
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s15",
+        "w:in#s44"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hand-in#e-ba51761302e252e4",
+          "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-in#e-a19c8f132a3d1cdf",
+          "text": "Hand in a report.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hand-in#e-0d4273c3a21e4cfb",
+          "text": "I scribbled down the best answers I could and handed in my paper, hoping for the best.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,446 @@
+{
+  "entryId": "w:turn-to-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turn to",
+    "turning to",
+    "turns to"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "to",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "to",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "turn",
+        "to"
+      ],
+      [
+        "turning",
+        "to"
+      ],
+      [
+        "turns",
+        "to"
+      ],
+      [
+        "turned",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:turn-to-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "向……求助；求教于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-to-sb-sth#e-910e752a08e2903e",
+          "text": "Turn to his English teacher.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2026-i:24#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-187afc91e87ff580",
+          "text": "97% said they were very likely to suggest that a friend or someone like them turn to Talkspace.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
+          },
+          "parts": [
+            [
+              77,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-93babe203b60bc3e",
+          "text": "Before the appearance of digital tools, you’d probably have turned to a dictionary for the same assistance.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 69
+          },
+          "parts": [
+            [
+              60,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 43
+      }
+    },
+    {
+      "senseId": "w:turn-to-sb-sth#s2",
+      "pos": "短语",
+      "glossZh": "转向（新的对象）；转而采用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-to-sb-sth#e-3fbea589e0682feb",
+          "text": "They turned to overseas markets.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2022-national-b:33#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-52bf0ad74212b464",
+          "text": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 101
+          },
+          "parts": [
+            [
+              94,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-0c7d7c251aea3fd2",
+          "text": "Her art was years away from producing real income, so she turned to the land to sustain her family.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          },
+          "parts": [
+            [
+              58,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 35
+      }
+    },
+    {
+      "senseId": "w:turn-to-sb-sth#s3",
+      "pos": "短语",
+      "glossZh": "转而着手处理",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-to-sb-sth#e-2849872a8c1991c1",
+          "text": "Struck deeply, Chandra turned to medical research.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-to-sb-sth#s4",
+      "pos": "短语",
+      "glossZh": "变成；转化为",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-to-sb-sth#e-58dbb7b98f4605dd",
+          "text": "Paragraph 1: Following her eyes, Mr. Carter’s expression turned to understanding and mild embarrassment.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 66
+          },
+          "parts": [
+            [
+              57,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-953c644e41e902b8",
+          "text": "But when we land in a new time zone, and day suddenly turns to night, this rhythm is thrown off balance.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 62
+          },
+          "parts": [
+            [
+              54,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-to-sb-sth#e-7e0590e912863c42",
+          "text": "After a shower, steam turns to water on walls and ceilings.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 84
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

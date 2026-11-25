@@ -1,0 +1,171 @@
+{
+  "entryId": "w:live-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "living through"
+  ],
+  "pattern": {
+    "tokens": [
+      "live",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "through"
+      ],
+      [
+        "living",
+        "through"
+      ],
+      [
+        "lived",
+        "through"
+      ],
+      [
+        "lives",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lived through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live through",
+  "senses": [
+    {
+      "senseId": "w:live-through#s1",
+      "pos": "短语",
+      "glossZh": "亲身经历；熬过（艰难时期等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-through#e-f2ca2f8c45e07e67",
+          "text": "The book also reflects on the complex moral choice of those who lived through the war.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 77
+          },
+          "parts": [
+            [
+              64,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-through#e-256002141ef846af",
+          "text": "But, why are human beings always so nostalgic for past eras that seemed difficult and dangerous to those who lived through them?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 122
+          },
+          "parts": [
+            [
+              109,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              122
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-through#e-097b08bf6da6cf03",
+          "text": "Michéle Martin of Carleton University, thinks we’re living through a replay of the telephone, where the things that made it valuable – instant communications – are the same that made it annoying.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

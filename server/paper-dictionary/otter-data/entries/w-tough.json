@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 118
+    "mock": 18
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -195,12 +195,12 @@
       "pos": "adj.",
       "glossZh": "坚强的",
       "pronunciationId": "w:tough#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -208,12 +208,25 @@
       "pos": "adj.",
       "glossZh": "严厉的",
       "pronunciationId": "w:tough#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:tough#s6",
+      "pos": "adj.",
+      "glossZh": "不幸的（形容运气）",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -223,6 +236,9 @@
       "reason": "少见或非正式"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:tough-it-out"
+  ]
 }

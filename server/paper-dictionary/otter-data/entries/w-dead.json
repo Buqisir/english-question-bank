@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 35
+    "mock": 9
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -211,7 +211,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -244,7 +244,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -275,100 +275,13 @@
       "glossZh": "恰好；完全",
       "pronunciationId": "w:dead#p-main",
       "note": "如 dead centre、dead right。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:dead#s6",
-      "pos": "短语",
-      "glossZh": "死胡同；行不通的道路或办法",
-      "pronunciationId": "w:dead#p-main",
-      "note": "dead end。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dead#e-21889b726d9b5234",
-          "text": "For the last fifteen minutes, only a lone goat and a few dancing swallows(燕子) __41__ us before we reached a dead end.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 108,
-            "end": 112
-          }
-        },
-        {
-          "exampleId": "w:dead#e-0ea9335eeeee7162",
-          "text": "After months of dead ends, she shifted strategy and started looking for alternative spaces that were accessible to high-risk communities.",
-          "source": {
-            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
-            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
-            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:dead#s7",
-      "pos": "短语",
-      "glossZh": "最冷、最静等的一段时间",
-      "pronunciationId": "w:dead#p-main",
-      "note": "in the dead of winter/night。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dead#e-0a999f263d71be62",
-          "text": "Life __53__, and so do we in the green of spring and the dead of winter, in the birth of a child and the __54__ of a loved one; in the words we leave behind and the hearts of those who will __55__ us.",
-          "source": {
-            "paperId": "paper-mock-hunan-yali-2026-second",
-            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
-            "groupId": "group:paper-mock-hunan-yali-2026-second:cloze",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-hunan-yali-2026-second:cloze:7",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 57,
-            "end": 61
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "senseId": "w:dead#s8",
@@ -391,6 +304,15 @@
       "reason": "体育、工业等专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dead-end",
+    "w:dead-on",
+    "w:in-the-dead-of-night",
+    "w:in-the-dead-of-winter",
+    "w:play-dead"
+  ]
 }

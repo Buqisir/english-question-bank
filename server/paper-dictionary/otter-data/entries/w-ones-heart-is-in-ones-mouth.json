@@ -1,0 +1,78 @@
+{
+  "entryId": "w:ones-heart-is-in-ones-mouth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "one’s heart is in one’s mouth"
+  ],
+  "pattern": {
+    "tokens": [
+      {
+        "slot": "one's"
+      },
+      "heart",
+      "is",
+      "in",
+      {
+        "slot": "one's"
+      },
+      "mouth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        {
+          "slot": "one's"
+        },
+        "heart",
+        "is",
+        "in",
+        {
+          "slot": "one's"
+        },
+        "mouth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one's heart is in one's mouth",
+  "senses": [
+    {
+      "senseId": "w:ones-heart-is-in-ones-mouth#s1",
+      "pos": "短语",
+      "glossZh": "紧张或害怕得心都提到了嗓子眼",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:heart#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

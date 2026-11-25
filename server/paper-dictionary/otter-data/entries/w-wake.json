@@ -80,7 +80,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 67
+    "mock": 0
   },
   "senses": [
     {
@@ -91,7 +91,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -162,7 +162,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -233,7 +233,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -282,12 +282,12 @@
       "pos": "n.",
       "glossZh": "船尾的尾流",
       "pronunciationId": "w:wake#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -304,17 +304,68 @@
       "examples": []
     },
     {
-      "senseId": "w:wake#s6",
-      "pos": "短语",
-      "glossZh": "紧随……而来",
+      "senseId": "w:wake#s7",
+      "pos": "adj.",
+      "glossZh": "醒着的",
       "pronunciationId": "w:wake#p-main",
-      "note": "in the wake of sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wake#e-4459369240727cb4",
+          "text": "In fact, screens now take up more than half of their waking hours.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:wake#e-eb3b1139860ecda6",
+          "text": "We actually spend nearly half our waking time daydreaming, but it isn’t always pleasant.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wake#s8",
+      "pos": "n.",
+      "glossZh": "经过后留下的痕迹",
+      "pronunciationId": "w:wake#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -324,6 +375,12 @@
       "reason": "专门或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-wake-of-sth",
+    "w:wake-sb-up"
+  ]
 }

@@ -1,0 +1,105 @@
+{
+  "entryId": "w:going-for-gold",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "going",
+      "for",
+      "gold"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "going",
+        "for",
+        "gold"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "going for gold",
+  "senses": [
+    {
+      "senseId": "w:going-for-gold#s1",
+      "pos": "短语",
+      "glossZh": "力争最好的结果；追求最高目标",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:going-for-gold#e-60a2a6e745e4c65c",
+          "text": "Fortunately, there is a formula to solve this problem: instead of always going for gold, shoot for the bronze.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 87
+          },
+          "parts": [
+            [
+              73,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:going-for-gold#s2",
+      "pos": "短语",
+      "glossZh": "（比赛中）争夺金牌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

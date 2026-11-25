@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 10
   },
   "senses": [
     {
@@ -122,7 +122,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -193,7 +193,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -236,78 +236,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:bury#s4",
-      "pos": "短语",
-      "glossZh": "埋头于；专心致志于",
-      "pronunciationId": "w:bury#p-main",
-      "note": "bury oneself in 或 be buried in",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bury#e-da76ba3a3da934ef",
-          "text": "Why does the author usually bury herself in a book during her commute?",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:24",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:bury#e-67f6216d04dd12fb",
-          "text": "Tom, a hard-working junior high school student, was buried in thick review books and exercise papers all day long.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 52,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:bury#e-12dc26f7701ada68",
-          "text": "Most of the students were buried in a novel at their desks.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
-            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
-            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 26,
-            "end": 32
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -316,6 +244,11 @@
       "reason": "体育用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bury-oneself-in"
+  ]
 }

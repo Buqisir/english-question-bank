@@ -1,0 +1,92 @@
+{
+  "entryId": "w:as-they-say",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "they",
+      "say"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "they",
+        "say"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as they say",
+  "senses": [
+    {
+      "senseId": "w:as-they-say#s1",
+      "pos": "短语",
+      "glossZh": "常言道；就像人们常说的那样",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-they-say#e-50346dea768608fd",
+          "text": "“I’ve brought you some tea and sympathy, as they say,” Grandpa said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 52
+          },
+          "parts": [
+            [
+              41,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 364
+    "mock": 170
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -288,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -361,7 +361,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -432,7 +432,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -503,7 +503,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -555,7 +555,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 54
       },
       "folded": false,
       "examples": [
@@ -643,6 +643,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:form#s11",
+      "pos": "n.",
+      "glossZh": "动作姿势",
+      "pronunciationId": "w:form#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:form#e-9c2c9ae577ab6895",
+          "text": "Emily pushed me past my limits, correcting my form, timing my breaks, and cheering me on when I wanted to quit.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -651,6 +684,10 @@
       "reason": "专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:in-the-form-of",
+    "w:take-form"
+  ]
 }

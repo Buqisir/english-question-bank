@@ -66,8 +66,8 @@
     "mock": 221
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 215
+    "gaokao": 4,
+    "mock": 19
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 95
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -255,7 +255,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -320,41 +320,6 @@
       ]
     },
     {
-      "senseId": "w:heat#s5",
-      "pos": "短语",
-      "glossZh": "加剧",
-      "pronunciationId": "w:heat#p-main",
-      "note": "heat up，常指竞争或局势。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:heat#e-d0b3c68a1e7544cf",
-          "text": "Competition among gyms is heating up.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:heat#s6",
       "pos": "n.",
       "glossZh": "辣度",
@@ -362,7 +327,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -399,6 +364,78 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:heat#s8",
+      "pos": "adj.",
+      "glossZh": "激烈的（争论等）",
+      "pronunciationId": "w:heat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:heat#e-f21eabc32499ae04",
+          "text": "Once, I saw her shout at a teen whose bike blocked her driveway – the fight got so heated the police were called.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:heat#e-e29f63fa7310a66e",
+          "text": "During lunch, two kids got into a heated quarrel over a single slice of dessert.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:heat#e-ab3694ebe19adba0",
+          "text": "But a total ban on minors sparks heated debate.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-import-20261026-n093:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -411,6 +448,12 @@
       "reason": "俚语或体育术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:heat-up",
+    "w:heat-up-sth"
+  ]
 }

@@ -1,0 +1,99 @@
+{
+  "entryId": "w:dream-come-true",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dream",
+      "come",
+      "true"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dream",
+        "come",
+        "true"
+      ],
+      [
+        "dreams",
+        "come",
+        "true"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dream come true",
+  "senses": [
+    {
+      "senseId": "w:dream-come-true#s1",
+      "pos": "短语",
+      "glossZh": "梦想成真的事；梦寐以求的事成为现实",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dream-come-true#e-07facbfea92932b0",
+          "text": "It made her childhood dream come true.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:23#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 37
+          },
+          "parts": [
+            [
+              22,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "作名词短语时常用 a dream come true。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

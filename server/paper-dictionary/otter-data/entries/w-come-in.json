@@ -1,0 +1,586 @@
+{
+  "entryId": "w:come-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came in",
+    "comes in",
+    "coming in"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "in"
+      ],
+      [
+        "came",
+        "in"
+      ],
+      [
+        "comes",
+        "in"
+      ],
+      [
+        "coming",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come in",
+  "senses": [
+    {
+      "senseId": "w:come-in#s1",
+      "pos": "短语",
+      "glossZh": "有（某种规格、颜色、包装等）；以……形式出现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-in#e-e7096f6cede64787",
+          "text": "This is the Tiny Forest movement, which aims to prove that the best things in life really do come in small packages.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 100
+          },
+          "parts": [
+            [
+              93,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-4b44482b4dbd389f",
+          "text": "English market towns come in many shapes and sizes.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          },
+          "parts": [
+            [
+              21,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-eb1eca9934cfb322",
+          "text": "Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 128
+          },
+          "parts": [
+            [
+              121,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              128
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:come-in#s2",
+      "pos": "短语",
+      "glossZh": "介入；发挥作用；派上用场",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s21",
+        "w:in#s77"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-in#e-71ac32da4b8c2593",
+          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 204,
+            "end": 212
+          },
+          "parts": [
+            [
+              204,
+              212
+            ]
+          ],
+          "highlightRanges": [
+            [
+              204,
+              212
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-1033ec8a9d0290ee",
+          "text": "He has also painted – and this is where the heart comes in – his fears for them.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:3",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          },
+          "parts": [
+            [
+              50,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-c04235970a4fad91",
+          "text": "That’s where the magic of music – a powerful emotional connector – comes in.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 75
+          },
+          "parts": [
+            [
+              67,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              75
+            ]
+          ]
+        }
+      ],
+      "note": "常用 that's where sb/sth comes in。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:come-in#s3",
+      "pos": "短语",
+      "glossZh": "（比赛中）取得某个名次",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-in#e-26474b69411b4ffe",
+          "text": "“I’ll come in last for sure.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          },
+          "parts": [
+            [
+              6,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-66dc1f41582b93cf",
+          "text": "We weren’t great, but we were good enough to come in third place at our school’s talent show.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-f89f9bd292ea4989",
+          "text": "The Triumph of Coming in Third.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        }
+      ],
+      "note": "后接 first、second、last 等。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-in#s4",
+      "pos": "短语",
+      "glossZh": "进来；进入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-in#e-77ec4fc8c5022e28",
+          "text": "I’m only picking up because our patient, Sarah, came in through emergency,” stated the woman.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 55
+          },
+          "parts": [
+            [
+              48,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-c9976409fc176492",
+          "text": "Mrs Melville came in, welcoming us back to school, and the first thing she did after that was to introduce Colette.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-in#e-a231ed93365b5ef5",
+          "text": "After a long wait, we were taken into a small room, and Dr. Anderson came in.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 76
+          },
+          "parts": [
+            [
+              69,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:come-in#s5",
+      "pos": "短语",
+      "glossZh": "到达；收到（消息、报告等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s6",
+      "pos": "短语",
+      "glossZh": "上市；开始供应",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s7",
+      "pos": "短语",
+      "glossZh": "加入（谈话、活动或演奏）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s8",
+      "pos": "短语",
+      "glossZh": "（信号）接收得到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s9",
+      "pos": "短语",
+      "glossZh": "（潮水）上涨；涨潮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s10",
+      "pos": "短语",
+      "glossZh": "开始流行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-in#s11",
+      "pos": "短语",
+      "glossZh": "（牙齿等）长出来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

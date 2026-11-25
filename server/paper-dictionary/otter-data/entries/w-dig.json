@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 31
+    "mock": 5
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -243,6 +243,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:dig#s5",
+      "pos": "n.",
+      "glossZh": "挖掘；挖的动作",
+      "pronunciationId": "w:dig#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dig#e-9d3713e13ab45e40",
+          "text": "My shovel and gloves were in my vehicle, parked about 100 meters away, but the job was so small that only a light dig was necessary.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 117
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -251,6 +284,6 @@
       "reason": "体育、行话或其他领域同形词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,133 @@
+{
+  "entryId": "w:play-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing to",
+    "plays to"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "to"
+      ],
+      [
+        "playing",
+        "to"
+      ],
+      [
+        "plays",
+        "to"
+      ],
+      [
+        "played",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play to",
+  "senses": [
+    {
+      "senseId": "w:play-to#s1",
+      "pos": "短语",
+      "glossZh": "发挥（自身长处或优势）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-to#e-53a974d9f35e5fb4",
+          "text": "Play to your strengths.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-dongying-2026-04-adaptability:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "note": "常用 play to your strengths。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:play-to#s2",
+      "pos": "短语",
+      "glossZh": "为（某类观众）演出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-to#s3",
+      "pos": "短语",
+      "glossZh": "迎合（某人的喜好、期待或情绪）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

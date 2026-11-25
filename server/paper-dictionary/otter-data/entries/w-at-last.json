@@ -1,0 +1,155 @@
+{
+  "entryId": "w:at-last",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "last"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "last"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at last",
+  "senses": [
+    {
+      "senseId": "w:at-last#s1",
+      "pos": "短语",
+      "glossZh": "终于；最终",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s13",
+        "w:last#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-last#e-5c5495b0d2f9149d",
+          "text": "The big day came at last.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-last#e-6d394f9d5fcc5492",
+          "text": "Together, the pair walked off into the forest-safe at last.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          },
+          "parts": [
+            [
+              51,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-last#e-35f2ef1285cb8f46",
+          "text": "What made the woman choose to travel by train at last?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 53
+          },
+          "parts": [
+            [
+              46,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 22
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

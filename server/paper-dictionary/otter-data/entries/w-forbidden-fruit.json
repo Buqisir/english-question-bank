@@ -1,0 +1,154 @@
+{
+  "entryId": "w:forbidden-fruit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "forbidden",
+      "fruit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "forbidden",
+        "fruit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "forbidden fruit",
+  "senses": [
+    {
+      "senseId": "w:forbidden-fruit#s1",
+      "pos": "短语",
+      "glossZh": "禁果；被禁止却有吸引力的东西",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fruit#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:forbidden-fruit#e-e828700443471a4a",
+          "text": "I was back teaching after an absence of 15 years, dealing with the various kinds of “forbidden fruit” that come out of book bags.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 100
+          },
+          "parts": [
+            [
+              85,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:forbidden-fruit#e-4ce986cb90bf662d",
+          "text": "They enjoyed hearing about all the forbidden fruit I had collected.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 50
+          },
+          "parts": [
+            [
+              35,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:forbidden-fruit#e-9951cb2788a56fe9",
+          "text": "I decided to think up a method of dealing with forbidden fruit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 62
+          },
+          "parts": [
+            [
+              47,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

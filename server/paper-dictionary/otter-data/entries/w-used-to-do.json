@@ -1,0 +1,168 @@
+{
+  "entryId": "w:used-to-do",
+  "headword": "used to do sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "use to",
+    "used to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "used",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "used",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "used to",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 72
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:used-to-do#s1",
+      "pos": "短语",
+      "glossZh": "过去常常；过去曾是",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 72
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:used#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:used-to-do#e-0c68133107347311",
+          "text": "My parents used to live here and my father’s watch was here,” he explained, trying to lift a floorboard.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to-do#e-6083247c0d0d2faa",
+          "text": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 102
+          },
+          "parts": [
+            [
+              95,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to-do#e-e240f4ca9fb456e9",
+          "text": "She said: “I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-c-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

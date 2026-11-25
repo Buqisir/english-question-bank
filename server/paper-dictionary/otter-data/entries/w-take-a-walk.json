@@ -1,0 +1,175 @@
+{
+  "entryId": "w:take-a-walk",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a walk"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "walk"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "walk"
+      ],
+      [
+        "taking",
+        "a",
+        "walk"
+      ],
+      [
+        "taken",
+        "a",
+        "walk"
+      ],
+      [
+        "takes",
+        "a",
+        "walk"
+      ],
+      [
+        "took",
+        "a",
+        "walk"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a walk",
+  "senses": [
+    {
+      "senseId": "w:take-a-walk#s1",
+      "pos": "短语",
+      "glossZh": "去散步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s48"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-walk#e-1267f20e4a4a0d2d",
+          "text": "Every time you take a walk on campus, you are helping to preserve our environment and also keeping yourself healthy.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-walk#e-7f53b455b521f054",
+          "text": "Taking a walk without thinking about tasks.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:take-a-walk#s2",
+      "pos": "短语",
+      "glossZh": "走开；滚开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "祈使语气，可用于不客气地赶人。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-a-walk#s3",
+      "pos": "短语",
+      "glossZh": "离开；退出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

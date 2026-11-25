@@ -1,0 +1,249 @@
+{
+  "entryId": "w:pair-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pair",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pair",
+        "up"
+      ],
+      [
+        "paired",
+        "up"
+      ],
+      [
+        "pairing",
+        "up"
+      ],
+      [
+        "pairs",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pair up",
+      "tags": []
+    },
+    {
+      "form": "paired up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pair (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:pair-up#s1",
+      "pos": "短语",
+      "glossZh": "两人一组；结成搭档",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pair-up#e-145a2e491901d7f4",
+          "text": "Last week in biology class, the teacher had the students pair up to care for a plant or a small animal for a month.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pair-up#e-bd8ba68411b6af5c",
+          "text": "After class, when our teacher praised us, I turned to Marcus and said, “I’m glad we got paired up.” He looked down, smiled slightly and replied, “Me too.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 97
+          },
+          "parts": [
+            [
+              88,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pair-up#e-e2f6f4c0bdbeab78",
+          "text": "Hagan’s classroom is full of unconventional energy: algebra becomes speed-dating as students pair up to name polynomials(多项式) and spaghetti strands (意大利面) demonstrate geometric principles.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 100
+          },
+          "parts": [
+            [
+              93,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:pair-up#s2",
+      "pos": "短语",
+      "glossZh": "把……配成一对；把……两两配组",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pair-up#e-f344e45bc2f496d2",
+          "text": "Imagine you’re writing a poem, rhymes must be paired up before you start a new line.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pair-up#e-ff9ed197ef52988a",
+          "text": "The tests asked whether they had seen two images paired up before.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

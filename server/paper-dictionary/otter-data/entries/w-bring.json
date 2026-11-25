@@ -84,8 +84,8 @@
     "mock": 575
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 573
+    "gaokao": 34,
+    "mock": 438
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 71,
-        "mock": 0
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -231,414 +231,6 @@
       ]
     },
     {
-      "senseId": "w:bring#s3",
-      "pos": "短语",
-      "glossZh": "使聚在一起；使结合",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring together",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 12,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-7cca1a3904c0ab8b",
-          "text": "An easy way to bring all work generations together is with a chat platform",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-national-ii:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:bring#e-33cb79faee0b97c3",
-          "text": "It felt great to know that I had helped bring this family together again.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 45
-          }
-        },
-        {
-          "exampleId": "w:bring#e-5c318b5c919e5425",
-          "text": "“The exhibition brings together Go culture, cutting-edge technology and contemporary art,” says Tu.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s4",
-      "pos": "短语",
-      "glossZh": "提起（话题）",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-bec57e138200f351",
-          "text": "It also makes it easier for you to bring up anything that you are worried about.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:bring#e-a5ee99d7aa791261",
-          "text": "We __51__ to date, though neither of us brought up the future.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s5",
-      "pos": "短语",
-      "glossZh": "带回来；使恢复；使想起",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring back",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-a13be74a6552f2c8",
-          "text": "But some ecologists and fashion (时装)enthusiasts are trying to bring back the market for fur made from nutria(海狸鼠).",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:bring#e-09f1544b9f13101d",
-          "text": "Bring back lost memories.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2022-national-a:28",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:bring#e-a0961ccdace4937b",
-          "text": "Then he went around to local ponds and streams and brought back some plants and animals.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s6",
-      "pos": "短语",
-      "glossZh": "引入；引进",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-afd87edca31e450d",
-          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:bring#e-49bbf194ff6d2d0d",
-          "text": "Even when I’m planning classes, I tend to think about how I can bring in my hobbies.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 69
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s7",
-      "pos": "短语",
-      "glossZh": "使发生；引起",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring about",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-0f2c3fcd17a17d1c",
-          "text": "Andria Zafirakou, a north London secondary school teacher, said she wanted to bring about a classroom revolution（变革）.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 83
-          }
-        },
-        {
-          "exampleId": "w:bring#e-87e6036f915821bf",
-          "text": "In his book, Unabridged: The Thrill of (and Threat to) the Modern Dictionary, American journalist Stefan Fatsis writes of the shift brought about by our decade-old dependence on search engines: “Definitions, good and bad, were a click away, and most people didn’t care or couldn’t tell which was which: expert research, scrape data, zombie (僵尸) websites, whatever popped up in a search.”",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 132,
-            "end": 139
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s8",
-      "pos": "短语",
-      "glossZh": "使降低；使倒下",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring down",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-f89548f8043c15dc",
-          "text": "Bring down the cost of labor.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-d",
-            "locator": {
-              "question": 35,
-              "questionId": "question:paper-gaokao-2021-ii:35",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s9",
-      "pos": "短语",
-      "glossZh": "使显现；使显露",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring out",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-81b6055e87b12ca0",
-          "text": "It also brought out the gentler side of some of the prisoners.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bring#s10",
-      "pos": "短语",
-      "glossZh": "使有生气；使鲜活",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring to life",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-0e5295360f0cd9eb",
-          "text": "This produced stunning maps that brought Tharp’s findings to life in a way that no scientific paper could.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 33,
-            "end": 40
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:bring#s11",
       "pos": "v.",
       "glossZh": "提起（诉讼）；提出（指控）",
@@ -650,54 +242,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:bring#s12",
-      "pos": "短语",
-      "glossZh": "抚养",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:bring#s13",
-      "pos": "短语",
-      "glossZh": "挣得；带来收入",
-      "pronunciationId": "w:bring#p-main",
-      "note": "bring in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bring#e-b45ce11aac86b941",
-          "text": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 53
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -706,6 +250,28 @@
       "reason": "拟声词或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bring-along",
+    "w:bring-down",
+    "w:bring-home",
+    "w:bring-in",
+    "w:bring-on",
+    "w:bring-out",
+    "w:bring-over",
+    "w:bring-sb-into-contact-with",
+    "w:bring-sth-about",
+    "w:bring-sth-back",
+    "w:bring-sth-to-life",
+    "w:bring-sth-to-the-table",
+    "w:bring-to",
+    "w:bring-to-life",
+    "w:bring-to-mind",
+    "w:bring-together",
+    "w:bring-under",
+    "w:bring-up"
+  ]
 }

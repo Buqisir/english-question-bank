@@ -42,8 +42,8 @@
     "mock": 34
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 25
+    "gaokao": 3,
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -189,113 +189,6 @@
       ]
     },
     {
-      "senseId": "w:reference#s3",
-      "pos": "短语",
-      "glossZh": "参照系",
-      "pronunciationId": "w:reference#p-main",
-      "note": "frame of reference。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reference#e-5f06c10e13f88582",
-          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 140,
-            "end": 149
-          }
-        },
-        {
-          "exampleId": "w:reference#e-d6e92db11307bf9d",
-          "text": "This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 90
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:reference#s4",
-      "pos": "短语",
-      "glossZh": "参考书",
-      "pronunciationId": "w:reference#p-main",
-      "note": "reference book。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:reference#e-f9918d622bbc5da6",
-          "text": "I keep two reference books close-by on my desk: dictionary and thesaurus(同义词词典).I don’t trust my laptop’s spellchecker.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:reference#e-454dbc973c17c75a",
-          "text": "A reference book.",
-          "source": {
-            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
-            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
-            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 2,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:reference#s5",
       "pos": "n.",
       "glossZh": "参考资料",
@@ -303,7 +196,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -355,7 +248,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -427,7 +320,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -459,6 +352,11 @@
       "reason": "计算机术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:frame-of-reference"
+  ]
 }

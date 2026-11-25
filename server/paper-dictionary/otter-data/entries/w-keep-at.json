@@ -1,0 +1,121 @@
+{
+  "entryId": "w:keep-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "at"
+      ],
+      [
+        "keeping",
+        "at"
+      ],
+      [
+        "keeps",
+        "at"
+      ],
+      [
+        "kept",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kept at",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep at sth/sb",
+  "senses": [
+    {
+      "senseId": "w:keep-at#s1",
+      "pos": "短语",
+      "glossZh": "坚持做下去",
+      "note": "常用 keep at it。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-at#e-9af13b3f812a8b8f",
+          "text": "A mushroom I painted came out better than expected, so I kept at it.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-at#s2",
+      "pos": "短语",
+      "glossZh": "不断催促某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

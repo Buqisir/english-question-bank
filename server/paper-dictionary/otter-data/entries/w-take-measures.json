@@ -1,0 +1,129 @@
+{
+  "entryId": "w:take-measures",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "measures"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "measures"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken measures",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take measures",
+  "senses": [
+    {
+      "senseId": "w:take-measures#s1",
+      "pos": "短语",
+      "glossZh": "采取措施",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s45"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-measures#e-40bcc01d71dd546e",
+          "text": "In this digital age, it’s important to take measures to protect our vision.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 52
+          },
+          "parts": [
+            [
+              39,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-measures#e-b7f8c30c92b96505",
+          "text": "Recently, about 70% of micromobility programs in the US have taken measures to better serve disadvantaged groups, such as accepting cash payments and offering non-smartphone booking options.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 75
+          },
+          "parts": [
+            [
+              61,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              75
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth 说明采取措施的目的。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

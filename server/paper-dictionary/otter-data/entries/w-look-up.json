@@ -1,0 +1,327 @@
+{
+  "entryId": "w:look-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "look it",
+    "looking up"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "look",
+        "up"
+      ],
+      [
+        "look",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "looking",
+        "up"
+      ],
+      [
+        "looked",
+        "up"
+      ],
+      [
+        "looks",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look up",
+      "tags": []
+    },
+    {
+      "form": "looked up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:look-up#s1",
+      "pos": "短语",
+      "glossZh": "查找；查阅（词条、资料等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s16",
+        "w:up#s77"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-up#e-32ae58f9d84101e8",
+          "text": "How did Kevin feel when looking up the word in the dictionary?",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2026-i:25",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          },
+          "parts": [
+            [
+              24,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-up#e-e555554857cef8aa",
+          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 101
+          },
+          "parts": [
+            [
+              92,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-up#e-14e3d40291c609ff",
+          "text": "“Look it up,” I responded.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              5
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              5
+            ],
+            [
+              9,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:look-up#s2",
+      "pos": "短语",
+      "glossZh": "抬头看",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-up#e-82342e17b235c1df",
+          "text": "He looked up and saw Eric hanging from the",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-up#e-b9feeb771000ea35",
+          "text": "She’d just look up at the right time, long enough to answer-in character - “The better to eat you with, my dear,” and go back to her place in the magazine article.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-up#e-293eea8eee1a761b",
+          "text": "Without looking up, he snapped out, “I don’t believe you want to work.” I hadn’t mentioned work.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 23
+      }
+    },
+    {
+      "senseId": "w:look-up#s3",
+      "pos": "短语",
+      "glossZh": "（情况、前景）好转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:look-up#s4",
+      "pos": "短语",
+      "glossZh": "联系；拜访（旧相识）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,139 @@
+{
+  "entryId": "w:stay-behind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "behind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "behind"
+      ],
+      [
+        "stayed",
+        "behind"
+      ],
+      [
+        "staying",
+        "behind"
+      ],
+      [
+        "stays",
+        "behind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stayed behind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay behind",
+  "senses": [
+    {
+      "senseId": "w:stay-behind#s1",
+      "pos": "短语",
+      "glossZh": "别人离开时仍留下；留下不走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stay-behind#e-7a91320fbed415a6",
+          "text": "When I was seven, I moved from London to Florida with my two sisters, while my four brothers stayed behind.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 106
+          },
+          "parts": [
+            [
+              93,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-behind#e-f83342e8a0dca4ce",
+          "text": "After school, without a word, they both stayed behind.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 53
+          },
+          "parts": [
+            [
+              40,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "可指放学后留校，也可指别人迁走后仍留在原居地。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

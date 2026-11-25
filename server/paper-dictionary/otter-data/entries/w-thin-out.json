@@ -1,0 +1,97 @@
+{
+  "entryId": "w:thin-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "thin",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "thin",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thinning out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "thin out",
+  "senses": [
+    {
+      "senseId": "w:thin-out#s1",
+      "pos": "短语",
+      "glossZh": "逐渐变少；变得稀疏",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:thin#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:thin-out#e-64ab809c462ad716",
+          "text": "A feeling of helplessness washed over me as I saw the bus queue thinning out.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 76
+          },
+          "parts": [
+            [
+              64,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

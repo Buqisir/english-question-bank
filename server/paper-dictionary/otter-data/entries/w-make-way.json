@@ -1,0 +1,110 @@
+{
+  "entryId": "w:make-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "way"
+      ],
+      [
+        "made",
+        "way"
+      ],
+      [
+        "makes",
+        "way"
+      ],
+      [
+        "making",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make way",
+  "senses": [
+    {
+      "senseId": "w:make-way#s1",
+      "pos": "短语",
+      "glossZh": "让开；让路",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-way#s2",
+      "pos": "短语",
+      "glossZh": "让出位置或机会；让位",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常与 for 连用。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-way#s3",
+      "pos": "短语",
+      "glossZh": "取得进展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:make-way#s4",
+      "pos": "短语",
+      "glossZh": "（船只）在水中行进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

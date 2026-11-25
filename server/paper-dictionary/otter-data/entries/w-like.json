@@ -74,8 +74,8 @@
     "mock": 1737
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 1737
+    "gaokao": 6,
+    "mock": 1538
   },
   "senses": [
     {
@@ -86,7 +86,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 48,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -159,7 +159,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -230,7 +230,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 100,
-        "mock": 0
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -301,7 +301,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -373,7 +373,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -437,73 +437,6 @@
       ]
     },
     {
-      "senseId": "w:like#s6",
-      "pos": "短语",
-      "glossZh": "发疯似地；拼命地",
-      "pronunciationId": "w:like#p-main",
-      "note": "like crazy。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:like#e-e538415d412ddf5c",
-          "text": "The fur trade kept nutria in check for decades, but when the market for nutria collapsed in the late 1980s, the cat-sized animals multiplied like crazy.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 141,
-            "end": 145
-          }
-        },
-        {
-          "exampleId": "w:like#e-38ce895c2fd43cec",
-          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 42
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:like#s7",
-      "pos": "短语",
-      "glossZh": "想做……",
-      "pronunciationId": "w:like#p-main",
-      "note": "feel like doing sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:like#s8",
       "pos": "n.",
       "glossZh": "点赞",
@@ -542,6 +475,19 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:like#s11",
+      "pos": "n.",
+      "glossZh": "同类的人或事物（the like）",
+      "pronunciationId": "w:like#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -550,6 +496,28 @@
       "reason": "专门或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-you-like",
+    "w:feel-like",
+    "w:feel-like-doing-sth",
+    "w:if-you-like",
+    "w:just-like-that",
+    "w:like-crazy",
+    "w:like-father-like-son",
+    "w:like-it-or-not",
+    "w:like-magic",
+    "w:like-no-other",
+    "w:like-so",
+    "w:like-that",
+    "w:look-like",
+    "w:nothing-like",
+    "w:something-like",
+    "w:something-like-that",
+    "w:what-would-you-like",
+    "w:would-like"
+  ]
 }

@@ -35,8 +35,8 @@
     "mock": 81
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 77
+    "gaokao": 2,
+    "mock": 13
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -161,149 +161,16 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:onto#s3",
-      "pos": "短语",
-      "glossZh": "察觉到有价值的线索",
-      "pronunciationId": "w:onto#p-main",
-      "note": "be onto something。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:onto#e-329840f0a696fb27",
-          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 104,
-            "end": 108
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:onto#s4",
-      "pos": "短语",
-      "glossZh": "抓住",
-      "pronunciationId": "w:onto#p-main",
-      "note": "hold onto；hang onto。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:onto#e-f16ca6153ddfc874",
-          "text": "Holding onto the climbing wall by my fingers and toes, using every muscle to stay safe, I was merely __51__ what I was doing in that moment rather than years of stress, failure, or depression.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:cloze:2",
-              "sentence": 9
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:onto#e-1899d3d8d35ec5ee",
-          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
-            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:onto#s5",
-      "pos": "短语",
-      "glossZh": "保留；坚持",
-      "pronunciationId": "w:onto#p-main",
-      "note": "hold onto。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:onto#e-21443ff56c01a7ec",
-          "text": "Yet deep down, I held onto the faint hope that my months of effort might pay off somehow.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:onto#e-667d1026d3f92f0a",
-          "text": "In education we have to hold onto this faith: everything we do for a child is worthwhile.",
-          "source": {
-            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
-            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 29,
-            "end": 33
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-onto-sth",
+    "w:hang-onto",
+    "w:lock-onto"
+  ]
 }

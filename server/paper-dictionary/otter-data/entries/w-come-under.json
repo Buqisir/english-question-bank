@@ -1,0 +1,83 @@
+{
+  "entryId": "w:come-under",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "under"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "under"
+      ],
+      [
+        "came",
+        "under"
+      ],
+      [
+        "comes",
+        "under"
+      ],
+      [
+        "coming",
+        "under"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come under sth",
+  "senses": [
+    {
+      "senseId": "w:come-under#s1",
+      "pos": "短语",
+      "glossZh": "归入……类别；列在……标题下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-under#s2",
+      "pos": "短语",
+      "glossZh": "受……管辖、管理或支配",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

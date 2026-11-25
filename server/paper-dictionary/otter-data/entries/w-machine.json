@@ -59,8 +59,8 @@
     "mock": 146
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 144
+    "gaokao": 1,
+    "mock": 20
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 103
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -230,78 +230,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:machine#s5",
-      "pos": "短语",
-      "glossZh": "机器学习",
-      "pronunciationId": "w:machine#p-main",
-      "note": "machine learning。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:machine#e-1f545e8080f9788e",
-          "text": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:machine#e-85a4724a4cb30c69",
-          "text": "Huawei’s Pangu-Weather, Nvidia’s FourcastNet, and Google DeepMind’s GraphCast are making meteorologists(气象学家) reconsider how we use machine learning and weather forecasts, Peter Dueben, head of Earth system modeling at the European Centre for Medium-Range Weather Forecasts(ECMWF), told me for the story.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 132,
-            "end": 139
-          }
-        },
-        {
-          "exampleId": "w:machine#e-1928f1db11b38dcf",
-          "text": "• Cave Dance: An innovative exhibit that employs machine learning to bring life to dances from Dunhuang’s murals（壁画）.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 49,
-            "end": 56
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -310,6 +238,8 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

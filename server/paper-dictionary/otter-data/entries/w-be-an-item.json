@@ -1,0 +1,63 @@
+{
+  "entryId": "w:be-an-item",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "an",
+      "item"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "an",
+        "item"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be an item",
+  "senses": [
+    {
+      "senseId": "w:be-an-item#s1",
+      "pos": "短语",
+      "glossZh": "是情侣；在交往",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:item#s4"
+      ],
+      "examples": [],
+      "note": "非正式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,234 @@
+{
+  "entryId": "w:pull-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "away"
+      ],
+      [
+        "pulled",
+        "away"
+      ],
+      [
+        "pulling",
+        "away"
+      ],
+      [
+        "pulls",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulled away",
+      "tags": []
+    },
+    {
+      "form": "pulling away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull away",
+  "senses": [
+    {
+      "senseId": "w:pull-away#s1",
+      "pos": "短语",
+      "glossZh": "（车等）开走；移开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-away#e-ce4cbffd86172225",
+          "text": "As the bus pulled away, Ethan looked back over his shoulder to watch the boys.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pull-away#s2",
+      "pos": "短语",
+      "glossZh": "拉开领先差距；甩开对手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pull#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pull-away#e-9b8b4f5abdd3264f",
+          "text": "Scoring was back and forth until the fourth quarter, when Apache pulled away by 14 points.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 76
+          },
+          "parts": [
+            [
+              65,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:pull-away#s3",
+      "pos": "短语",
+      "glossZh": "疏远他人；主动拉开关系",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pull-away#e-88032415189afc11",
+          "text": "Over time, they help soften the habit of pulling away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-away#e-7a924a60f1190365",
+          "text": "A late reply can feel like “They don’t like me,” and a serious face may seem like “They’re upset with me.” Because of this fear, they try to protect themselves by avoiding eye contact, keeping quiet, or pulling away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 203,
+            "end": 215
+          },
+          "parts": [
+            [
+              203,
+              215
+            ]
+          ],
+          "highlightRanges": [
+            [
+              203,
+              215
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

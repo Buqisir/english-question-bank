@@ -59,8 +59,8 @@
     "mock": 14
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 12
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -210,40 +210,6 @@
       ]
     },
     {
-      "senseId": "w:fry#s3",
-      "pos": "短语",
-      "glossZh": "无足轻重的人或事",
-      "pronunciationId": "w:fry#p-main",
-      "note": "small fry。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fry#e-cfc90ea26ad3a39f",
-          "text": "However, that was small fry compared with the city’s Circus Maximus, which accommodated around 250,000 people.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fry#s4",
       "pos": "n.",
       "glossZh": "鱼苗",
@@ -263,6 +229,11 @@
       "reason": "国名缩写 FRY"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:small-fry"
+  ]
 }

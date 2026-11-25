@@ -1,0 +1,139 @@
+{
+  "entryId": "w:cry-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cry",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cry",
+        "out"
+      ],
+      [
+        "cried",
+        "out"
+      ],
+      [
+        "cries",
+        "out"
+      ],
+      [
+        "crying",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cried out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cry out",
+  "senses": [
+    {
+      "senseId": "w:cry-out#s1",
+      "pos": "短语",
+      "glossZh": "大喊；惊叫",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cry-out#e-d6a9b296feee5d9a",
+          "text": "Some passengers cried out in alarm, while others froze, unable to process what was unfolding before them.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cry-out#e-8b5964f108da3e84",
+          "text": "Moments later, I heard him cry out.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          },
+          "parts": [
+            [
+              27,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "常因疼痛、害怕或惊讶而突然喊出声。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

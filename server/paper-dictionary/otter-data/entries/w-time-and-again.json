@@ -1,0 +1,123 @@
+{
+  "entryId": "w:time-and-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "time",
+      "and",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "time",
+        "and",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "time and again",
+  "senses": [
+    {
+      "senseId": "w:time-and-again#s1",
+      "pos": "短语",
+      "glossZh": "一次又一次；屡次",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:time-and-again#e-a4c8f9a03597680a",
+          "text": "We have all heard it time and again: get active if you want to prevent illnesses like diabetes and heart diseases.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:time-and-again#e-cda825664611d056",
+          "text": "Seeing her mother replace the water filter membranes (膜) time and again, Heller set out to find a better solution.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 71
+          },
+          "parts": [
+            [
+              57,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

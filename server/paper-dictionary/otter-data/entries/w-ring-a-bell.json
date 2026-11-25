@@ -1,0 +1,62 @@
+{
+  "entryId": "w:ring-a-bell",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ring",
+      "a",
+      "bell"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ring",
+        "a",
+        "bell"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ring a bell",
+  "senses": [
+    {
+      "senseId": "w:ring-a-bell#s1",
+      "pos": "短语",
+      "glossZh": "听起来耳熟；似曾听过",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bell#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:at-risk-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "risk",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "risk",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at risk of",
+  "senses": [
+    {
+      "senseId": "w:at-risk-of#s1",
+      "pos": "短语",
+      "glossZh": "有……的风险；可能遭遇……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-risk-of#e-a14b993abe360e7c",
+          "text": "With the young unable to afford to leave home and the old at risk of isolation(孤独), more families are choosing to live together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-risk-of#e-2c6bd339c7e6dc7f",
+          "text": "They define who we are in worlds foreign and familiar, remembered now but forever at risk of being forgotten.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 92
+          },
+          "parts": [
+            [
+              82,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-risk-of#e-df34c02d23a43d75",
+          "text": "This means that some people at risk of mental health problems could, in the right conditions, be really happy.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 38
+          },
+          "parts": [
+            [
+              28,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

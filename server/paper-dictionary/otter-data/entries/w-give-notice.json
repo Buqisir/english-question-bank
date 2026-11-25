@@ -1,0 +1,124 @@
+{
+  "entryId": "w:give-notice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "giving notice"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "notice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "notice"
+      ],
+      [
+        "giving",
+        "notice"
+      ],
+      [
+        "gave",
+        "notice"
+      ],
+      [
+        "given",
+        "notice"
+      ],
+      [
+        "gives",
+        "notice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give notice",
+  "senses": [
+    {
+      "senseId": "w:give-notice#s1",
+      "pos": "短语",
+      "glossZh": "提前正式通知",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-notice#e-1bd03d9fbd76bfcc",
+          "text": "Giving notice at least 60 days early.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "note": "常说明通知须提前多长时间。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:give-notice#s2",
+      "pos": "短语",
+      "glossZh": "正式提出辞职；提前通知退租",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "通常是雇员或租户依规定通知对方将离职或搬离。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

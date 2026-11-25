@@ -1,0 +1,240 @@
+{
+  "entryId": "w:at-the-end-of-the-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "end",
+      "of",
+      "the",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "end",
+        "of",
+        "the",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the end of the day",
+  "senses": [
+    {
+      "senseId": "w:at-the-end-of-the-day#s1",
+      "pos": "短语",
+      "glossZh": "说到底；归根结底",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s30",
+        "w:day#s8",
+        "w:end#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-end-of-the-day#e-ff23678768da462b",
+          "text": "\"At the end of the day all transit agencies right now are doing everything they can to improve the rider experience.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 22
+          },
+          "parts": [
+            [
+              1,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-end-of-the-day#e-84cf9b7fffea214e",
+          "text": "At the end of the day, even the smartest computers are our tools, and their intentions are ours.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 21
+          },
+          "parts": [
+            [
+              0,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:at-the-end-of-the-day#s2",
+      "pos": "短语",
+      "glossZh": "一天结束时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-the-end-of-the-day#e-01a8eaf46184c8f2",
+          "text": "Usually the offender would appear at the end of the day, and I would return the belonging.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 55
+          },
+          "parts": [
+            [
+              34,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-end-of-the-day#e-af0783e0b7a130d2",
+          "text": "I would leave the elephant in the office parking lot, and then pick him up at the end of the day.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:7",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 96
+          },
+          "parts": [
+            [
+              75,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-end-of-the-day#e-c58cbf8fcc427e1a",
+          "text": "But I also want this one hour at the end of the day when I step out of work and measure and preheat and marinate（腌制）.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 51
+          },
+          "parts": [
+            [
+              30,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

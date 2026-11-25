@@ -1,0 +1,94 @@
+{
+  "entryId": "w:a-fighting-chance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "fighting",
+      "chance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "fighting",
+        "chance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a fighting chance",
+  "senses": [
+    {
+      "senseId": "w:a-fighting-chance#s1",
+      "pos": "短语",
+      "glossZh": "经过努力仍有可能成功的机会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fight#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-fighting-chance#e-bb7ad96a01b356c0",
+          "text": "After some quick research, we concluded that the best way to give the squirrel a fighting chance was to care for him ourselves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 96
+          },
+          "parts": [
+            [
+              79,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              96
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

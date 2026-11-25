@@ -1,0 +1,93 @@
+{
+  "entryId": "w:agony-aunt",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "agony",
+      "aunt"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "agony",
+        "aunt"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "agony aunt",
+  "senses": [
+    {
+      "senseId": "w:agony-aunt#s1",
+      "pos": "短语",
+      "glossZh": "为他人排解烦恼的人；答疑解忧专栏作家",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:aunt#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:agony-aunt#e-bd03b216b0ae010d",
+          "text": "Alongside their craft, hairdressers are known for their conversation skills, who often act as an agony aunt, adviser and friend rolled into one.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 107
+          },
+          "parts": [
+            [
+              97,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              107
+            ]
+          ]
+        }
+      ],
+      "note": "英式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

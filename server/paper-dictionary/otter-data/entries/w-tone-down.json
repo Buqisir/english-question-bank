@@ -1,0 +1,98 @@
+{
+  "entryId": "w:tone-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tone",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tone",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tone down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tone sth down",
+  "senses": [
+    {
+      "senseId": "w:tone-down#s1",
+      "pos": "短语",
+      "glossZh": "减弱；降低……的强度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tone#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tone-down#e-0d7c59f768378d39",
+          "text": "When organizations tone down their efforts, the broader sustainability conversation can be weakened – and the opportunity for businesses to be drivers of social change could be lost.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          },
+          "parts": [
+            [
+              19,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              28
+            ]
+          ]
+        }
+      ],
+      "note": "可指减少投入，也可指让措辞更温和或让色彩更柔和。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,113 @@
+{
+  "entryId": "w:play-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing on"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "on"
+      ],
+      [
+        "playing",
+        "on"
+      ],
+      [
+        "played",
+        "on"
+      ],
+      [
+        "plays",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play on",
+  "senses": [
+    {
+      "senseId": "w:play-on#s1",
+      "pos": "短语",
+      "glossZh": "利用（某人的恐惧、情绪或弱点）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-on#s2",
+      "pos": "短语",
+      "glossZh": "利用双关或谐音",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-on#s3",
+      "pos": "短语",
+      "glossZh": "（在心头）萦绕；持续困扰",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 play on sb’s mind。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-on#s4",
+      "pos": "短语",
+      "glossZh": "继续比赛、演奏或玩下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "体育比赛中，裁判也可用 Play on! 示意继续。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

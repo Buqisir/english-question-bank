@@ -1,0 +1,290 @@
+{
+  "entryId": "w:show-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "showed up",
+    "showing up",
+    "shows up"
+  ],
+  "pattern": {
+    "tokens": [
+      "show",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "show",
+        "up"
+      ],
+      [
+        "showed",
+        "up"
+      ],
+      [
+        "showing",
+        "up"
+      ],
+      [
+        "shows",
+        "up"
+      ],
+      [
+        "shown",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shown up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "show up",
+  "senses": [
+    {
+      "senseId": "w:show-up#s1",
+      "pos": "短语",
+      "glossZh": "到场；露面",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:show#s6",
+        "w:up#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:show-up#e-4ae603cb16bdafb7",
+          "text": "So the main thing is just to show up and be adventurous, trying different foods and talking to strangers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-up#e-fd972de392383295",
+          "text": "So, when my brother showed up, I asked him to watch Toby and keep him outside.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 29
+          },
+          "parts": [
+            [
+              20,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-up#e-ce0cc7aea7927a05",
+          "text": "Organizers expected perhaps 50,000 people to show up.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:show-up#s2",
+      "pos": "短语",
+      "glossZh": "显现；变得可见或可察觉",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:show#s7",
+        "w:up#s59"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:show-up#e-0c84411102858513",
+          "text": "In most people the first signs show up in their 50s or early 60s.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          },
+          "parts": [
+            [
+              31,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-up#e-9144592208a94c91",
+          "text": "If wildlife conflict news shows up regularly, fear can settle in long before personal experience does.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-up#e-ad8b8ed570b990c9",
+          "text": "It doesn’t always appear as sadness but can show up as emotional flatness or internal emptiness.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

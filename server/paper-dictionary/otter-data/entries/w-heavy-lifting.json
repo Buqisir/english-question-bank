@@ -1,0 +1,93 @@
+{
+  "entryId": "w:heavy-lifting",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heavy",
+      "lifting"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heavy",
+        "lifting"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heavy lifting",
+  "senses": [
+    {
+      "senseId": "w:heavy-lifting#s1",
+      "pos": "短语",
+      "glossZh": "一项任务中最费力的工作",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lift#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:heavy-lifting#e-9b3a4fd3509628a7",
+          "text": "Referred to as matrix planting, this approach aims for nature to do a lot more of the heavy lifting in the garden, and even some of the designing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 99
+          },
+          "parts": [
+            [
+              86,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              99
+            ]
+          ]
+        }
+      ],
+      "note": "常用 do the heavy lifting。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

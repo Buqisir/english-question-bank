@@ -54,8 +54,8 @@
     "mock": 55
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 52
+    "gaokao": 2,
+    "mock": 13
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -130,78 +130,6 @@
       ]
     },
     {
-      "senseId": "w:usual#s2",
-      "pos": "短语",
-      "glossZh": "照常",
-      "pronunciationId": "w:usual#p-main",
-      "note": "as usual。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:usual#e-c9affdb57ec883ea",
-          "text": "Poppy welcomed them home as usual but when she saw the box, she stopped.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:usual#e-43d79a8091ee1865",
-          "text": "On that Saturday, the family set up their stand as usual.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 56
-          }
-        },
-        {
-          "exampleId": "w:usual#e-08eccc05e38cc24d",
-          "text": "One day after school, Adam went to the playground to practise as usual.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
-            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
-            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:usual#s3",
       "pos": "n.",
       "glossZh": "平时点的东西",
@@ -210,7 +138,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -237,6 +165,11 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-usual"
+  ]
 }

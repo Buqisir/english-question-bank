@@ -1,0 +1,177 @@
+{
+  "entryId": "w:hit-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "home"
+      ],
+      [
+        "hits",
+        "home"
+      ],
+      [
+        "hitting",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit home",
+  "senses": [
+    {
+      "senseId": "w:hit-home#s1",
+      "pos": "短语",
+      "glossZh": "触动人心；使人切身体会到某事的重要性或真实性",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hit#s5",
+        "w:home#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hit-home#e-79245193a260acf2",
+          "text": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hit-home#e-0ff91d0539b3a9cd",
+          "text": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 116
+          },
+          "parts": [
+            [
+              108,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hit-home#e-0071c5f25c81588a",
+          "text": "What do the underlined words “hit home for me” mean in paragraph 2?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-ii:24",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          },
+          "parts": [
+            [
+              30,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              38
+            ]
+          ]
+        }
+      ],
+      "note": "可接 for sb 或 to sb。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:hit-home#s2",
+      "pos": "短语",
+      "glossZh": "准确命中目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

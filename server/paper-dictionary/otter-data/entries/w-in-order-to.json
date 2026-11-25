@@ -1,0 +1,158 @@
+{
+  "entryId": "w:in-order-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "order",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "order",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in order to",
+  "senses": [
+    {
+      "senseId": "w:in-order-to#s1",
+      "pos": "短语",
+      "glossZh": "为了；以便",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s15",
+        "w:order#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-order-to#e-abb2e8d1ffc9bfd3",
+          "text": "In order to make surely all of us are in good health, and she makes specific plans for us.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:writing-short-error-correction:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order-to#e-0b56c0b681a76b63",
+          "text": "Here are some tips worth following in order to communicate more effectively.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 46
+          },
+          "parts": [
+            [
+              35,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-order-to#e-6eee47115b1bc5be",
+          "text": "I needed to do something in my community (社区) in order to complete the community service hours required to graduate from high school.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "后接动词原形，表示目的。",
+      "counts": {
+        "gaokao": 11,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

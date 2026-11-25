@@ -1,0 +1,115 @@
+{
+  "entryId": "w:talk-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "back"
+      ],
+      [
+        "talked",
+        "back"
+      ],
+      [
+        "talking",
+        "back"
+      ],
+      [
+        "talks",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk back",
+  "senses": [
+    {
+      "senseId": "w:talk-back#s1",
+      "pos": "短语",
+      "glossZh": "（玩具、设备等）用语音回应",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:talk-back#e-1a691a1ba3b96175",
+          "text": "Recent holiday seasons have seen children opening toys that can talk back.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          },
+          "parts": [
+            [
+              64,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:talk-back#s2",
+      "pos": "短语",
+      "glossZh": "顶嘴；无礼地回话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

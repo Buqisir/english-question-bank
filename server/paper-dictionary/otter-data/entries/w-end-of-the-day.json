@@ -1,0 +1,63 @@
+{
+  "entryId": "w:end-of-the-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "end",
+      "of",
+      "the",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "of",
+        "the",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end of the day",
+  "senses": [
+    {
+      "senseId": "w:end-of-the-day#s1",
+      "pos": "短语",
+      "glossZh": "说到底；归根结底",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "完整固定搭配为 at the end of the day。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

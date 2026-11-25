@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 182
+    "mock": 15
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 152
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -183,7 +183,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -258,6 +258,6 @@
       "reason": "政治旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

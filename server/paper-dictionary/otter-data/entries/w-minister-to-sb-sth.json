@@ -1,0 +1,66 @@
+{
+  "entryId": "w:minister-to-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "minister",
+      "to",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "minister",
+        "to",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "minister to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:minister-to-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "照料某人；满足某人的需要",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:minister#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

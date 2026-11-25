@@ -1,0 +1,94 @@
+{
+  "entryId": "w:every-now-and-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "now",
+      "and",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "now",
+        "and",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every now and again",
+  "senses": [
+    {
+      "senseId": "w:every-now-and-again#s1",
+      "pos": "短语",
+      "glossZh": "偶尔；时不时",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:every-now-and-again#e-968f08bb48fa2b20",
+          "text": "That’s why it’s important to shake things up every now and again.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 64
+          },
+          "parts": [
+            [
+              45,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

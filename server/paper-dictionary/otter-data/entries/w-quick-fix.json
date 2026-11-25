@@ -1,0 +1,157 @@
+{
+  "entryId": "w:quick-fix",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "quick",
+      "fix"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "quick",
+        "fix"
+      ],
+      [
+        "quick",
+        "fixes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "quick fix",
+  "senses": [
+    {
+      "senseId": "w:quick-fix#s1",
+      "pos": "短语",
+      "glossZh": "快速解决问题的简便办法，常指应急之策",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:quick-fix#e-67505608825eeb21",
+          "text": "While there is no quick fix, the following suggestions can help us overcome the confusion and ease the pain of rejection.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          },
+          "parts": [
+            [
+              18,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:quick-fix#e-413f245c3f84ded0",
+          "text": "The researchers argue that no single solution offers a quick fix, and that it is wrong for the terminology to suggest otherwise.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 64
+          },
+          "parts": [
+            [
+              55,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:quick-fix#e-cf1de833c7edb112",
+          "text": "A Quick Fix That Cuts Biological Pollution",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:35#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

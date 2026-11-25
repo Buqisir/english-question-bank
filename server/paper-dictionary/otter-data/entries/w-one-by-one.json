@@ -1,0 +1,154 @@
+{
+  "entryId": "w:one-by-one",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "by",
+      "one"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "by",
+        "one"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one by one",
+  "senses": [
+    {
+      "senseId": "w:one-by-one#s1",
+      "pos": "短语",
+      "glossZh": "一个接一个地；逐一",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:one-by-one#e-c5de160256c29c64",
+          "text": "And one by one, the young people left, leaving the elderly behind and letting the fields go unused.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-by-one#e-f47143a6111227e4",
+          "text": "Start by picking out a front-runner, and then compare each of your options with the front-runner, one by one.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 108
+          },
+          "parts": [
+            [
+              98,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-by-one#e-901ba4b5148abf12",
+          "text": "“Okay,” I replied, unconvinced, “who’s first?” One by one they sat down, and I asked the usual basic questions.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

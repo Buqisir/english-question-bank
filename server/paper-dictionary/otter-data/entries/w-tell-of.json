@@ -1,0 +1,155 @@
+{
+  "entryId": "w:tell-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "tells of"
+  ],
+  "pattern": {
+    "tokens": [
+      "tell",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tell",
+        "of"
+      ],
+      [
+        "tells",
+        "of"
+      ],
+      [
+        "telling",
+        "of"
+      ],
+      [
+        "told",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "told of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tell (sb) of sth",
+  "senses": [
+    {
+      "senseId": "w:tell-of#s1",
+      "pos": "短语",
+      "glossZh": "讲述；描写",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tell-of#e-c7cb79d26b773153",
+          "text": "His “Cold Food Observance” tells of his time in exile (流放).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          },
+          "parts": [
+            [
+              27,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:tell-of#s2",
+      "pos": "短语",
+      "glossZh": "将某件事告知某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tell-of#e-03945bcfb274da88",
+          "text": "After boarding the plane, the passengers were told of another weather delay – at least another 45 minutes.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 53
+          },
+          "parts": [
+            [
+              46,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "常用 tell sb of sth 或 sb be told of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

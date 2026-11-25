@@ -1,0 +1,148 @@
+{
+  "entryId": "w:dead-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dead",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dead",
+        "end"
+      ],
+      [
+        "dead",
+        "ends"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dead ends",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dead end",
+  "senses": [
+    {
+      "senseId": "w:dead-end#s1",
+      "pos": "短语",
+      "glossZh": "死胡同；没有出口的路",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dead#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dead-end#e-d5b9d0afff11fcd2",
+          "text": "Finding safe-enough spots for practice might be tough, yet with a little creativity, parents can track down dead ends or unused parking lots.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 117
+          },
+          "parts": [
+            [
+              108,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              117
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:dead-end#s2",
+      "pos": "短语",
+      "glossZh": "行不通的办法；没有出路的处境",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dead#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dead-end#e-bfaa5b1fcd9172ea",
+          "text": "After months of dead ends, she shifted strategy and started looking for alternative spaces that were accessible to high-risk communities.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

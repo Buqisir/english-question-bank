@@ -1,0 +1,152 @@
+{
+  "entryId": "w:depending-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "depending",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "depending",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "depending on",
+  "senses": [
+    {
+      "senseId": "w:depending-on#s1",
+      "pos": "短语",
+      "glossZh": "视……而定；取决于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:depending-on#e-2da9ea42aa748263",
+          "text": "Campers enjoy a staff – to–child ratio ranging from 1:4 to 1:7 depending on the age group.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 75
+          },
+          "parts": [
+            [
+              63,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:depending-on#e-478eb96a065b6a9e",
+          "text": "Since April drinks companies have been forced to pay between 18p and 24p for every litre of sugary drink they produce or import, depending on the sugar content.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 141
+          },
+          "parts": [
+            [
+              129,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              141
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:depending-on#e-4307557f2811db11",
+          "text": "I would spend from five minutes to two hours on it at a time, depending on how busy I was.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 74
+          },
+          "parts": [
+            [
+              62,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              74
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 17
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

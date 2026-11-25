@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 33,
-    "mock": 322
+    "mock": 122
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 190
       },
       "folded": false,
       "examples": [
@@ -124,12 +124,12 @@
       "glossZh": "早上好",
       "pronunciationId": "w:morning#p-main",
       "note": "Morning! 是 Good morning! 的简略口语形式。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 10
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -139,6 +139,9 @@
       "reason": "苏格兰用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:good-morning"
+  ]
 }

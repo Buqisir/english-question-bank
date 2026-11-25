@@ -1,0 +1,152 @@
+{
+  "entryId": "w:blow-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "blow sb’s mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "blow",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "blow",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "blown mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "blow one's mind",
+  "senses": [
+    {
+      "senseId": "w:blow-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "使某人极为惊讶；让某人震撼",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blow#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:blow-ones-mind#e-30463bd4874feb4d",
+          "text": "“It's blown my mind how engaged the children are.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              11
+            ],
+            [
+              15,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              11
+            ],
+            [
+              15,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:blow-ones-mind#e-7f63ca3e0dee2aac",
+          "text": "“It’s blown my mind how engaged the children are.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              11
+            ],
+            [
+              15,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              11
+            ],
+            [
+              15,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

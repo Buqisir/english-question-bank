@@ -1,0 +1,152 @@
+{
+  "entryId": "w:time-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "time",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "time",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "time off",
+  "senses": [
+    {
+      "senseId": "w:time-off#s1",
+      "pos": "短语",
+      "glossZh": "休假；不用上班的时间",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:time-off#e-f0e6c1ec8ca192bb",
+          "text": "All this requires neither a big budget nor time off work but still cheers you up.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:time-off#e-7f5933903f8b6cc0",
+          "text": "Why does the man need time off work?",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:time-off#e-effce61eebf99a85",
+          "text": "Phrases like “I have limited access to email” and “I’ll respond as soon as I get back” sound like you’re being held against your will from working as opposed to making the most of your time off.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 193
+          },
+          "parts": [
+            [
+              185,
+              193
+            ]
+          ],
+          "highlightRanges": [
+            [
+              185,
+              193
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

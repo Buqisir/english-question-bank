@@ -1,0 +1,345 @@
+{
+  "entryId": "w:agree-with-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "agree with"
+  ],
+  "pattern": {
+    "tokens": [
+      "agree",
+      "with",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "agree",
+        "with",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "agree",
+        "with"
+      ],
+      [
+        "agreed",
+        "with"
+      ],
+      [
+        "agreeing",
+        "with"
+      ],
+      [
+        "agrees",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "agreed with",
+      "tags": []
+    },
+    {
+      "form": "agreeing with",
+      "tags": []
+    },
+    {
+      "form": "agrees with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "agree with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:agree-with-sb#s1",
+      "pos": "短语",
+      "glossZh": "同意某人；赞同某种观点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:agree-with-sb#e-9dc3e649af3780b5",
+          "text": "It’s hard to tell exactly how many people agree with him, but research indicates that the numbers have been rising for some time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 52
+          },
+          "parts": [
+            [
+              42,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:agree-with-sb#e-0addf9a0540a47a7",
+          "text": "Which statement will the author probably agree with?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2022-national-a:35",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:agree-with-sb#e-c95b69d637ab39dd",
+          "text": "The differences in conversational styles became evident when participants listened to audio clips in which two people spoke at the same time but were agreeing with each other and stayed on topic, Hilton said.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 163
+          },
+          "parts": [
+            [
+              150,
+              163
+            ]
+          ],
+          "highlightRanges": [
+            [
+              150,
+              163
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 27
+      }
+    },
+    {
+      "senseId": "w:agree-with-sb#s2",
+      "pos": "短语",
+      "glossZh": "与……一致；印证",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:agree-with-sb#e-839ee0d492ebed16",
+          "text": "Which of the following agrees with the educational philosophy of Sint-Paulus?",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-shanxi-taiyuan-2026-03-first:31",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 34
+          },
+          "parts": [
+            [
+              23,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:agree-with-sb#e-ea24ac05b249095d",
+          "text": "Paragraph 1: Noah’s aching hands seemed to agree with his brother’s words.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:agree-with-sb#e-0685a6c0ab0f0d0f",
+          "text": "This principle forms the foundation of the GROW model, which succeeds because it agrees with how human motivation actually works.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 92
+          },
+          "parts": [
+            [
+              81,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:agree-with-sb#s3",
+      "pos": "短语",
+      "glossZh": "（食物、气候等）适合某人的身体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:agree#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:agree-with-sb#e-aeedaffcd9feceb7",
+          "text": "The atmosphere doesn’t agree with her.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        }
+      ],
+      "note": "这一义项常用于否定句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

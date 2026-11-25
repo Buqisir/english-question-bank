@@ -1,0 +1,115 @@
+{
+  "entryId": "w:go-too-far",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went too far"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "too",
+      "far"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "too",
+        "far"
+      ],
+      [
+        "went",
+        "too",
+        "far"
+      ],
+      [
+        "goes",
+        "too",
+        "far"
+      ],
+      [
+        "going",
+        "too",
+        "far"
+      ],
+      [
+        "gone",
+        "too",
+        "far"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go too far",
+  "senses": [
+    {
+      "senseId": "w:go-too-far#s1",
+      "pos": "短语",
+      "glossZh": "做得过分；超出可接受的限度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-too-far#e-343027d148377f10",
+          "text": "However, I went too far at one time.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

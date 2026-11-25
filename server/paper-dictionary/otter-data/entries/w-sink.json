@@ -65,8 +65,8 @@
     "mock": 91
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 85
+    "gaokao": 7,
+    "mock": 35
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -110,7 +110,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -162,7 +162,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -207,94 +207,6 @@
       ]
     },
     {
-      "senseId": "w:sink#s4",
-      "pos": "短语",
-      "glossZh": "突然感到失落",
-      "pronunciationId": "w:sink#p-main",
-      "note": "one’s heart sinks。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sink#e-f6d6c30371f90f0a",
-          "text": "But one day when I heard her saying “I think I’m too fat,” my heart sank.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 68,
-            "end": 72
-          }
-        },
-        {
-          "exampleId": "w:sink#e-6042ee3ddffc4b45",
-          "text": "On Ethan’s birthday, Lily’s heart sank when she suddenly forgot where she had exactly put the gift and failed to find it.",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
-            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:sink#s5",
-      "pos": "短语",
-      "glossZh": "渐渐被理解",
-      "pronunciationId": "w:sink#p-main",
-      "note": "sink in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sink#e-e84a42eb263d3b96",
-          "text": "Progress can be slow, and you’ll wonder if it’s all sinking in.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-ii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sink#s6",
       "pos": "v.",
       "glossZh": "（身体）下坐",
@@ -302,7 +214,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -369,7 +281,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -394,6 +306,214 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:sink#s9",
+      "pos": "adj.",
+      "glossZh": "令人心里一沉的",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-1520631e39fe0121",
+          "text": "For theatergoers, it produces an all too familiar sinking feeling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:sink#e-35eee3cb4cb61623",
+          "text": "Have you ever walked away from a conversation with the sinking feeling that you said too much?",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:sink#e-21ef4748fd3d0d6c",
+          "text": "Soon, the sinking feeling sets in as you revisit your draft, realizing the hard part has just begun.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s10",
+      "pos": "adj.",
+      "glossZh": "已投入且无法收回的",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-13a742e51f2f9568",
+          "text": "They’re all examples of what economists call “sunk costs (沉没成本)”: the price you’ve already paid – in time, money, effort, suffering, for an item or an experience – holds you to them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s11",
+      "pos": "v.",
+      "glossZh": "（使）突然感到沮丧或不安",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-0b4e84a998a96b88",
+          "text": "The Student Affairs Office logo in the corner made his stomach sink.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:sink#e-0c328c8dcd83f6ef",
+          "text": "But Ethan's stomach sank.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:sink#e-80d9a99c139199b9",
+          "text": "The bad weather in New York sank my spirits.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s12",
+      "pos": "v.",
+      "glossZh": "投中（篮球）",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-b513d843e3c202f2",
+          "text": "After King called one last timeout, Academy played as if they had nothing to lose, sinking shot after shot to pull within a few points of Apache.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -402,6 +522,11 @@
       "reason": "罕见的历史义或专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sink-in"
+  ]
 }

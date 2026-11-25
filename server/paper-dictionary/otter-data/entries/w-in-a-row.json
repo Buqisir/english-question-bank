@@ -1,0 +1,265 @@
+{
+  "entryId": "w:in-a-row",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "a",
+      "row"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "a",
+        "row"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in a row",
+  "senses": [
+    {
+      "senseId": "w:in-a-row#s1",
+      "pos": "短语",
+      "glossZh": "连续地；接连地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s18",
+        "w:row#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-a-row#e-80c0ded246144cac",
+          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 131
+          },
+          "parts": [
+            [
+              123,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              131
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-a-row#e-1618a958e8b419b2",
+          "text": "What was the most popular name for American girls five years in a row?",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          },
+          "parts": [
+            [
+              61,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-a-row#e-34df8728a9b2d3b6",
+          "text": "Tom had run every City Marathon for twenty-three years in a row.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          },
+          "parts": [
+            [
+              55,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:in-a-row#s2",
+      "pos": "短语",
+      "glossZh": "排成一行；连成一线",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-a-row#e-258b6b436c1b01ee",
+          "text": "Or play it like the classic game Connect 4, which requires four in a row, but is played on a 7×6 grid.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          },
+          "parts": [
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-a-row#e-d9ce1bef3ef404b4",
+          "text": "The winner is the first to place three of their symbols in a row",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          },
+          "parts": [
+            [
+              56,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-a-row#e-a068bc13f7ea00da",
+          "text": "Take turns to place your symbol, aiming to get five in a row.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          },
+          "parts": [
+            [
+              52,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 15
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

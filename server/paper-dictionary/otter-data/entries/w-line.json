@@ -65,8 +65,8 @@
     "mock": 247
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 241
+    "gaokao": 5,
+    "mock": 95
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 34,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -291,7 +291,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -362,7 +362,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -415,7 +415,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -448,7 +448,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -481,7 +481,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -550,191 +550,471 @@
       "pos": "v.",
       "glossZh": "给……加衬里",
       "pronunciationId": "w:line#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:line#s10",
-      "pos": "短语",
-      "glossZh": "排队；排成一列",
+      "senseId": "w:line#s13",
+      "pos": "v.",
+      "glossZh": "使布满纹路",
       "pronunciationId": "w:line#p-main",
-      "note": "line up。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 2
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:line#e-66e344f41e24a26d",
-          "text": "With a serpentine line, a long delay at one register won’t unfairly punish the people who lined up behind it.",
+          "exampleId": "w:line#e-9fba803868b9a224",
+          "text": "His bronzed, salt-kissed skin was lined with deep wrinkles; roughened fingers followed invisible waves.",
           "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 95
-          }
-        },
-        {
-          "exampleId": "w:line#e-e4267dbfdd6cb4b9",
-          "text": "I opened it carefully and lined up my shells on the table.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
-            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
-            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:4",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:3",
               "sentence": 4
             }
           },
           "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:line#e-e9cfdca3ec020098",
-          "text": "Lining up to board a plane shows how we now pay to skip waiting.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 6
+            "start": 34,
+            "end": 39
           }
         }
       ]
     },
     {
-      "senseId": "w:line#s11",
-      "pos": "短语",
-      "glossZh": "与……一致",
+      "senseId": "w:line#s14",
+      "pos": "n.",
+      "glossZh": "内衬；内壁",
       "pronunciationId": "w:line#p-main",
-      "note": "in line with。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
+        "gaokao": 0,
         "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:line#e-4631d5275917bc30",
-          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
+          "exampleId": "w:line#e-9ac280d1359219a4",
+          "text": "I used to love my nonstick pans, marveling at the ease of cleanup, until I learned that the plastic lining may release toxins (毒素) when heated.",
           "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:seven-choices",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:seven-choices:1",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 3,
-            "end": 7
+            "start": 100,
+            "end": 106
           }
         },
         {
-          "exampleId": "w:line#e-ee5094451f243484",
-          "text": "Taxing large vehicles more would be in line with their cost to society through road danger and pollution.",
+          "exampleId": "w:line#e-666b540c70103178",
+          "text": "Maria Marco, a professor at the University of California, found in lab that sauerkraut contains more compounds that protect the lining of the gut than raw cabbage does.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-c",
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-c:5",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s15",
+      "pos": "n.",
+      "glossZh": "思路；推理脉络",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-ed9f5762b77250e3",
+          "text": "People with popcorn brain find it hard to concentrate or maintain a clear line of thinking.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s16",
+      "pos": "n.",
+      "glossZh": "公共交通线路",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-a6cd4270091d6442",
+          "text": "·Served by bus lines 66, 86, 70, and free Harvard Shuttles.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s17",
+      "pos": "n.",
+      "glossZh": "一系列相继出现的事物",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-263ce0a648873e59",
+          "text": "The paper is the latest in a line of “many analyst” projects that examine how results can vary because of scientists’ decisions during data analysis – and the first to study the effects in ecology.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s18",
+      "pos": "n.",
+      "glossZh": "阵容；活动安排（line-up）",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-b3f003898bf77ce9",
+          "text": "We also have a wonderful line up of free evening talks and tastings with our experts this year, and events just for pass holders.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s19",
+      "pos": "n.",
+      "glossZh": "一句话；台词",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-f3e1d44163ddf262",
+          "text": "(Recall Woody Allen’s line about taking a speed-reading course, then tackling War and Peace: “It’s about Russia.”) But there’s far too much content for that.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d:4",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 39,
-            "end": 43
+            "start": 22,
+            "end": 26
           }
         },
         {
-          "exampleId": "w:line#e-3ea1ba92c574c876",
-          "text": "“If a practice isn't in line with healthy child development, why are we doing it?”",
+          "exampleId": "w:line#e-19f0cfc9ad95d195",
+          "text": "A favorite line among DNA data storage researchers is that “you could store all of the data in the world in a teaspoon.” But its practical application still faces hurdles, especially in terms of cost and data access efficiency.",
           "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-c",
             "locator": {
               "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:3",
-              "sentence": 4
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-c:3",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 24,
-            "end": 28
+            "start": 11,
+            "end": 15
           }
         }
       ]
     },
     {
-      "senseId": "w:line#s12",
-      "pos": "短语",
-      "glossZh": "不幸中的一线希望",
+      "senseId": "w:line#s20",
+      "pos": "n.",
+      "glossZh": "界线；界限",
       "pronunciationId": "w:line#p-main",
-      "note": "silver lining。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 5
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:line#e-6ec65406680efb10",
-          "text": "Martin sees a silver lining, however: She believes that anthropomorphism（拟人化）“provides an opportunity to change stereotypes.” When women are put into positions of leadership like running companies, it reduces negative stereotypes about women.",
+          "exampleId": "w:line#e-f0170b2946576bda",
+          "text": "As educators recognized the limitations of passive, one-size-fits-all tasks in encouraging genuine understanding and student engagement, traditional worksheets and reading logs gave way to project-based assignments or online lessons, clouding the line between homework and classwork.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:5",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices:4",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 21,
-            "end": 27
+            "start": 247,
+            "end": 251
+          }
+        },
+        {
+          "exampleId": "w:line#e-c22a8593616f688b",
+          "text": "As Laumer reflects: “The line between human and animal laughter isn’t as sharp as we thought.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:line#e-43611defd251a0f9",
+          "text": "The “Second Line” is between Hainan and the Chinese mainland.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:grammar-fill:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 16
           }
         }
       ]
+    },
+    {
+      "senseId": "w:line#s21",
+      "pos": "n.",
+      "glossZh": "电话线路",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-13c398bed3a841df",
+          "text": "When I explained Stevie’s problem, the man on the other end of the line considered for a moment and then told me about the “cool suit.” They’d used it on a few of the moon missions, and he thought it might do the trick for Stevie.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:line#e-33b2d25681b0ee97",
+          "text": "A strange, calm voice on the other end of the line said, “Hi.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s22",
+      "pos": "n.",
+      "glossZh": "产品系列",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:line#e-d92892ea1e32242b",
+          "text": "By expanding into new product lines and markets.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:31",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:line#e-f541c4d4d7624464",
+          "text": "Introduce a line of mystery boxes for your products.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:line#s23",
+      "pos": "n.",
+      "glossZh": "行为分寸（out of line 指举止不当）",
+      "pronunciationId": "w:line#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -743,6 +1023,15 @@
       "reason": "行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:end-of-the-line",
+    "w:fine-line",
+    "w:in-line",
+    "w:in-line-with",
+    "w:line-up"
+  ]
 }

@@ -1,0 +1,104 @@
+{
+  "entryId": "w:how-about-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "about",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "about",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "how about",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how about doing sth",
+  "senses": [
+    {
+      "senseId": "w:how-about-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "做某事怎么样？要不要做某事？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:how#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:how-about-doing-sth#e-5a13c224ae06ffe7",
+          "text": "Paragraph 1: “How about going to the beach?” Mike said.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "用于提出建议。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

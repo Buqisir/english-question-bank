@@ -85,8 +85,8 @@
     "mock": 198
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 195
+    "gaokao": 3,
+    "mock": 14
   },
   "senses": [
     {
@@ -97,7 +97,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -265,40 +265,6 @@
       ]
     },
     {
-      "senseId": "w:complete#s4",
-      "pos": "短语",
-      "glossZh": "配有；附带",
-      "pronunciationId": "w:complete#p-main",
-      "note": "complete with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:complete#e-39d929e4db385323",
-          "text": "A long, negative review of a hotel, complete with lots of information, tended to convince participants.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:complete#s5",
       "pos": "v.",
       "glossZh": "完成；做完",
@@ -306,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 107
       },
       "folded": false,
       "examples": [
@@ -377,7 +343,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -427,12 +393,12 @@
       "pos": "v.",
       "glossZh": "使完整；补齐",
       "pronunciationId": "w:complete#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -442,6 +408,11 @@
       "reason": "学科或牌戏术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:complete-with"
+  ]
 }

@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 307
+    "mock": 124
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 57,
-        "mock": 0
+        "mock": 161
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -237,40 +237,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:enjoy#s4",
-      "pos": "短语",
-      "glossZh": "玩得开心",
-      "pronunciationId": "w:enjoy#p-main",
-      "note": "enjoy oneself。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:enjoy#e-57339082601acd89",
-          "text": "While his classmates relaxed and enjoyed themselves after class, Ricky stayed by himself.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 33,
-            "end": 40
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -279,6 +245,11 @@
       "reason": "旧式委婉用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:enjoy-oneself"
+  ]
 }

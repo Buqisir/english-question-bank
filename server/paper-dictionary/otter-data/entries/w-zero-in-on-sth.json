@@ -1,0 +1,154 @@
+{
+  "entryId": "w:zero-in-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "zero",
+      "in",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "zero",
+        "in",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "zero in on",
+      "tags": []
+    },
+    {
+      "form": "zeroed in on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "zero in on sth",
+  "senses": [
+    {
+      "senseId": "w:zero-in-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "把注意力集中在；聚焦于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:zero#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:zero-in-on-sth#e-2ddef70540924c52",
+          "text": "Whereas some previous tests relied on observing general brain activities, this strategy zeroed in on an activity directly linked to a researcher’s verbal command.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 100
+          },
+          "parts": [
+            [
+              88,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:zero-in-on-sth#s2",
+      "pos": "短语",
+      "glossZh": "瞄准；锁定（特定目标）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:zero-in-on-sth#e-bd3f0aef39098b7f",
+          "text": "Today, the treatment toolbox is broader than ever: targeted therapies that zero in on specific cancer cell, immunotherapies that activate the body’s own immune (免疫的) system to attack tumors, and precision forms of radiation can all be matched to a patient’s unique tumor biology.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

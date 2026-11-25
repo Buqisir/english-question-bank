@@ -35,8 +35,8 @@
     "mock": 1142
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 1142
+    "gaokao": 18,
+    "mock": 949
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 66,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 68,
-        "mock": 0
+        "mock": 102
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -376,181 +376,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:most#s6",
-      "pos": "短语",
-      "glossZh": "充分利用",
-      "pronunciationId": "w:most#p-main",
-      "note": "make the most of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 14,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:most#e-a3f9c3cffd79d8d7",
-          "text": "I have the same 24 hours in a day as you do, but I have made specific choices that allow me to make the most of every day and still feel happy and relaxed.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 104,
-            "end": 108
-          }
-        },
-        {
-          "exampleId": "w:most#e-7755d7656f8acac2",
-          "text": "Perhaps these tips will help you make the most of your time.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:31",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:most#e-b319a6cab94c4b9a",
-          "text": "Volunteering makes you feel capable and inspires you to make the most of each day.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2025-ii:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 69
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:most#s7",
-      "pos": "短语",
-      "glossZh": "从……获得最大益处",
-      "pronunciationId": "w:most#p-main",
-      "note": "get the most out of / from。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:most#e-233633055cde80bb",
-          "text": "To get the most out of reading these plays, try to picture the play on stage, with you, the reader, in the audience.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:most#e-defa718c5d107d89",
-          "text": "This mountain walk provides an insight into the skills required for hillwalking to ensure you get the most from future walking trips.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 102,
-            "end": 106
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:most#s8",
-      "pos": "短语",
-      "glossZh": "尤其；最重要的是",
-      "pronunciationId": "w:most#p-main",
-      "note": "most of all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:most#e-608e51f0e6321aa7",
-          "text": "class and focuses on a range of topics that emphasize active learning, exploration and, most of all, fun!",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 13,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 88,
-            "end": 92
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:most#s9",
-      "pos": "短语",
-      "glossZh": "至多",
-      "pronunciationId": "w:most#p-main",
-      "note": "at most。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -559,6 +384,16 @@
       "reason": "主要为美式非正式用法，本批无例证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-most",
+    "w:for-the-most-part",
+    "w:get-the-most-out-of",
+    "w:make-the-most-of",
+    "w:most-of-all",
+    "w:most-of-the-time"
+  ]
 }

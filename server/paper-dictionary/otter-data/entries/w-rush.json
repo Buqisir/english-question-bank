@@ -59,8 +59,8 @@
     "mock": 150
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 143
+    "gaokao": 3,
+    "mock": 13
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -175,7 +175,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -240,78 +240,6 @@
       ]
     },
     {
-      "senseId": "w:rush#s4",
-      "pos": "短语",
-      "glossZh": "交通高峰期",
-      "pronunciationId": "w:rush#p-main",
-      "note": "rush hour。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rush#e-df579c4d8ac879db",
-          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 147,
-            "end": 151
-          }
-        },
-        {
-          "exampleId": "w:rush#e-358e54c53a6c8944",
-          "text": "• __39__ Minimize impact and maximize experience by skipping major holidays or rush hour.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 83
-          }
-        },
-        {
-          "exampleId": "w:rush#e-d744ea285cd2d829",
-          "text": "It was a little after the morning rush hour.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
-            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:rush#s5",
       "pos": "v.",
       "glossZh": "仓促做完",
@@ -319,7 +247,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -371,7 +299,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -404,7 +332,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -481,6 +409,11 @@
       "reason": "体育专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:rush-hour"
+  ]
 }

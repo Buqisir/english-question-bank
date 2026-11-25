@@ -1,0 +1,133 @@
+{
+  "entryId": "w:course-of-action",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "course",
+      "of",
+      "action"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "course",
+        "of",
+        "action"
+      ],
+      [
+        "courses",
+        "of",
+        "action"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "courses of action",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "course of action",
+  "senses": [
+    {
+      "senseId": "w:course-of-action#s1",
+      "pos": "短语",
+      "glossZh": "行动方案；拟采取的做法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:course-of-action#e-b2646c3a06751873",
+          "text": "Despite these considerations, it’s worth bearing in mind the courses of action we mentally rehearse （彩排）.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 78
+          },
+          "parts": [
+            [
+              61,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:course-of-action#e-637fec736519bf4d",
+          "text": "The course of action people entertain in their imagination can influence the probability of actually taking that path.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 20
+          },
+          "parts": [
+            [
+              4,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

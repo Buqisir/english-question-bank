@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 43
+    "mock": 9
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -146,74 +146,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:cash#s3",
-      "pos": "短语",
-      "glossZh": "利用……赚钱；从……牟利",
-      "pronunciationId": "w:cash#p-main",
-      "note": "cash in on",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cash#e-8bca7997daa46d8c",
-          "text": "What is far less acceptable is the vet who cashes in on an owner’s misguided love for their pet to conduct unnecessary, painful and expensive tests and procedures on an animal that cannot give its permission.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
-            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
-            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cash#s4",
-      "pos": "短语",
-      "glossZh": "摇钱树；持续赚钱的项目",
-      "pronunciationId": "w:cash#p-main",
-      "note": "cash cow",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cash#e-2cfc507643dd7b88",
-          "text": "“They don’t want to lose their cash cow, so they’re willing to put millions into fighting government restrictions on UPFs as well as funding nutritionists to voice evidence of their harmlessness,” Popkin said.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n093",
-            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
-            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -222,6 +154,13 @@
       "reason": "旧货币名称或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cash-cow",
+    "w:cash-in",
+    "w:cash-in-on"
+  ]
 }

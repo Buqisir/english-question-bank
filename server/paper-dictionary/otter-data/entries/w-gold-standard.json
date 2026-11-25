@@ -1,0 +1,171 @@
+{
+  "entryId": "w:gold-standard",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "gold",
+      "standard"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "gold",
+        "standard"
+      ],
+      [
+        "gold",
+        "standards"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "gold standard",
+  "senses": [
+    {
+      "senseId": "w:gold-standard#s1",
+      "pos": "短语",
+      "glossZh": "金标准；公认最可靠的衡量标准或方法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:gold#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:gold-standard#e-b63ca053754c5da3",
+          "text": "ECMWF’s forecasting model is considered the gold standard for medium-term weather forecasting (up to 15 days ahead).",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 57
+          },
+          "parts": [
+            [
+              44,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:gold-standard#e-9609924c44a876a0",
+          "text": "My dad has always been a wok hei lover – that restaurant magic is his gold standard.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 83
+          },
+          "parts": [
+            [
+              70,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:gold-standard#e-1676de18373f05ce",
+          "text": "Their trains run on time, their watches are the gold standard.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:gold-standard#s2",
+      "pos": "短语",
+      "glossZh": "金本位制",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -59,8 +59,8 @@
     "mock": 241
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 239
+    "gaokao": 4,
+    "mock": 45
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 194
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -166,112 +166,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:mention#s3",
-      "pos": "短语",
-      "glossZh": "荣誉奖；入围表扬",
-      "pronunciationId": "w:mention#p-main",
-      "note": "honorable mention。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mention#e-73a7070aa97f1b06",
-          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 21
-          }
-        },
-        {
-          "exampleId": "w:mention#e-6648e6f8a677ef63",
-          "text": "What will each of the honorable mention winners get?",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-a",
-            "locator": {
-              "question": 22,
-              "questionId": "question:paper-gaokao-2020-i:22",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:mention#e-76655e84d5cd3980",
-          "text": "● Prizes (two age groups: 13-15; 16-19): 1 winner ($250), 1 runner-up ($100), and 3 honorable mentions ($50) per group.",
-          "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a",
-            "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a:16",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 94,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:mention#s4",
-      "pos": "短语",
-      "glossZh": "更不用说",
-      "pronunciationId": "w:mention#p-main",
-      "note": "not to mention。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mention#e-7be5ffa35f462f14",
-          "text": "These days, safety regulations – not to mention the modern sports fan’s desire for a good view and a comfortable seat – tend to keep stadium capacities（容量）slightly lower.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 47
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -280,6 +174,11 @@
       "reason": "应用界面用法，与普通名词义有重叠"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-to-mention"
+  ]
 }

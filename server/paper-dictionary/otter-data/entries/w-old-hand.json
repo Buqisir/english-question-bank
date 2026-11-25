@@ -1,0 +1,94 @@
+{
+  "entryId": "w:old-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "old",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "old",
+        "hand"
+      ],
+      [
+        "old",
+        "hands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "old hand",
+  "senses": [
+    {
+      "senseId": "w:old-hand#s1",
+      "pos": "短语",
+      "glossZh": "老手；经验丰富的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:old-hand#e-7d3b5c9f08b80b0c",
+          "text": "This was only Amy’s first year at SunRay Tech, yet she already felt like an old hand.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 84
+          },
+          "parts": [
+            [
+              76,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

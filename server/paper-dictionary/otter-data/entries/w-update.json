@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 74
+    "mock": 10
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -224,12 +224,12 @@
       "pos": "n.",
       "glossZh": "软件更新",
       "pronunciationId": "w:update#p-noun",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 8
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -240,7 +240,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -265,9 +265,42 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:update#s5",
+      "pos": "n.",
+      "glossZh": "使内容符合现状的修订",
+      "pronunciationId": "w:update#p-noun",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:update#e-84220d1ea60c89cd",
+          "text": "The old saying still holds but needs an update: Practice alone doesn’t make perfect; practice with noteworthy mistakes does.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

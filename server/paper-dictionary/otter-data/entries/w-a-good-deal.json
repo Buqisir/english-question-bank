@@ -1,0 +1,76 @@
+{
+  "entryId": "w:a-good-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "good",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "good",
+        "deal"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a good deal",
+  "senses": [
+    {
+      "senseId": "w:a-good-deal#s1",
+      "pos": "短语",
+      "glossZh": "大量；相当多",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:deal#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:a-good-deal#s2",
+      "pos": "短语",
+      "glossZh": "大大地；多得多",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可修饰比较级，如 a good deal better。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

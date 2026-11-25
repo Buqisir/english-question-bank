@@ -1,0 +1,86 @@
+{
+  "entryId": "w:follow-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "following on"
+  ],
+  "pattern": {
+    "tokens": [
+      "follow",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "follow",
+        "on"
+      ],
+      [
+        "following",
+        "on"
+      ],
+      [
+        "followed",
+        "on"
+      ],
+      [
+        "follows",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "follow on",
+  "senses": [
+    {
+      "senseId": "w:follow-on#s1",
+      "pos": "短语",
+      "glossZh": "随后发生；接着……继续",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 follow on from sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:follow-on#s2",
+      "pos": "短语",
+      "glossZh": "（板球）首局大比分落后后紧接着打第二局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

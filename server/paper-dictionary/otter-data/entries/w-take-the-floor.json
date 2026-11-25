@@ -1,0 +1,112 @@
+{
+  "entryId": "w:take-the-floor",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "floor"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "floor"
+      ],
+      [
+        "taken",
+        "the",
+        "floor"
+      ],
+      [
+        "takes",
+        "the",
+        "floor"
+      ],
+      [
+        "taking",
+        "the",
+        "floor"
+      ],
+      [
+        "took",
+        "the",
+        "floor"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the floor",
+  "senses": [
+    {
+      "senseId": "w:take-the-floor#s1",
+      "pos": "短语",
+      "glossZh": "（在会议或讨论中）开始发言",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-floor#e-3ae8137dbcc825f5",
+          "text": "Sociologists from Princeton University found that the larger a group is, the more likely it is that men will take the floor.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 123
+          },
+          "parts": [
+            [
+              109,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,309 @@
+{
+  "entryId": "w:put-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "out"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "putting",
+        "out"
+      ],
+      [
+        "puts",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:put-out#s1",
+      "pos": "短语",
+      "glossZh": "熄灭；扑灭",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s11",
+        "w:put#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-out#e-f97e5337248366ee",
+          "text": "The next minute, the porridge boiled over and put out the fire.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 53
+          },
+          "parts": [
+            [
+              46,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-out#e-4da688ad1a63893e",
+          "text": "What is the key to sound waves putting out a fire according to the text?",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:33",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-out#e-2a65b9f86058e2e2",
+          "text": "There’s no water in sight – the flames are put out by sound waves.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          },
+          "parts": [
+            [
+              43,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:put-out#s2",
+      "pos": "短语",
+      "glossZh": "摆出来供人取用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-out#e-23a96de1d519c408",
+          "text": "And don’t forget to put out some cookies and fruits.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-out#s3",
+      "pos": "短语",
+      "glossZh": "发布；发行",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-out#e-1b606c4f005d13b2",
+          "text": "Conservation organizations put out pollinator-friendliness guidelines for home gardens, businesses, schools, cities——and now there are guidelines for solar farms.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          },
+          "parts": [
+            [
+              27,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-out#s4",
+      "pos": "短语",
+      "glossZh": "给某人添麻烦；使某人感到不便",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-out#s5",
+      "pos": "短语",
+      "glossZh": "（船）驶离港口；出航",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-out#s6",
+      "pos": "短语",
+      "glossZh": "弄伤眼睛使其失明",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 put sb's eye out。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

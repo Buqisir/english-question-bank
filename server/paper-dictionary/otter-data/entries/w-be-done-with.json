@@ -1,0 +1,208 @@
+{
+  "entryId": "w:be-done-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is done with"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "done",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "done",
+        "with"
+      ],
+      [
+        "is",
+        "done",
+        "with"
+      ],
+      [
+        "been",
+        "done",
+        "with"
+      ],
+      [
+        "being",
+        "done",
+        "with"
+      ],
+      [
+        "was",
+        "done",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "be done with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be done with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:be-done-with#s1",
+      "pos": "短语",
+      "glossZh": "做完；处理完",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-done-with#e-97da411065434ea1",
+          "text": "I was in a rush to be done with them, eager to get back to my endless list of tasks.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 31
+          },
+          "parts": [
+            [
+              19,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-done-with#e-37d8b6f9e6543faf",
+          "text": "I was in a rush to be done with them since I had an endless list of things to finish as a high school student taking a tough course load.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 31
+          },
+          "parts": [
+            [
+              19,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:be-done-with#s2",
+      "pos": "短语",
+      "glossZh": "摆脱；不必再应付",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-done-with#e-3e0b9d12b2e2e189",
+          "text": "Soon you’ll be done with the stresses of high school.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:be-done-with#s3",
+      "pos": "短语",
+      "glossZh": "与某人断绝来往；不再与某人合作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

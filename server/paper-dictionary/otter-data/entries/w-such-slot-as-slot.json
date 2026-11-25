@@ -1,0 +1,171 @@
+{
+  "entryId": "w:such-slot-as-slot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "such",
+      {
+        "slot": "…"
+      },
+      "as",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "such",
+        {
+          "slot": "…"
+        },
+        "as",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "such as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "such … as …",
+  "senses": [
+    {
+      "senseId": "w:such-slot-as-slot#s1",
+      "pos": "短语",
+      "glossZh": "像……这样的……（列举实例）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:such-slot-as-slot#e-60bf1772ba655b56",
+          "text": "When they reached the park with such toys as a bucket（水桶）and a truck, Vivian felt a wave of relief – only two others were there: a woman and her daughter about 6 years old, playing in the large sandbox.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          },
+          "parts": [
+            [
+              32,
+              36
+            ],
+            [
+              42,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              36
+            ],
+            [
+              42,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:such-slot-as-slot#s2",
+      "pos": "短语",
+      "glossZh": "与……相同或相近的（用于比较）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:such-slot-as-slot#e-bbd5989bb1460367",
+          "text": "These plastic bits have been found in various bodily organs – including the kidney, liver – although not at such concentrations as now seen in the brain, the team said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 130
+          },
+          "parts": [
+            [
+              108,
+              112
+            ],
+            [
+              128,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              112
+            ],
+            [
+              128,
+              130
+            ]
+          ]
+        }
+      ],
+      "note": "如 not at such concentrations as now seen，表示浓度没有现在看到的那么高。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

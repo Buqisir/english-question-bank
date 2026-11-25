@@ -1,0 +1,70 @@
+{
+  "entryId": "w:come-to-ones-rescue",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "come to somebody’s rescue"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      {
+        "slot": "one's"
+      },
+      "rescue"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        {
+          "slot": "one's"
+        },
+        "rescue"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to one's rescue",
+  "senses": [
+    {
+      "senseId": "w:come-to-ones-rescue#s1",
+      "pos": "短语",
+      "glossZh": "前来救援某人；帮某人解围",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:come#s23"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 44
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -187,59 +187,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:household#s3",
-      "pos": "短语",
-      "glossZh": "家喻户晓的名字",
-      "pronunciationId": "w:household#p-main",
-      "note": "a household name。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:household#e-ba56dbbc49347f0c",
-          "text": "Douglas, who had owned and coached the Rens for their entire 25-year run, is today known as the “Father of Black Professional Basketball,” which ensures that although the Rens isn’t a household name, their legacy will never be forgotten.",
-          "source": {
-            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
-            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
-            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 184,
-            "end": 193
-          }
-        },
-        {
-          "exampleId": "w:household#e-04e7854a08365249",
-          "text": "Written in first person, this book tracks his 25-year journey as a cartoonist, writer and showrunner, from an Ontario farm kid to a household name.",
-          "source": {
-            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
-            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
-            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 132,
-            "end": 141
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -248,6 +195,11 @@
       "reason": "不同于通常同住的住户义，缺少语料"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-household-name"
+  ]
 }

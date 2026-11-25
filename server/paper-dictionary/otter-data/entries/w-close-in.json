@@ -1,0 +1,122 @@
+{
+  "entryId": "w:close-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "in"
+      ],
+      [
+        "closed",
+        "in"
+      ],
+      [
+        "closes",
+        "in"
+      ],
+      [
+        "closing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "closing in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close in",
+  "senses": [
+    {
+      "senseId": "w:close-in#s1",
+      "pos": "短语",
+      "glossZh": "从四周围拢；逐渐逼近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-in#e-4188719e2996b20f",
+          "text": "We'd run this shop for three years, but lately, it felt like the walls were closing in.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 86
+          },
+          "parts": [
+            [
+              76,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              86
+            ]
+          ]
+        }
+      ],
+      "note": "close in on sb/sth 可指追赶者向目标逼近。the walls are closing in 可形容压迫感越来越强。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:close-in#s2",
+      "pos": "短语",
+      "glossZh": "把……关在里面；围住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "及物用法，如 close sb in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

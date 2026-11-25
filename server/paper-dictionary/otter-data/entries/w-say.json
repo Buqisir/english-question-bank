@@ -69,7 +69,7 @@
     "mock": 1779
   },
   "unassignedCounts": {
-    "gaokao": 272,
+    "gaokao": 274,
     "mock": 1775
   },
   "senses": [
@@ -353,40 +353,6 @@
       ]
     },
     {
-      "senseId": "w:say#s6",
-      "pos": "短语",
-      "glossZh": "不用说",
-      "pronunciationId": "w:say#p-main",
-      "note": "needless to say。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:say#e-a5d5c931493e036d",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:say#s7",
       "pos": "n.",
       "glossZh": "发言权",
@@ -419,6 +385,24 @@
       "reason": "历史专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-they-say",
+    "w:final-say",
+    "w:i-say",
+    "w:id-say",
+    "w:lets-say",
+    "w:needless-to-say",
+    "w:not-to-say",
+    "w:say-goodbye-to-sth",
+    "w:say-the-word",
+    "w:say-what",
+    "w:say-when",
+    "w:so-they-say",
+    "w:to-say-the-least",
+    "w:you-dont-say"
+  ]
 }

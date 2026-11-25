@@ -35,8 +35,8 @@
     "mock": 970
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 970
+    "gaokao": 40,
+    "mock": 813
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 86,
-        "mock": 0
+        "mock": 134
       },
       "folded": false,
       "examples": [
@@ -181,187 +181,18 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:only#s3",
-      "pos": "短语",
-      "glossZh": "不但……而且……",
-      "pronunciationId": "w:only#p-main",
-      "note": "not only … but also …。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 27,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:only#e-3796d0d1bd6d9366",
-          "text": "I loved talking about the imaginary box, not only with my students but also with my own children.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:only#e-b601d0d3099f1473",
-          "text": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:only#e-2e6b5c86314e4d59",
-          "text": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:only#s4",
-      "pos": "短语",
-      "glossZh": "却（引出意外结果）",
-      "pronunciationId": "w:only#p-main",
-      "note": "only to do。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:only#e-81bb48fc85a4c78c",
-          "text": "Lamb and mother __39__, I turned back to the tractor only to see it move suddenly away from me.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 53,
-            "end": 57
-          }
-        },
-        {
-          "exampleId": "w:only#e-68251bc98e9acd1a",
-          "text": "Most parents will have eagerly asked their child about their day, only to meet with a “good”, quickly followed by \"I’m hungry\".",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:only#e-bc959b2fdbceacc9",
-          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 80,
-            "end": 84
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:only#s5",
-      "pos": "短语",
-      "glossZh": "要是……就好了",
-      "pronunciationId": "w:only#p-main",
-      "note": "if only。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:only#e-bb5216cdc957196d",
-          "text": "If only the effort they put into avoiding responsibility could be redirected into, well, actual responsibility.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:if-only",
+    "w:not-only-but-also",
+    "w:only-just",
+    "w:only-to-do",
+    "w:only-too"
+  ]
 }

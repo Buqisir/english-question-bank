@@ -1,0 +1,205 @@
+{
+  "entryId": "w:come-down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came down to",
+    "comes down to"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "down",
+        "to"
+      ],
+      [
+        "came",
+        "down",
+        "to"
+      ],
+      [
+        "comes",
+        "down",
+        "to"
+      ],
+      [
+        "coming",
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "come down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come down to sth",
+  "senses": [
+    {
+      "senseId": "w:come-down-to#s1",
+      "pos": "短语",
+      "glossZh": "归根结底取决于；关键在于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-down-to#e-6d9b2c7717e6a4fe",
+          "text": "When it comes down to it, you only really face three types of decisions in life: no-stakes, low-stakes and high-stakes.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 21
+          },
+          "parts": [
+            [
+              8,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-down-to#e-d0adf28a5088d871",
+          "text": "Success will come down to the value of the brand and the kind of loyalty it develops among consumers as the market for electric boats expands.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "when it comes down to it 表示说到底或到了关键时刻。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-down-to#s2",
+      "pos": "短语",
+      "glossZh": "归结为；最终可概括为",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-down-to#e-1cb1d459269fa541",
+          "text": "Together, we calculated costs, detailed market strategies, and planned pricing carefully, all of which came down to a ten-page business plan.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 115
+          },
+          "parts": [
+            [
+              103,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-down-to#s3",
+      "pos": "短语",
+      "glossZh": "降到某个水平或数值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -58,8 +58,8 @@
     "mock": 154
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 151
+    "gaokao": 3,
+    "mock": 48
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -281,79 +281,45 @@
       ]
     },
     {
-      "senseId": "w:thank#s4",
-      "pos": "短语",
-      "glossZh": "多亏",
+      "senseId": "w:thank#s5",
+      "pos": "n.",
+      "glossZh": "感谢的话或表示谢意的举动（thank-you）",
       "pronunciationId": "w:thank#p-main",
-      "note": "thanks to。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:thank#e-0385ee9018525211",
-          "text": "Thanks to them, a family was saved from the fire.",
+          "exampleId": "w:thank#e-2b3fa47294a64945",
+          "text": "Small jobs are the most important ones that always go unnoticed and get the least amount of thank yous.”",
           "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
             "locator": {
               "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-ii:cloze:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:thank#e-d40bc85372f13dd0",
-          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:thank#e-02ea061297957dc1",
-          "text": "That all changed thanks to the work of Marie Tharp, a pioneering cartographer and geologist.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:1",
-              "sentence": 3
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:5",
+              "sentence": 6
             }
           },
           "tier": "mock",
           "target": {
-            "start": 17,
-            "end": 23
+            "start": 92,
+            "end": 97
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:thank-you"
+  ]
 }

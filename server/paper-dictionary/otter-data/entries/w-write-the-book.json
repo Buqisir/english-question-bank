@@ -1,0 +1,115 @@
+{
+  "entryId": "w:write-the-book",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "wrote the book"
+  ],
+  "pattern": {
+    "tokens": [
+      "write",
+      "the",
+      "book"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "write",
+        "the",
+        "book"
+      ],
+      [
+        "wrote",
+        "the",
+        "book"
+      ],
+      [
+        "writes",
+        "the",
+        "book"
+      ],
+      [
+        "writing",
+        "the",
+        "book"
+      ],
+      [
+        "written",
+        "the",
+        "book"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "write the book",
+  "senses": [
+    {
+      "senseId": "w:write-the-book#s1",
+      "pos": "短语",
+      "glossZh": "对某事了如指掌；是某方面的权威",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:write-the-book#e-1d29739fa5bb7816",
+          "text": "They say I “wrote the book” on field study.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "常用 wrote the book on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

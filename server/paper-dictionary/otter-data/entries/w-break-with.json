@@ -1,0 +1,100 @@
+{
+  "entryId": "w:break-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "break",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "with"
+      ],
+      [
+        "breaking",
+        "with"
+      ],
+      [
+        "breaks",
+        "with"
+      ],
+      [
+        "broke",
+        "with"
+      ],
+      [
+        "broken",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:break-with#s1",
+      "pos": "短语",
+      "glossZh": "与某人或团体决裂；断绝关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-with#s2",
+      "pos": "短语",
+      "glossZh": "摒弃原有传统或做法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-with#s3",
+      "pos": "短语",
+      "glossZh": "（旧）向某人吐露心事；与某人商议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

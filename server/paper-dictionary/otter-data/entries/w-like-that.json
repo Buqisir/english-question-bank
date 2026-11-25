@@ -1,0 +1,228 @@
+{
+  "entryId": "w:like-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "like",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "like",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "like that",
+  "senses": [
+    {
+      "senseId": "w:like-that#s1",
+      "pos": "短语",
+      "glossZh": "像那样的；那种",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:like-that#e-71cb20321f79a520",
+          "text": "Stories like that are more common in parts of the world where multigenerational living is more firmly rooted.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 17
+          },
+          "parts": [
+            [
+              8,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:like-that#e-3ee2174a33fdd159",
+          "text": "He thought my storybook was like that.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 37
+          },
+          "parts": [
+            [
+              28,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:like-that#e-a18909c7f8b1d8a9",
+          "text": "Clara nodded, “For kids like that, patience helps.” Sure enough, Ben and Lila laughed as they piled sand, with Ben even sharing his toy truck.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:like-that#s2",
+      "pos": "短语",
+      "glossZh": "以那种方式；那样做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:like-that#e-f420cd3fd19501a9",
+          "text": "I just wasn’t getting it, and it had been going on like that for a few weeks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          },
+          "parts": [
+            [
+              51,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:like-that#e-3e0ce86353e4fe39",
+          "text": "It reminded me of my colorful school life a decade ago, though saying goodbye to my school friends like that didn’t seem natural to me when I was in their position.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:1",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 108
+          },
+          "parts": [
+            [
+              99,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -61,8 +61,8 @@
     "mock": 121
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 120
+    "gaokao": 1,
+    "mock": 16
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 95
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -168,40 +168,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:expand#s3",
-      "pos": "短语",
-      "glossZh": "进一步阐述",
-      "pronunciationId": "w:expand#p-main",
-      "note": "expand on sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:expand#e-0d72b0c54a336207",
-          "text": "In Wickenden’s book, she expanded on the history of the West and also on feminism, which of course influenced the girls’ decision to go to Elkhead.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 33
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -210,6 +176,11 @@
       "reason": "数学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:expand-on-sth"
+  ]
 }

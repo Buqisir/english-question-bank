@@ -1,0 +1,127 @@
+{
+  "entryId": "w:fall-back-into-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fall back into"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "back",
+      "into",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "back",
+        "into",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "fall",
+        "back",
+        "into"
+      ],
+      [
+        "fallen",
+        "back",
+        "into"
+      ],
+      [
+        "falling",
+        "back",
+        "into"
+      ],
+      [
+        "falls",
+        "back",
+        "into"
+      ],
+      [
+        "fell",
+        "back",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall back into sth",
+  "senses": [
+    {
+      "senseId": "w:fall-back-into-sth#s1",
+      "pos": "短语",
+      "glossZh": "重新陷入原来的状态；恢复旧习惯",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-back-into-sth#e-caf19ff2dfcf1e28",
+          "text": "Have you ever made a resolution to “study harder”, only to fall back into old habits within a week?",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 73
+          },
+          "parts": [
+            [
+              59,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

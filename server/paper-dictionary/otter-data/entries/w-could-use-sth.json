@@ -1,0 +1,167 @@
+{
+  "entryId": "w:could-use-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "could use"
+  ],
+  "pattern": {
+    "tokens": [
+      "could",
+      "use",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "could",
+        "use",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "could",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "could use sth",
+  "senses": [
+    {
+      "senseId": "w:could-use-sth#s1",
+      "pos": "短语",
+      "glossZh": "正需要……；有……会更好",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:use#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:could-use-sth#e-6bc3034e356bd9d5",
+          "text": "“Without anybody left in the house but us, this place could use a bit of fun.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 63
+          },
+          "parts": [
+            [
+              54,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:could-use-sth#e-5661504d6a996abd",
+          "text": "They’re all situations where we could use a little extra patience",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-a:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:could-use-sth#e-9893a3db2701f1d3",
+          "text": "Ask yourself what your life could use more of and what you could use less of in your day-to-day life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          },
+          "parts": [
+            [
+              28,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

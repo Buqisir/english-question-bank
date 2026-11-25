@@ -1,0 +1,72 @@
+{
+  "entryId": "w:be-in-the-mood-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "in",
+      "the",
+      "mood",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "in",
+        "the",
+        "mood",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be in the mood for sth",
+  "senses": [
+    {
+      "senseId": "w:be-in-the-mood-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "有兴致做某事或享用某物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:mood#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -53,7 +53,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 105
+    "mock": 14
   },
   "senses": [
     {
@@ -64,7 +64,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -135,7 +135,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -187,7 +187,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -239,7 +239,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -308,12 +308,12 @@
       "pos": "n.",
       "glossZh": "情感上的伤痛",
       "pronunciationId": "w:hurt#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 9
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -323,6 +323,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

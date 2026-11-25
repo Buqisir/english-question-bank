@@ -1,0 +1,168 @@
+{
+  "entryId": "w:as-if",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "if"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "if"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as if",
+  "senses": [
+    {
+      "senseId": "w:as-if#s1",
+      "pos": "短语",
+      "glossZh": "好像；仿佛",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s9",
+        "w:if#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-if#e-f0a24a5e22e2df1e",
+          "text": "It is like killing elephants as if they reproduced at the same rate as rabbits.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          },
+          "parts": [
+            [
+              29,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-if#e-070a7a3ffe1d494a",
+          "text": "Indoor plants might look as if they just sit around not doing much, but in many ways they are the unsung heroes of the home.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          },
+          "parts": [
+            [
+              25,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-if#e-07de2a666ede28ed",
+          "text": "Emotional intelligence is often spoken about as if it’s a mysterious quality you either have or don’t.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 50
+          },
+          "parts": [
+            [
+              45,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 63
+      }
+    },
+    {
+      "senseId": "w:as-if#s2",
+      "pos": "短语",
+      "glossZh": "才不呢；得了吧（单独使用，表示不信）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

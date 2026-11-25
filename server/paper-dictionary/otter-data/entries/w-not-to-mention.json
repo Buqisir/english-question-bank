@@ -1,0 +1,127 @@
+{
+  "entryId": "w:not-to-mention",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "to",
+      "mention"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "to",
+        "mention"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not to mention",
+  "senses": [
+    {
+      "senseId": "w:not-to-mention#s1",
+      "pos": "短语",
+      "glossZh": "更不用说；况且还有",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mention#s4",
+        "w:not#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-to-mention#e-659cdf05fe2c3570",
+          "text": "These days, safety regulations – not to mention the modern sports fan’s desire for a good view and a comfortable seat – tend to keep stadium capacities（容量）slightly lower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 47
+          },
+          "parts": [
+            [
+              33,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-to-mention#e-e3f929a1cb1acaca",
+          "text": "Not to mention, you’ll most likely work with leaders in your school or community.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-2026-04-core-literacy-assessment:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

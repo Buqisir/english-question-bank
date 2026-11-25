@@ -1,0 +1,92 @@
+{
+  "entryId": "w:peace-and-quiet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "peace",
+      "and",
+      "quiet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "peace",
+        "and",
+        "quiet"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "peace and quiet",
+  "senses": [
+    {
+      "senseId": "w:peace-and-quiet#s1",
+      "pos": "短语",
+      "glossZh": "不受打扰的安宁；清静",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:peace-and-quiet#e-e673198a0cf591c0",
+          "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law, she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 30
+          },
+          "parts": [
+            [
+              15,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

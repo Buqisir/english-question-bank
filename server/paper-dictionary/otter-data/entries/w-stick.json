@@ -72,8 +72,8 @@
     "mock": 203
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 198
+    "gaokao": 15,
+    "mock": 96
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -136,7 +136,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -294,7 +294,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -339,195 +339,88 @@
       ]
     },
     {
-      "senseId": "w:stick#s6",
-      "pos": "短语",
-      "glossZh": "留在记忆里",
+      "senseId": "w:stick#s10",
+      "pos": "n.",
+      "glossZh": "U盘（memory stick）",
       "pronunciationId": "w:stick#p-main",
-      "note": "stick in one’s mind。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:stick#e-bd84940a2b8fb495",
-          "text": "As the song goes, this long and winding road “will never disappear”, and it will always stick in the visitor’s memory.",
+          "exampleId": "w:stick#e-8e9891a89938b74c",
+          "text": "To use a memory stick.",
           "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:grammar-fill",
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:listening.short-dialogue",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:4",
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "A",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 88,
-            "end": 93
-          }
-        },
-        {
-          "exampleId": "w:stick#e-875208b91e9f6f6e",
-          "text": "Although my kindergarten experience feels like a century ago, the lessons I learned will stick in my mind forever.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 89,
-            "end": 94
+            "start": 16,
+            "end": 21
           }
         }
       ]
     },
     {
-      "senseId": "w:stick#s7",
-      "pos": "短语",
-      "glossZh": "坚持",
+      "senseId": "w:stick#s11",
+      "pos": "v.",
+      "glossZh": "持续下来；成为习惯",
       "pronunciationId": "w:stick#p-main",
-      "note": "stick to。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 10,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 8
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:stick#e-976b17012af73a82",
-          "text": "Stick to a promise.",
+          "exampleId": "w:stick#e-c8a3a5dea8b3b748",
+          "text": "Habits need to be easy and enjoyable to stick.",
           "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:seven-choices",
             "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2022-national-a:28",
-              "option": "D",
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-jinlishu-2026-dec-m1:36",
+              "option": "A",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 0,
-            "end": 5
+            "start": 40,
+            "end": 45
           }
         },
         {
-          "exampleId": "w:stick#e-b383d9219be8a3f1",
-          "text": "I decided to stick to it no matter what.",
+          "exampleId": "w:stick#e-5ea0c7ce8e094bcb",
+          "text": "What stuck was pottery.",
           "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:stick#e-4a6865183b411437",
-          "text": "Stick to your plan,” she said.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
             "locator": {
               "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:4",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stick#s8",
-      "pos": "短语",
-      "glossZh": "继续使用",
-      "pronunciationId": "w:stick#p-main",
-      "note": "stick with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stick#e-8adc9e915398665f",
-          "text": "More than half of Australian homes are still choosing to stick with their home phone.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stick#s9",
-      "pos": "短语",
-      "glossZh": "漂亮地完成最后一步",
-      "pronunciationId": "w:stick#p-main",
-      "note": "stick the landing，此处比喻写好结尾。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stick#e-59cec191b8ef66fd",
-          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 105,
-            "end": 110
+            "start": 5,
+            "end": 10
           }
         }
       ]
@@ -539,6 +432,19 @@
       "reason": "旧行业义或游戏专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:stick-around",
+    "w:stick-in-ones-mind",
+    "w:stick-it-out",
+    "w:stick-on",
+    "w:stick-out",
+    "w:stick-the-landing",
+    "w:stick-to",
+    "w:stick-together",
+    "w:stick-with"
+  ]
 }

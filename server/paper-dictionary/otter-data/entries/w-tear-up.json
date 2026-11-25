@@ -1,0 +1,147 @@
+{
+  "entryId": "w:tear-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tear",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tear",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "teared up",
+      "tags": []
+    },
+    {
+      "form": "tearing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tear (sth) up",
+  "senses": [
+    {
+      "senseId": "w:tear-up#s1",
+      "pos": "短语",
+      "glossZh": "眼里涌出泪水；眼眶湿润起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tear#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tear-up#e-3b5872a992f3b3b2",
+          "text": "Tearing up, sweating, nose running and other bodily functions are all signs when you’re eating spicy foods.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tear-up#e-eb8b374dcc16eea3",
+          "text": "Mrs. Henderson, an 82-year-old resident living alone, teared up as she said, “I used to have a garden, but I can’t bend down anymore.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 63
+          },
+          "parts": [
+            [
+              54,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              63
+            ]
+          ]
+        }
+      ],
+      "note": "此义不接宾语，过去式为 teared up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:tear-up#s2",
+      "pos": "短语",
+      "glossZh": "把……撕碎",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "此义接宾语，过去式为 tore up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

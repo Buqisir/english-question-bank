@@ -1,0 +1,131 @@
+{
+  "entryId": "w:a-great-deal-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "great deal"
+  ],
+  "pattern": {
+    "tokens": [
+      "a",
+      "great",
+      "deal",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "great",
+        "deal",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a great deal of",
+  "senses": [
+    {
+      "senseId": "w:a-great-deal-of#s1",
+      "pos": "短语",
+      "glossZh": "大量的；很多的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deal#s2",
+        "w:great#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-great-deal-of#e-a477b07aa1fbc04e",
+          "text": "She spent a great deal of time visiting the poor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 25
+          },
+          "parts": [
+            [
+              10,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-great-deal-of#e-dbfb0c567970527c",
+          "text": "Noticing Teddy waiting patiently by the door, she added softly that the eggs currently required a great deal of her attention – much like Lily – but Teddy understood he was still her good boy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 111
+          },
+          "parts": [
+            [
+              96,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "后接不可数名词。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

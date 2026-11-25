@@ -1,0 +1,142 @@
+{
+  "entryId": "w:a-long-game",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "long game"
+  ],
+  "pattern": {
+    "tokens": [
+      "a",
+      "long",
+      "game"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "long",
+        "game"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a long game",
+  "senses": [
+    {
+      "senseId": "w:a-long-game#s1",
+      "pos": "习语",
+      "glossZh": "需要长期投入才能见效的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:game#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-long-game#e-6456e48f9eeb2cdc",
+          "text": "“Feeding is a long game,” says Markey.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-long-game#e-72bbb66a27b6be98",
+          "text": "Nature conservation is often a long game.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-zj-qiangji-2026-mar:35#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:a-long-game#s2",
+      "pos": "名词短语",
+      "glossZh": "着眼长远目标的策略",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 the long game。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

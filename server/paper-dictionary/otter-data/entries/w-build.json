@@ -62,8 +62,8 @@
     "mock": 404
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 402
+    "gaokao": 5,
+    "mock": 238
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 96
       },
       "folded": false,
       "examples": [
@@ -209,127 +209,6 @@
       ]
     },
     {
-      "senseId": "w:build#s3",
-      "pos": "短语",
-      "glossZh": "以……为基础",
-      "pronunciationId": "w:build#p-main",
-      "note": "build on 或 build around",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:build#e-ad984907806d886f",
-          "text": "We’ve got a foundation built on ancient cultures but with a drive and dynamism of a young country.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:7",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:build#e-9f23d4713b6ca33e",
-          "text": "The course builds on the ideas of Ron Ritchhart’s new book of the same name (2023).",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
-            "paperTitle": "重庆市高2026届高三第六次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a:20",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:build#s4",
-      "pos": "短语",
-      "glossZh": "把……纳入；嵌入",
-      "pronunciationId": "w:build#p-main",
-      "note": "build into",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:build#e-4fdfab0b6d56aa00",
-          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:build#s5",
-      "pos": "短语",
-      "glossZh": "积累；逐渐增强",
-      "pronunciationId": "w:build#p-main",
-      "note": "build up",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:build#e-c0f6f77f3aa3446f",
-          "text": "More importantly, people can gradually build up a tolerance, essentially training their bodies and brains to handle higher levels of spiciness.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:build#s6",
       "pos": "n.",
       "glossZh": "体格；身材",
@@ -349,6 +228,17 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:build-around",
+    "w:build-character",
+    "w:build-in",
+    "w:build-into",
+    "w:build-on",
+    "w:build-up",
+    "w:build-upon"
+  ]
 }

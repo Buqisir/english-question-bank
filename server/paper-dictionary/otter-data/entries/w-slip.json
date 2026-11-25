@@ -59,8 +59,8 @@
     "mock": 85
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 76
+    "gaokao": 1,
+    "mock": 30
   },
   "senses": [
     {
@@ -105,7 +105,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -306,103 +306,16 @@
       ]
     },
     {
-      "senseId": "w:slip#s6",
-      "pos": "短语",
-      "glossZh": "未被察觉",
-      "pronunciationId": "w:slip#p-main",
-      "note": "slip by somebody。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:slip#e-6a836c816082bf63",
-          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 111,
-            "end": 116
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:slip#s7",
-      "pos": "短语",
-      "glossZh": "逐渐消逝",
-      "pronunciationId": "w:slip#p-main",
-      "note": "slip away。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:slip#e-32700d15280780cc",
-          "text": "As she grew older, she stopped running, and those shared moments slipped away.",
-          "source": {
-            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
-            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
-            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 72
-          }
-        },
-        {
-          "exampleId": "w:slip#e-ff69ab951d8a279b",
-          "text": "Giving them my lunch meant I would have to wait again – maybe another line, maybe my break slipping away faster.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
-            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
-            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 91,
-            "end": 99
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:slip#s8",
       "pos": "n.",
       "glossZh": "纸条",
       "pronunciationId": "w:slip#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -417,6 +330,125 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:slip#s10",
+      "pos": "n.",
+      "glossZh": "打滑；滑跤",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-49c9dd285a934ff4",
+          "text": "Icy sidewalks can lead to slips and falls.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s11",
+      "pos": "v.",
+      "glossZh": "犯小错（slip up）",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-3543cc7f1d62eac2",
+          "text": "You may slip up sometimes or allow yourself a cheat day.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s12",
+      "pos": "v.",
+      "glossZh": "下降；下滑",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-092ba29583a36a47",
+          "text": "“Your grades are slipping lately,” her teacher’s concerned voice echoed in her memory, “Is everything all right at home?”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:slip#e-152aa1a3d56d1bcb",
+          "text": "Monthly growth has flattened to 4 % by May 2025, and resale prices of the leading doll brand “LuluCloset” have slipped 35 % since March, after the company restocked a best-selling mini-series three times within two months.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 118
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -425,6 +457,12 @@
       "reason": "专业或地区用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:slip-away",
+    "w:slip-by-sb"
+  ]
 }

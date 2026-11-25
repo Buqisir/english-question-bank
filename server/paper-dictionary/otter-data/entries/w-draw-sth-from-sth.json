@@ -1,0 +1,435 @@
+{
+  "entryId": "w:draw-sth-from-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      {
+        "slot": "sth"
+      },
+      "from",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        {
+          "slot": "sth"
+        },
+        "from",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draw from",
+      "tags": []
+    },
+    {
+      "form": "drawing from",
+      "tags": []
+    },
+    {
+      "form": "drawn from",
+      "tags": []
+    },
+    {
+      "form": "draws from",
+      "tags": []
+    },
+    {
+      "form": "drew from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw sth from sth",
+  "senses": [
+    {
+      "senseId": "w:draw-sth-from-sth#s1",
+      "pos": "短语",
+      "glossZh": "从……取材；从……汲取（灵感等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:draw#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:draw-sth-from-sth#e-3ea0d3bbec11d732",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 135
+          },
+          "parts": [
+            [
+              116,
+              121
+            ],
+            [
+              131,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              121
+            ],
+            [
+              131,
+              135
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sth-from-sth#e-42e011dd0f48cefb",
+          "text": "Rinsma’s plan for the future draws equally from memory and ambition.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 47
+          },
+          "parts": [
+            [
+              29,
+              34
+            ],
+            [
+              43,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ],
+            [
+              43,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sth-from-sth#e-0a3abc43bff49b19",
+          "text": "Other writers drew inspiration from his works.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:28#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 35
+          },
+          "parts": [
+            [
+              14,
+              18
+            ],
+            [
+              31,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              18
+            ],
+            [
+              31,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:draw-sth-from-sth#s2",
+      "pos": "短语",
+      "glossZh": "根据……作出推断或得出结论",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:draw-sth-from-sth#e-8fcaf30db6dbd603",
+          "text": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 212,
+            "end": 235
+          },
+          "parts": [
+            [
+              212,
+              219
+            ],
+            [
+              231,
+              235
+            ]
+          ],
+          "highlightRanges": [
+            [
+              212,
+              219
+            ],
+            [
+              231,
+              235
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sth-from-sth#e-ca1579840c2ac5b5",
+          "text": "What conclusion can be drawn about US healthcare from the text?",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zj-shaoxing-2026-apr-m181:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 53
+          },
+          "parts": [
+            [
+              23,
+              28
+            ],
+            [
+              49,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              28
+            ],
+            [
+              49,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:draw-sth-from-sth#s3",
+      "pos": "短语",
+      "glossZh": "引起（某方的反应）；赢得（某方的支持）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:draw-sth-from-sth#e-c84c9ab1eeb59f96",
+          "text": "Simple and relatively harmless household objects can draw extreme fear responses from a bird.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 85
+          },
+          "parts": [
+            [
+              53,
+              57
+            ],
+            [
+              81,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              57
+            ],
+            [
+              81,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sth-from-sth#e-e0593e20d2fdf5b2",
+          "text": "Organized by Ed Newton-Rex, a composer and copyright campaigner, the project has drawn vast support from the literary world.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 104
+          },
+          "parts": [
+            [
+              81,
+              86
+            ],
+            [
+              100,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              86
+            ],
+            [
+              100,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:draw-sth-from-sth#e-abd292d5e55b8a19",
+          "text": "In the silence, each sound drew looks from other readers.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 42
+          },
+          "parts": [
+            [
+              27,
+              31
+            ],
+            [
+              38,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              31
+            ],
+            [
+              38,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

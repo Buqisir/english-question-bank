@@ -1,0 +1,90 @@
+{
+  "entryId": "w:welcome-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "welcome",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "welcome",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "welcome home",
+  "senses": [
+    {
+      "senseId": "w:welcome-home#s1",
+      "pos": "短语",
+      "glossZh": "欢迎回家！",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:welcome-home#e-773eb81197aef4ba",
+          "text": "When we arrived at Grandma’s farm, she hugged me and said, “Welcome home!” But to me, this place didn’t feel like home at all.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 72
+          },
+          "parts": [
+            [
+              60,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

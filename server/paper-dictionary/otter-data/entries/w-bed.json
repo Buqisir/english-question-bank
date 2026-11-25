@@ -65,8 +65,8 @@
     "mock": 91
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 87
+    "gaokao": 4,
+    "mock": 14
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 58
       },
       "folded": false,
       "examples": [
@@ -141,59 +141,6 @@
       ]
     },
     {
-      "senseId": "w:bed#s2",
-      "pos": "短语",
-      "glossZh": "上床睡觉",
-      "pronunciationId": "w:bed#p-main",
-      "note": "go to bed。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bed#e-585aebeff7594a6a",
-          "text": "I found comfort in keeping myself awake when everyone else had gone to bed, and I loved the silence of the night.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 74
-          }
-        },
-        {
-          "exampleId": "w:bed#e-b50269df16a3d0d7",
-          "text": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:bed#s3",
       "pos": "n.",
       "glossZh": "花坛；苗床",
@@ -201,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -272,7 +219,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -309,6 +256,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:bed#s6",
+      "pos": "n.",
+      "glossZh": "床上用品；铺盖",
+      "pronunciationId": "w:bed#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bed#e-91bfacc683eef922",
+          "text": "If they could pick their own bedding and their own blankets, they would create a room that said, “This is who I am.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -317,6 +297,14 @@
       "reason": "历史、专业或同形用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-to-bed",
+    "w:go-to-bed-with",
+    "w:in-bed-with",
+    "w:make-the-bed"
+  ]
 }

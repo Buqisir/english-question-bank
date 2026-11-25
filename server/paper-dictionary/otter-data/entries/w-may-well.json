@@ -1,0 +1,156 @@
+{
+  "entryId": "w:may-well",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "may",
+      "well"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "may",
+        "well"
+      ],
+      [
+        "might",
+        "well"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "may well",
+  "senses": [
+    {
+      "senseId": "w:may-well#s1",
+      "pos": "短语",
+      "glossZh": "很可能；完全有可能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:may-well#e-00605d72d0998551",
+          "text": "This culture may well be shifting, but it remains far more the norm（常态）there than in Britain.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:may-well#e-54af4516c6204aad",
+          "text": "Its ability to turn data into actionable insights may well determine whether we can feed future generations without sacrificing the health of our Earth.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          },
+          "parts": [
+            [
+              50,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:may-well#e-4e97cc7f4e779503",
+          "text": "Top Tip The founder of Travel POTY, Chris Coe, says, “Think about entering the category you feel is the hardest, as this may well have the least entries!”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-a",
+            "locator": {
+              "paragraph": 22,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-a:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 129
+          },
+          "parts": [
+            [
+              121,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              129
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

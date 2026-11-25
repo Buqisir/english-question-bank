@@ -1,0 +1,288 @@
+{
+  "entryId": "w:reach-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "reach",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reach",
+        "out"
+      ],
+      [
+        "reached",
+        "out"
+      ],
+      [
+        "reaches",
+        "out"
+      ],
+      [
+        "reaching",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reached out",
+      "tags": []
+    },
+    {
+      "form": "reaches out",
+      "tags": []
+    },
+    {
+      "form": "reaching out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reach out",
+  "senses": [
+    {
+      "senseId": "w:reach-out#s1",
+      "pos": "短语",
+      "glossZh": "伸出手；伸手去够",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s17",
+        "w:reach#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:reach-out#e-b193f8f5b3a7e2d4",
+          "text": "As I read, he reaches out and pokes (戳) the page with his finger.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out#e-1fcf8d8ec19f1c04",
+          "text": "He slowly moved closer, but when he reached out his hand, the bird became very frightened and struggled wildly.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out#e-2e870eb7132c7327",
+          "text": "Jorge knelt beside it to help, reaching out with a pair of wire cutters.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:reach-out#s2",
+      "pos": "短语",
+      "glossZh": "主动联系；主动与人沟通",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reach-out#e-06426ddd08b696da",
+          "text": "My classmates were polite and kind, but I was just too hesitant and shy to be the first to reach out.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out#e-148b4f84d9224063",
+          "text": "First, a sincere thank you to the neighbors who have reached out over the past few months.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 64
+          },
+          "parts": [
+            [
+              53,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out#e-722fe8c1811a2755",
+          "text": "As I started reaching out for help, the love and support of my friends moved me.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to sb，可用于寻求帮助或向对方提供支持。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

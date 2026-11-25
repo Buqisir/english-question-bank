@@ -75,8 +75,8 @@
     "mock": 505
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 495
+    "gaokao": 15,
+    "mock": 358
   },
   "senses": [
     {
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -301,7 +301,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -369,7 +369,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -414,322 +414,6 @@
       ]
     },
     {
-      "senseId": "w:break#s7",
-      "pos": "短语",
-      "glossZh": "消除（阻碍）；分解；拆解",
-      "pronunciationId": "w:break#p-main",
-      "note": "break down 或 break apart",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-db197dd1334a3af2",
-          "text": "Love breaks down barriers.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2020-i:27",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:break#e-adbbf453edecbea1",
-          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 45
-          }
-        },
-        {
-          "exampleId": "w:break#e-be302b4fd3088a57",
-          "text": "Volunteering can be the first step in breaking down prejudice.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2025-ii:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s8",
-      "pos": "短语",
-      "glossZh": "出故障；失灵",
-      "pronunciationId": "w:break#p-main",
-      "note": "break down",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-e4d14059ecfc2af4",
-          "text": "I was halfway across Indiana headed home to Kentucky when my car broke down.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 70
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s9",
-      "pos": "短语",
-      "glossZh": "结束；使解散；分手",
-      "pronunciationId": "w:break#p-main",
-      "note": "break up",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-a9715660b27e6330",
-          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:break#e-eb777962a7c1ad32",
-          "text": "“And even if you don’t understand the __53__ for their pain or maybe it seems __54__—like girls breaking up with you – there are sometimes deeper things happening that you don’t understand,” Eby said.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 96,
-            "end": 104
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s10",
-      "pos": "短语",
-      "glossZh": "突然爆发；突然开始",
-      "pronunciationId": "w:break#p-main",
-      "note": "break out",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-07ba7df9d56a7827",
-          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 47,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:break#e-293b75a3edbee7a1",
-          "text": "monsters from all stores because of the risk of fights breaking out between customers.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
-            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:grammar-fill:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s11",
-      "pos": "短语",
-      "glossZh": "突然开始做某事；闯入",
-      "pronunciationId": "w:break#p-main",
-      "note": "break into",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-005d342d893a84a7",
-          "text": "Paragraph 1: An elderly aunt broke into warm applause.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:10",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 29,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s12",
-      "pos": "短语",
-      "glossZh": "逃脱；挣脱",
-      "pronunciationId": "w:break#p-main",
-      "note": "break free",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-ed030618c851a835",
-          "text": "Despite their loving intentions, Xiao Xin longs to find the courage to break free from fear.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 71,
-            "end": 76
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:break#s13",
-      "pos": "短语",
-      "glossZh": "冲破；突破",
-      "pronunciationId": "w:break#p-main",
-      "note": "break through",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:break#e-d31ea674367cec95",
-          "text": "In a world where people are __52__ marketed to, it is rare to find something that truly breaks through.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:cloze:6",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 88,
-            "end": 94
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:break#s14",
       "pos": "v.",
       "glossZh": "违反（规则、法律等）",
@@ -737,7 +421,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -867,13 +551,158 @@
       "pos": "v.",
       "glossZh": "（天）破晓",
       "pronunciationId": "w:break#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:break#s19",
+      "pos": "v.",
+      "glossZh": "（break ground）破土动工",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:break#s20",
+      "pos": "n.",
+      "glossZh": "（对道德准则等的）违背",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-6268bed2f0e1d9f8",
+          "text": "Our brains are wired to notice threats and moral breaks – negative content sticks in our minds.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s21",
+      "pos": "adj.",
+      "glossZh": "（语言）说得不流利的；蹩脚的",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-f3aedc5b17a28eef",
+          "text": "My broken English made it hard to keep up with colleagues.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s22",
+      "pos": "n.",
+      "glossZh": "骨折；断裂处",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-c65f1233924f9c77",
+          "text": "Despite medical progress, treating bone breaks with many small pieces remains a big challenge.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s23",
+      "pos": "v.",
+      "glossZh": "（酱汁）分层；油水分离",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-0ef5b433f881186e",
+          "text": "Now, decades later, when friends ask why my sauces never break, I know it’s those approachable, patient lessons from childhood living on in my hands.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -882,6 +711,29 @@
       "reason": "行业、运动或历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:break-apart",
+    "w:break-away",
+    "w:break-down",
+    "w:break-free",
+    "w:break-from",
+    "w:break-ground",
+    "w:break-in",
+    "w:break-into",
+    "w:break-off",
+    "w:break-open",
+    "w:break-out",
+    "w:break-the-cycle",
+    "w:break-the-ice",
+    "w:break-through",
+    "w:break-up",
+    "w:break-with",
+    "w:catch-a-break",
+    "w:clean-break",
+    "w:take-a-break"
+  ]
 }

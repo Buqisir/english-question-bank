@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 220
+    "mock": 32
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 170
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -257,6 +257,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:experiment#s4",
+      "pos": "v.",
+      "glossZh": "做实验",
+      "pronunciationId": "w:experiment#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:experiment#e-afc6a1ea404b4980",
+          "text": "The farm exposes tourists to nature and the exploration center provides people with an opportunity to observe, to experiment, and to discuss.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-a:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 124
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -265,6 +298,6 @@
       "reason": "过时义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

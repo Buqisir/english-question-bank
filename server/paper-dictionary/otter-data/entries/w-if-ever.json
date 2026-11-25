@@ -1,0 +1,91 @@
+{
+  "entryId": "w:if-ever",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "if",
+      "ever"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "if",
+        "ever"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "if ever",
+  "senses": [
+    {
+      "senseId": "w:if-ever#s1",
+      "pos": "短语",
+      "glossZh": "如果真有过的话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:if-ever#e-bd8c42d7a8d05a81",
+          "text": "Maybe you like to play a little background music while you work or do the chores, but even before the pandemic, most of us rarely, if ever, saw a live performance, let alone visited a gallery or watched a play.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 138
+          },
+          "parts": [
+            [
+              131,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              138
+            ]
+          ]
+        }
+      ],
+      "note": "rarely/seldom, if ever 强调极少发生，甚至从未发生。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

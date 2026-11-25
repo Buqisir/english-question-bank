@@ -42,8 +42,8 @@
     "mock": 591
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 591
+    "gaokao": 2,
+    "mock": 391
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -124,66 +124,13 @@
       "glossZh": "存在；生命；本质",
       "pronunciationId": "w:being#p-main",
       "note": "如 with every fibre of one’s being。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:being#s3",
-      "pos": "短语",
-      "glossZh": "形成；产生",
-      "pronunciationId": "w:being#p-main",
-      "note": "come into being。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:being#e-0b83159f5250e092",
-          "text": "Three days later, a beautiful stairway came into being.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:being#e-f8dafa13a67bd64e",
-          "text": "The image of the reader appears throughout history, in art made long before books as we now know them came into being.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 112,
-            "end": 117
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "senseId": "w:being#s4",
@@ -193,7 +140,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 43,
-        "mock": 0
+        "mock": 121
       },
       "folded": false,
       "examples": [
@@ -264,7 +211,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -334,6 +281,12 @@
       "reason": "罕见方言用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:come-into-being",
+    "w:that-being-said"
+  ]
 }

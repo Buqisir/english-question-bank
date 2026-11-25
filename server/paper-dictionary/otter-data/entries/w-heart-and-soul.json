@@ -1,0 +1,88 @@
+{
+  "entryId": "w:heart-and-soul",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heart",
+      "and",
+      "soul"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heart",
+        "and",
+        "soul"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heart and soul",
+  "senses": [
+    {
+      "senseId": "w:heart-and-soul#s1",
+      "pos": "短语",
+      "glossZh": "全心全意地；倾尽全力地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:heart-and-soul#s2",
+      "pos": "短语",
+      "glossZh": "核心；精髓",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 the heart and soul of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:heart-and-soul#s3",
+      "pos": "短语",
+      "glossZh": "全部的心血和热情",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 put one's heart and soul into sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

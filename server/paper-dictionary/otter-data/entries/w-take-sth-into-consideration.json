@@ -1,0 +1,114 @@
+{
+  "entryId": "w:take-sth-into-consideration",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "sth"
+      },
+      "into",
+      "consideration"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "into",
+        "consideration"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take into consideration",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sth into consideration",
+  "senses": [
+    {
+      "senseId": "w:take-sth-into-consideration#s1",
+      "pos": "短语",
+      "glossZh": "将……纳入考虑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:into#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-sth-into-consideration#e-024fb5a63ae2117f",
+          "text": "To take their needs into consideration.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 38
+          },
+          "parts": [
+            [
+              3,
+              7
+            ],
+            [
+              20,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              7
+            ],
+            [
+              20,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

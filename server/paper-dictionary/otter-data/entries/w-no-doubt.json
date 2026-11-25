@@ -1,0 +1,125 @@
+{
+  "entryId": "w:no-doubt",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "doubt"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "doubt"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no doubt",
+  "senses": [
+    {
+      "senseId": "w:no-doubt#s1",
+      "pos": "短语",
+      "glossZh": "想必；无疑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:doubt#s3",
+        "w:no#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-doubt#e-02e0326c2dcc016c",
+          "text": "Such wrinkles will no doubt be ironed out.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-doubt#e-27a2fdadb9dd20d3",
+          "text": "She hesitated a moment on our doorstep, no doubt remembering the time I’d driven her away.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "作副词短语，可表示把握很大的推测。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

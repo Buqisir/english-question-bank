@@ -1,0 +1,107 @@
+{
+  "entryId": "w:im-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I'm good"
+  ],
+  "pattern": {
+    "tokens": [
+      "i'm",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i'm",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i'm good",
+  "senses": [
+    {
+      "senseId": "w:im-good#s1",
+      "pos": "短语",
+      "glossZh": "我挺好的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:im-good#e-a53426fa47b8b83f",
+          "text": "When they say, ‘Hey, how are you?’, you don’t say, ‘I’m good, thanks’, you say something different.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          },
+          "parts": [
+            [
+              52,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              60
+            ]
+          ]
+        }
+      ],
+      "note": "用于回应问候。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:im-good#s2",
+      "pos": "短语",
+      "glossZh": "不用了，谢谢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于婉拒对方提供的东西或帮助。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

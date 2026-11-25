@@ -1,0 +1,133 @@
+{
+  "entryId": "w:talk-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "talking over"
+  ],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "over"
+      ],
+      [
+        "talking",
+        "over"
+      ],
+      [
+        "talked",
+        "over"
+      ],
+      [
+        "talks",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk over sb/sth",
+  "senses": [
+    {
+      "senseId": "w:talk-over#s1",
+      "pos": "短语",
+      "glossZh": "抢着说话盖过对方的声音",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:talk-over#e-61c3be70abf592b2",
+          "text": "When people start shouting and talking over each other, it’s easy to copy that same angry energy, which only makes things worse.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        }
+      ],
+      "note": "talk over each other 表示彼此同时讲话，盖过对方的声音。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:talk-over#s2",
+      "pos": "短语",
+      "glossZh": "仔细讨论；商量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "也常用 talk sth over。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:talk-over#s3",
+      "pos": "短语",
+      "glossZh": "通过劝说使某人改变主意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 talk sb over。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

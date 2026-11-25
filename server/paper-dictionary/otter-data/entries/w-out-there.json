@@ -1,0 +1,282 @@
+{
+  "entryId": "w:out-there",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "there"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "there"
+      ],
+      [
+        "more",
+        "out",
+        "there"
+      ],
+      [
+        "most",
+        "out",
+        "there"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out there",
+  "senses": [
+    {
+      "senseId": "w:out-there#s1",
+      "pos": "短语",
+      "glossZh": "在外面的世界；在外界某处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-there#e-165472d8e39593f1",
+          "text": "There is an amazing world out there, and it needs our children as much as they need it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 35
+          },
+          "parts": [
+            [
+              26,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-there#e-4e66a0e38005e4ac",
+          "text": "\"The big message from this study is that there is another species (物种) out there that is meaningful in its communication, so that’s not unique to humans,\" said Dr Hobaiter.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 80
+          },
+          "parts": [
+            [
+              71,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-there#e-8bb8809b741b455a",
+          "text": "With all the fancy fashion frames out there, it can be easy to overlook what really matters – the lenses(镜片).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 43
+          },
+          "parts": [
+            [
+              34,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:out-there#s2",
+      "pos": "短语",
+      "glossZh": "在外面；在说话者所指的场地上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-there#e-be3e39c770ab7264",
+          "text": "I complained, “Five, how did I get five; I was just out there and no one was there.”",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-there#e-25896cd1ffc9b07b",
+          "text": "Mitchell worries about road safety, not her kids’ rule-following, admitting, “It’s chaotic out there, and I’ve had close calls.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-there#e-b6afd829d950aa94",
+          "text": "He might love the game, but that’s not why he’s out there.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          },
+          "parts": [
+            [
+              48,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:out-there#s3",
+      "pos": "短语",
+      "glossZh": "很另类的；古怪的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

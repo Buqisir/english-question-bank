@@ -1,0 +1,169 @@
+{
+  "entryId": "w:push-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "away"
+      ],
+      [
+        "pushed",
+        "away"
+      ],
+      [
+        "pushes",
+        "away"
+      ],
+      [
+        "pushing",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "push away",
+      "tags": []
+    },
+    {
+      "form": "pushed away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push sb/sth away",
+  "senses": [
+    {
+      "senseId": "w:push-away#s1",
+      "pos": "短语",
+      "glossZh": "疏远某人；拒绝别人的亲近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-away#e-722051612e4eb83d",
+          "text": "Gradually, I reconnected with friends I’d pushed away, loosened the invisible hold I had on David, and learned to embrace the present moment rather than fear the unknown.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          },
+          "parts": [
+            [
+              42,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-away#s2",
+      "pos": "短语",
+      "glossZh": "压下某个念头或感受；把它赶出脑海",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-away#e-07c9fc7c6ef3333b",
+          "text": "Here’s why this happens: When you tell yourself something is bad enough to avoid, your brain checks in to make sure you’re succeeding with this task, bringing to mind the thoughts you were trying to push away.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 199,
+            "end": 208
+          },
+          "parts": [
+            [
+              199,
+              208
+            ]
+          ],
+          "highlightRanges": [
+            [
+              199,
+              208
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-away#s3",
+      "pos": "短语",
+      "glossZh": "用力把人或物推开、推远",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

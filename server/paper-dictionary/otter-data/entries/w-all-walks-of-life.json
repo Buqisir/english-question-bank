@@ -1,0 +1,161 @@
+{
+  "entryId": "w:all-walks-of-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "walks",
+      "of",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "walks",
+        "of",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all walks of life",
+  "senses": [
+    {
+      "senseId": "w:all-walks-of-life#s1",
+      "pos": "短语",
+      "glossZh": "各行各业；各社会阶层",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:life#s10",
+        "w:walk#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-walks-of-life#e-798f34bdbbdec948",
+          "text": "Tan treated women from all walks of life.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 40
+          },
+          "parts": [
+            [
+              23,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-walks-of-life#e-982871a4f76b6b9c",
+          "text": "People from all walks of life across China felt a deep sense of pride and responsibility while watching the grand military parade.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 29
+          },
+          "parts": [
+            [
+              12,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-walks-of-life#e-132c847c2fb02a59",
+          "text": "They are from all walks of life.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 31
+          },
+          "parts": [
+            [
+              14,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "常用 people from all walks of life。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

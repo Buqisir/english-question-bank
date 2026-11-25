@@ -1,0 +1,173 @@
+{
+  "entryId": "w:go-green",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "green"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "green"
+      ],
+      [
+        "goes",
+        "green"
+      ],
+      [
+        "going",
+        "green"
+      ],
+      [
+        "gone",
+        "green"
+      ],
+      [
+        "went",
+        "green"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "going green",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go green",
+  "senses": [
+    {
+      "senseId": "w:go-green#s1",
+      "pos": "短语",
+      "glossZh": "转向更环保的做法；践行环保生活",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-green#e-ad40ab52f1d73823",
+          "text": "Much is still to be settled, but here are some of the solutions to get us going green.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 85
+          },
+          "parts": [
+            [
+              74,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-green#e-8e510abd574b6270",
+          "text": "Which mode of transport can go green comparatively easily?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-green#e-173ae3ff16d38afb",
+          "text": "为推进绿色校园建设，你校英语报举办主题为“Going Green in the Classroom”的征文活动。请你针对教室内某一种能源浪费现象，写一篇短文投稿，内容包括：",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.application",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-159",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

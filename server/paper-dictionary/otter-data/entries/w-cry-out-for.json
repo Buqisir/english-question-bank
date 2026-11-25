@@ -1,0 +1,77 @@
+{
+  "entryId": "w:cry-out-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cry",
+      "out",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cry",
+        "out",
+        "for"
+      ],
+      [
+        "cried",
+        "out",
+        "for"
+      ],
+      [
+        "cries",
+        "out",
+        "for"
+      ],
+      [
+        "crying",
+        "out",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cry out for sth",
+  "senses": [
+    {
+      "senseId": "w:cry-out-for#s1",
+      "pos": "短语",
+      "glossZh": "迫切需要",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cry#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

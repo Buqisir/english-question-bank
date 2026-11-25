@@ -1,0 +1,127 @@
+{
+  "entryId": "w:make-a-connection",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "a",
+      "connection"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "a",
+        "connection"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make a connection",
+  "senses": [
+    {
+      "senseId": "w:make-a-connection#s1",
+      "pos": "短语",
+      "glossZh": "与人建立联系；与人产生共鸣",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s34"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-a-connection#e-be086df4bdb80691",
+          "text": "Talk directly to your audience, be yourself and make a connection.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 65
+          },
+          "parts": [
+            [
+              48,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-a-connection#e-91822a57df81fc48",
+          "text": "Many love to make a connection with someone from across the world.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 30
+          },
+          "parts": [
+            [
+              13,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make a connection with sb。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

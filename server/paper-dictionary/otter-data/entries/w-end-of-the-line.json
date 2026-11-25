@@ -1,0 +1,87 @@
+{
+  "entryId": "w:end-of-the-line",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "end",
+      "of",
+      "the",
+      "line"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "of",
+        "the",
+        "line"
+      ],
+      [
+        "ends",
+        "of",
+        "the",
+        "line"
+      ],
+      [
+        "ends",
+        "of",
+        "the",
+        "lines"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end of the line",
+  "senses": [
+    {
+      "senseId": "w:end-of-the-line#s1",
+      "pos": "短语",
+      "glossZh": "（事情或生命）走到尽头；彻底结束",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:end-of-the-line#s2",
+      "pos": "短语",
+      "glossZh": "（铁路等交通线路的）终点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

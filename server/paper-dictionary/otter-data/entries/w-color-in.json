@@ -1,0 +1,70 @@
+{
+  "entryId": "w:color-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "color",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "color",
+        "in"
+      ],
+      [
+        "colored",
+        "in"
+      ],
+      [
+        "coloring",
+        "in"
+      ],
+      [
+        "colors",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "color sth in",
+  "senses": [
+    {
+      "senseId": "w:color-in#s1",
+      "pos": "短语",
+      "glossZh": "给图画涂色；在轮廓内填色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

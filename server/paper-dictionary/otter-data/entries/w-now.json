@@ -35,8 +35,8 @@
     "mock": 857
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 856
+    "gaokao": 13,
+    "mock": 660
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 104,
-        "mock": 0
+        "mock": 172
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -325,132 +325,6 @@
       ]
     },
     {
-      "senseId": "w:now#s5",
-      "pos": "短语",
-      "glossZh": "有时；偶尔",
-      "pronunciationId": "w:now#p-main",
-      "note": "now and then。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:now#e-f79b732d787b8637",
-          "text": "Stop to have a rest now and then.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:now#e-6f25a246a0de8a06",
-          "text": "Age is naturally a factor（因素） – only 58 percent of Generation Ys still use landlines now and then, compared to 84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 85,
-            "end": 88
-          }
-        },
-        {
-          "exampleId": "w:now#e-3c2249f71d016414",
-          "text": "To stay warm, she ran her engine for a few minutes every now and then.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
-              "sentence": 9
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:now#s6",
-      "pos": "短语",
-      "glossZh": "目前；暂时",
-      "pronunciationId": "w:now#p-main",
-      "note": "for now。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:now#e-ec57d3d27cb5710d",
-          "text": "It was time to say goodbye for now at least.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:now#e-8aa44c876ab5612d",
-          "text": "For now, grizzlies remain listed.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:now#s7",
       "pos": "conj.",
       "glossZh": "既然",
@@ -459,7 +333,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -491,6 +365,24 @@
       "reason": "疑为 know 漏字"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-now",
+    "w:every-now-and-again",
+    "w:every-now-and-then",
+    "w:for-now",
+    "w:from-now-on",
+    "w:here-and-now",
+    "w:just-now",
+    "w:now-and-again",
+    "w:now-and-then",
+    "w:now-for",
+    "w:now-then",
+    "w:right-now",
+    "w:up-to-now",
+    "w:what-now"
+  ]
 }

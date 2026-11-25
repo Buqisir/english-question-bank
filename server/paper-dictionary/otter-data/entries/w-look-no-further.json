@@ -1,0 +1,126 @@
+{
+  "entryId": "w:look-no-further",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "look",
+      "no",
+      "further"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "no",
+        "further"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look no further",
+  "senses": [
+    {
+      "senseId": "w:look-no-further#s1",
+      "pos": "短语",
+      "glossZh": "不用再找了；这正合适",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-no-further#e-a20b2ff38f529be3",
+          "text": "If you’re looking for cleanliness and a modern hostel, look no further than Youth Station.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 70
+          },
+          "parts": [
+            [
+              55,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-no-further#e-c08d6d6e65914465",
+          "text": "Well, look no further and take part in a sea turtle conservation project at a summer camp in Bali, where you’ll be involved in a volunteer program at a turtle protection center.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 21
+          },
+          "parts": [
+            [
+              6,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "常用 look no further than 引出推荐的人或事物。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

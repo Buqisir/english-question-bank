@@ -1,0 +1,156 @@
+{
+  "entryId": "w:from-an-early-age",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "an",
+      "early",
+      "age"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "an",
+        "early",
+        "age"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from an early age",
+  "senses": [
+    {
+      "senseId": "w:from-an-early-age#s1",
+      "pos": "短语",
+      "glossZh": "从小；自幼",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:from-an-early-age#e-4f33111d5b5b2da5",
+          "text": "From an early age, Edward Norton was taught what protecting the environment really requires.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-an-early-age#e-b469eb4deee49771",
+          "text": "More effective are measures that build nature connection from an early age, such as forest schools for young children.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 74
+          },
+          "parts": [
+            [
+              57,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:from-an-early-age#e-9e948b44a95ec5ff",
+          "text": "To pass down the power of poetry to the next generation, it’s best to develop a love and appreciation for it in our children from an early age.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 142
+          },
+          "parts": [
+            [
+              125,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              142
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -105,7 +105,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 8
   },
   "senses": [
     {
@@ -117,7 +117,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -188,7 +188,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -259,7 +259,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -330,7 +330,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -373,93 +373,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:grey#s5",
-      "pos": "短语",
-      "glossZh": "界限不明的领域",
-      "pronunciationId": "w:grey#p-main",
-      "note": "grey area。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grey#e-a68d080a51c3e6d6",
-          "text": "Since that is an ethically grey area, Dr Kikusui worked instead with mice.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
-            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
-            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:grey#s6",
-      "pos": "短语",
-      "glossZh": "灰质",
-      "pronunciationId": "w:grey#p-main",
-      "note": "grey matter。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grey#e-c48ace0362aff11d",
-          "text": "Research indicates that it has a distinct influence on young people’s developing brains – even contributing to reduced grey matter.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n093",
-            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
-            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-import-20261026-n093:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 126,
-            "end": 130
-          }
-        },
-        {
-          "exampleId": "w:grey#e-b3a8553e2ed28f2e",
-          "text": "People who have attention disorder tend to have less grey matter in brain’s parietal cortex (顶叶皮层), highlighted Nilli Lavie, professor of psychology and brain sciences at University College London.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
-            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
-            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 53,
-            "end": 57
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -468,6 +381,11 @@
       "reason": "人名专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:grey-area"
+  ]
 }

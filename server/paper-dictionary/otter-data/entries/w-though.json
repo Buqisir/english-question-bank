@@ -35,8 +35,8 @@
     "mock": 284
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 284
+    "gaokao": 9,
+    "mock": 111
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 142
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -180,150 +180,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:though#s3",
-      "pos": "短语",
-      "glossZh": "好像",
-      "pronunciationId": "w:though#p-main",
-      "note": "as though。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:though#e-e9a8b6cec889769a",
-          "text": "I always read, using different voices, as though I were acting out the stories with my voice and they loved it!",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:though#e-cff58d07a79bc4a4",
-          "text": "He looked at me as though I weren’t there.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:though#e-52cb6b650318dad2",
-          "text": "I felt he treated me as though I would hold him back and probably make him fail to get an A in the course.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:though#s4",
-      "pos": "短语",
-      "glossZh": "即使",
-      "pronunciationId": "w:though#p-main",
-      "note": "even though，陈述事实时常译为尽管。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:though#e-b8c488dfc3b85ae3",
-          "text": "Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:though#e-3fadfac5329222e7",
-          "text": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:though#e-0f3beb4adcb82dac",
-          "text": "Even though Britain has a reputation for less-than-impressive cuisine, it is producing more top class chefs who appear frequently on our television screens and whose recipe books frequently top the best seller lists.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -332,6 +188,12 @@
       "reason": "拼写错误"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-though",
+    "w:even-though"
+  ]
 }

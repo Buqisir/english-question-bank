@@ -1,0 +1,219 @@
+{
+  "entryId": "w:write-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "writing down"
+  ],
+  "pattern": {
+    "tokens": [
+      "write",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "write",
+        "down"
+      ],
+      [
+        "write",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "writing",
+        "down"
+      ],
+      [
+        "writes",
+        "down"
+      ],
+      [
+        "written",
+        "down"
+      ],
+      [
+        "wrote",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "write down",
+      "tags": []
+    },
+    {
+      "form": "writes down",
+      "tags": []
+    },
+    {
+      "form": "written down",
+      "tags": []
+    },
+    {
+      "form": "wrote down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "write (sth) down",
+  "senses": [
+    {
+      "senseId": "w:write-down#s1",
+      "pos": "短语",
+      "glossZh": "写下；记下来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:write-down#e-c821e92f3de1a85d",
+          "text": "Writing down what the doctor says will help you remember important information.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:write-down#e-38bd6712b2c00125",
+          "text": "Whatever it is, no matter how small it might seem, write it down.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 64
+          },
+          "parts": [
+            [
+              51,
+              56
+            ],
+            [
+              60,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              56
+            ],
+            [
+              60,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:write-down#e-e398151c2c9158ac",
+          "text": "To serve its function, a book must be activated by a user: the cover opened, the pages parted, the contents reviewed, perhaps notes written down or words underlined.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 144
+          },
+          "parts": [
+            [
+              132,
+              144
+            ]
+          ],
+          "highlightRanges": [
+            [
+              132,
+              144
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 14,
+        "mock": 28
+      }
+    },
+    {
+      "senseId": "w:write-down#s2",
+      "pos": "短语",
+      "glossZh": "减记；调低（资产账面价值）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

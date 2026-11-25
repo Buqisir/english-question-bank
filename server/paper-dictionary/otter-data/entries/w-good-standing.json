@@ -1,0 +1,104 @@
+{
+  "entryId": "w:good-standing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "standing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "standing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good standing",
+  "senses": [
+    {
+      "senseId": "w:good-standing#s1",
+      "pos": "短语",
+      "glossZh": "符合所在机构的要求；资格有效",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:good-standing#e-2d9d21375518fa43",
+          "text": "The scholarship is renewable for those who maintain a minimum GPA of 2.0, agree to report their grades to donors, and remain in good standing as a student.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 141
+          },
+          "parts": [
+            [
+              128,
+              141
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              141
+            ]
+          ]
+        }
+      ],
+      "note": "常用 in good standing，可指学生达到学校规定的学业等要求。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:good-standing#s2",
+      "pos": "短语",
+      "glossZh": "品行和信誉良好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

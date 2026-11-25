@@ -1,0 +1,95 @@
+{
+  "entryId": "w:what-would-you-like",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what",
+      "would",
+      "you",
+      "like"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "would",
+        "you",
+        "like"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what would you like",
+  "senses": [
+    {
+      "senseId": "w:what-would-you-like#s1",
+      "pos": "短语",
+      "glossZh": "您想要什么？您想做什么？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-would-you-like#e-b51bac6ccc24bbd8",
+          "text": "He would often say, “Well, what would you like to do?” or “Let’s go do this; you’ll like this.” I started to notice what a struggle it was for him to just want something for himself.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 46
+          },
+          "parts": [
+            [
+              27,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              46
+            ]
+          ]
+        }
+      ],
+      "note": "礼貌询问对方的需求或选择，可接 to do 等不定式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

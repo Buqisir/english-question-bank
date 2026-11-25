@@ -1,0 +1,159 @@
+{
+  "entryId": "w:as-soon-as-possible",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "soon",
+      "as",
+      "possible"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "soon",
+        "as",
+        "possible"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as soon as possible",
+  "senses": [
+    {
+      "senseId": "w:as-soon-as-possible#s1",
+      "pos": "短语",
+      "glossZh": "尽快；尽早",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:soon#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-soon-as-possible#e-b4d222eb93b01179",
+          "text": "We just hoped we could free the poor little guy safely as soon as possible.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 74
+          },
+          "parts": [
+            [
+              55,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-soon-as-possible#e-3bc200b7366a9b66",
+          "text": "Because the animal shelter needed the donation as soon as possible.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 66
+          },
+          "parts": [
+            [
+              47,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-soon-as-possible#e-43cdb4f4f80a6f12",
+          "text": "Removing them as soon as possible helps the rest last longer.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 33
+          },
+          "parts": [
+            [
+              14,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

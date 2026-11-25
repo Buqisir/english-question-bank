@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-memory-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "memory",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "memory",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in memory of",
+  "senses": [
+    {
+      "senseId": "w:in-memory-of#s1",
+      "pos": "短语",
+      "glossZh": "为纪念（逝者或往事）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:memory#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-memory-of#e-7dbdb1ee470e2a96",
+          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 122
+          },
+          "parts": [
+            [
+              110,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              122
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-memory-of#e-92391ed9ec66fdbb",
+          "text": "Pahlavan Mahmud Mausoleum: It is a historic monument, just next to the tower, in memory of a famous poet and folk hero in the 13th century.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 90
+          },
+          "parts": [
+            [
+              78,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-memory-of#e-4e64486ffac277e7",
+          "text": "The following Fellowship was set up in memory of Khadija Saye, who worked as a Young Freelancer (自由职业者) at LTM at the time of her death in June 2017.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

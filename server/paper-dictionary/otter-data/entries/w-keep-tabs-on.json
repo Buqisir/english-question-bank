@@ -1,0 +1,161 @@
+{
+  "entryId": "w:keep-tabs-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "tabs",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "tabs",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keeping tabs on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep tabs on",
+  "senses": [
+    {
+      "senseId": "w:keep-tabs-on#s1",
+      "pos": "短语",
+      "glossZh": "持续关注；掌握……的动向",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-tabs-on#e-2d2ccc8e5ce0d6d7",
+          "text": "What does the underlined phrase “keeping tabs on” in paragraph 3 probably mean?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-national-iii:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 48
+          },
+          "parts": [
+            [
+              33,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-tabs-on#e-179aaacd9fa86c5c",
+          "text": "One nonprofit organization, which monitors the treatment of animals in filmed entertainment, is keeping tabs on more than 2,000 productions this year.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 111
+          },
+          "parts": [
+            [
+              96,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-tabs-on#e-633ba2919d3227b7",
+          "text": "It is equally important to determine whether your child is really ready for this financial responsibility – and how you will keep tabs on them along the way.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 137
+          },
+          "parts": [
+            [
+              125,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

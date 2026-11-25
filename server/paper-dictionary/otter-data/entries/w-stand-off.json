@@ -1,0 +1,134 @@
+{
+  "entryId": "w:stand-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "off"
+      ],
+      [
+        "standing",
+        "off"
+      ],
+      [
+        "stands",
+        "off"
+      ],
+      [
+        "stood",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stood off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand off",
+  "senses": [
+    {
+      "senseId": "w:stand-off#s1",
+      "pos": "短语",
+      "glossZh": "站开；保持距离",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-off#e-2377d946ed5c2d0f",
+          "text": "Nine of us – those inside the dragon’s body – pushed each other harder, perfecting every movement, while the tenth member, Emma, who held the pearl (宝珠), now stood off to the side.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 167
+          },
+          "parts": [
+            [
+              158,
+              167
+            ]
+          ],
+          "highlightRanges": [
+            [
+              158,
+              167
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stand-off#s2",
+      "pos": "短语",
+      "glossZh": "挡住进攻者，使其无法靠近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-off#s3",
+      "pos": "短语",
+      "glossZh": "（船）驶离岸边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "航海用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

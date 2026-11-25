@@ -1,0 +1,175 @@
+{
+  "entryId": "w:take-a-breath",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "breath"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "breath"
+      ],
+      [
+        "taken",
+        "a",
+        "breath"
+      ],
+      [
+        "takes",
+        "a",
+        "breath"
+      ],
+      [
+        "taking",
+        "a",
+        "breath"
+      ],
+      [
+        "took",
+        "a",
+        "breath"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "took a breath",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a breath",
+  "senses": [
+    {
+      "senseId": "w:take-a-breath#s1",
+      "pos": "短语",
+      "glossZh": "吸一口气",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-breath#e-80558ef6351ab598",
+          "text": "To my relief, the stranger took a breath.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 40
+          },
+          "parts": [
+            [
+              27,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-a-breath#s3",
+      "pos": "短语",
+      "glossZh": "先缓一缓；冷静一下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-breath#e-c236585516303f45",
+          "text": "Take a breath.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-a-breath#s2",
+      "pos": "短语",
+      "glossZh": "停下来喘口气；稍作休息",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

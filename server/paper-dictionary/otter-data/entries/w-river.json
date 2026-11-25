@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 103
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 103
       },
       "folded": false,
       "examples": [
@@ -141,6 +141,6 @@
       "reason": "印刷专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

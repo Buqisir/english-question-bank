@@ -1,0 +1,135 @@
+{
+  "entryId": "w:time-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "time",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "time",
+        "out"
+      ],
+      [
+        "timed",
+        "out"
+      ],
+      [
+        "times",
+        "out"
+      ],
+      [
+        "timing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "time out",
+  "senses": [
+    {
+      "senseId": "w:time-out#s1",
+      "pos": "短语",
+      "glossZh": "暂停；暂停的时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:time-out#s2",
+      "pos": "短语",
+      "glossZh": "暂停！先停一下！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:time-out#s3",
+      "pos": "短语",
+      "glossZh": "（操作、连接等）超时终止；使超时终止",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:time-out#s4",
+      "pos": "短语",
+      "glossZh": "（真人角色扮演）暂停扮演；出戏时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:time-out#s5",
+      "pos": "短语",
+      "glossZh": "打卡下班",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:time-out#s6",
+      "pos": "短语",
+      "glossZh": "（板球）因未及时上场而判击球手出局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

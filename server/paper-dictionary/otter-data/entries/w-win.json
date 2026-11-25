@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 177
+    "mock": 14
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 71
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -223,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -325,12 +325,12 @@
       "pos": "n.",
       "glossZh": "一次胜利",
       "pronunciationId": "w:win#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 22
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -344,6 +344,11 @@
       "reason": "少见或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:win-over",
+    "w:win-the-day",
+    "w:you-win"
+  ]
 }

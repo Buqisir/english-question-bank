@@ -1,0 +1,187 @@
+{
+  "entryId": "w:get-sick",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "sick"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "sick"
+      ],
+      [
+        "gets",
+        "sick"
+      ],
+      [
+        "getting",
+        "sick"
+      ],
+      [
+        "got",
+        "sick"
+      ],
+      [
+        "gotten",
+        "sick"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting sick",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get sick",
+  "senses": [
+    {
+      "senseId": "w:get-sick#s1",
+      "pos": "短语",
+      "glossZh": "生病；身体不适",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-sick#e-65368a191828e6b8",
+          "text": "Bonds, who bought his first cattle almost 50 years ago, still has each of his cowboys inspect 300 or 400 cattle daily and look for signs that an animal is getting sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 155,
+            "end": 167
+          },
+          "parts": [
+            [
+              155,
+              167
+            ]
+          ],
+          "highlightRanges": [
+            [
+              155,
+              167
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sick#e-ccefdcc2e1520efb",
+          "text": "I can’t say I never imagined getting sick or being in the hospital.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-sick#e-6a463e9d159c88f5",
+          "text": "Why does nature contact reduce people’s chance of getting sick?",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-import-20261026-n085:26",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          },
+          "parts": [
+            [
+              50,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:get-sick#s2",
+      "pos": "短语",
+      "glossZh": "呕吐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "北美口语中的委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

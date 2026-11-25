@@ -1,0 +1,121 @@
+{
+  "entryId": "w:screen-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "screen",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "screen",
+        "out"
+      ],
+      [
+        "screened",
+        "out"
+      ],
+      [
+        "screening",
+        "out"
+      ],
+      [
+        "screens",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "screening out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "screen sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:screen-out#s1",
+      "pos": "短语",
+      "glossZh": "筛除；按条件排除",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:screen-out#e-7e131cb36b06dd8b",
+          "text": "By screening out complex images.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hunan-changjun-2025-11-monthly-exam-3:29#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 16
+          },
+          "parts": [
+            [
+              3,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:screen-out#s2",
+      "pos": "短语",
+      "glossZh": "用筛网或格栅滤掉（颗粒）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

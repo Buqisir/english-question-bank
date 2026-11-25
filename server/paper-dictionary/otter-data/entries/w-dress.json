@@ -69,8 +69,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 60
+    "gaokao": 2,
+    "mock": 6
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -217,70 +217,16 @@
       ]
     },
     {
-      "senseId": "w:dress#s3",
-      "pos": "短语",
-      "glossZh": "装扮；盛装打扮",
-      "pronunciationId": "w:dress#p-main",
-      "note": "dress up as sb 指「装扮成某人」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dress#e-12830b4d715d102e",
-          "text": "Dressing up as soldiers.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 9,
-              "questionId": "question:listening:9",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:dress#e-eb568c37e9aa1493",
-          "text": "The next day, he dressed up in a clean shirt, tied a tie and set out cheerfully, hoping to meet his secret admirer.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
-            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
-            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:dress#s4",
       "pos": "v.",
       "glossZh": "处理（伤口）；给（沙拉等）加调味料",
       "pronunciationId": "w:dress#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -290,6 +236,12 @@
       "reason": "前者为独立名词 dressing，其余为缩写或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dress-up",
+    "w:dress-up-as-sb"
+  ]
 }

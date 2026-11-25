@@ -1,0 +1,95 @@
+{
+  "entryId": "w:nothing-to-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nothing",
+      "to",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nothing",
+        "to",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nothing to it",
+  "senses": [
+    {
+      "senseId": "w:nothing-to-it#s1",
+      "pos": "短语",
+      "glossZh": "没什么难的；很容易做",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nothing#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:nothing-to-it#e-3e3dd384d7f89401",
+          "text": "There was nothing to it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 23
+          },
+          "parts": [
+            [
+              10,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 there is nothing to it。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

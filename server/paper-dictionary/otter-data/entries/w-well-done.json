@@ -1,0 +1,160 @@
+{
+  "entryId": "w:well-done",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "well",
+      "done"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "well",
+        "done"
+      ],
+      [
+        "more",
+        "well",
+        "done"
+      ],
+      [
+        "most",
+        "well",
+        "done"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "well done",
+  "senses": [
+    {
+      "senseId": "w:well-done#s1",
+      "pos": "感叹语",
+      "glossZh": "做得好！",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:well-done#e-887131811c1ae2d1",
+          "text": "Well done!",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2021-national-a:29#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:well-done#s2",
+      "pos": "形容词短语",
+      "glossZh": "做得好的；完成出色的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:well-done#e-6ad2a623250abe79",
+          "text": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 77
+          },
+          "parts": [
+            [
+              68,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              77
+            ]
+          ]
+        }
+      ],
+      "note": "如 a job well done。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:well-done#s3",
+      "pos": "形容词短语",
+      "glossZh": "（牛排等）全熟的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

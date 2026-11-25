@@ -81,7 +81,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 137
+    "mock": 2
   },
   "senses": [
     {
@@ -92,7 +92,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 79
       },
       "folded": false,
       "examples": [
@@ -163,7 +163,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -236,7 +236,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -301,18 +301,37 @@
       ]
     },
     {
-      "senseId": "w:drink#s4",
-      "pos": "短语",
-      "glossZh": "举杯为……祝愿",
+      "senseId": "w:drink#s5",
+      "pos": "adj.",
+      "glossZh": "喝醉的",
       "pronunciationId": "w:drink#p-main",
-      "note": "drink to sb/sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drink#e-d3f1ca60363d7525",
+          "text": "Tragedy struck again when Robyn was killed by a drunk driver.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -321,6 +340,13 @@
       "reason": "前者作独立形容词时不属 drink 的动词用法；其余属罕见义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:drink-in",
+    "w:drink-to-sb-sth",
+    "w:soft-drink"
+  ]
 }

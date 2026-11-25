@@ -1,0 +1,168 @@
+{
+  "entryId": "w:all-kinds-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "kinds",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "kinds",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all kinds of",
+  "senses": [
+    {
+      "senseId": "w:all-kinds-of#s1",
+      "pos": "短语",
+      "glossZh": "各种各样的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:all-kinds-of#e-70848254fa1e1fd3",
+          "text": "She knew they had problems, and they needed all kinds of help.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 56
+          },
+          "parts": [
+            [
+              44,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-kinds-of#e-f1821e67d36f7915",
+          "text": "This is a very old habit that’s been present in all kinds of",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-kinds-of#e-ee7f096160e4d43a",
+          "text": "and on all kinds of unloved pieces of land across towns and cities, tiny forests barely the size of tennis courts are appearing, making a great place for both wildlife and local people who may not normally have easy access to nature.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:all-kinds-of#s2",
+      "pos": "短语",
+      "glossZh": "非常；极其",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用法，置于形容词前加强语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

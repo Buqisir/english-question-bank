@@ -1,0 +1,151 @@
+{
+  "entryId": "w:not-at-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "at",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "at",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not at all",
+  "senses": [
+    {
+      "senseId": "w:not-at-all#s1",
+      "pos": "短语",
+      "glossZh": "一点也不；完全不",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-at-all#e-a5f67f9abb2667ec",
+          "text": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 126
+          },
+          "parts": [
+            [
+              116,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              116,
+              126
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-at-all#e-129e05f49d73456d",
+          "text": "This was his chief comfort: that some people, at least, would still appreciate that face value and true worth are not at all the same thing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 124
+          },
+          "parts": [
+            [
+              114,
+              124
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              124
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:not-at-all#s2",
+      "pos": "短语",
+      "glossZh": "不客气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于回答道谢。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:not-at-all#s3",
+      "pos": "短语",
+      "glossZh": "没关系；别介意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于回应道歉或对方怕添麻烦的顾虑。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

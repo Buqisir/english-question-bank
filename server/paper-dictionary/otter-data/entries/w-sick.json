@@ -48,8 +48,8 @@
     "mock": 38
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 37
+    "gaokao": 1,
+    "mock": 5
   },
   "senses": [
     {
@@ -61,7 +61,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -125,70 +125,17 @@
       ]
     },
     {
-      "senseId": "w:sick#s2",
-      "pos": "短语",
-      "glossZh": "厌烦……",
-      "pronunciationId": "w:sick#p-main",
-      "note": "be sick of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sick#e-354cd06d9ec43386",
-          "text": "Each time these things happened, I was sick of the way most people hadn’t bothered to help.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:sick#e-c794b8d49280985b",
-          "text": "I was sick and tired of the world treating me like a __45__.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
-            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
-            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:sick#s3",
       "pos": "adj.",
       "glossZh": "恶心想吐的",
       "pronunciationId": "w:sick#p-main",
       "note": "feel sick。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -225,6 +172,13 @@
       "reason": "俚语、特定生产语境或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-sick-of",
+    "w:get-sick",
+    "w:out-sick"
+  ]
 }

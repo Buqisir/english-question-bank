@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 6,
-    "mock": 150
+    "mock": 23
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 112
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -215,6 +215,6 @@
       "reason": "网络低频名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,301 @@
+{
+  "entryId": "w:stick-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "with"
+      ],
+      [
+        "sticking",
+        "with"
+      ],
+      [
+        "sticks",
+        "with"
+      ],
+      [
+        "stuck",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stick with",
+      "tags": []
+    },
+    {
+      "form": "sticking with",
+      "tags": []
+    },
+    {
+      "form": "stuck with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:stick-with#s1",
+      "pos": "短语",
+      "glossZh": "继续使用；坚持原有选择或做法",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stick#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stick-with#e-4cc79ce82fc668e5",
+          "text": "More than half of Australian homes are still choosing to stick with their home phone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 67
+          },
+          "parts": [
+            [
+              57,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stick-with#e-ce2b7879d248960a",
+          "text": "Before graduating, she told me, “You are the reason I stuck with this.” That moment stayed with me.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 64
+          },
+          "parts": [
+            [
+              54,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stick-with#e-edf3c28cd7cb9390",
+          "text": "I have plenty of memories of thinking I was going to pick up something new and stick with it, whether it be playing the piano, or drawing.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 89
+          },
+          "parts": [
+            [
+              79,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:stick-with#s2",
+      "pos": "短语",
+      "glossZh": "继续陪伴或支持某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stick-with#e-3452c6a383d9252a",
+          "text": "The bond of friendship would stick with me.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stick-with#e-d0fe2f78b1e965bb",
+          "text": "Sticking with the community.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:stick-with#s3",
+      "pos": "短语",
+      "glossZh": "（经历、话语等）长久留在某人记忆中",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stick-with#e-5d65af0534765281",
+          "text": "Her response stuck with me: “That doesn’t sound like the man who finished the Marathon.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 23
+          },
+          "parts": [
+            [
+              13,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

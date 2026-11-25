@@ -1,0 +1,60 @@
+{
+  "entryId": "w:get-nowhere",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "nowhere"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "nowhere"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get nowhere",
+  "senses": [
+    {
+      "senseId": "w:get-nowhere#s1",
+      "pos": "短语",
+      "glossZh": "毫无进展；没有取得任何成果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:nowhere#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

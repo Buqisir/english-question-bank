@@ -42,8 +42,8 @@
     "mock": 78
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 71
+    "gaokao": 1,
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -106,7 +106,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -345,40 +345,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:magic#s6",
-      "pos": "短语",
-      "glossZh": "神奇般地",
-      "pronunciationId": "w:magic#p-main",
-      "note": "like magic。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:magic#e-0a9a05a2801d0e90",
-          "text": "My imaginary Grandma’s Box worked like magic that spring, and later.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 44
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -387,6 +353,13 @@
       "reason": "专业用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:like-magic",
+    "w:magic-number",
+    "w:magic-word"
+  ]
 }

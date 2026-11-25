@@ -1,0 +1,201 @@
+{
+  "entryId": "w:push-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "through"
+      ],
+      [
+        "pushed",
+        "through"
+      ],
+      [
+        "pushes",
+        "through"
+      ],
+      [
+        "pushing",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pushing through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push through",
+  "senses": [
+    {
+      "senseId": "w:push-through#s1",
+      "pos": "短语",
+      "glossZh": "顶住困难或不适，坚持下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:push#s5",
+        "w:through#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:push-through#e-5257584b42cd881e",
+          "text": "You just have to push through.” But even as the words left my mouth, I felt uneasy.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 29
+          },
+          "parts": [
+            [
+              17,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:push-through#e-3a09f397302f81a5",
+          "text": "You might think pushing through is normal.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 31
+          },
+          "parts": [
+            [
+              16,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:push-through#s3",
+      "pos": "短语",
+      "glossZh": "用力挤过去；穿过阻挡物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-through#e-095045feb9e63da3",
+          "text": "Slowly, I began to notice things I had never noticed before: the sound of wind moving through corn, the determination of a pumpkin vine pushing through dry soil.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 151
+          },
+          "parts": [
+            [
+              136,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              136,
+              151
+            ]
+          ]
+        }
+      ],
+      "note": "如 push through the crowd。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-through#s2",
+      "pos": "短语",
+      "glossZh": "力排阻力，促成法案或计划通过",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "push sth through",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

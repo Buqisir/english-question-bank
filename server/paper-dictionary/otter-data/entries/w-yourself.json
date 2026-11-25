@@ -35,8 +35,8 @@
     "mock": 313
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 312
+    "gaokao": 3,
+    "mock": 115
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 57,
-        "mock": 0
+        "mock": 190
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -143,108 +143,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:yourself#s3",
-      "pos": "短语",
-      "glossZh": "表现出本来的样子",
-      "pronunciationId": "w:yourself#p-main",
-      "note": "be yourself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yourself#e-09c054fbc89f9bf7",
-          "text": "Talk directly to your audience, be yourself and make a connection.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:yourself#s4",
-      "pos": "短语",
-      "glossZh": "请自便",
-      "pronunciationId": "w:yourself#p-main",
-      "note": "help yourself。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yourself#e-431dbcfca8090f1a",
-          "text": "“Help yourself while I run into the other room and check on my little one.”",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:8",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:yourself#s5",
-      "pos": "短语",
-      "glossZh": "专心投入",
-      "pronunciationId": "w:yourself#p-main",
-      "note": "apply yourself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yourself#e-3969a5de5aeb6c26",
-          "text": "If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 35
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -253,6 +151,13 @@
       "reason": "地域或特殊书写习惯"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:apply-yourself",
+    "w:be-yourself",
+    "w:help-yourself"
+  ]
 }

@@ -1,0 +1,207 @@
+{
+  "entryId": "w:family-tree",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "family",
+      "tree"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "family",
+        "tree"
+      ],
+      [
+        "family",
+        "trees"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "family trees",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "family tree",
+  "senses": [
+    {
+      "senseId": "w:family-tree#s1",
+      "pos": "短语",
+      "glossZh": "家谱；家族谱系图",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:family-tree#e-d91337110dc8b389",
+          "text": "What did Tim think of the family tree websites?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:family-tree#e-261ef3fcf0985c87",
+          "text": "The complexity of family trees.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-2026-04-core-literacy-assessment:25#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 30
+          },
+          "parts": [
+            [
+              18,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:family-tree#e-9d418a8e3f584883",
+          "text": "We discussed language, identity, and history; we drew and redrew family trees, and reviewed ancestors’ names and backstories as though they’d be coming over at any moment.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 77
+          },
+          "parts": [
+            [
+              65,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:family-tree#s2",
+      "pos": "短语",
+      "glossZh": "（语言、天体等的）谱系；谱系图",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:family-tree#e-d228a569a2f4d4b2",
+          "text": "It’s more than a mere academic exercise to find this particular branch of an asteroid family tree: Some asteroids are potentially risky, meaning they could crash with Earth some time in the distant future.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 97
+          },
+          "parts": [
+            [
+              86,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              97
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

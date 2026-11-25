@@ -1,0 +1,212 @@
+{
+  "entryId": "w:tie-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tie",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tie",
+        "up"
+      ],
+      [
+        "tied",
+        "up"
+      ],
+      [
+        "ties",
+        "up"
+      ],
+      [
+        "tying",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tied up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tie sb/sth up",
+  "senses": [
+    {
+      "senseId": "w:tie-up#s1",
+      "pos": "短语",
+      "glossZh": "使忙得脱不开身；占用",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tie-up#e-9af22f1f70737b33",
+          "text": "She led him gently into her garden and phoned his father – who apologised for being so tied up with the new baby.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 94
+          },
+          "parts": [
+            [
+              87,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tie-up#e-76fd4603bcf1eea4",
+          "text": "She told me it was just her and her 7-year-old daughter Lila living in the house, and that her husband, Pierre, was a nurse in another city who worked permanent night shifts and was often tied up with his demanding schedule.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 188,
+            "end": 195
+          },
+          "parts": [
+            [
+              188,
+              195
+            ]
+          ],
+          "highlightRanges": [
+            [
+              188,
+              195
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tie-up#e-9f6ed3b79b3f5a52",
+          "text": "She said she was tied up with her job in another city, but promised, “Don’t worry, we’ll celebrate together soon.” The couple missed her, of course, but they smiled at each other and agreed it would be meaningful to get the new home ready, a warm welcome awaiting their daughter’s arrival.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        }
+      ],
+      "note": "说某人忙于某事时，常用 be tied up with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:tie-up#s2",
+      "pos": "短语",
+      "glossZh": "捆住；系牢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:up#s55"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tie-up#s3",
+      "pos": "短语",
+      "glossZh": "处理完；把剩余细节收尾",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 tie up loose ends。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tie-up#s4",
+      "pos": "短语",
+      "glossZh": "使资金被占用，无法挪用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

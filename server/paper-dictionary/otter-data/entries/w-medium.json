@@ -56,8 +56,8 @@
     "mock": 325
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 325
+    "gaokao": 15,
+    "mock": 268
   },
   "senses": [
     {
@@ -69,7 +69,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -122,7 +122,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -188,78 +188,6 @@
       ]
     },
     {
-      "senseId": "w:medium#s3",
-      "pos": "短语",
-      "glossZh": "社交媒体",
-      "pronunciationId": "w:medium#p-main",
-      "note": "social media。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:medium#e-9fc9fa8054ea173f",
-          "text": "Share library announcements on your social media.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:medium#e-c226a0f79fe37a25",
-          "text": "As an artist who shares her journey on social media, I’m often asked by curious followers how to begin an art journey.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 51
-          }
-        },
-        {
-          "exampleId": "w:medium#e-d63053e5956a62fa",
-          "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 173,
-            "end": 178
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:medium#s4",
       "pos": "n.",
       "glossZh": "传播媒介",
@@ -267,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -320,7 +248,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -350,12 +278,12 @@
       "pos": "n.",
       "glossZh": "传播或存留物质、能量的介质",
       "pronunciationId": "w:medium#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -395,6 +323,8 @@
       "reason": "地区用法或同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -77,8 +77,8 @@
     "mock": 244
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 244
+    "gaokao": 4,
+    "mock": 58
   },
   "senses": [
     {
@@ -89,7 +89,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 105
       },
       "folded": false,
       "examples": [
@@ -161,7 +161,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -227,40 +227,6 @@
       ]
     },
     {
-      "senseId": "w:fast#s3",
-      "pos": "短语",
-      "glossZh": "快餐",
-      "pronunciationId": "w:fast#p-main",
-      "note": "fast food。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fast#e-20677803eb522a88",
-          "text": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 101,
-            "end": 105
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fast#s4",
       "pos": "v.",
       "glossZh": "禁食",
@@ -294,58 +260,10 @@
       ]
     },
     {
-      "senseId": "w:fast#s5",
-      "pos": "短语",
-      "glossZh": "快进到",
-      "pronunciationId": "w:fast#p-main",
-      "note": "fast forward to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fast#e-88bb5ad4381d4925",
-          "text": "Fast forward to my first year of college.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fast#s6",
       "pos": "adv.",
       "glossZh": "牢牢地",
       "pronunciationId": "w:fast#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:fast#s7",
-      "pos": "短语",
-      "glossZh": "熟睡",
-      "pronunciationId": "w:fast#p-main",
-      "note": "fast asleep。",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -379,6 +297,19 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:fast#s10",
+      "pos": "adj.",
+      "glossZh": "亲密的",
+      "pronunciationId": "w:fast#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -387,6 +318,14 @@
       "reason": "医学大写缩写 FAST"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fast-asleep",
+    "w:fast-forward",
+    "w:fast-forward-to",
+    "w:fast-track"
+  ]
 }

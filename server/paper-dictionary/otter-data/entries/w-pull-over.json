@@ -1,0 +1,186 @@
+{
+  "entryId": "w:pull-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pull",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pull",
+        "over"
+      ],
+      [
+        "pulled",
+        "over"
+      ],
+      [
+        "pulling",
+        "over"
+      ],
+      [
+        "pulls",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pulled over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pull over",
+  "senses": [
+    {
+      "senseId": "w:pull-over#s1",
+      "pos": "短语",
+      "glossZh": "（司机或车辆）靠边停车",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:over#s14",
+        "w:pull#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pull-over#e-3d3028c2a096efc8",
+          "text": "Right as I was about to give up, a Mexican family in a small truck pulled over, and the father bounded out.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-over#e-29a2392be175991c",
+          "text": "A rusty blue car, looking as worn and kind as its owner, pulled over.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 68
+          },
+          "parts": [
+            [
+              57,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pull-over#e-ab25010b811879ab",
+          "text": "“Are you sure, Kenny?” Dad asked and slowly pulled over to check.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 55
+          },
+          "parts": [
+            [
+              44,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:pull-over#s2",
+      "pos": "短语",
+      "glossZh": "（警察等）示意司机靠边停车",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 pull sb over。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

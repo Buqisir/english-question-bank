@@ -1,0 +1,125 @@
+{
+  "entryId": "w:day-job",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "day",
+      "job"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "day",
+        "job"
+      ],
+      [
+        "day",
+        "jobs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "day job",
+  "senses": [
+    {
+      "senseId": "w:day-job#s1",
+      "pos": "短语",
+      "glossZh": "主业；赖以谋生的本职工作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-job#e-08ec6850dc66e75a",
+          "text": "It’s a familiar tale these days: A Canadian quits their exhausting day job to pursue a dream, like opening a coffee shop, and finds freedom and joy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:day-job#e-28c531ecb8f3898f",
+          "text": "For many, the “day job” simply finances the “passion project” – as one Glassdoor community member put it: “I always joke that I don’t dream of labor...",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          },
+          "parts": [
+            [
+              15,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

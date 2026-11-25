@@ -1,0 +1,99 @@
+{
+  "entryId": "w:be-short-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "short",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "short",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "is short for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be short for",
+  "senses": [
+    {
+      "senseId": "w:be-short-for#s1",
+      "pos": "短语",
+      "glossZh": "是……的简称或缩写",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:short#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-short-for#e-a95f83bf90772e02",
+          "text": "FOBO is short for “Fear of a Better Option”.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

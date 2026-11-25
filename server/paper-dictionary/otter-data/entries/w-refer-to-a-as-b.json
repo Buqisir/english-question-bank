@@ -1,0 +1,160 @@
+{
+  "entryId": "w:refer-to-a-as-b",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "refer to A as B"
+  ],
+  "pattern": {
+    "tokens": [
+      "refer",
+      "to",
+      {
+        "slot": "…"
+      },
+      "as",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "refer",
+        "to",
+        {
+          "slot": "…"
+        },
+        "as",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "refer to as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "refer to a as b",
+  "senses": [
+    {
+      "senseId": "w:refer-to-a-as-b#s1",
+      "pos": "短语",
+      "glossZh": "把……称为……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:refer#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:refer-to-a-as-b#e-75b6dd1dd85684f9",
+          "text": "In genetics, scientists refer to this as the environment “selecting” for those traits.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 40
+          },
+          "parts": [
+            [
+              24,
+              32
+            ],
+            [
+              38,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ],
+            [
+              38,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:refer-to-a-as-b#e-c7d0422e717f908e",
+          "text": "It’s no wonder researchers refer to this as a fundamental human contradiction: we start out in life as curious explorers, eager as possible to absorb whatever knowledge we can.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 43
+          },
+          "parts": [
+            [
+              27,
+              35
+            ],
+            [
+              41,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              35
+            ],
+            [
+              41,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

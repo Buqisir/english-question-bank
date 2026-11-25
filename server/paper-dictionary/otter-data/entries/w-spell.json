@@ -66,8 +66,8 @@
     "mock": 53
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 47
+    "gaokao": 2,
+    "mock": 2
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -216,40 +216,6 @@
       ]
     },
     {
-      "senseId": "w:spell#s3",
-      "pos": "短语",
-      "glossZh": "详细说明",
-      "pronunciationId": "w:spell#p-main",
-      "note": "spell out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:spell#e-8f0727fc6d3e6e0a",
-          "text": "When you talk with someone who takes a stand, ask them to give you a reason for their view and spell out their argument fully.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 95,
-            "end": 100
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:spell#s4",
       "pos": "n.",
       "glossZh": "咒语",
@@ -257,7 +223,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -291,7 +257,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -409,6 +375,11 @@
       "reason": "专业、罕用义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:spell-out"
+  ]
 }

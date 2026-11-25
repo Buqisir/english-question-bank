@@ -1,0 +1,184 @@
+{
+  "entryId": "w:come-to-do-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "come to do something"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        {
+          "slot": "do"
+        }
+      ],
+      [
+        "come",
+        "to",
+        {
+          "slot": "do"
+        },
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "came to",
+      "tags": []
+    },
+    {
+      "form": "come to",
+      "tags": []
+    },
+    {
+      "form": "coming to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to do sth",
+  "senses": [
+    {
+      "senseId": "w:come-to-do-sth#s1",
+      "pos": "短语",
+      "glossZh": "渐渐开始；后来终于（理解、接受等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-to-do-sth#e-43a740b416b98f70",
+          "text": "Now, I’ve come to love those of small living things.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:writing-short-error-correction:7",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-do-sth#e-4780cb4be1618438",
+          "text": "What has the author come to realize about learning?",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2026-i:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-do-sth#e-3e0a3dcc216a983c",
+          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 109
+          },
+          "parts": [
+            [
+              102,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              109
+            ]
+          ]
+        }
+      ],
+      "note": "常接 realize、understand、love 等表示认知或感受的动词。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 18
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,192 @@
+{
+  "entryId": "w:take-the-lead",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes the lead",
+    "took the lead"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "lead"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "lead"
+      ],
+      [
+        "takes",
+        "the",
+        "lead"
+      ],
+      [
+        "took",
+        "the",
+        "lead"
+      ],
+      [
+        "taken",
+        "the",
+        "lead"
+      ],
+      [
+        "taking",
+        "the",
+        "lead"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the lead",
+  "senses": [
+    {
+      "senseId": "w:take-the-lead#s1",
+      "pos": "短语",
+      "glossZh": "带头；起主导作用",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-lead#e-ad9c77816c5b3106",
+          "text": "Let your child take the lead, but work together as a family to explore designing and creating.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 28
+          },
+          "parts": [
+            [
+              15,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-lead#e-6113aa2a86e6ff87",
+          "text": "Positive thinking takes the lead.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 32
+          },
+          "parts": [
+            [
+              18,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:take-the-lead#s2",
+      "pos": "短语",
+      "glossZh": "取得领先",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-lead#e-71e14e9b0a3ce84a",
+          "text": "Captain Oliver even sent him to the bench, saying he’d put him in after they took the lead.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 90
+          },
+          "parts": [
+            [
+              77,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

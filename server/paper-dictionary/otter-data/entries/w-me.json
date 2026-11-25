@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 1635
+    "mock": 1435
   },
   "senses": [
     {
@@ -48,7 +48,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 182,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -118,6 +118,17 @@
       "reason": "真题无证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:believe-me",
+    "w:between-you-and-me",
+    "w:can-you-help-me",
+    "w:dont-get-me-wrong",
+    "w:excuse-me",
+    "w:little-old-me",
+    "w:me-too",
+    "w:thats-just-me",
+    "w:you-tell-me"
+  ]
 }

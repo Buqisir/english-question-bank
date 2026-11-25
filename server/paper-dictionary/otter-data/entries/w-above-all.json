@@ -1,0 +1,155 @@
+{
+  "entryId": "w:above-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "above",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "above",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "above all",
+  "senses": [
+    {
+      "senseId": "w:above-all#s1",
+      "pos": "短语",
+      "glossZh": "最重要的是；尤其是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:above-all#e-dc5139fb297cbc31",
+          "text": "Above all, I hoped he wouldn’t assign me to work with the fiercely competitive, extremely serious fellow who always wore dark clothes and apparently had a personality to match.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:above-all#e-14dc22f201d771ea",
+          "text": "Above all",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "question": 47,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:47#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:above-all#e-c05e47382867cd99",
+          "text": "Above all, we must feel motivated to begin the journey to pursue our dreams and remain motivated.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

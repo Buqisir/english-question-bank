@@ -1,0 +1,233 @@
+{
+  "entryId": "w:come-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came through",
+    "comes through"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "through"
+      ],
+      [
+        "came",
+        "through"
+      ],
+      [
+        "comes",
+        "through"
+      ],
+      [
+        "coming",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come through",
+  "senses": [
+    {
+      "senseId": "w:come-through#s1",
+      "pos": "短语",
+      "glossZh": "（消息、声音等）传来；收到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-through#e-dd3747cfcf1bda7d",
+          "text": "Shortly after noon, an urgent message came through: “Help!",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-through#e-32b5510593538f37",
+          "text": "Three – then a bright, breathless voice came through:",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 52
+          },
+          "parts": [
+            [
+              40,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              52
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-through#s2",
+      "pos": "短语",
+      "glossZh": "穿过来；经过此处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-through#e-1532268a62f5e98a",
+          "text": "No bus came through.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-through#s3",
+      "pos": "短语",
+      "glossZh": "挺过；熬过（重病、困境等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-through#s4",
+      "pos": "短语",
+      "glossZh": "（情感、态度等）流露出来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-through#s5",
+      "pos": "短语",
+      "glossZh": "在关键时刻办成事；兑现承诺",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-through#s6",
+      "pos": "短语",
+      "glossZh": "（俚语）交代；供出消息",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

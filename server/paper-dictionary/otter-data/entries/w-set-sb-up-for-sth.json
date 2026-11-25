@@ -1,0 +1,162 @@
+{
+  "entryId": "w:set-sb-up-for-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      {
+        "slot": "sb"
+      },
+      "up",
+      "for",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        {
+          "slot": "sb"
+        },
+        "up",
+        "for",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set up for",
+      "tags": []
+    },
+    {
+      "form": "setting up for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set sb up for sth",
+  "senses": [
+    {
+      "senseId": "w:set-sb-up-for-sth#s1",
+      "pos": "短语",
+      "glossZh": "为某人日后取得某种结果创造条件；为某人将来打好基础",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s95"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-sb-up-for-sth#e-99bcabe47c8c7072",
+          "text": "Those habits you’re building now are setting your child up for a lifetime of resilience (韧性) and satisfaction.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 62
+          },
+          "parts": [
+            [
+              37,
+              44
+            ],
+            [
+              56,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ],
+            [
+              56,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-sb-up-for-sth#e-921275090c16358b",
+          "text": "NAHS provides scholarship opportunities for high school students, which can truly set them up for life in this field.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-a:19",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 97
+          },
+          "parts": [
+            [
+              82,
+              85
+            ],
+            [
+              91,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              85
+            ],
+            [
+              91,
+              97
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

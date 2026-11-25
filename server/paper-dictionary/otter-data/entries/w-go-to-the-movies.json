@@ -1,0 +1,134 @@
+{
+  "entryId": "w:go-to-the-movies",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "the",
+      "movies"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "the",
+        "movies"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "going to the movies",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to the movies",
+  "senses": [
+    {
+      "senseId": "w:go-to-the-movies#s1",
+      "pos": "短语",
+      "glossZh": "去电影院看电影",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:movie#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-to-the-movies#e-920b90915fe64099",
+          "text": "Go to the movies.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-the-movies#e-ae192da441dd9cee",
+          "text": "Going to the movies.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 19
+          },
+          "parts": [
+            [
+              0,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

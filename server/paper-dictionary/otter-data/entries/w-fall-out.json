@@ -1,0 +1,180 @@
+{
+  "entryId": "w:fall-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell out"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "out"
+      ],
+      [
+        "fell",
+        "out"
+      ],
+      [
+        "fallen",
+        "out"
+      ],
+      [
+        "falling",
+        "out"
+      ],
+      [
+        "falls",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall out",
+  "senses": [
+    {
+      "senseId": "w:fall-out#s1",
+      "pos": "短语",
+      "glossZh": "掉出来；脱落",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-out#e-d457161f3dbb339a",
+          "text": "The next day, my sister and I were going through his old clothes when something fell out and hit the floor – it was a 1928 Wheat penny.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          },
+          "parts": [
+            [
+              80,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-out#e-213be1733bae9011",
+          "text": "As the lid popped open, a pile of yellowed letters, a cracked coarse porcelain bowl（粗瓷碗）, and an unremarkable old fountain pen fell out.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 135
+          },
+          "parts": [
+            [
+              127,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              127,
+              135
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:fall-out#s2",
+      "pos": "短语",
+      "glossZh": "（与某人）闹翻",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-out#s3",
+      "pos": "短语",
+      "glossZh": "（士兵）离开队列；解散",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-out#s4",
+      "pos": "短语",
+      "glossZh": "晕倒；失去意识",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "方言或俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

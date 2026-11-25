@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 38
+    "mock": 7
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -236,78 +236,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:dawn#s4",
-      "pos": "短语",
-      "glossZh": "逐渐明白；意识到",
-      "pronunciationId": "w:dawn#p-main",
-      "note": "it dawns on sb that …。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dawn#e-ee7891c74ead9167",
-          "text": "That was the first time it dawned on me how much I knew about the rest of the world, and how prepared I was for it, just from growing up in New York City – that I had been everywhere before I'd ever actually gone anywhere.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:dawn#e-c5e777dd9a96f37e",
-          "text": "It finally dawns on me: my dad recorded the news and is playing it back.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:dawn#e-70dd4023b195685f",
-          "text": "With smiles on my “new auntie”, it dawned on me that she was excited to be here.",
-          "source": {
-            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
-            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
-            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:writing-continuation:5",
-              "sentence": 9
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 35,
-            "end": 41
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -316,6 +244,8 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false
 }

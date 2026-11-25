@@ -1,0 +1,97 @@
+{
+  "entryId": "w:a-piece-of-cake",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "piece",
+      "of",
+      "cake"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "piece",
+        "of",
+        "cake"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a piece of cake",
+  "senses": [
+    {
+      "senseId": "w:a-piece-of-cake#s1",
+      "pos": "短语",
+      "glossZh": "轻而易举的事；小菜一碟",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cake#s3",
+        "w:piece#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-piece-of-cake#e-29c1365c1d92889d",
+          "text": "“Shén me, Shén me… What, What…” A piece of cake!",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 47
+          },
+          "parts": [
+            [
+              32,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,63 @@
+{
+  "entryId": "w:i-tell-you",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I tell you"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "tell",
+      "you"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "tell",
+        "you"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i tell you",
+  "senses": [
+    {
+      "senseId": "w:i-tell-you#s1",
+      "pos": "短语",
+      "glossZh": "我跟你说，真的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中用来强调所说的话。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

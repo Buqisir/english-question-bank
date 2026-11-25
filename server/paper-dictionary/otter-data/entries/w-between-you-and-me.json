@@ -1,0 +1,64 @@
+{
+  "entryId": "w:between-you-and-me",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "between",
+      "you",
+      "and",
+      "me"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "between",
+        "you",
+        "and",
+        "me"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "between you and me",
+  "senses": [
+    {
+      "senseId": "w:between-you-and-me#s1",
+      "pos": "短语",
+      "glossZh": "私下跟你说；这话只限你我知道",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:between#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

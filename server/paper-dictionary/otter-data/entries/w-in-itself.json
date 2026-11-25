@@ -1,0 +1,95 @@
+{
+  "entryId": "w:in-itself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in  itself"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "itself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "itself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in itself",
+  "senses": [
+    {
+      "senseId": "w:in-itself#s1",
+      "pos": "短语",
+      "glossZh": "就其本身而言；单就这一点而言",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:itself#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-itself#e-2637eb5cc28e0c8f",
+          "text": "This, in itself, is a precious form of self-healing.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-cq-nankai-2026-05-ninth-quality-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 15
+          },
+          "parts": [
+            [
+              6,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

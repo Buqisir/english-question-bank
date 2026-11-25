@@ -1,0 +1,119 @@
+{
+  "entryId": "w:turn-sth-over-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      {
+        "slot": "sth"
+      },
+      "over",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        {
+          "slot": "sth"
+        },
+        "over",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turning over to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn sth over to sb",
+  "senses": [
+    {
+      "senseId": "w:turn-sth-over-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "把某事交给某人负责；把某物移交给某人",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-over-to-sb#e-3aa7ed36d90733c9",
+          "text": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 41
+          },
+          "parts": [
+            [
+              9,
+              16
+            ],
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ],
+            [
+              34,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

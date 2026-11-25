@@ -1,0 +1,152 @@
+{
+  "entryId": "w:compared-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "compared",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "compared",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "compared with",
+  "senses": [
+    {
+      "senseId": "w:compared-with#s1",
+      "pos": "短语",
+      "glossZh": "与……相比；相对于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:compared-with#e-7c804c403ca2bca0",
+          "text": "It is said that about 20% of 25-34-year-olds live with their parents, compared with 16% in 1991.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 83
+          },
+          "parts": [
+            [
+              70,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:compared-with#e-27100856024bf7f2",
+          "text": "However, that was small fry compared with the city’s Circus Maximus, which accommodated around 250,000 people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 41
+          },
+          "parts": [
+            [
+              28,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:compared-with#e-70f828839629b9b7",
+          "text": "However, compared with other football giants, he was “way too small” to consider a football career.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 22
+          },
+          "parts": [
+            [
+              9,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 26
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

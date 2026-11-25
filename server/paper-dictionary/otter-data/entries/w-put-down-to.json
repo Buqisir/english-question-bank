@@ -1,0 +1,109 @@
+{
+  "entryId": "w:put-down-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "down",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "down",
+        "to"
+      ],
+      [
+        "puts",
+        "down",
+        "to"
+      ],
+      [
+        "putting",
+        "down",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth down to sth",
+  "senses": [
+    {
+      "senseId": "w:put-down-to#s1",
+      "pos": "短语",
+      "glossZh": "把某事归因于……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s30"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-down-to#e-cf2e22ce4a6d11f3",
+          "text": "These should be put down to its chemically inert（惰性的）dielectric layer and its naturally flexible water-based structure.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

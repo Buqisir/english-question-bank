@@ -1,0 +1,187 @@
+{
+  "entryId": "w:follow-suit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "following suit"
+  ],
+  "pattern": {
+    "tokens": [
+      "follow",
+      "suit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "follow",
+        "suit"
+      ],
+      [
+        "following",
+        "suit"
+      ],
+      [
+        "followed",
+        "suit"
+      ],
+      [
+        "follows",
+        "suit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "followed suit",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "follow suit",
+  "senses": [
+    {
+      "senseId": "w:follow-suit#s1",
+      "pos": "短语",
+      "glossZh": "照着别人做；仿效",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:follow#s13",
+        "w:suit#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:follow-suit#e-a620c8b0b64f1412",
+          "text": "The participants followed suit, taking more food than they normally would have.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 30
+          },
+          "parts": [
+            [
+              17,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:follow-suit#e-f29baf2a2972d784",
+          "text": "The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 74
+          },
+          "parts": [
+            [
+              61,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:follow-suit#e-62929672de58b958",
+          "text": "But if a thin person eats a lot, I’ll follow suit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:follow-suit#s2",
+      "pos": "短语",
+      "glossZh": "跟出与首出牌同花色的牌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

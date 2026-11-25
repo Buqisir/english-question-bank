@@ -67,8 +67,8 @@
     "mock": 298
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 298
+    "gaokao": 4,
+    "mock": 102
   },
   "senses": [
     {
@@ -79,7 +79,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -222,7 +222,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -293,7 +293,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -365,7 +365,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -452,7 +452,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -496,74 +496,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:speak#s8",
-      "pos": "短语",
-      "glossZh": "从某角度来说",
-      "pronunciationId": "w:speak#p-main",
-      "note": "副词加 speaking。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:speak#e-a090ebf5e4c56b65",
-          "text": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 73
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:speak#s9",
-      "pos": "短语",
-      "glossZh": "公开为某人辩护",
-      "pronunciationId": "w:speak#p-main",
-      "note": "speak up for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:speak#e-904864e43b077204",
-          "text": "As you make your lifestyle changes, you may find yourself wanting to speak up for yourself if others comment on what you’re doing, which can turn itself into a whole household debate.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 69,
-            "end": 74
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -572,6 +504,16 @@
       "reason": "罕见同形名词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:speak-for",
+    "w:speak-of",
+    "w:speak-out",
+    "w:speak-up",
+    "w:speak-up-for",
+    "w:speak-volumes"
+  ]
 }

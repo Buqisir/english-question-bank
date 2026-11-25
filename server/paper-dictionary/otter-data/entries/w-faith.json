@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 9
+    "mock": 7
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -127,7 +127,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -184,43 +184,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:faith#s4",
-      "pos": "短语",
-      "glossZh": "凭信念冒险一试",
-      "pronunciationId": "w:faith#p-main",
-      "note": "take a leap of faith。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:faith#e-f6124c0b88bfd3a4",
-          "text": "In 2005, my husband Meherwan and I took a leap of faith.",
-          "source": {
-            "paperId": "paper-mock-zj-qiangji-2026-mar",
-            "paperTitle": "浙江强基联盟2026年3月高三联考",
-            "groupId": "group:paper-mock-zj-qiangji-2026-mar:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 55
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-a-leap-of-faith"
+  ]
 }

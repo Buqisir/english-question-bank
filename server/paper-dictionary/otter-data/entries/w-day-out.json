@@ -1,0 +1,125 @@
+{
+  "entryId": "w:day-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "day",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "day",
+        "out"
+      ],
+      [
+        "days",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "day out",
+  "senses": [
+    {
+      "senseId": "w:day-out#s1",
+      "pos": "名词短语",
+      "glossZh": "当天往返的出游；一日游",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:day-out#e-7a5426b714ea0b7d",
+          "text": "We also have a range of birds and other animals to offer a fun-filled day out for families.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 77
+          },
+          "parts": [
+            [
+              70,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:day-out#e-5f3936e7392e7f3d",
+          "text": "Perfect for a fun day out with friends!",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-a:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

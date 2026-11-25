@@ -1,0 +1,142 @@
+{
+  "entryId": "w:separate-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "separate",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "separate",
+        "out"
+      ],
+      [
+        "separated",
+        "out"
+      ],
+      [
+        "separates",
+        "out"
+      ],
+      [
+        "separating",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "separate out",
+      "tags": []
+    },
+    {
+      "form": "separated out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "separate (sth) out",
+  "senses": [
+    {
+      "senseId": "w:separate-out#s1",
+      "pos": "短语",
+      "glossZh": "从整体中分离出来；把……单独分出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:separate-out#e-771bfc653cbe7803",
+          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 88
+          },
+          "parts": [
+            [
+              75,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:separate-out#e-d604d56ec39f4948",
+          "text": "“We use advanced computing systems to separate out everything except the vibrations(振动) caused by a person’s heartbeat.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

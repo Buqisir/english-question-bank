@@ -1,0 +1,123 @@
+{
+  "entryId": "w:at-all-costs",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "all",
+      "costs"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "all",
+        "costs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at all costs",
+  "senses": [
+    {
+      "senseId": "w:at-all-costs#s1",
+      "pos": "短语",
+      "glossZh": "不惜一切代价；无论如何",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-all-costs#e-d14f5f4ee271b2c4",
+          "text": "Learning to tolerate discomfort, rather than avoiding it at all costs, can foster both toughness and closeness.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all-costs#e-ff6595d8f3f03105",
+          "text": "Growing up, I avoided team sports at all costs.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 46
+          },
+          "parts": [
+            [
+              34,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

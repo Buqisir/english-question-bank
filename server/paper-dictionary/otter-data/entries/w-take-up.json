@@ -1,0 +1,470 @@
+{
+  "entryId": "w:take-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes up",
+    "taking up",
+    "took up"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "up"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "takes",
+        "up"
+      ],
+      [
+        "taking",
+        "up"
+      ],
+      [
+        "took",
+        "up"
+      ],
+      [
+        "taken",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take up",
+      "tags": []
+    },
+    {
+      "form": "taken up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sth) up",
+  "senses": [
+    {
+      "senseId": "w:take-up#s1",
+      "pos": "短语",
+      "glossZh": "占用（空间或时间）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s21",
+        "w:up#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-up#e-116fc6f92ea7281a",
+          "text": "However, the three bears managed to pick out the bigger number of dots even in pairs of patterns where fewer dots took up a larger area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 121
+          },
+          "parts": [
+            [
+              114,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              121
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up#e-2d7a0af409bbcd7c",
+          "text": "But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up#e-bd0635bc13376329",
+          "text": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 144,
+            "end": 151
+          },
+          "parts": [
+            [
+              144,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              144,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:take-up#s2",
+      "pos": "短语",
+      "glossZh": "开始从事（某项活动或爱好）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s22",
+        "w:up#s70"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-up#e-2d42fac7104c437a",
+          "text": "While it may be true that you don’t need expensive equipment to take up running",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up#e-85aa516e4ec34610",
+          "text": "To encourage her to take up a hobby.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2023-national-a:25#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up#e-dd6f8c634e5cb3ce",
+          "text": "If a child lacks confidence, parents may encourage the child to take up new hobbies.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:take-up#s3",
+      "pos": "短语",
+      "glossZh": "拿起；举起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-up#e-466213353f6cb8a0",
+          "text": "He took up his pen and wrote a heartfelt letter to the principal (校长), earnestly requesting the school to clear away the bird nests so that students could study in peace.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-up#s4",
+      "pos": "短语",
+      "glossZh": "就任（职务）；就位",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-up#e-a0c9c3df52eeb87f",
+          "text": "To take up a new post.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-up#s5",
+      "pos": "短语",
+      "glossZh": "着手处理；接着处理或讨论",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-up#e-220737627c1f9617",
+          "text": "Family Weekend, and other busy campus events – taking up tasks outside his usual routine.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up#e-05f53c6772a90a46",
+          "text": "And so, now I take up assignments, some that pay well, some that don’t, but together, and most importantly, they fill me with joy.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

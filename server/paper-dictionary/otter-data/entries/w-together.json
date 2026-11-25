@@ -35,8 +35,8 @@
     "mock": 329
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 329
+    "gaokao": 21,
+    "mock": 147
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 142
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -182,215 +182,34 @@
       ]
     },
     {
-      "senseId": "w:together#s3",
-      "pos": "短语",
-      "glossZh": "使团聚",
+      "senseId": "w:together#s7",
+      "pos": "phr.",
+      "glossZh": "稳住情绪；重新振作（pull oneself together）",
       "pronunciationId": "w:together#p-main",
-      "note": "bring together。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 9,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:together#e-d8090a0d58fd83c4",
-          "text": "An easy way to bring all work generations together is with a chat platform",
+          "exampleId": "w:together#e-695eaa8de77cf35f",
+          "text": "So, she pulled herself together for her first class.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-national-ii:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:together#e-60c8a0bc24aac378",
-          "text": "That’s only for giving __60__ to the dogs that brought us together.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:together#e-b7e8f22586c99de0",
-          "text": "It felt great to know that I had helped bring this family together again.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:together#s4",
-      "pos": "短语",
-      "glossZh": "聚会",
-      "pronunciationId": "w:together#p-main",
-      "note": "get together。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:together#e-10bf2abb07025b6a",
-          "text": "The best housewarming parties encourage old friends to get together.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2020-national-iii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:together#s5",
-      "pos": "短语",
-      "glossZh": "组装",
-      "pronunciationId": "w:together#p-main",
-      "note": "piece together。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:together#e-d3894c0563a860b6",
-          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:together#s6",
-      "pos": "短语",
-      "glossZh": "汇集编成",
-      "pronunciationId": "w:together#p-main",
-      "note": "put together。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:together#e-b613be721a2b3c3b",
-          "text": "“It is curious that no one has put together a history of both the steam and electric revolutions,” writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:cloze",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
-              "sentence": 1
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:cloze:2",
+              "sentence": 5
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 35,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:together#e-fb93a5cc4edfda62",
-          "text": "So I’ve put together some good tips for starting an art journey.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:together#e-29bddfc40c461ef5",
-          "text": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 26
+            "start": 23,
+            "end": 31
           }
         }
       ]
@@ -402,6 +221,22 @@
       "reason": "少见"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:band-together",
+    "w:bring-together",
+    "w:come-together",
+    "w:get-together",
+    "w:go-together",
+    "w:hold-it-together",
+    "w:hold-together",
+    "w:piece-together",
+    "w:pull-together",
+    "w:put-together",
+    "w:stick-together",
+    "w:together-with"
+  ]
 }

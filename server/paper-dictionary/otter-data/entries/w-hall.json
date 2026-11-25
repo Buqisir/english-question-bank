@@ -48,8 +48,8 @@
     "mock": 84
   },
   "unassignedCounts": {
-    "gaokao": 12,
-    "mock": 79
+    "gaokao": 14,
+    "mock": 16
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -200,12 +200,12 @@
       "pos": "n.",
       "glossZh": "门厅",
       "pronunciationId": "w:hall#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -217,7 +217,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -257,54 +257,34 @@
       "examples": []
     },
     {
-      "senseId": "w:hall#s6",
+      "senseId": "w:hall#s7",
       "pos": "短语",
-      "glossZh": "市政厅",
+      "glossZh": "公开交流会",
       "pronunciationId": "w:hall#p-main",
-      "note": "town hall 或 city hall。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:hall#e-be00f908a6da1e21",
-          "text": "Start Point: The Town Hall",
+          "exampleId": "w:hall#e-8805b400b978da64",
+          "text": "P. S. All entrants will be invited to participate in a Pulitzer Center town hall event, held virtually in August, to share solutions with other students from around the world.",
           "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-a",
             "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:16",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:hall#e-78c9ea04f8567006",
-          "text": "Why did the couple have the wedding at City Hall?",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:listening.long-form",
-            "locator": {
-              "question": 12,
-              "questionId": "question:listening:12",
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-a:17",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 44,
-            "end": 48
+            "start": 76,
+            "end": 80
           }
         }
       ]
@@ -316,6 +296,8 @@
       "reason": "场馆、地名或车站专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

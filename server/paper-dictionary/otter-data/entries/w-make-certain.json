@@ -1,0 +1,116 @@
+{
+  "entryId": "w:make-certain",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "certain"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "certain"
+      ],
+      [
+        "made",
+        "certain"
+      ],
+      [
+        "makes",
+        "certain"
+      ],
+      [
+        "making",
+        "certain"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make certain",
+  "senses": [
+    {
+      "senseId": "w:make-certain#s1",
+      "pos": "短语",
+      "glossZh": "确保某事发生或达到要求",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-certain#e-df9629e02a3b900a",
+          "text": "So, whenever we were expecting company, I tired myself out to make certain the house was spotless.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 74
+          },
+          "parts": [
+            [
+              62,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              74
+            ]
+          ]
+        }
+      ],
+      "note": "常接 that 从句，that 可省略。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-certain#s2",
+      "pos": "短语",
+      "glossZh": "核实；确认无误",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

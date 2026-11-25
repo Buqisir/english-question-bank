@@ -1,0 +1,190 @@
+{
+  "entryId": "w:get-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets it",
+    "getting it"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "it"
+      ],
+      [
+        "gets",
+        "it"
+      ],
+      [
+        "getting",
+        "it"
+      ],
+      [
+        "got",
+        "it"
+      ],
+      [
+        "gotten",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got it",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get it",
+  "senses": [
+    {
+      "senseId": "w:get-it#s1",
+      "pos": "短语",
+      "glossZh": "明白；理解；听懂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-it#e-f420cd3fd19501a9",
+          "text": "I just wasn’t getting it, and it had been going on like that for a few weeks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          },
+          "parts": [
+            [
+              14,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-it#e-d59ff3ec665dac5b",
+          "text": "“Oh, man, I’ve got it!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          },
+          "parts": [
+            [
+              15,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-it#e-da521827a364649a",
+          "text": "Grandma gets it.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          },
+          "parts": [
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "Get it? 可用来确认对方是否明白，Got it! 可用来表示已经明白。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:get-it#s2",
+      "pos": "短语",
+      "glossZh": "挨罚；挨骂或挨打",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

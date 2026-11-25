@@ -1,0 +1,152 @@
+{
+  "entryId": "w:together-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "together",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "together",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "together with",
+  "senses": [
+    {
+      "senseId": "w:together-with#s1",
+      "pos": "短语",
+      "glossZh": "和……一起；连同……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:together-with#e-00d668ce7f97b2d3",
+          "text": "Set small, achievable goals together with them and celebrate progress, not perfection.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 41
+          },
+          "parts": [
+            [
+              28,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:together-with#e-996ca9dcd7ac0c03",
+          "text": "Museums are working together with AI ethicists to develop fair algorithms.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 33
+          },
+          "parts": [
+            [
+              20,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:together-with#e-22afcf405acf4156",
+          "text": "What can you do together with Javier Marin?",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-national-a:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 29
+          },
+          "parts": [
+            [
+              16,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

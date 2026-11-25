@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 479
+    "mock": 290
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 145
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -370,20 +370,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:key#s9",
-      "pos": "短语",
-      "glossZh": "键入",
-      "pronunciationId": "w:key#p-main",
-      "note": "key sth in。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -392,6 +378,11 @@
       "reason": "专业用法或同形地理用词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:key-sth-in"
+  ]
 }

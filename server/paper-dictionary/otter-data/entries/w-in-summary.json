@@ -1,0 +1,92 @@
+{
+  "entryId": "w:in-summary",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "summary"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "summary"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in summary",
+  "senses": [
+    {
+      "senseId": "w:in-summary#s1",
+      "pos": "短语",
+      "glossZh": "总之；概括来说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:summary#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-summary#e-0726891b8f76c5b2",
+          "text": "In summary, classical music is a rich and diverse tradition that has evolved over centuries,",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 28,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:28",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

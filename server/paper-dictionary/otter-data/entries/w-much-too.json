@@ -1,0 +1,122 @@
+{
+  "entryId": "w:much-too",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "much",
+      "too"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "much",
+        "too"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "much too",
+  "senses": [
+    {
+      "senseId": "w:much-too#s1",
+      "pos": "短语",
+      "glossZh": "实在太……；过于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:much-too#e-e204bf1458fe8d35",
+          "text": "One of the biggest mistakes new runners make is doing too much too soon.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          },
+          "parts": [
+            [
+              58,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:much-too#e-97a6bfc5b54611f8",
+          "text": "·Doing too much too soon",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          },
+          "parts": [
+            [
+              11,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "修饰形容词或副词。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

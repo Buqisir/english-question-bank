@@ -1,0 +1,107 @@
+{
+  "entryId": "w:one-hundred-percent",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "hundred",
+      "percent"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "hundred",
+        "percent"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one hundred percent",
+  "senses": [
+    {
+      "senseId": "w:one-hundred-percent#s1",
+      "pos": "短语",
+      "glossZh": "百分之百；完全",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:one-hundred-percent#e-09f16c5b3c30f2f8",
+          "text": "“Eighty percent is schoolwork, ten percent the SAT, and ten percent extracurriculars.” She then looked at me with deep emotion and said, “But most importantly, at one hundred percent, is your mental health.”",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 163,
+            "end": 182
+          },
+          "parts": [
+            [
+              163,
+              182
+            ]
+          ],
+          "highlightRanges": [
+            [
+              163,
+              182
+            ]
+          ]
+        }
+      ],
+      "note": "可表示全部比例，也可强调程度或把握十足。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:one-hundred-percent#s2",
+      "pos": "短语",
+      "glossZh": "身体或精神状态完全良好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 feel one hundred percent，否定形式可指尚未完全恢复。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

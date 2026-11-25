@@ -1,0 +1,95 @@
+{
+  "entryId": "w:at-the-ready",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "ready"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "ready"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the ready",
+  "senses": [
+    {
+      "senseId": "w:at-the-ready#s1",
+      "pos": "短语",
+      "glossZh": "已准备好；随时可用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s28",
+        "w:ready#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-ready#e-d6745b98806cfb04",
+          "text": "It’s more challenging to eat in moderation if you have unhealthy snacks at the ready, like cookies.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 84
+          },
+          "parts": [
+            [
+              72,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

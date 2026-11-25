@@ -1,0 +1,85 @@
+{
+  "entryId": "w:kid-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "kids on"
+  ],
+  "pattern": {
+    "tokens": [
+      "kid",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kid",
+        "on"
+      ],
+      [
+        "kids",
+        "on"
+      ],
+      [
+        "kidded",
+        "on"
+      ],
+      [
+        "kidding",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kid (sb) on",
+  "senses": [
+    {
+      "senseId": "w:kid-on#s1",
+      "pos": "短语",
+      "glossZh": "哄骗某人；戏弄某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kid-on#s2",
+      "pos": "短语",
+      "glossZh": "装作；假装",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

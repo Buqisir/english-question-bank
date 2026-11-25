@@ -1,0 +1,156 @@
+{
+  "entryId": "w:tens-of-millions",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tens",
+      "of",
+      "millions"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tens",
+        "of",
+        "millions"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tens of millions",
+  "senses": [
+    {
+      "senseId": "w:tens-of-millions#s1",
+      "pos": "短语",
+      "glossZh": "数千万；数以千万计",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ten#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tens-of-millions#e-42189676fffc8eb4",
+          "text": "The creative team behind “Apes” used motion-capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 126
+          },
+          "parts": [
+            [
+              110,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              126
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tens-of-millions#e-ed3be0138b2dbcdd",
+          "text": "OpenAI’s CEO Sam Altman replied: “Tens of millions of dollars well spent – you never know.”",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 50
+          },
+          "parts": [
+            [
+              34,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tens-of-millions#e-523da40d0797dcf1",
+          "text": "When asked whether there’s a cost to all this politeness, OpenAI CEO Sam Altman responded, “Tens of millions of dollars well spent – you never know.” In reality, of course, AI chatbots do not appreciate politeness; they lack consciousness, feelings or a need for social politeness.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 108
+          },
+          "parts": [
+            [
+              92,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

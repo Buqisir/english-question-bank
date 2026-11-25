@@ -1,0 +1,76 @@
+{
+  "entryId": "w:whats-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "What’s up"
+  ],
+  "pattern": {
+    "tokens": [
+      "what's",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what's",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what's up",
+  "senses": [
+    {
+      "senseId": "w:whats-up#s1",
+      "pos": "短语",
+      "glossZh": "怎么了？发生什么事了？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:up#s58"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:whats-up#s2",
+      "pos": "短语",
+      "glossZh": "嗨，最近怎么样？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中的随意问候。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

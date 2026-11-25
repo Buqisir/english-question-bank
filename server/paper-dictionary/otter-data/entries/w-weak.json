@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 63
+    "mock": 6
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -183,7 +183,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -250,7 +250,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -293,13 +293,118 @@
       "pos": "adj.",
       "glossZh": "意志薄弱的",
       "pronunciationId": "w:weak#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:weak#s8",
+      "pos": "adj.",
+      "glossZh": "（土壤）贫瘠的",
+      "pronunciationId": "w:weak#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weak#e-ff8cef752f5f85ba",
+          "text": "Widespread fertilizer use could lead to harmful side effects, including polluting rivers and lakes and making the soil too weak for trees to stay healthy.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 127
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:weak#s9",
+      "pos": "adj.",
+      "glossZh": "效力不足的；作用有限的",
+      "pronunciationId": "w:weak#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weak#e-d57eaabe9320d124",
+          "text": "From over 3,000 rice varieties, the team identified a naturally stronger version of the gene and used traditional plant breeding (育种) to cross it into varieties carrying a weaker form.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 178
+          }
+        },
+        {
+          "exampleId": "w:weak#e-c97ba9f834f69638",
+          "text": "Treatment is often delayed and weak.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:weak#e-ec32b31850b438cc",
+          "text": "Coupled with weak management, fields often had more weeds than rice, so yields were naturally low.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -308,6 +413,6 @@
       "reason": "物理或语言学专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

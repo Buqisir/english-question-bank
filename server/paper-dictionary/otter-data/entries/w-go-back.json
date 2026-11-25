@@ -1,0 +1,233 @@
+{
+  "entryId": "w:go-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes back",
+    "going back",
+    "went back"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "back"
+      ],
+      [
+        "goes",
+        "back"
+      ],
+      [
+        "going",
+        "back"
+      ],
+      [
+        "went",
+        "back"
+      ],
+      [
+        "gone",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go back",
+  "senses": [
+    {
+      "senseId": "w:go-back#s1",
+      "pos": "短语",
+      "glossZh": "回去；返回原处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-back#e-3eea842bbdfb21bb",
+          "text": "The boy’s mother turned to the dog, “Okay, Poppy, time to go back home.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 65
+          },
+          "parts": [
+            [
+              58,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-back#e-13e236e5bffb8741",
+          "text": "On the day he went back, he said, “If I’m not back in an hour, come looking for me.” He wasn’t back in an hour.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-back#e-f68da816aeb423d5",
+          "text": "A photographer kept going back into the mud to fix the rope.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-sep-opening:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 30
+          },
+          "parts": [
+            [
+              20,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:go-back#s2",
+      "pos": "短语",
+      "glossZh": "追溯到（较早的时期）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-back#e-08a48a69682282f3",
+          "text": "AI-powered forecasting models are trained on historical weather data that goes back decades, which means they are great at predicting events that are similar to the weather of the past.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 83
+          },
+          "parts": [
+            [
+              74,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-back#s3",
+      "pos": "短语",
+      "glossZh": "恢复到原来的状态；回到先前的话题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

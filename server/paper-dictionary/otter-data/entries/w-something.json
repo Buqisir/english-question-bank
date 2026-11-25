@@ -35,8 +35,8 @@
     "mock": 698
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 696
+    "gaokao": 3,
+    "mock": 500
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 76,
-        "mock": 0
+        "mock": 198
       },
       "folded": false,
       "examples": [
@@ -109,127 +109,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:something#s2",
-      "pos": "短语",
-      "glossZh": "有点像……",
-      "pronunciationId": "w:something#p-main",
-      "note": "something of a。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:something#e-bd64b848f66f505b",
-          "text": "It’s something of a cliché（陈词滥调）that most people learn not from their successes but their mistakes.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:something#e-dfa6d0fe9ed98774",
-          "text": "In Glassdoor’s survey of more than 1,000 U. S. professionals, a striking 68% of Gen Z respondents said they wouldn’t pursue management if it weren’t for paycheck or title, signaling a rejection of the traditional corporate climb favored by previous generations and a belief that management is something of a poisonous chalice (圣杯).",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 293,
-            "end": 302
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:something#s3",
-      "pos": "短语",
-      "glossZh": "有了有价值的发现",
-      "pronunciationId": "w:something#p-main",
-      "note": "be onto something。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:something#e-393d4ad53f1b80bb",
-          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 118
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:something#s4",
-      "pos": "短语",
-      "glossZh": "或诸如此类",
-      "pronunciationId": "w:something#p-main",
-      "note": "or something。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:something#e-692066f38314d71e",
-          "text": "The other kids are always in a p-p-play or something.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 52
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -238,6 +117,16 @@
       "reason": "罕见临时构词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:make-something-of",
+    "w:or-something",
+    "w:something-else",
+    "w:something-like",
+    "w:something-like-that",
+    "w:something-of-a"
+  ]
 }

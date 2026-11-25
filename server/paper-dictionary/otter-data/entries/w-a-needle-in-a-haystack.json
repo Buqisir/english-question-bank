@@ -1,0 +1,66 @@
+{
+  "entryId": "w:a-needle-in-a-haystack",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "needle",
+      "in",
+      "a",
+      "haystack"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "needle",
+        "in",
+        "a",
+        "haystack"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a needle in a haystack",
+  "senses": [
+    {
+      "senseId": "w:a-needle-in-a-haystack#s1",
+      "pos": "短语",
+      "glossZh": "如同在草堆里找针一样难找的人或物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:needle#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

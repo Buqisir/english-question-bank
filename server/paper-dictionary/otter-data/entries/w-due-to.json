@@ -1,12 +1,24 @@
 {
   "entryId": "w:due-to",
-  "headword": "due to",
   "kind": "phrase",
   "lists": [
     "3000",
     "3100"
   ],
   "variants": [],
+  "pattern": {
+    "tokens": [
+      "due",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "due",
+        "to"
+      ]
+    ]
+  },
   "ipa": {
     "uk": "/djuː tuː/",
     "us": "/duː tuː/"
@@ -30,59 +42,24 @@
     }
   ],
   "forms": [],
-  "counts": {
-    "gaokao": 7,
-    "mock": 130
-  },
-  "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 1
-  },
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "headword": "due to",
   "senses": [
     {
       "senseId": "w:due-to#s1",
-      "pos": "prep.",
-      "glossZh": "因为；由于",
       "pronunciationId": "w:due-to#p-main",
+      "pos": "短语",
+      "glossZh": "因为；由于",
       "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 126
-      },
       "folded": false,
+      "legacySenseIds": [
+        "w:due-to#s1",
+        "w:to#s16"
+      ],
       "examples": [
         {
-          "exampleId": "w:due-to#e-90bd42662fcd7f92",
-          "text": "Due to a big storm, my flight had been delayed by an hour and a half.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao"
-        },
-        {
-          "exampleId": "w:due-to#e-867a338d867b2bea",
-          "text": "Both efforts were overturned due to lawsuits from conservation groups.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao"
-        },
-        {
-          "exampleId": "w:due-to#e-b9b4ed73e567191c",
+          "exampleId": "w:due-to#e-8c6e880256d4172b",
           "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
           "source": {
             "paperId": "paper-gaokao-2021-ii",
@@ -94,24 +71,136 @@
               "sentence": 1
             }
           },
-          "tier": "gaokao"
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          },
+          "parts": [
+            [
+              32,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:due-to#e-e527ebf9d8d7b303",
+          "text": "I have missed plenty of beautiful sunsets/sunrises due to being on the spot only five minutes before the best moment.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          },
+          "parts": [
+            [
+              51,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:due-to#e-b9ba32543c5e287e",
+          "text": "Both efforts were overturned due to lawsuits from conservation groups.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          },
+          "parts": [
+            [
+              29,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              35
+            ]
+          ]
         }
-      ]
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 121
+      }
     },
     {
       "senseId": "w:due-to#s2",
-      "pos": "adj. + to",
-      "glossZh": "按安排将要；预计会（be due to do）",
       "pronunciationId": "w:due-to#p-main",
+      "pos": "短语",
+      "glossZh": "按安排将要；预计会（be due to do）",
       "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
       "folded": false,
+      "legacySenseIds": [
+        "w:due-to#s2"
+      ],
       "examples": [
         {
-          "exampleId": "w:due-to#e-8e25a9959f1d62d6",
+          "exampleId": "w:due-to#e-bf0bcfb2f56a139d",
+          "text": "Paragraph 1: But this Tuesday, Lily’s eyes were red-rimmed as she was due to leave the next day.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          },
+          "parts": [
+            [
+              70,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:due-to#e-5a4f9a8745cd69c7",
           "text": "Two days before Mr. Somerset was due to return, Jorge was out on a horse seeking out a sheep that had wandered away.",
           "source": {
             "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
@@ -123,10 +212,26 @@
               "sentence": 1
             }
           },
-          "tier": "mock"
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          },
+          "parts": [
+            [
+              33,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              39
+            ]
+          ]
         },
         {
-          "exampleId": "w:due-to#e-a77827396681d65d",
+          "exampleId": "w:due-to#e-cdee3660b31ee05d",
           "text": "The protest comes just a week before the UK government is due to publish an economic impact assessment of proposed changes to copyright law.",
           "source": {
             "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
@@ -138,17 +243,54 @@
               "sentence": 1
             }
           },
-          "tier": "mock"
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 64
+          },
+          "parts": [
+            [
+              58,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              64
+            ]
+          ]
         }
-      ]
-    }
-  ],
-  "droppedSenses": [
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
     {
-      "glossZh": "归某项债务到期应付给某人",
-      "reason": "特定账务构式"
+      "senseId": "w:due-to#s3",
+      "pos": "短语",
+      "glossZh": "出自；由……提出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用于注明某个证明、方法或结果的提出者。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 124
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
 }

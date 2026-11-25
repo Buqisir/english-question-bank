@@ -1,0 +1,198 @@
+{
+  "entryId": "w:send-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sending back"
+  ],
+  "pattern": {
+    "tokens": [
+      "send",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "send",
+        "back"
+      ],
+      [
+        "sending",
+        "back"
+      ],
+      [
+        "sends",
+        "back"
+      ],
+      [
+        "sent",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sent back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "send sb/sth back",
+  "senses": [
+    {
+      "senseId": "w:send-back#s2",
+      "pos": "短语",
+      "glossZh": "传回（消息、答复等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:send-back#e-1fbe6d20b509e33a",
+          "text": "In response, she sent back hers.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-back#e-04edc0986ca9e6b0",
+          "text": "“The patterns stored in AI technology seem to be sending back to the human mind,” notes co-author Levin Brinkmann, describing a cultural feedback cycle: humans train AI on text, AI returns statistically remixed versions, and then people unconsciously adopt its patterns.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 61
+          },
+          "parts": [
+            [
+              49,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-back#e-2c8c00d36e8300bd",
+          "text": "Meanwhile, aboard another plane cruising over a mountainous terrain, scientists sent a message to other counterparts on the ground, “Gold possible.” Walking across hilly ground, four scientists documented their findings, “This ground should be searched for metals.” From an airplane hovering over a hilly wasteland, a scientist sent back by radio one word, “Uranium.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 328,
+            "end": 337
+          },
+          "parts": [
+            [
+              328,
+              337
+            ]
+          ],
+          "highlightRanges": [
+            [
+              328,
+              337
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:send-back#s1",
+      "pos": "短语",
+      "glossZh": "送回；退回",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:send-back#s3",
+      "pos": "短语",
+      "glossZh": "使某人回想起过去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 send sb back to …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

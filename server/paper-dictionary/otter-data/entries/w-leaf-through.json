@@ -1,0 +1,164 @@
+{
+  "entryId": "w:leaf-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "leaf",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leaf",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "leafed through",
+      "tags": []
+    },
+    {
+      "form": "leafing through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leaf through",
+  "senses": [
+    {
+      "senseId": "w:leaf-through#s1",
+      "pos": "短语",
+      "glossZh": "翻阅；粗略浏览（书刊等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:leaf#s4",
+        "w:through#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:leaf-through#e-47d8ea012fdc5cdd",
+          "text": "I spend a good part of the day just leafing through magazines, drinking cups of tea, poking clumsily at the piano.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 51
+          },
+          "parts": [
+            [
+              36,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leaf-through#e-81a6e83eba6da6c4",
+          "text": "The other requires leafing through pages without knowing exactly where you’ll end up.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 34
+          },
+          "parts": [
+            [
+              19,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leaf-through#e-a046123baa52d393",
+          "text": "Many nights I stayed awake till past midnight leafing through pages.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 61
+          },
+          "parts": [
+            [
+              46,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

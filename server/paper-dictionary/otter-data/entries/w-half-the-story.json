@@ -1,0 +1,93 @@
+{
+  "entryId": "w:half-the-story",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "half",
+      "the",
+      "story"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "half",
+        "the",
+        "story"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "half the story",
+  "senses": [
+    {
+      "senseId": "w:half-the-story#s1",
+      "pos": "短语",
+      "glossZh": "事情的一部分；不完整的说法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:half-the-story#e-ec6fe45a62d9317f",
+          "text": "But farms are only half the story.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 33
+          },
+          "parts": [
+            [
+              19,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              33
+            ]
+          ]
+        }
+      ],
+      "note": "常用 only half the story。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

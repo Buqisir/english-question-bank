@@ -1,0 +1,193 @@
+{
+  "entryId": "w:give-sb-a-call",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "give",
+      {
+        "slot": "sb"
+      },
+      "a",
+      "call"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        {
+          "slot": "sb"
+        },
+        "a",
+        "call"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "give a call",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give sb a call",
+  "senses": [
+    {
+      "senseId": "w:give-sb-a-call#s1",
+      "pos": "短语",
+      "glossZh": "给某人打电话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:give#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-sb-a-call#e-e5cdff164f066aeb",
+          "text": "Give Sally a call.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              11,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              11,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-sb-a-call#e-7e16a6b311814b59",
+          "text": "Contact the Volunteer Helpline at volunteer@aarp.org or give us a call at 865-2277.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 70
+          },
+          "parts": [
+            [
+              56,
+              60
+            ],
+            [
+              64,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              60
+            ],
+            [
+              64,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-sb-a-call#e-819aeefcc524c69f",
+          "text": "Give his friend a call.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 22
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              16,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              16,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

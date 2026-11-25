@@ -1,0 +1,72 @@
+{
+  "entryId": "w:wing-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wing",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wing",
+        "it"
+      ],
+      [
+        "winged",
+        "it"
+      ],
+      [
+        "winging",
+        "it"
+      ],
+      [
+        "wings",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wing it",
+  "senses": [
+    {
+      "senseId": "w:wing-it#s1",
+      "pos": "短语",
+      "glossZh": "事先没怎么准备，靠临场发挥应付",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:wing#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

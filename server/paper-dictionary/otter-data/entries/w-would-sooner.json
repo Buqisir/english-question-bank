@@ -1,0 +1,61 @@
+{
+  "entryId": "w:would-sooner",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "would",
+      "sooner"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "would",
+        "sooner"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "would sooner",
+  "senses": [
+    {
+      "senseId": "w:would-sooner#s1",
+      "pos": "短语",
+      "glossZh": "宁愿；更愿意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:soon#s6"
+      ],
+      "examples": [],
+      "note": "后接动词原形，可用 than 引出另一选择。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

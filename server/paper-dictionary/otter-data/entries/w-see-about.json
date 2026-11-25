@@ -1,0 +1,89 @@
+{
+  "entryId": "w:see-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "saw about"
+  ],
+  "pattern": {
+    "tokens": [
+      "see",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "about"
+      ],
+      [
+        "saw",
+        "about"
+      ],
+      [
+        "seeing",
+        "about"
+      ],
+      [
+        "seen",
+        "about"
+      ],
+      [
+        "sees",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see about sth",
+  "senses": [
+    {
+      "senseId": "w:see-about#s1",
+      "pos": "短语",
+      "glossZh": "着手处理；设法安排",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-about#s2",
+      "pos": "短语",
+      "glossZh": "了解或查问某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

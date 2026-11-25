@@ -1,0 +1,95 @@
+{
+  "entryId": "w:honor-system",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "honor",
+      "system"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "honor",
+        "system"
+      ],
+      [
+        "honor",
+        "systems"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "honor system",
+  "senses": [
+    {
+      "senseId": "w:honor-system#s1",
+      "pos": "短语",
+      "glossZh": "靠参与者诚信自觉遵守的制度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:honor-system#e-127106aedc0a5811",
+          "text": "But what makes the stall even more remarkable in the heart of Camden is that payment is on the honor system – customers just throw coins into an old mailbox – and most of the items on offer are priced at £1 in a neighborhood where fresh food usually goes for much, much more.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 107
+          },
+          "parts": [
+            [
+              95,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              107
+            ]
+          ]
+        }
+      ],
+      "note": "如在无人监督的情况下自行付款。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

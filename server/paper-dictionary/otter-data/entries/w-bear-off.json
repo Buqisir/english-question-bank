@@ -1,0 +1,113 @@
+{
+  "entryId": "w:bear-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bear",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bear",
+        "off"
+      ],
+      [
+        "bearing",
+        "off"
+      ],
+      [
+        "bears",
+        "off"
+      ],
+      [
+        "bore",
+        "off"
+      ],
+      [
+        "borne",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bear (sth) off",
+  "senses": [
+    {
+      "senseId": "w:bear-off#s1",
+      "pos": "短语",
+      "glossZh": "赢得并带走（奖品等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-off#s2",
+      "pos": "短语",
+      "glossZh": "把……挡开；推开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-off#s3",
+      "pos": "短语",
+      "glossZh": "（船只等）驶离；移开以避让",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bear-off#s4",
+      "pos": "短语",
+      "glossZh": "（尤指西洋双陆棋中）将己方棋子移出棋盘",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

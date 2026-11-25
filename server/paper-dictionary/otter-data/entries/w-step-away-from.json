@@ -1,0 +1,214 @@
+{
+  "entryId": "w:step-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "step away from",
+      "tags": []
+    },
+    {
+      "form": "stepped away from",
+      "tags": []
+    },
+    {
+      "form": "stepping away from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step away from sb/sth",
+  "senses": [
+    {
+      "senseId": "w:step-away-from#s1",
+      "pos": "短语",
+      "glossZh": "暂时退出；暂时停止参与",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:step#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:step-away-from#e-3e6e95a8e8e33c18",
+          "text": "This process requires you to step away from optional online activities for thirty days.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 43
+          },
+          "parts": [
+            [
+              29,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-away-from#e-83fe27942773feb4",
+          "text": "Setiya’s story is a vivid example of how stepping away from unending pursuits can lift one out of a low point.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 59
+          },
+          "parts": [
+            [
+              41,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-away-from#e-4d1f46f91237dad3",
+          "text": "Some interactions, such as group chats, messages to friends and family abroad might feel urgent, but once I step away from them, I realize that the sense of urgency is a product of software engineering, my own anxiety, or a combination.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 122
+          },
+          "parts": [
+            [
+              108,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              122
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:step-away-from#s2",
+      "pos": "短语",
+      "glossZh": "走开；离开某人或某处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-away-from#e-b18507ccbfe62fa5",
+          "text": "Their uniforms were heavy with faint spots, like they'd just stepped away from a smoky scene, and their boots still held a hint of damp from the morning dew.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 78
+          },
+          "parts": [
+            [
+              61,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

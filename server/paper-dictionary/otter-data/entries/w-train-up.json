@@ -1,0 +1,108 @@
+{
+  "entryId": "w:train-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "train",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "train",
+        "up"
+      ],
+      [
+        "trained",
+        "up"
+      ],
+      [
+        "training",
+        "up"
+      ],
+      [
+        "trains",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "train up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "train (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:train-up#s1",
+      "pos": "短语",
+      "glossZh": "训练；培养使其具备所需能力",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:train-up#e-38931d15adcf5802",
+          "text": "Those exposures help train up kids’ immune systems.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        }
+      ],
+      "note": "可比喻为通过接触外界来训练免疫系统。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

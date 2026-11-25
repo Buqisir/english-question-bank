@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 57
+    "mock": 2
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -125,35 +125,34 @@
       ]
     },
     {
-      "senseId": "w:apple#s2",
-      "pos": "短语",
-      "glossZh": "喉结",
+      "senseId": "w:apple#s3",
+      "pos": "n.",
+      "glossZh": "腰果梨（cashew apple）",
       "pronunciationId": "w:apple#p-main",
-      "note": "Adam’s apple。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:apple#e-7db2cb5856aee540",
-          "text": "The father nodded, his Adam’s apple rolling slightly but his eyes never left the hopping swallow.",
+          "exampleId": "w:apple#e-469cd2f99fc73bb9",
+          "text": "When a cashew apple fully ripens, it turns sticky and juicy.",
           "source": {
-            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
-            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
-            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:4",
-              "sentence": 6
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation:3",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 30,
-            "end": 35
+            "start": 14,
+            "end": 19
           }
         }
       ]
@@ -169,6 +168,11 @@
       "reason": "低频或专门用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:adams-apple"
+  ]
 }

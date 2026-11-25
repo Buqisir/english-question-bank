@@ -1,0 +1,102 @@
+{
+  "entryId": "w:move-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "about"
+      ],
+      [
+        "moved",
+        "about"
+      ],
+      [
+        "moves",
+        "about"
+      ],
+      [
+        "moving",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move about",
+  "senses": [
+    {
+      "senseId": "w:move-about#s1",
+      "pos": "短语",
+      "glossZh": "四处走动；到处活动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-about#e-1fad3f8e4226b773",
+          "text": "Researchers have developed a robotic hand that can not only move about on its fingertips, but it can also bend its fingers backward, connect and disconnect from a robotic arm and pick up and carry one or more objects at a time, researchers report January 20 in Nature Communications.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 70
+          },
+          "parts": [
+            [
+              60,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

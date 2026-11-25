@@ -74,7 +74,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 2
   },
   "senses": [
     {
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -204,40 +204,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:sour#s6",
-      "pos": "短语",
-      "glossZh": "对……不再抱有好感",
-      "pronunciationId": "w:sour#p-main",
-      "note": "sour on somebody or something。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sour#e-003beafba179067c",
-          "text": "For some time now, people had soured on him.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 36
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -246,6 +212,11 @@
       "reason": "行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sour-on-sb-sth"
+  ]
 }

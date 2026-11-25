@@ -1,0 +1,124 @@
+{
+  "entryId": "w:no-worries",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "worries"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "worries"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no worries",
+  "senses": [
+    {
+      "senseId": "w:no-worries#s1",
+      "pos": "短语",
+      "glossZh": "别担心；没关系",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:no#s5",
+        "w:worry#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-worries#e-0f571e097a77656b",
+          "text": "No worries: He handed it to his wife, and she was gone in a flash down the road to buy a new tire iron.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-worries#e-b845350a044a2883",
+          "text": "Even well-meaning words of comfort like “no worries” may be perceived as mocking or insincere.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

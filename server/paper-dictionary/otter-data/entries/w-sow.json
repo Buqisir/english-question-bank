@@ -86,7 +86,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 1
+    "mock": 0
   },
   "senses": [
     {
@@ -168,7 +168,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -213,6 +213,6 @@
       "reason": "动物专称、历史义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,206 @@
+{
+  "entryId": "w:in-the-first-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "first",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "first",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the first place",
+  "senses": [
+    {
+      "senseId": "w:in-the-first-place#s1",
+      "pos": "短语",
+      "glossZh": "一开始；起初；本来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:first#s8",
+        "w:in#s60",
+        "w:place#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-first-place#e-423946b07cd06b45",
+          "text": "Do your part to preserve what makes a destination special in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 76
+          },
+          "parts": [
+            [
+              58,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-first-place#e-011f627197858769",
+          "text": "In his 1936 work How to Win Friends and Influence People, Dale Carnegie wrote: “I have come to the conclusion that there is only one way to get the best of an argument- and that is to avoid it.” This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 383,
+            "end": 401
+          },
+          "parts": [
+            [
+              383,
+              401
+            ]
+          ],
+          "highlightRanges": [
+            [
+              383,
+              401
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-first-place#e-22aa89c48c648122",
+          "text": "it in the first place, whose fault is it in situations like these where things go wrong?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 21
+          },
+          "parts": [
+            [
+              3,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:in-the-first-place#s2",
+      "pos": "短语",
+      "glossZh": "首先；第一点是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-first-place#e-a073bc6e3bbfca84",
+          "text": "What can people do in the first place?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 37
+          },
+          "parts": [
+            [
+              19,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "引出要说明的第一个理由或观点。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

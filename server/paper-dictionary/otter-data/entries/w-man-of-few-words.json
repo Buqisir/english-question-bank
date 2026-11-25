@@ -1,0 +1,100 @@
+{
+  "entryId": "w:man-of-few-words",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "man",
+      "of",
+      "few",
+      "words"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "man",
+        "of",
+        "few",
+        "words"
+      ],
+      [
+        "men",
+        "of",
+        "few",
+        "words"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "man of few words",
+  "senses": [
+    {
+      "senseId": "w:man-of-few-words#s1",
+      "pos": "短语",
+      "glossZh": "寡言少语的男人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:man-of-few-words#e-ac2766756a9aef3f",
+          "text": "A man of few words, he kept to himself, with no one knowing his family or entering his house.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 18
+          },
+          "parts": [
+            [
+              2,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,117 @@
+{
+  "entryId": "w:matter-of-life-and-death",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "matter",
+      "of",
+      "life",
+      "and",
+      "death"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "matter",
+        "of",
+        "life",
+        "and",
+        "death"
+      ],
+      [
+        "matters",
+        "of",
+        "life",
+        "and",
+        "death"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "matter of life and death",
+  "senses": [
+    {
+      "senseId": "w:matter-of-life-and-death#s1",
+      "pos": "短语",
+      "glossZh": "生死攸关的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:matter-of-life-and-death#e-727d8fe82584924c",
+          "text": "During treatment, the ability to quickly and effectively restore blood flow becomes a matter of life and death.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 110
+          },
+          "parts": [
+            [
+              86,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              110
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:matter-of-life-and-death#s2",
+      "pos": "短语",
+      "glossZh": "极其紧急或要紧的事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "夸张用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

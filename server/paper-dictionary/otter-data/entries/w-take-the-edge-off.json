@@ -1,0 +1,124 @@
+{
+  "entryId": "w:take-the-edge-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "edge",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "edge",
+        "off"
+      ],
+      [
+        "taken",
+        "the",
+        "edge",
+        "off"
+      ],
+      [
+        "takes",
+        "the",
+        "edge",
+        "off"
+      ],
+      [
+        "taking",
+        "the",
+        "edge",
+        "off"
+      ],
+      [
+        "took",
+        "the",
+        "edge",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take the edge off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the edge off (sth)",
+  "senses": [
+    {
+      "senseId": "w:take-the-edge-off#s1",
+      "pos": "短语",
+      "glossZh": "缓和紧张；减轻疼痛等不适",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-edge-off#e-e045581813d146f5",
+          "text": "For you, it might look like asking for reassurance before a decision, scrolling on your phone to tune out your thoughts, pouring a drink to take the edge off, or checking your emails five times for mistakes.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 157
+          },
+          "parts": [
+            [
+              140,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              157
+            ]
+          ]
+        }
+      ],
+      "note": "喝酒可以是语境中提到的缓解方式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

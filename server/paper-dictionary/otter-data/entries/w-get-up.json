@@ -1,0 +1,328 @@
+{
+  "entryId": "w:get-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets up",
+    "getting up"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "up"
+      ],
+      [
+        "gets",
+        "up"
+      ],
+      [
+        "getting",
+        "up"
+      ],
+      [
+        "got",
+        "up"
+      ],
+      [
+        "gotten",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get up",
+  "senses": [
+    {
+      "senseId": "w:get-up#s1",
+      "pos": "短语",
+      "glossZh": "起床",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s86"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-up#e-a0143570e64027dc",
+          "text": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 50
+          },
+          "parts": [
+            [
+              44,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-up#e-a7b7b36fb2c3bdce",
+          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          },
+          "parts": [
+            [
+              7,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-up#e-fcec15d1024bb607",
+          "text": "Get up early to do my homework?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:get-up#s2",
+      "pos": "短语",
+      "glossZh": "起身；站起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-up#e-37d8ee4811619a86",
+          "text": "Just get up and keep on going.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          },
+          "parts": [
+            [
+              5,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-up#e-066f8a6759df0d57",
+          "text": "If you’re stuck indoors, get up and stretch your body at least once in an hour.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          },
+          "parts": [
+            [
+              25,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-up#e-e1cdaec720b2ee43",
+          "text": "For every hour of studying, take a 5-minute break to get up and move your body.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 59
+          },
+          "parts": [
+            [
+              53,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-up#s3",
+      "pos": "短语",
+      "glossZh": "组织；召集",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 get up a team。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-up#s4",
+      "pos": "短语",
+      "glossZh": "装扮成；把……打扮成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be got up as。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-up#s5",
+      "pos": "短语",
+      "glossZh": "（风等）刮起来；渐强",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

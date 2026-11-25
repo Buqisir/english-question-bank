@@ -1,0 +1,62 @@
+{
+  "entryId": "w:set-about-doing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "about",
+      "doing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "about",
+        "doing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set about doing sth",
+  "senses": [
+    {
+      "senseId": "w:set-about-doing#s1",
+      "pos": "短语",
+      "glossZh": "着手做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:set#s16"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

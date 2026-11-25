@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 11
+    "mock": 0
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -112,7 +112,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -187,6 +187,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:snowy#s4",
+      "pos": "adj.",
+      "glossZh": "有杂讯的",
+      "pronunciationId": "w:snowy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:snowy#e-d27c5dd15d93e53b",
+          "text": "However, Mr Diamond says that the ability of AI to handle massive amounts of data means it’s possible to take millions of “snapshots” of the snowy audio picture over time, and to start to look for patterns.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 146
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -195,6 +228,6 @@
       "reason": "专名或鸟名的简称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

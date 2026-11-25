@@ -1,0 +1,101 @@
+{
+  "entryId": "w:art-is-long-life-is-short",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "art",
+      "is",
+      "long",
+      ",",
+      "life",
+      "is",
+      "short"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "art",
+        "is",
+        "long",
+        ",",
+        "life",
+        "is",
+        "short"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "art is long, life is short",
+  "senses": [
+    {
+      "senseId": "w:art-is-long-life-is-short#s1",
+      "pos": "短语",
+      "glossZh": "艺术长存，人生短暂",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:art-is-long-life-is-short#e-f509ced3dad2f608",
+          "text": "Art is long, life is short.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:23#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 26
+          },
+          "parts": [
+            [
+              0,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

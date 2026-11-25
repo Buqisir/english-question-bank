@@ -1,0 +1,65 @@
+{
+  "entryId": "w:strike-up-a-conversation",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strike",
+      "up",
+      "a",
+      "conversation"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        "up",
+        "a",
+        "conversation"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike up a conversation",
+  "senses": [
+    {
+      "senseId": "w:strike-up-a-conversation#s1",
+      "pos": "短语",
+      "glossZh": "主动攀谈；开始交谈",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:strike#s12"
+      ],
+      "examples": [],
+      "note": "常接 with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

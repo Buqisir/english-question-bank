@@ -1,0 +1,134 @@
+{
+  "entryId": "w:iron-sth-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "iron out"
+  ],
+  "pattern": {
+    "tokens": [
+      "iron",
+      {
+        "slot": "sth"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "iron",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "iron",
+        "out"
+      ],
+      [
+        "ironed",
+        "out"
+      ],
+      [
+        "ironing",
+        "out"
+      ],
+      [
+        "irons",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "ironed out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "iron sth out",
+  "senses": [
+    {
+      "senseId": "w:iron-sth-out#s1",
+      "pos": "短语",
+      "glossZh": "解决小问题；消除分歧",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:iron#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:iron-sth-out#e-02e0326c2dcc016c",
+          "text": "Such wrinkles will no doubt be ironed out.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:iron-sth-out#s2",
+      "pos": "短语",
+      "glossZh": "熨平褶皱；使表面变平滑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

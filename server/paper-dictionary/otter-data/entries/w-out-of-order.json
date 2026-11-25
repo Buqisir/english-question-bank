@@ -1,0 +1,158 @@
+{
+  "entryId": "w:out-of-order",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "order"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "order"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of order",
+  "senses": [
+    {
+      "senseId": "w:out-of-order#s1",
+      "pos": "短语",
+      "glossZh": "出故障；不能使用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:order#s8",
+        "w:out#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-of-order#e-1250d3b4aadfabf3",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 118
+          },
+          "parts": [
+            [
+              106,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              118
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-order#e-a8fb9ff2a63cdafd",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message: “Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-ii:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 119
+          },
+          "parts": [
+            [
+              107,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              119
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-order#e-d6244e6cd364b257",
+          "text": "The booking system was out of order.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

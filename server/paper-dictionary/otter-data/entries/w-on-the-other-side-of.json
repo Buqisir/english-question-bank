@@ -1,0 +1,184 @@
+{
+  "entryId": "w:on-the-other-side-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "other",
+      "side",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "other",
+        "side",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the other side of",
+  "senses": [
+    {
+      "senseId": "w:on-the-other-side-of#s1",
+      "pos": "短语",
+      "glossZh": "在……的另一边；在……的另一端",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-the-other-side-of#e-bd41c58598542d2d",
+          "text": "On the other side of the net, number 8 covered her mouth and yawned, as if the result had already been decided.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-168",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 20
+          },
+          "parts": [
+            [
+              0,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-other-side-of#e-f52c106e13caae15",
+          "text": "After a while, he spotted her on the other side of that fence.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 50
+          },
+          "parts": [
+            [
+              30,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-other-side-of#e-d0d877c9177ff570",
+          "text": "I put my sleeping bag on the other side of Shyla.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 42
+          },
+          "parts": [
+            [
+              22,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:on-the-other-side-of#s2",
+      "pos": "短语",
+      "glossZh": "在（某段时间或事件）之后",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:on-the-other-side-of#s3",
+      "pos": "短语",
+      "glossZh": "年龄超过……岁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

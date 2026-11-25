@@ -1,0 +1,171 @@
+{
+  "entryId": "w:zone-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "zone",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "zone",
+        "out"
+      ],
+      [
+        "zoned",
+        "out"
+      ],
+      [
+        "zones",
+        "out"
+      ],
+      [
+        "zoning",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "zoning out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "zone out",
+  "senses": [
+    {
+      "senseId": "w:zone-out#s1",
+      "pos": "短语",
+      "glossZh": "走神；放空",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:zone#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:zone-out#e-cb1f78e9be3ff6e2",
+          "text": "“It’s becoming much rarer to zone out and just let the mind wander, but that’s when we think in ways that broaden our minds.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:zone-out#e-e06aacbf5de4f776",
+          "text": "zoning out is typically shown to have a negative effect.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:zone-out#e-f5dc454261009f0b",
+          "text": "Still, it helps to have the option to zone out.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 46
+          },
+          "parts": [
+            [
+              38,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

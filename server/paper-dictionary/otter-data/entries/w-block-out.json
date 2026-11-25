@@ -1,0 +1,330 @@
+{
+  "entryId": "w:block-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "block",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "block",
+        "out"
+      ],
+      [
+        "blocked",
+        "out"
+      ],
+      [
+        "blocking",
+        "out"
+      ],
+      [
+        "blocks",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "block out",
+      "tags": []
+    },
+    {
+      "form": "blocked out",
+      "tags": []
+    },
+    {
+      "form": "blocks out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "block sth out",
+  "senses": [
+    {
+      "senseId": "w:block-out#s1",
+      "pos": "短语",
+      "glossZh": "挡住（光线）；隔绝（声音）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:block#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:block-out#e-983f275dcaa7bca8",
+          "text": "It blocks out background noise.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2021-national-b:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:block-out#e-f12a61f1e2c3c695",
+          "text": "It blocks out blue light.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:block-out#s2",
+      "pos": "短语",
+      "glossZh": "排除干扰；屏蔽无关信息或不愿去想的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:block-out#e-dcd2642d709b1f01",
+          "text": "Escape into books and block out noise.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 31
+          },
+          "parts": [
+            [
+              22,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:block-out#e-cbd65d3c19d44e25",
+          "text": "It blocks out distractions.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:33#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:block-out#e-380e5e50dfe65473",
+          "text": "Adults have experienced many things, so the visual part of their brains seems to be tuned to tick at a higher frequency, which studies suggest may help them to block out unimportant information, says Köster.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 160,
+            "end": 169
+          },
+          "parts": [
+            [
+              160,
+              169
+            ]
+          ],
+          "highlightRanges": [
+            [
+              160,
+              169
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:block-out#s3",
+      "pos": "短语",
+      "glossZh": "划出并预留（一段时间）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:block-out#e-23edf8aa5d510aa4",
+          "text": "Day after day, I repeated the same routines: I set up the perfect workspace, blocked out hours for writing, and reread old pages that had once made me proud.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:block-out#s4",
+      "pos": "短语",
+      "glossZh": "遮住（某物）使其看不见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:block-out#s5",
+      "pos": "短语",
+      "glossZh": "粗略勾勒；搭出框架",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

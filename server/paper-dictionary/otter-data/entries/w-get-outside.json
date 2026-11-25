@@ -1,0 +1,144 @@
+{
+  "entryId": "w:get-outside",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "outside"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "outside"
+      ],
+      [
+        "gets",
+        "outside"
+      ],
+      [
+        "getting",
+        "outside"
+      ],
+      [
+        "got",
+        "outside"
+      ],
+      [
+        "gotten",
+        "outside"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting outside",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get outside",
+  "senses": [
+    {
+      "senseId": "w:get-outside#s1",
+      "pos": "动词短语",
+      "glossZh": "出去；到户外去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s33"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-outside#e-afec3d0709cc9fc5",
+          "text": "“They get outside,” she says, “and they feel successful.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 17
+          },
+          "parts": [
+            [
+              6,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-outside#e-cce5b3d3e1892d1f",
+          "text": "Getting outside for a breath of fresh air feels like a reset for a lot of people.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

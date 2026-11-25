@@ -1,0 +1,103 @@
+{
+  "entryId": "w:take-a-leap-of-faith",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "leap",
+      "of",
+      "faith"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "leap",
+        "of",
+        "faith"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "took a leap of faith",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a leap of faith",
+  "senses": [
+    {
+      "senseId": "w:take-a-leap-of-faith#s1",
+      "pos": "短语",
+      "glossZh": "凭信念冒险一试",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:faith#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-leap-of-faith#e-1a2908d8b85d97ab",
+          "text": "In 2005, my husband Meherwan and I took a leap of faith.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 55
+          },
+          "parts": [
+            [
+              35,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

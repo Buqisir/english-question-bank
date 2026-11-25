@@ -1,0 +1,114 @@
+{
+  "entryId": "w:go-up-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going up against"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "up",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "up",
+        "against"
+      ],
+      [
+        "going",
+        "up",
+        "against"
+      ],
+      [
+        "goes",
+        "up",
+        "against"
+      ],
+      [
+        "gone",
+        "up",
+        "against"
+      ],
+      [
+        "went",
+        "up",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go up against",
+  "senses": [
+    {
+      "senseId": "w:go-up-against#s1",
+      "pos": "短语",
+      "glossZh": "与对手较量；迎战",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-up-against#e-c7c11aa9fb5c6dfb",
+          "text": "Over the past six weeks, Corinne’s science class at Wheatley Middle had been going up against eighth graders at a suburban school in the first annual “City Birder versus Burb Birder Spring Birding Competition.” Corinne was one of the few students still excited about the contest, which involved spotting birds in neighborhoods and parks, and going head-to-head in mini challenges.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 93
+          },
+          "parts": [
+            [
+              77,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

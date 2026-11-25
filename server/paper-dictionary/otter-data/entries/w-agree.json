@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 130
+    "mock": 27
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -212,7 +212,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -236,23 +236,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:agree#s4",
-      "pos": "短语",
-      "glossZh": "（食物或气候等）适合某人",
-      "pronunciationId": "w:agree#p-main",
-      "note": "agree with sb，也常用于否定。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:agree-with-sb"
+  ]
 }

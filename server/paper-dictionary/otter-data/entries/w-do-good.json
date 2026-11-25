@@ -1,0 +1,185 @@
+{
+  "entryId": "w:do-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "does good",
+    "doing good"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "good"
+      ],
+      [
+        "does",
+        "good"
+      ],
+      [
+        "doing",
+        "good"
+      ],
+      [
+        "did",
+        "good"
+      ],
+      [
+        "done",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do good",
+  "senses": [
+    {
+      "senseId": "w:do-good#s1",
+      "pos": "短语",
+      "glossZh": "行善；做好事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:do-good#e-6fcb964d84194281",
+          "text": "Furthermore, people who do good merely to feel good about themselves are judged less harshly than those seeking to enhance their reputation.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 31
+          },
+          "parts": [
+            [
+              24,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-good#e-33d0f78c773e94b1",
+          "text": "These modern researchers are rediscovering an age-old wisdom: we should practice doing good regularly, not just for the sake of the people we benefit, but for our own.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 91
+          },
+          "parts": [
+            [
+              81,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:do-good#s2",
+      "pos": "短语",
+      "glossZh": "起到有益作用；带来好处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:do-good#e-256b7c9f3924d3d7",
+          "text": "Ultimately, given the massive energy consumed by algorithms (算法), it is essential that AI be employed to “do good in terms of fighting the climate crisis – designing the next generation of batteries, tracking deforestation,” as Sasha Luccioni, climate lead at an AI firm, said, rather than “create social-media websites filled with rubbish while data centres are still powered by coal-fired generators.”",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 113
+          },
+          "parts": [
+            [
+              106,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,141 @@
+{
+  "entryId": "w:dress-up-as-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "dress up as"
+  ],
+  "pattern": {
+    "tokens": [
+      "dress",
+      "up",
+      "as",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dress",
+        "up",
+        "as",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dressing up as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dress up as sb/sth",
+  "senses": [
+    {
+      "senseId": "w:dress-up-as-sb#s1",
+      "pos": "短语",
+      "glossZh": "穿上特定服装装扮成……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:dress#s3",
+        "w:up#s49"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dress-up-as-sb#e-4aad75e94d2c4c7c",
+          "text": "Dressing up as soldiers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dress-up-as-sb#e-461ef72a3095865c",
+          "text": "The employees dress up as bears.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

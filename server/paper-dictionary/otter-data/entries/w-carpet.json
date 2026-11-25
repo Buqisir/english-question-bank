@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 10
+    "mock": 1
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -169,40 +169,6 @@
       ]
     },
     {
-      "senseId": "w:carpet#s3",
-      "pos": "短语",
-      "glossZh": "红毯",
-      "pronunciationId": "w:carpet#p-main",
-      "note": "red carpet",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carpet#e-89b6d99d56efc469",
-          "text": "Scarlett Johansson and June Squibb on the red carpet together is a moment waiting to happen.",
-          "source": {
-            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
-            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
-            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 46,
-            "end": 52
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:carpet#s4",
       "pos": "v.",
       "glossZh": "给……铺地毯；铺满",
@@ -222,6 +188,11 @@
       "reason": "昆虫名称、旧义或地区用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:red-carpet"
+  ]
 }

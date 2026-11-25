@@ -42,8 +42,8 @@
     "mock": 316
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 312
+    "gaokao": 8,
+    "mock": 119
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 97
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -267,7 +267,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -331,75 +331,6 @@
       ]
     },
     {
-      "senseId": "w:heart#s5",
-      "pos": "短语",
-      "glossZh": "凭记忆",
-      "pronunciationId": "w:heart#p-main",
-      "note": "by heart。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:heart#e-21ec1db5f2a29601",
-          "text": "You may find yourself having to learn something by heart.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:heart#s6",
-      "pos": "短语",
-      "glossZh": "非常紧张；担惊受怕",
-      "pronunciationId": "w:heart#p-main",
-      "note": "one’s heart is in one’s mouth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:heart#e-e7a32bcfaaf869fd",
-          "text": "With his heart in his mouth, Kevin grabbed Mrs. Hill’s home phone and called the police.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:heart#s7",
       "pos": "n.",
       "glossZh": "心形",
@@ -407,7 +338,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -470,13 +401,46 @@
       "glossZh": "勇气",
       "pronunciationId": "w:heart#p-main",
       "note": "如 lose heart 意为「丧失信心」。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:heart#s10",
+      "pos": "v.",
+      "glossZh": "爱；喜欢",
+      "pronunciationId": "w:heart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:heart#e-5f94401ead768c40",
+          "text": "The closest match I can think of in English to this would be something like “I <3 you” or “I heart you”, representing “I love you”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 98
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -485,6 +449,21 @@
       "reason": "网络或植物栽培用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-the-heart-of",
+    "w:by-heart",
+    "w:from-the-bottom-of-ones-heart",
+    "w:have-a-heart",
+    "w:heart-and-soul",
+    "w:heart-in-ones-mouth",
+    "w:heart-of-gold",
+    "w:heavy-heart",
+    "w:ones-heart-is-in-ones-mouth",
+    "w:ones-heart-sinks",
+    "w:strike-fear-into-ones-heart"
+  ]
 }

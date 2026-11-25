@@ -1,0 +1,103 @@
+{
+  "entryId": "w:run-wild",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "run",
+      "wild"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "wild"
+      ],
+      [
+        "ran",
+        "wild"
+      ],
+      [
+        "running",
+        "wild"
+      ],
+      [
+        "runs",
+        "wild"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run wild",
+  "senses": [
+    {
+      "senseId": "w:run-wild#s1",
+      "pos": "短语",
+      "glossZh": "不受约束地发展；失去控制",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-wild#e-8cecabb614743dd6",
+          "text": "Plus, without concrete visuals, listeners’ imaginations run wild.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:12",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          },
+          "parts": [
+            [
+              56,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              64
+            ]
+          ]
+        }
+      ],
+      "note": "想象力作主语时，指天马行空地想象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

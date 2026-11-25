@@ -1,0 +1,268 @@
+{
+  "entryId": "w:ask-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "asking for"
+  ],
+  "pattern": {
+    "tokens": [
+      "ask",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ask",
+        "for"
+      ],
+      [
+        "asking",
+        "for"
+      ],
+      [
+        "asked",
+        "for"
+      ],
+      [
+        "asks",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "asked for",
+      "tags": []
+    },
+    {
+      "form": "asks for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ask for",
+  "senses": [
+    {
+      "senseId": "w:ask-for#s1",
+      "pos": "短语",
+      "glossZh": "请求；索要",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ask-for#e-8301b19123e0faf6",
+          "text": "It may seem like a simple request to ask for salt and pepper at a meal",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-national-a:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 44
+          },
+          "parts": [
+            [
+              37,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ask-for#e-4edd82eb65d305b7",
+          "text": "For instance, almost all animals have distinct vocals（声音）that they rely on to either ask for help, scare away any dangerous animals or look for shelter.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 92
+          },
+          "parts": [
+            [
+              85,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ask-for#e-2f0f295b6aa9a457",
+          "text": "I’m writing to ask for your help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          },
+          "parts": [
+            [
+              15,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              22
+            ]
+          ]
+        }
+      ],
+      "note": "也可接人，表示要求见某人或请某人来接电话。",
+      "counts": {
+        "gaokao": 24,
+        "mock": 80
+      }
+    },
+    {
+      "senseId": "w:ask-for#s2",
+      "pos": "短语",
+      "glossZh": "需要；要求具备",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ask-for#e-f8a70b07f903c00c",
+          "text": "In these blooms, people find a mirror to life’s simplest wisdom: true beauty asks for little, but gives endlessly.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          },
+          "parts": [
+            [
+              77,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ask-for#e-f7a558b371b097b2",
+          "text": "Daffodils ask for strict light and water control.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:ask-for#s3",
+      "pos": "短语",
+      "glossZh": "自找；招来（麻烦等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be asking for trouble。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 24,
+    "mock": 87
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

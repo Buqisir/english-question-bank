@@ -1,0 +1,65 @@
+{
+  "entryId": "w:stop-in-its-tracks",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stop",
+      "in",
+      "its",
+      "tracks"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stop",
+        "in",
+        "its",
+        "tracks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stop (sb/sth) in one's tracks",
+  "senses": [
+    {
+      "senseId": "w:stop-in-its-tracks#s1",
+      "pos": "短语",
+      "glossZh": "突然停住；使某人或某事当即停下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:track#s10"
+      ],
+      "examples": [],
+      "note": "物主限定词随停下的人或事物变化，如 stop it in its tracks。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

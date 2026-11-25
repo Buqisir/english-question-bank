@@ -1,0 +1,212 @@
+{
+  "entryId": "w:go-to-bed",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going to bed",
+    "went to bed"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "bed"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "bed"
+      ],
+      [
+        "going",
+        "to",
+        "bed"
+      ],
+      [
+        "went",
+        "to",
+        "bed"
+      ],
+      [
+        "goes",
+        "to",
+        "bed"
+      ],
+      [
+        "gone",
+        "to",
+        "bed"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone to bed",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to bed",
+  "senses": [
+    {
+      "senseId": "w:go-to-bed#s1",
+      "pos": "短语",
+      "glossZh": "上床睡觉；去睡觉",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bed#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-to-bed#e-a0143570e64027dc",
+          "text": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 39
+          },
+          "parts": [
+            [
+              30,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-bed#e-c138e09c262ce015",
+          "text": "I am down there in my wheelchair in the morning letting the hens out and down there again at night to see they’ve gone to bed.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-c-4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 125
+          },
+          "parts": [
+            [
+              114,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-bed#e-67b22a63278db482",
+          "text": "Go to bed.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:go-to-bed#s2",
+      "pos": "短语",
+      "glossZh": "（报刊）定稿付印",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-to-bed#s3",
+      "pos": "短语",
+      "glossZh": "与某人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 go to bed with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

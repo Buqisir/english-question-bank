@@ -1,0 +1,339 @@
+{
+  "entryId": "w:let-sb-sth-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "let out",
+    "letting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      {
+        "slot": "sb/sth"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "let",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "let",
+        "out"
+      ],
+      [
+        "letting",
+        "out"
+      ],
+      [
+        "lets",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:let-sb-sth-out#s1",
+      "pos": "短语",
+      "glossZh": "让……出去；放出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:let#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-sb-sth-out#e-c138e09c262ce015",
+          "text": "I am down there in my wheelchair in the morning letting the hens out and down there again at night to see they’ve gone to bed.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-c-4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 68
+          },
+          "parts": [
+            [
+              48,
+              55
+            ],
+            [
+              65,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              55
+            ],
+            [
+              65,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-sth-out#e-62602495daa3ff85",
+          "text": "Inserting the correct “key” would let out the nut.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-sth-out#e-88e8b53043d525da",
+          "text": "Walking and taking big breaths of fresh air are like gently letting the pressure out...”",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 84
+          },
+          "parts": [
+            [
+              60,
+              67
+            ],
+            [
+              81,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ],
+            [
+              81,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:let-sb-sth-out#s2",
+      "pos": "短语",
+      "glossZh": "发出（叫声、笑声等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:let#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-sb-sth-out#e-b85f046ee6e88d5e",
+          "text": "She again looked directly into my eyes, then let out a squeaking call and was gone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 52
+          },
+          "parts": [
+            [
+              45,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-sth-out#e-3e1b905bf2c975a7",
+          "text": "Suddenly, Ziyad let out a sharp cry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-sth-out#e-9fe35888f2d56997",
+          "text": "The son stared at the empty branch, casually threw the newspaper on the bench and let out a heavy sigh.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 89
+          },
+          "parts": [
+            [
+              82,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:let-sb-sth-out#s3",
+      "pos": "短语",
+      "glossZh": "泄露（秘密等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:let-sb-sth-out#s4",
+      "pos": "短语",
+      "glossZh": "把衣服放宽",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:let-sb-sth-out#s5",
+      "pos": "短语",
+      "glossZh": "出租（房屋等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

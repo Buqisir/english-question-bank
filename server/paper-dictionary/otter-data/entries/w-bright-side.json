@@ -1,0 +1,158 @@
+{
+  "entryId": "w:bright-side",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bright",
+      "side"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bright",
+        "side"
+      ],
+      [
+        "bright",
+        "sides"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bright side",
+  "senses": [
+    {
+      "senseId": "w:bright-side#s1",
+      "pos": "短语",
+      "glossZh": "好的一面；困境中值得庆幸之处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bright-side#e-033e545c0cfa26f6",
+          "text": "But like my father, I saw the bright side – so many people read the piece and loved it, sharing joyful emotions and praise on social media.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 41
+          },
+          "parts": [
+            [
+              30,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bright-side#e-d22d51bb5d9286e8",
+          "text": "She seldom sees the bright side of anything.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bright-side#e-a0f73fb4e6fb9907",
+          "text": "But I see a bright side.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 see 或 look on the bright side。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

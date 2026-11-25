@@ -1,0 +1,123 @@
+{
+  "entryId": "w:live-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "live",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "off"
+      ],
+      [
+        "lived",
+        "off"
+      ],
+      [
+        "lives",
+        "off"
+      ],
+      [
+        "living",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lived off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live off",
+  "senses": [
+    {
+      "senseId": "w:live-off#s1",
+      "pos": "短语",
+      "glossZh": "靠……维持生计",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:live#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:live-off#e-e84e6c2ac89e0ddd",
+          "text": "The project becomes a rare partnership between people who once lived off the forest and those who now seek to save it.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        }
+      ],
+      "note": "可接供养自己的人、收入或赖以为生的资源。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:live-off#s2",
+      "pos": "短语",
+      "glossZh": "靠吃……维持生活",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

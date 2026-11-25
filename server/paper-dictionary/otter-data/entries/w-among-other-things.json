@@ -1,0 +1,123 @@
+{
+  "entryId": "w:among-other-things",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "among",
+      "other",
+      "things"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "among",
+        "other",
+        "things"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "among other things",
+  "senses": [
+    {
+      "senseId": "w:among-other-things#s1",
+      "pos": "短语",
+      "glossZh": "此外还有别的；所列仅为其中一部分",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:among-other-things#e-ea2eee31fd278be5",
+          "text": "actually in peanut butter and vanilla flavoring, among other things.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 67
+          },
+          "parts": [
+            [
+              49,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:among-other-things#e-1b1cefa8fb629a54",
+          "text": "Your friendships don't just impact your social life – they affect your motivation, your academics, and, among other things, your sense of self.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 122
+          },
+          "parts": [
+            [
+              104,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              122
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

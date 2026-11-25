@@ -1,0 +1,68 @@
+{
+  "entryId": "w:lay-sth-to-rest",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lay",
+      {
+        "slot": "sth"
+      },
+      "to",
+      "rest"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lay",
+        {
+          "slot": "sth"
+        },
+        "to",
+        "rest"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lay sth to rest",
+  "senses": [
+    {
+      "senseId": "w:lay-sth-to-rest#s1",
+      "pos": "短语",
+      "glossZh": "消除疑虑；平息谣言或争议",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:lay#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

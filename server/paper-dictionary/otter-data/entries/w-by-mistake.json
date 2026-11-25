@@ -1,0 +1,157 @@
+{
+  "entryId": "w:by-mistake",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "mistake"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "mistake"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by mistake",
+  "senses": [
+    {
+      "senseId": "w:by-mistake#s1",
+      "pos": "短语",
+      "glossZh": "由于弄错；无意中做错",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s12",
+        "w:mistake#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-mistake#e-b77161845ef5ede0",
+          "text": "He got on a train by mistake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 28
+          },
+          "parts": [
+            [
+              18,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-mistake#e-b50209ebe2100683",
+          "text": "“Oh no, the lady took my phone by mistake!” Meanwhile, the guy on the bike stayed close to me.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-mistake#e-b4272a6d0d50d8f1",
+          "text": "Resetting the whole account by mistake.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:30#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 38
+          },
+          "parts": [
+            [
+              28,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

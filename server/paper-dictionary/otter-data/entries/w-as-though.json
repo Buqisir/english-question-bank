@@ -1,0 +1,157 @@
+{
+  "entryId": "w:as-though",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "though"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "though"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as though",
+  "senses": [
+    {
+      "senseId": "w:as-though#s1",
+      "pos": "短语",
+      "glossZh": "好像；仿佛",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s9",
+        "w:though#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-though#e-c5054938ff6b8d34",
+          "text": "I felt he treated me as though I would hold him back and probably make him fail to get an A in the course.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-though#e-8400b4a044777bb9",
+          "text": "I always read, using different voices, as though I were acting out the stories with my voice and they loved it!",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 48
+          },
+          "parts": [
+            [
+              39,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-though#e-6c41b26cd3fa7fff",
+          "text": "as though",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:52#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "note": "引导从句，可描述表象或假设。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -71,82 +71,10 @@
     "mock": 26
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 23
+    "gaokao": 6,
+    "mock": 1
   },
   "senses": [
-    {
-      "senseId": "w:scare#s1",
-      "pos": "短语",
-      "glossZh": "吓跑",
-      "pronunciationId": "w:scare#p-main",
-      "note": "scare off；scare away。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:scare#e-e99decc298902282",
-          "text": "Sometimes loud noises like these will scare bears off.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:scare#e-4049838f364b22e6",
-          "text": "We watched it from a distance, not wanting to disturb it or scare off its mother.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 65
-          }
-        },
-        {
-          "exampleId": "w:scare#e-e408ebf5296c1053",
-          "text": "For instance, almost all animals have distinct vocals（声音）that they rely on to either ask for help, scare away any dangerous animals or look for shelter.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 99,
-            "end": 104
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:scare#s2",
       "pos": "adj.",
@@ -156,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -227,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -315,6 +243,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:scare#s6",
+      "pos": "v.",
+      "glossZh": "受惊",
+      "pronunciationId": "w:scare#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:scare#e-e08629f9f4b3e841",
+          "text": "Butterflies scared up at my feet.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -323,6 +284,12 @@
       "reason": "罕见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:scare-away",
+    "w:scare-off"
+  ]
 }

@@ -1,0 +1,75 @@
+{
+  "entryId": "w:enough-is-enough",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "enough",
+      "is",
+      "enough"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "enough",
+        "is",
+        "enough"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "enough is enough",
+  "senses": [
+    {
+      "senseId": "w:enough-is-enough#s1",
+      "pos": "短语",
+      "glossZh": "受够了；到此为止吧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:enough#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:enough-is-enough#s2",
+      "pos": "短语",
+      "glossZh": "已经够了；无需再加",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

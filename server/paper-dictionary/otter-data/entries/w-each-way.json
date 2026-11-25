@@ -1,0 +1,105 @@
+{
+  "entryId": "w:each-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "each",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "each",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "each way",
+  "senses": [
+    {
+      "senseId": "w:each-way#s1",
+      "pos": "短语",
+      "glossZh": "去程和回程各自；按单程计",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:each-way#e-2b560ffd2816aba2",
+          "text": "☑FREE private UK driver service, up to 100 miles each way, for ALL bookings",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          },
+          "parts": [
+            [
+              49,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "常跟在距离、票价或所需时间之后。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:each-way#s2",
+      "pos": "短语",
+      "glossZh": "（赛马等）同时押注夺冠和进入规定名次",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "修饰名词时常写作 each-way，如 an each-way bet。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,90 @@
+{
+  "entryId": "w:lead-the-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leading the way"
+  ],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "the",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "the",
+        "way"
+      ],
+      [
+        "leading",
+        "the",
+        "way"
+      ],
+      [
+        "leads",
+        "the",
+        "way"
+      ],
+      [
+        "led",
+        "the",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead the way",
+  "senses": [
+    {
+      "senseId": "w:lead-the-way#s1",
+      "pos": "短语",
+      "glossZh": "在前面带路",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lead-the-way#s2",
+      "pos": "短语",
+      "glossZh": "带头行动；走在同行前面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

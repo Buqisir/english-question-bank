@@ -1,0 +1,154 @@
+{
+  "entryId": "w:plenty-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "plenty",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plenty",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plenty of",
+  "senses": [
+    {
+      "senseId": "w:plenty-of#s1",
+      "pos": "短语",
+      "glossZh": "大量的；充足的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:plenty#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:plenty-of#e-fca152dd4fa4be5b",
+          "text": "Toby was using up his energy by running back and forth in the backyard and giving the kids plenty of room.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plenty-of#e-3f6c45885d1eb8d0",
+          "text": "Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          },
+          "parts": [
+            [
+              19,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plenty-of#e-5151f61293135a20",
+          "text": "They should also prepare plenty of reusable bags to carry their \"new\" clothes home.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 11,
+        "mock": 41
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

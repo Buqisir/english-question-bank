@@ -201,6 +201,10 @@
       "reason": "大写 SHE 同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:he-or-she",
+    "w:he-said-she-said"
+  ]
 }

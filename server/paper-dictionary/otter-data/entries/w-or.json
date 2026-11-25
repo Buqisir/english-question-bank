@@ -35,7 +35,7 @@
     "mock": 2592
   },
   "unassignedCounts": {
-    "gaokao": 289,
+    "gaokao": 291,
     "mock": 2592
   },
   "senses": [
@@ -228,59 +228,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:or#s5",
-      "pos": "短语",
-      "glossZh": "左右；大约",
-      "pronunciationId": "w:or#p-main",
-      "note": "or so 用在数量后。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:or#e-8f134e262bd47498",
-          "text": "In the last century or so, these changes have accelerated.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:grammar-fill:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:or#e-f45109f55fa4e2cf",
-          "text": "However, in this case, I was a woman all alone, in a strange neighborhood, at night, and there were twenty or so very large men – all wearing insignia（徽章） that indicated they were in some sort of club – standing before me.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 109
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -289,6 +236,31 @@
       "reason": "同形术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-thing-or-two",
+    "w:believe-it-or-not",
+    "w:day-or-night",
+    "w:he-or-she",
+    "w:here-or-there",
+    "w:like-it-or-not",
+    "w:more-or-less",
+    "w:once-or-twice",
+    "w:one-or-two",
+    "w:one-way-or-another",
+    "w:or-anything",
+    "w:or-else",
+    "w:or-so",
+    "w:or-something",
+    "w:or-what",
+    "w:or-whatever",
+    "w:put-up-or-shut-up",
+    "w:rain-or-shine",
+    "w:sooner-or-later",
+    "w:take-it-or-leave-it",
+    "w:use-it-or-lose-it"
+  ]
 }

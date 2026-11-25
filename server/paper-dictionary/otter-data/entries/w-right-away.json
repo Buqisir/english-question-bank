@@ -1,0 +1,155 @@
+{
+  "entryId": "w:right-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right away",
+  "senses": [
+    {
+      "senseId": "w:right-away#s1",
+      "pos": "短语",
+      "glossZh": "立刻；马上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:away#s9",
+        "w:right#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:right-away#e-2dbf6d94d60a4584",
+          "text": "Ollie suggested a robot, while I thought of a tree, but we couldn’t decide right away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-away#e-453712de625a901f",
+          "text": "However, it’s important to remember that there are hidden dangers that many young people may not notice right away.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 114
+          },
+          "parts": [
+            [
+              104,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              114
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-away#e-1acfae3fc6573319",
+          "text": "When I weakly said I wanted to stop, she didn’t answer right away.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 65
+          },
+          "parts": [
+            [
+              55,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

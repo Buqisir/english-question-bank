@@ -1,0 +1,88 @@
+{
+  "entryId": "w:ride-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ride",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ride",
+        "up"
+      ],
+      [
+        "ridden",
+        "up"
+      ],
+      [
+        "rides",
+        "up"
+      ],
+      [
+        "riding",
+        "up"
+      ],
+      [
+        "rode",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ride up",
+  "senses": [
+    {
+      "senseId": "w:ride-up#s1",
+      "pos": "短语",
+      "glossZh": "（衣物）往上滑；向上缩",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ride-up#s2",
+      "pos": "短语",
+      "glossZh": "骑车或骑马来到近前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 ride up to sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

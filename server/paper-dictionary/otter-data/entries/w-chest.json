@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 23
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -187,20 +187,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:chest#s3",
-      "pos": "短语",
-      "glossZh": "把心里话说出来；把烦心事说出来",
-      "pronunciationId": "w:chest#p-main",
-      "note": "get something off one's chest",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -209,6 +195,11 @@
       "reason": "少见、运动或专名缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-sth-off-ones-chest"
+  ]
 }

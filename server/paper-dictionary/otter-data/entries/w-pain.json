@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 114
+    "mock": 13
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -262,9 +262,43 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:pain#s5",
+      "pos": "n.",
+      "glossZh": "辛苦；费心付出的努力（pains）",
+      "pronunciationId": "w:pain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pain#e-d0a97989d6e153db",
+          "text": "No pains, no gains.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:32",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

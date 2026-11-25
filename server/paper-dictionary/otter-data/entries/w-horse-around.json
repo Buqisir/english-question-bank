@@ -1,0 +1,72 @@
+{
+  "entryId": "w:horse-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "horse",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "horse",
+        "around"
+      ],
+      [
+        "horsed",
+        "around"
+      ],
+      [
+        "horses",
+        "around"
+      ],
+      [
+        "horsing",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "horse around",
+  "senses": [
+    {
+      "senseId": "w:horse-around#s1",
+      "pos": "短语",
+      "glossZh": "嬉闹；胡闹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:horse#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

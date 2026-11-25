@@ -1,0 +1,135 @@
+{
+  "entryId": "w:fish-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fish",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fish",
+        "out"
+      ],
+      [
+        "fished",
+        "out"
+      ],
+      [
+        "fishes",
+        "out"
+      ],
+      [
+        "fishing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fished out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fish sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:fish-out#s1",
+      "pos": "短语",
+      "glossZh": "（从口袋、包等处）摸出；翻找后取出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fish#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fish-out#e-bd0cf423256635b6",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          },
+          "parts": [
+            [
+              36,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fish-out#s2",
+      "pos": "短语",
+      "glossZh": "把（人或物）从水里捞出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fish-out#s3",
+      "pos": "短语",
+      "glossZh": "把某片水域的鱼捕捞殆尽",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

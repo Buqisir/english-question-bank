@@ -42,8 +42,8 @@
     "mock": 551
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 549
+    "gaokao": 7,
+    "mock": 371
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 31,
-        "mock": 0
+        "mock": 89
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -248,7 +248,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -291,78 +291,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:idea#s5",
-      "pos": "短语",
-      "glossZh": "不知道",
-      "pronunciationId": "w:idea#p-main",
-      "note": "have no idea。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:idea#e-a95b5986c3d567e6",
-          "text": "“I had no idea about what I’d find there and I wasn’t nervous, I just wanted to do it.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:idea#e-3539e21a898bf9ed",
-          "text": "Halfway down the page you realize that you have no idea what you have read.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:idea#e-cab9d789cb7a4b54",
-          "text": "These tasks, which were key to my project, confused me: I had no idea how to organize the corner in a neat and orderly way, how to use simple tech tools to record audio, or even how to ask Ms. Henderson, the librarian, for permission.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 69
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -371,6 +299,13 @@
       "reason": "专门术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:have-no-idea",
+    "w:hit-on-an-idea",
+    "w:no-idea"
+  ]
 }

@@ -1,0 +1,195 @@
+{
+  "entryId": "w:act-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "acting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "act",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "act",
+        "out"
+      ],
+      [
+        "acting",
+        "out"
+      ],
+      [
+        "acted",
+        "out"
+      ],
+      [
+        "acts",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "act (sth) out",
+  "senses": [
+    {
+      "senseId": "w:act-out#s1",
+      "pos": "短语",
+      "glossZh": "用动作或声音把（情节、情景等）演出来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:out#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:act-out#e-8400b4a044777bb9",
+          "text": "I always read, using different voices, as though I were acting out the stories with my voice and they loved it!",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 66
+          },
+          "parts": [
+            [
+              56,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:act-out#e-a63f217744396f57",
+          "text": "Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 138
+          },
+          "parts": [
+            [
+              128,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              128,
+              138
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:act-out#e-7eff11de7fde7358",
+          "text": "Wonderment from acting out the stories.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2020-national-ii:33#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:act-out#s2",
+      "pos": "短语",
+      "glossZh": "故意装出（惊讶、害怕等反应）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:act-out#s3",
+      "pos": "短语",
+      "glossZh": "用不当举动发泄情绪；因情绪困扰而胡闹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 76,
-    "mock": 661
+    "mock": 466
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -104,12 +104,12 @@
       "glossZh": "以……为依据",
       "pronunciationId": "w:found#p-main",
       "note": "be founded on。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -124,6 +124,435 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:found#s4",
+      "pos": "v.",
+      "glossZh": "找到；寻获（find 的过去式和过去分词）",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 56
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-8da35b81976c8c37",
+          "text": "Lily and Chloe found their names in an instant among the neat rows of letters.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:found#e-b967ee4e81fd665b",
+          "text": "Glancing back, under the camera, she found a faded brown developing kit, labeled: “Emergency film developing.”",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:found#e-e7eb1299cb6f4fc6",
+          "text": "Instead of thirty or forty messages, I found only five requiring my attention.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:13",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:found#s5",
+      "pos": "v.",
+      "glossZh": "发现；查明（事实）",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 77
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-9a2ca20bd250fe3f",
+          "text": "Anik and her colleagues found that students who attended museums showed greater emotional, behavioural and cognitive engagement than before.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:found#e-3f20316a4888a292",
+          "text": "The researchers found that tool users had less dental damage from biting hard food items.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:found#e-387466d6c6802e0c",
+          "text": "A 2023 analysis found that participating in sports is linked with better mental health.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:found#s6",
+      "pos": "v.",
+      "glossZh": "觉得；认为",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-dfe0f34622ef02e9",
+          "text": "Having grown up in the foster (寄养) system, she found life as a college student mostly mysterious.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:found#e-a83825aa0479c76b",
+          "text": "He found no challenge in his job.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-hunan-zhuzhou-2026-01-first:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:found#e-a3160133c8cd7b76",
+          "text": "He found it too boring.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:found#s7",
+      "pos": "v.",
+      "glossZh": "发觉自己处于某种情境",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-188f23551a60aeaf",
+          "text": "Surrounded by crowds of joyful families and devoted lifelong fans, I unexpectedly found myself genuinely cheering loudly for every goal and groaning disappointedly at all the missed chances.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:found#e-7db2f513091c5d45",
+          "text": "Instead, I found myself staring at a blinking（闪烁的）typing line that seemed to flash with quiet accusation.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:found#e-e40a09aa4a9ffb62",
+          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:found#s8",
+      "pos": "v.",
+      "glossZh": "获得；感受到",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-fe6f7b3b2f6724a1",
+          "text": "I found unexpected companionship and freedom, finally being just me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:3",
+              "sentence": 12
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:found#e-eafc5b61b75a715e",
+          "text": "But Steve James, a 65-year-old retired banker, has found his feet and reached the halfway mark – an average of 100 marathons in 100 days.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:found#e-6e953519b0aee0f0",
+          "text": "It matches his own story, as he found strength in sports after losing his legs.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:found#s9",
+      "pos": "v.",
+      "glossZh": "见于；存在于（被动式）",
+      "pronunciationId": "w:found#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:found#e-f104e0a318fa946d",
+          "text": "The entire collection of 400,000 books is now being treated, as drugstore beetles – also known as bread beetles – have been found throughout the library.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:found#e-e091f831dcfc5f22",
+          "text": "Hope can be found in troubled neighborhoods.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:found#e-d8b58d2e0803e875",
+          "text": "Research shows that divergent thinking is mostly found among people who know how to ask questions.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -132,6 +561,9 @@
       "reason": "绝大多数真题命中为 find 的变形；孤立 founded 选项没有完整语境"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:lost-and-found"
+  ]
 }

@@ -1,0 +1,153 @@
+{
+  "entryId": "w:go-to-the-bathroom",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      "the",
+      "bathroom"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        "the",
+        "bathroom"
+      ],
+      [
+        "goes",
+        "to",
+        "the",
+        "bathroom"
+      ],
+      [
+        "going",
+        "to",
+        "the",
+        "bathroom"
+      ],
+      [
+        "gone",
+        "to",
+        "the",
+        "bathroom"
+      ],
+      [
+        "went",
+        "to",
+        "the",
+        "bathroom"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to the bathroom",
+  "senses": [
+    {
+      "senseId": "w:go-to-the-bathroom#s1",
+      "pos": "短语",
+      "glossZh": "上厕所；大小便",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bathroom#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-to-the-bathroom#e-581eebfc2c539388",
+          "text": "Our puppy needed to learn to go to the bathroom outside.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 47
+          },
+          "parts": [
+            [
+              29,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-to-the-bathroom#e-857bc52e1b335fb4",
+          "text": "Go to the bathroom.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "委婉用语，也可指宠物排泄。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

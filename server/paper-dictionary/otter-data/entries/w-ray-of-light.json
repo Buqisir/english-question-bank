@@ -1,0 +1,110 @@
+{
+  "entryId": "w:ray-of-light",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ray",
+      "of",
+      "light"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ray",
+        "of",
+        "light"
+      ],
+      [
+        "rays",
+        "of",
+        "light"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ray of light",
+  "senses": [
+    {
+      "senseId": "w:ray-of-light#s1",
+      "pos": "短语",
+      "glossZh": "困境中的一线希望；带来慰藉或启发的人或事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ray-of-light#e-c5b721113795f1fb",
+          "text": "Every dream lost in the dark longs for a ray of light – and for Lily, that light came from a stranger.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:ray-of-light#s2",
+      "pos": "短语",
+      "glossZh": "一束光；一道光线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

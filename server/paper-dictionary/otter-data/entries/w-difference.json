@@ -42,8 +42,8 @@
     "mock": 202
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 202
+    "gaokao": 12,
+    "mock": 58
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 141
       },
       "folded": false,
       "examples": [
@@ -118,88 +118,16 @@
       ]
     },
     {
-      "senseId": "w:difference#s2",
-      "pos": "n. / 短语",
-      "glossZh": "影响；作用；有所改变",
-      "pronunciationId": "w:difference#p-main",
-      "note": "make a difference 指「起作用；产生影响」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:difference#e-821b18e711099c1f",
-          "text": "You could not take back a book to the library on the same day you’d taken it out; it made no difference to her that you’d read every word in it and needed another to start.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 103
-          }
-        },
-        {
-          "exampleId": "w:difference#e-1014ad3a44e3a5a1",
-          "text": "But does one plastic straw or cup really make a difference?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:difference#e-93b97a3620ab3383",
-          "text": "“Just five more minutes outdoors can make a difference,” David Bond says.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 54
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:difference#s3",
       "pos": "n.",
       "glossZh": "（意见上的）分歧",
       "pronunciationId": "w:difference#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -207,12 +135,12 @@
       "pos": "n.",
       "glossZh": "差值；差额",
       "pronunciationId": "w:difference#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -222,6 +150,13 @@
       "reason": "逻辑、数学或纹章专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:make-a-difference",
+    "w:make-all-the-difference",
+    "w:make-the-difference"
+  ]
 }

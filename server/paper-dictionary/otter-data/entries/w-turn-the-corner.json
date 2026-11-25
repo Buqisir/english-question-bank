@@ -1,0 +1,88 @@
+{
+  "entryId": "w:turn-the-corner",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "the",
+      "corner"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "the",
+        "corner"
+      ],
+      [
+        "turned",
+        "the",
+        "corner"
+      ],
+      [
+        "turning",
+        "the",
+        "corner"
+      ],
+      [
+        "turns",
+        "the",
+        "corner"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn the corner",
+  "senses": [
+    {
+      "senseId": "w:turn-the-corner#s1",
+      "pos": "短语",
+      "glossZh": "渡过难关；开始好转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-the-corner#s2",
+      "pos": "短语",
+      "glossZh": "（克里比奇牌戏）达到不易被对手赶上的分数",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

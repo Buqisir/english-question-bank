@@ -1,0 +1,123 @@
+{
+  "entryId": "w:terms-and-conditions",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "terms",
+      "and",
+      "conditions"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "terms",
+        "and",
+        "conditions"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "terms and conditions",
+  "senses": [
+    {
+      "senseId": "w:terms-and-conditions#s1",
+      "pos": "短语",
+      "glossZh": "条款与条件；适用的规定",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:terms-and-conditions#e-0c9a46808ea9e75f",
+          "text": "Up to $175 off course fees ( terms and conditions apply) and a $60 reduction in registration fees for new semester registrations in English courses",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 49
+          },
+          "parts": [
+            [
+              29,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:terms-and-conditions#e-eddd408eea5400c6",
+          "text": "Terms and Conditions",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 20
+          },
+          "parts": [
+            [
+              0,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

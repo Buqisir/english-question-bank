@@ -1,0 +1,75 @@
+{
+  "entryId": "w:put-oneself-in-ones-shoes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "put oneself in sb's shoes",
+    "put oneself in sb’s shoes"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "oneself",
+      "in",
+      {
+        "slot": "one's"
+      },
+      "shoes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "oneself",
+        "in",
+        {
+          "slot": "one's"
+        },
+        "shoes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put oneself in sb's shoes",
+  "senses": [
+    {
+      "senseId": "w:put-oneself-in-ones-shoes#s1",
+      "pos": "短语",
+      "glossZh": "设身处地为别人着想；换位思考",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:in#s68",
+        "w:put#s26",
+        "w:shoe#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

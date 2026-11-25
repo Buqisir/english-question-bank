@@ -1,0 +1,126 @@
+{
+  "entryId": "w:do-the-talking",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "do",
+      "the",
+      "talking"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "the",
+        "talking"
+      ],
+      [
+        "did",
+        "the",
+        "talking"
+      ],
+      [
+        "does",
+        "the",
+        "talking"
+      ],
+      [
+        "doing",
+        "the",
+        "talking"
+      ],
+      [
+        "done",
+        "the",
+        "talking"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do the talking",
+  "senses": [
+    {
+      "senseId": "w:do-the-talking#s1",
+      "pos": "短语",
+      "glossZh": "用事实、表现或结果来说明问题",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:do-the-talking#e-29242cb3d4cd7618",
+          "text": "Finally, many service managers highlighted that instead of communicating good practice, they relied on sustainability certifications provided by third-party institutions to do the talking for them.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 187
+          },
+          "parts": [
+            [
+              173,
+              187
+            ]
+          ],
+          "highlightRanges": [
+            [
+              173,
+              187
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 let sth do the talking 和 sth does the talking for sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:do-the-talking#s2",
+      "pos": "短语",
+      "glossZh": "负责开口；由某人出面说话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

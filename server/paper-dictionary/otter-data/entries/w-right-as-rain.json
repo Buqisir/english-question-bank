@@ -1,0 +1,136 @@
+{
+  "entryId": "w:right-as-rain",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "as",
+      "rain"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "as",
+        "rain"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right as rain",
+  "senses": [
+    {
+      "senseId": "w:right-as-rain#s1",
+      "pos": "短语",
+      "glossZh": "身体很好；恢复健康",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:right-as-rain#e-6db23e73125b22f3",
+          "text": "He then explained that Caper would soon be right as rain if they cut back on his diet and let him rest properly.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 56
+          },
+          "parts": [
+            [
+              43,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-as-rain#e-9c0c2d11ea885985",
+          "text": "“Perhaps a few biscuits will make you right as rain.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 51
+          },
+          "parts": [
+            [
+              38,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:right-as-rain#s2",
+      "pos": "短语",
+      "glossZh": "一切正常；妥当无误",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

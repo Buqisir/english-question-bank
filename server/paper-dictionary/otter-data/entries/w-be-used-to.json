@@ -1,0 +1,191 @@
+{
+  "entryId": "w:be-used-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "being used to",
+    "is used to",
+    "was used to"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "used",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "used",
+        "to"
+      ],
+      [
+        "being",
+        "used",
+        "to"
+      ],
+      [
+        "is",
+        "used",
+        "to"
+      ],
+      [
+        "was",
+        "used",
+        "to"
+      ],
+      [
+        "been",
+        "used",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are used to",
+      "tags": []
+    },
+    {
+      "form": "were used to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be used to sth/doing sth",
+  "senses": [
+    {
+      "senseId": "w:be-used-to#s1",
+      "pos": "短语",
+      "glossZh": "习惯于；已适应",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:to#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-used-to#e-fc835c5e2d0033d9",
+          "text": "As an enthusiastic rock climber, Sam was used to occasional minor injuries.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 48
+          },
+          "parts": [
+            [
+              37,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-used-to#e-1cf34fbf13d0deb5",
+          "text": "“It is probably related to the drama-based process, where you are used to trying to think and feel as the character,” she added.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 73
+          },
+          "parts": [
+            [
+              62,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-used-to#e-b371d919b8d8939f",
+          "text": "They were used to their old lifestyle.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "to 是介词，后接名词、代词或动名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

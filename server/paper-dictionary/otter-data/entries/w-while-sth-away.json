@@ -1,0 +1,84 @@
+{
+  "entryId": "w:while-sth-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "while away"
+  ],
+  "pattern": {
+    "tokens": [
+      "while",
+      {
+        "slot": "sth"
+      },
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "while",
+        {
+          "slot": "sth"
+        },
+        "away"
+      ],
+      [
+        "while",
+        "away"
+      ],
+      [
+        "whiled",
+        "away"
+      ],
+      [
+        "whiles",
+        "away"
+      ],
+      [
+        "whiling",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "while sth away",
+  "senses": [
+    {
+      "senseId": "w:while-sth-away#s1",
+      "pos": "短语",
+      "glossZh": "悠闲地消磨（时间）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:while#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

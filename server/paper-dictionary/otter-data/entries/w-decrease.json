@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 50
+    "mock": 0
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -225,6 +225,6 @@
       "reason": "编织专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

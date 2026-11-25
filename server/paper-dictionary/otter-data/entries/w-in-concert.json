@@ -1,0 +1,60 @@
+{
+  "entryId": "w:in-concert",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "concert"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "concert"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in concert",
+  "senses": [
+    {
+      "senseId": "w:in-concert#s1",
+      "pos": "短语",
+      "glossZh": "共同地；协同地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:concert#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

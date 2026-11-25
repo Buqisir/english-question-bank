@@ -1,0 +1,67 @@
+{
+  "entryId": "w:as-luck-would-have-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "luck",
+      "would",
+      "have",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "luck",
+        "would",
+        "have",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as luck would have it",
+  "senses": [
+    {
+      "senseId": "w:as-luck-would-have-it#s1",
+      "pos": "短语",
+      "glossZh": "碰巧；恰巧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:luck#s3"
+      ],
+      "examples": [],
+      "note": "可引出幸运或不幸的巧合。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

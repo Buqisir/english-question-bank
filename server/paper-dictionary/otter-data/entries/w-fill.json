@@ -59,8 +59,8 @@
     "mock": 237
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 236
+    "gaokao": 5,
+    "mock": 61
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -194,7 +194,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -265,7 +265,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -329,88 +329,16 @@
       ]
     },
     {
-      "senseId": "w:fill#s5",
-      "pos": "短语",
-      "glossZh": "填写",
-      "pronunciationId": "w:fill#p-main",
-      "note": "fill in 或 fill out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fill#e-1df62853601681c8",
-          "text": "Last week our teacher asked us to fill in a questionnaire.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:fill#e-01e3c78b227d1efa",
-          "text": "Register online or fill out a Group Play Registration Form with multiple date and start time options.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:fill#e-16e1831d8f9a07aa",
-          "text": "of Available Projects and fill out the Group Project Request Form.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fill#s6",
       "pos": "v.",
       "glossZh": "填补（空缺）",
       "pronunciationId": "w:fill#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 15
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -418,12 +346,12 @@
       "pos": "v.",
       "glossZh": "补（牙）",
       "pronunciationId": "w:fill#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -447,6 +375,13 @@
       "reason": "音乐术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fill-in",
+    "w:fill-out",
+    "w:fill-up"
+  ]
 }

@@ -1,0 +1,73 @@
+{
+  "entryId": "w:save-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "saving it"
+  ],
+  "pattern": {
+    "tokens": [
+      "save",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "save",
+        "it"
+      ],
+      [
+        "saving",
+        "it"
+      ],
+      [
+        "saved",
+        "it"
+      ],
+      [
+        "saves",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "save it",
+  "senses": [
+    {
+      "senseId": "w:save-it#s1",
+      "pos": "短语",
+      "glossZh": "省省吧；别说了，我不想听",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，用于打断解释或辩解。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

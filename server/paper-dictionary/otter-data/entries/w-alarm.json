@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 46
+    "mock": 1
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -124,7 +124,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -207,12 +207,12 @@
       "pos": "n.",
       "glossZh": "警报；警报声",
       "pronunciationId": "w:alarm#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 14
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -220,12 +220,12 @@
       "pos": "n.",
       "glossZh": "报警器",
       "pronunciationId": "w:alarm#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -235,6 +235,6 @@
       "reason": "历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

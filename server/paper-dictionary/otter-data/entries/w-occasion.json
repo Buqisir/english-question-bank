@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -220,40 +220,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:occasion#s4",
-      "pos": "短语",
-      "glossZh": "偶尔",
-      "pronunciationId": "w:occasion#p-main",
-      "note": "on occasion。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:occasion#e-f436b6566206d827",
-          "text": "On occasion, an entire building or part of a building is just completely inaccessible, so we split up or pass on an activity we planned to enjoy because we literally can’t get everyone in the door.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
-            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
-            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 11
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -262,6 +228,11 @@
       "reason": "少见正式用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-occasion"
+  ]
 }

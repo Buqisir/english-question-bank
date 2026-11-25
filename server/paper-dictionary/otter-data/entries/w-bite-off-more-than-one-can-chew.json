@@ -1,0 +1,70 @@
+{
+  "entryId": "w:bite-off-more-than-one-can-chew",
+  "headword": "bite off more than one can chew",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bite",
+      "off",
+      "more",
+      "than",
+      "one",
+      "can",
+      "chew"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bite",
+        "off",
+        "more",
+        "than",
+        "one",
+        "can",
+        "chew"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:bite-off-more-than-one-can-chew#s1",
+      "pos": "短语",
+      "glossZh": "揽下自己应付不了的事",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [
+        "w:chew#s2"
+      ],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,118 @@
+{
+  "entryId": "w:eye-in-the-sky",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "eye",
+      "in",
+      "the",
+      "sky"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eye",
+        "in",
+        "the",
+        "sky"
+      ],
+      [
+        "eyes",
+        "in",
+        "the",
+        "sky"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "eyes in the sky",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eye in the sky",
+  "senses": [
+    {
+      "senseId": "w:eye-in-the-sky#s1",
+      "pos": "短语",
+      "glossZh": "空中监视设备；空中监测系统",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:eye-in-the-sky#e-2af8c379b9cfdb25",
+          "text": "That is the very likely future of applying today’s “eyes in the sky” technology to making sure that the millions of kilometres of rail tracks and infrastructure（基础设施）worldwide are safe for trains on a 24/7 basis.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 67
+          },
+          "parts": [
+            [
+              52,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eye-in-the-sky#s2",
+      "pos": "短语",
+      "glossZh": "从空中观察并报道路况的记者",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

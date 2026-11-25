@@ -42,62 +42,10 @@
     "mock": 22
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 19
+    "gaokao": 2,
+    "mock": 15
   },
   "senses": [
-    {
-      "senseId": "w:silk#s1",
-      "pos": "短语",
-      "glossZh": "丝绸之路",
-      "pronunciationId": "w:silk#p-main",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:silk#e-5fca87561a518ca1",
-          "text": "This beautiful structure, named Glasshouse, is at the centre of a new garden that shows how the Silk Road influences English gardens even in modern times.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 100
-          }
-        },
-        {
-          "exampleId": "w:silk#e-608933d8e89716c2",
-          "text": "The garden also contains a winding path that guides visitors through the twelve regions of the Silk Road.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 95,
-            "end": 99
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:silk#s2",
       "pos": "n.",
@@ -106,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -189,6 +137,8 @@
       "reason": "法律、竞赛、杂技和烹调中的专义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

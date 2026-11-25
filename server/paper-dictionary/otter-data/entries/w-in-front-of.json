@@ -1,0 +1,279 @@
+{
+  "entryId": "w:in-front-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "front",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "front",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in front of",
+  "senses": [
+    {
+      "senseId": "w:in-front-of#s1",
+      "pos": "短语",
+      "glossZh": "在……前面",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:front#s4",
+        "w:in#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-front-of#e-952aaa7ae1fe003f",
+          "text": "When he stood in front of the house where he grew up as a child, he saw a lady standing in the entrance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-front-of#e-1e8d9be9b5329c8c",
+          "text": "In front of me was an array of foods I couldn’t even name in my native language.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-front-of#e-45d9b9db13df0322",
+          "text": "In front of the theater were a group of bikers – very big, tough-looking bikers.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 13,
+        "mock": 28
+      }
+    },
+    {
+      "senseId": "w:in-front-of#s2",
+      "pos": "短语",
+      "glossZh": "当着……的面",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:front#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-front-of#e-314995b905067a06",
+          "text": "Once in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 91
+          },
+          "parts": [
+            [
+              80,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-front-of#e-37f260cc4a6dcfa6",
+          "text": "An interruption in the sense of gaining power almost always happens in front of an audience.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 79
+          },
+          "parts": [
+            [
+              68,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-front-of#e-8436a652524f2dc0",
+          "text": "At some point, they will be asked to deliver a speech or a presentation in front of others.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 83
+          },
+          "parts": [
+            [
+              72,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:in-front-of#s3",
+      "pos": "短语",
+      "glossZh": "排在……前面；领先于",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

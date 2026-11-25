@@ -1,0 +1,97 @@
+{
+  "entryId": "w:work-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "work",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "work",
+        "over"
+      ],
+      [
+        "worked",
+        "over"
+      ],
+      [
+        "working",
+        "over"
+      ],
+      [
+        "works",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "work (sb/sth) over",
+  "senses": [
+    {
+      "senseId": "w:work-over#s1",
+      "pos": "短语",
+      "glossZh": "反复修改加工；进一步完善",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:work-over#s2",
+      "pos": "短语",
+      "glossZh": "狠狠殴打某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:work-over#s3",
+      "pos": "短语",
+      "glossZh": "严厉盘问或训斥某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

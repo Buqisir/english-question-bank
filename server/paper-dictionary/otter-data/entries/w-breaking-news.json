@@ -1,0 +1,122 @@
+{
+  "entryId": "w:breaking-news",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "breaking",
+      "news"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "breaking",
+        "news"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "breaking news",
+  "senses": [
+    {
+      "senseId": "w:breaking-news#s1",
+      "pos": "短语",
+      "glossZh": "突发新闻；刚发生的新闻",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:breaking-news#e-7c3734da329ca44d",
+          "text": "The stories covered in the newsletter range from breaking news to more evergreen content which you will be able to go back to according to your students’ needs.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 62
+          },
+          "parts": [
+            [
+              49,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:breaking-news#e-ccfd714c6f42afaa",
+          "text": "It prioritizes breaking news.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:22#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 28
+          },
+          "parts": [
+            [
+              15,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

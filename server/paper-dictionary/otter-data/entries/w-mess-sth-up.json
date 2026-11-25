@@ -1,0 +1,329 @@
+{
+  "entryId": "w:mess-sth-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "mess up"
+  ],
+  "pattern": {
+    "tokens": [
+      "mess",
+      {
+        "slot": "sth"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "mess",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "mess",
+        "up"
+      ],
+      [
+        "messed",
+        "up"
+      ],
+      [
+        "messes",
+        "up"
+      ],
+      [
+        "messing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "messed up",
+      "tags": []
+    },
+    {
+      "form": "messes up",
+      "tags": []
+    },
+    {
+      "form": "messing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mess sth up",
+  "senses": [
+    {
+      "senseId": "w:mess-sth-up#s1",
+      "pos": "短语",
+      "glossZh": "把……搞糟；把……做砸",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s91"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mess-sth-up#e-d3087fa5807c66f2",
+          "text": "It really messed up my relationship with food – something that took me years to overcome.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 19
+          },
+          "parts": [
+            [
+              10,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:mess-sth-up#e-cba21a058d46090f",
+          "text": "I quickly explained the situation, telling him that Mike’s sudden absence had messed up our schedule.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 87
+          },
+          "parts": [
+            [
+              78,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:mess-sth-up#e-af172ff590cc3d8a",
+          "text": "I feared messing up how to say “mǎ” and the subsequent disrespect it could bring.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:mess-sth-up#s2",
+      "pos": "短语",
+      "glossZh": "犯错；搞砸了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s94"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mess-sth-up#e-10b415be05cc0879",
+          "text": "When kids mess up, don’t jump in with a rescue mission.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          },
+          "parts": [
+            [
+              10,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:mess-sth-up#e-ff1285d997bfe6b2",
+          "text": "Why should someone be given another chance when they mess up?",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:mess-sth-up#e-341f3350135064cd",
+          "text": "Everyone messes up at some point.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          },
+          "parts": [
+            [
+              9,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "不带宾语，用 mess up。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:mess-sth-up#s3",
+      "pos": "短语",
+      "glossZh": "弄乱；弄脏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "宾语常为头发、衣服或房间。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mess-sth-up#s4",
+      "pos": "短语",
+      "glossZh": "弄伤（身体部位）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,122 @@
+{
+  "entryId": "w:hold-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "to"
+      ],
+      [
+        "held",
+        "to"
+      ],
+      [
+        "holding",
+        "to"
+      ],
+      [
+        "holds",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold (sb) to sth",
+  "senses": [
+    {
+      "senseId": "w:hold-to#s1",
+      "pos": "短语",
+      "glossZh": "要求某人遵守承诺或达到标准",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-to#e-6f23ff31cfa8b485",
+          "text": "It fits the needs of mentees（被指导者） well, who neither want to be held to an impossible standard, nor want to feel overprotected or dismissed.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          },
+          "parts": [
+            [
+              64,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              71
+            ]
+          ]
+        }
+      ],
+      "note": "hold sb to a promise / a standard",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hold-to#s2",
+      "pos": "短语",
+      "glossZh": "坚持信念、原则、说法或决定",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "hold to a belief / a principle / a decision",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

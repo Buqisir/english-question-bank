@@ -1,0 +1,156 @@
+{
+  "entryId": "w:the-other-way-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "other",
+      "way",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "other",
+        "way",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the other way around",
+  "senses": [
+    {
+      "senseId": "w:the-other-way-around#s1",
+      "pos": "短语",
+      "glossZh": "反过来；双方的角色或顺序对调",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:the-other-way-around#e-e2d833a2fa422ec6",
+          "text": "Sometimes the weaknesses seem to outweigh the strengths and sometimes it’s the other way around.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 95
+          },
+          "parts": [
+            [
+              75,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-other-way-around#e-55fb9a98b7b88742",
+          "text": "Most of us assume that warmth is what leads to generosity, rather than the other way around.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 91
+          },
+          "parts": [
+            [
+              71,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:the-other-way-around#e-cd800c028de70c99",
+          "text": "Still, it’s interesting to see that parents’ concerns about their children becoming addicted to smartphones and other smart devices, are also perfectly true the other way around.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 177
+          },
+          "parts": [
+            [
+              157,
+              177
+            ]
+          ],
+          "highlightRanges": [
+            [
+              157,
+              177
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

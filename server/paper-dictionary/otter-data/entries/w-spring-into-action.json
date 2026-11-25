@@ -1,0 +1,117 @@
+{
+  "entryId": "w:spring-into-action",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spring",
+      "into",
+      "action"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spring",
+        "into",
+        "action"
+      ],
+      [
+        "sprang",
+        "into",
+        "action"
+      ],
+      [
+        "springing",
+        "into",
+        "action"
+      ],
+      [
+        "springs",
+        "into",
+        "action"
+      ],
+      [
+        "sprung",
+        "into",
+        "action"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sprang into action",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spring into action",
+  "senses": [
+    {
+      "senseId": "w:spring-into-action#s1",
+      "pos": "短语",
+      "glossZh": "立即行动起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:spring-into-action#e-d1d36867069dba39",
+          "text": "Horse trapped in mud.” Without hesitation, volunteers sprang into action, gathering ropes and enlisting the help of a neighbor.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 72
+          },
+          "parts": [
+            [
+              54,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

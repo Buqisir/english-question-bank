@@ -1,0 +1,124 @@
+{
+  "entryId": "w:cool-beans",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cool",
+      "beans"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cool",
+        "beans"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cool beans",
+  "senses": [
+    {
+      "senseId": "w:cool-beans#s1",
+      "pos": "短语",
+      "glossZh": "太棒了；好极了",
+      "note": "非正式，用来表示赞同或高兴。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bean#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cool-beans#e-58970b2a66c2df2b",
+          "text": "What do people mean when they say “cool beans” ?",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cool-beans#e-9ee2a24becdd2505",
+          "text": "What do people mean when they say “cool beans”?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

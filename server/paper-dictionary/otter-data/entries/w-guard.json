@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 29
+    "mock": 21
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -176,7 +176,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -269,80 +269,10 @@
       "examples": []
     },
     {
-      "senseId": "w:guard#s6",
-      "pos": "短语",
-      "glossZh": "提防",
+      "senseId": "w:guard#s9",
+      "pos": "adj.",
+      "glossZh": "有戒心的；谨慎的",
       "pronunciationId": "w:guard#p-main",
-      "note": "guard against。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:guard#e-185e534967dc0169",
-          "text": "Second, guard against the “true enough” mindset.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuchang-2026-05",
-            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
-            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-d:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:guard#s7",
-      "pos": "短语",
-      "glossZh": "放松警惕",
-      "pronunciationId": "w:guard#p-main",
-      "note": "let down one's guard。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:guard#e-26435269b8f68c2a",
-          "text": "You let down your guard.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:34",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 18,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:guard#s8",
-      "pos": "短语",
-      "glossZh": "使措手不及",
-      "pronunciationId": "w:guard#p-main",
-      "note": "catch sb off guard。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -351,41 +281,57 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:guard#e-ae8d9988a1664647",
-          "text": "Caught off guard, I gave a real answer.",
+          "exampleId": "w:guard#e-3ec49e175805f3d0",
+          "text": "It is guarded about seabed mining.",
           "source": {
-            "paperId": "paper-mock-import-20261026-n085",
-            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
-            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c",
             "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:6",
-              "sentence": 6
+              "question": 29,
+              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:29",
+              "option": "B",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 11,
-            "end": 16
+            "start": 6,
+            "end": 13
           }
-        },
+        }
+      ]
+    },
+    {
+      "senseId": "w:guard#s10",
+      "pos": "n.",
+      "glossZh": "海岸警卫队",
+      "pronunciationId": "w:guard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
         {
-          "exampleId": "w:guard#e-c1504fc96886c104",
-          "text": "The question caught me off guard.",
+          "exampleId": "w:guard#e-fe780f0477a7b0b3",
+          "text": "He called the coast guard for help.",
           "source": {
-            "paperId": "paper-mock-shandong-zibo-2026-03-first",
-            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:3",
-              "sentence": 3
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:24",
+              "option": "A",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 27,
-            "end": 32
+            "start": 20,
+            "end": 25
           }
         }
       ]
@@ -397,6 +343,13 @@
       "reason": "格斗专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:catch-sb-off-guard",
+    "w:guard-against",
+    "w:let-down-ones-guard"
+  ]
 }

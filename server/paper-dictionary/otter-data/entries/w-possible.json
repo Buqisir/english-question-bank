@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 169
+    "mock": 15
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -133,7 +133,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 92
       },
       "folded": false,
       "examples": [
@@ -205,7 +205,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -277,6 +277,11 @@
       "reason": "较少见的省略用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:as-much-as-possible",
+    "w:as-soon-as-possible",
+    "w:if-possible"
+  ]
 }

@@ -1,0 +1,237 @@
+{
+  "entryId": "w:set-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sets out",
+    "setting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "out"
+      ],
+      [
+        "sets",
+        "out"
+      ],
+      [
+        "setting",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set out",
+  "senses": [
+    {
+      "senseId": "w:set-out#s1",
+      "pos": "短语",
+      "glossZh": "出发；动身",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:set#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-out#e-4f9a1e46de9237e1",
+          "text": "Emily Sanders, a 25-year-old from Detroit, Michigan, set out on December 23rd with high hopes of reaching Toronto to meet her boyfriend for Christmas.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-out#e-e02a710dfc207a08",
+          "text": "Paragraph 2: Still stuck on that unspoken thank-you, I set out for Lisbon months later.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:writing-continuation:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 62
+          },
+          "parts": [
+            [
+              55,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-out#e-9832a485775929dd",
+          "text": "The next day, he dressed up in a clean shirt, tied a tie and set out cheerfully, hoping to meet his secret admirer.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          },
+          "parts": [
+            [
+              61,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:set-out#s3",
+      "pos": "短语",
+      "glossZh": "有条理地列明；详述",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-out#e-2a3d3aca72984411",
+          "text": "Here, we set out the nature of these two problems.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          },
+          "parts": [
+            [
+              9,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-out#s2",
+      "pos": "短语",
+      "glossZh": "着手做；带着目标开始行动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "set out to do sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-out#s4",
+      "pos": "短语",
+      "glossZh": "摆放；布置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

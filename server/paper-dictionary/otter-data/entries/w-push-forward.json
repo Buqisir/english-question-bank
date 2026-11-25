@@ -1,0 +1,166 @@
+{
+  "entryId": "w:push-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "forward"
+      ],
+      [
+        "pushed",
+        "forward"
+      ],
+      [
+        "pushes",
+        "forward"
+      ],
+      [
+        "pushing",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pushing forward",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push forward",
+  "senses": [
+    {
+      "senseId": "w:push-forward#s1",
+      "pos": "短语",
+      "glossZh": "继续推进；努力使事情向前发展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-forward#e-335cfe925db8f5b7",
+          "text": "The toy industry is pushing forward with AI chatbots built into stuffed animals and mini robots.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 35
+          },
+          "parts": [
+            [
+              20,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常用 push forward with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-forward#s2",
+      "pos": "短语",
+      "glossZh": "向前发力；把某物向前推",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-forward#e-4be661a05402e5bd",
+          "text": "The birds used their powerful hip flexors to push forward, clenched their tail and abs(腹肌) to prepare for the strike, and stiffened the back of their head and neck on contact – similar to the way you might stiffen the back of your wrist when you hammer a nail.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 57
+          },
+          "parts": [
+            [
+              45,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-forward#s3",
+      "pos": "短语",
+      "glossZh": "把活动的时间提前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

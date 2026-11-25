@@ -52,7 +52,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 38
+    "mock": 19
   },
   "senses": [
     {
@@ -63,7 +63,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -134,7 +134,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -191,131 +191,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:burst#s4",
-      "pos": "短语",
-      "glossZh": "突然哭起来、笑起来或开始做某事",
-      "pronunciationId": "w:burst#p-main",
-      "note": "burst into 或 burst out",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:burst#e-b496d8f608910ae8",
-          "text": "Now, a series of experiments on zebra finches (斑胸草雀) suggests that while darkness holds back singing, birds build up a strong motivation to sing in the night that causes them to burst into song at dawn.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 178,
-            "end": 183
-          }
-        },
-        {
-          "exampleId": "w:burst#e-058ab1a549979c9a",
-          "text": "After Mom walked back into the house, Dad looked at his sons, and we all burst out laughing.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:cloze",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:cloze:7",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 73,
-            "end": 78
-          }
-        },
-        {
-          "exampleId": "w:burst#e-9d8f38a0d95a925e",
-          "text": "For days, Lauren’s daughter would burst into tears before school, pressing her face against her mom’s leg and begging not to go – an all-too-familiar scene for parents of young students.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:burst#s5",
-      "pos": "短语",
-      "glossZh": "充满；满是",
-      "pronunciationId": "w:burst#p-main",
-      "note": "burst with",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:burst#e-3261d75f14e82d61",
-          "text": "Every surface bursts with colorful creations: posters and paper fill every corner and a handmade sign declares her the “Teacher of Awesome (Math).” This transformation mirrors her revolutionary approach to education – one that relies not only on textbooks but also on student-crafted learning journals filled with origami folds(折纸), hand-drawn diagrams, and lessons printed on rainbow-colored paper.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:burst#e-f9ca83e67c17dc31",
-          "text": "To make matters more challenging, my three children – Mike, Emma, and little Sam – had been bursting with restless energy all week, their stored excitement from school ready to burst forth before a long weekend.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 92,
-            "end": 100
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -324,6 +199,13 @@
       "reason": "军事术语或偏义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:burst-into",
+    "w:burst-out",
+    "w:burst-with"
+  ]
 }

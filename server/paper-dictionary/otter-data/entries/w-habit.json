@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 303
+    "mock": 117
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 35,
-        "mock": 0
+        "mock": 186
       },
       "folded": false,
       "examples": [
@@ -150,6 +150,9 @@
       "reason": "矿物学专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:get-into-the-habit"
+  ]
 }

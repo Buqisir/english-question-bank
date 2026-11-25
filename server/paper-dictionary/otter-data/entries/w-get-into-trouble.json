@@ -1,0 +1,164 @@
+{
+  "entryId": "w:get-into-trouble",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "into",
+      "trouble"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "into",
+        "trouble"
+      ],
+      [
+        "gets",
+        "into",
+        "trouble"
+      ],
+      [
+        "getting",
+        "into",
+        "trouble"
+      ],
+      [
+        "got",
+        "into",
+        "trouble"
+      ],
+      [
+        "gotten",
+        "into",
+        "trouble"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got into trouble",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get into trouble",
+  "senses": [
+    {
+      "senseId": "w:get-into-trouble#s1",
+      "pos": "动词短语",
+      "glossZh": "惹上麻烦；陷入困境",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s39"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-into-trouble#e-a7d6f17533e62d1d",
+          "text": "He never got into trouble, though sometimes he wanted to do risky things.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 25
+          },
+          "parts": [
+            [
+              9,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into-trouble#e-657a90f2d690d789",
+          "text": "I must keep a close eye on them in case they forget their way back or get into trouble!”",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 86
+          },
+          "parts": [
+            [
+              70,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              86
+            ]
+          ]
+        }
+      ],
+      "note": "也常指因做错事或违反规定而受到责罚。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-into-trouble#s2",
+      "pos": "动词短语",
+      "glossZh": "（旧时委婉语）未婚怀孕",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

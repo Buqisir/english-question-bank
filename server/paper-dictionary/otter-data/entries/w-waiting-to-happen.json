@@ -1,0 +1,93 @@
+{
+  "entryId": "w:waiting-to-happen",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "waiting",
+      "to",
+      "happen"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "waiting",
+        "to",
+        "happen"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "waiting to happen",
+  "senses": [
+    {
+      "senseId": "w:waiting-to-happen#s1",
+      "pos": "短语",
+      "glossZh": "迟早会发生；就等时机到来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:waiting-to-happen#e-a42c467bd6d6b663",
+          "text": "Scarlett Johansson and June Squibb on the red carpet together is a moment waiting to happen.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 91
+          },
+          "parts": [
+            [
+              74,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "常见搭配 an accident waiting to happen。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

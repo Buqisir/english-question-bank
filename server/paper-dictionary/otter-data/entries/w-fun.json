@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 215
+    "mock": 30
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 76
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 109
       },
       "folded": false,
       "examples": [
@@ -205,23 +205,16 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:fun#s3",
-      "pos": "短语",
-      "glossZh": "取笑",
-      "pronunciationId": "w:fun#p-main",
-      "note": "make fun of。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-fun",
+    "w:have-fun",
+    "w:make-fun-of"
+  ]
 }

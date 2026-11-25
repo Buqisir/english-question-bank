@@ -1,0 +1,141 @@
+{
+  "entryId": "w:join-forces",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "join",
+      "forces"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "join",
+        "forces"
+      ],
+      [
+        "joined",
+        "forces"
+      ],
+      [
+        "joining",
+        "forces"
+      ],
+      [
+        "joins",
+        "forces"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "joined forces",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "join forces",
+  "senses": [
+    {
+      "senseId": "w:join-forces#s1",
+      "pos": "短语",
+      "glossZh": "联手；合力行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:join#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:join-forces#e-c1d4ad5bbdade492",
+          "text": "Students, parents, and teachers from Colombo schools joined forces against us, saying they wouldn’t allow the cup to be taken out of Colombo.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 66
+          },
+          "parts": [
+            [
+              53,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:join-forces#e-509dec6887d24b18",
+          "text": "That’s why the National Geographic Society and the Nature Conservancy have joined forces to develop a program centered around a unique remote externship(校外实习) program for young adults worldwide.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 88
+          },
+          "parts": [
+            [
+              75,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "可用 join forces with 表明合作对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

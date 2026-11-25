@@ -1,0 +1,121 @@
+{
+  "entryId": "w:take-flight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took flight"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "flight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "flight"
+      ],
+      [
+        "took",
+        "flight"
+      ],
+      [
+        "taken",
+        "flight"
+      ],
+      [
+        "takes",
+        "flight"
+      ],
+      [
+        "taking",
+        "flight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take flight",
+  "senses": [
+    {
+      "senseId": "w:take-flight#s1",
+      "pos": "短语",
+      "glossZh": "逃走；迅速逃离",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-flight#e-c05495ea94673383",
+          "text": "Their first choice is to take flight.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 36
+          },
+          "parts": [
+            [
+              25,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-flight#s2",
+      "pos": "短语",
+      "glossZh": "起飞；飞起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

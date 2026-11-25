@@ -42,8 +42,8 @@
     "mock": 35
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 33
+    "gaokao": 3,
+    "mock": 22
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -117,78 +117,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:dozen#s2",
-      "pos": "短语",
-      "glossZh": "几十个；许多",
-      "pronunciationId": "w:dozen#p-main",
-      "note": "dozens of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:dozen#e-f1e77657e226d20a",
-          "text": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:dozen#e-216499a5268f3171",
-          "text": "This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:dozen#e-e3e8ea62b806c667",
-          "text": "Oakley draws on interviews with dozens of career changers to show what strategies worked and what pitfalls to avoid.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 38
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -197,6 +125,8 @@
       "reason": "历史行业专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

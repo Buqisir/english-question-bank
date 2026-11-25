@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 120
+    "mock": 15
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -322,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -374,7 +374,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -439,20 +439,6 @@
       ]
     },
     {
-      "senseId": "w:mix#s7",
-      "pos": "短语",
-      "glossZh": "混淆；弄错",
-      "pronunciationId": "w:mix#p-main",
-      "note": "mix up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:mix#s8",
       "pos": "v.",
       "glossZh": "交往；来往",
@@ -472,6 +458,12 @@
       "reason": "专业用法或同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:mix-it-up",
+    "w:mix-up"
+  ]
 }

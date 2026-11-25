@@ -1,0 +1,154 @@
+{
+  "entryId": "w:owing-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "owing",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "owing",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "owing to",
+  "senses": [
+    {
+      "senseId": "w:owing-to#s1",
+      "pos": "短语",
+      "glossZh": "由于；因为",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:owe#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:owing-to#e-d41b15c1f25602a8",
+          "text": "“Sarah collapsed at the bank, probably owing to low blood pressure, and she hasn’t regained consciousness yet.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          },
+          "parts": [
+            [
+              39,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:owing-to#e-aab5b0deb85ff473",
+          "text": "Women’s scores are typically 15% lower, owing to smaller hearts and less muscle mass.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:owing-to#e-a3222f2a0f407dd2",
+          "text": "They say that using this product is necessary owing to the increased move towards electric cars and green energy at large.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 54
+          },
+          "parts": [
+            [
+              46,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

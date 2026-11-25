@@ -1,0 +1,181 @@
+{
+  "entryId": "w:make-it-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made it through",
+      "tags": []
+    },
+    {
+      "form": "make it through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make it through (sth)",
+  "senses": [
+    {
+      "senseId": "w:make-it-through#s1",
+      "pos": "短语",
+      "glossZh": "熬过去；挺过难关；活下来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:it#s11",
+        "w:make#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it-through#e-c9f16016f45677ac",
+          "text": "I still made it through the next three years of college, even without the book.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 23
+          },
+          "parts": [
+            [
+              8,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-it-through#e-57717d3d6f817431",
+          "text": "“It’s going to be fine.” Now, thinking I would make it through, I felt better.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 62
+          },
+          "parts": [
+            [
+              47,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-it-through#s2",
+      "pos": "短语",
+      "glossZh": "坚持完成；设法做完",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-it-through#e-c8f5a864e72fe8b5",
+          "text": "Literature students once read three books a week but today they struggle to make it through one in three weeks, Sir Jonathan Bate, a professor of English literature at the University of Oxford, has warned.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 91
+          },
+          "parts": [
+            [
+              76,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              91
+            ]
+          ]
+        }
+      ],
+      "note": "如坚持读完一本书。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

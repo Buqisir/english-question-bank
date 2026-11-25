@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 63
+    "mock": 10
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -213,12 +213,12 @@
       "pos": "adj.",
       "glossZh": "宽裕的；轻松取得的（如领先优势）",
       "pronunciationId": "w:comfortable#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -228,6 +228,6 @@
       "reason": "罕见名词或古旧形容词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

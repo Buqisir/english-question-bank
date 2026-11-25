@@ -1,0 +1,95 @@
+{
+  "entryId": "w:out-of-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of business",
+  "senses": [
+    {
+      "senseId": "w:out-of-business#s1",
+      "pos": "短语",
+      "glossZh": "停止经营；倒闭",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:business#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-of-business#e-284902be480cd888",
+          "text": "Her former employer was out of business.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:21#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 39
+          },
+          "parts": [
+            [
+              24,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

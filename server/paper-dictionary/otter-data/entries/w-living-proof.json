@@ -1,0 +1,92 @@
+{
+  "entryId": "w:living-proof",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "living",
+      "proof"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "living",
+        "proof"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "living proof",
+  "senses": [
+    {
+      "senseId": "w:living-proof#s1",
+      "pos": "短语",
+      "glossZh": "活生生的证据；能证明某事的实例",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:living-proof#e-85bdb065fafd040b",
+          "text": "Horror Enthusiasts: Living Proof of Empathy Loss",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-zj-2026-xinzhendi-2:35#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "常用 living proof of sth 或 living proof that ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

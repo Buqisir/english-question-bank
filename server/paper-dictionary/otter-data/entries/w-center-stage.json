@@ -1,0 +1,104 @@
+{
+  "entryId": "w:center-stage",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "center",
+      "stage"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "center",
+        "stage"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "center stage",
+  "senses": [
+    {
+      "senseId": "w:center-stage#s1",
+      "pos": "短语",
+      "glossZh": "最受关注的位置；焦点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:center-stage#e-3d868d3a44ab6389",
+          "text": "This literary circle of strangers is on a reading retreat – part of an evolving wave of holidays that put reading center stage.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 126
+          },
+          "parts": [
+            [
+              114,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              126
+            ]
+          ]
+        }
+      ],
+      "note": "常见搭配为 take center stage、put sth center stage。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:center-stage#s2",
+      "pos": "短语",
+      "glossZh": "舞台中央",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

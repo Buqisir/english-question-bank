@@ -1,0 +1,125 @@
+{
+  "entryId": "w:have-in-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "in",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "in",
+        "mind"
+      ],
+      [
+        "had",
+        "in",
+        "mind"
+      ],
+      [
+        "has",
+        "in",
+        "mind"
+      ],
+      [
+        "having",
+        "in",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "have in mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have sb/sth in mind",
+  "senses": [
+    {
+      "senseId": "w:have-in-mind#s1",
+      "pos": "短语",
+      "glossZh": "心里想的是某人或某事；指的是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-in-mind#e-4b4c943c6b1de113",
+          "text": "Or, to the extent that we can speak of their intentions at all – for example, the intention of a self-driving car to avoid an obstacle – we have in mind something it’s designed to do.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 152
+          },
+          "parts": [
+            [
+              140,
+              152
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              152
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:have-in-mind#s2",
+      "pos": "短语",
+      "glossZh": "心里有某个计划或打算",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

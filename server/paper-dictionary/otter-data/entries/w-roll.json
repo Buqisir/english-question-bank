@@ -62,8 +62,8 @@
     "mock": 88
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 76
+    "gaokao": 4,
+    "mock": 25
   },
   "senses": [
     {
@@ -127,7 +127,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -276,181 +276,6 @@
       ]
     },
     {
-      "senseId": "w:roll#s5",
-      "pos": "短语",
-      "glossZh": "到来",
-      "pronunciationId": "w:roll#p-main",
-      "note": "roll in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:roll#e-d3eb288657026ce2",
-          "text": "As the summer months roll in, our Georgian country estate makes the perfect setting for an outdoor fitness session.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:roll#s6",
-      "pos": "短语",
-      "glossZh": "推出",
-      "pronunciationId": "w:roll#p-main",
-      "note": "roll out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:roll#e-388af05970bcc079",
-          "text": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "reading-c-6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 140,
-            "end": 144
-          }
-        },
-        {
-          "exampleId": "w:roll#e-7b2a97775e8ef6a9",
-          "text": "Farr’s message is that her approach can be rolled out.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:5",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:roll#s7",
-      "pos": "短语",
-      "glossZh": "摇下（车窗）",
-      "pronunciationId": "w:roll#p-main",
-      "note": "roll down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:roll#e-43df2714b40b76c1",
-          "text": "When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:roll#e-3deb4d6fb9d6fe1e",
-          "text": "At sunset, I'd roll down my car window, sing loudly and __54__ the pink sky.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:roll#s8",
-      "pos": "短语",
-      "glossZh": "摇滚乐",
-      "pronunciationId": "w:roll#p-main",
-      "note": "rock and roll。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:roll#e-f3770f7866c8c00c",
-          "text": "Rock and roll.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:roll#s9",
       "pos": "v.",
       "glossZh": "滚动",
@@ -458,7 +283,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -507,12 +332,12 @@
       "pos": "v.",
       "glossZh": "卷起",
       "pronunciationId": "w:roll#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -523,7 +348,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -575,7 +400,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -608,7 +433,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -651,12 +476,12 @@
       "pos": "n.",
       "glossZh": "名单",
       "pronunciationId": "w:roll#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -671,6 +496,144 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:roll#s17",
+      "pos": "n.",
+      "glossZh": "转动或翻滚的动作",
+      "pronunciationId": "w:roll#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:roll#e-48c89d74813754a4",
+          "text": "Shoulder Rolls and Reach Overs.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:21",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:roll#e-3b51be19d35f721a",
+          "text": "My mind wandered back to when I was six, afraid to even do a forward roll.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:roll#e-80045412ca6045e4",
+          "text": "I would respond with a “Yes, Mom” or, when out of her view, a much-practiced eye roll.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:roll#s18",
+      "pos": "短语",
+      "glossZh": "合为一体",
+      "pronunciationId": "w:roll#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:roll#e-5c3784cfce08c3ed",
+          "text": "Alongside their craft, hairdressers are known for their conversation skills, who often act as an agony aunt, adviser and friend rolled into one.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:roll#s19",
+      "pos": "adj.",
+      "glossZh": "滚动进行的",
+      "pronunciationId": "w:roll#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:roll#e-fa6ab681d3e51e10",
+          "text": "Applications will be reviewed on a rolling basis.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -679,6 +642,21 @@
       "reason": "金融专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:ready-to-roll",
+    "w:rock-and-roll",
+    "w:roll-about",
+    "w:roll-around",
+    "w:roll-back",
+    "w:roll-down",
+    "w:roll-in",
+    "w:roll-on",
+    "w:roll-out",
+    "w:roll-over",
+    "w:roll-up"
+  ]
 }

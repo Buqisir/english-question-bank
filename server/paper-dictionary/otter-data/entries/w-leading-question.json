@@ -1,0 +1,94 @@
+{
+  "entryId": "w:leading-question",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "leading",
+      "question"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leading",
+        "question"
+      ],
+      [
+        "leading",
+        "questions"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leading question",
+  "senses": [
+    {
+      "senseId": "w:leading-question#s1",
+      "pos": "短语",
+      "glossZh": "诱导性问题；暗示特定答案的问题",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leading-question#e-b56f17cf5a54068d",
+          "text": "Worse still, ask a leading question – suggesting that the answer “might be 4”, and it will specifically add numbers that ultimately lead it to agree with the question, even if the suggestion is wrong.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 35
+          },
+          "parts": [
+            [
+              19,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,121 @@
+{
+  "entryId": "w:short-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "short",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "short",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "short for",
+  "senses": [
+    {
+      "senseId": "w:short-for#s1",
+      "pos": "短语",
+      "glossZh": "是……的简称或缩写",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:short-for#e-1c1ebee4a05809b6",
+          "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 15
+          },
+          "parts": [
+            [
+              6,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:short-for#e-51bae7f9f1f9feee",
+          "text": "These mushroom-based devices act as organic memristors (忆阻器), short for memory resistors.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          },
+          "parts": [
+            [
+              62,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

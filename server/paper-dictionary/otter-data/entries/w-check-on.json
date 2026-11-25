@@ -1,0 +1,262 @@
+{
+  "entryId": "w:check-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "check",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "check",
+        "on"
+      ],
+      [
+        "checked",
+        "on"
+      ],
+      [
+        "checking",
+        "on"
+      ],
+      [
+        "checks",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "check on",
+      "tags": []
+    },
+    {
+      "form": "checked on",
+      "tags": []
+    },
+    {
+      "form": "checking on",
+      "tags": []
+    },
+    {
+      "form": "checks on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "check on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:check-on#s1",
+      "pos": "短语",
+      "glossZh": "查看某人是否安好；检查某事物的状况",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:check#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:check-on#e-1c2b3d6df450e50f",
+          "text": "The use of drones in checking on power lines.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:check-on#e-fcf81be69d9675f9",
+          "text": "By checking on smells.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-national-a:25#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:check-on#e-e646e4af26755853",
+          "text": "Check on the flat.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:check-on#s2",
+      "pos": "短语",
+      "glossZh": "核实信息；查问最新进展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:check-on#e-7d98231464c0c425",
+          "text": "The first thing I did was check on the availability and the cost of a meeting room.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:check-on#e-3fd4893d08e70b37",
+          "text": "Any login attempt must be strictly checked on.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

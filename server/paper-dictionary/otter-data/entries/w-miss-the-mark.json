@@ -1,0 +1,125 @@
+{
+  "entryId": "w:miss-the-mark",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "miss",
+      "the",
+      "mark"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "miss",
+        "the",
+        "mark"
+      ],
+      [
+        "missed",
+        "the",
+        "mark"
+      ],
+      [
+        "misses",
+        "the",
+        "mark"
+      ],
+      [
+        "missing",
+        "the",
+        "mark"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "misses the mark",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "miss the mark",
+  "senses": [
+    {
+      "senseId": "w:miss-the-mark#s1",
+      "pos": "短语",
+      "glossZh": "没说到点子上；未达到预期效果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:miss-the-mark#e-6516b1152efb452f",
+          "text": "Settlers are often labelled as copycats, but this stereotype misses the mark.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 76
+          },
+          "parts": [
+            [
+              61,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:miss-the-mark#s2",
+      "pos": "短语",
+      "glossZh": "未击中目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

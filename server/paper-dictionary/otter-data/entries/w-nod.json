@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 79
+    "mock": 3
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -200,7 +200,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -224,20 +224,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:nod#s4",
-      "pos": "短语",
-      "glossZh": "打瞌睡",
-      "pronunciationId": "w:nod#p-main",
-      "note": "nod off。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -246,6 +232,11 @@
       "reason": "同形领域缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:nod-off"
+  ]
 }

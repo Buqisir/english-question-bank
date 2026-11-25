@@ -1,0 +1,95 @@
+{
+  "entryId": "w:double-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "double",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "double",
+        "life"
+      ],
+      [
+        "double",
+        "lives"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "double life",
+  "senses": [
+    {
+      "senseId": "w:double-life#s1",
+      "pos": "短语",
+      "glossZh": "双重生活（同时维持两种身份或生活，其中一种通常对部分人保密）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:double-life#e-017146c2de12a9eb",
+          "text": "Living a double life between work and family.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 20
+          },
+          "parts": [
+            [
+              9,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

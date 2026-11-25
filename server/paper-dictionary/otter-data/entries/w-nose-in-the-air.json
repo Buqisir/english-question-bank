@@ -1,0 +1,65 @@
+{
+  "entryId": "w:nose-in-the-air",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nose",
+      "in",
+      "the",
+      "air"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nose",
+        "in",
+        "the",
+        "air"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nose in the air",
+  "senses": [
+    {
+      "senseId": "w:nose-in-the-air#s1",
+      "pos": "短语",
+      "glossZh": "昂着头，一副傲慢的样子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:nose#s5"
+      ],
+      "examples": [],
+      "note": "常见于 with one's nose in the air。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,196 @@
+{
+  "entryId": "w:catch-ones-eye",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "catch sb's eye"
+  ],
+  "pattern": {
+    "tokens": [
+      "catch",
+      {
+        "slot": "one's"
+      },
+      "eye"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        {
+          "slot": "one's"
+        },
+        "eye"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catch eye",
+      "tags": []
+    },
+    {
+      "form": "caught eye",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch one's eye",
+  "senses": [
+    {
+      "senseId": "w:catch-ones-eye#s1",
+      "pos": "短语",
+      "glossZh": "吸引某人的注意；引起某人留意",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eye#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-ones-eye#e-54730a0ed80efccc",
+          "text": "Suddenly, a movement outside caught his eye.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 43
+          },
+          "parts": [
+            [
+              29,
+              35
+            ],
+            [
+              40,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              35
+            ],
+            [
+              40,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-ones-eye#e-18d19cd655aa8122",
+          "text": "caught her eye",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 55,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:55#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              6
+            ],
+            [
+              11,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ],
+            [
+              11,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-ones-eye#e-fb68acd78f58169b",
+          "text": "He’d sometimes catch my eye and give a small, understanding nod, but he never pressured me to speak.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              20
+            ],
+            [
+              24,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              20
+            ],
+            [
+              24,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

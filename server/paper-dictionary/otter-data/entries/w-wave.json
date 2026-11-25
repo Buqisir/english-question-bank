@@ -65,8 +65,8 @@
     "mock": 174
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 165
+    "gaokao": 2,
+    "mock": 16
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -253,7 +253,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -338,7 +338,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -390,7 +390,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -435,54 +435,209 @@
       ]
     },
     {
-      "senseId": "w:wave#s8",
-      "pos": "短语",
-      "glossZh": "引起轰动",
+      "senseId": "w:wave#s9",
+      "pos": "n.",
+      "glossZh": "一段持续的高温天气（heat wave）",
       "pronunciationId": "w:wave#p-main",
-      "note": "make waves。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 13
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:wave#e-512767b4d1cdc969",
-          "text": "tan has been making waves in Bangkok’s culinary scene since it opened in 2009.",
+          "exampleId": "w:wave#e-99fbd1dc28281467",
+          "text": "Punishing heat waves and extreme weather events like hurricanes and floods are going to become more common as the climate crisis worsens, making it more important than ever before to produce accurate weather forecasts.",
           "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
             "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:1",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 20,
-            "end": 25
+            "start": 15,
+            "end": 20
           }
         },
         {
-          "exampleId": "w:wave#e-6be5e5833475e236",
-          "text": "In Queensland, a dog care institution is making waves thanks to its founder, dog trainer Jo Mcvilly.",
+          "exampleId": "w:wave#e-1a826bcf98d86e6f",
+          "text": "A new study shows that continued exposure to heat waves can age the body as much as regular drinking or smoking.",
           "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-c",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:1",
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:wave#e-0733209decafd1e6",
+          "text": "On the extremes, the draft states that U.S. records do not support increases in heat waves, heavy rainfall, droughts, hurricanes, or wildfires.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d:4",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 48,
-            "end": 53
+            "start": 85,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wave#s10",
+      "pos": "n.",
+      "glossZh": "挥手；挥动的动作",
+      "pronunciationId": "w:wave#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wave#e-0f59717d5010b012",
+          "text": "The conflict worsened when, during a practice for a key trick – where the dragon was supposed to “follow” the pearl in a graceful movement – Emma’s slow, unenthusiastic waves upset the entire team.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 169,
+            "end": 174
+          }
+        },
+        {
+          "exampleId": "w:wave#e-1dea87f1f1b3236c",
+          "text": "Have you ever experienced such moments: a warm smile from a stranger, a brief chat with someone waiting in line, or a simple wave to a neighbor you hardly know?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:wave#e-5864c2f10782e6c9",
+          "text": "With a click, Reba folded its knees, settled it behind the wheel of its tiny convertible（敞篷车）car and rolled it away with a goodbye wave to mine.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 135
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wave#s11",
+      "pos": "n.",
+      "glossZh": "绿波；沿路相继亮起的绿灯（green wave）",
+      "pronunciationId": "w:wave#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wave#e-3681a1057d0e08ca",
+          "text": "“Hitting a green wave?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wave#s12",
+      "pos": "v.",
+      "glossZh": "呈波浪形起伏",
+      "pronunciationId": "w:wave#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wave#e-5e7fa6813c2051b3",
+          "text": "I created raised-line drawings of five different wheels, spokes with lines that curved, bent, waved, dashed（虚线）and extended beyond the perimeter（直径）of the wheel.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 99
           }
         }
       ]
@@ -494,6 +649,11 @@
       "reason": "专门用法或同形词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:wave-off"
+  ]
 }

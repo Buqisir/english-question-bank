@@ -1,0 +1,113 @@
+{
+  "entryId": "w:with-an-eye-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "with",
+      "an",
+      "eye",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "with",
+        "an",
+        "eye",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "with an eye to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "with an eye to sth",
+  "senses": [
+    {
+      "senseId": "w:with-an-eye-to#s1",
+      "pos": "短语",
+      "glossZh": "着眼于；把……纳入考虑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:with-an-eye-to#e-fc32502e9e14973a",
+          "text": "To truly get the most out of your journey, you need to prepare with an eye to everything from start to the end.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 77
+          },
+          "parts": [
+            [
+              63,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              77
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:with-an-eye-to#s2",
+      "pos": "短语",
+      "glossZh": "以……为目标；打算做……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 with an eye to doing sth 表示目的。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

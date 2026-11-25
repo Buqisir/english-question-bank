@@ -1,0 +1,123 @@
+{
+  "entryId": "w:on-edge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "edge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "edge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on edge",
+  "senses": [
+    {
+      "senseId": "w:on-edge#s1",
+      "pos": "短语",
+      "glossZh": "紧张不安；心神不宁",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:edge#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-edge#e-1183cf80a7057e7f",
+          "text": "My client David felt constantly on edge, already forecasting everything that might go wrong.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          },
+          "parts": [
+            [
+              32,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-edge#e-9cb1c99176b0d6b7",
+          "text": "Everyone else seemed at ease, while I felt on edge.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          },
+          "parts": [
+            [
+              43,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

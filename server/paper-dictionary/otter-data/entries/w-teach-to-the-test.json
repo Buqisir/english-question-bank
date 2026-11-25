@@ -1,0 +1,117 @@
+{
+  "entryId": "w:teach-to-the-test",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "teach",
+      "to",
+      "the",
+      "test"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "teach",
+        "to",
+        "the",
+        "test"
+      ],
+      [
+        "taught",
+        "to",
+        "the",
+        "test"
+      ],
+      [
+        "teaches",
+        "to",
+        "the",
+        "test"
+      ],
+      [
+        "teaching",
+        "to",
+        "the",
+        "test"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "teaching to the test",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "teach to the test",
+  "senses": [
+    {
+      "senseId": "w:teach-to-the-test#s1",
+      "pos": "短语",
+      "glossZh": "只围绕考试内容教学",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:teach-to-the-test#e-f2c27a13ef044970",
+          "text": "Bounded framing involves “teaching to the test” in ways that minimize students’ future use of knowledge, signaling its irrelevance beyond the classroom and holding back skill development.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 46
+          },
+          "parts": [
+            [
+              26,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

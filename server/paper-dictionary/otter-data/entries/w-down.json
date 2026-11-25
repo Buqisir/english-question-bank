@@ -95,8 +95,8 @@
     "mock": 720
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 719
+    "gaokao": 42,
+    "mock": 611
   },
   "senses": [
     {
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 54,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -178,7 +178,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -244,589 +244,6 @@
       ]
     },
     {
-      "senseId": "w:down#s3",
-      "pos": "短语",
-      "glossZh": "记下；写下",
-      "pronunciationId": "w:down#p-main",
-      "note": "write down 或 note down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-d00689690ab87a5b",
-          "text": "To remember all the questions you have when you are not in the doctor’s office, write them down and bring the list with you to your appointment.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 91,
-            "end": 95
-          }
-        },
-        {
-          "exampleId": "w:down#e-55a8e5d350bf6f9f",
-          "text": "note down",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:cloze",
-            "locator": {
-              "question": 51,
-              "questionId": "question:paper-gaokao-2021-ii:51",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:down#e-7fa26506d77c2b38",
-          "text": "To serve its function, a book must be activated by a user: the cover opened, the pages parted, the contents reviewed, perhaps notes written down or words underlined.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 140,
-            "end": 144
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s4",
-      "pos": "短语",
-      "glossZh": "拆除；打倒；消除",
-      "pronunciationId": "w:down#p-main",
-      "note": "常与 tear、break、take、cut 等动词搭配。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-da0a408c308fa735",
-          "text": "Love breaks down barriers.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2020-i:27",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:down#e-115694368c706634",
-          "text": "Not this polar bear though-he just kept trying to tear down the fence with his massive paws(爪子).",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        },
-        {
-          "exampleId": "w:down#e-a8017a7fbf876ee3",
-          "text": "“We’re not going to go cutting down any big old oaks,” and neither will the department completely stop planting new ones, said Auyeung.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s5",
-      "pos": "短语",
-      "glossZh": "关闭；停止运行；发生故障",
-      "pronunciationId": "w:down#p-main",
-      "note": "shut down、close down、break down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-e332b89ee0930886",
-          "text": "After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:down#e-8652402d5cd761a5",
-          "text": "It will close down.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2024-ii:27",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:down#e-08bdd4f813ddb01f",
-          "text": "I was halfway across Indiana headed home to Kentucky when my car broke down.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 75
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s6",
-      "pos": "短语",
-      "glossZh": "安顿；定居；平静下来",
-      "pronunciationId": "w:down#p-main",
-      "note": "settle down；put down roots 指「扎根」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-f967de6f704c729d",
-          "text": "Back in 1951, Reisley was just 26, newly married and ready to put down roots.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:down#e-f572e5ad0d24492f",
-          "text": "What made Reisley finally decide to settle down in Usonia?",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2026-ii:25",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s7",
-      "pos": "短语",
-      "glossZh": "传下来；世代相传",
-      "pronunciationId": "w:down#p-main",
-      "note": "pass down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-84bd3a03065e89f0",
-          "text": "passing down",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
-            "locator": {
-              "question": 37,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jan:37",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:down#e-501b6c273b504bfb",
-          "text": "These communities serve as guardians of an ancient wisdom and heritage passed down through generations.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 78,
-            "end": 82
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s8",
-      "pos": "短语",
-      "glossZh": "稀释；减弱",
-      "pronunciationId": "w:down#p-main",
-      "note": "water down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-a2b5561e890cd8c3",
-          "text": "Always water it down and don’t let your ego (自我) get __58__.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s9",
-      "pos": "短语",
-      "glossZh": "颠倒；上下翻转",
-      "pronunciationId": "w:down#p-main",
-      "note": "upside down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-00ea1a126c0f9522",
-          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 68,
-            "end": 72
-          }
-        },
-        {
-          "exampleId": "w:down#e-6cf5777d37bb823d",
-          "text": "This training taught her to read and write her Chinese upside down – a skill that has turned out to be quite __50__, especially whenever we share the newspaper.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s10",
-      "pos": "短语",
-      "glossZh": "将来；过些时候",
-      "pronunciationId": "w:down#p-main",
-      "note": "down the road。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-423c231ee81312d0",
-          "text": "Volunteers will wash, cut, and freeze or dry them for use in meals down the road.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "reading-b-4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 71
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s11",
-      "pos": "短语",
-      "glossZh": "使失望；辜负",
-      "pronunciationId": "w:down#p-main",
-      "note": "let sb down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-add724b219ef05f0",
-          "text": ", teaching Jacky to swim means he has to __48__ that, when he’s swimming in the big pool, I’ll come to his rescue if his doggy paddle lets him down.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 149,
-            "end": 153
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s12",
-      "pos": "短语",
-      "glossZh": "着陆",
-      "pronunciationId": "w:down#p-main",
-      "note": "touch down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-441de5d1c986937a",
-          "text": "I touched down in Vienna just 30 minutes before the departure of the last bus to Prague.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s13",
-      "pos": "短语",
-      "glossZh": "分解；拆开说明",
-      "pronunciationId": "w:down#p-main",
-      "note": "break down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-c16d98d13c90fb33",
-          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:down#s14",
-      "pos": "短语",
-      "glossZh": "归因于；是……的结果",
-      "pronunciationId": "w:down#p-main",
-      "note": "be down to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:down#e-dc43b2cb8c0a1ba5",
-          "text": "She said it was all down to some key aspects.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:down#s15",
       "pos": "n.",
       "glossZh": "下降；低谷",
@@ -835,7 +252,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -866,12 +283,12 @@
       "pos": "adj.",
       "glossZh": "情绪低落的；沮丧的",
       "pronunciationId": "w:down#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -899,6 +316,145 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:down#s19",
+      "pos": "adv.",
+      "glossZh": "（look down on/upon）轻视；看不起",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:down#e-c744cd4c190f1020",
+          "text": "When we look down upon waiting, we risk losing part of our shared humanity.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-putian-2026-05-adaptability-exam:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:down#s20",
+      "pos": "adv.",
+      "glossZh": "（turn down）拒绝；谢绝",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:down#e-43f52f38c3158032",
+          "text": "The 25-year-old teacher, who turned down opportunities in bigger cities, now spends her days in a once-worn-out classroom at Drumright High School, earning barely $30,000 a year.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:down#s21",
+      "pos": "adv.",
+      "glossZh": "（wipe down）把表面擦干净",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:down#s22",
+      "pos": "adv.",
+      "glossZh": "（track down）追查到；找到",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:down#s23",
+      "pos": "adv.",
+      "glossZh": "（get down to）着手做；开始认真做",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:down#s24",
+      "pos": "adv.",
+      "glossZh": "（lock down）锁定；确定",
+      "pronunciationId": "w:down#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:down#e-8fac4091236bdde9",
+          "text": "In selected regions, fishing nets bear unique identifiers, enabling the precise tracking of their ownership by individuals or commercial fisheries post-recovery and instantly locking down whoever is at fault.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 183,
+            "end": 187
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -907,6 +463,89 @@
       "reason": "专门术语、俚语或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:back-down",
+    "w:be-down-to-sth",
+    "w:bear-down",
+    "w:beat-down",
+    "w:boil-down-to",
+    "w:boil-sth-down-to-sth",
+    "w:break-down",
+    "w:bring-down",
+    "w:burn-down",
+    "w:calm-down",
+    "w:clean-down",
+    "w:close-down",
+    "w:come-down",
+    "w:come-down-to",
+    "w:come-down-with",
+    "w:cool-down",
+    "w:count-down",
+    "w:cut-down",
+    "w:cut-down-on",
+    "w:deep-down",
+    "w:die-down",
+    "w:down-and-out",
+    "w:down-the-road",
+    "w:down-to",
+    "w:down-with",
+    "w:drag-sb-down",
+    "w:drive-down",
+    "w:face-down",
+    "w:fall-down",
+    "w:fall-down-on",
+    "w:get-down",
+    "w:get-down-to",
+    "w:get-down-to-business",
+    "w:go-down",
+    "w:go-down-a-rabbit-hole",
+    "w:hand-down",
+    "w:knock-sb-sth-down-over",
+    "w:let-down-ones-guard",
+    "w:let-sb-down",
+    "w:lie-down",
+    "w:look-down",
+    "w:look-down-on",
+    "w:nail-down",
+    "w:note-down",
+    "w:pass-down",
+    "w:play-down",
+    "w:pull-down",
+    "w:push-down",
+    "w:put-down",
+    "w:put-down-roots",
+    "w:put-down-to",
+    "w:quiet-down",
+    "w:roll-down",
+    "w:run-down",
+    "w:scarf-down",
+    "w:set-down",
+    "w:settle-down",
+    "w:shut-down",
+    "w:sit-down",
+    "w:slow-down",
+    "w:strike-down",
+    "w:take-down",
+    "w:talk-down",
+    "w:talk-down-to",
+    "w:tear-down",
+    "w:throw-down",
+    "w:tone-down",
+    "w:touch-down",
+    "w:track-down",
+    "w:turn-sth-down",
+    "w:turn-sth-upside-down",
+    "w:up-and-down",
+    "w:upside-down",
+    "w:wash-sth-down",
+    "w:water-sth-down",
+    "w:wear-down",
+    "w:weigh-sb-down",
+    "w:wind-down",
+    "w:write-down"
+  ]
 }

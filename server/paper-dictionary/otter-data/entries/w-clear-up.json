@@ -1,0 +1,314 @@
+{
+  "entryId": "w:clear-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clear",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "clear",
+        "up"
+      ],
+      [
+        "clear",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "cleared",
+        "up"
+      ],
+      [
+        "clearing",
+        "up"
+      ],
+      [
+        "clears",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "clear up",
+      "tags": []
+    },
+    {
+      "form": "clearing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clear (sth) up",
+  "senses": [
+    {
+      "senseId": "w:clear-up#s1",
+      "pos": "短语",
+      "glossZh": "清理干净；收拾整齐",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s44"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:clear-up#e-a8085d03e3b35432",
+          "text": "Clear up the mess.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clear-up#e-b9f9564644e1786f",
+          "text": "Clear up massive plastic waste.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clear-up#e-7cb6db1d9ec3969a",
+          "text": "Clear up the fallen leaves.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:clear-up#s2",
+      "pos": "短语",
+      "glossZh": "说清（疑点）；澄清（误会）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clear-up#e-ce0c7cd1ff004cd8",
+          "text": "Ultimately, Faizan correctly spelled “éclaircissement” – meaning “a clearing up of something difficult to understand”.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 79
+          },
+          "parts": [
+            [
+              68,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:clear-up#s3",
+      "pos": "短语",
+      "glossZh": "使（症状）消退",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clear-up#e-a75250ca4a1d16c8",
+          "text": "Targeting chlamydia’s MOMP protein, the vaccine gives three types of protection: reducing infection risk, stopping mild cases from worsening, and clearing up symptoms(症状).",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 157
+          },
+          "parts": [
+            [
+              146,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:clear-up#s4",
+      "pos": "短语",
+      "glossZh": "（症状、皮疹等）消退",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clear-up#s5",
+      "pos": "短语",
+      "glossZh": "（天气）转晴；（风暴）散去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clear-up#s6",
+      "pos": "短语",
+      "glossZh": "（斯诺克等）一杆清台",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

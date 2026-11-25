@@ -1,0 +1,126 @@
+{
+  "entryId": "w:catch-a-cold",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "a",
+      "cold"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "a",
+        "cold"
+      ],
+      [
+        "catches",
+        "a",
+        "cold"
+      ],
+      [
+        "catching",
+        "a",
+        "cold"
+      ],
+      [
+        "caught",
+        "a",
+        "cold"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catching a cold",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch a cold",
+  "senses": [
+    {
+      "senseId": "w:catch-a-cold#s1",
+      "pos": "短语",
+      "glossZh": "患感冒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:catch-a-cold#e-8aa8df95ada1c396",
+          "text": "Catching a cold.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:catch-a-cold#s2",
+      "pos": "短语",
+      "glossZh": "遭遇麻烦；蒙受损失",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

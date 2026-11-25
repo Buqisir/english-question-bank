@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 526
+    "mock": 330
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 43,
-        "mock": 0
+        "mock": 196
       },
       "folded": false,
       "examples": [
@@ -118,20 +118,6 @@
       ]
     },
     {
-      "senseId": "w:team#s2",
-      "pos": "短语",
-      "glossZh": "合作",
-      "pronunciationId": "w:team#p-main",
-      "note": "team up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:team#s3",
       "pos": "n.",
       "glossZh": "一队拉车的牲畜",
@@ -151,6 +137,12 @@
       "reason": "专名或历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:team-up",
+    "w:team-up-with"
+  ]
 }

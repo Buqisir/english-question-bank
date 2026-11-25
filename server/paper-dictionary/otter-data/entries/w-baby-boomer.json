@@ -1,0 +1,92 @@
+{
+  "entryId": "w:baby-boomer",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "baby",
+      "boomer"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "baby",
+        "boomer"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "baby boomer",
+  "senses": [
+    {
+      "senseId": "w:baby-boomer#s1",
+      "pos": "短语",
+      "glossZh": "婴儿潮一代的人（通常指二战后出生于人口高峰期的人）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:baby#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:baby-boomer#e-ca064638200db381",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

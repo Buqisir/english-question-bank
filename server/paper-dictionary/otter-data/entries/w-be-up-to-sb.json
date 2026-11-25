@@ -1,0 +1,150 @@
+{
+  "entryId": "w:be-up-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "up",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "up",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "was up to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be up to sb",
+  "senses": [
+    {
+      "senseId": "w:be-up-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "由某人负责；该由某人做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-up-to-sb#e-21cef4783fa93952",
+          "text": "To her, it was an essential “American skill.” That meant it was up to me, her American-born child, to learn to type.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 69
+          },
+          "parts": [
+            [
+              60,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-up-to-sb#e-f61c59ff04215b37",
+          "text": "Anyway, it was up to Ed to keep checking his rocket.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation:11",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "常用 it is up to sb to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:be-up-to-sb#s2",
+      "pos": "短语",
+      "glossZh": "由某人决定；由某人作主",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:up#s81"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,99 @@
+{
+  "entryId": "w:move-the-needle",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "the",
+      "needle"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "the",
+        "needle"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moving the needle",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move the needle",
+  "senses": [
+    {
+      "senseId": "w:move-the-needle#s1",
+      "pos": "短语",
+      "glossZh": "带来可见的进展；产生明显影响",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:needle#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:move-the-needle#e-029ed4de67ba22d3",
+          "text": "It’s Sunday evening, and you’re reviewing another week of progress on five different goals without truly moving the needle on any.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 122
+          },
+          "parts": [
+            [
+              105,
+              122
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              122
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

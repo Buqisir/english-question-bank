@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-line-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "line",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "line",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in line with",
+  "senses": [
+    {
+      "senseId": "w:in-line-with#s1",
+      "pos": "短语",
+      "glossZh": "与……一致；符合；依照",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s50",
+        "w:line#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-line-with#e-5b757e549ec6692c",
+          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-line-with#e-a2532181df24f115",
+          "text": "Taxing large vehicles more would be in line with their cost to society through road danger and pollution.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-line-with#e-0b4de6d79732f056",
+          "text": "“If a practice isn't in line with healthy child development, why are we doing it?”",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 33
+          },
+          "parts": [
+            [
+              21,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,84 @@
+{
+  "entryId": "w:dance-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dance",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dance",
+        "around"
+      ],
+      [
+        "danced",
+        "around"
+      ],
+      [
+        "dances",
+        "around"
+      ],
+      [
+        "dancing",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dance around",
+  "senses": [
+    {
+      "senseId": "w:dance-around#s1",
+      "pos": "短语",
+      "glossZh": "绕开重点；回避正面回答或处理",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 issue、question 等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dance-around#s2",
+      "pos": "短语",
+      "glossZh": "绕着……跳舞",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

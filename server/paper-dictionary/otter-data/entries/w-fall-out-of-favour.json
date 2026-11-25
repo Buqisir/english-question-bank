@@ -1,0 +1,101 @@
+{
+  "entryId": "w:fall-out-of-favour",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "out",
+      "of",
+      "favour"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "out",
+        "of",
+        "favour"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fallen out of favour",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall out of favour",
+  "senses": [
+    {
+      "senseId": "w:fall-out-of-favour#s1",
+      "pos": "短语",
+      "glossZh": "不再受欢迎；失去青睐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:favour#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-out-of-favour#e-793725e7356aeeb8",
+          "text": "Food Technology is a vital subject but has fallen out of favour in recent years, overshadowed by “academic” subjects.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 63
+          },
+          "parts": [
+            [
+              43,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

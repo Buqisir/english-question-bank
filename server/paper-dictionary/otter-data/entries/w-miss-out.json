@@ -1,0 +1,190 @@
+{
+  "entryId": "w:miss-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "missing out"
+  ],
+  "pattern": {
+    "tokens": [
+      "miss",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "miss",
+        "out"
+      ],
+      [
+        "missing",
+        "out"
+      ],
+      [
+        "missed",
+        "out"
+      ],
+      [
+        "misses",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "missed out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "miss out",
+  "senses": [
+    {
+      "senseId": "w:miss-out#s1",
+      "pos": "短语",
+      "glossZh": "错过参加、体验或获得某事物的机会",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:miss#s7",
+        "w:out#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:miss-out#e-7b4b1b4905335370",
+          "text": "With so many online posts featuring the same places, it’s easy to feel like you’re missing out.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 94
+          },
+          "parts": [
+            [
+              83,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-out#e-3bf15eb105183be4",
+          "text": "While you experience FOMO, the things you’re “missing out on” might be right in front of you.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-out#e-26a6c2b90c9d9fc4",
+          "text": "missed out on",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:cloze",
+            "locator": {
+              "question": 52,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:52#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "可用 miss out on sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:miss-out#s2",
+      "pos": "短语",
+      "glossZh": "遗漏；略去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 miss sth out，常见于英式英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,177 @@
+{
+  "entryId": "w:take-a-break",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a break",
+    "took a break"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "break"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "break"
+      ],
+      [
+        "taking",
+        "a",
+        "break"
+      ],
+      [
+        "took",
+        "a",
+        "break"
+      ],
+      [
+        "taken",
+        "a",
+        "break"
+      ],
+      [
+        "takes",
+        "a",
+        "break"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a break",
+  "senses": [
+    {
+      "senseId": "w:take-a-break#s1",
+      "pos": "短语",
+      "glossZh": "暂停手头的事，休息一会儿",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-break#e-24d51ce951335c14",
+          "text": "Further experiments showed neither playing games nor taking a break boosted creativity.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 67
+          },
+          "parts": [
+            [
+              53,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-break#e-6ba947d802b8790a",
+          "text": "With three little babies, I never took a break, completely ignoring any self-care.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 46
+          },
+          "parts": [
+            [
+              34,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-a-break#e-25e59f176fb7b2a6",
+          "text": "How often should we take a break from staring at a screen?",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

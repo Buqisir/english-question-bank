@@ -1,0 +1,159 @@
+{
+  "entryId": "w:bounce-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bounce",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bounce",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bounced back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bounce back",
+  "senses": [
+    {
+      "senseId": "w:bounce-back#s1",
+      "pos": "短语",
+      "glossZh": "恢复过来；重新振作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bounce#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bounce-back#e-894f5595eded8149",
+          "text": "She stopped pressing and Anna bounced back to being the cheery little child they knew.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 42
+          },
+          "parts": [
+            [
+              30,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bounce-back#e-4aaaa1de81978993",
+          "text": "New research, however, shows a simple trick that allows us to get back some control and bounce back from goal-pursuit failure.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 99
+          },
+          "parts": [
+            [
+              88,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bounce-back#e-2ae9d81ce2be4e0c",
+          "text": "Whether we’ve hurt someone’s feelings, or messed up a work project, we can use our errors as opportunities to stop, reflect, and bounce back.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 140
+          },
+          "parts": [
+            [
+              129,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              140
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

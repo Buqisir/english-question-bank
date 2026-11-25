@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 20
+    "mock": 4
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -168,20 +168,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:calculate#s3",
-      "pos": "短语",
-      "glossZh": "有意做成；旨在",
-      "pronunciationId": "w:calculate#p-main",
-      "note": "be calculated to do",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -190,6 +176,8 @@
       "reason": "棋类专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

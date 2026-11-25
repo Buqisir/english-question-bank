@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 75
+    "mock": 12
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 3
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -170,74 +170,6 @@
       ]
     },
     {
-      "senseId": "w:breath#s3",
-      "pos": "短语",
-      "glossZh": "恢复正常呼吸；缓过气来",
-      "pronunciationId": "w:breath#p-main",
-      "note": "catch one's breath",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:breath#e-8defb13ef5acfee6",
-          "text": "As we stood there, catching our breath, we noticed the __53__ had stopped completely.",
-          "source": {
-            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
-            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:breath#s4",
-      "pos": "短语",
-      "glossZh": "别指望；别抱太大希望",
-      "pronunciationId": "w:breath#p-main",
-      "note": "don't hold your breath",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:breath#e-b2c6880503c05e10",
-          "text": "However, even if we should be moving in the direction of more time spent at schools, don’t hold your breath.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 101,
-            "end": 107
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:breath#s5",
       "pos": "n.",
       "glossZh": "一丝；一缕",
@@ -257,6 +189,13 @@
       "reason": "专业形容词用法或 breathe 的误拼"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:catch-ones-breath",
+    "w:dont-hold-your-breath",
+    "w:take-a-breath"
+  ]
 }

@@ -1,0 +1,108 @@
+{
+  "entryId": "w:rules-of-the-game",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rules",
+      "of",
+      "the",
+      "game"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rules",
+        "of",
+        "the",
+        "game"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rules of the game",
+  "senses": [
+    {
+      "senseId": "w:rules-of-the-game#s1",
+      "pos": "短语",
+      "glossZh": "游戏或比赛规则",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rules-of-the-game#e-0a70cfca2ccf1972",
+          "text": "To obey the rules of the game.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-2026-01-shandong-jinan-gaosan-first:33#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 29
+          },
+          "parts": [
+            [
+              12,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:rules-of-the-game#s2",
+      "pos": "短语",
+      "glossZh": "某个领域通行的行事规则",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

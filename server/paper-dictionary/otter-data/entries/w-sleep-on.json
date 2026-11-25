@@ -1,0 +1,87 @@
+{
+  "entryId": "w:sleep-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sleeping on"
+  ],
+  "pattern": {
+    "tokens": [
+      "sleep",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sleep",
+        "on"
+      ],
+      [
+        "sleeping",
+        "on"
+      ],
+      [
+        "sleeps",
+        "on"
+      ],
+      [
+        "slept",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sleep on",
+  "senses": [
+    {
+      "senseId": "w:sleep-on#s1",
+      "pos": "短语",
+      "glossZh": "先过一夜再作决定",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 sleep on it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sleep-on#s2",
+      "pos": "短语",
+      "glossZh": "低估；忽视……的价值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

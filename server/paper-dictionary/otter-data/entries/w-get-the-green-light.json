@@ -1,0 +1,66 @@
+{
+  "entryId": "w:get-the-green-light",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "the",
+      "green",
+      "light"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "the",
+        "green",
+        "light"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get the green light",
+  "senses": [
+    {
+      "senseId": "w:get-the-green-light#s1",
+      "pos": "短语",
+      "glossZh": "获准开始或继续做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:get#s31",
+        "w:green#s8",
+        "w:light#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

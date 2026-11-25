@@ -1,0 +1,94 @@
+{
+  "entryId": "w:over-and-over-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "over",
+      "and",
+      "over",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "over",
+        "and",
+        "over",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "over and over again",
+  "senses": [
+    {
+      "senseId": "w:over-and-over-again#s1",
+      "pos": "短语",
+      "glossZh": "反复地；一再",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:over-and-over-again#e-705ba14e6c30c45a",
+          "text": "The entire year our grade had been lectured over and over again on these topics because we were earning the reputation as the worst grade in the school, which was not a reputation that my friends nor I were particularly proud of.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 63
+          },
+          "parts": [
+            [
+              44,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

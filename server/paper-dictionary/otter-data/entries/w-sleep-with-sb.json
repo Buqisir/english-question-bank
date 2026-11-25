@@ -1,0 +1,91 @@
+{
+  "entryId": "w:sleep-with-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sleep with",
+    "sleep with somebody",
+    "sleeping with"
+  ],
+  "pattern": {
+    "tokens": [
+      "sleep",
+      "with",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sleep",
+        "with",
+        {
+          "slot": "sb"
+        }
+      ],
+      [
+        "sleep",
+        "with"
+      ],
+      [
+        "sleep",
+        "with",
+        "somebody"
+      ],
+      [
+        "sleeping",
+        "with"
+      ],
+      [
+        "sleeps",
+        "with"
+      ],
+      [
+        "slept",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sleep with sb",
+  "senses": [
+    {
+      "senseId": "w:sleep-with-sb#s1",
+      "pos": "短语",
+      "glossZh": "与某人发生性关系（委婉说法）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sleep#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

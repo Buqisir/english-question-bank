@@ -1,0 +1,92 @@
+{
+  "entryId": "w:out-and-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "and",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "and",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out and about",
+  "senses": [
+    {
+      "senseId": "w:out-and-about#s1",
+      "pos": "短语",
+      "glossZh": "外出活动；在外四处走动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-and-about#e-df1430e75807f07a",
+          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 144,
+            "end": 157
+          },
+          "parts": [
+            [
+              144,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              144,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

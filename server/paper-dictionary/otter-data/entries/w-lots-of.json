@@ -1,0 +1,154 @@
+{
+  "entryId": "w:lots-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lots",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lots",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lots of",
+  "senses": [
+    {
+      "senseId": "w:lots-of#s1",
+      "pos": "短语",
+      "glossZh": "许多；大量",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lot#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lots-of#e-bb2f8baab3ec4b0b",
+          "text": "A long, negative review of a hotel, complete with lots of information, tended to convince participants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          },
+          "parts": [
+            [
+              50,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lots-of#e-3f9a1ef81bca6392",
+          "text": "She had prepared lots of snacks, while my job was to have the backyard in order.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lots-of#e-4a7bcee35794c96a",
+          "text": "The human body is 60% water and we need to drink lots of water to be healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          },
+          "parts": [
+            [
+              49,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 9,
+        "mock": 39
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

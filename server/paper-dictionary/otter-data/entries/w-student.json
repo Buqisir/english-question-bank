@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1328
+    "mock": 1128
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 117,
-        "mock": 0
+        "mock": 199
       },
       "folded": false,
       "examples": [
@@ -122,12 +122,12 @@
       "pos": "n.",
       "glossZh": "研习某领域的人",
       "pronunciationId": "w:student#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -137,6 +137,6 @@
       "reason": "专名所有格来源的专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

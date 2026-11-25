@@ -1,0 +1,169 @@
+{
+  "entryId": "w:real-estate",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "real",
+      "estate"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "real",
+        "estate"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "real estate",
+  "senses": [
+    {
+      "senseId": "w:real-estate#s1",
+      "pos": "短语",
+      "glossZh": "房地产；不动产",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:estate#s2",
+        "w:real#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:real-estate#e-ce0ff1076de8293f",
+          "text": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:real-estate#e-0736790cfdd50768",
+          "text": "But for this vacant(空着的) office outside Dupont Circle in Washington, D. C., real estate developers see potential.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 87
+          },
+          "parts": [
+            [
+              76,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:real-estate#e-84c8de0472151441",
+          "text": "Sarah Jennings of Bay Shore, New York was ready to buy it, but her real estate agent suggested getting a home inspection.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:real-estate#s2",
+      "pos": "短语",
+      "glossZh": "可用空间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用法，如屏幕上可用于显示内容的空间。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

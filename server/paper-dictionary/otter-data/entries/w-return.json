@@ -62,8 +62,8 @@
     "mock": 322
   },
   "unassignedCounts": {
-    "gaokao": 9,
-    "mock": 314
+    "gaokao": 12,
+    "mock": 135
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 90
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -269,7 +269,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -340,7 +340,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -426,7 +426,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -497,7 +497,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -547,12 +547,12 @@
       "pos": "n.",
       "glossZh": "往返票",
       "pronunciationId": "w:return#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -563,7 +563,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -602,74 +602,349 @@
       "examples": []
     },
     {
-      "senseId": "w:return#s12",
-      "pos": "短语",
-      "glossZh": "作为交换",
+      "senseId": "w:return#s13",
+      "pos": "adj.",
+      "glossZh": "往返的",
       "pronunciationId": "w:return#p-main",
-      "note": "in return；in return for。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 3,
-        "mock": 1
+        "gaokao": 0,
+        "mock": 4
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:return#e-fd38e0e8908ad6bc",
-          "text": "In return for a food reward one bear, Brutus, would touch the more heavily dotted pattern with his nose.",
+          "exampleId": "w:return#e-53473e8a44cbd3c2",
+          "text": "To celebrate its 30th anniversary – marking decades of reliable service – Key Publishing has teamed up with easyJet to host a special competition, giving one lucky reader the chance to fly away with a companion on a return trip to any destination in its network.",
           "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a:1",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 3,
-            "end": 9
+            "start": 216,
+            "end": 222
           }
         },
         {
-          "exampleId": "w:return#e-72f3a1d551237153",
-          "text": "in return for",
+          "exampleId": "w:return#e-38ace56bf7bce04f",
+          "text": "• London Trip: Return flights and a two-night stay in London to attend the glittering award ceremony in October 2026.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a",
             "locator": {
-              "question": 48,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:48",
-              "option": "B",
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a:11",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 3,
-            "end": 9
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:return#s14",
+      "pos": "v.",
+      "glossZh": "恢复到先前的状态",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:return#e-36aecdba7ea30580",
+          "text": "Once the elevator reaches a steady speed, acceleration stops and the reading returns to normal.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
           }
         },
         {
-          "exampleId": "w:return#e-e20dce8fd0c525d1",
-          "text": "They include “debt-for-nature-swapping” agreements under which some donor countries and organisations reduce their debt repayment demands in return for calling a stop to destructive logging.",
+          "exampleId": "w:return#e-391a2b0955cb2a9f",
+          "text": "The key lies in the ability of a single cell to develop into a whole organism, and dedifferentiation (去分化), where mature cells return to a dividing state before forming new tissues and organs.",
           "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
             "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:return#e-5a97e1f10ea97e6b",
+          "text": "The electricity supply has returned to normal.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:return#s15",
+      "pos": "adj.",
+      "glossZh": "回程的",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:return#e-9b7be01992db6083",
+          "text": "Take a different return route.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:return#e-90ecb3ccaea6a54b",
+          "text": "After nearly 30 hours of fishing, their return trips – lasting up to 16 hours – always began with the penguins pointing directly toward their colonies, but their following path depended on the day’s ocean conditions.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c:3",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 141,
-            "end": 147
+            "start": 40,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:return#e-3a918f853d3c8621",
+          "text": "Later, boarding a rented bus for the return trip, Sumi stared out the window, a heavy cloud of disappointment settling over her.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:return#s16",
+      "pos": "n.",
+      "glossZh": "回球",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:return#s17",
+      "pos": "v.",
+      "glossZh": "放回原处",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:return#e-470d0e733053e437",
+          "text": "● Return the chicken to the pan, add the chicken soup and cook gently for around 20 minutes, until the chicken is done.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:return#s18",
+      "pos": "v.",
+      "glossZh": "返回（数据或结果）",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:return#e-6e208ce314f4e845",
+          "text": "“The patterns stored in AI technology seem to be sending back to the human mind,” notes co-author Levin Brinkmann, describing a cultural feedback cycle: humans train AI on text, AI returns statistically remixed versions, and then people unconsciously adopt its patterns.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 181,
+            "end": 188
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:return#s19",
+      "pos": "v.",
+      "glossZh": "回应；回以（同样的举动）",
+      "pronunciationId": "w:return#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:return#e-3dd22458fb78342c",
+          "text": "Return a phone call.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:return#e-778bb0e4145ed47a",
+          "text": "Return her call.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:return#e-a40d3ba110ac02e9",
+          "text": "Whispers of disapproval drifted across the room; no one returned his smile, but he kept grinning anyway.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
           }
         }
       ]
@@ -681,6 +956,12 @@
       "reason": "矿业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-return",
+    "w:in-return-for"
+  ]
 }

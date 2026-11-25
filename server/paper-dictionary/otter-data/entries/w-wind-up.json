@@ -1,0 +1,263 @@
+{
+  "entryId": "w:wind-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wind",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wind",
+        "up"
+      ],
+      [
+        "winding",
+        "up"
+      ],
+      [
+        "winds",
+        "up"
+      ],
+      [
+        "wound",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wound up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wind up",
+  "senses": [
+    {
+      "senseId": "w:wind-up#s1",
+      "pos": "短语",
+      "glossZh": "结果做了某事；最终到了某处或处于某种境地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wound#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wind-up#e-69cc76415f4023e0",
+          "text": "On the Neighborhood, Rogers asked Jeff straightforwardly about the mechanics of his wheelchair, and how he wound up in it.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 115
+          },
+          "parts": [
+            [
+              107,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wind-up#e-9d4b578524b4dcb1",
+          "text": "What does the underlined phrase “wind up” mean in paragraph 3?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          },
+          "parts": [
+            [
+              33,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wind-up#e-bff9f8118351e023",
+          "text": "Knowing what comes next is like crocheting (钩针编织): The end of one day knits into the next, and you wind up with a garment (毛衣) that is flexible but strong.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 106
+          },
+          "parts": [
+            [
+              99,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              106
+            ]
+          ]
+        }
+      ],
+      "note": "常接动词 -ing 形式，或用 wind up in/with。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:wind-up#s2",
+      "pos": "短语",
+      "glossZh": "卷起；把线、绳等绕起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s3",
+      "pos": "短语",
+      "glossZh": "给钟表或玩具上发条",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s4",
+      "pos": "短语",
+      "glossZh": "使激动或紧张",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s5",
+      "pos": "短语",
+      "glossZh": "故意逗弄；惹恼",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s6",
+      "pos": "短语",
+      "glossZh": "结束；收尾",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s7",
+      "pos": "短语",
+      "glossZh": "清算并解散（公司等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-up#s8",
+      "pos": "短语",
+      "glossZh": "做投球前的蓄力动作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

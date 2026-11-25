@@ -58,8 +58,8 @@
     "mock": 743
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 743
+    "gaokao": 11,
+    "mock": 557
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 53,
-        "mock": 0
+        "mock": 172
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -205,113 +205,28 @@
       ]
     },
     {
-      "senseId": "w:own#s3",
-      "pos": "短语",
-      "glossZh": "独自；靠自己",
+      "senseId": "w:own#s5",
+      "pos": "v.",
+      "glossZh": "承认并为……负责",
       "pronunciationId": "w:own#p-main",
-      "note": "on one’s own。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 9,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:own#e-3fc86fe20f4b0790",
-          "text": "However, Molai went looking on his own and __50__ a nearby island where he began to plant trees.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 38
-          }
-        },
-        {
-          "exampleId": "w:own#e-671fc27b5f04a16e",
-          "text": "I started reading books on my own before age 5 and my mother took me to the public library once a week to borrow several books.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:own#e-8a5bdfd9cdc9c598",
-          "text": "Then, Angela gets us to try the nine movements on our own.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:grammar-fill",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:own#s4",
-      "pos": "短语",
-      "glossZh": "凭本身条件",
-      "pronunciationId": "w:own#p-main",
-      "note": "in one’s own right。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:own#e-8427ff908c36e3ce",
-          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 110
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-ones-own-right",
+    "w:life-of-its-own",
+    "w:on-ones-own",
+    "w:own-goal"
+  ]
 }

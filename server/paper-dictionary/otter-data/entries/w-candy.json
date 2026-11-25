@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 28
+    "mock": 1
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -167,40 +167,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:candy#s3",
-      "pos": "短语",
-      "glossZh": "只供视觉享受的东西",
-      "pronunciationId": "w:candy#p-main",
-      "note": "eye candy",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:candy#e-d3bc4d9c0f68f7be",
-          "text": "Their contents are just eye candy for shrinking attention spans.",
-          "source": {
-            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
-            "paperTitle": "太原市2026年高三年级模拟考试（二）",
-            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -209,6 +175,11 @@
       "reason": "俚语或历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:eye-candy"
+  ]
 }

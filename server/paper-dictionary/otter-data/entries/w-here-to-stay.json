@@ -1,0 +1,156 @@
+{
+  "entryId": "w:here-to-stay",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "here",
+      "to",
+      "stay"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "here",
+        "to",
+        "stay"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "here to stay",
+  "senses": [
+    {
+      "senseId": "w:here-to-stay#s1",
+      "pos": "短语",
+      "glossZh": "会长期存在；会持续下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:here-to-stay#e-1c65f97323d4f3d0",
+          "text": "Whether you trust it or not, technology is here to stay, including in sports.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:here-to-stay#e-c44e49f0784f992b",
+          "text": "While my romance with books is still ongoing, in the long run, my love for illustrated novels is more substantial and here to stay.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 130
+          },
+          "parts": [
+            [
+              118,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              130
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:here-to-stay#e-ccbce5d1c52b8de4",
+          "text": "One-size-fits-all Approaches are Here to Stay",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-zhuji-2025-12-first:31#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 45
+          },
+          "parts": [
+            [
+              33,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

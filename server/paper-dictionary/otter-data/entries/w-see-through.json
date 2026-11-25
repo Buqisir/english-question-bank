@@ -1,0 +1,290 @@
+{
+  "entryId": "w:see-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sees through"
+  ],
+  "pattern": {
+    "tokens": [
+      "see",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "through"
+      ],
+      [
+        "sees",
+        "through"
+      ],
+      [
+        "saw",
+        "through"
+      ],
+      [
+        "seeing",
+        "through"
+      ],
+      [
+        "seen",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see through",
+  "senses": [
+    {
+      "senseId": "w:see-through#s1",
+      "pos": "短语",
+      "glossZh": "识破骗局；看穿某人的伪装或真实意图",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:see-through#e-c73bda99c4d6b5a2",
+          "text": "Always strive to see through the smokescreen by following these three steps.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:see-through#e-c8b56b772c044000",
+          "text": "Strive always to see through the smokescreen by following these steps.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:see-through#s2",
+      "pos": "短语",
+      "glossZh": "透过遮挡物看见另一侧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:see-through#e-aca107e39345e701",
+          "text": "Scientists are trained to see through the earth’s surface and detect minerals.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-08-first:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:see-through#e-5d7f5d11f12f5e66",
+          "text": "By employing a set of satellite technologies – including satellites that can see through clouds and at night – the researchers hope to enhance AI’s landslide detection capabilities.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 88
+          },
+          "parts": [
+            [
+              77,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:see-through#e-e958684dc01197ed",
+          "text": "Nava is training AI to identify landslides in two types of satellite images – visual images of the ground surface and radar (雷达) data, the latter of which can see through cloud cover and even acquire images at night.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 170
+          },
+          "parts": [
+            [
+              159,
+              170
+            ]
+          ],
+          "highlightRanges": [
+            [
+              159,
+              170
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:see-through#s3",
+      "pos": "短语",
+      "glossZh": "支持某人渡过难关",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "see sb through sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-through#s4",
+      "pos": "短语",
+      "glossZh": "坚持把某事做完",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "see sth through。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:see-through#s5",
+      "pos": "短语",
+      "glossZh": "（钱、食物等）足够某人用到某时",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "see sb through a period。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

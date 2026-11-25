@@ -1,0 +1,301 @@
+{
+  "entryId": "w:break-apart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "break",
+      "apart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "apart"
+      ],
+      [
+        "breaking",
+        "apart"
+      ],
+      [
+        "breaks",
+        "apart"
+      ],
+      [
+        "broke",
+        "apart"
+      ],
+      [
+        "broken",
+        "apart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "break apart",
+      "tags": []
+    },
+    {
+      "form": "breaking apart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break (sth) apart",
+  "senses": [
+    {
+      "senseId": "w:break-apart#s1",
+      "pos": "短语",
+      "glossZh": "拆解（复杂问题或含义）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:break#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-apart#e-cb57e76247069933",
+          "text": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 15
+          },
+          "parts": [
+            [
+              1,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-apart#s2",
+      "pos": "短语",
+      "glossZh": "掰开；拆成几部分",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-apart#e-7ac28cbe96433270",
+          "text": "“Their preferred food is urchins(海胆),” says biologist Chris Law, who notes that urchins are relatively easy for otters to break apart.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 133
+          },
+          "parts": [
+            [
+              122,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              133
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-apart#e-70676d01388c0374",
+          "text": "Urchins are hard to break apart.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:29#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-apart#s3",
+      "pos": "短语",
+      "glossZh": "裂开；散开；解体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-apart#e-d6bc088c322438b6",
+          "text": "Blood clots may break apart while being deformed, resulting in small pieces stuck in hard-to-reach areas.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-apart#e-c5dfe37b05fcf873",
+          "text": "The result would be that spiral arms last for tens or hundreds of millions of years before breaking apart and re-forming.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 105
+          },
+          "parts": [
+            [
+              91,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-apart#e-ec57e6e5f7099d6f",
+          "text": "By adding that dataset to a computational algorithm（算法）, they produced a structured model that displayed two ancestral populations breaking apart and getting back together in ancient times.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 145
+          },
+          "parts": [
+            [
+              131,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              131,
+              145
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

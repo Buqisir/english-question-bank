@@ -1,0 +1,121 @@
+{
+  "entryId": "w:mess-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "mess with"
+  ],
+  "pattern": {
+    "tokens": [
+      "mess",
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mess",
+        "with",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "mess",
+        "with"
+      ],
+      [
+        "messed",
+        "with"
+      ],
+      [
+        "messes",
+        "with"
+      ],
+      [
+        "messing",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "messing with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mess with sth",
+  "senses": [
+    {
+      "senseId": "w:mess-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "摆弄；乱动；随意干预",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mess#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mess-with-sth#e-eef3a1df6bc60541",
+          "text": "So basically, we’re not just messing with the are.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,154 @@
+{
+  "entryId": "w:also-known-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "also",
+      "known",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "also",
+        "known",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "also known as",
+  "senses": [
+    {
+      "senseId": "w:also-known-as#s1",
+      "pos": "短语",
+      "glossZh": "也称为；又名",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:also-known-as#e-c74fdb47de15fdef",
+          "text": "Indoor plants, also known as houseplants or pot plants, are plants that like to grow indoors.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 28
+          },
+          "parts": [
+            [
+              15,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:also-known-as#e-1ae16c117bf58d31",
+          "text": "Solar cells, also known as photovoltaic cells (光伏电池), can turn sunlight into electricity.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:also-known-as#e-8648bf080d4593b5",
+          "text": "They are bridge inspectors, also known as the youngest “bridge guardians” on the line.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 41
+          },
+          "parts": [
+            [
+              28,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

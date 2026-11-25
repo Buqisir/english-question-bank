@@ -1,0 +1,101 @@
+{
+  "entryId": "w:plant-the-seed-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "plant",
+      "the",
+      "seed",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plant",
+        "the",
+        "seed",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "planted the seed of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plant the seed of sth",
+  "senses": [
+    {
+      "senseId": "w:plant-the-seed-of#s1",
+      "pos": "短语",
+      "glossZh": "播下……的种子；促使某个想法萌生",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:plant#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:plant-the-seed-of#e-ed34cfd7b719707c",
+          "text": "On the walls hang the photos of the destructive 1966 Arno flood that planted the seed of her story.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 88
+          },
+          "parts": [
+            [
+              69,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              88
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

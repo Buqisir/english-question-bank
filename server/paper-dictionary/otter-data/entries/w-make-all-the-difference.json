@@ -1,0 +1,182 @@
+{
+  "entryId": "w:make-all-the-difference",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes all the difference"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "all",
+      "the",
+      "difference"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "all",
+        "the",
+        "difference"
+      ],
+      [
+        "makes",
+        "all",
+        "the",
+        "difference"
+      ],
+      [
+        "made",
+        "all",
+        "the",
+        "difference"
+      ],
+      [
+        "making",
+        "all",
+        "the",
+        "difference"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made all the difference",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make all the difference",
+  "senses": [
+    {
+      "senseId": "w:make-all-the-difference#s1",
+      "pos": "短语",
+      "glossZh": "起决定性作用；使结果大不相同",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-all-the-difference#e-69ba89561607df61",
+          "text": "Differences between subjects in what they do outside of mealtimes can make all the difference.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 93
+          },
+          "parts": [
+            [
+              70,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-all-the-difference#e-7cac3d021651d156",
+          "text": "Communication is a skill, and a few simple psychology tricks can make all the difference.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 88
+          },
+          "parts": [
+            [
+              65,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-all-the-difference#e-2514db1b5acf861a",
+          "text": "A different angle makes all the difference.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 42
+          },
+          "parts": [
+            [
+              18,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

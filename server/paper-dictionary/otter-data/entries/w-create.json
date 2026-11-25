@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 726
+    "mock": 534
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 143
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -216,6 +216,6 @@
       "reason": "正式、戏剧专门用法或方言"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

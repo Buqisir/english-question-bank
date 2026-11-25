@@ -1,0 +1,114 @@
+{
+  "entryId": "w:take-a-beat",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "beat"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "beat"
+      ],
+      [
+        "taken",
+        "a",
+        "beat"
+      ],
+      [
+        "takes",
+        "a",
+        "beat"
+      ],
+      [
+        "taking",
+        "a",
+        "beat"
+      ],
+      [
+        "took",
+        "a",
+        "beat"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a beat",
+  "senses": [
+    {
+      "senseId": "w:take-a-beat#s1",
+      "pos": "短语",
+      "glossZh": "先停一下；稍停片刻再作反应",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:beat#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-beat#e-fc8b2b91c2003a18",
+          "text": "Kathleen Grace, head of Vermillio, said: “We can all win if we just take a beat and figure out a way to share and track content.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 79
+          },
+          "parts": [
+            [
+              68,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

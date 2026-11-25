@@ -1,0 +1,86 @@
+{
+  "entryId": "w:drop-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drop",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drop",
+        "in"
+      ],
+      [
+        "dropped",
+        "in"
+      ],
+      [
+        "dropping",
+        "in"
+      ],
+      [
+        "drops",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drop in",
+  "senses": [
+    {
+      "senseId": "w:drop-in#s1",
+      "pos": "短语",
+      "glossZh": "顺道拜访；不事先约定就来访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:drop#s7"
+      ],
+      "examples": [],
+      "note": "拜访某人常接 on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:drop-in#s2",
+      "pos": "短语",
+      "glossZh": "（冲浪）抢乘他人正在乘的浪",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

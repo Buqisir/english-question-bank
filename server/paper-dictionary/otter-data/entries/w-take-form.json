@@ -1,0 +1,119 @@
+{
+  "entryId": "w:take-form",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "form"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "form"
+      ],
+      [
+        "taken",
+        "form"
+      ],
+      [
+        "takes",
+        "form"
+      ],
+      [
+        "taking",
+        "form"
+      ],
+      [
+        "took",
+        "form"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take form",
+  "senses": [
+    {
+      "senseId": "w:take-form#s1",
+      "pos": "短语",
+      "glossZh": "逐渐成形",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-form#e-3406e48788ec2002",
+          "text": "Then, at a turntable, they shape the material with their hands and cups, bowls or small vases slowly take form.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 110
+          },
+          "parts": [
+            [
+              101,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              110
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-form#s2",
+      "pos": "短语",
+      "glossZh": "（想法、计划等）逐渐明确",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

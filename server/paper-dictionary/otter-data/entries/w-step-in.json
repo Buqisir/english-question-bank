@@ -1,0 +1,327 @@
+{
+  "entryId": "w:step-in",
+  "headword": "step in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "in"
+      ],
+      [
+        "stepped",
+        "in"
+      ],
+      [
+        "stepping",
+        "in"
+      ],
+      [
+        "steps",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stepped in",
+      "tags": []
+    },
+    {
+      "form": "stepping in",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:step-in#s1",
+      "pos": "短语",
+      "glossZh": "介入；出面帮忙",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:step#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:step-in#e-a01e21f39153f804",
+          "text": "Dr. Fornari noticed her isolation and, moved by something beyond professional responsibility, decided to step in.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 112
+          },
+          "parts": [
+            [
+              105,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              112
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-in#e-34c22ccdaf3138e7",
+          "text": "John listened carefully and then said, “It sounds like you need someone to step in and take over some of the tasks.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 82
+          },
+          "parts": [
+            [
+              75,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-in#e-bb2beeb510ecda86",
+          "text": "Being aware of the emotional signs early makes it easier to step in and make changes.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          },
+          "parts": [
+            [
+              60,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:step-in#s2",
+      "pos": "短语",
+      "glossZh": "临时代替；顶上",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-in#e-b35645633748dfef",
+          "text": "The student who usually handled it, Lily, was out sick, and someone needed to step in.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 85
+          },
+          "parts": [
+            [
+              78,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              85
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:step-in#s3",
+      "pos": "短语",
+      "glossZh": "走进；迈入",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-in#e-d5a8a551f6341bb4",
+          "text": "With few customers stepping in, I felt disheartened and began to reflect on what went wrong.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 30
+          },
+          "parts": [
+            [
+              19,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-in#e-5ed02ab30e5c6485",
+          "text": "Just as the families were about to leave, a father, mother, and a child with worn but neat clothes stepped in.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 109
+          },
+          "parts": [
+            [
+              99,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              109
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-in#e-22067312f81c726e",
+          "text": "You’ll step in the celebrated stadium to listen to the interesting stories of athletic events tied to the history of Olympia.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          },
+          "parts": [
+            [
+              7,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              14
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "mock",
+  "folded": false
+}

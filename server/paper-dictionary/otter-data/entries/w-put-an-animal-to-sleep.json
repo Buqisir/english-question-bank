@@ -1,0 +1,66 @@
+{
+  "entryId": "w:put-an-animal-to-sleep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "an",
+      "animal",
+      "to",
+      "sleep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "an",
+        "animal",
+        "to",
+        "sleep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put an animal to sleep",
+  "senses": [
+    {
+      "senseId": "w:put-an-animal-to-sleep#s1",
+      "pos": "短语",
+      "glossZh": "给动物实施安乐死",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sleep#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 173
+    "mock": 28
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -303,7 +303,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -374,7 +374,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -423,12 +423,12 @@
       "pos": "n.",
       "glossZh": "武力",
       "pronunciationId": "w:force#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 10
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -436,12 +436,12 @@
       "pos": "n.",
       "glossZh": "有组织的队伍",
       "pronunciationId": "w:force#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -449,12 +449,12 @@
       "pos": "n.",
       "glossZh": "效力",
       "pronunciationId": "w:force#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -464,6 +464,10 @@
       "reason": "地域义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:driving-force",
+    "w:force-out"
+  ]
 }

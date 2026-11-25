@@ -1,0 +1,321 @@
+{
+  "entryId": "w:hold-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "holding up"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "up"
+      ],
+      [
+        "holding",
+        "up"
+      ],
+      [
+        "held",
+        "up"
+      ],
+      [
+        "holds",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held up",
+      "tags": []
+    },
+    {
+      "form": "hold up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:hold-up#s1",
+      "pos": "短语",
+      "glossZh": "举起；举着给人看",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-up#e-e97e5f3e87ecc7eb",
+          "text": "She held up her own works – colorful flags and a dragon-painted horn – and sighed, wishing they had more use.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          },
+          "parts": [
+            [
+              4,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-up#e-aa84563a47d4bb15",
+          "text": "Holding up her phone, Corinne recorded the bird’s distinctive call while silently hoping to get lucky with a sighting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-up#e-95b309ae2e978ae0",
+          "text": "Usually, her old friend would be ready and waiting, holding up his ancient mechanical watch as a joke when she arrived.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:hold-up#s3",
+      "pos": "短语",
+      "glossZh": "托住；支撑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-up#e-d7a7a6bb5e99ca39",
+          "text": "Plus, the turntable itself is held up in the air via magnetic suspension, which, as well as looking unbelievably cool, means it’s isolated from vibrations (震动) to provide maximum musical faithfulness.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:12",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          },
+          "parts": [
+            [
+              30,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hold-up#s4",
+      "pos": "短语",
+      "glossZh": "经受住考验；仍然成立",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-up#e-d36d10748c98bf17",
+          "text": "But that assumption doesn't hold up when you look at the volume and specialization of Turkish clinics.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hold-up#s2",
+      "pos": "短语",
+      "glossZh": "耽搁；阻滞",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:hold#s13",
+        "w:up#s50"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-up#s5",
+      "pos": "短语",
+      "glossZh": "持械抢劫",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-up#s6",
+      "pos": "短语",
+      "glossZh": "把……作为榜样或例证",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hold sb/sth up as an example。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-up#s7",
+      "pos": "短语",
+      "glossZh": "等一下；先停一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

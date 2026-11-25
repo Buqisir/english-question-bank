@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 80
+    "mock": 2
   },
   "senses": [
     {
@@ -48,7 +48,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -121,7 +121,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -173,7 +173,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -232,6 +232,72 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:born#s5",
+      "pos": "n.",
+      "glossZh": "按出生顺序称的孩子（如 last born 指最小的孩子）",
+      "pronunciationId": "w:born#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:born#s6",
+      "pos": "adj.",
+      "glossZh": "天生的；与生俱来的",
+      "pronunciationId": "w:born#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:born#e-b2011c6f973f58ea",
+          "text": "She has a born talent for physics.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:born#e-75870b0758b17f06",
+          "text": "Turns out this gender gap is more a question of culture and experience than of born ability.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -240,6 +306,11 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:be-born",
+    "w:i-was-born-in",
+    "w:not-be-born-yesterday"
+  ]
 }

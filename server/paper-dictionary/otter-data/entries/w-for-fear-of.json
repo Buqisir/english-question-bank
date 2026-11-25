@@ -1,0 +1,157 @@
+{
+  "entryId": "w:for-fear-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "fear",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "fear",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for fear of",
+  "senses": [
+    {
+      "senseId": "w:for-fear-of#s1",
+      "pos": "短语",
+      "glossZh": "唯恐；因为担心……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:for#s23"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-fear-of#e-a77f3f6667f56b96",
+          "text": "However, some high sugar brands, like Classic Coca Cola, have accepted the sugar tax and are refusing to change for fear of upsetting consumers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 123
+          },
+          "parts": [
+            [
+              112,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-fear-of#e-c7ad1eac20f34d55",
+          "text": "Peter Gray, a Boston College professor, notes that fewer kids are outside, which isn’t just for fear of cars.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 103
+          },
+          "parts": [
+            [
+              92,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-fear-of#e-c95635ac5618e0e1",
+          "text": "I did not tell them my discovery, for fear of the same laughter.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 45
+          },
+          "parts": [
+            [
+              34,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "后接名词或动名词。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

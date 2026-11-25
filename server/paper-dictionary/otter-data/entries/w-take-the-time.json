@@ -1,0 +1,178 @@
+{
+  "entryId": "w:take-the-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking the time",
+    "took the time"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "time"
+      ],
+      [
+        "taking",
+        "the",
+        "time"
+      ],
+      [
+        "took",
+        "the",
+        "time"
+      ],
+      [
+        "taken",
+        "the",
+        "time"
+      ],
+      [
+        "takes",
+        "the",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the time",
+  "senses": [
+    {
+      "senseId": "w:take-the-time#s1",
+      "pos": "短语",
+      "glossZh": "特意抽出时间做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-time#e-5987b68b143334e2",
+          "text": "If someone’s loafing is affecting you, it’s always worth taking the time to be honest about how you’re feeling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 72
+          },
+          "parts": [
+            [
+              57,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-time#e-b9bb85418a7aa430",
+          "text": "Practical steps include journaling about feelings toward money and taking the time to evaluate the value of purchases.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 82
+          },
+          "parts": [
+            [
+              67,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-time#e-b929c06887fe750b",
+          "text": "I had time to talk to the people I met, and I took the time to sit down at a small cafe that no one would ever recommend.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 59
+          },
+          "parts": [
+            [
+              46,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              59
+            ]
+          ]
+        }
+      ],
+      "note": "常接 to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

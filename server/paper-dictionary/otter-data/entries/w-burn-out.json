@@ -1,0 +1,167 @@
+{
+  "entryId": "w:burn-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "burn",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "burn",
+        "out"
+      ],
+      [
+        "burned",
+        "out"
+      ],
+      [
+        "burning",
+        "out"
+      ],
+      [
+        "burns",
+        "out"
+      ],
+      [
+        "burnt",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "burn out",
+  "senses": [
+    {
+      "senseId": "w:burn-out#s1",
+      "pos": "短语",
+      "glossZh": "因过劳而耗尽精力；使某人精疲力竭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:burn#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s2",
+      "pos": "短语",
+      "glossZh": "（火）因燃料耗尽而熄灭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s3",
+      "pos": "短语",
+      "glossZh": "把……彻底烧毁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s4",
+      "pos": "短语",
+      "glossZh": "（灯泡、电机等）烧坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s5",
+      "pos": "短语",
+      "glossZh": "（俚语）结束当班；下班",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s6",
+      "pos": "短语",
+      "glossZh": "使轮胎高速空转并因摩擦生热",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s7",
+      "pos": "短语",
+      "glossZh": "使辐射工作者达到规定的暴露上限",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:burn-out#s8",
+      "pos": "短语",
+      "glossZh": "（运动中）因前期耗力过多而后劲不足",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

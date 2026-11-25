@@ -1,0 +1,296 @@
+{
+  "entryId": "w:move-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moves on",
+    "moving on"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "on"
+      ],
+      [
+        "moves",
+        "on"
+      ],
+      [
+        "moving",
+        "on"
+      ],
+      [
+        "moved",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move on",
+  "senses": [
+    {
+      "senseId": "w:move-on#s1",
+      "pos": "短语",
+      "glossZh": "转到下一个话题、任务或阶段",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:move#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:move-on#e-fb1b6a064ce2eae6",
+          "text": "With the title literally named FLOW, temporariness seems to be the main message: things constantly changing, the world moves on.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 127
+          },
+          "parts": [
+            [
+              119,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              127
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-on#e-2f83a9ce7c18eecb",
+          "text": "Often I have to stop myself from teaching or from asking him to keep trying when he is ready to move on quickly to something else.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 103
+          },
+          "parts": [
+            [
+              96,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-on#e-c97389b30c60a49e",
+          "text": "At lab meetings, the conversation progressed so quickly that by the time I understood a question, the discussion had already moved on.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 133
+          },
+          "parts": [
+            [
+              125,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              133
+            ]
+          ]
+        }
+      ],
+      "note": "可用 move on to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:move-on#s2",
+      "pos": "短语",
+      "glossZh": "继续前行；离开原处往前走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-on#e-d256e9a305f12d71",
+          "text": "Encouraged, I moved on, keeping a sharp eye on the tracks.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:move-on#s3",
+      "pos": "短语",
+      "glossZh": "放下过去；继续新的生活",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-on#e-561172247e445788",
+          "text": "Most people move on quickly, but for those who are sensitive to rejection, these small moments feel heavy.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          },
+          "parts": [
+            [
+              12,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-on#e-511207cd1f993b02",
+          "text": "We project our identity onto the object, making it painful to move on.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 69
+          },
+          "parts": [
+            [
+              62,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

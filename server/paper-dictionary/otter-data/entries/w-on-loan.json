@@ -1,0 +1,103 @@
+{
+  "entryId": "w:on-loan",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "loan"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "loan"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on loan",
+  "senses": [
+    {
+      "senseId": "w:on-loan#s1",
+      "pos": "短语",
+      "glossZh": "暂借的；借来使用或展出的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-loan#e-ce5ab07cf51946d2",
+          "text": "The museum houses more than 1,000 artifacts on display in the galleries, on loan from institutions and private lenders across the country.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 80
+          },
+          "parts": [
+            [
+              73,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:on-loan#s2",
+      "pos": "短语",
+      "glossZh": "被借调的；被租借到另一支队伍的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 195
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 195
+    "gaokao": 2,
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 195
       },
       "folded": false,
       "examples": [
@@ -116,40 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:knowledge#s2",
-      "pos": "短语",
-      "glossZh": "知道某事而（感到放心等）",
-      "pronunciationId": "w:knowledge#p-main",
-      "note": "in the knowledge that。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:knowledge#e-4713d48f1e3453f8",
-          "text": "Every time I __45__ Jacky to something new, he’ll do it only because he trusts me and feels __46__ in the knowledge that he won’t get hurt.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 106,
-            "end": 115
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -158,6 +124,12 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-knowledge-that",
+    "w:knowledge-is-power"
+  ]
 }

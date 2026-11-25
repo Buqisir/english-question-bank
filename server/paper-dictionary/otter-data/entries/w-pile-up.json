@@ -1,0 +1,274 @@
+{
+  "entryId": "w:pile-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pile",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pile",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pile up",
+      "tags": []
+    },
+    {
+      "form": "piled up",
+      "tags": []
+    },
+    {
+      "form": "piling up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pile (sth) up",
+  "senses": [
+    {
+      "senseId": "w:pile-up#s1",
+      "pos": "短语",
+      "glossZh": "堆起来；堆积成堆",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s43"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pile-up#e-52f3cbf26246c3b6",
+          "text": "Heavy snow had piled up tightly against the door all night, forming a solid wall that locked me inside.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pile-up#e-25b20c898841a3df",
+          "text": "It was a place where some unused items were stored – some old chairs, folding tables, all piled up gathering dust under a large tree.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 98
+          },
+          "parts": [
+            [
+              90,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pile-up#e-ad1a6fa0015ad64f",
+          "text": "Its concrete panels were piled up without a strong internal frame, and its joints were even filled with old cement（水泥）bags and wrinkled newspapers.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:pile-up#s2",
+      "pos": "短语",
+      "glossZh": "（工作、任务等）越积越多",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pile-up#e-3bbdeae384ac5344",
+          "text": "Deadlines piled up, and when he finally worked, he had less time and more fear of incompetence.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pile-up#e-9060596a8db69174",
+          "text": "The work is piling up, pressure is mounting, and deadlines are approaching.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pile-up#e-74f22eed0c09eb1c",
+          "text": "It’s because the floor creaked (嘎吱).” You can also adjust your beliefs with more evidence piled up: “Having combed the room, I must conclude that it’s just an old, creaky house.”",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 98
+          },
+          "parts": [
+            [
+              90,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

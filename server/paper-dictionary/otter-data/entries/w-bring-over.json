@@ -1,0 +1,120 @@
+{
+  "entryId": "w:bring-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "over"
+      ],
+      [
+        "bringing",
+        "over"
+      ],
+      [
+        "brings",
+        "over"
+      ],
+      [
+        "brought",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brought over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth over",
+  "senses": [
+    {
+      "senseId": "w:bring-over#s1",
+      "pos": "短语",
+      "glossZh": "把某人或某物带过来；带到指定地点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bring-over#e-f17a4916319b6f00",
+          "text": "The string is quickly brought over to her.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bring-over#s2",
+      "pos": "短语",
+      "glossZh": "使某人改变立场并转而支持己方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

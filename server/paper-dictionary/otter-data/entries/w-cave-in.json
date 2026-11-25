@@ -1,0 +1,75 @@
+{
+  "entryId": "w:cave-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cave",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cave",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cave in",
+  "senses": [
+    {
+      "senseId": "w:cave-in#s1",
+      "pos": "短语",
+      "glossZh": "坍塌；塌陷",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cave#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cave-in#s2",
+      "pos": "短语",
+      "glossZh": "屈服；在压力下让步",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cave#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

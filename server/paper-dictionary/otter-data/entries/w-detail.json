@@ -59,8 +59,8 @@
     "mock": 219
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 217
+    "gaokao": 1,
+    "mock": 27
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 135
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -207,70 +207,16 @@
       ]
     },
     {
-      "senseId": "w:detail#s3",
-      "pos": "短语",
-      "glossZh": "详细地；仔细地",
-      "pronunciationId": "w:detail#p-main",
-      "note": "in detail。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:detail#e-06c7daea94f06706",
-          "text": "You don’t have to write these things in detail.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:detail#e-f8127d102a9f8fd3",
-          "text": "To analyze consumer behavior in detail.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
-            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
-            "locator": {
-              "question": 30,
-              "questionId": "question:paper-mock-fujian-putian-2026-05-adaptability-exam:30",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:detail#s4",
       "pos": "v.",
       "glossZh": "详细说明；详述",
       "pronunciationId": "w:detail#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 11
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -280,6 +226,11 @@
       "reason": "军事、保洁等专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-detail"
+  ]
 }

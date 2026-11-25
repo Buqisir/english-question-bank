@@ -52,8 +52,8 @@
     "mock": 215
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 209
+    "gaokao": 10,
+    "mock": 78
   },
   "senses": [
     {
@@ -64,7 +64,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -135,7 +135,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -200,270 +200,6 @@
       ]
     },
     {
-      "senseId": "w:cut#s3",
-      "pos": "短语",
-      "glossZh": "插嘴；打断",
-      "pronunciationId": "w:cut#p-main",
-      "note": "cut in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-2e7ee6239a1b029e",
-          "text": "Rita cuts in: “We spoke more with Nick because I think it’s a big thing for Nick to live with his mother-in-law.”",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cut#s4",
-      "pos": "短语",
-      "glossZh": "穿过；横贯；（声音）穿透",
-      "pronunciationId": "w:cut#p-main",
-      "note": "cut through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-54c7a82ff5138171",
-          "text": "One morning I __36__ a lost lamb when I was in the top field, near where a motorway cuts through my land.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 84,
-            "end": 88
-          }
-        },
-        {
-          "exampleId": "w:cut#e-a122ce4540465d46",
-          "text": "The sharp and continuous chirping cut through the quiet classroom again and again, easily breaking his train of thought.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cut#s5",
-      "pos": "短语",
-      "glossZh": "减少使用或摄入",
-      "pronunciationId": "w:cut#p-main",
-      "note": "cut down on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-521555f39be5f37e",
-          "text": "They cut down on their production.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2022-national-b:33",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cut#s6",
-      "pos": "短语",
-      "glossZh": "砍倒（树木）",
-      "pronunciationId": "w:cut#p-main",
-      "note": "cut down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-78be0e170151af67",
-          "text": "“We’re not going to go cutting down any big old oaks,” and neither will the department completely stop planting new ones, said Auyeung.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:cut#e-80dafe41a395d63e",
-          "text": "Claiming “I’m not going to cut down that tree over there if you give me money” is not a carbon offset.",
-          "source": {
-            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
-            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
-            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cut#s7",
-      "pos": "短语",
-      "glossZh": "切断；隔绝；使中断",
-      "pronunciationId": "w:cut#p-main",
-      "note": "cut off。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-9c813bbba5c7b74c",
-          "text": "Their stems were cut off.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:cut#e-a1a84520c8062fa2",
-          "text": "On top of that, increased screen time is often tied to rising levels of social anxiety and loneliness, which can lead kids to withdraw even further into their digital worlds, cutting off real-life social opportunities.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 175,
-            "end": 182
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cut#s8",
-      "pos": "短语",
-      "glossZh": "抄近路；走捷径",
-      "pronunciationId": "w:cut#p-main",
-      "note": "a short cut 也常写作 a shortcut。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cut#e-e9759bbf29cb4b61",
-          "text": "Taking a short cut home.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
-            "locator": {
-              "question": 9,
-              "questionId": "question:listening:9",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cut#s9",
       "pos": "n.",
       "glossZh": "削减；减少",
@@ -471,7 +207,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -553,12 +289,12 @@
       "pos": "v.",
       "glossZh": "剪辑；剪切；删去",
       "pronunciationId": "w:cut#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -588,11 +324,23 @@
       "examples": []
     },
     {
-      "senseId": "w:cut#s14",
-      "pos": "短语",
-      "glossZh": "达到要求；管用",
+      "senseId": "w:cut#s15",
+      "pos": "n.",
+      "glossZh": "切口；割伤",
       "pronunciationId": "w:cut#p-main",
-      "note": "cut it，常见于否定句。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:cut#s16",
+      "pos": "短语",
+      "glossZh": "（技术等的）最前沿（cutting edge）",
+      "pronunciationId": "w:cut#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -601,38 +349,124 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:cut#e-e9a0e58f2c198dd5",
-          "text": "Andrew Duhe wanted to do something special to celebrate the 40th birthday of his wife, Jennifer Duhe, and jewelry or flowers would not cut it.",
+          "exampleId": "w:cut#e-5c9b074d552ac7ca",
+          "text": "“DNA barcoding as a technique isn’t on the cutting edge anymore, and in the best way – it has become routine,” Grinter says.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:1",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b:4",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 135,
-            "end": 138
+            "start": 43,
+            "end": 50
           }
         }
       ]
     },
     {
-      "senseId": "w:cut#s15",
-      "pos": "n.",
-      "glossZh": "切口；割伤",
+      "senseId": "w:cut#s17",
+      "pos": "短语",
+      "glossZh": "为省事而省略步骤；偷工减料（cut corners）",
       "pronunciationId": "w:cut#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cut#e-b6c6532179c12532",
+          "text": "But we also cut corners out of habit.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cut#s18",
+      "pos": "v.",
+      "glossZh": "刺痛；伤害感情",
+      "pronunciationId": "w:cut#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cut#e-c9523c27e2d60559",
+          "text": "The words cut deep.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cut#s19",
+      "pos": "n.",
+      "glossZh": "（供扦插的）插枝；插穗（cutting）",
+      "pronunciationId": "w:cut#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cut#e-a3a61b20067fa01f",
+          "text": "Start by removing the lower leaves from each cutting, leaving one or two leaves on the stems (茎).",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -641,6 +475,22 @@
       "reason": "俚语或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cut-back",
+    "w:cut-down",
+    "w:cut-down-on",
+    "w:cut-in",
+    "w:cut-it",
+    "w:cut-off",
+    "w:cut-out",
+    "w:cut-short",
+    "w:cut-through",
+    "w:cut-up",
+    "w:make-the-cut",
+    "w:take-a-short-cut"
+  ]
 }

@@ -86,7 +86,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 179
+    "mock": 4
   },
   "senses": [
     {
@@ -98,7 +98,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -185,7 +185,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 100
       },
       "folded": false,
       "examples": [
@@ -292,7 +292,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -344,7 +344,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -387,6 +387,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:lie#s7",
+      "pos": "v.",
+      "glossZh": "躺平；不再努力竞争（lie flat）",
+      "pronunciationId": "w:lie#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lie#e-9a31dcf6392ee83a",
+          "text": "Many young adults see xiexiu as a middle path between “996” office culture and “lying flat”.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -395,6 +428,15 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:lie-ahead",
+    "w:lie-around",
+    "w:lie-behind",
+    "w:lie-down",
+    "w:lie-in",
+    "w:lie-to",
+    "w:white-lie"
+  ]
 }

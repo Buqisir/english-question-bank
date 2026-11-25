@@ -61,8 +61,8 @@
     "mock": 504
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 497
+    "gaokao": 7,
+    "mock": 359
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 33,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -357,7 +357,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -428,7 +428,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -494,7 +494,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -618,7 +618,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -689,7 +689,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -761,7 +761,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -794,7 +794,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -879,7 +879,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -913,7 +913,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -993,265 +993,6 @@
       ]
     },
     {
-      "senseId": "w:run#s18",
-      "pos": "短语",
-      "glossZh": "从长远来看",
-      "pronunciationId": "w:run#p-main",
-      "note": "in the long run。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-4fc3ae06a9a53bd8",
-          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 80
-          }
-        },
-        {
-          "exampleId": "w:run#e-6ca7757d2fb76524",
-          "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 172,
-            "end": 175
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s19",
-      "pos": "短语",
-      "glossZh": "逃走",
-      "pronunciationId": "w:run#p-main",
-      "note": "run away。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-34575a596aa9b9e5",
-          "text": "ran away",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:cloze",
-            "locator": {
-              "question": 49,
-              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:49",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 3
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s20",
-      "pos": "短语",
-      "glossZh": "用完",
-      "pronunciationId": "w:run#p-main",
-      "note": "run out of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-a039e6faf2202906",
-          "text": "Running out of.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:28",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s21",
-      "pos": "短语",
-      "glossZh": "遇到（麻烦等）",
-      "pronunciationId": "w:run#p-main",
-      "note": "run into sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-e684917d42f265be",
-          "text": "Then I was worried that he’d had an accident or had run into trouble of some kind.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 52,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s22",
-      "pos": "短语",
-      "glossZh": "碾过",
-      "pronunciationId": "w:run#p-main",
-      "note": "run over。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-581c0045bb2fcee3",
-          "text": "It makes sense that larger cars are more dangerous if they run you over.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 59,
-            "end": 62
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s23",
-      "pos": "短语",
-      "glossZh": "累积（费用）",
-      "pronunciationId": "w:run#p-main",
-      "note": "run up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-5cc84718ab3ca106",
-          "text": "One notable downside of adding your kid to your credit card: __39__ If they run up charges, you are responsible for a potentially larger bill.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:seven-choices:7",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 76,
-            "end": 79
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:run#s24",
-      "pos": "短语",
-      "glossZh": "落后于原定时间",
-      "pronunciationId": "w:run#p-main",
-      "note": "run late。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:run#e-bdcf0cfe8a6fc012",
-          "text": "By then, we were already running late.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 25,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:run#s25",
       "pos": "v.",
       "glossZh": "竞选",
@@ -1259,7 +1000,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -1335,6 +1076,236 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:run#s30",
+      "pos": "v.",
+      "glossZh": "在家族中遗传",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-64e395c513bb1ee4",
+          "text": "They were the first people identified with familial natural short sleep, a condition that runs in families like other genetic features.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:run#s31",
+      "pos": "短语",
+      "glossZh": "紧随其后，位居第二",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-e59d6f3960812343",
+          "text": "Your eyes may be the most important organ for looking at art, but the heart runs them a close second.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:run#s32",
+      "pos": "v.",
+      "glossZh": "使（手指等）滑过",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-3ed920c1fb6816b1",
+          "text": "After school one day, he found Tom sitting alone by the library window, running his fingers over the table.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:run#s33",
+      "pos": "n.",
+      "glossZh": "滑雪道",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-25e152a2c25fb96d",
+          "text": "Zermatt has over 200 km of pistes (滑雪道) which comprise 12 blue, 41 red, and 21 black runs.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:run#e-1d5d71e04d160611",
+          "text": "Why have the artificial skiing runs been built?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:run#s34",
+      "pos": "v.",
+      "glossZh": "持续（多长时间）",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:run#s35",
+      "pos": "v.",
+      "glossZh": "闯（红灯）",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-2202cfb06bd18817",
+          "text": "Wang responded quickly – he alerted traffic police, ran six red lights, and reached the hospital in just seven minutes, half the normal time.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:run#s36",
+      "pos": "v.",
+      "glossZh": "乘船穿过（急流）",
+      "pronunciationId": "w:run#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:run#e-18b1f514249d1fa1",
+          "text": "I brushed off his words as romantic wisdom until we ran a set of rapids.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -1347,6 +1318,38 @@
       "reason": "采矿专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-long-run",
+    "w:run-a-temperature",
+    "w:run-across",
+    "w:run-after",
+    "w:run-around",
+    "w:run-away",
+    "w:run-away-from",
+    "w:run-behind",
+    "w:run-by",
+    "w:run-counter",
+    "w:run-down",
+    "w:run-in",
+    "w:run-in-the-family",
+    "w:run-into-sth",
+    "w:run-late",
+    "w:run-off",
+    "w:run-on",
+    "w:run-out",
+    "w:run-out-of",
+    "w:run-out-of-road",
+    "w:run-over",
+    "w:run-the-risk",
+    "w:run-through",
+    "w:run-to",
+    "w:run-up",
+    "w:run-wild",
+    "w:run-with",
+    "w:still-waters-run-deep"
+  ]
 }

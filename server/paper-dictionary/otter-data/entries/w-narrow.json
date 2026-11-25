@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 42
+    "mock": 1
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -153,7 +153,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -221,12 +221,12 @@
       "pos": "adj.",
       "glossZh": "勉强的；差距很小的",
       "pronunciationId": "w:narrow#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -237,7 +237,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -290,7 +290,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -355,6 +355,6 @@
       "reason": "语言学、纺织或编程术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,495 @@
+{
+  "entryId": "w:think-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "thinking of"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "of"
+      ],
+      [
+        "thinking",
+        "of"
+      ],
+      [
+        "thinks",
+        "of"
+      ],
+      [
+        "thought",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thought of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think of",
+  "senses": [
+    {
+      "senseId": "w:think-of#s1",
+      "pos": "短语",
+      "glossZh": "对……有某种看法；觉得……怎么样",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-of#e-d38673a5c1c734db",
+          "text": "Carnegie would be right if arguments were fights, which is how we often think of them.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 80
+          },
+          "parts": [
+            [
+              72,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-c37c726cae78f3ed",
+          "text": "What does the author think of victors' standards for joining the genius club?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2021-national-a:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          },
+          "parts": [
+            [
+              21,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-44db14cc89546f9c",
+          "text": "What does Craig-Martin think of the teaching of the arts in UK schools?",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2021-ii:29",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "常用于 What do you think of …?",
+      "counts": {
+        "gaokao": 28,
+        "mock": 173
+      }
+    },
+    {
+      "senseId": "w:think-of#s2",
+      "pos": "短语",
+      "glossZh": "想到；想起",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-of#e-10cfe8f997c06a00",
+          "text": "The twins were filled with excitement as they thought of the surprise they were planning for Mother’s Day.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-97d5f794c5e2c336",
+          "text": "I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-62a32f9e8f601f37",
+          "text": "It saddened me to think of how many people there were who didn’t have a place to call home and the only food they got came from a soup kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          },
+          "parts": [
+            [
+              18,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 42
+      }
+    },
+    {
+      "senseId": "w:think-of#s3",
+      "pos": "短语",
+      "glossZh": "想出；构思出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-of#e-d1de04079d04b01a",
+          "text": "I could think of a million ways to interpret the essay, but which one was my professor looking for?",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-2dbf6d94d60a4584",
+          "text": "Ollie suggested a robot, while I thought of a tree, but we couldn’t decide right away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-0ccce1f457f69cee",
+          "text": "Really let yourself go in thinking of different approaches to the subject.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 37
+          },
+          "parts": [
+            [
+              26,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              37
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:think-of#s4",
+      "pos": "短语",
+      "glossZh": "考虑到；考虑做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-of#e-db970077c0e95bb4",
+          "text": "Or perhaps you’ve aimed to get active by thinking of the long-term upsides of exercise.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-tianyu-2026-m4:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 52
+          },
+          "parts": [
+            [
+              41,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-8c3ccec67640b5b8",
+          "text": "She thought of withdrawing, but the judges – six city musicians – were already staring.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          },
+          "parts": [
+            [
+              4,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-of#e-8bb41e44e87ba453",
+          "text": "But it wasn’t until people started offering to pay us for our creations that we ever thought of doing it professionally.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 95
+          },
+          "parts": [
+            [
+              85,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              95
+            ]
+          ]
+        }
+      ],
+      "note": "后可接名词或动名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 34,
+    "mock": 234
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

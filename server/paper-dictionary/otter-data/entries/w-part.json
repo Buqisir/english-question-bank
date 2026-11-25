@@ -59,8 +59,8 @@
     "mock": 529
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 528
+    "gaokao": 16,
+    "mock": 352
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 62,
-        "mock": 0
+        "mock": 147
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -409,7 +409,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -443,7 +443,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -469,236 +469,17 @@
       ]
     },
     {
-      "senseId": "w:part#s8",
-      "pos": "短语",
-      "glossZh": "参加",
+      "senseId": "w:part#s12",
+      "pos": "adv.",
+      "glossZh": "部分地；在一定程度上",
       "pronunciationId": "w:part#p-main",
-      "note": "take part in。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:part#e-cc1f0a2cdc3560ba",
-          "text": "I think I am much __55__ for having taken part in the project.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:part#e-39dbca5e78038f98",
-          "text": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 95,
-            "end": 99
-          }
-        },
-        {
-          "exampleId": "w:part#e-1e3f1e3be5f4e101",
-          "text": "Take an active part in discussions.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 14,
-              "questionId": "question:listening:14",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:part#s9",
-      "pos": "短语",
-      "glossZh": "发挥作用；尽本分",
-      "pronunciationId": "w:part#p-main",
-      "note": "play 或 do one’s part。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:part#e-24f000e84c301289",
-          "text": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "reading-b-5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:part#e-d3cf1de302baf20b",
-          "text": "Helping the next generation to have a healthy and active childhood is of great importance, and the industry is playing its part.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 123,
-            "end": 127
-          }
-        },
-        {
-          "exampleId": "w:part#e-652705cc015362ca",
-          "text": "Do your part to preserve what makes a destination special in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:part#s10",
-      "pos": "短语",
-      "glossZh": "就某人而言",
-      "pronunciationId": "w:part#p-main",
-      "note": "on sb’s part。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:part#e-336dfbb76487c130",
-          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:part#s11",
-      "pos": "短语",
-      "glossZh": "舍弃；割舍",
-      "pronunciationId": "w:part#p-main",
-      "note": "part with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:part#e-6ed802eb09857be5",
-          "text": "It was hard for us to finally part with them.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:part#e-aa5b225078ed90ac",
-          "text": "Do you have a home full of things you’re ready to part with?",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -707,6 +488,20 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:best-part-of",
+    "w:do-ones-part",
+    "w:for-the-most-part",
+    "w:on-ones-part",
+    "w:part-ways",
+    "w:part-with",
+    "w:play-a-part",
+    "w:play-ones-part",
+    "w:take-part",
+    "w:take-part-in"
+  ]
 }

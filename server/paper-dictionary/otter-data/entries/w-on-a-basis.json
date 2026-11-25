@@ -1,0 +1,324 @@
+{
+  "entryId": "w:on-a-basis",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "a",
+      {
+        "slot": "…"
+      },
+      "basis"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "a",
+        {
+          "slot": "…"
+        },
+        "basis"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on a basis",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on a … basis",
+  "senses": [
+    {
+      "senseId": "w:on-a-basis#s1",
+      "pos": "短语",
+      "glossZh": "按某种频率；定期地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:basis#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-a-basis#e-77f0626797de52cc",
+          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 82
+          },
+          "parts": [
+            [
+              61,
+              65
+            ],
+            [
+              77,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              65
+            ],
+            [
+              77,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-a-basis#e-2899bd286355eaa5",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 120
+          },
+          "parts": [
+            [
+              102,
+              106
+            ],
+            [
+              115,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              106
+            ],
+            [
+              115,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-a-basis#e-4a31341cfc4a25f8",
+          "text": "Offering these boxes on a seasonal or limited-time basis also adds an element of urgency, motivating customers to act quickly.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 56
+          },
+          "parts": [
+            [
+              21,
+              25
+            ],
+            [
+              51,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              25
+            ],
+            [
+              51,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "如 on a regular basis（定期）、on a weekly basis（每周）。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:on-a-basis#s2",
+      "pos": "短语",
+      "glossZh": "按某种方式或规则",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-a-basis#e-2d298812aa779051",
+          "text": "Spaces for these free trial lessons are limited and available on a first-come-first-served basis.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 96
+          },
+          "parts": [
+            [
+              62,
+              66
+            ],
+            [
+              91,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              66
+            ],
+            [
+              91,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-a-basis#e-98a3d10c5efd530d",
+          "text": "Hotel accommodation in Quito on a bed-and-breakfast basis.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 57
+          },
+          "parts": [
+            [
+              29,
+              33
+            ],
+            [
+              52,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              33
+            ],
+            [
+              52,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-a-basis#e-e4827e2014e18903",
+          "text": "Applications will be reviewed on a rolling basis.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 48
+          },
+          "parts": [
+            [
+              30,
+              34
+            ],
+            [
+              43,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              34
+            ],
+            [
+              43,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "如 on a first-come-first-served basis（按先到先得的规则）。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,70 @@
+{
+  "entryId": "w:doll-sb-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "doll",
+      {
+        "slot": "sb"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "doll",
+        {
+          "slot": "sb"
+        },
+        "up"
+      ],
+      [
+        "doll",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "doll sb up",
+  "senses": [
+    {
+      "senseId": "w:doll-sb-up#s1",
+      "pos": "短语",
+      "glossZh": "把某人打扮得漂漂亮亮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:doll#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

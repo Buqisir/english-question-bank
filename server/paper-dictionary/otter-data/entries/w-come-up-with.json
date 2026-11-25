@@ -1,0 +1,189 @@
+{
+  "entryId": "w:come-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came up with",
+    "coming up with"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "up",
+        "with"
+      ],
+      [
+        "came",
+        "up",
+        "with"
+      ],
+      [
+        "coming",
+        "up",
+        "with"
+      ],
+      [
+        "comes",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come up with",
+  "senses": [
+    {
+      "senseId": "w:come-up-with#s1",
+      "pos": "短语",
+      "glossZh": "想出；提出（点子、办法或答案）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s7",
+        "w:up#s17",
+        "w:with#s26"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-up-with#e-fd55c338cef4d470",
+          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 29
+          },
+          "parts": [
+            [
+              17,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up-with#e-27f9f9f7b6f40a7e",
+          "text": "He works for one of Wisconsin’s county highway commissions and came up with the idea of using cheese brine.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 75
+          },
+          "parts": [
+            [
+              63,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up-with#e-a80da7f4d540c888",
+          "text": "In the past few years, an increasing number of people and organisations have begun coming up with plans to counter this trend.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 97
+          },
+          "parts": [
+            [
+              83,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              97
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 24
+      }
+    },
+    {
+      "senseId": "w:come-up-with#s2",
+      "pos": "短语",
+      "glossZh": "设法筹到；拿出（所需的钱或资源）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

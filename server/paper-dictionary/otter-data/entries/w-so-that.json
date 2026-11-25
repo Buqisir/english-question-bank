@@ -1,0 +1,197 @@
+{
+  "entryId": "w:so-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "so",
+      {
+        "slot": "…"
+      },
+      "that",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "so",
+        {
+          "slot": "…"
+        },
+        "that",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "so that",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "so … that …",
+  "senses": [
+    {
+      "senseId": "w:so-that#s1",
+      "pos": "短语",
+      "glossZh": "如此……以至于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:so#s10",
+        "w:that#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:so-that#e-8fe2b90c50b4f229",
+          "text": "Klein, a noted historian of technology, spins a narrative so lively that at times it reads like a novel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 72
+          },
+          "parts": [
+            [
+              58,
+              60
+            ],
+            [
+              68,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              60
+            ],
+            [
+              68,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:so-that#e-65d92e6f2065ca2d",
+          "text": "“We were so amazed that they could stay underwater much longer than us local islanders,” Dr. Jubilado said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              11
+            ],
+            [
+              19,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              11
+            ],
+            [
+              19,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:so-that#e-8401d1273e2f57b7",
+          "text": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 49
+          },
+          "parts": [
+            [
+              18,
+              20
+            ],
+            [
+              45,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              20
+            ],
+            [
+              45,
+              49
+            ]
+          ]
+        }
+      ],
+      "note": "so 后常接形容词、副词或由 much、many 等修饰的名词，that 引出结果。",
+      "counts": {
+        "gaokao": 17,
+        "mock": 52
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 17,
+    "mock": 52
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,93 @@
+{
+  "entryId": "w:far-and-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "far",
+      "and",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "far",
+        "and",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "far and away",
+  "senses": [
+    {
+      "senseId": "w:far-and-away#s1",
+      "pos": "短语",
+      "glossZh": "远远地；明显地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:far-and-away#e-9e31030d710e497d",
+          "text": "By far and away his most famous dish is Dongpo Pork.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "常修饰最高级，强调明显超过其他对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

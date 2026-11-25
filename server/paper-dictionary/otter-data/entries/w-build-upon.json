@@ -1,0 +1,104 @@
+{
+  "entryId": "w:build-upon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "building upon"
+  ],
+  "pattern": {
+    "tokens": [
+      "build",
+      "upon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "upon"
+      ],
+      [
+        "building",
+        "upon"
+      ],
+      [
+        "builds",
+        "upon"
+      ],
+      [
+        "built",
+        "upon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build upon sth",
+  "senses": [
+    {
+      "senseId": "w:build-upon#s1",
+      "pos": "短语",
+      "glossZh": "在已有成果、经验等基础上继续发展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:build-upon#e-37f6c16d394d20b2",
+          "text": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

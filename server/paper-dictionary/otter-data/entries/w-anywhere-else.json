@@ -1,0 +1,153 @@
+{
+  "entryId": "w:anywhere-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "anywhere",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "anywhere",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "anywhere else",
+  "senses": [
+    {
+      "senseId": "w:anywhere-else#s1",
+      "pos": "短语",
+      "glossZh": "其他任何地方；别处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:anywhere-else#e-134f141d3c9d41b8",
+          "text": "She has served here for 17 years and can’t imagine working anywhere else.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 72
+          },
+          "parts": [
+            [
+              59,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anywhere-else#e-acf411181a8f99a2",
+          "text": "This is the place I love.” She went on, “After Hurricane Katrina, I thought, could I live anywhere else?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 103
+          },
+          "parts": [
+            [
+              90,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anywhere-else#e-a78df41632faf051",
+          "text": "Most important, I have learned that fathers don’t need clones in footsteps or anywhere else.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-b:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 91
+          },
+          "parts": [
+            [
+              78,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,117 @@
+{
+  "entryId": "w:key-sth-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "key in"
+  ],
+  "pattern": {
+    "tokens": [
+      "key",
+      {
+        "slot": "sth"
+      },
+      "in"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "key",
+        {
+          "slot": "sth"
+        },
+        "in"
+      ],
+      [
+        "key",
+        "in"
+      ],
+      [
+        "keyed",
+        "in"
+      ],
+      [
+        "keying",
+        "in"
+      ],
+      [
+        "keys",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "key sth in",
+  "senses": [
+    {
+      "senseId": "w:key-sth-in#s1",
+      "pos": "短语",
+      "glossZh": "键入；用键盘输入（文字、数字等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:key#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:key-sth-in#e-d2a6993631daced5",
+          "text": "Key in a unique access code to get parcels.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-shandong-jining-2026-03-first:22#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

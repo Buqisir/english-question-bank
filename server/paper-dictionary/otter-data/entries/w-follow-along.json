@@ -1,0 +1,120 @@
+{
+  "entryId": "w:follow-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "follow",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "follow",
+        "along"
+      ],
+      [
+        "followed",
+        "along"
+      ],
+      [
+        "following",
+        "along"
+      ],
+      [
+        "follows",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "following along",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "follow along",
+  "senses": [
+    {
+      "senseId": "w:follow-along#s1",
+      "pos": "短语",
+      "glossZh": "跟着看或听；跟随进展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:follow-along#e-b707d94f32a1fa64",
+          "text": "To my surprise, people loved following along.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 44
+          },
+          "parts": [
+            [
+              29,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:follow-along#s2",
+      "pos": "短语",
+      "glossZh": "跟着走；一路同行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,70 @@
+{
+  "entryId": "w:hold-water",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "water"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "water"
+      ],
+      [
+        "held",
+        "water"
+      ],
+      [
+        "holding",
+        "water"
+      ],
+      [
+        "holds",
+        "water"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold water",
+  "senses": [
+    {
+      "senseId": "w:hold-water#s1",
+      "pos": "短语",
+      "glossZh": "（说法、理由等）站得住脚；经得起推敲",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

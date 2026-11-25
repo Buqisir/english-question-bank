@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 10
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -258,7 +258,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -363,7 +363,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -441,11 +441,10 @@
       "examples": []
     },
     {
-      "senseId": "w:loose#s8",
-      "pos": "短语",
-      "glossZh": "闲得无事可做",
+      "senseId": "w:loose#s9",
+      "pos": "adj.",
+      "glossZh": "松散的；不紧密的",
       "pronunciationId": "w:loose#p-main",
-      "note": "at a loose end。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -454,22 +453,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:loose#e-958c35196384134e",
-          "text": "So it’s hardly surprising that once it’s over, many exchange students feel at a loose end.",
+          "exampleId": "w:loose#e-e94886ce79d22ed1",
+          "text": "I watched people move in loose formation at an unhurried pace.",
           "source": {
-            "paperId": "paper-mock-import-20261026-n085",
-            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
-            "groupId": "group:paper-mock-import-20261026-n085:seven-choices",
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:cloze",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-import-20261026-n085:seven-choices:4",
-              "sentence": 4
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:cloze:1",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 80,
-            "end": 85
+            "start": 25,
+            "end": 30
           }
         }
       ]
@@ -481,6 +480,11 @@
       "reason": "少见或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-a-loose-end"
+  ]
 }

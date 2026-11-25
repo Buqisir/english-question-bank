@@ -35,7 +35,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 95
+    "mock": 0
   },
   "senses": [
     {
@@ -46,7 +46,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -117,7 +117,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -248,6 +248,6 @@
       "reason": "罕见技术名词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

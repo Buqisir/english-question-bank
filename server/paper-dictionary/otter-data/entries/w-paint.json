@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 178
+    "mock": 11
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 80
       },
       "folded": false,
       "examples": [
@@ -291,7 +291,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -354,9 +354,154 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:paint#s5",
+      "pos": "v.",
+      "glossZh": "使染上颜色；使呈现某种光色",
+      "pronunciationId": "w:paint#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paint#e-82cd7ea8805e1698",
+          "text": "The sun hangs heavy over central Iraq in the late afternoon, painting the ruins of Babylon in heat and light.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:paint#e-800128ac033b990e",
+          "text": "The first frost of November painted Mrs. Henderson’s rose bushes silver, but her mood was anything but cheerful.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:paint#e-55c02edbb37e59cd",
+          "text": "Paragraph 2: When I finally reached the summit, the rising sun painted the sky gold.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:paint#s6",
+      "pos": "v.",
+      "glossZh": "用文字或叙述描绘；刻画",
+      "pronunciationId": "w:paint#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paint#e-0600b97d32999a20",
+          "text": "His journey from construction site to café owner paints a picture of modern rural China – one where returning wings bring new life.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:paint#e-7ac9556d91c1f082",
+          "text": "Monica Sok’s “ABC for Refugees” powerfully paints a portrait of a young child caught between languages and cultures – a reality that many pediatric (儿科的) patients face.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:paint#e-b26595c173481109",
+          "text": "That’s why I push my conversation partners toward the details – painting as complete a picture as they can.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:paint-over"
+  ]
 }

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 7,
-    "mock": 78
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -152,16 +152,16 @@
       "pos": "v.",
       "glossZh": "用某种措辞表达",
       "pronunciationId": "w:phrase#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

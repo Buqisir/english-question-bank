@@ -1,0 +1,70 @@
+{
+  "entryId": "w:beef-sth-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beef",
+      {
+        "slot": "sth"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "beef",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "beef",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beef sth up",
+  "senses": [
+    {
+      "senseId": "w:beef-sth-up#s1",
+      "pos": "短语",
+      "glossZh": "加强；充实",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:beef#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

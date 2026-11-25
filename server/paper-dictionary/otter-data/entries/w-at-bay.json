@@ -1,0 +1,61 @@
+{
+  "entryId": "w:at-bay",
+  "headword": "at bay",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "bay"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "bay"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:at-bay#s1",
+      "pos": "短语",
+      "glossZh": "被挡在一旁；无法接近",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [
+        "w:keep#s16"
+      ],
+      "examples": [],
+      "note": "常用 keep/hold sb/sth at bay。"
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

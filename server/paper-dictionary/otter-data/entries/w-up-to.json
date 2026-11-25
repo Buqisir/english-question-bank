@@ -1,0 +1,494 @@
+{
+  "entryId": "w:up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up to",
+  "senses": [
+    {
+      "senseId": "w:up-to#s1",
+      "pos": "短语",
+      "glossZh": "最多达；不超过",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:up-to#e-b84fb7c178fbd289",
+          "text": "I was always an enthusiastic reader sometimes reading up to three books a day as a child.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 59
+          },
+          "parts": [
+            [
+              54,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-ed49c900d6e65d7b",
+          "text": "To make some of my landscape shots, I have traveled up to four hours away to shoot within a 10-minute time frame.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 57
+          },
+          "parts": [
+            [
+              52,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-f2c44e0b346f5c14",
+          "text": "Some pieces of music can go for 40 minutes and require up to 50 page turns, including back turns for repeat passages.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          },
+          "parts": [
+            [
+              55,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 80
+      }
+    },
+    {
+      "senseId": "w:up-to#s2",
+      "pos": "短语",
+      "glossZh": "一直到（某时间、阶段或位置）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:up-to#e-4002fb9e885aa88c",
+          "text": "Pulling up to the building, Grant saw flames (火焰) shooting out of a second-floor window.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          },
+          "parts": [
+            [
+              8,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-5e942a1ccee1bec1",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          },
+          "parts": [
+            [
+              66,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-51fcdcb4a1fdae0a",
+          "text": "I parked my car, pitying their ignorance, walked up to the cow in what the onlookers assumed to be a fearless manner.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 54
+          },
+          "parts": [
+            [
+              49,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 10,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:up-to#s5",
+      "pos": "短语",
+      "glossZh": "由……决定；由……负责",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-to#e-e2a41239acabd6b9",
+          "text": "This issue won’t tell you what your ending should be – that’s up to you and the story you’re telling – but it might provide what you need to get there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 67
+          },
+          "parts": [
+            [
+              62,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-2a0aaa4f47374560",
+          "text": "It’s up to you to draw your future.” The idea inspired him to explore boldly and persevere through challenges.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 10
+          },
+          "parts": [
+            [
+              5,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-f63ea56d5e25d75c",
+          "text": "Such fields tend to ask broad questions that leave a lot of choices up to researchers.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          },
+          "parts": [
+            [
+              68,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "常用 It’s up to sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:up-to#s3",
+      "pos": "短语",
+      "glossZh": "能胜任；能应付",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-to#e-6f634381a04c76f8",
+          "text": "While 3D printers aren’t yet up to the task of printing such a fine-scale network, the researchers were able to design and print a vascular model with 500 branches.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          },
+          "parts": [
+            [
+              29,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be up to the task。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:up-to#s4",
+      "pos": "短语",
+      "glossZh": "在做；在忙",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:up-to#e-51ac1816204d7cd5",
+          "text": "What is Vincent up to right now?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          },
+          "parts": [
+            [
+              16,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-to#e-e2a46cfe9398aeb2",
+          "text": "What’s Jocasta up to?",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-b:4",
+              "sentence": 12
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          },
+          "parts": [
+            [
+              15,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "常用于 What is sb up to?",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 18,
+    "mock": 103
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

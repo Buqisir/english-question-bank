@@ -1,0 +1,108 @@
+{
+  "entryId": "w:no-longer-with-us",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "longer",
+      "with",
+      "us"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "longer",
+        "with",
+        "us"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no longer with us",
+  "senses": [
+    {
+      "senseId": "w:no-longer-with-us#s1",
+      "pos": "短语",
+      "glossZh": "已经去世",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-longer-with-us#e-e289f47877d5101e",
+          "text": "Our father is no longer with us, but he is still here.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 31
+          },
+          "parts": [
+            [
+              14,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:no-longer-with-us#s2",
+      "pos": "短语",
+      "glossZh": "已经离职；已离开本团队",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

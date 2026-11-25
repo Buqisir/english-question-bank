@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 126
+    "mock": 3
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -182,7 +182,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -253,7 +253,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -316,6 +316,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:map#s5",
+      "pos": "v.",
+      "glossZh": "规划；拟定",
+      "pronunciationId": "w:map#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:map#e-0b96970ecf4c2b9c",
+          "text": "In this day and age, those who want help mapping the story out can receive instructions online from some of the world’s most popular authors.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -324,6 +357,9 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:map-out"
+  ]
 }

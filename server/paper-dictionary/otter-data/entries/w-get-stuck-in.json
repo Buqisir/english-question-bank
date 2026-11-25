@@ -1,0 +1,274 @@
+{
+  "entryId": "w:get-stuck-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting stuck in"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "stuck",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "stuck",
+        "in"
+      ],
+      [
+        "getting",
+        "stuck",
+        "in"
+      ],
+      [
+        "gets",
+        "stuck",
+        "in"
+      ],
+      [
+        "got",
+        "stuck",
+        "in"
+      ],
+      [
+        "gotten",
+        "stuck",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got stuck in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get stuck in",
+  "senses": [
+    {
+      "senseId": "w:get-stuck-in#s1",
+      "pos": "短语",
+      "glossZh": "被困在……；卡在……里",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-stuck-in#e-120381b8f925654e",
+          "text": "To avoid getting stuck in traffic.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 25
+          },
+          "parts": [
+            [
+              9,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-stuck-in#e-5ab754b7be176175",
+          "text": "They get stuck in traffic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-stuck-in#e-9d4ec4f0e2082735",
+          "text": "Paragraph 1: But the front wheel got stuck in a narrow gap on the ground.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 45
+          },
+          "parts": [
+            [
+              33,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "常用 get stuck in traffic 表示遇上堵车、动弹不得。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:get-stuck-in#s2",
+      "pos": "短语",
+      "glossZh": "陷在（错误、想法等）里走不出来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-stuck-in#e-0fb9c4b406146b1a",
+          "text": "Instead of getting stuck in “what ifs,” gently bring your focus to the things you can influence.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 27
+          },
+          "parts": [
+            [
+              11,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-stuck-in#e-442d63aa36bfbb79",
+          "text": "Don’t get stuck in your mistakes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 18
+          },
+          "parts": [
+            [
+              6,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:get-stuck-in#s3",
+      "pos": "短语",
+      "glossZh": "起劲地干起来；投入地做",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

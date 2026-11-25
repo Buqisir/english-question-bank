@@ -1,0 +1,107 @@
+{
+  "entryId": "w:turn-heads",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "heads"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "heads"
+      ],
+      [
+        "turned",
+        "heads"
+      ],
+      [
+        "turning",
+        "heads"
+      ],
+      [
+        "turns",
+        "heads"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turning heads",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn heads",
+  "senses": [
+    {
+      "senseId": "w:turn-heads#s1",
+      "pos": "短语",
+      "glossZh": "引人注目；吸引目光",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-heads#e-b5846b8338491982",
+          "text": "Hidden beside the crowded Western Market food hall, a brightly lit vending machine（自动售卖机）is turning heads.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 105
+          },
+          "parts": [
+            [
+              92,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              105
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

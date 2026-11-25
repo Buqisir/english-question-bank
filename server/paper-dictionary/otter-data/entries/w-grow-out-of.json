@@ -1,0 +1,177 @@
+{
+  "entryId": "w:grow-out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "grow",
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "grow",
+        "out",
+        "of"
+      ],
+      [
+        "grew",
+        "out",
+        "of"
+      ],
+      [
+        "growing",
+        "out",
+        "of"
+      ],
+      [
+        "grown",
+        "out",
+        "of"
+      ],
+      [
+        "grows",
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "growing out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "grow out of",
+  "senses": [
+    {
+      "senseId": "w:grow-out-of#s1",
+      "pos": "短语",
+      "glossZh": "源于；由……发展而来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:grow#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:grow-out-of#e-7a0faddbfb7738a2",
+          "text": "A few characters are used to create a single impression growing out of the theme.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 70
+          },
+          "parts": [
+            [
+              56,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:grow-out-of#e-56bc5c6738f2c5ea",
+          "text": "They grow out of unique ideas.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-shandong-2026-04-core-literacy-assessment:23#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:grow-out-of#s2",
+      "pos": "短语",
+      "glossZh": "长大后穿不下（原来的衣服或鞋）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:grow-out-of#s3",
+      "pos": "短语",
+      "glossZh": "长大后不再有（某种习惯或兴趣）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

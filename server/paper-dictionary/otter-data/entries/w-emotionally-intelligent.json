@@ -1,0 +1,92 @@
+{
+  "entryId": "w:emotionally-intelligent",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "emotionally",
+      "intelligent"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "emotionally",
+        "intelligent"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "emotionally intelligent",
+  "senses": [
+    {
+      "senseId": "w:emotionally-intelligent#s1",
+      "pos": "短语",
+      "glossZh": "情商高的；善于理解和处理情绪的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:intelligent#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:emotionally-intelligent#e-8395001edfc5b85e",
+          "text": "Being emotionally intelligent does not necessarily make one a moral person.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 29
+          },
+          "parts": [
+            [
+              6,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

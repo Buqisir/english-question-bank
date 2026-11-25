@@ -1,0 +1,66 @@
+{
+  "entryId": "w:come-at-the-hands-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "at",
+      "the",
+      "hands",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "at",
+        "the",
+        "hands",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come at the hands of sb",
+  "senses": [
+    {
+      "senseId": "w:come-at-the-hands-of#s1",
+      "pos": "短语",
+      "glossZh": "（失败、伤害等）由某人或某一方造成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:come#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

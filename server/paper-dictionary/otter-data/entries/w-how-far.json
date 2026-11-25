@@ -1,0 +1,198 @@
+{
+  "entryId": "w:how-far",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "far"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "far"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how far",
+  "senses": [
+    {
+      "senseId": "w:how-far#s1",
+      "pos": "短语",
+      "glossZh": "有多远；到了什么位置",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:how-far#e-480264128a10f1f8",
+          "text": "People often link their memory of what they’ve read to how far into the book it was or where it was on the page.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 62
+          },
+          "parts": [
+            [
+              55,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:how-far#e-ff486271353f4e0f",
+          "text": "How far they are able to see.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-national-a:26#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:how-far#e-6b3cd65cf230d632",
+          "text": "How far is Lakeview from Greenhill?",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:how-far#s2",
+      "pos": "短语",
+      "glossZh": "达到什么程度；有多大进展",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:how-far#e-875abe760f406511",
+          "text": "He now looks at old photos with disbelief and pride, knowing how far he’s come.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          },
+          "parts": [
+            [
+              61,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

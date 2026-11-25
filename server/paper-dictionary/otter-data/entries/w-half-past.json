@@ -1,0 +1,61 @@
+{
+  "entryId": "w:half-past",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "half",
+      "past"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "half",
+        "past"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "half past",
+  "senses": [
+    {
+      "senseId": "w:half-past#s1",
+      "pos": "短语",
+      "glossZh": "……点半",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:half#s6"
+      ],
+      "examples": [],
+      "note": "后接小时数，如 half past six；小时已明确时可省略。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

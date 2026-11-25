@@ -1,0 +1,210 @@
+{
+  "entryId": "w:fill-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fill",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fill",
+        "up"
+      ],
+      [
+        "filled",
+        "up"
+      ],
+      [
+        "filling",
+        "up"
+      ],
+      [
+        "fills",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fill up",
+      "tags": []
+    },
+    {
+      "form": "fills up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fill (sth) up",
+  "senses": [
+    {
+      "senseId": "w:fill-up#s1",
+      "pos": "短语",
+      "glossZh": "装满；填满；占满",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fill-up#e-e341a1afb6d29b88",
+          "text": "In an after-school classroom, she takes out a piece of paper and fills up a whole line to spell the word that describes a type of lung disease.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 73
+          },
+          "parts": [
+            [
+              65,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fill-up#s2",
+      "pos": "短语",
+      "glossZh": "（给车辆）加满油",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fill-up#e-84c613cd5972e800",
+          "text": "He will fill up her car with gas.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          },
+          "parts": [
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fill-up#s3",
+      "pos": "短语",
+      "glossZh": "逐渐变满；满员",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fill-up#s4",
+      "pos": "短语",
+      "glossZh": "（眼里）涌满泪水",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fill-up#s5",
+      "pos": "短语",
+      "glossZh": "吃饱；使人吃饱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fill-up#s6",
+      "pos": "短语",
+      "glossZh": "填写表格",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "见于新加坡、马来西亚和菲律宾英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

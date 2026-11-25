@@ -1,0 +1,179 @@
+{
+  "entryId": "w:wind-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wind",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wind",
+        "down"
+      ],
+      [
+        "winding",
+        "down"
+      ],
+      [
+        "winds",
+        "down"
+      ],
+      [
+        "wound",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wound down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wind (sth) down",
+  "senses": [
+    {
+      "senseId": "w:wind-down#s1",
+      "pos": "短语",
+      "glossZh": "逐渐结束；逐步缩减或停止（活动等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wound#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wind-down#e-4f9870d2fd88f890",
+          "text": "I wound down my complaining and gave her a chance to respond.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wind-down#e-d75165320e6e4d7b",
+          "text": "As the meal wound down, Mark signaled the waiter over and asked him for the bill, intending to split the cost equally and pay his own share.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 22
+          },
+          "parts": [
+            [
+              12,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:wind-down#s2",
+      "pos": "短语",
+      "glossZh": "（忙碌或紧张过后）放松下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-down#s3",
+      "pos": "短语",
+      "glossZh": "转动摇柄使（车窗等）降下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:wind-down#s4",
+      "pos": "短语",
+      "glossZh": "（使）发条逐渐松开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

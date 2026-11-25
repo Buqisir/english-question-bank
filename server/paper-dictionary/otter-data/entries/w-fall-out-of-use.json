@@ -1,0 +1,97 @@
+{
+  "entryId": "w:fall-out-of-use",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "out",
+      "of",
+      "use"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "out",
+        "of",
+        "use"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall out of use",
+  "senses": [
+    {
+      "senseId": "w:fall-out-of-use#s1",
+      "pos": "短语",
+      "glossZh": "逐渐不再使用；逐渐废弃",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-out-of-use#e-98617a66037ede08",
+          "text": "It will fall out of use some day.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-national-b:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 23
+          },
+          "parts": [
+            [
+              8,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,74 @@
+{
+  "entryId": "w:light-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "light",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "light",
+        "into"
+      ],
+      [
+        "lighted",
+        "into"
+      ],
+      [
+        "lighting",
+        "into"
+      ],
+      [
+        "lights",
+        "into"
+      ],
+      [
+        "lit",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "light into sb/sth",
+  "senses": [
+    {
+      "senseId": "w:light-into#s1",
+      "pos": "短语",
+      "glossZh": "猛扑上去攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

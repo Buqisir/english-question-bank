@@ -1,0 +1,148 @@
+{
+  "entryId": "w:see-sb-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "see off"
+  ],
+  "pattern": {
+    "tokens": [
+      "see",
+      {
+        "slot": "sb"
+      },
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "see",
+        {
+          "slot": "sb"
+        },
+        "off"
+      ],
+      [
+        "see",
+        "off"
+      ],
+      [
+        "saw",
+        "off"
+      ],
+      [
+        "seeing",
+        "off"
+      ],
+      [
+        "seen",
+        "off"
+      ],
+      [
+        "sees",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "seeing off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see sb off",
+  "senses": [
+    {
+      "senseId": "w:see-sb-off#s1",
+      "pos": "短语",
+      "glossZh": "给某人送行",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s17",
+        "w:see#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:see-sb-off#e-841ff0163fd67e51",
+          "text": "Seeing a friend off.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 19
+          },
+          "parts": [
+            [
+              0,
+              6
+            ],
+            [
+              16,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ],
+            [
+              16,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:see-sb-off#s2",
+      "pos": "短语",
+      "glossZh": "赶走；击退（对手或来犯者）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

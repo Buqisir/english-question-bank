@@ -1,0 +1,135 @@
+{
+  "entryId": "w:turn-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "against"
+      ],
+      [
+        "turned",
+        "against"
+      ],
+      [
+        "turning",
+        "against"
+      ],
+      [
+        "turns",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned against",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn against sb/sth",
+  "senses": [
+    {
+      "senseId": "w:turn-against#s1",
+      "pos": "短语",
+      "glossZh": "转而反对原先支持的人或事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-against#e-2f09edefc171bce6",
+          "text": "She seemed to have turned against it as a mode of expression.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 33
+          },
+          "parts": [
+            [
+              19,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-against#s2",
+      "pos": "短语",
+      "glossZh": "转过去迎着；使转向迎着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可指迎着某种力量。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-against#s3",
+      "pos": "短语",
+      "glossZh": "反过来用某事物对付某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 turn sth against sb，可指利用对方自己的话或行为对付对方。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,369 @@
+{
+  "entryId": "w:as-much-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "much",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "much",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as much as",
+  "senses": [
+    {
+      "senseId": "w:as-much-as#s1",
+      "pos": "短语",
+      "glossZh": "多达；高达",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:much#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-much-as#e-9c767bec55695b62",
+          "text": "At least 80 inches of rain a year is normal-and in some areas there may be as much as 430 inches of rain annually.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as#e-b6d2f81475f5011e",
+          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 279,
+            "end": 289
+          },
+          "parts": [
+            [
+              279,
+              289
+            ]
+          ],
+          "highlightRanges": [
+            [
+              279,
+              289
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as#e-9702bcaa15a4d7ee",
+          "text": "By lifting the hull out of the water, the boat reduces drag by as much as 80 percent, saving a huge amount of energy.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 73
+          },
+          "parts": [
+            [
+              63,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "接数量或百分比，强调数值之大。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:as-much-as#s2",
+      "pos": "短语",
+      "glossZh": "与……一样多；与……程度相同",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-much-as#e-165472d8e39593f1",
+          "text": "There is an amazing world out there, and it needs our children as much as they need it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 73
+          },
+          "parts": [
+            [
+              63,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as#e-dad0dd3572b79b6b",
+          "text": "They can’t help their situation, and it seems to me that they deserve to enjoy life as much as anyone.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:writing-continuation:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 94
+          },
+          "parts": [
+            [
+              84,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as#e-3d629d809c577052",
+          "text": "“If they were using AI as a study pal, they weren’t absorbing as much as they might think.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:as-much-as#s3",
+      "pos": "短语",
+      "glossZh": "与其说……不如说……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-much-as#e-bf787fb69e2e0f78",
+          "text": "Forgetting is not our memory failing on us as much as it is our memory being better used.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as#e-e0dba97f732919a9",
+          "text": "The idea is not to completely shift your approach to free time – or even pick up new pursuits – as much as it is to integrate a few specific goals.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 106
+          },
+          "parts": [
+            [
+              96,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              106
+            ]
+          ]
+        }
+      ],
+      "note": "用于 not A as much as B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:as-much-as#s4",
+      "pos": "短语",
+      "glossZh": "几乎等于；无异于",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 as much as admitted it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:as-much-as#s5",
+      "pos": "短语",
+      "glossZh": "哪怕只是；甚至",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可在 if 从句中接动词，强调很小的动作。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

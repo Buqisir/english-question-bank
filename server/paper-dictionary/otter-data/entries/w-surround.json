@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 34
+    "mock": 6
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -147,62 +147,11 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:surround#s3",
-      "pos": "短语",
-      "glossZh": "环绕声",
-      "pronunciationId": "w:surround#p-main",
-      "note": "surround sound。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:surround#e-72c3c59f7621e3df",
-          "text": "Finally, everyone wanted big screens and surround sound rather than the tiny screens in bedrooms.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:5",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 41,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:surround#e-354fc51b7fa860a7",
-          "text": "When visitors walk into the museum, the spatial sound field creates a surrounding atmosphere through multi-channel audio, providing the opportunity to get fully involved in surround sound.",
-          "source": {
-            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
-            "paperTitle": "太原市2026年高三年级模拟考试（一）",
-            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 173,
-            "end": 181
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,69 @@
+{
+  "entryId": "w:not-any-longer",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      {
+        "slot": "…"
+      },
+      "any",
+      "longer"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        {
+          "slot": "…"
+        },
+        "any",
+        "longer"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not … any longer",
+  "senses": [
+    {
+      "senseId": "w:not-any-longer#s1",
+      "pos": "短语",
+      "glossZh": "不再；再也不",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:any#s3",
+        "w:long#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

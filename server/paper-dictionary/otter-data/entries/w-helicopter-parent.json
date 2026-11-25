@@ -1,0 +1,92 @@
+{
+  "entryId": "w:helicopter-parent",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "helicopter",
+      "parent"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "helicopter",
+        "parent"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "helicopter parent",
+  "senses": [
+    {
+      "senseId": "w:helicopter-parent#s1",
+      "pos": "短语",
+      "glossZh": "直升机家长；过度关注和干预子女生活的家长",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:helicopter#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:helicopter-parent#e-dcda0b998c196e2b",
+          "text": "For as long as I could remember my mom had been a helicopter parent, hovering (盘旋) over me all the time.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 67
+          },
+          "parts": [
+            [
+              50,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

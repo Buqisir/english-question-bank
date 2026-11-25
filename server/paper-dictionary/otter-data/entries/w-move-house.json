@@ -1,0 +1,174 @@
+{
+  "entryId": "w:move-house",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moving house"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "house"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "house"
+      ],
+      [
+        "moving",
+        "house"
+      ],
+      [
+        "moved",
+        "house"
+      ],
+      [
+        "moves",
+        "house"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved house",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move house",
+  "senses": [
+    {
+      "senseId": "w:move-house#s1",
+      "pos": "短语",
+      "glossZh": "搬家；迁居",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:house#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:move-house#e-801049a28dcc0e53",
+          "text": "She adds: “I’ve moved house many times and I always like to personalise my room and put up pictures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-house#e-0dd20aa182a957b0",
+          "text": "Moving house.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-house#e-874132eeb56350c1",
+          "text": "Move House Without the Waste",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

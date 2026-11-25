@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 40
+    "mock": 14
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -252,6 +252,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:borrow#s5",
+      "pos": "v.",
+      "glossZh": "（on borrowed time）撑过预期的期限，随时可能结束",
+      "pronunciationId": "w:borrow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:borrow#e-873b34a9bf150249",
+          "text": "But even if you have somewhat of a green thumb, those blooms are on borrowed time.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -260,6 +293,6 @@
       "reason": "古旧、方言或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

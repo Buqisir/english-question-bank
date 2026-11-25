@@ -42,8 +42,8 @@
     "mock": 82
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 80
+    "gaokao": 6,
+    "mock": 30
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 1
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -118,81 +118,11 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:parking#s2",
-      "pos": "短语",
-      "glossZh": "停车场",
-      "pronunciationId": "w:parking#p-main",
-      "note": "parking lot 或 parking area。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:parking#e-02a70f50fc8e4a4f",
-          "text": "People who you swear got in other lines long after you are already checked out and off to the parking lot.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 94,
-            "end": 101
-          }
-        },
-        {
-          "exampleId": "w:parking#e-14a30bac390563de",
-          "text": "7/10-Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:11",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:parking#e-2c0b478d18be3b1d",
-          "text": "The houses were well-kept, with flowers blooming in most yards, but at the corner of her block sat a 1,200-square-foot parking lot – a dumping ground for old tires, broken furniture, and overgrown weeds.",
-          "source": {
-            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
-            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
-            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 119,
-            "end": 126
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

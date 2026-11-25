@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 21
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -123,12 +123,12 @@
       "glossZh": "祖先种；前身",
       "pronunciationId": "w:ancestor#p-main",
       "note": "用于生物演化和事物发展。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -138,6 +138,6 @@
       "reason": "特定信仰与翻译语境"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

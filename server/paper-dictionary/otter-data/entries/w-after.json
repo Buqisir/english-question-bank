@@ -35,8 +35,8 @@
     "mock": 1176
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 1175
+    "gaokao": 14,
+    "mock": 992
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 113,
-        "mock": 0
+        "mock": 182
       },
       "folded": false,
       "examples": [
@@ -106,184 +106,6 @@
           "target": {
             "start": 8,
             "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:after#s2",
-      "pos": "短语",
-      "glossZh": "照顾；料理",
-      "pronunciationId": "w:after#p-main",
-      "note": "look after。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:after#e-b6d9e3ca0eb55320",
-          "text": "Who will look after the children?",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:listening.short-dialogue",
-            "locator": {
-              "question": 3,
-              "questionId": "question:listening:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:after#e-e7367bef68991ed7",
-          "text": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "reading-c-6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:after#e-378ffe917b349e0f",
-          "text": "What’s more, indoor plants are easy to look after and are not very expensive.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:after#s3",
-      "pos": "短语",
-      "glossZh": "毕竟；别忘了",
-      "pronunciationId": "w:after#p-main",
-      "note": "after all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:after#e-a727036c5052d872",
-          "text": "After all, coworking spaces also typically use an open office layout (布局).",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:after#e-828f461b5a932806",
-          "text": "After all, I had left him little choice.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:after#s4",
-      "pos": "短语",
-      "glossZh": "依次；接连",
-      "pronunciationId": "w:after#p-main",
-      "note": "one after another。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:after#e-0ec920e6d661ed35",
-          "text": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:after#e-a447429fbb45bf32",
-          "text": "Low intensity speakers find it rude to talk at the same time and prefer people speak one after another in conversation.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 89,
-            "end": 94
           }
         }
       ]
@@ -365,7 +187,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -411,6 +233,26 @@
       "reason": "交通工具的专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:after-a-while",
+    "w:after-all",
+    "w:after-dark",
+    "w:after-you",
+    "w:ask-after",
+    "w:come-after",
+    "w:day-after-day",
+    "w:go-after",
+    "w:look-after",
+    "w:name-a-after-b",
+    "w:name-after",
+    "w:night-after-night",
+    "w:one-after-another",
+    "w:run-after",
+    "w:take-after",
+    "w:time-after-time"
+  ]
 }

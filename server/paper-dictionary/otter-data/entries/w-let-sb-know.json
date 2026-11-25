@@ -1,0 +1,205 @@
+{
+  "entryId": "w:let-sb-know",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "let know"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      {
+        "slot": "sb"
+      },
+      "know"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        {
+          "slot": "sb"
+        },
+        "know"
+      ],
+      [
+        "let",
+        "know"
+      ],
+      [
+        "lets",
+        "know"
+      ],
+      [
+        "letting",
+        "know"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "letting know",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let sb know",
+  "senses": [
+    {
+      "senseId": "w:let-sb-know#s1",
+      "pos": "短语",
+      "glossZh": "告知某人；让某人知道",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:know#s10",
+        "w:let#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-sb-know#e-9390c372502e9522",
+          "text": "Let their teacher know.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 22
+          },
+          "parts": [
+            [
+              0,
+              3
+            ],
+            [
+              18,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              3
+            ],
+            [
+              18,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-know#e-5e74e9e885de2ad6",
+          "text": "Plus, it never hurts you to let people know that you can do more than what they hired you to do.”",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 43
+          },
+          "parts": [
+            [
+              28,
+              31
+            ],
+            [
+              39,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              31
+            ],
+            [
+              39,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-know#e-5cb95f34479ecb5e",
+          "text": "Just let us know your bug(虫子) dreams and we’ll make it happen within your budget!",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-a:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              8
+            ],
+            [
+              12,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              8
+            ],
+            [
+              12,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

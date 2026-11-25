@@ -35,8 +35,8 @@
     "mock": 1610
   },
   "unassignedCounts": {
-    "gaokao": 130,
-    "mock": 1609
+    "gaokao": 214,
+    "mock": 1545
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 53,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -255,1061 +255,667 @@
       ]
     },
     {
-      "senseId": "w:out#s4",
+      "senseId": "w:out#s21",
       "pos": "短语",
-      "glossZh": "查明；弄清",
+      "glossZh": "体能状态差（out of shape）",
       "pronunciationId": "w:out#p-main",
-      "note": "find out、figure out、work out。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 19,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:out#e-8ff700543d262f4e",
-          "text": "To find out what she would do in the two tests.",
+          "exampleId": "w:out#e-fa7438e357ded492",
+          "text": "She is out of shape.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-gaokao-2020-i:34",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:out#e-374123726471bf77",
-          "text": "The study showed the animals had figured out how to apply what they learned about human faces during training to new faces in the testing stage.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:out#e-92643ce418318886",
-          "text": "What does the follow-up test aim to find out about the cockatoos?",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2022-national-a:26",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s5",
-      "pos": "短语",
-      "glossZh": "结果是",
-      "pronunciationId": "w:out#p-main",
-      "note": "turn out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-3917a48d3f2c0515",
-          "text": "A bright spot for me turned out to be reading.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:out#e-0ff51ae6ead22e73",
-          "text": "It turns out, it’s just math working against you; chances are, the other line really is faster.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:out#e-3d7cf585e4883c63",
-          "text": "This training taught her to read and write her Chinese upside down – a skill that has turned out to be quite __50__, especially whenever we share the newspaper.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 96
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s6",
-      "pos": "短语",
-      "glossZh": "挑出；选出",
-      "pronunciationId": "w:out#p-main",
-      "note": "pick out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-aa155df04ba2484b",
-          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 90,
-            "end": 93
-          }
-        },
-        {
-          "exampleId": "w:out#e-f4f435b6dd195593",
-          "text": "However, the three bears managed to pick out the bigger number of dots even in pairs of patterns where fewer dots took up a larger area.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 44
-          }
-        },
-        {
-          "exampleId": "w:out#e-1af53afe8445c655",
-          "text": "Pick out diseased plants in the forest.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-gaokao-2026-zhejiang-jan:34",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s7",
-      "pos": "短语",
-      "glossZh": "表达出来；表演出来",
-      "pronunciationId": "w:out#p-main",
-      "note": "act out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-cbe0c3182ceb96b1",
-          "text": "I always read, using different voices, as though I were acting out the stories with my voice and they loved it!",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:out#e-6b4508157af82dbc",
-          "text": "Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 135,
-            "end": 138
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s8",
-      "pos": "短语",
-      "glossZh": "指出",
-      "pronunciationId": "w:out#p-main",
-      "note": "point out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-e4fe9d9e1faf5f8f",
-          "text": "It is not my intention to point out the central theme of each of the plays in this collection, for that would, indeed, ruin the pleasure of reading, discussing, and thinking about the plays and the effectiveness of the playwright.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:out#e-be29643b31d96deb",
-          "text": "What phenomenon does the author point out in paragraph 1?",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2025-i:28",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:out#e-44f5978f10fcfff0",
-          "text": "What does the author point out at the beginning of the text?",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2026-ii:28",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s9",
-      "pos": "短语",
-      "glossZh": "锻炼",
-      "pronunciationId": "w:out#p-main",
-      "note": "work out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-9c40e10b0df39ee0",
-          "text": "Come and work out with our qualified personal trainer, Jodie McGregor, on the grounds of the Middleton Lodge estate.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:out#e-87bb4dd5d4ab4a53",
-          "text": "If you plan on working out in a gym, that person must belong to the same gym.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "seven-choices-4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:out#e-ed8569c8fd5c5ee7",
-          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s10",
-      "pos": "短语",
-      "glossZh": "在外面吃饭",
-      "pronunciationId": "w:out#p-main",
-      "note": "eat out、dine out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-ae7ad82f9b443e60",
-          "text": "Eat out.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:listening.short-dialogue",
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:listening.short-dialogue",
             "locator": {
               "question": 4,
               "questionId": "question:listening:4",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:out#e-3bc327dc7e0aa696",
-          "text": "Important Things to Know When Dining Out",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 37,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:out#e-836a13aa5578b705",
-          "text": "Eat out with Mark.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
-            "locator": {
-              "question": 3,
-              "questionId": "question:listening:3",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s11",
-      "pos": "短语",
-      "glossZh": "熄灭",
-      "pronunciationId": "w:out#p-main",
-      "note": "put out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-4fe3210ceae50413",
-          "text": "The next minute, the porridge boiled over and put out the fire.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:out#e-cb35d40c58fe2fdc",
-          "text": "The next minute, the porridge boiled over and put out the fire.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-ii:writing-continuation:material-3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 53
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s12",
-      "pos": "短语",
-      "glossZh": "丢弃",
-      "pronunciationId": "w:out#p-main",
-      "note": "throw out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-48e8940ab6cbe3e7",
-          "text": "Clothing takes a huge amount of natural resources（资源）to make, and buying loads of new clothing ( or throwing out old clothing ) is not healthy for the environment.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 112
-          }
-        },
-        {
-          "exampleId": "w:out#e-d4aa729275b5045b",
-          "text": "How old was Gallo when she threw out the bottle?",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:out#e-4d34c6f89a7d18b1",
-          "text": "Up to 84.3% is simply thrown out.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s13",
-      "pos": "短语",
-      "glossZh": "用完",
-      "pronunciationId": "w:out#p-main",
-      "note": "run out of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-c592fd8e3dc067e8",
-          "text": "Running out of.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:28",
               "option": "A",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 8,
-            "end": 11
+            "start": 7,
+            "end": 10
           }
         }
       ]
     },
     {
-      "senseId": "w:out#s14",
+      "senseId": "w:out#s22",
       "pos": "短语",
-      "glossZh": "填完（表格）",
+      "glossZh": "主动联系（reach out）",
       "pronunciationId": "w:out#p-main",
-      "note": "fill out。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-5592c4fac3329ffd",
-          "text": "Register online or fill out a Group Play Registration Form with multiple date and start time options.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-a",
-            "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:out#e-53c84371b7832e3d",
-          "text": "of Available Projects and fill out the Group Project Request Form.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:out#e-905be91d7c614a7b",
-          "text": "Fill out a form.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s15",
-      "pos": "短语",
-      "glossZh": "执行",
-      "pronunciationId": "w:out#p-main",
-      "note": "carry out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-dd9c9bae469fd5de",
-          "text": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 69
-          }
-        },
-        {
-          "exampleId": "w:out#e-62bd677ce6194772",
-          "text": "Why did Blue Hill carry out the experiment?",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2025-ii:33",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:out#e-92fbaf9392f22e06",
-          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s16",
-      "pos": "短语",
-      "glossZh": "不再运作；坏了",
-      "pronunciationId": "w:out#p-main",
-      "note": "out of order 表示出故障；go out 表示停止运转。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-056bab3a208b015a",
-          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 106,
-            "end": 109
-          }
-        },
-        {
-          "exampleId": "w:out#e-72d6c79c05c7cd3d",
-          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message: “Out of order.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-ii:writing-continuation:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 110
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s17",
-      "pos": "短语",
-      "glossZh": "伸出",
-      "pronunciationId": "w:out#p-main",
-      "note": "reach out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:out#e-1ae0815818f45b47",
-          "text": "As I read, he reaches out and pokes (戳) the page with his finger.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s18",
-      "pos": "短语",
-      "glossZh": "闲逛；一起消磨时间",
-      "pronunciationId": "w:out#p-main",
-      "note": "hang out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:out#e-c5607f5e5db7ca7f",
-          "text": "Hang out with friends.",
+          "exampleId": "w:out#e-9cde83e37749a46c",
+          "text": "People frequently reach out to tell him that his videos have encouraged them to learn how to read, too.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
             "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "B",
-              "sentence": 1
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:3",
+              "sentence": 6
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 5,
-            "end": 8
+            "start": 24,
+            "end": 27
           }
-        },
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s23",
+      "pos": "adv.",
+      "glossZh": "出声地；让人听见",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
         {
-          "exampleId": "w:out#e-63bc9e09ba36aa78",
-          "text": "There’s also an area on the rooftop for hanging out with other travelers during the summer.",
+          "exampleId": "w:out#e-1691e38b79e0c664",
+          "text": "You might need to read it out to students or it may also serve as a reference point to you, depending on the activities that go with the particular piece of news.",
           "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 51
-          }
-        },
-        {
-          "exampleId": "w:out#e-a2865fdc42d0f83a",
-          "text": "You might think college will be a breeze – studying your favorite courses and hanging out with your friends all day.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:1",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:4",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 86,
-            "end": 89
+            "start": 26,
+            "end": 29
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:out#s19",
-      "pos": "短语",
-      "glossZh": "借出或借阅",
-      "pronunciationId": "w:out#p-main",
-      "note": "check out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:out#e-70551fa492babeb2",
-          "text": "She wished me to have my own library card to check out books for myself.",
+          "exampleId": "w:out#e-44cd91f1bc8fcb1e",
+          "text": "Without looking up, he snapped out, “I don’t believe you want to work.” I hadn’t mentioned work.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:out#e-5d481d0e30ee7bb2",
-          "text": "I checked out a half-dozen books on Paul Revere from the library.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
-              "sentence": 17
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 13
-          }
-        },
-        {
-          "exampleId": "w:out#e-412162cf838d1402",
-          "text": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 100,
-            "end": 103
+            "start": 31,
+            "end": 34
           }
         }
       ]
     },
     {
-      "senseId": "w:out#s20",
-      "pos": "短语",
-      "glossZh": "错过",
+      "senseId": "w:out#s24",
+      "pos": "prep.",
+      "glossZh": "在……之中，表示比例（out of）",
       "pronunciationId": "w:out#p-main",
-      "note": "miss out。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:out#e-a8d26bf9b27e2a4a",
-          "text": "With so many online posts featuring the same places, it’s easy to feel like you’re missing out.",
+          "exampleId": "w:out#e-2012a467afe11eea",
+          "text": "Two out of three Americans bring back a souvenir from their travels, with US sales topping $21bn in 2022.",
           "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:2",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:out#e-ccfbb918f97b35df",
+          "text": "An estimated 3 out of 4 people have a fear of public speaking.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s25",
+      "pos": "短语",
+      "glossZh": "特意去做；不辞麻烦（go out of one’s way）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-65174cecdc586d02",
+          "text": "In the era of AI and digital art, people across the world still go out of their way to museums to catch a glimpse of some of the masterpieces that were painted years ago.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s26",
+      "pos": "短语",
+      "glossZh": "倾诉；吐露（pour out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-fa4c0fa9f0fef45b",
+          "text": "I found my mother, the woman who had sacrificed her own career and life for my opportunities, and poured out my fears.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s27",
+      "pos": "adj.",
+      "glossZh": "已推出的；可买到的",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-c28042ee6731fa5d",
+          "text": "Eufy says its new model, E15 (out in June), is fully “self-driving” – no wires or pegs (钉子) needed, which could make it a game changer.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s28",
+      "pos": "短语",
+      "glossZh": "逐项列出（list out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-59e5cf7031bceec3",
+          "text": "A recommendation letter (email to team@fairgaze.com) from your principal or senior English teacher, who may recommend your name to the SSP listing out reasons for recommendation.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 150
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s29",
+      "pos": "短语",
+      "glossZh": "不当季（out of season）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-716bd78477df2bc6",
+          "text": "Purchase fruit out of season.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s30",
+      "pos": "短语",
+      "glossZh": "隔绝；挡在外面（shut out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:out#s31",
+      "pos": "adv.",
+      "glossZh": "做出来；生产出来",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-cdcf6f6adcb293f9",
+          "text": "Her works turn out the best models.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:out#e-6c9e2462ad685a79",
+          "text": "Now, a decade on, MacColl can pump out 17 of them in a row.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:1",
               "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 91,
-            "end": 94
+            "start": 35,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:out#e-a8f35989be89287c",
+          "text": "In her youth, Granny squares became the after-dinner routine and soon I was churning out dozens of multicolored squares.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s32",
+      "pos": "prep.",
+      "glossZh": "已用尽；没有（out of）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-ac95cc8b7462888c",
+          "text": "One damp January evening, I was walking home, headphones out of power in my bag, when I noticed a small figure fall down on the pavement with her eyes closed.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s33",
+      "pos": "短语",
+      "glossZh": "使筋疲力尽（wipe out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-e6f4d84bbb73ed4a",
+          "text": "When I began to feel slightly better, I got up to do a few basic chores, only to be very quickly wiped out.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s34",
+      "pos": "短语",
+      "glossZh": "参加选拔；试演（try out for）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-3979cda3543a5075",
+          "text": "Maybe back at the community theater, where I’d just tried out for a play and felt easy with the assistant director, a woman my age who I could imagine becoming a friend.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s35",
+      "pos": "短语",
+      "glossZh": "排除某种可能性（rule out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:out#s36",
+      "pos": "短语",
+      "glossZh": "消除阻碍；使更顺畅（smooth out）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-7daaf4e19ecc9b78",
+          "text": "These movements often help the speaker to smooth out their thought process and assist in getting the words out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s37",
+      "pos": "adj.",
+      "glossZh": "已放学的；已放假的",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-983fd8749acc3737",
+          "text": "School’s out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s38",
+      "pos": "短语",
+      "glossZh": "与……不同步；与……不合拍（out of step with）",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-62684b1607f801ea",
+          "text": "I was born in 2010 in the countryside, which may be why I always felt a little out of step with the times.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:out#s39",
+      "pos": "adj.",
+      "glossZh": "熄灭的；不亮的",
+      "pronunciationId": "w:out#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:out#e-2a30fe8c127a2545",
+          "text": "All the overhead lights were out.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 32
           }
         }
       ]
@@ -1321,6 +927,196 @@
       "reason": "语境不足或独立词头"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:act-out",
+    "w:all-out",
+    "w:as-it-turned-out",
+    "w:ask-out",
+    "w:balance-out",
+    "w:be-out-for",
+    "w:block-out",
+    "w:bottle-out",
+    "w:bottom-out",
+    "w:branch-out",
+    "w:break-out",
+    "w:bring-out",
+    "w:burn-out",
+    "w:burst-out",
+    "w:call-out",
+    "w:camp-out",
+    "w:cancel-out",
+    "w:carry-out",
+    "w:carve-out",
+    "w:check-out",
+    "w:chicken-out",
+    "w:clean-out",
+    "w:clear-out",
+    "w:come-out",
+    "w:come-out-of-ones-shell",
+    "w:cross-out",
+    "w:crowd-out",
+    "w:cry-out",
+    "w:cry-out-for",
+    "w:cut-out",
+    "w:day-out",
+    "w:die-out",
+    "w:dine-out",
+    "w:down-and-out",
+    "w:draw-sb-out-of-their-shell",
+    "w:drop-out",
+    "w:drown-out",
+    "w:dry-out",
+    "w:eat-out",
+    "w:empty-out",
+    "w:even-out",
+    "w:fake-out",
+    "w:fall-out",
+    "w:fall-out-of-favour",
+    "w:fall-out-of-use",
+    "w:fan-out",
+    "w:farm-out-sth",
+    "w:feel-out",
+    "w:figure-out",
+    "w:fill-out",
+    "w:find-out",
+    "w:fish-out",
+    "w:force-out",
+    "w:from-here-on-out",
+    "w:get-out",
+    "w:get-out-of",
+    "w:get-out-of-doing-sth",
+    "w:get-out-of-your-comfort-zone",
+    "w:get-the-most-out-of",
+    "w:give-out",
+    "w:go-all-out",
+    "w:go-out",
+    "w:grow-out",
+    "w:grow-out-of",
+    "w:hand-out",
+    "w:hang-out",
+    "w:head-out",
+    "w:help-out",
+    "w:hold-out",
+    "w:in-and-out",
+    "w:iron-sth-out",
+    "w:it-turns-out",
+    "w:it-turns-out-that",
+    "w:jump-out",
+    "w:keep-an-eye-out",
+    "w:kick-sb-out",
+    "w:kit-sb-out",
+    "w:lay-sth-out",
+    "w:leave-out",
+    "w:let-sb-sth-out",
+    "w:live-out",
+    "w:look-out",
+    "w:look-out-for",
+    "w:make-out",
+    "w:map-out",
+    "w:miss-out",
+    "w:miss-out-on-sth",
+    "w:move-out",
+    "w:out-and-about",
+    "w:out-loud",
+    "w:out-of",
+    "w:out-of-business",
+    "w:out-of-context",
+    "w:out-of-date",
+    "w:out-of-hand",
+    "w:out-of-nowhere",
+    "w:out-of-order",
+    "w:out-of-place",
+    "w:out-of-pocket",
+    "w:out-of-sight",
+    "w:out-of-the-blue",
+    "w:out-of-the-picture",
+    "w:out-of-the-way",
+    "w:out-sick",
+    "w:out-there",
+    "w:out-west",
+    "w:pan-out",
+    "w:pass-out",
+    "w:pay-out-of-pocket",
+    "w:phase-out",
+    "w:pick-out",
+    "w:play-out",
+    "w:point-out",
+    "w:pop-out",
+    "w:portion-out",
+    "w:price-out",
+    "w:print-out",
+    "w:pull-out",
+    "w:push-out",
+    "w:put-out",
+    "w:rain-out",
+    "w:reach-out",
+    "w:reach-out-to-sb",
+    "w:read-out",
+    "w:rent-out",
+    "w:ring-out",
+    "w:roll-out",
+    "w:round-out",
+    "w:rule-out",
+    "w:run-out",
+    "w:run-out-of",
+    "w:run-out-of-road",
+    "w:salt-out",
+    "w:screen-out",
+    "w:seek-out",
+    "w:sell-out",
+    "w:send-out",
+    "w:separate-out",
+    "w:set-out",
+    "w:set-out-to-do",
+    "w:shell-out",
+    "w:ship-out",
+    "w:shoot-out",
+    "w:shut-out",
+    "w:single-out",
+    "w:sort-out",
+    "w:space-out",
+    "w:speak-out",
+    "w:spell-out",
+    "w:spread-out",
+    "w:stamp-out",
+    "w:stand-out",
+    "w:start-out",
+    "w:stay-out",
+    "w:step-out",
+    "w:step-out-of",
+    "w:stick-it-out",
+    "w:stick-out",
+    "w:storm-out",
+    "w:straight-out",
+    "w:stress-out",
+    "w:switch-out",
+    "w:take-a-bite-out-of-sth",
+    "w:take-it-out-on-sb",
+    "w:take-out",
+    "w:take-sth-out-of-sth",
+    "w:test-out",
+    "w:thin-out",
+    "w:think-out",
+    "w:throw-out",
+    "w:time-out",
+    "w:top-out",
+    "w:tough-it-out",
+    "w:try-sth-out",
+    "w:tune-sth-out",
+    "w:turn-out",
+    "w:wait-out",
+    "w:walk-out",
+    "w:watch-out",
+    "w:watch-out-for-sth",
+    "w:way-out",
+    "w:wear-out",
+    "w:weed-sth-out",
+    "w:work-out",
+    "w:write-out",
+    "w:zone-out"
+  ]
 }

@@ -1,0 +1,121 @@
+{
+  "entryId": "w:eye-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "eyes up"
+  ],
+  "pattern": {
+    "tokens": [
+      "eye",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eye",
+        "up"
+      ],
+      [
+        "eyes",
+        "up"
+      ],
+      [
+        "eyed",
+        "up"
+      ],
+      [
+        "eyeing",
+        "up"
+      ],
+      [
+        "eying",
+        "<",
+        "l",
+        "up"
+      ],
+      [
+        "rare",
+        ">",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "eyeing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eye sb/sth up",
+  "senses": [
+    {
+      "senseId": "w:eye-up#s1",
+      "pos": "短语",
+      "glossZh": "饶有兴趣地打量；看中并考虑入手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:eye-up#e-4a9f311f4415e6f9",
+          "text": "But today she is eyeing up a cast-iron log burner for her home.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

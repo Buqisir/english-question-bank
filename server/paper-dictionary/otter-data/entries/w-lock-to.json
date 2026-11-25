@@ -1,0 +1,61 @@
+{
+  "entryId": "w:lock-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lock",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lock",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lock to",
+  "senses": [
+    {
+      "senseId": "w:lock-to#s1",
+      "pos": "短语",
+      "glossZh": "（目光）紧盯着……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:lock#s7"
+      ],
+      "examples": [],
+      "note": "主语可为 eyes 或 gaze。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -48,7 +48,7 @@
     "mock": 3633
   },
   "unassignedCounts": {
-    "gaokao": 257,
+    "gaokao": 264,
     "mock": 3632
   },
   "senses": [
@@ -867,63 +867,46 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:from#s13",
-      "pos": "短语",
-      "glossZh": "有时",
-      "pronunciationId": "w:from#p-main",
-      "note": "from time to time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:from#e-ffffda097fa2d28b",
-          "text": "Additionally, from time to time I will assign group work to be completed in class or short assignments to be completed at home, both of which will be graded.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "reading-a-9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:from#e-cb17f07e6b865b31",
-          "text": "Changing the pot of your plant from time to time will also help",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-national-b:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:across-from",
+    "w:anywhere-from-to",
+    "w:apart-from",
+    "w:aside-from",
+    "w:break-from",
+    "w:come-from",
+    "w:come-from-behind",
+    "w:come-from-nowhere",
+    "w:draw-sth-from-sth",
+    "w:far-from-sth",
+    "w:fresh-from",
+    "w:from-an-early-age",
+    "w:from-day-to-day",
+    "w:from-here-on-out",
+    "w:from-life",
+    "w:from-near-and-far",
+    "w:from-now-on",
+    "w:from-the-bottom-of-ones-heart",
+    "w:from-then-on",
+    "w:from-time-to-time",
+    "w:go-from-strength-to-strength",
+    "w:hear-from-sb",
+    "w:keep-away-from",
+    "w:run-away-from",
+    "w:shy-away-from",
+    "w:spring-from",
+    "w:step-away-from",
+    "w:straight-from-the-horses-mouth",
+    "w:suffering-from",
+    "w:take-away-from",
+    "w:turn-away-from-sth",
+    "w:walk-away-from",
+    "w:where-are-you-from"
+  ]
 }

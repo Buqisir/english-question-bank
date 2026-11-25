@@ -1,0 +1,147 @@
+{
+  "entryId": "w:fall-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falls away"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "away"
+      ],
+      [
+        "falls",
+        "away"
+      ],
+      [
+        "fallen",
+        "away"
+      ],
+      [
+        "falling",
+        "away"
+      ],
+      [
+        "fell",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall away",
+  "senses": [
+    {
+      "senseId": "w:fall-away#s1",
+      "pos": "短语",
+      "glossZh": "逐渐减少、减弱或消失",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-away#e-f8ad7f1e4642900f",
+          "text": "It’s also good for developing skills, for concentration and critical thinking, and if that falls away, that is problematic for society and individuals.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 101
+          },
+          "parts": [
+            [
+              91,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-away#s2",
+      "pos": "短语",
+      "glossZh": "（支持者）逐渐离去；不再支持",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-away#s3",
+      "pos": "短语",
+      "glossZh": "（地面、道路等）向下倾斜",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-away#s4",
+      "pos": "短语",
+      "glossZh": "从原处脱落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

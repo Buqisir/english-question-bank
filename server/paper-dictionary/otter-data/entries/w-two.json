@@ -34,8 +34,8 @@
     "mock": 700
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 700
+    "gaokao": 3,
+    "mock": 500
   },
   "senses": [
     {
@@ -46,7 +46,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 115,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -108,75 +108,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:two#s2",
-      "pos": "短语",
-      "glossZh": "两个一组地",
-      "pronunciationId": "w:two#p-main",
-      "note": "two by two。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:two#e-6554aba92ae03b8b",
-          "text": "So two by two,I read library books as fast as I could go: rushing them home in the basket of my bicycle.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:two#s3",
-      "pos": "短语",
-      "glossZh": "一举两得",
-      "pronunciationId": "w:two#p-main",
-      "note": "kill two birds with one stone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:two#e-96613f35ae628fa7",
-          "text": "killing two birds with one stone",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 11
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -185,6 +116,14 @@
       "reason": "同形缩写或行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-thing-or-two",
+    "w:kill-two-birds-with-one-stone",
+    "w:one-or-two",
+    "w:two-by-two"
+  ]
 }

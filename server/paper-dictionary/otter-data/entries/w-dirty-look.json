@@ -1,0 +1,131 @@
+{
+  "entryId": "w:dirty-look",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dirty",
+      "look"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dirty",
+        "look"
+      ],
+      [
+        "dirty",
+        "looks"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dirty looks",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dirty look",
+  "senses": [
+    {
+      "senseId": "w:dirty-look#s1",
+      "pos": "名词短语",
+      "glossZh": "表示不满或责怪的眼神",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dirty-look#e-2aca16137f6ac16f",
+          "text": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 158
+          },
+          "parts": [
+            [
+              147,
+              158
+            ]
+          ],
+          "highlightRanges": [
+            [
+              147,
+              158
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dirty-look#e-1e6ea4d686670490",
+          "text": "And the traffic police gave me such dirty looks that I was ashamed.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "常用 give sb a dirty look。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

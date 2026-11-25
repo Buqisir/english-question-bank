@@ -1,0 +1,99 @@
+{
+  "entryId": "w:train-of-thought",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "train",
+      "of",
+      "thought"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "train",
+        "of",
+        "thought"
+      ],
+      [
+        "trains",
+        "of",
+        "thought"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "train of thought",
+  "senses": [
+    {
+      "senseId": "w:train-of-thought#s1",
+      "pos": "短语",
+      "glossZh": "思路；连贯的思绪",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:train#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:train-of-thought#e-046a97078d199729",
+          "text": "The sharp and continuous chirping cut through the quiet classroom again and again, easily breaking his train of thought.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 119
+          },
+          "parts": [
+            [
+              103,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              119
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 60
+    "gaokao": 6,
+    "mock": 21
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -119,40 +119,6 @@
       ]
     },
     {
-      "senseId": "w:duty#s2",
-      "pos": "短语",
-      "glossZh": "值班；执勤",
-      "pronunciationId": "w:duty#p-main",
-      "note": "on duty，反义为 off duty。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:duty#e-383aa1a64c2a086b",
-          "text": "I managed to get to a gas station, but it was Sunday in the early fall, and there was no __42__ on duty.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 99,
-            "end": 103
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:duty#s3",
       "pos": "n.",
       "glossZh": "税；关税",
@@ -172,6 +138,12 @@
       "reason": "专门或历史用法和专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:off-duty",
+    "w:on-duty"
+  ]
 }

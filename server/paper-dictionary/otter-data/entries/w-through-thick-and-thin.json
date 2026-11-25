@@ -1,0 +1,98 @@
+{
+  "entryId": "w:through-thick-and-thin",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "through",
+      "thick",
+      "and",
+      "thin"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "through",
+        "thick",
+        "and",
+        "thin"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "through thick and thin",
+  "senses": [
+    {
+      "senseId": "w:through-thick-and-thin#s1",
+      "pos": "短语",
+      "glossZh": "不论顺境逆境；不畏艰难始终坚持",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:thick#s7",
+        "w:thin#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:through-thick-and-thin#e-9c08961333aa3c23",
+          "text": "Through thick and thin, Dion and Gobi survived together and had no intentions of parting ways at the finish line.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 22
+          },
+          "parts": [
+            [
+              0,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              22
+            ]
+          ]
+        }
+      ],
+      "note": "形容彼此支持时，可译为「同甘共苦；不离不弃」。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

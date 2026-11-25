@@ -1,0 +1,99 @@
+{
+  "entryId": "w:close-call",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "call"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "call"
+      ],
+      [
+        "close",
+        "calls"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "close calls",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close call",
+  "senses": [
+    {
+      "senseId": "w:close-call#s1",
+      "pos": "短语",
+      "glossZh": "差点出事的险情；有惊无险的一次经历",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-call#e-25896cd1ffc9b07b",
+          "text": "Mitchell worries about road safety, not her kids’ rule-following, admitting, “It’s chaotic out there, and I’ve had close calls.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 126
+          },
+          "parts": [
+            [
+              115,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              126
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:food-for-thought",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "food",
+      "for",
+      "thought"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "food",
+        "for",
+        "thought"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "food for thought",
+  "senses": [
+    {
+      "senseId": "w:food-for-thought#s1",
+      "pos": "短语",
+      "glossZh": "值得深思的事；引人思考的内容",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:food-for-thought#e-bc837360d86181ed",
+          "text": "The origin of potatoes offers much food for thought.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 51
+          },
+          "parts": [
+            [
+              35,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:food-for-thought#e-6c5aeffc434b7446",
+          "text": "To bring food for thought to the readers.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 25
+          },
+          "parts": [
+            [
+              9,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

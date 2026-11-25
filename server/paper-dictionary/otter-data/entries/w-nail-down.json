@@ -1,0 +1,93 @@
+{
+  "entryId": "w:nail-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nail",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nail",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nail down",
+  "senses": [
+    {
+      "senseId": "w:nail-down#s1",
+      "pos": "短语",
+      "glossZh": "确定；敲定",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nail#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:nail-down#e-8320b09d09fe079f",
+          "text": "Instead of trying to nail down that number, we would be better served focusing on an ecosystem’s functions; that is, keeping the plane in the sky, rather than saving every rivet.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常接数字、细节或安排。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

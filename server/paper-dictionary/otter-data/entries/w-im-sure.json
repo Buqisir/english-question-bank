@@ -1,0 +1,181 @@
+{
+  "entryId": "w:im-sure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I'm sure"
+  ],
+  "pattern": {
+    "tokens": [
+      "i'm",
+      "sure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i'm",
+        "sure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i'm sure",
+  "senses": [
+    {
+      "senseId": "w:im-sure#s1",
+      "pos": "短语",
+      "glossZh": "我确信；我很肯定",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:im-sure#e-3f2739b98dd23533",
+          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          },
+          "parts": [
+            [
+              11,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:im-sure#e-e75ef8c6a3ab1c99",
+          "text": "Mom kissed me good night and said softly, “I’m sure everything will turn out fine.”",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          },
+          "parts": [
+            [
+              43,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:im-sure#e-b684dcfd539f91bc",
+          "text": "Now I’m sure you thought the coin was in this hand.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          },
+          "parts": [
+            [
+              4,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:im-sure#s2",
+      "pos": "短语",
+      "glossZh": "当然啦；行了，我知道了（带讽刺语气）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:im-sure#s3",
+      "pos": "短语",
+      "glossZh": "才不是；我才没有",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧的反驳用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

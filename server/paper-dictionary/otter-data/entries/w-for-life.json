@@ -1,0 +1,155 @@
+{
+  "entryId": "w:for-life",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "life"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "life"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for life",
+  "senses": [
+    {
+      "senseId": "w:for-life#s1",
+      "pos": "短语",
+      "glossZh": "一辈子；终身",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:life#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:for-life#e-5816ba00d5438cff",
+          "text": "“There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 174
+          },
+          "parts": [
+            [
+              166,
+              174
+            ]
+          ],
+          "highlightRanges": [
+            [
+              166,
+              174
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-life#e-d2df08fc3f6c9a8c",
+          "text": "你校英语报的Weekly Talk栏目发布了一个辩题“Housework: A distraction or a lesson for life”，现面向全校征稿。请你写一篇短文投稿，内容包括：",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-application",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-application:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          },
+          "parts": [
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:for-life#e-83ec38daab77f89e",
+          "text": "Books are for life, not for shelves.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zj-taizhou-2026-m2:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

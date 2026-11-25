@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 18
+    "mock": 8
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -194,7 +194,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -332,7 +332,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -375,40 +375,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:pot#s7",
-      "pos": "短语",
-      "glossZh": "多种文化等相互交融的地方",
-      "pronunciationId": "w:pot#p-main",
-      "note": "melting pot。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pot#e-87f7ac1e7c95babf",
-          "text": "People often describe New York as a melting pot of cultures, but it’s __51__ to know that in this busy city, there’s also a place for me and the language I __52__ inside.",
-          "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
-            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:cloze:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 44,
-            "end": 47
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -425,6 +391,11 @@
       "reason": "电子术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:melting-pot"
+  ]
 }

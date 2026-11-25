@@ -70,8 +70,8 @@
     "mock": 230
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 225
+    "gaokao": 4,
+    "mock": 32
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 73
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -187,7 +187,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -255,12 +255,12 @@
       "pos": "adj.",
       "glossZh": "暖色的",
       "pronunciationId": "w:warm#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -271,7 +271,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -304,7 +304,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -349,52 +349,37 @@
       ]
     },
     {
-      "senseId": "w:warm#s7",
-      "pos": "短语",
-      "glossZh": "热身",
+      "senseId": "w:warm#s9",
+      "pos": "adj.",
+      "glossZh": "接近目标或答案的",
       "pronunciationId": "w:warm#p-main",
-      "note": "warm up。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:warm#e-361bf4d45cb7df35",
-          "text": "Students from seven different primary schools in and around the small town were warming up and walking the route(路线)through thick evergreen forest.",
+          "exampleId": "w:warm#e-614da1b676016019",
+          "text": "They are distinct from analytical thinking, like doing formulaic algebra (代数), where solutions emerge gradually as if you’re getting warmer.",
           "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:seven-choices",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "writing-continuation-2",
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:seven-choices:2",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 80,
-            "end": 87
+            "start": 133,
+            "end": 139
           }
         }
       ]
-    },
-    {
-      "senseId": "w:warm#s8",
-      "pos": "短语",
-      "glossZh": "逐渐喜欢上",
-      "pronunciationId": "w:warm#p-main",
-      "note": "warm to sb/sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -403,6 +388,12 @@
       "reason": "专门用法或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:warm-to-sb-sth",
+    "w:warm-up"
+  ]
 }

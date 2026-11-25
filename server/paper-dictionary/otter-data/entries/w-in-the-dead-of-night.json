@@ -1,0 +1,66 @@
+{
+  "entryId": "w:in-the-dead-of-night",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "dead",
+      "of",
+      "night"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "dead",
+        "of",
+        "night"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the dead of night",
+  "senses": [
+    {
+      "senseId": "w:in-the-dead-of-night#s1",
+      "pos": "短语",
+      "glossZh": "在夜深人静时",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:dead#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

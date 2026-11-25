@@ -1,0 +1,107 @@
+{
+  "entryId": "w:power-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "power",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "power",
+        "on"
+      ],
+      [
+        "powered",
+        "on"
+      ],
+      [
+        "powering",
+        "on"
+      ],
+      [
+        "powers",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "power on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "power (sth) on",
+  "senses": [
+    {
+      "senseId": "w:power-on#s1",
+      "pos": "短语",
+      "glossZh": "接通电源；启动设备",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:power-on#e-7d20308f2e94e0e2",
+          "text": "Finally, power on the device using the Micro USB cable connected to a 5V/2A power adapter.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          },
+          "parts": [
+            [
+              9,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

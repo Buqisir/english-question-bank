@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 194
+    "mock": 0
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 41,
-        "mock": 0
+        "mock": 191
       },
       "folded": false,
       "examples": [
@@ -146,12 +146,12 @@
       "glossZh": "创始人",
       "pronunciationId": "w:father#p-main",
       "note": "the father of sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -188,6 +188,9 @@
       "reason": "旧式技术义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:like-father-like-son"
+  ]
 }

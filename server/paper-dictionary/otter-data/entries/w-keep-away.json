@@ -1,0 +1,85 @@
+{
+  "entryId": "w:keep-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping away"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "away"
+      ],
+      [
+        "keeping",
+        "away"
+      ],
+      [
+        "keeps",
+        "away"
+      ],
+      [
+        "kept",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:keep-away#s1",
+      "pos": "短语",
+      "glossZh": "远离；别靠近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-away#s2",
+      "pos": "短语",
+      "glossZh": "使……远离；阻止……靠近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

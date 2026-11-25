@@ -61,8 +61,8 @@
     "mock": 371
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 371
+    "gaokao": 13,
+    "mock": 192
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 129
       },
       "folded": false,
       "examples": [
@@ -208,93 +208,6 @@
       ]
     },
     {
-      "senseId": "w:allow#s3",
-      "pos": "短语",
-      "glossZh": "使……成为可能",
-      "pronunciationId": "w:allow#p-main",
-      "note": "allow for sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:allow#e-bc911ccf5142e5dd",
-          "text": "The train’s equipment allows for basic checkups.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:allow#e-d044574689005434",
-          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 121,
-            "end": 126
-          }
-        },
-        {
-          "exampleId": "w:allow#e-59ea2418e139d1f0",
-          "text": "This capability allows for timely restoration.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-i:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:allow#s4",
-      "pos": "短语",
-      "glossZh": "考虑到；为……预留余地",
-      "pronunciationId": "w:allow#p-main",
-      "note": "allow for sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:allow#s5",
       "pos": "v.",
       "glossZh": "（条件等）容许",
@@ -334,6 +247,11 @@
       "reason": "较正式，常见于旧式叙述"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:allow-for-sth"
+  ]
 }

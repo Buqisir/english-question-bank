@@ -1,0 +1,67 @@
+{
+  "entryId": "w:in-the-middle-of-nowhere",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "middle",
+      "of",
+      "nowhere"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "middle",
+        "of",
+        "nowhere"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the middle of nowhere",
+  "senses": [
+    {
+      "senseId": "w:in-the-middle-of-nowhere#s1",
+      "pos": "短语",
+      "glossZh": "在偏僻、少有人烟的地方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:middle#s6",
+        "w:nowhere#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

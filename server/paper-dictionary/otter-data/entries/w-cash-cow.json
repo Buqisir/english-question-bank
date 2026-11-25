@@ -1,0 +1,93 @@
+{
+  "entryId": "w:cash-cow",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cash",
+      "cow"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cash",
+        "cow"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cash cow",
+  "senses": [
+    {
+      "senseId": "w:cash-cow#s1",
+      "pos": "短语",
+      "glossZh": "摇钱树；持续赚钱的产品或业务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cash#s4",
+        "w:cow#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cash-cow#e-fc949a6d07424722",
+          "text": "“They don’t want to lose their cash cow, so they’re willing to put millions into fighting government restrictions on UPFs as well as funding nutritionists to voice evidence of their harmlessness,” Popkin said.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          },
+          "parts": [
+            [
+              31,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

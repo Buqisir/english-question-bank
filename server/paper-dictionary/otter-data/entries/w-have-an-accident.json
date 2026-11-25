@@ -1,0 +1,157 @@
+{
+  "entryId": "w:have-an-accident",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "an",
+      "accident"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "an",
+        "accident"
+      ],
+      [
+        "had",
+        "an",
+        "accident"
+      ],
+      [
+        "has",
+        "an",
+        "accident"
+      ],
+      [
+        "having",
+        "an",
+        "accident"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had an accident",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have an accident",
+  "senses": [
+    {
+      "senseId": "w:have-an-accident#s1",
+      "pos": "短语",
+      "glossZh": "出事故；遭遇意外",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-an-accident#e-27c44e3b8004e0af",
+          "text": "Then I was worried that he’d had an accident or had run into trouble of some kind.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 44
+          },
+          "parts": [
+            [
+              29,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-an-accident#e-14437930252aa711",
+          "text": "Who had an accident?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 19
+          },
+          "parts": [
+            [
+              4,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:have-an-accident#s2",
+      "pos": "短语",
+      "glossZh": "不小心尿湿或弄脏裤子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "委婉用语，常用于小孩。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

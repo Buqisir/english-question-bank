@@ -59,8 +59,8 @@
     "mock": 385
   },
   "unassignedCounts": {
-    "gaokao": 10,
-    "mock": 379
+    "gaokao": 18,
+    "mock": 222
   },
   "senses": [
     {
@@ -68,12 +68,12 @@
       "pos": "n.",
       "glossZh": "得分",
       "pronunciationId": "w:point#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 16
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -156,7 +156,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -279,7 +279,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -353,7 +353,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -405,7 +405,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -470,7 +470,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -542,7 +542,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -660,160 +660,119 @@
       ]
     },
     {
-      "senseId": "w:point#s12",
-      "pos": "短语",
-      "glossZh": "指出",
+      "senseId": "w:point#s15",
+      "pos": "n.",
+      "glossZh": "数据点；单条观测值",
       "pronunciationId": "w:point#p-main",
-      "note": "point out。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 6,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 5
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:point#e-ca129a8f8ff4b7e7",
-          "text": "It is not my intention to point out the central theme of each of the plays in this collection, for that would, indeed, ruin the pleasure of reading, discussing, and thinking about the plays and the effectiveness of the playwright.",
+          "exampleId": "w:point#e-90d6187390d937fd",
+          "text": "She began plotting thousands of data points, a painstaking process that required a mix of mathematical skill and artistic intuition.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
-              "sentence": 3
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 6
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 31
+            "start": 37,
+            "end": 43
           }
         },
         {
-          "exampleId": "w:point#e-400936a1653f68fa",
-          "text": "What phenomenon does the author point out in paragraph 1?",
+          "exampleId": "w:point#e-cdaafebeff040960",
+          "text": "Rather than offering separate data points, these devices track how small changes build up over time, revealing behavioral patterns that shape overall health trends.",
           "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-c",
             "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2025-i:28",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:point#e-26e5bedda173fb6d",
+          "text": "“Globally, if we don’t anchor AI development to what makes us human – our capacity to choose, to feel, to reason with care, for empathy and compassion – we risk creating systems that devalue and flatten humanity into data points, rather than improve the human condition,” she said.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:4",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 32,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:point#e-f3eb5dea1614d1c7",
-          "text": "Though many companies use algorithms (算法) to weed out fake reviews, Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 80
+            "start": 222,
+            "end": 228
           }
         }
       ]
     },
     {
-      "senseId": "w:point#s13",
+      "senseId": "w:point#s16",
       "pos": "短语",
-      "glossZh": "观点",
+      "glossZh": "联系人；联络窗口（point of contact）",
       "pronunciationId": "w:point#p-main",
-      "note": "point of view。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:point#s17",
+      "pos": "n.",
+      "glossZh": "价位（price point）",
+      "pronunciationId": "w:point#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:point#e-8a1df0df05edc23d",
-          "text": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "exampleId": "w:point#e-1b4b2a365bddff32",
+          "text": "By issuing unlimited basics to meet every consumer’s price point.",
           "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:point#e-98bcc9b7f3ac21f8",
-          "text": "Audrey Sabbagh, an associate professor at Paris City University, once asked, “Can we consider research that is not ethical from an environmental point of view to be excellent?” That question stayed with me.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:3",
-              "sentence": 2
+              "question": 31,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:31",
+              "option": "D",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 145,
-            "end": 150
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:point#s14",
-      "pos": "短语",
-      "glossZh": "特意做某事",
-      "pronunciationId": "w:point#p-main",
-      "note": "make it a point。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:point#e-8a7e322ed6cc21b7",
-          "text": "My parents made it a point for their two kids to spend time outside, no matter the weather or season.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 33
+            "start": 59,
+            "end": 64
           }
         }
       ]
@@ -825,6 +784,23 @@
       "reason": "固定地名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:beside-the-point",
+    "w:breaking-point",
+    "w:case-in-point",
+    "w:entry-point",
+    "w:high-point",
+    "w:make-it-a-point-to-do",
+    "w:make-ones-point",
+    "w:miss-the-point",
+    "w:point-of-view",
+    "w:point-out",
+    "w:selling-point",
+    "w:tipping-point",
+    "w:turning-point"
+  ]
 }

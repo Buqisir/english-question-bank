@@ -1,0 +1,68 @@
+{
+  "entryId": "w:in-character",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "character"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "character"
+      ],
+      [
+        "more",
+        "in",
+        "character"
+      ],
+      [
+        "most",
+        "in",
+        "character"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in character",
+  "senses": [
+    {
+      "senseId": "w:in-character#s1",
+      "pos": "短语",
+      "glossZh": "符合某人一贯的性格或作风",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

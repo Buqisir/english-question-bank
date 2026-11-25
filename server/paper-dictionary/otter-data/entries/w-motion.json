@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 47
+    "mock": 5
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -224,134 +224,13 @@
       "pos": "v.",
       "glossZh": "用手势示意",
       "pronunciationId": "w:motion#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
-    },
-    {
-      "senseId": "w:motion#s5",
-      "pos": "短语",
-      "glossZh": "使开始运转；启动",
-      "pronunciationId": "w:motion#p-main",
-      "note": "set sth in motion。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:motion#e-2f3f1ad3185fa077",
-          "text": "With a heart full of excitement, I set my plan in motion.",
-          "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
-            "paperTitle": "厦门市2026届高中毕业班模拟测试",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 56
-          }
-        },
-        {
-          "exampleId": "w:motion#e-074b82b0ce335e3b",
-          "text": "These findings set a three-year project led by Lambrecht to document what was left of HSL into motion.",
-          "source": {
-            "paperId": "paper-mock-hubei-mingxiao-2025-09",
-            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
-            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 95,
-            "end": 101
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:motion#s6",
-      "pos": "短语",
-      "glossZh": "敷衍了事",
-      "pronunciationId": "w:motion#p-main",
-      "note": "go through the motions。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:motion#e-966bf774a7bdeabc",
-          "text": "It often comes across as going through the motions of life without truly connecting to it.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 43,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:motion#s7",
-      "pos": "短语",
-      "glossZh": "电影",
-      "pronunciationId": "w:motion#p-main",
-      "note": "motion picture。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:motion#e-57bf72ab211d041e",
-          "text": "A motion picture formed in my head – the pumper, shiny and new, rolling down Main Street in the annual parade（游行）.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -360,6 +239,11 @@
       "reason": "历史或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:set-sth-in-motion"
+  ]
 }

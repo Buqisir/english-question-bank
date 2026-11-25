@@ -1,0 +1,302 @@
+{
+  "entryId": "w:send-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sending out"
+  ],
+  "pattern": {
+    "tokens": [
+      "send",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "send",
+        "out"
+      ],
+      [
+        "sending",
+        "out"
+      ],
+      [
+        "sends",
+        "out"
+      ],
+      [
+        "sent",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "send out",
+      "tags": []
+    },
+    {
+      "form": "sends out",
+      "tags": []
+    },
+    {
+      "form": "sent out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "send (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:send-out#s1",
+      "pos": "短语",
+      "glossZh": "寄出；发送",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:send-out#e-74a3a48a9939d5a7",
+          "text": "In the past year, Detrinidad sent out more than 70,000 plants.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-out#e-ba224ab6b89f1ee8",
+          "text": "To send out some samples.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-out#e-0da874b706b8d7ff",
+          "text": "As a very shy writer who had been sending out manuscripts (手稿) for years, I couldn’t decide what scared me more: never getting published, or finally getting published and having to talk about my book in front of people.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 45
+          },
+          "parts": [
+            [
+              34,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              45
+            ]
+          ]
+        }
+      ],
+      "note": "可接货物、稿件、通知等。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:send-out#s2",
+      "pos": "短语",
+      "glossZh": "发出（光、信号等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:send-out#e-115219316766d674",
+          "text": "In the coral reefs (珊瑚礁) of the Pacific, researchers observed corals sending out green under blue light.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 80
+          },
+          "parts": [
+            [
+              69,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-out#e-86e8db66209b2f31",
+          "text": "Similarly, pine trees attacked by beetles send out warning signals through fungal networks, pushing neighbors to boost defensive resins (树脂).",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:send-out#e-acee10da0ecf7032",
+          "text": "It sends out laser light.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:send-out#s3",
+      "pos": "短语",
+      "glossZh": "派出（人员）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

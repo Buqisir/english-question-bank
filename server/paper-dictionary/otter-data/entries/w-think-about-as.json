@@ -1,0 +1,193 @@
+{
+  "entryId": "w:think-about-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "think about ... as"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "about",
+      {
+        "slot": "…"
+      },
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "about",
+        {
+          "slot": "…"
+        },
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "think about as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think about … as",
+  "senses": [
+    {
+      "senseId": "w:think-about-as#s1",
+      "pos": "短语",
+      "glossZh": "把……看作……；把……理解为……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:think#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:think-about-as#e-3aea31285e528e40",
+          "text": "It’s important to slow down and think about food as something nutritious rather than just something to eat in between meetings.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 51
+          },
+          "parts": [
+            [
+              32,
+              43
+            ],
+            [
+              49,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ],
+            [
+              49,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-about-as#e-9d763a4e472c945f",
+          "text": "To me, it’s far more useful to think about patience as something we do rather than something we have.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 54
+          },
+          "parts": [
+            [
+              31,
+              42
+            ],
+            [
+              52,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ],
+            [
+              52,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-about-as#e-7425d156eff6575a",
+          "text": "Anyway, more people now think about nature as a dynamic system rather than as a stable landscape – a lasting legacy of the ecological trial.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 45
+          },
+          "parts": [
+            [
+              24,
+              35
+            ],
+            [
+              43,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              35
+            ],
+            [
+              43,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

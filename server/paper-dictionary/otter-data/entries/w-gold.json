@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 48
+    "mock": 12
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -106,7 +106,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -158,7 +158,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -210,7 +210,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -274,73 +274,34 @@
       ]
     },
     {
-      "senseId": "w:gold#s5",
-      "pos": "短语",
-      "glossZh": "公认的最高标准",
+      "senseId": "w:gold#s6",
+      "pos": "adj.",
+      "glossZh": "金奖级的；最高等级的",
       "pronunciationId": "w:gold#p-main",
-      "note": "gold standard。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:gold#e-de00aee4855f0638",
-          "text": "ECMWF’s forecasting model is considered the gold standard for medium-term weather forecasting (up to 15 days ahead).",
+          "exampleId": "w:gold#e-4ae86263f1ab5a10",
+          "text": "The awards are categorized into 4 types: Gold Prize (1 winner) with ¥30,000 prize money; Silver Prize (2 winners) with ¥20,000; Bronze Prize (3 winners) with ¥10,000; 10 Outstanding Prize winners with an award.",
           "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:4",
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a:12",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 44,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:gold#e-3bdf0e5bfa361be8",
-          "text": "However, a new working paper by Dr. Alp Sungu of the University of Pennsylvania offers convincing evidence from a large-scale randomized controlled trial (RCT) – the gold standard in social science.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
-            "paperTitle": "2026届广州市高三年级调研测试英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 166,
-            "end": 170
-          }
-        },
-        {
-          "exampleId": "w:gold#e-cfa80feedaa6d06e",
-          "text": "In January, Kristian Blummenfelt, a triathlete, had recorded the highest-ever VO₂ max score – the gold standard for measuring cardio respiratory fitness (CRF).",
-          "source": {
-            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
-            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 98,
-            "end": 102
+            "start": 41,
+            "end": 45
           }
         }
       ]
@@ -352,6 +313,14 @@
       "reason": "软件行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-for-the-gold",
+    "w:going-for-gold",
+    "w:gold-standard",
+    "w:heart-of-gold"
+  ]
 }

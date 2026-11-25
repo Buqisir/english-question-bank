@@ -1,0 +1,106 @@
+{
+  "entryId": "w:that-being-said",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "that",
+      "being",
+      "said"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "that",
+        "being",
+        "said"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "that being said",
+  "senses": [
+    {
+      "senseId": "w:that-being-said#s1",
+      "pos": "短语",
+      "glossZh": "话虽如此；不过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:that-being-said#e-e13f06f17f95eb56",
+          "text": "But that being said, spending time in Kuittinen’s design doesn’t mean roughing it.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 19
+          },
+          "parts": [
+            [
+              4,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:that-being-said#s2",
+      "pos": "短语",
+      "glossZh": "说完这一点；接下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于结束前一个话题或引出补充说明。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

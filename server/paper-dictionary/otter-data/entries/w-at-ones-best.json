@@ -1,0 +1,153 @@
+{
+  "entryId": "w:at-ones-best",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "at one’s best"
+  ],
+  "pattern": {
+    "tokens": [
+      "at",
+      {
+        "slot": "one's"
+      },
+      "best"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        {
+          "slot": "one's"
+        },
+        "best"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "at best",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at one's best",
+  "senses": [
+    {
+      "senseId": "w:at-ones-best#s1",
+      "pos": "固定短语",
+      "glossZh": "处于最佳状态；展现最高水平",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s29",
+        "w:best#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-ones-best#e-fd5d60b1df0093e8",
+          "text": "Culinary theater at its best.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              19
+            ],
+            [
+              24,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              19
+            ],
+            [
+              24,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-ones-best#e-871765f3e399c001",
+          "text": "It’s true that the filters got much better: technologies such as Amazon’s recommendation engine are an excellent way to discover things to read, while social media, at its best, is like having thousands of unpaid assistants searching the globe for content you’re likely to find particularly fascinating.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 165,
+            "end": 176
+          },
+          "parts": [
+            [
+              165,
+              167
+            ],
+            [
+              172,
+              176
+            ]
+          ],
+          "highlightRanges": [
+            [
+              165,
+              167
+            ],
+            [
+              172,
+              176
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

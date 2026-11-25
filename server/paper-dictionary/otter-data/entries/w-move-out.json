@@ -1,0 +1,185 @@
+{
+  "entryId": "w:move-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moving out"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "out"
+      ],
+      [
+        "moving",
+        "out"
+      ],
+      [
+        "moved",
+        "out"
+      ],
+      [
+        "moves",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "moved out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move out",
+  "senses": [
+    {
+      "senseId": "w:move-out#s1",
+      "pos": "短语",
+      "glossZh": "搬出去；搬离原来的住处或办公地点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-out#e-7a0b2419fb07c675",
+          "text": "So, it’s been useful to know how to cover up holes and repaint a room to avoid any charges when I’ve moved out.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 110
+          },
+          "parts": [
+            [
+              101,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-out#e-03312607b0f1849d",
+          "text": "After college, Smith moved out to California with his eyes set on a bodybuilding career.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          },
+          "parts": [
+            [
+              21,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-out#e-255aa9b29e77a8f0",
+          "text": "Why is the woman thinking about moving out of the neighbourhood?",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:move-out#s2",
+      "pos": "短语",
+      "glossZh": "离开原地；撤离",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用于队伍离开驻地。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

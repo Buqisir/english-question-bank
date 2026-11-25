@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -155,41 +155,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:nut#s5",
-      "pos": "短语",
-      "glossZh": "棘手的人或事",
-      "pronunciationId": "w:nut#p-main",
-      "note": "a hard nut to crack。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nut#e-59a74a86542fc1ec",
-          "text": "A hard nut to crack.",
-          "source": {
-            "paperId": "paper-mock-zj-2026-03-m171",
-            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
-            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-mock-zj-2026-03-m171:26",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 10
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -198,6 +163,11 @@
       "reason": "同形专名或缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-hard-nut-to-crack"
+  ]
 }

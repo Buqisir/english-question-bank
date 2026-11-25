@@ -1,0 +1,113 @@
+{
+  "entryId": "w:waste-no-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "waste",
+      "no",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "waste",
+        "no",
+        "time"
+      ],
+      [
+        "wasted",
+        "no",
+        "time"
+      ],
+      [
+        "wastes",
+        "no",
+        "time"
+      ],
+      [
+        "wasting",
+        "no",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wasted no time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "waste no time",
+  "senses": [
+    {
+      "senseId": "w:waste-no-time#s1",
+      "pos": "短语",
+      "glossZh": "毫不耽搁地做某事；立即行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:waste-no-time#e-6399bcca891ee522",
+          "text": "Sarah arrived precisely at 2:00 p. m. She wasted no time getting down to business, reviewing the contract with Mr. Hopkins.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 56
+          },
+          "parts": [
+            [
+              42,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "常用 waste no time (in) doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

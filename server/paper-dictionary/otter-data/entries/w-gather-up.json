@@ -1,0 +1,97 @@
+{
+  "entryId": "w:gather-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "gather",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "gather",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gathered up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "gather sth up",
+  "senses": [
+    {
+      "senseId": "w:gather-up#s1",
+      "pos": "短语",
+      "glossZh": "收拢；拿齐（物品）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s84"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:gather-up#e-243be5ff84ca2a9a",
+          "text": "I gathered up my wallet and room key and set off.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 13
+          },
+          "parts": [
+            [
+              2,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

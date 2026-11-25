@@ -1,0 +1,185 @@
+{
+  "entryId": "w:lie-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lying around"
+  ],
+  "pattern": {
+    "tokens": [
+      "lie",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lie",
+        "around"
+      ],
+      [
+        "lying",
+        "around"
+      ],
+      [
+        "lain",
+        "around"
+      ],
+      [
+        "lay",
+        "around"
+      ],
+      [
+        "lies",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lie around",
+  "senses": [
+    {
+      "senseId": "w:lie-around#s1",
+      "pos": "短语",
+      "glossZh": "闲躺着；无所事事地待着",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-around#e-f72fb3e1f2899ec9",
+          "text": "That was the moment I figured out that resting to recover would require a great deal more time spent lying around than I had expected.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 113
+          },
+          "parts": [
+            [
+              101,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              113
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-around#e-9d6e4de5eb1744e7",
+          "text": "He had spent longer and longer simply lying around.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lie-around#s2",
+      "pos": "短语",
+      "glossZh": "（东西）随手放在一旁；随处搁着",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-around#e-a601946c3d9104b2",
+          "text": "Leave them lying around.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:30#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

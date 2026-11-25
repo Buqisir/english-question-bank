@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-particular",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "particular"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "particular"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in particular",
+  "senses": [
+    {
+      "senseId": "w:in-particular#s1",
+      "pos": "短语",
+      "glossZh": "尤其；特别是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s22",
+        "w:particular#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-particular#e-a45f848ce2ecb822",
+          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 100
+          },
+          "parts": [
+            [
+              87,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-particular#e-6f1f2e2d39f87fe5",
+          "text": "Jane Jacobs spent her working life advancing a distinct vision of the city – in particular focusing on what makes a successful urban community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 90
+          },
+          "parts": [
+            [
+              77,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-particular#e-27b345ed931885e2",
+          "text": "Vibe coding, in particular, exemplifies how AI is transforming our interaction with technology.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

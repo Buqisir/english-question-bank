@@ -1,0 +1,65 @@
+{
+  "entryId": "w:a-shadow-of-doubt",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "shadow",
+      "of",
+      "doubt"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "shadow",
+        "of",
+        "doubt"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a shadow of doubt",
+  "senses": [
+    {
+      "senseId": "w:a-shadow-of-doubt#s1",
+      "pos": "短语",
+      "glossZh": "一丝疑虑；丝毫的怀疑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shadow#s5"
+      ],
+      "examples": [],
+      "note": "without a shadow of doubt 表示毫无疑问。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

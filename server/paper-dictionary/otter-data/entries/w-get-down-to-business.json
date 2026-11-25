@@ -1,0 +1,120 @@
+{
+  "entryId": "w:get-down-to-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting down to business"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "down",
+      "to",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "down",
+        "to",
+        "business"
+      ],
+      [
+        "getting",
+        "down",
+        "to",
+        "business"
+      ],
+      [
+        "gets",
+        "down",
+        "to",
+        "business"
+      ],
+      [
+        "got",
+        "down",
+        "to",
+        "business"
+      ],
+      [
+        "gotten",
+        "down",
+        "to",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get down to business",
+  "senses": [
+    {
+      "senseId": "w:get-down-to-business#s1",
+      "pos": "短语",
+      "glossZh": "进入正题；开始认真办正事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-down-to-business#e-6399bcca891ee522",
+          "text": "Sarah arrived precisely at 2:00 p. m. She wasted no time getting down to business, reviewing the contract with Mr. Hopkins.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 81
+          },
+          "parts": [
+            [
+              57,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

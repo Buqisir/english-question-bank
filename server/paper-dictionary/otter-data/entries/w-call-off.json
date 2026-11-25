@@ -1,0 +1,179 @@
+{
+  "entryId": "w:call-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "calling off"
+  ],
+  "pattern": {
+    "tokens": [
+      "call",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "call",
+        "off"
+      ],
+      [
+        "call",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "calling",
+        "off"
+      ],
+      [
+        "called",
+        "off"
+      ],
+      [
+        "calls",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "call off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:call-off#s1",
+      "pos": "短语",
+      "glossZh": "取消（会议、比赛等）；叫停（行动）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:call#s7",
+        "w:off#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:call-off#e-046dc9b3b3204146",
+          "text": "To call off a meeting.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:call-off#e-097631f400638885",
+          "text": "Call off the appointment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:call-off#s2",
+      "pos": "短语",
+      "glossZh": "叫回（正在追赶或攻击的人或动物）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-off#s3",
+      "pos": "短语",
+      "glossZh": "打电话请假不上班",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美国英语地区用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

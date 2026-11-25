@@ -1,0 +1,61 @@
+{
+  "entryId": "w:its-a-pleasure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it's",
+      "a",
+      "pleasure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it's",
+        "a",
+        "pleasure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it's a pleasure",
+  "senses": [
+    {
+      "senseId": "w:its-a-pleasure#s1",
+      "pos": "短语",
+      "glossZh": "不客气；我很乐意帮忙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于回应道谢。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

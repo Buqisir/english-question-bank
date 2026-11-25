@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 1144
+    "mock": 944
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 94,
-        "mock": 0
+        "mock": 179
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 50,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -397,6 +397,9 @@
       "reason": "g37 搭配混用，此处通常用 when in trouble"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:where-are-you-from"
+  ]
 }

@@ -62,8 +62,8 @@
     "mock": 798
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 797
+    "gaokao": 46,
+    "mock": 685
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -178,7 +178,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 26,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -444,7 +444,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -470,665 +470,285 @@
       ]
     },
     {
-      "senseId": "w:turn#s8",
-      "pos": "短语",
-      "glossZh": "轮流",
+      "senseId": "w:turn#s23",
+      "pos": "n.",
+      "glossZh": "方向的转变",
       "pronunciationId": "w:turn#p-main",
-      "note": "take turns。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:turn#e-b0a6f703c5850d9e",
-          "text": "Our daughters and I took turns in feeding “Squirt.” Kaytlin took on the most responsibility.",
+          "exampleId": "w:turn#e-cb2e13738dd01dbd",
+          "text": "“As someone who’s always struggled with the morals of influencing, I love to see us taking a turn in a different direction.",
           "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s9",
-      "pos": "短语",
-      "glossZh": "结果是",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-41586d7b69f7c388",
-          "text": "By the time 250,000 were on the bridge, engineers noticed something terrible: the roadway was flattening under what turned out to be the heaviest load it had ever been asked to carry.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 116,
-            "end": 122
-          }
-        },
-        {
-          "exampleId": "w:turn#e-9bd884b31117f504",
-          "text": "It turns out that pet transporting pays quite well at about $30,000 per year before tax.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:turn#e-495612414157bb0d",
-          "text": "This training taught her to read and write her Chinese upside down – a skill that has turned out to be quite __50__, especially whenever we share the newspaper.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:4",
               "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 86,
-            "end": 92
+            "start": 93,
+            "end": 97
           }
         }
       ]
     },
     {
-      "senseId": "w:turn#s10",
+      "senseId": "w:turn#s24",
       "pos": "短语",
-      "glossZh": "借助",
+      "glossZh": "拒绝",
       "pronunciationId": "w:turn#p-main",
-      "note": "turn to sb/sth。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 5,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:turn#e-f600064d0432d0d0",
-          "text": "He turned to the __49__ department for help but was told that nothing would grow there.",
+          "exampleId": "w:turn#e-550b5977aa61019f",
+          "text": "The 25-year-old teacher, who turned down opportunities in bigger cities, now spends her days in a once-worn-out classroom at Drumright High School, earning barely $30,000 a year.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:turn#e-f1493b92c5e480ad",
-          "text": "They turned to overseas markets.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2022-national-b:33",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:turn#e-4826d8888e6700d9",
-          "text": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 94,
-            "end": 98
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s11",
-      "pos": "短语",
-      "glossZh": "打开（设备或供应）",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-a31c51c8d6525b9c",
-          "text": "When we turn on a light or switch on a TV or a computer we use energy and we need water to produce this energy.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:turn#e-1b2553233d039b93",
-          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s12",
-      "pos": "短语",
-      "glossZh": "关闭（设备或供应）",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-4d999907ac66ef92",
-          "text": "Thankfully, Jeff stayed calm and turned off the gas quickly.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 39
-          }
-        },
-        {
-          "exampleId": "w:turn#e-ac5f53f06b3d4235",
-          "text": "Turn it off for a while.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 13,
-              "questionId": "question:listening:13",
-              "option": "A",
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:2",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 0,
-            "end": 4
+            "start": 29,
+            "end": 35
           }
         }
       ]
     },
     {
-      "senseId": "w:turn#s13",
+      "senseId": "w:turn#s25",
       "pos": "短语",
-      "glossZh": "使失去兴趣",
+      "glossZh": "转折点",
       "pronunciationId": "w:turn#p-main",
-      "note": "turn sb off。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:turn#e-c2305101b53ba969",
-          "text": "Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+          "exampleId": "w:turn#e-5fee2eb41d2acc70",
+          "text": "What was the turning point in the artificial breeding program?",
           "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
-              "sentence": 4
+              "question": 25,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-10-second:25",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s14",
-      "pos": "短语",
-      "glossZh": "调低",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-372cdf214fcbcf79",
-          "text": "This time, she turned down the fire so it cooked nicely.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 11
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s15",
-      "pos": "短语",
-      "glossZh": "提交",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-e63df532d40d8065",
-          "text": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "reading-a-11",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
             "start": 13,
-            "end": 19
+            "end": 20
           }
         },
         {
-          "exampleId": "w:turn#e-ca418612cd08bd63",
-          "text": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+          "exampleId": "w:turn#e-025374ac103cb765",
+          "text": "The significant turning point came on a quiet afternoon when I chanced upon David in his room.",
           "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s16",
-      "pos": "短语",
-      "glossZh": "交给某人负责",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth over to sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-53d98feec1dde039",
-          "text": "Consider turning your travel plan over to a travel agent and letting him double-check all the details, make suggestions, and then handle the actual reservations.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s17",
-      "pos": "短语",
-      "glossZh": "转而产生相应结果",
-      "pronunciationId": "w:turn#p-main",
-      "note": "in turn。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-48633d6986367a7a",
-          "text": "I post my work on social media and, in turn, have met some of the kindest people.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:turn#e-eedc33474e1e6508",
-          "text": "These qualities, in turn, are mapped onto products that have been assigned a gender.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s18",
-      "pos": "短语",
-      "glossZh": "转身返回",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-d676214d12887630",
-          "text": "Lamb and mother __39__, I turned back to the tractor only to see it move suddenly away from me.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s19",
-      "pos": "短语",
-      "glossZh": "使时间倒退",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn the clock back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-072c8f4111c0b59f",
-          "text": "“We took these 50-year-old hearts and turned the clock back to 30-or 35-year-old hearts,” says Levine.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 38,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s20",
-      "pos": "短语",
-      "glossZh": "使情况好转",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth around。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-23d31595dc4c70dc",
-          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s21",
-      "pos": "短语",
-      "glossZh": "弄得一团乱",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn sth upside down。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-c6660a6e67e02451",
-          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:turn#s22",
-      "pos": "短语",
-      "glossZh": "不再采用",
-      "pronunciationId": "w:turn#p-main",
-      "note": "turn away from sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:turn#e-0fe5a6d199a0a3e3",
-          "text": "It’s thanks to these TV chefs rather than any advertising campaign that Britons are turning away from meat-and-two-veg and ready-made meals and becoming more adventurous in their cooking habits.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
             "locator": {
               "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:2",
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:2",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 84,
-            "end": 91
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn#s26",
+      "pos": "短语",
+      "glossZh": "出现",
+      "pronunciationId": "w:turn#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:turn#e-78e493fce559c3fa",
+          "text": "Traditional Chinese paper-cutting, once limited to window decorations during weddings and the Spring Festival, now is turning up in product design and art exhibitions far from home.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn#s27",
+      "pos": "短语",
+      "glossZh": "使转而反对",
+      "pronunciationId": "w:turn#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:turn#e-0183151bd7b7f702",
+          "text": "Heartwarming campaigns have turned shoemakers against kangaroo leather and weakened foreign appetite for the meat.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn#s28",
+      "pos": "短语",
+      "glossZh": "生产；制成",
+      "pronunciationId": "w:turn#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:turn#e-d35ad0e4bd153923",
+          "text": "Her works turn out the best models.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn#s29",
+      "pos": "v.",
+      "glossZh": "把（注意力）转向",
+      "pronunciationId": "w:turn#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:turn#e-997b1d43fe229109",
+          "text": "Jost, who is in charge of the carmaker’s critical move towards electrification, turns his attention to the waterfront.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:turn#s30",
+      "pos": "短语",
+      "glossZh": "突然攻击；反过来对付",
+      "pronunciationId": "w:turn#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:turn#e-53d07d8ea9dcc175",
+          "text": "However, these powerful digital assistants are turning on their owners, raising urgent concerns about AI safety.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-c:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
           }
         }
       ]
@@ -1140,6 +760,39 @@
       "reason": "行业或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-turn",
+    "w:take-a-turn",
+    "w:take-a-turn-for-the-worse",
+    "w:turn-a-blind-eye-to-sth",
+    "w:turn-a-deaf-ear-to-sth",
+    "w:turn-a-profit",
+    "w:turn-about",
+    "w:turn-against",
+    "w:turn-away",
+    "w:turn-away-from-sth",
+    "w:turn-back",
+    "w:turn-heads",
+    "w:turn-into",
+    "w:turn-off",
+    "w:turn-on-its-head",
+    "w:turn-out",
+    "w:turn-over",
+    "w:turn-sb-off",
+    "w:turn-sth-around",
+    "w:turn-sth-down",
+    "w:turn-sth-in",
+    "w:turn-sth-on",
+    "w:turn-sth-over-to-sb",
+    "w:turn-sth-upside-down",
+    "w:turn-the-clock-back",
+    "w:turn-the-corner",
+    "w:turn-the-page",
+    "w:turn-to-sb-sth",
+    "w:turn-up"
+  ]
 }

@@ -1,0 +1,84 @@
+{
+  "entryId": "w:run-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "run",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "by"
+      ],
+      [
+        "ran",
+        "by"
+      ],
+      [
+        "running",
+        "by"
+      ],
+      [
+        "runs",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run by",
+  "senses": [
+    {
+      "senseId": "w:run-by#s1",
+      "pos": "短语",
+      "glossZh": "把想法或计划告诉某人以征求意见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 run sth by sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-by#s2",
+      "pos": "短语",
+      "glossZh": "顺路去某处一趟",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

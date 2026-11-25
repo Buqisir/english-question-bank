@@ -1,0 +1,102 @@
+{
+  "entryId": "w:ground-zero",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ground",
+      "zero"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ground",
+        "zero"
+      ],
+      [
+        "ground",
+        "zeroes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ground zero",
+  "senses": [
+    {
+      "senseId": "w:ground-zero#s1",
+      "pos": "短语",
+      "glossZh": "爆炸中心点；空爆点正下方的地面位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ground-zero#s2",
+      "pos": "短语",
+      "glossZh": "灾难或冲突的中心地带",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ground-zero#s3",
+      "pos": "短语",
+      "glossZh": "某场运动、变化或问题的起点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ground-zero#s4",
+      "pos": "短语",
+      "glossZh": "纽约世界贸易中心双塔遗址",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "专名写作 Ground Zero。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

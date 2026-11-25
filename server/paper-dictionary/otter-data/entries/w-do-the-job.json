@@ -1,0 +1,82 @@
+{
+  "entryId": "w:do-the-job",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "did the job"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "the",
+      "job"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "the",
+        "job"
+      ],
+      [
+        "did",
+        "the",
+        "job"
+      ],
+      [
+        "does",
+        "the",
+        "job"
+      ],
+      [
+        "doing",
+        "the",
+        "job"
+      ],
+      [
+        "done",
+        "the",
+        "job"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do the job",
+  "senses": [
+    {
+      "senseId": "w:do-the-job#s1",
+      "pos": "短语",
+      "glossZh": "管用；足以达到目的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

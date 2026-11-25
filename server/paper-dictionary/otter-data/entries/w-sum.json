@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 8
+    "mock": 1
   },
   "senses": [
     {
@@ -241,35 +241,34 @@
       ]
     },
     {
-      "senseId": "w:sum#s5",
-      "pos": "短语",
-      "glossZh": "概括",
+      "senseId": "w:sum#s6",
+      "pos": "n.",
+      "glossZh": "中式点心（dim sum）",
       "pronunciationId": "w:sum#p-main",
-      "note": "sum up。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:sum#e-969dbc0a6fc1b87f",
-          "text": "Early in my teaching career, students complained about my accent, and my department chair once summed up my performance: Dr. Sun was a good teacher, but he had an accent.",
+          "exampleId": "w:sum#e-528d6c4e310f3247",
+          "text": "In my family, Saturday mornings were for dim sum (点心).",
           "source": {
-            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
-            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
-            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze",
             "locator": {
               "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:1",
-              "sentence": 2
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze:1",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 95,
-            "end": 101
+            "start": 45,
+            "end": 48
           }
         }
       ]
@@ -281,6 +280,11 @@
       "reason": "复合词或专有计量单位"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:sum-up"
+  ]
 }

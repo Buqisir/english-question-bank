@@ -1,0 +1,136 @@
+{
+  "entryId": "w:play-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing at"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "at"
+      ],
+      [
+        "playing",
+        "at"
+      ],
+      [
+        "played",
+        "at"
+      ],
+      [
+        "plays",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "played at",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play at",
+  "senses": [
+    {
+      "senseId": "w:play-at#s1",
+      "pos": "短语",
+      "glossZh": "把……当儿戏；不认真地做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-at#e-56548ea33b7303e6",
+          "text": "After university, having played at newspapers, I made the move to London to do it for real.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:play-at#s2",
+      "pos": "短语",
+      "glossZh": "（游戏中）假装扮演",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:play-at#s3",
+      "pos": "短语",
+      "glossZh": "（质问）到底在搞什么",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于 What are you playing at? 一类问句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

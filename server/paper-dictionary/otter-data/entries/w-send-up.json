@@ -1,0 +1,83 @@
+{
+  "entryId": "w:send-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "send",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "send",
+        "up"
+      ],
+      [
+        "sending",
+        "up"
+      ],
+      [
+        "sends",
+        "up"
+      ],
+      [
+        "sent",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "send sb/sth up",
+  "senses": [
+    {
+      "senseId": "w:send-up#s1",
+      "pos": "短语",
+      "glossZh": "夸张模仿以讽刺或取笑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:send-up#s2",
+      "pos": "短语",
+      "glossZh": "（美国俚语）把某人送进监狱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:take-a-seat",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "seat"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "seat"
+      ],
+      [
+        "taken",
+        "a",
+        "seat"
+      ],
+      [
+        "takes",
+        "a",
+        "seat"
+      ],
+      [
+        "taking",
+        "a",
+        "seat"
+      ],
+      [
+        "took",
+        "a",
+        "seat"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a seat",
+  "senses": [
+    {
+      "senseId": "w:take-a-seat#s1",
+      "pos": "短语",
+      "glossZh": "坐下；就座",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s35"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-seat#e-381b410d3ef81cab",
+          "text": "Take a seat for dinner.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "祈使句中常用来礼貌地请人坐下。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-a-seat#s2",
+      "pos": "短语",
+      "glossZh": "（运动员）下场坐替补席",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

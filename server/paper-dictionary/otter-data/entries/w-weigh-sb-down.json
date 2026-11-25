@@ -1,0 +1,195 @@
+{
+  "entryId": "w:weigh-sb-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "weigh",
+      {
+        "slot": "sb"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "weigh",
+        {
+          "slot": "sb"
+        },
+        "down"
+      ],
+      [
+        "weigh",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "weighed down",
+      "tags": []
+    },
+    {
+      "form": "weighing down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "weigh sb down",
+  "senses": [
+    {
+      "senseId": "w:weigh-sb-down#s1",
+      "pos": "短语",
+      "glossZh": "使人感到负担沉重；使人不堪重负",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:weigh#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:weigh-sb-down#e-5c8b8c78c7920f76",
+          "text": "The mismatch can boil down to the fact that we are weighed down by our day-to-day responsibilities, leaving our schedule packed.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:weigh-sb-down#e-64e038e822b9a20c",
+          "text": "“But you look like it’s weighing you down.”",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 41
+          },
+          "parts": [
+            [
+              24,
+              32
+            ],
+            [
+              37,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ],
+            [
+              37,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:weigh-sb-down#s2",
+      "pos": "短语",
+      "glossZh": "因重量压得人行动不便",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:weigh-sb-down#e-b39c8efa233a7971",
+          "text": "In the heavy summer heat, I watched an elderly woman struggle with a walker, weighed down with bags of groceries.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 89
+          },
+          "parts": [
+            [
+              77,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              89
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

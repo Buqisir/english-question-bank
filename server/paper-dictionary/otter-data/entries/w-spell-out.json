@@ -1,0 +1,245 @@
+{
+  "entryId": "w:spell-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spell",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spell",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "spell out",
+      "tags": []
+    },
+    {
+      "form": "spelled out",
+      "tags": []
+    },
+    {
+      "form": "spells out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spell (sth) out",
+  "senses": [
+    {
+      "senseId": "w:spell-out#s1",
+      "pos": "短语",
+      "glossZh": "详细说明；把……讲清楚",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:spell#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:spell-out#e-30647466404984f2",
+          "text": "When you talk with someone who takes a stand, ask them to give you a reason for their view and spell out their argument fully.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 104
+          },
+          "parts": [
+            [
+              95,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              104
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:spell-out#e-aa498a1226fa7d6e",
+          "text": "What does the underlined phrase “spell out” in paragraph 3 probably mean?",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:30",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:spell-out#s2",
+      "pos": "短语",
+      "glossZh": "逐个字母拼出；完整拼写",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:spell-out#e-c44e46d7054f7528",
+          "text": "Spell out the difficult words.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:spell-out#e-769dce1c78a03adb",
+          "text": "Spell out the difficult words",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:spell-out#e-646c689c3bdf20f1",
+          "text": "Notice how the first letter of each word in the sentence spells out the word “because”.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 67
+          },
+          "parts": [
+            [
+              57,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

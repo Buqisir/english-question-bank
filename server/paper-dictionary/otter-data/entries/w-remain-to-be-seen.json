@@ -1,0 +1,115 @@
+{
+  "entryId": "w:remain-to-be-seen",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "remains to be seen"
+  ],
+  "pattern": {
+    "tokens": [
+      "remain",
+      "to",
+      "be",
+      "seen"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "remain",
+        "to",
+        "be",
+        "seen"
+      ],
+      [
+        "remains",
+        "to",
+        "be",
+        "seen"
+      ],
+      [
+        "remained",
+        "to",
+        "be",
+        "seen"
+      ],
+      [
+        "remaining",
+        "to",
+        "be",
+        "seen"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "remain to be seen",
+  "senses": [
+    {
+      "senseId": "w:remain-to-be-seen#s1",
+      "pos": "短语",
+      "glossZh": "尚无定论；仍有待观察",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:remain-to-be-seen#e-abae56c29449730c",
+          "text": "It remains to be seen if Nima will be the breakthrough athlete he wants to be.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 21
+          },
+          "parts": [
+            [
+              3,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "常用 it remains to be seen whether/if ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

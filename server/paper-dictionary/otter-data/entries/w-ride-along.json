@@ -1,0 +1,75 @@
+{
+  "entryId": "w:ride-along",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ride",
+      "along"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ride",
+        "along"
+      ],
+      [
+        "ridden",
+        "along"
+      ],
+      [
+        "rides",
+        "along"
+      ],
+      [
+        "riding",
+        "along"
+      ],
+      [
+        "rode",
+        "along"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ride along",
+  "senses": [
+    {
+      "senseId": "w:ride-along#s1",
+      "pos": "短语",
+      "glossZh": "跟着别人一起乘车出行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "也可指随警员乘车巡逻。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 166
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 1
+        "mock": 167
       },
       "folded": false,
       "examples": [
@@ -202,6 +202,9 @@
       "reason": "体育、数学、历史或俚语用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:old-bag"
+  ]
 }

@@ -1,0 +1,83 @@
+{
+  "entryId": "w:fire-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fire",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fire",
+        "off"
+      ],
+      [
+        "fired",
+        "off"
+      ],
+      [
+        "fires",
+        "off"
+      ],
+      [
+        "firing",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fire sth off",
+  "senses": [
+    {
+      "senseId": "w:fire-off#s1",
+      "pos": "短语",
+      "glossZh": "迅速发出（消息、回复等）；连珠炮似地提出（问题等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fire-off#s2",
+      "pos": "短语",
+      "glossZh": "开枪；射出子弹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

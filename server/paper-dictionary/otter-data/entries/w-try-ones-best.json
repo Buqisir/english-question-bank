@@ -1,0 +1,201 @@
+{
+  "entryId": "w:try-ones-best",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "try",
+      {
+        "slot": "one's"
+      },
+      "best"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "try",
+        {
+          "slot": "one's"
+        },
+        "best"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tried best",
+      "tags": []
+    },
+    {
+      "form": "tries best",
+      "tags": []
+    },
+    {
+      "form": "try best",
+      "tags": []
+    },
+    {
+      "form": "trying best",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "try one's best",
+  "senses": [
+    {
+      "senseId": "w:try-ones-best#s1",
+      "pos": "短语",
+      "glossZh": "尽力；竭尽全力",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:try-ones-best#e-dacc468e4f620448",
+          "text": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 32
+          },
+          "parts": [
+            [
+              18,
+              23
+            ],
+            [
+              28,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              23
+            ],
+            [
+              28,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-ones-best#e-2cd63881586ec9d2",
+          "text": "NOTE: Eurail Trips have a pre-defined route but we try our best to accommodate small amendments(修正) where possible.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 63
+          },
+          "parts": [
+            [
+              51,
+              54
+            ],
+            [
+              59,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              54
+            ],
+            [
+              59,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-ones-best#e-68f065008705edf4",
+          "text": "We tried our best to cheer him up – planning small activities and checking on him regularly – but John still felt lonely.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 17
+          },
+          "parts": [
+            [
+              3,
+              8
+            ],
+            [
+              13,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              8
+            ],
+            [
+              13,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

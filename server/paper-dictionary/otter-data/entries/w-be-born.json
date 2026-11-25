@@ -1,0 +1,321 @@
+{
+  "entryId": "w:be-born",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "is born",
+    "was born"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "born"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "born"
+      ],
+      [
+        "is",
+        "born"
+      ],
+      [
+        "was",
+        "born"
+      ],
+      [
+        "'",
+        "m",
+        "born"
+      ],
+      [
+        "'",
+        "re",
+        "born"
+      ],
+      [
+        "'",
+        "s",
+        "born"
+      ],
+      [
+        "am",
+        "born"
+      ],
+      [
+        "are",
+        "born"
+      ],
+      [
+        "been",
+        "born"
+      ],
+      [
+        "being",
+        "born"
+      ],
+      [
+        "were",
+        "born"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are born",
+      "tags": []
+    },
+    {
+      "form": "been born",
+      "tags": []
+    },
+    {
+      "form": "were born",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be born",
+  "senses": [
+    {
+      "senseId": "w:be-born#s1",
+      "pos": "短语",
+      "glossZh": "出生；降生",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-born#e-7929394e491eeb2b",
+          "text": "When the tiny creature arrived on January 31, she became the 40th black rhino to be born at the reserve.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 88
+          },
+          "parts": [
+            [
+              81,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-born#e-f74c36092afb853a",
+          "text": "Spot and Stripe are the first tiger cubs（幼兽）that have ever been born here.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 68
+          },
+          "parts": [
+            [
+              59,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-born#e-d2bcd1f7d8dc03ed",
+          "text": "Not every child is born with the willpower of a marathon runner.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "be born with sth 表示生来就有某种特征。",
+      "counts": {
+        "gaokao": 16,
+        "mock": 30
+      }
+    },
+    {
+      "senseId": "w:be-born#s2",
+      "pos": "短语",
+      "glossZh": "产生；诞生",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-born#e-e9cacc41eea6eca7",
+          "text": "Her pet transport job was born of the financial crisis(危机) in the late 2000s.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 30
+          },
+          "parts": [
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-born#e-88980112557aa3f1",
+          "text": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          },
+          "parts": [
+            [
+              12,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-born#e-3d293a621a5ab2cc",
+          "text": "It was there that she recognized the potential of technology to solve rural farmers’ struggles, and that’s how FLT was born.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 123
+          },
+          "parts": [
+            [
+              115,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              123
+            ]
+          ]
+        }
+      ],
+      "note": "be born of sth 表示由某种情况催生。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 18,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

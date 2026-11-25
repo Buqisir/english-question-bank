@@ -1,0 +1,117 @@
+{
+  "entryId": "w:go-to-ones-head",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "go to sb’s head"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "to",
+      {
+        "slot": "one's"
+      },
+      "head"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "to",
+        {
+          "slot": "one's"
+        },
+        "head"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go to head",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go to one's head",
+  "senses": [
+    {
+      "senseId": "w:go-to-ones-head#s1",
+      "pos": "短语",
+      "glossZh": "使某人飘飘然；使某人自负",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s29",
+        "w:head#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-to-ones-head#e-983e767e15346711",
+          "text": "I promise not to let it go to my head.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 37
+          },
+          "parts": [
+            [
+              24,
+              29
+            ],
+            [
+              33,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              29
+            ],
+            [
+              33,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "主语常为赞扬、成功等。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

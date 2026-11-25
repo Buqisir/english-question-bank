@@ -1,0 +1,175 @@
+{
+  "entryId": "w:keep-in-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "in",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "in",
+        "mind"
+      ],
+      [
+        "keeping",
+        "in",
+        "mind"
+      ],
+      [
+        "keeps",
+        "in",
+        "mind"
+      ],
+      [
+        "kept",
+        "in",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep in mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep (sth) in mind",
+  "senses": [
+    {
+      "senseId": "w:keep-in-mind#s1",
+      "pos": "短语",
+      "glossZh": "记住；把……考虑在内",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-in-mind#e-ee0efd0556593d76",
+          "text": "generative AI tools, but there are important considerations to keep in mind when using these tools.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 75
+          },
+          "parts": [
+            [
+              63,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-in-mind#e-67b30f4c09344d62",
+          "text": "Always keep in mind that maintaining a clean environment ensures a healthy home for everyone.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-in-mind#e-acb714b985aeb04f",
+          "text": "It might also help to keep in mind that even though the adults in your life can seem all-knowing, they’re actually just ordinary people with strengths and weaknesses.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "也可用 keep in mind that …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

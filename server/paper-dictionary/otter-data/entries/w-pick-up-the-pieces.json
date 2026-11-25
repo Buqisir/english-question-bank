@@ -1,0 +1,112 @@
+{
+  "entryId": "w:pick-up-the-pieces",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "up",
+      "the",
+      "pieces"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "up",
+        "the",
+        "pieces"
+      ],
+      [
+        "picked",
+        "up",
+        "the",
+        "pieces"
+      ],
+      [
+        "picking",
+        "up",
+        "the",
+        "pieces"
+      ],
+      [
+        "picks",
+        "up",
+        "the",
+        "pieces"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick up the pieces",
+  "senses": [
+    {
+      "senseId": "w:pick-up-the-pieces#s1",
+      "pos": "短语",
+      "glossZh": "收拾残局；在挫折后重整生活",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up-the-pieces#e-9d8e00ae6c6f4a8d",
+          "text": "Love is what enables us to pick up the pieces of our broken lives and go on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 45
+          },
+          "parts": [
+            [
+              27,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

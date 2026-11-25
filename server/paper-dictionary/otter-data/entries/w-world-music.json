@@ -1,0 +1,96 @@
+{
+  "entryId": "w:world-music",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "world",
+      "music"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "world",
+        "music"
+      ],
+      [
+        "world",
+        "musics"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "world music",
+  "senses": [
+    {
+      "senseId": "w:world-music#s1",
+      "pos": "短语",
+      "glossZh": "世界音乐（以各地传统或民族音乐为基础的音乐类别）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:world#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:world-music#e-854d1149ffaa08a6",
+          "text": "It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 93
+          },
+          "parts": [
+            [
+              82,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

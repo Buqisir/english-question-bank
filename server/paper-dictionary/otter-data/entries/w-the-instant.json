@@ -1,0 +1,93 @@
+{
+  "entryId": "w:the-instant",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "instant"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "instant"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the instant",
+  "senses": [
+    {
+      "senseId": "w:the-instant#s1",
+      "pos": "短语",
+      "glossZh": "一……就……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:instant#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-instant#e-1ef9e4f7a5bb7077",
+          "text": "She ceased her struggle the instant I picked her up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 35
+          },
+          "parts": [
+            [
+              24,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "后接分句，引出时间状语从句。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

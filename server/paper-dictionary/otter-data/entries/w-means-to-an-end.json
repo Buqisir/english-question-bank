@@ -1,0 +1,132 @@
+{
+  "entryId": "w:means-to-an-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "means",
+      "to",
+      "an",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "means",
+        "to",
+        "an",
+        "end"
+      ],
+      [
+        "means",
+        "to",
+        "ends"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "means to an end",
+  "senses": [
+    {
+      "senseId": "w:means-to-an-end#s1",
+      "pos": "短语",
+      "glossZh": "达到其他目的的手段",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:means-to-an-end#e-ca7c187eef6a0b73",
+          "text": "“Humankind must not be treated as a means to an end.”",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 51
+          },
+          "parts": [
+            [
+              36,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:means-to-an-end#e-e6a1fd4202b3f411",
+          "text": "Treating humans as a means to an end.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 36
+          },
+          "parts": [
+            [
+              21,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "常用 a means to an end。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

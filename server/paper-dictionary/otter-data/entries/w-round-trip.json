@@ -1,0 +1,147 @@
+{
+  "entryId": "w:round-trip",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "round",
+      "trip"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "round",
+        "trip"
+      ],
+      [
+        "round",
+        "trips"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "round trip",
+  "senses": [
+    {
+      "senseId": "w:round-trip#s1",
+      "pos": "短语",
+      "glossZh": "往返旅程；来回行程",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:round-trip#e-29a6d892971d7fa2",
+          "text": "Complete a round trip.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-zj-huliqu-2025-nov-m1:22#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          },
+          "parts": [
+            [
+              11,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:round-trip#s2",
+      "pos": "短语",
+      "glossZh": "起下钻（把钻具提至地面后再下回井内）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:round-trip#s3",
+      "pos": "短语",
+      "glossZh": "卖出资产后再买回的交易",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:round-trip#s4",
+      "pos": "短语",
+      "glossZh": "利用透支资金在同一市场进行的套利操作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:round-trip#s5",
+      "pos": "短语",
+      "glossZh": "数据往返转换后保持原样",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

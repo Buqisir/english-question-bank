@@ -1,0 +1,174 @@
+{
+  "entryId": "w:heat-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heat",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heat",
+        "up"
+      ],
+      [
+        "heated",
+        "up"
+      ],
+      [
+        "heating",
+        "up"
+      ],
+      [
+        "heats",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "heating up",
+      "tags": []
+    },
+    {
+      "form": "heats up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heat (sth) up",
+  "senses": [
+    {
+      "senseId": "w:heat-up#s1",
+      "pos": "短语",
+      "glossZh": "加剧；变得激烈",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:heat#s5",
+        "w:up#s97"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:heat-up#e-7d5d03d41e613cef",
+          "text": "Competition among gyms is heating up.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 36
+          },
+          "parts": [
+            [
+              26,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "常指竞争、争论或局势。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:heat-up#s2",
+      "pos": "短语",
+      "glossZh": "变热；给……加热",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:heat-up#e-116db4cf37b7e414",
+          "text": "When a quick pulse of laser light hits a pixel, the film heats up, causing the trapped air to expand, making the surface swell upward in just 2 to 100 milliseconds, by about a millimeter (0.04 inch).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          },
+          "parts": [
+            [
+              57,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:heat-up#s3",
+      "pos": "短语",
+      "glossZh": "惹恼；使生气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,144 @@
+{
+  "entryId": "w:come-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came into",
+    "comes into"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "into"
+      ],
+      [
+        "came",
+        "into"
+      ],
+      [
+        "comes",
+        "into"
+      ],
+      [
+        "coming",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come into",
+  "senses": [
+    {
+      "senseId": "w:come-into#s1",
+      "pos": "短语",
+      "glossZh": "进入（某处或某个领域）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-into#e-8a902fc7fd9565fb",
+          "text": "Validation came into psychology as a corrective tool.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 20
+          },
+          "parts": [
+            [
+              11,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-into#s2",
+      "pos": "短语",
+      "glossZh": "继承；获得（一笔财产）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-into#s3",
+      "pos": "短语",
+      "glossZh": "成为相关因素；影响结果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-into#s4",
+      "pos": "短语",
+      "glossZh": "开始担任（某个角色）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

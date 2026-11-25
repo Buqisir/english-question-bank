@@ -1,0 +1,61 @@
+{
+  "entryId": "w:shell-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shell",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shell",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shell out",
+  "senses": [
+    {
+      "senseId": "w:shell-out#s1",
+      "pos": "短语",
+      "glossZh": "掏钱；花一大笔钱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shell#s10"
+      ],
+      "examples": [],
+      "note": "常暗含不情愿，常用 shell out for sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

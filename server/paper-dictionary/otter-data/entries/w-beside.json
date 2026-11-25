@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 66
+    "mock": 0
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 67
       },
       "folded": false,
       "examples": [
@@ -109,34 +109,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:beside#s2",
-      "pos": "短语",
-      "glossZh": "离题；无关紧要",
-      "pronunciationId": "w:beside#p-main",
-      "note": "beside the point。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:beside#s3",
-      "pos": "短语",
-      "glossZh": "情绪失控；极为激动",
-      "pronunciationId": "w:beside#p-main",
-      "note": "beside oneself with anger/joy 等。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -145,6 +117,13 @@
       "reason": "这一用法已少见，现代通常说 besides。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:beside-oneself-with-anger",
+    "w:beside-oneself-with-joy",
+    "w:beside-the-point"
+  ]
 }

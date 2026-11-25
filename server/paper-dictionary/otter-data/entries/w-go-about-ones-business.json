@@ -1,0 +1,114 @@
+{
+  "entryId": "w:go-about-ones-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "about",
+      {
+        "slot": "one's"
+      },
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "about",
+        {
+          "slot": "one's"
+        },
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go about business",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go about one's business",
+  "senses": [
+    {
+      "senseId": "w:go-about-ones-business#s1",
+      "pos": "短语",
+      "glossZh": "照常做自己的事；忙自己的日常事务",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:about#s8",
+        "w:business#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-about-ones-business#e-8f18b781b4228660",
+          "text": "And yet, when we don’t recognize the truth, we go about our business with the illusion that we are the focus of intense outside interest.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 68
+          },
+          "parts": [
+            [
+              47,
+              55
+            ],
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ],
+            [
+              60,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

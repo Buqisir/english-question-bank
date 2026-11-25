@@ -1,0 +1,282 @@
+{
+  "entryId": "w:lead-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leading to",
+    "leads to"
+  ],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "to"
+      ],
+      [
+        "leading",
+        "to"
+      ],
+      [
+        "leads",
+        "to"
+      ],
+      [
+        "led",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "led to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead to",
+  "senses": [
+    {
+      "senseId": "w:lead-to#s1",
+      "pos": "短语",
+      "glossZh": "导致；带来（某种结果）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:to#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lead-to#e-3193b65a20c6e7ab",
+          "text": "Her success is just one example of increased time at home leading to an explosion in the houseplant industry.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-to#e-bb841f9d43dee40c",
+          "text": "And over time, the persistence gained through fathers led to higher achievement in school.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 60
+          },
+          "parts": [
+            [
+              54,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-to#e-da507aa7ff4e7f49",
+          "text": "Their study revealed that the large number of observation-only records did not lead to better global coverage.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          },
+          "parts": [
+            [
+              79,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 27,
+        "mock": 240
+      }
+    },
+    {
+      "senseId": "w:lead-to#s2",
+      "pos": "短语",
+      "glossZh": "通向；通往",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lead-to#e-55acbf1d03f4d64a",
+          "text": "On each floor, hallways stretched in four directions, leading to classrooms, laboratories, and teachers’ offices.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 64
+          },
+          "parts": [
+            [
+              54,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-to#e-fb6e43e4b19036e3",
+          "text": "“But remember this: difficult roads often lead to beautiful destinations.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 49
+          },
+          "parts": [
+            [
+              42,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-to#e-caf576984a72298c",
+          "text": "Analysis of data revealed that the Mare Tranquillitatis pit leads to a cave 45 metres wide and up to 80 metres long, about 150 metres beneath the surface.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        }
+      ],
+      "note": "主语常为道路、门或通道。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 28,
+    "mock": 244
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

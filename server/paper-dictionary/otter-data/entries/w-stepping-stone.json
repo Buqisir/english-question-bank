@@ -1,0 +1,107 @@
+{
+  "entryId": "w:stepping-stone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stepping",
+      "stone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stepping",
+        "stone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stepping stone",
+  "senses": [
+    {
+      "senseId": "w:stepping-stone#s1",
+      "pos": "短语",
+      "glossZh": "通往目标的跳板；迈向目标的一步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stone#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stepping-stone#e-e726ff8e3492f829",
+          "text": "In both of these ways, expansive framing represents a stepping stone towards better science comprehension and scientific competence.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 68
+          },
+          "parts": [
+            [
+              54,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stepping-stone#s2",
+      "pos": "短语",
+      "glossZh": "供人踩踏通行的石块；垫脚石",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:step#s10"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

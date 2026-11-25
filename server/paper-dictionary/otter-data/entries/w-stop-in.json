@@ -1,0 +1,70 @@
+{
+  "entryId": "w:stop-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stop",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stop",
+        "in"
+      ],
+      [
+        "stopped",
+        "in"
+      ],
+      [
+        "stopping",
+        "in"
+      ],
+      [
+        "stops",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stop in",
+  "senses": [
+    {
+      "senseId": "w:stop-in#s1",
+      "pos": "短语",
+      "glossZh": "顺便进去坐坐；顺路短暂拜访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

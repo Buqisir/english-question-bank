@@ -1,0 +1,193 @@
+{
+  "entryId": "w:go-along-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going along with"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "along",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "along",
+        "with"
+      ],
+      [
+        "going",
+        "along",
+        "with"
+      ],
+      [
+        "goes",
+        "along",
+        "with"
+      ],
+      [
+        "gone",
+        "along",
+        "with"
+      ],
+      [
+        "went",
+        "along",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go along with",
+  "senses": [
+    {
+      "senseId": "w:go-along-with#s1",
+      "pos": "短语",
+      "glossZh": "接受（提议、安排等）并配合；赞同",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:along#s5",
+        "w:go#s43",
+        "w:with#s29"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-along-with#e-e1e406877f6ac55e",
+          "text": "So just go along with it!",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 21
+          },
+          "parts": [
+            [
+              8,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-along-with#e-6ac423264294d597",
+          "text": "Social psychologists call this dynamic “pluralistic ignorance”: people privately reject harmful norms but go along with them publicly.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 119
+          },
+          "parts": [
+            [
+              106,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              119
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-along-with#e-6051fb2abf8ef446",
+          "text": "“I’m just going along with the ride.” The club is a local example of a nationwide trend – cursive handwriting is back in many classrooms across the country.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 26
+          },
+          "parts": [
+            [
+              10,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-along-with#s2",
+      "pos": "短语",
+      "glossZh": "与某人同行；陪同前往",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

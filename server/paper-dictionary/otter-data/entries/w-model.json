@@ -73,8 +73,8 @@
     "mock": 333
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 323
+    "gaokao": 7,
+    "mock": 144
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -190,7 +190,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -262,7 +262,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -386,7 +386,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -431,81 +431,6 @@
       ]
     },
     {
-      "senseId": "w:model#s7",
-      "pos": "短语",
-      "glossZh": "榜样",
-      "pronunciationId": "w:model#p-main",
-      "note": "role model。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:model#e-ef6a8ca0f87131a1",
-          "text": "A role model in her family.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
-            "locator": {
-              "question": 20,
-              "questionId": "question:listening:20",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:model#e-4b3059dd68accbee",
-          "text": "David Bond: A Role Model for Children",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jun:27",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:model#e-41a333c0c1cbdff1",
-          "text": "Children need role models.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2026-i:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:model#s8",
       "pos": "v.",
       "glossZh": "示范（行为）",
@@ -513,7 +438,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -567,7 +492,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -598,12 +523,12 @@
       "pos": "v.",
       "glossZh": "建立模拟模型",
       "pronunciationId": "w:model#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 17
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -626,6 +551,8 @@
       "reason": "专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

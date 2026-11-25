@@ -1,0 +1,62 @@
+{
+  "entryId": "w:throw-oneself-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "oneself",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "throw",
+        "oneself",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw oneself into sth",
+  "senses": [
+    {
+      "senseId": "w:throw-oneself-into#s1",
+      "pos": "短语",
+      "glossZh": "全身心投入某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:throw#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

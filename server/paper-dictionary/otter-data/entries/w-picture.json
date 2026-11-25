@@ -59,8 +59,8 @@
     "mock": 229
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 226
+    "gaokao": 1,
+    "mock": 61
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -265,7 +265,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -329,73 +329,27 @@
       ]
     },
     {
-      "senseId": "w:picture#s5",
-      "pos": "短语",
-      "glossZh": "在考虑或涉及的范围内",
-      "pronunciationId": "w:picture#p-main",
-      "note": "in、out of the picture。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:picture#e-a82e3e22b91279e9",
-          "text": "Removing gender from the picture altogether seems like a simple way to fix this.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:picture#e-eb4179ae03d32d43",
-          "text": "Just when it seemed like things couldn’t get any __45__, a new technology entered the picture – a digital assistant called an AI scribe.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 86,
-            "end": 93
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:picture#s6",
       "pos": "n.",
       "glossZh": "电影",
       "pronunciationId": "w:picture#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:big-picture",
+    "w:out-of-the-picture",
+    "w:take-a-picture"
+  ]
 }

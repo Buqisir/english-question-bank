@@ -1,0 +1,93 @@
+{
+  "entryId": "w:tens-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tens",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tens",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tens of",
+  "senses": [
+    {
+      "senseId": "w:tens-of#s1",
+      "pos": "短语",
+      "glossZh": "几十；数以十计的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ten#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tens-of#e-e452e900961260ca",
+          "text": "Beneath the Pacific lies the Clarion-Clipperton Zone (CCZ), where tens of billions of polymetallic nodules(多金属结核) are packed with cobalt (钴).",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 73
+          },
+          "parts": [
+            [
+              66,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "可接数量单位，如 tens of billions（数百亿）。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

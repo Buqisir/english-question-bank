@@ -1,0 +1,96 @@
+{
+  "entryId": "w:enter-into-a-contract",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "enter",
+      "into",
+      "a",
+      "contract"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "enter",
+        "into",
+        "a",
+        "contract"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "enter into a contract",
+  "senses": [
+    {
+      "senseId": "w:enter-into-a-contract#s1",
+      "pos": "短语",
+      "glossZh": "订立合同",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:enter#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:enter-into-a-contract#e-72a6944c34ada71a",
+          "text": "Successful artists selected; enter into a contract with the City of Burlington",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "cell:paper-gaokao-2026-zhejiang-jan:reading-a:ocr-916a21169272a7ae:2:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 50
+          },
+          "parts": [
+            [
+              29,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

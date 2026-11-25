@@ -1,0 +1,133 @@
+{
+  "entryId": "w:start-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "start",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "start",
+        "over"
+      ],
+      [
+        "started",
+        "over"
+      ],
+      [
+        "starting",
+        "over"
+      ],
+      [
+        "starts",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "start over",
+  "senses": [
+    {
+      "senseId": "w:start-over#s1",
+      "pos": "短语",
+      "glossZh": "重新开始；从头再来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:start-over#e-4b9bf4f8f262fd70",
+          "text": "I bought a cottage in the Idaho countryside and prepared to start over.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 70
+          },
+          "parts": [
+            [
+              60,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:start-over#e-4ba785f40ae6012c",
+          "text": "It gives you a chance to start over and helps you to experience a new environment with new friends, which keeps life interesting for you.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 35
+          },
+          "parts": [
+            [
+              25,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

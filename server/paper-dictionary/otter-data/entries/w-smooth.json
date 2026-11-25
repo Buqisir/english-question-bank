@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 57
+    "mock": 11
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -134,7 +134,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -206,7 +206,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -258,7 +258,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -317,7 +317,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -389,7 +389,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -413,40 +413,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:smooth#s9",
-      "pos": "短语",
-      "glossZh": "缓和",
-      "pronunciationId": "w:smooth#p-main",
-      "note": "smooth things over。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:smooth#e-13e9e985d8ff4580",
-          "text": "Anticipating others’ reactions, smoothing things over, or presenting a “bulletproof” reason may prevent punishment or emotional fallout.",
-          "source": {
-            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
-            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
-            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 41
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -455,6 +421,12 @@
       "reason": "学科专义或地区特称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:smooth-sailing",
+    "w:smooth-things-over"
+  ]
 }

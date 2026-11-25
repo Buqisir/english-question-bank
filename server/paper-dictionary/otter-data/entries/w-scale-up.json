@@ -1,0 +1,186 @@
+{
+  "entryId": "w:scale-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "scale",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "scale",
+        "up"
+      ],
+      [
+        "scaled",
+        "up"
+      ],
+      [
+        "scales",
+        "up"
+      ],
+      [
+        "scaling",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "scale up",
+      "tags": []
+    },
+    {
+      "form": "scaling up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "scale (sth) up",
+  "senses": [
+    {
+      "senseId": "w:scale-up#s1",
+      "pos": "短语",
+      "glossZh": "扩大（生产、项目或技术应用的）规模",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:scale-up#e-8362a1bd4521fcb5",
+          "text": "Scaling up the project requires huge investment and may face hurdles like airspace restrictions.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:scale-up#e-5c5fbaf31f74b406",
+          "text": "However, a major challenge is to scale up the technology without creating loud or even damaging sound effects.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:scale-up#e-62a4d98fb9e562bf",
+          "text": "She notes that scaling up such innovations requires significant policy adjustments from national and local governments.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          },
+          "parts": [
+            [
+              15,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:scale-up#s2",
+      "pos": "短语",
+      "glossZh": "按比例放大（图像、模型等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

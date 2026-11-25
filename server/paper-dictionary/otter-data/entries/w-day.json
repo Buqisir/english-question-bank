@@ -42,8 +42,8 @@
     "mock": 1420
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 1419
+    "gaokao": 5,
+    "mock": 1223
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 168,
-        "mock": 0
+        "mock": 166
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -267,7 +267,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -329,143 +329,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:day#s5",
-      "pos": "短语",
-      "glossZh": "前几天",
-      "pronunciationId": "w:day#p-main",
-      "note": "the other day。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:day#e-d97504fb70d24bce",
-          "text": "I caught sight of myself in a cafe window the other day, bent over my phone, with my head down and shoulders tense near my ears.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 52,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:day#s6",
-      "pos": "短语",
-      "glossZh": "使某人非常高兴",
-      "pronunciationId": "w:day#p-main",
-      "note": "make sb's day。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:day#e-bdb307d0e1ce733b",
-          "text": "made her day",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
-            "locator": {
-              "question": 55,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jun:55",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:day#s7",
-      "pos": "短语",
-      "glossZh": "获胜；取得最终成功",
-      "pronunciationId": "w:day#p-main",
-      "note": "win the day。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:day#e-b5b9d9aef5028f01",
-          "text": "Neither won the race, but the __55__ of human kindness won the day.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:day#s8",
-      "pos": "短语",
-      "glossZh": "归根结底；到头来",
-      "pronunciationId": "w:day#p-main",
-      "note": "at the end of the day，也可以表示「一天结束时」。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:day#e-79dc474f209f1e10",
-          "text": "\"At the end of the day all transit agencies right now are doing everything they can to improve the rider experience.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 22
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -474,6 +337,38 @@
       "reason": "同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-day",
+    "w:any-day",
+    "w:any-day-of-the-week",
+    "w:at-the-end-of-the-day",
+    "w:call-it-a-day",
+    "w:carry-the-day",
+    "w:day-after-day",
+    "w:day-and-age",
+    "w:day-and-night",
+    "w:day-by-day",
+    "w:day-job",
+    "w:day-off",
+    "w:day-or-night",
+    "w:day-out",
+    "w:end-of-the-day",
+    "w:every-dog-has-its-day",
+    "w:for-a-rainy-day",
+    "w:from-day-to-day",
+    "w:late-in-the-day",
+    "w:make-a-day-of-it",
+    "w:make-ones-day",
+    "w:see-the-light-of-day",
+    "w:snow-day",
+    "w:some-day",
+    "w:the-other-day",
+    "w:to-this-day",
+    "w:what-day-is-it-today",
+    "w:win-the-day"
+  ]
 }

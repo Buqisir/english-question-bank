@@ -1,0 +1,153 @@
+{
+  "entryId": "w:someone-else",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "someone",
+      "else"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "someone",
+        "else"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "someone else",
+  "senses": [
+    {
+      "senseId": "w:someone-else#s1",
+      "pos": "短语",
+      "glossZh": "别人；另外一个人",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:someone-else#e-347c307c9b4bb67a",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 89
+          },
+          "parts": [
+            [
+              77,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:someone-else#e-5a0968c0a95a59a8",
+          "text": "You’ll work harder if you train with someone else.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-i:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 49
+          },
+          "parts": [
+            [
+              37,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:someone-else#e-5e9e77428f367ef0",
+          "text": "When you teach someone else, you practice patience, clear communication and problem solving.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 7,
+        "mock": 20
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

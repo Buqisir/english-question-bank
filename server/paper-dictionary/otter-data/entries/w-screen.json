@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 197
+    "mock": 3
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 170
       },
       "folded": false,
       "examples": [
@@ -165,12 +165,12 @@
       "pos": "v.",
       "glossZh": "筛查",
       "pronunciationId": "w:screen#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 18
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -198,6 +198,40 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:screen#s7",
+      "pos": "n.",
+      "glossZh": "拍摄用的背景幕",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:screen#e-c79d86ff36bcdf35",
+          "text": "Start simply, then encourage exploring features like green screens.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -206,6 +240,11 @@
       "reason": "海军事务专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:screen-out",
+    "w:small-screen",
+    "w:smoke-screen"
+  ]
 }

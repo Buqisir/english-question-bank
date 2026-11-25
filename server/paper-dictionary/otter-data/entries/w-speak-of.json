@@ -1,0 +1,267 @@
+{
+  "entryId": "w:speak-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "speaking of",
+    "spoke of"
+  ],
+  "pattern": {
+    "tokens": [
+      "speak",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speak",
+        "of"
+      ],
+      [
+        "speaking",
+        "of"
+      ],
+      [
+        "spoke",
+        "of"
+      ],
+      [
+        "speaks",
+        "of"
+      ],
+      [
+        "spoken",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "speaks of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speak of",
+  "senses": [
+    {
+      "senseId": "w:speak-of#s1",
+      "pos": "短语",
+      "glossZh": "谈到；提及",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-of#e-760cc7edfae566c6",
+          "text": "How does Robert sound when speaking of his being a writer?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-of#e-32743f246b1e9ae1",
+          "text": "First, managers spoke of reputational risks, highlighting their fear of being accused of greenwashing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speak-of#e-2bb9dba47b4ddf17",
+          "text": "My mother spoke of Helen without complaint, but with quiet empathy.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:speak-of#s2",
+      "pos": "短语",
+      "glossZh": "说到……；谈起……（用来引出相关话题）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-of#e-6d24d2346906fe1e",
+          "text": "Speaking of fungi, most tend to picture mushrooms typically growing in soil.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "用 speaking of，通常置于句首。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:speak-of#s3",
+      "pos": "短语",
+      "glossZh": "显示；表明",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:speak-of#e-f02b95250266b140",
+          "text": "In the depths of that unimaginable grief, Mom, you made a choice that speaks of boundless courage and selflessness.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          },
+          "parts": [
+            [
+              70,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,101 @@
+{
+  "entryId": "w:it-happens-to-the-best-of-us",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it",
+      "happens",
+      "to",
+      "the",
+      "best",
+      "of",
+      "us"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it",
+        "happens",
+        "to",
+        "the",
+        "best",
+        "of",
+        "us"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it happens to the best of us",
+  "senses": [
+    {
+      "senseId": "w:it-happens-to-the-best-of-us#s1",
+      "pos": "短语",
+      "glossZh": "再厉害的人也有失手的时候；这种事谁都可能遇到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:it-happens-to-the-best-of-us#e-fbef76a4ef68a096",
+          "text": "It happens to the best of us.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 28
+          },
+          "parts": [
+            [
+              0,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              28
+            ]
+          ]
+        }
+      ],
+      "note": "用于安慰犯错或遇到尴尬事的人。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

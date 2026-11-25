@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 199
+    "mock": 30
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -357,7 +357,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -406,12 +406,12 @@
       "pos": "v.",
       "glossZh": "使陷入某状态",
       "pronunciationId": "w:send#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -421,6 +421,13 @@
       "reason": "运动专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:send-back",
+    "w:send-for",
+    "w:send-in",
+    "w:send-out",
+    "w:send-up"
+  ]
 }

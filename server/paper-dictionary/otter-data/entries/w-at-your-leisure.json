@@ -1,0 +1,94 @@
+{
+  "entryId": "w:at-your-leisure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "your",
+      "leisure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "your",
+        "leisure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at your leisure",
+  "senses": [
+    {
+      "senseId": "w:at-your-leisure#s1",
+      "pos": "短语",
+      "glossZh": "在自己方便时从容地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:leisure#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-your-leisure#e-b40a48a30c159045",
+          "text": "There are over 700 questions in five categories the StoryBook interviewer can ask you, all about your life and family, at your leisure.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 134
+          },
+          "parts": [
+            [
+              119,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

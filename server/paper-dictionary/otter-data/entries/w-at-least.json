@@ -1,0 +1,266 @@
+{
+  "entryId": "w:at-least",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "least"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "least"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at least",
+  "senses": [
+    {
+      "senseId": "w:at-least#s1",
+      "pos": "短语",
+      "glossZh": "至少；不少于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s11",
+        "w:least#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-least#e-9e3042efd1a1f02e",
+          "text": "Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 91
+          },
+          "parts": [
+            [
+              83,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-least#e-167a36aa47bc5d54",
+          "text": "I looked pointedly at the bookshelf that held at least three dictionaries, and Kevin sighed（叹气）dramatically.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 54
+          },
+          "parts": [
+            [
+              46,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-least#e-9c767bec55695b62",
+          "text": "At least 80 inches of rain a year is normal-and in some areas there may be as much as 430 inches of rain annually.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 12,
+        "mock": 93
+      }
+    },
+    {
+      "senseId": "w:at-least#s2",
+      "pos": "短语",
+      "glossZh": "起码；至少在这一点上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:least#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-least#e-931ab438fc5362a5",
+          "text": "Emotion was also important in convincing readers – or the lack of emotion, at least.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 83
+          },
+          "parts": [
+            [
+              75,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-least#e-21d7c76523afcd3b",
+          "text": "I wasn’t sure what it meant exactly, but at least we had a topic.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-least#e-fcbb71050675f8be",
+          "text": "But it is always purposeful-or at least it should be.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:31#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 39
+          },
+          "parts": [
+            [
+              31,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              39
+            ]
+          ]
+        }
+      ],
+      "note": "用于限定所说的话，或退一步指出仍可肯定的情况。",
+      "counts": {
+        "gaokao": 14,
+        "mock": 31
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 26,
+    "mock": 124
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

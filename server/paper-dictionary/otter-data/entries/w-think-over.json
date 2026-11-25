@@ -1,0 +1,142 @@
+{
+  "entryId": "w:think-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "thinking over"
+  ],
+  "pattern": {
+    "tokens": [
+      "think",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "over"
+      ],
+      [
+        "thinking",
+        "over"
+      ],
+      [
+        "thinks",
+        "over"
+      ],
+      [
+        "thought",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thought over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think sth over",
+  "senses": [
+    {
+      "senseId": "w:think-over#s1",
+      "pos": "短语",
+      "glossZh": "仔细考虑；反复斟酌",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:think#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:think-over#e-182edecf15d83403",
+          "text": "He thought over every second of that day, from the golden light on the water to the moment he lied.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:15",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          },
+          "parts": [
+            [
+              3,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:think-over#e-3d933458e8e5f63a",
+          "text": "Paragraph 1: Thinking over Jonathan’s words, Stacey consulted her dad again.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

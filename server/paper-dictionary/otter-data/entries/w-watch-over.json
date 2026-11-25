@@ -1,0 +1,171 @@
+{
+  "entryId": "w:watch-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "watching over"
+  ],
+  "pattern": {
+    "tokens": [
+      "watch",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "watch",
+        "over"
+      ],
+      [
+        "watching",
+        "over"
+      ],
+      [
+        "watched",
+        "over"
+      ],
+      [
+        "watches",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "watched over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "watch over",
+  "senses": [
+    {
+      "senseId": "w:watch-over#s1",
+      "pos": "短语",
+      "glossZh": "照看；守护",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:watch-over#e-e7b61fe8fcfb9c8f",
+          "text": "She guarded the children as well, watching over them as closely as she did the chickens and ducks.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 47
+          },
+          "parts": [
+            [
+              34,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-over#e-bb618add35c7f1b6",
+          "text": "The great statue of a winged lion standing in Venice’s Saint Mark’s Square has watched over the city for centuries.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 91
+          },
+          "parts": [
+            [
+              79,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:watch-over#e-196c71cdd42dd964",
+          "text": "He argued I couldn't keep watching over our four-year-old boy all the time and preventing him from doing sports and activities.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 39
+          },
+          "parts": [
+            [
+              26,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

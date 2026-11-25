@@ -54,8 +54,8 @@
     "mock": 649
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 648
+    "gaokao": 12,
+    "mock": 459
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 50,
-        "mock": 0
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -211,7 +211,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -282,7 +282,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -353,7 +353,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -458,7 +458,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -530,7 +530,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -668,7 +668,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -702,7 +702,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -773,7 +773,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -825,7 +825,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -858,7 +858,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -975,249 +975,12 @@
       "pos": "n.",
       "glossZh": "善",
       "pronunciationId": "w:good#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:good#s19",
-      "pos": "短语",
-      "glossZh": "祝你好运",
-      "pronunciationId": "w:good#p-main",
-      "note": "good luck。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:good#e-a0ed6e940d1a6b1e",
-          "text": "So wherever your next wait may be: Good luck.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:good#s20",
-      "pos": "短语",
-      "glossZh": "玩得愉快",
-      "pronunciationId": "w:good#p-main",
-      "note": "have a good time。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:good#e-f3b07df87b21af2f",
-          "text": "I’m surely you’ll have a good time.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:good#s21",
-      "pos": "短语",
-      "glossZh": "充分利用",
-      "pronunciationId": "w:good#p-main",
-      "note": "make good use of 或 put sth to good use。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:good#e-1bf8ffc5b3ea29d7",
-          "text": "Make good use of it.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:good#e-ae128886647f527a",
-          "text": "A few months ago, the 30-year-old teacher decided it was time to put her __42__ to good use.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 83,
-            "end": 87
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:good#s22",
-      "pos": "短语",
-      "glossZh": "大量",
-      "pronunciationId": "w:good#p-main",
-      "note": "a good deal of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:good#e-6406924650e72875",
-          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:good#s23",
-      "pos": "短语",
-      "glossZh": "有充分的理由",
-      "pronunciationId": "w:good#p-main",
-      "note": "for good reason。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:good#e-6a9b900255779ddb",
-          "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 82,
-            "end": 86
-          }
-        },
-        {
-          "exampleId": "w:good#e-392ccff5ad8cce19",
-          "text": "It’s one of the best-rated hostels in the city, and for good reason.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:good#s24",
-      "pos": "短语",
-      "glossZh": "境况较好",
-      "pronunciationId": "w:good#p-main",
-      "note": "better off。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:good#s25",
-      "pos": "短语",
-      "glossZh": "永远",
-      "pronunciationId": "w:good#p-main",
-      "note": "for good。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
       "examples": []
     }
   ],
@@ -1227,6 +990,42 @@
       "reason": "姓氏专名，g110、g111 留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-change-is-as-good-as-a-rest",
+    "w:a-good-deal",
+    "w:a-good-deal-of",
+    "w:a-good-sport",
+    "w:all-good",
+    "w:all-good-things-come-to-an-end",
+    "w:any-good",
+    "w:as-good-as",
+    "w:be-good-for",
+    "w:do-good",
+    "w:do-sb-a-world-of-good",
+    "w:for-good",
+    "w:for-good-reason",
+    "w:good-afternoon",
+    "w:good-deal",
+    "w:good-evening",
+    "w:good-job",
+    "w:good-luck",
+    "w:good-morning",
+    "w:good-night",
+    "w:good-old",
+    "w:good-standing",
+    "w:greater-good",
+    "w:have-a-good-time",
+    "w:im-good",
+    "w:in-good-repair",
+    "w:its-all-good",
+    "w:make-good",
+    "w:make-good-use-of",
+    "w:no-good",
+    "w:put-sth-to-good-use",
+    "w:too-good-to-be-true"
+  ]
 }

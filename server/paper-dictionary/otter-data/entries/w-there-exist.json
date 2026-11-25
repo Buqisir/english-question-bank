@@ -1,0 +1,176 @@
+{
+  "entryId": "w:there-exist",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "there",
+      "exist"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "there",
+        "exist"
+      ],
+      [
+        "there",
+        "existed"
+      ],
+      [
+        "there",
+        "existing"
+      ],
+      [
+        "there",
+        "exists"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "there existed",
+      "tags": []
+    },
+    {
+      "form": "there exists",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "there exist",
+  "senses": [
+    {
+      "senseId": "w:there-exist#s1",
+      "pos": "短语",
+      "glossZh": "有；存在",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:there-exist#e-cad67c07ac5ee55f",
+          "text": "There existed stereotypical perception of women.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:24#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:there-exist#e-43130fbc348ee959",
+          "text": "Interestingly, there exists a silver lining.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zj-2026-xinzhendi-2:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:there-exist#e-f4e4160e425a76b3",
+          "text": "Beyond these common types, there exists a distinctive group known as pyrophilous fungi, also called fire-loving fungi, that thrive abundantly in fire-stricken areas.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 39
+          },
+          "parts": [
+            [
+              27,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              39
+            ]
+          ]
+        }
+      ],
+      "note": "较正式。现在时后接单数名词时用 there exists。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

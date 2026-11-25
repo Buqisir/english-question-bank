@@ -1,0 +1,92 @@
+{
+  "entryId": "w:special-sauce",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "special",
+      "sauce"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "special",
+        "sauce"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "special sauce",
+  "senses": [
+    {
+      "senseId": "w:special-sauce#s1",
+      "pos": "短语",
+      "glossZh": "成功的秘诀；起关键作用的因素",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sauce#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:special-sauce#e-e80ed0b8dc4e1793",
+          "text": "Datchuk said the “special sauce” is that students have to pay closer attention to how letters connect when they write.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 31
+          },
+          "parts": [
+            [
+              18,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

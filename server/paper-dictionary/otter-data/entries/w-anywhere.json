@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 21
+    "mock": 4
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -144,59 +144,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:anywhere#s3",
-      "pos": "短语",
-      "glossZh": "从……到……不等",
-      "pronunciationId": "w:anywhere#p-main",
-      "note": "anywhere from … to …。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:anywhere#e-a4a46f62b83113db",
-          "text": "The kids would stay with us anywhere from a week to a few months.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
-            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
-            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:anywhere#e-63b761fb33a2f196",
-          "text": "A typical home inspection can cost anywhere from $200 to $500, with the national average sitting right around $336.",
-          "source": {
-            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
-            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
-            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 35,
-            "end": 43
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -205,6 +152,13 @@
       "reason": "当代社会评论中的特定标签。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:anywhere-else",
+    "w:anywhere-from-to",
+    "w:anywhere-near"
+  ]
 }

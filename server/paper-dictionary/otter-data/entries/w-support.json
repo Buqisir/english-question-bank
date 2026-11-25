@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 5,
-    "mock": 540
+    "mock": 344
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 94
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -362,7 +362,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -434,7 +434,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -516,13 +516,84 @@
       "pos": "v.",
       "glossZh": "兼容",
       "pronunciationId": "w:support#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:support#s9",
+      "pos": "n.",
+      "glossZh": "佐证；支持性证据",
+      "pronunciationId": "w:support#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-f9c10c153628c265",
+          "text": "That this “mimicry”, discovered in remote jungles, could offer timely field support for his great theory remains my proudest achievement.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:support#e-8ab7f5d993f0e1f2",
+          "text": "scientific support to their version of episodic memory.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:support#e-06bdca6340ca9118",
+          "text": "Experimental support is accumulating.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -531,6 +602,6 @@
       "reason": "误配或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

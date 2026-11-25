@@ -1,0 +1,99 @@
+{
+  "entryId": "w:off-duty",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "off",
+      "duty"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "off",
+        "duty"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "off duty",
+  "senses": [
+    {
+      "senseId": "w:off-duty#s1",
+      "pos": "短语",
+      "glossZh": "不当班；不在执勤",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:off-duty#e-627161494f9b20df",
+          "text": "off duty",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:cloze",
+            "locator": {
+              "question": 42,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:42#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [
+    {
+      "legacySenseIds": [
+        "w:duty#s2"
+      ],
+      "glossZh": "值班；执勤",
+      "reason": "旧义项释 on duty，仅在注中将 off duty 列为反义短语。"
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

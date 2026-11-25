@@ -1,0 +1,130 @@
+{
+  "entryId": "w:call-it-a-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "call",
+      "it",
+      "a",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "it",
+        "a",
+        "day"
+      ],
+      [
+        "called",
+        "it",
+        "a",
+        "day"
+      ],
+      [
+        "calling",
+        "it",
+        "a",
+        "day"
+      ],
+      [
+        "calls",
+        "it",
+        "a",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "calling it a day",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call it a day",
+  "senses": [
+    {
+      "senseId": "w:call-it-a-day#s1",
+      "pos": "短语",
+      "glossZh": "今天就做到这里；收工",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-it-a-day#e-3ce9cc0bdb472524",
+          "text": "Ernest Hemingway had the smart trick of always calling it a day at a point when he knew what came next.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 63
+          },
+          "parts": [
+            [
+              47,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:call-it-a-day#s2",
+      "pos": "短语",
+      "glossZh": "就此收手；结束正在从事的事业或活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

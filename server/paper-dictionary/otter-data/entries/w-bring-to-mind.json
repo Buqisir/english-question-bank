@@ -1,0 +1,148 @@
+{
+  "entryId": "w:bring-to-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "to",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "to",
+        "mind"
+      ],
+      [
+        "bringing",
+        "to",
+        "mind"
+      ],
+      [
+        "brings",
+        "to",
+        "mind"
+      ],
+      [
+        "brought",
+        "to",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bring to mind",
+      "tags": []
+    },
+    {
+      "form": "bringing to mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sth to mind",
+  "senses": [
+    {
+      "senseId": "w:bring-to-mind#s1",
+      "pos": "短语",
+      "glossZh": "想起；使人想起",
+      "note": "较长的宾语也可放在 to mind 后。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bring-to-mind#e-d33f5f6b05545e8b",
+          "text": "Bring to mind an embarrassing memory.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-to-mind#e-07c9fc7c6ef3333b",
+          "text": "Here’s why this happens: When you tell yourself something is bad enough to avoid, your brain checks in to make sure you’re succeeding with this task, bringing to mind the thoughts you were trying to push away.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 166
+          },
+          "parts": [
+            [
+              150,
+              166
+            ]
+          ],
+          "highlightRanges": [
+            [
+              150,
+              166
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,207 @@
+{
+  "entryId": "w:kick-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kick",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kick",
+        "in"
+      ],
+      [
+        "kicked",
+        "in"
+      ],
+      [
+        "kicking",
+        "in"
+      ],
+      [
+        "kicks",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kick in",
+  "senses": [
+    {
+      "senseId": "w:kick-in#s1",
+      "pos": "短语",
+      "glossZh": "开始起作用；开始显现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:kick#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:kick-in#e-629b389b5874dcc3",
+          "text": "When it comes to navigating(导航) areas, past studies showed that the abilities don't truly kick in until 12.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 97
+          },
+          "parts": [
+            [
+              90,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kick-in#e-17ad83806ecbc246",
+          "text": "Stage fright would kick in.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          },
+          "parts": [
+            [
+              19,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:kick-in#e-eb3e388f3bea580c",
+          "text": "When Claude is asked for the opposite of “big” in English, or the same concept in Chinese, the same feature lights up in every case, before more language-specific circuits kick in to “translate” the concept of smallness into a particular word.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 179
+          },
+          "parts": [
+            [
+              172,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              172,
+              179
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:kick-in#s2",
+      "pos": "短语",
+      "glossZh": "把门等踢开或踢破",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "kick sth in",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-in#s3",
+      "pos": "短语",
+      "glossZh": "出一份力；凑份子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-in#s4",
+      "pos": "短语",
+      "glossZh": "死掉；垮掉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

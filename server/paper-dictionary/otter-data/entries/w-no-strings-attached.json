@@ -1,0 +1,62 @@
+{
+  "entryId": "w:no-strings-attached",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "strings",
+      "attached"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "strings",
+        "attached"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no strings attached",
+  "senses": [
+    {
+      "senseId": "w:no-strings-attached#s1",
+      "pos": "短语",
+      "glossZh": "没有附加条件；不附带义务",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:string#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

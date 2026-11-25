@@ -1,0 +1,135 @@
+{
+  "entryId": "w:common-sense",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "common",
+      "sense"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "common",
+        "sense"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "common sense",
+  "senses": [
+    {
+      "senseId": "w:common-sense#s1",
+      "pos": "短语",
+      "glossZh": "常识；基于日常经验的基本判断力",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:common-sense#e-ea3f9af426023436",
+          "text": "But it does suggest that within limits of common sense,one way of eating is about as good as another.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          },
+          "parts": [
+            [
+              42,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:common-sense#e-37ed0f60713193c3",
+          "text": "But it does suggest that within limits of common sense, one way of eating is about as good as another.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          },
+          "parts": [
+            [
+              42,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:common-sense#s2",
+      "pos": "短语",
+      "glossZh": "整合不同感官信息的内在感官",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "哲学和科学史中的用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

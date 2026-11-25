@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 34
+    "mock": 9
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -187,6 +187,40 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:lucky#s3",
+      "pos": "adj.",
+      "glossZh": "凭运气的（lucky draw 指抽奖）",
+      "pronunciationId": "w:lucky#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lucky#e-1510054516023ce8",
+          "text": "Have a lucky draw.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -195,6 +229,10 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:get-lucky",
+    "w:lucky-you"
+  ]
 }

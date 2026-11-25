@@ -1,0 +1,204 @@
+{
+  "entryId": "w:a-big-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "big",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "big",
+        "deal"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a big deal",
+  "senses": [
+    {
+      "senseId": "w:a-big-deal#s1",
+      "pos": "短语",
+      "glossZh": "大事；重要的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:big#s6",
+        "w:deal#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-big-deal#e-ca2fd56c7cc97f00",
+          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-big-deal#e-dd17c70f0eb6e01d",
+          "text": "“It wouldn’t be a big deal, but it’d bring me a lot of joy to bless other people like we were blessed.”",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-big-deal#e-e149578f2fd0eca0",
+          "text": "My parents were busy during the day, so surfing the internet was a big deal for me.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 75
+          },
+          "parts": [
+            [
+              65,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:a-big-deal#s2",
+      "pos": "短语",
+      "glossZh": "重要人物；有影响力的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:deal#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-big-deal#e-3787b054fbee4c42",
+          "text": "That’s why we feel like we have to appear busy, and there’s a real perception that if someone is knee-deep in meetings, emails, and stress, then they’re probably a big deal.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 162,
+            "end": 172
+          },
+          "parts": [
+            [
+              162,
+              172
+            ]
+          ],
+          "highlightRanges": [
+            [
+              162,
+              172
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

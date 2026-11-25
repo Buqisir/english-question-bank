@@ -1,0 +1,112 @@
+{
+  "entryId": "w:stick-it-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "it",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "it",
+        "out"
+      ],
+      [
+        "sticking",
+        "it",
+        "out"
+      ],
+      [
+        "sticks",
+        "it",
+        "out"
+      ],
+      [
+        "stuck",
+        "it",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sticking it out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick it out",
+  "senses": [
+    {
+      "senseId": "w:stick-it-out#s1",
+      "pos": "短语",
+      "glossZh": "撑过困难；坚持到底",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stick-it-out#e-4f38a6036825ec65",
+          "text": "Through it all, people across the northern hemisphere survived, some by packing up and moving, others by sticking it out.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 120
+          },
+          "parts": [
+            [
+              105,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              120
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

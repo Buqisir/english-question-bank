@@ -59,8 +59,8 @@
     "mock": 161
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 160
+    "gaokao": 7,
+    "mock": 16
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 139
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -197,172 +197,34 @@
       "examples": []
     },
     {
-      "senseId": "w:table#s5",
-      "pos": "短语",
-      "glossZh": "食盐",
+      "senseId": "w:table#s10",
+      "pos": "phr.",
+      "glossZh": "白白错过可得的好处（leave ... on the table）",
       "pronunciationId": "w:table#p-main",
-      "note": "table salt。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:table#e-7956e9a5dbd35c39",
-          "text": "Rock salt is made of sodium chloride, the same compound（化合物）in ordinary table salt.",
+          "exampleId": "w:table#e-76eba2a128aeb336",
+          "text": "You might be leaving some happiness on the table by doing your everyday activities all by yourself.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:cloze",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:cloze:1",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 72,
-            "end": 77
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:table#s6",
-      "pos": "短语",
-      "glossZh": "目录",
-      "pronunciationId": "w:table#p-main",
-      "note": "table of contents。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:table#e-11558bc6e444e50d",
-          "text": "Look at the table of contents, the preface, the chapter heading, etc.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:table#s7",
-      "pos": "短语",
-      "glossZh": "餐桌礼仪",
-      "pronunciationId": "w:table#p-main",
-      "note": "table manners。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:table#e-919642e8f7b9c1c7",
-          "text": "Table manners in the UK.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2023-national-b:31",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:table#s8",
-      "pos": "短语",
-      "glossZh": "乒乓球",
-      "pronunciationId": "w:table#p-main",
-      "note": "table tennis。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:table#e-8e607a4d44bd73f2",
-          "text": "Glad to know that you want to learn to play table tennis.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-application",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-application:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:table#s9",
-      "pos": "短语",
-      "glossZh": "带来助益",
-      "pronunciationId": "w:table#p-main",
-      "note": "bring something to the table。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:table#e-e568de3be01ffdb4",
-          "text": "Everyone brings something unique to the table and can connect with each other in a new way.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 52
+            "start": 43,
+            "end": 48
           }
         }
       ]
@@ -374,6 +236,14 @@
       "reason": "行业专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bring-sth-to-the-table",
+    "w:round-table",
+    "w:set-the-table",
+    "w:table-manners"
+  ]
 }

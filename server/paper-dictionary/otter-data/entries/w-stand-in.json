@@ -1,0 +1,73 @@
+{
+  "entryId": "w:stand-in",
+  "headword": "stand in (for sb)",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing in",
+    "stands in"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "in"
+      ],
+      [
+        "standing",
+        "in"
+      ],
+      [
+        "stands",
+        "in"
+      ],
+      [
+        "stood",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:stand-in#s1",
+      "pos": "短语",
+      "glossZh": "临时代替；替班",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "dictionary",
+  "folded": true
+}

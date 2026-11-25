@@ -1,0 +1,74 @@
+{
+  "entryId": "w:see-things",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "see",
+      "things"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "things"
+      ],
+      [
+        "saw",
+        "things"
+      ],
+      [
+        "seeing",
+        "things"
+      ],
+      [
+        "seen",
+        "things"
+      ],
+      [
+        "sees",
+        "things"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see things",
+  "senses": [
+    {
+      "senseId": "w:see-things#s1",
+      "pos": "短语",
+      "glossZh": "产生幻觉；看见并不存在的东西",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

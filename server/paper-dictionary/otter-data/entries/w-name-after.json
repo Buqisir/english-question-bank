@@ -1,0 +1,170 @@
+{
+  "entryId": "w:name-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "name",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "name",
+        "after"
+      ],
+      [
+        "named",
+        "after"
+      ],
+      [
+        "names",
+        "after"
+      ],
+      [
+        "naming",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "named after",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "name sb/sth after sb/sth",
+  "senses": [
+    {
+      "senseId": "w:name-after#s1",
+      "pos": "短语",
+      "glossZh": "以某人或某物的名字命名",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:name-after#e-8f65159cef4a3582",
+          "text": "But often, streets are named after people, which places us in a historical or political context too.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 34
+          },
+          "parts": [
+            [
+              23,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:name-after#e-e6bf2b8c30f16185",
+          "text": "This is called the Dunning-Kruger effect, named after the psychologists David Dunning and Justin Kruger.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          },
+          "parts": [
+            [
+              42,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:name-after#e-672255abd3b796bb",
+          "text": "Montreal (Canada) — Named after Mount Royal, a triple-peaked hill, this Canadian city balances city life with nature.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          },
+          "parts": [
+            [
+              20,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "常用被动形式 be named after sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

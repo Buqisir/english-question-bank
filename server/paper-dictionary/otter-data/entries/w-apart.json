@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 53
+    "mock": 23
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -217,93 +217,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:apart#s3",
-      "pos": "短语",
-      "glossZh": "使不同于；把……区分开",
-      "pronunciationId": "w:apart#p-main",
-      "note": "set sb/sth apart。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:apart#e-b5772349b213dc51",
-          "text": "The Red Cross was my passion and what I relied on to set me apart from other applicants.",
-          "source": {
-            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
-            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 60,
-            "end": 65
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:apart#s4",
-      "pos": "短语",
-      "glossZh": "除……之外",
-      "pronunciationId": "w:apart#p-main",
-      "note": "apart from，可引出例外，也可补充。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:apart#e-250c4ff9a3d55a21",
-          "text": "Luckily, she was still standing where she had been, Nevertheless, apart from the repeated “My…”, I knew nothing more about her.",
-          "source": {
-            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
-            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
-            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:6",
-              "sentence": 8
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 66,
-            "end": 71
-          }
-        },
-        {
-          "exampleId": "w:apart#e-cdc4a35e405054ae",
-          "text": "Apart from the deliciousness of those snacks, the majority of other UPFs, such as ready-to-eat meals and instant mixes, contain artificial flavors and preservatives.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n093",
-            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
-            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -312,6 +225,16 @@
       "reason": "分写的另一个词组。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:apart-from",
+    "w:break-apart",
+    "w:fall-apart",
+    "w:pull-apart",
+    "w:set-sb-sth-apart",
+    "w:take-apart"
+  ]
 }

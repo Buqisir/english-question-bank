@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 169
+    "mock": 12
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -352,12 +352,12 @@
       "pos": "v.",
       "glossZh": "尺寸为",
       "pronunciationId": "w:measure#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -386,6 +386,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:measure#s8",
+      "pos": "adj.",
+      "glossZh": "审慎的；有分寸的",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:measure#e-8478e7445b0f2851",
+          "text": "“If we want to equip students for an uncertain future and prepare them for meaningful careers, while also ensuring the survival of thoughtful, measured journalism in the age of AI, then the skills developed through these extracurriculars and courses really matter,” says Ed Glassman, executive director of the CEL.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 151
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -398,6 +431,6 @@
       "reason": "独立形容词用法，本批仅一条模拟例证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

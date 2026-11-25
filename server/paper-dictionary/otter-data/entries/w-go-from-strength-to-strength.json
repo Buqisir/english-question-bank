@@ -1,0 +1,104 @@
+{
+  "entryId": "w:go-from-strength-to-strength",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "from",
+      "strength",
+      "to",
+      "strength"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "from",
+        "strength",
+        "to",
+        "strength"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone from strength to strength",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go from strength to strength",
+  "senses": [
+    {
+      "senseId": "w:go-from-strength-to-strength#s1",
+      "pos": "短语",
+      "glossZh": "越来越成功；不断发展壮大",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s41",
+        "w:strength#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-from-strength-to-strength#e-853b25550d409878",
+          "text": "Since its birth, Harrogate Music Festival has gone from strength to strength.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 76
+          },
+          "parts": [
+            [
+              46,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -54,8 +54,8 @@
     "mock": 732
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 730
+    "gaokao": 20,
+    "mock": 604
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -241,7 +241,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -286,209 +286,16 @@
       ]
     },
     {
-      "senseId": "w:social#s5",
-      "pos": "短语",
-      "glossZh": "社交媒体",
-      "pronunciationId": "w:social#p-main",
-      "note": "social media。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:social#e-2564a78c991bedb8",
-          "text": "Share library announcements on your social media.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:social#e-05b3751476bbc602",
-          "text": "You might think about posting what you are looking for on social media, but it probably won’t result in a useful response.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "seven-choices-4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 64
-          }
-        },
-        {
-          "exampleId": "w:social#e-397da42f29fb679b",
-          "text": "As an artist who shares her journey on social media, I’m often asked by curious followers how to begin an art journey.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 45
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:social#s6",
-      "pos": "短语",
-      "glossZh": "社交网络",
-      "pronunciationId": "w:social#p-main",
-      "note": "social network，语料中指网站或服务。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:social#e-3879f79a324cf249",
-          "text": "Today his hobby has developed into the website postcrossing.com, a social network that has grown to 575,217 registered users in 214 countries and regions since he started it 10 years ago.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:social#e-9e52e7b0d0461e84",
-          "text": "Americans are still texting while driving, as well as using social networks and taking photos.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:social#s7",
-      "pos": "短语",
-      "glossZh": "社会研究课",
-      "pronunciationId": "w:social#p-main",
-      "note": "social studies。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:social#e-cb8ce2ec36f7c76a",
-          "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:social#s8",
-      "pos": "短语",
-      "glossZh": "社会保障",
-      "pronunciationId": "w:social#p-main",
-      "note": "social security。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:social#e-d861ebf9a94057da",
-          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 98
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:social#s9",
       "pos": "n.",
       "glossZh": "社交聚会",
       "pronunciationId": "w:social#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -500,7 +307,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -532,6 +339,8 @@
       "reason": "罕见义或特定国家制度的简称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

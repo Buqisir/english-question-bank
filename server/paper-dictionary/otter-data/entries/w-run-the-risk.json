@@ -1,0 +1,142 @@
+{
+  "entryId": "w:run-the-risk",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "runs the risk"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "the",
+      "risk"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "the",
+        "risk"
+      ],
+      [
+        "runs",
+        "the",
+        "risk"
+      ],
+      [
+        "ran",
+        "the",
+        "risk"
+      ],
+      [
+        "running",
+        "the",
+        "risk"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run the risk",
+  "senses": [
+    {
+      "senseId": "w:run-the-risk#s1",
+      "pos": "短语",
+      "glossZh": "冒着……的风险；有遭遇不良后果的可能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-the-risk#e-e0cb5e48bb05a662",
+          "text": "If we start removing pieces, we run the risk of becoming imbalanced and then opening up the door for injury.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          },
+          "parts": [
+            [
+              32,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-the-risk#e-79baccf6fd2ed1d6",
+          "text": "It runs the risk of expanding too fast.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:26#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 16
+          },
+          "parts": [
+            [
+              3,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              16
+            ]
+          ]
+        }
+      ],
+      "note": "常接 of (doing) sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

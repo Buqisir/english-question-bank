@@ -1,0 +1,60 @@
+{
+  "entryId": "w:take-precautions",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "precautions"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "precautions"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take precautions",
+  "senses": [
+    {
+      "senseId": "w:take-precautions#s1",
+      "pos": "短语",
+      "glossZh": "采取预防措施；事先防范",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:take#s45"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

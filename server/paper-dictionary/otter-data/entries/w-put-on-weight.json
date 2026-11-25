@@ -1,0 +1,103 @@
+{
+  "entryId": "w:put-on-weight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "on",
+      "weight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "on",
+        "weight"
+      ],
+      [
+        "puts",
+        "on",
+        "weight"
+      ],
+      [
+        "putting",
+        "on",
+        "weight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put on weight",
+  "senses": [
+    {
+      "senseId": "w:put-on-weight#s1",
+      "pos": "短语",
+      "glossZh": "体重增加；变胖",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-on-weight#e-a315b2291b68964f",
+          "text": "She’s put on weight.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,157 @@
+{
+  "entryId": "w:out-of-nowhere",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "nowhere"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "nowhere"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of nowhere",
+  "senses": [
+    {
+      "senseId": "w:out-of-nowhere#s1",
+      "pos": "短语",
+      "glossZh": "突然；毫无预兆地（出现或发生）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nowhere#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:out-of-nowhere#e-da63227c8748786c",
+          "text": "“My…daughter…my…”, an old lady out of nowhere came over to me.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 45
+          },
+          "parts": [
+            [
+              31,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-nowhere#e-54edb9a30e1fa582",
+          "text": "Panic hit me out of nowhere.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 27
+          },
+          "parts": [
+            [
+              13,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-nowhere#e-4a080ea4b5a34410",
+          "text": "Out of nowhere",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:cloze",
+            "locator": {
+              "question": 42,
+              "questionId": "question:paper-mock-hunan-yali-2026-second:42#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

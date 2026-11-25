@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 46
+    "mock": 4
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -276,40 +276,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:chicken#s6",
-      "pos": "短语",
-      "glossZh": "鸡和蛋的问题（难以判断哪一个是原因）",
-      "pronunciationId": "w:chicken#p-main",
-      "note": "chicken and egg",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chicken#e-6e6016f72fb6290c",
-          "text": "And it’s really crucial to study these issues further so the chicken and egg problem can be solved.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-02-first",
-            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
-            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-c:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 61,
-            "end": 68
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -318,6 +284,12 @@
       "reason": "俚语、旧义或同形义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:chicken-and-egg",
+    "w:chicken-out"
+  ]
 }

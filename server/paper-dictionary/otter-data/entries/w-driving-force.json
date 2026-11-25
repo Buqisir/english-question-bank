@@ -1,0 +1,108 @@
+{
+  "entryId": "w:driving-force",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "driving",
+      "force"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "driving",
+        "force"
+      ],
+      [
+        "driving",
+        "forces"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "driving force",
+  "senses": [
+    {
+      "senseId": "w:driving-force#s1",
+      "pos": "短语",
+      "glossZh": "促成或推动某事的动力、人或因素",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:driving-force#e-aa7fb4014c4f14d5",
+          "text": "What was the driving force behind Picasso’s artistic exploration?",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-fujian-putian-2026-03-second-quality-test:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "常接 behind。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:driving-force#s2",
+      "pos": "短语",
+      "glossZh": "（物理、工程）驱动力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

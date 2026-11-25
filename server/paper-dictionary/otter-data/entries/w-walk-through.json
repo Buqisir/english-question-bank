@@ -1,0 +1,98 @@
+{
+  "entryId": "w:walk-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking through"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "through"
+      ],
+      [
+        "walking",
+        "through"
+      ],
+      [
+        "walked",
+        "through"
+      ],
+      [
+        "walks",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk (sb) through sth",
+  "senses": [
+    {
+      "senseId": "w:walk-through#s1",
+      "pos": "短语",
+      "glossZh": "给某人逐步讲解；带某人一步步完成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-through#s2",
+      "pos": "短语",
+      "glossZh": "（正式开始前）把流程从头到尾过一遍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-through#s3",
+      "pos": "短语",
+      "glossZh": "轻松完成；轻松通过",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

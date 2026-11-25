@@ -1,0 +1,94 @@
+{
+  "entryId": "w:much-less",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "much",
+      "less"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "much",
+        "less"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "much less",
+  "senses": [
+    {
+      "senseId": "w:much-less#s1",
+      "pos": "短语",
+      "glossZh": "更不用说；更谈不上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:less#s6",
+        "w:much#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:much-less#e-915af0224a387d98",
+          "text": "Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world – much less to their personal interests.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 134,
+            "end": 143
+          },
+          "parts": [
+            [
+              134,
+              143
+            ]
+          ],
+          "highlightRanges": [
+            [
+              134,
+              143
+            ]
+          ]
+        }
+      ],
+      "note": "接在否定或含否定意味的表述后。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 310
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 310
+    "gaokao": 1,
+    "mock": 114
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 49,
-        "mock": 0
+        "mock": 189
       },
       "folded": false,
       "examples": [
@@ -118,52 +118,17 @@
       ]
     },
     {
-      "senseId": "w:tree#s2",
-      "pos": "短语",
-      "glossZh": "找错对象；想错方向",
-      "pronunciationId": "w:tree#p-main",
-      "note": "bark up the wrong tree。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:tree#e-402cebef5a1bc834",
-          "text": "barking up the wrong tree",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:tree#s3",
       "pos": "n.",
       "glossZh": "树状图",
       "pronunciationId": "w:tree#p-main",
       "note": "如 family tree（家谱）。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -173,6 +138,12 @@
       "reason": "专门或旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bark-up-the-wrong-tree",
+    "w:family-tree"
+  ]
 }

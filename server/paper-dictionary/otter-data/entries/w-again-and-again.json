@@ -1,0 +1,154 @@
+{
+  "entryId": "w:again-and-again",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "again",
+      "and",
+      "again"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "again",
+        "and",
+        "again"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "again and again",
+  "senses": [
+    {
+      "senseId": "w:again-and-again#s1",
+      "pos": "短语",
+      "glossZh": "一再；反复地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:again-and-again#e-4ac9af96b994d023",
+          "text": "Now, write it again.\" I wrote it again, and again and again.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 59
+          },
+          "parts": [
+            [
+              44,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:again-and-again#e-4a61c866a3c8ccec",
+          "text": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until,suddenly, it does not work at all anymore.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 73
+          },
+          "parts": [
+            [
+              58,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:again-and-again#e-4507e90194f93550",
+          "text": "That sparked her idea for something more environmental – a lightweight cup that could be used again and again.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 109
+          },
+          "parts": [
+            [
+              94,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

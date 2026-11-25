@@ -1,0 +1,154 @@
+{
+  "entryId": "w:lose-touch",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "losing touch"
+  ],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "touch"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "touch"
+      ],
+      [
+        "losing",
+        "touch"
+      ],
+      [
+        "loses",
+        "touch"
+      ],
+      [
+        "lost",
+        "touch"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lost touch",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose touch (with sb/sth)",
+  "senses": [
+    {
+      "senseId": "w:lose-touch#s1",
+      "pos": "短语",
+      "glossZh": "（与某人）失去联系",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lose-touch#e-0df0a8f96f3daac8",
+          "text": "Making friends and then losing touch teaches you that everything is temporary.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-touch#e-268849890bf86258",
+          "text": "He lost touch with his mother in India.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zj-qiangji-2026-mar:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lose-touch#s2",
+      "pos": "短语",
+      "glossZh": "逐渐不了解某领域或情况的最新变化",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,171 @@
+{
+  "entryId": "w:build-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "build",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "into"
+      ],
+      [
+        "building",
+        "into"
+      ],
+      [
+        "builds",
+        "into"
+      ],
+      [
+        "built",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "built into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build sth into sth",
+  "senses": [
+    {
+      "senseId": "w:build-into#s1",
+      "pos": "短语",
+      "glossZh": "把……嵌入……；把……纳入……成为一部分",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:build#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:build-into#e-335cfe925db8f5b7",
+          "text": "The toy industry is pushing forward with AI chatbots built into stuffed animals and mini robots.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 63
+          },
+          "parts": [
+            [
+              53,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-into#e-ae51cc75a5661d83",
+          "text": "Product placements are built into the shows, turning cooking into a tool to chase ratings and make profits.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-into#e-78608be89f890703",
+          "text": "These bricks find various applications, from individual blocks and dividing walls to furniture parts built into chairs and tables.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 111
+          },
+          "parts": [
+            [
+              101,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              111
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

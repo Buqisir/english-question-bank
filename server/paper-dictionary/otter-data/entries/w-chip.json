@@ -65,7 +65,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 11
+    "mock": 3
   },
   "senses": [
     {
@@ -128,7 +128,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -251,7 +251,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -378,34 +378,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:chip#s7",
-      "pos": "短语",
-      "glossZh": "凑钱；出一份力",
-      "pronunciationId": "w:chip#p-main",
-      "note": "chip in。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:chip#s8",
-      "pos": "短语",
-      "glossZh": "插话",
-      "pronunciationId": "w:chip#p-main",
-      "note": "chip in。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -414,6 +386,11 @@
       "reason": "运动、科技专门用法或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:chip-in"
+  ]
 }

@@ -1,0 +1,76 @@
+{
+  "entryId": "w:on-sight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "sight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "sight"
+      ],
+      [
+        "on",
+        "sights"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on sight",
+  "senses": [
+    {
+      "senseId": "w:on-sight#s1",
+      "pos": "短语",
+      "glossZh": "一看见就；一见到便立即",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:on-sight#s2",
+      "pos": "短语",
+      "glossZh": "在无事先提示的情况下首次尝试即完成攀岩路线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "攀岩术语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

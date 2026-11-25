@@ -1,0 +1,186 @@
+{
+  "entryId": "w:work-on-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "work on",
+    "working on",
+    "works on"
+  ],
+  "pattern": {
+    "tokens": [
+      "work",
+      "on",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "work",
+        "on",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "work",
+        "on"
+      ],
+      [
+        "working",
+        "on"
+      ],
+      [
+        "works",
+        "on"
+      ],
+      [
+        "worked",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "worked on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "work on sth",
+  "senses": [
+    {
+      "senseId": "w:work-on-sth#s1",
+      "pos": "短语",
+      "glossZh": "着手做；致力于完成或改进",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:work#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:work-on-sth#e-7b1386245d742dea",
+          "text": "This kind of \"distracted focus\" appears to be the best state for working on creative tasks.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 75
+          },
+          "parts": [
+            [
+              65,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-on-sth#e-d6b1f2d594f9ead1",
+          "text": "Engineers are now working on a new concept: the rail drones of the future.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 28
+          },
+          "parts": [
+            [
+              18,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:work-on-sth#e-135840ef7a6a11fd",
+          "text": "I had my own bedroom, so I worked on removing things I didn't need.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "常接项目、任务、作品或技能。",
+      "counts": {
+        "gaokao": 8,
+        "mock": 82
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

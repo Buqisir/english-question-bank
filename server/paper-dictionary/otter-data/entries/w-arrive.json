@@ -58,8 +58,8 @@
     "mock": 219
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 218
+    "gaokao": 5,
+    "mock": 23
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 34,
-        "mock": 0
+        "mock": 165
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -193,7 +193,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -219,51 +219,17 @@
       ]
     },
     {
-      "senseId": "w:arrive#s4",
-      "pos": "短语",
-      "glossZh": "得出（结论）；作出（决定）",
-      "pronunciationId": "w:arrive#p-main",
-      "note": "arrive at sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:arrive#e-e34cd6e32917c005",
-          "text": "BYU professors Laura Padilla-Walker and Randal Day arrived at these findings after following 325 American families over several years.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:arrive#s5",
       "pos": "v.",
       "glossZh": "获得成功；得到认可",
       "pronunciationId": "w:arrive#p-main",
       "note": "常用 have arrived。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -273,6 +239,8 @@
       "reason": "少见或历史义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

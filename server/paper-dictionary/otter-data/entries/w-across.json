@@ -366,6 +366,14 @@
       "reason": "特定领域或地区用法"
     }
   ],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:across-from",
+    "w:across-the-board",
+    "w:across-the-way",
+    "w:come-across",
+    "w:get-across",
+    "w:run-across"
+  ]
 }

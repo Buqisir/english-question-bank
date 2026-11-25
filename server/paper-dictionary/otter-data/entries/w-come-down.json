@@ -1,0 +1,331 @@
+{
+  "entryId": "w:come-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came down",
+    "comes down",
+    "coming down"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "down"
+      ],
+      [
+        "came",
+        "down"
+      ],
+      [
+        "comes",
+        "down"
+      ],
+      [
+        "coming",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come down",
+  "senses": [
+    {
+      "senseId": "w:come-down#s1",
+      "pos": "短语",
+      "glossZh": "下来；从高处落下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-down#e-8e0bce0109e34b4f",
+          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-down#e-723b76289efee30e",
+          "text": "That day, I was carrying express boxes upstairs when she slowly came down, holding the handrail （楼梯扶手）.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          },
+          "parts": [
+            [
+              64,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-down#e-c50a336203f6bb1c",
+          "text": "They go up, and we need them to come down.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:come-down#s2",
+      "pos": "短语",
+      "glossZh": "（雨、雪）下起来；落下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-down#e-da62687f9191f2f9",
+          "text": "As the snow came down more and more heavily, Emily was directed off the highway.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-down#e-65f1303d29998fe8",
+          "text": "Paragraph 2: We hurried outside, and sure enough, snow was coming down in thick sheets.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "可用 heavily 等描述雨雪的强度。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:come-down#s3",
+      "pos": "短语",
+      "glossZh": "（价格、费用等）下降",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-down#e-c29225fdb1594ca1",
+          "text": "“A streamlined panel focusing on the brain, heart and immune system could reach clinics within two to three years,” he predicts, “and the cost will come down as we focus on fewer key organs.”",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 148,
+            "end": 157
+          },
+          "parts": [
+            [
+              148,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              148,
+              157
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-down#s4",
+      "pos": "短语",
+      "glossZh": "（建筑物等）倒塌；被拆除",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-down#s5",
+      "pos": "短语",
+      "glossZh": "（故事、传统等）流传下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-down#s6",
+      "pos": "短语",
+      "glossZh": "从兴奋状态恢复平静",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,167 @@
+{
+  "entryId": "w:interfere-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "interfere",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "interfere",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "interfere with",
+      "tags": []
+    },
+    {
+      "form": "interfered with",
+      "tags": []
+    },
+    {
+      "form": "interferes with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "interfere with sth",
+  "senses": [
+    {
+      "senseId": "w:interfere-with#s1",
+      "pos": "短语",
+      "glossZh": "妨碍；干扰……的正常进行或运作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:with#s31"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:interfere-with#e-ae8954638ae0f09a",
+          "text": "“There’s the potential that these nanomaterials interfere with the connections between axons (轴突) in the brain.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 62
+          },
+          "parts": [
+            [
+              48,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:interfere-with#e-5876835397d6fb44",
+          "text": "Many artists worry that artificial intelligence may interfere with artistic creation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:interfere-with#e-a69b530499eb1b92",
+          "text": "High levels of cortisol can hurt the heart system and interfere with immune function.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 68
+          },
+          "parts": [
+            [
+              54,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

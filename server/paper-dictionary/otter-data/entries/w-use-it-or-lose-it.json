@@ -1,0 +1,122 @@
+{
+  "entryId": "w:use-it-or-lose-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "use",
+      "it",
+      "or",
+      "lose",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "use",
+        "it",
+        "or",
+        "lose",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "use it or lose it",
+  "senses": [
+    {
+      "senseId": "w:use-it-or-lose-it#s1",
+      "pos": "短语",
+      "glossZh": "技能或知识长期不用就会生疏",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:use-it-or-lose-it#e-713ba1d6d2d00e89",
+          "text": "The saying “use it or lose it” applies perfectly to vocabulary.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 29
+          },
+          "parts": [
+            [
+              12,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:use-it-or-lose-it#s2",
+      "pos": "短语",
+      "glossZh": "权利或资格长期不行使就可能失去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:use-it-or-lose-it#s3",
+      "pos": "短语",
+      "glossZh": "长期不锻炼就会丧失体能",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

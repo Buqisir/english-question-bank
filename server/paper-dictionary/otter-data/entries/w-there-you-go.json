@@ -1,0 +1,134 @@
+{
+  "entryId": "w:there-you-go",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "there",
+      "you",
+      "go"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "there",
+        "you",
+        "go"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "there you go",
+  "senses": [
+    {
+      "senseId": "w:there-you-go#s3",
+      "pos": "短语",
+      "glossZh": "给你；拿着",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:there-you-go#e-90041bc6bf7030e3",
+          "text": "Well, there you go, Gerard.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 18
+          },
+          "parts": [
+            [
+              6,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "递东西时说。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:there-you-go#s1",
+      "pos": "短语",
+      "glossZh": "对，就是这样；这就对了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于肯定对方的做法，或指出对方也得出了相同的结论。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:there-you-go#s2",
+      "pos": "短语",
+      "glossZh": "事情就是这样；也只能这样了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:there-you-go#s4",
+      "pos": "短语",
+      "glossZh": "你看，又来了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用不耐烦的语气指出对方又做了同样的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

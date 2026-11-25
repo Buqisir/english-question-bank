@@ -54,8 +54,8 @@
     "mock": 652
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 652
+    "gaokao": 21,
+    "mock": 501
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 38,
-        "mock": 0
+        "mock": 123
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -305,181 +305,6 @@
       ]
     },
     {
-      "senseId": "w:high#s5",
-      "pos": "短语",
-      "glossZh": "高中",
-      "pronunciationId": "w:high#p-main",
-      "note": "high school。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 15,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:high#e-7ffba604898f147e",
-          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        },
-        {
-          "exampleId": "w:high#e-0d1a032a4b87fa55",
-          "text": "Urban Sprouts’ classes, at two middle schools and two high schools, include hands-on experiments such as soil testing, flower-and-seed dissection, tastings of fresh or dried produce, and work in the garden.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:high#e-d32cb38cebf6406b",
-          "text": "Eva spent the first week of high school trying to keep her head above water.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:high#s6",
-      "pos": "短语",
-      "glossZh": "情绪高涨",
-      "pronunciationId": "w:high#p-main",
-      "note": "spirits are high。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:high#e-e92e4878bc7c4d6f",
-          "text": "The end of the school year was in sight and spirits were high.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 61
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:high#s7",
-      "pos": "短语",
-      "glossZh": "旺季",
-      "pronunciationId": "w:high#p-main",
-      "note": "high season。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:high#e-bbc666226e3ce109",
-          "text": "Open: High Season 1 Apr – 31 Oct: Mon to Sat 10.00 – 17.00, Sun 11.00 – 17.00.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:14",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:high#s8",
-      "pos": "短语",
-      "glossZh": "高科技",
-      "pronunciationId": "w:high#p-main",
-      "note": "high technology。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:high#e-869fcb463ff9b905",
-          "text": "Applying high technology.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:29",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:high#s9",
       "pos": "adj.",
       "glossZh": "高等的",
@@ -488,7 +313,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -510,41 +335,6 @@
           "target": {
             "start": 9,
             "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:high#s10",
-      "pos": "短语",
-      "glossZh": "志向高远",
-      "pronunciationId": "w:high#p-main",
-      "note": "aim high。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:high#e-0273a52fdc4b3312",
-          "text": "Aim high.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
-            "locator": {
-              "question": 17,
-              "questionId": "question:listening:17",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 8
           }
         }
       ]
@@ -575,6 +365,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:high#s13",
+      "pos": "n.",
+      "glossZh": "强烈的兴奋感；快感",
+      "pronunciationId": "w:high#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:high#e-213ce6002e3661d7",
+          "text": "I know that craving the high of posting may not be cool, but I desperately miss sharing travel photos.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -583,6 +406,17 @@
       "reason": "地理、语音或航海专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:aim-high",
+    "w:get-high",
+    "w:high-and-low",
+    "w:high-point",
+    "w:high-season",
+    "w:high-street",
+    "w:spirits-are-high"
+  ]
 }

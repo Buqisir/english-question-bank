@@ -59,8 +59,8 @@
     "mock": 350
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 349
+    "gaokao": 9,
+    "mock": 166
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -330,84 +330,16 @@
       ]
     },
     {
-      "senseId": "w:meet#s5",
-      "pos": "短语",
-      "glossZh": "遭遇；得到（某种反应）",
-      "pronunciationId": "w:meet#p-main",
-      "note": "meet with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:meet#e-a9f6114de5509bba",
-          "text": "Most parents will have eagerly asked their child about their day, only to meet with a “good”, quickly followed by \"I’m hungry\".",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:meet#s6",
-      "pos": "短语",
-      "glossZh": "收支相抵",
-      "pronunciationId": "w:meet#p-main",
-      "note": "make ends meet。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:meet#e-0e6788b7dd87a49e",
-          "text": "Many of their families were struggling to make ends meet.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:meet#s7",
       "pos": "v.",
       "glossZh": "相接；交汇",
       "pronunciationId": "w:meet#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -418,7 +350,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -469,13 +401,92 @@
       "glossZh": "体育比赛",
       "pronunciationId": "w:meet#p-main",
       "note": "主要用于美式英语，如 track meet。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:meet#s10",
+      "pos": "v.",
+      "glossZh": "迎上（某人的目光）；与……对视",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:meet#s11",
+      "pos": "v.",
+      "glossZh": "显现在眼前；看得出来（meet the eye）",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-b299cea15405490c",
+          "text": "There’s more to beach sand than meets the eye.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s12",
+      "pos": "v.",
+      "glossZh": "从对方的现状或习惯出发与其沟通",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-c16304ca75422341",
+          "text": "This is a widespread phenomenon for any teacher, but my students’ awareness of it allowed me to step into the moment immediately to meet them where they were.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 136
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -484,6 +495,15 @@
       "reason": "旧义或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:make-ends-meet",
+    "w:meet-up",
+    "w:meet-up-with",
+    "w:meet-with",
+    "w:nice-to-meet-you"
+  ]
 }

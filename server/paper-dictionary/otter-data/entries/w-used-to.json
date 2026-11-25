@@ -1,0 +1,263 @@
+{
+  "entryId": "w:used-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "used",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "used",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "used to",
+  "senses": [
+    {
+      "senseId": "w:used-to#s1",
+      "pos": "短语",
+      "glossZh": "过去常常；曾经",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:to#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:used-to#e-3c27db00dc656756",
+          "text": "I used to afraid of insects, but last Friday’s biology class make a big change in me.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:writing-short-error-correction:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          },
+          "parts": [
+            [
+              2,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to#e-1fcaea0ec6fef0c1",
+          "text": "Almost one third say they now use a wider variety of ingredients (配料) than they used to, and just under 1 in 4 say they now buy better quality ingredients than before.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 87
+          },
+          "parts": [
+            [
+              80,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to#e-2c08cb1f26a0d48a",
+          "text": "These old bones can’t do what they used to.” The arrangement made perfect sense.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          },
+          "parts": [
+            [
+              35,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "后接动词原形，指过去的习惯或状态。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:used-to#s2",
+      "pos": "短语",
+      "glossZh": "习惯于；已适应",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:used-to#e-fb55b54e5c229017",
+          "text": "In the Digital Age, we’re used to having what we need immediately and right at our fingertips.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          },
+          "parts": [
+            [
+              26,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to#e-3c2920cae3a28fad",
+          "text": "While the younger generations prefer to communicate visually, for those used to working with traditional tools like email, it may feel like a learning curve(曲线).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 79
+          },
+          "parts": [
+            [
+              72,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:used-to#e-c3b1f3f5ce5b4f13",
+          "text": "I had been so used to the work mode that I didn’t realize I was bringing it into family life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:cloze:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          },
+          "parts": [
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "用于 be、get 或 grow used to，to 后接名词、代词或动名词。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,8 +62,8 @@
     "mock": 1277
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 1277
+    "gaokao": 10,
+    "mock": 1086
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 82,
-        "mock": 0
+        "mock": 93
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 75,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -353,108 +353,29 @@
       ]
     },
     {
-      "senseId": "w:need#s5",
-      "pos": "短语",
-      "glossZh": "需要（某人或某物）",
-      "pronunciationId": "w:need#p-main",
-      "note": "in need of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:need#e-fdb5c2670cd32b4e",
-          "text": "The humidity (湿气) of large rainforests contributes to the formation of rainclouds that may travel to other countries in need of rain.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 120,
-            "end": 124
-          }
-        },
-        {
-          "exampleId": "w:need#e-e9776cdba5c88089",
-          "text": "Russia’s public health care service has been in serious need of modernization.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:need#s6",
-      "pos": "短语",
-      "glossZh": "处于困境",
-      "pronunciationId": "w:need#p-main",
-      "note": "in need。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:need#e-5e1c2908bcc9704c",
-          "text": "I thought that we would just be passing out dinners to those in need, but I found out we would be doing everything from preparing to serving the dinner.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:need#s7",
       "pos": "modal v.",
       "glossZh": "需要（通常用于否定句或疑问句）",
       "pronunciationId": "w:need#p-main",
       "note": "如 need not do sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-friend-in-need-is-a-friend-indeed",
+    "w:in-need",
+    "w:in-need-of",
+    "w:need-not"
+  ]
 }

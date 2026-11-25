@@ -130,6 +130,9 @@
       "reason": "比喻性称谓，本批语料缺少用例"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:put-an-animal-to-sleep"
+  ]
 }

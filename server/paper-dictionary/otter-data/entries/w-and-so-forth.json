@@ -1,0 +1,62 @@
+{
+  "entryId": "w:and-so-forth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "and",
+      "so",
+      "forth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "and",
+        "so",
+        "forth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "and so forth",
+  "senses": [
+    {
+      "senseId": "w:and-so-forth#s1",
+      "pos": "短语",
+      "glossZh": "等等；诸如此类",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:and#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

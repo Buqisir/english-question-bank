@@ -1,0 +1,85 @@
+{
+  "entryId": "w:gun-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "gun",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "gun",
+        "for"
+      ],
+      [
+        "gunned",
+        "for"
+      ],
+      [
+        "gunning",
+        "for"
+      ],
+      [
+        "guns",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "gun for",
+  "senses": [
+    {
+      "senseId": "w:gun-for#s1",
+      "pos": "短语",
+      "glossZh": "竭力争取某个目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:gun#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:gun-for#s2",
+      "pos": "短语",
+      "glossZh": "盯上某人；力图击败某人或使其失势",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

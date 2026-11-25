@@ -1,0 +1,171 @@
+{
+  "entryId": "w:go-without",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "without"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "without"
+      ],
+      [
+        "goes",
+        "without"
+      ],
+      [
+        "going",
+        "without"
+      ],
+      [
+        "gone",
+        "without"
+      ],
+      [
+        "went",
+        "without"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go without",
+  "senses": [
+    {
+      "senseId": "w:go-without#s1",
+      "pos": "短语",
+      "glossZh": "不用或没有……也照样生活或做事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-without#e-94559d447b22601d",
+          "text": "I laughed it off at first but decided to go without mine for a month.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-heze-2026-03-first:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-without#e-0945ea8b35bff5d8",
+          "text": "One day, I decided to see how long I could go without using plastic.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-without#e-d23fd19e086c97ae",
+          "text": "I especially love that doing a puzzle doesn’t involve a screen in any capacity since so many aspects of my life almost can’t go without my computer, my phone or the television – even following a workout app in the gym or listening to a podcast on a walk.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 135
+          },
+          "parts": [
+            [
+              125,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              135
+            ]
+          ]
+        }
+      ],
+      "note": "可指主动不用，也可指缺少某物时将就。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

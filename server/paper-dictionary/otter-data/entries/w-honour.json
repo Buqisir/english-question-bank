@@ -84,8 +84,8 @@
     "mock": 90
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 82
+    "gaokao": 7,
+    "mock": 30
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -182,7 +182,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -246,59 +246,6 @@
       ]
     },
     {
-      "senseId": "w:honour#s4",
-      "pos": "短语",
-      "glossZh": "为纪念……；为向……致敬",
-      "pronunciationId": "w:honour#p-main",
-      "note": "in honour of 或 in sb’s honour。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:honour#e-4baba0269633a9c2",
-          "text": "In February 2025, he spent 10 hours running 40 miles to create a snake in honor of the Lunar New Year.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 74,
-            "end": 79
-          }
-        },
-        {
-          "exampleId": "w:honour#e-39fc131198cec722",
-          "text": "This year, consider donating to Feeding America in honor of your friends and family.",
-          "source": {
-            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
-            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
-            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:honour#s5",
       "pos": "n.",
       "glossZh": "荣幸",
@@ -306,7 +253,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -340,7 +287,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -389,12 +336,12 @@
       "pos": "v.",
       "glossZh": "遵守；履行（承诺或协议）",
       "pronunciationId": "w:honour#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -409,6 +356,91 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:honour#s9",
+      "pos": "n.",
+      "glossZh": "（美）优等生进阶课程",
+      "pronunciationId": "w:honour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:honour#e-0e185ae9d3f28e7f",
+          "text": "One day, Ms. Clark read a story about a teacher who treated her slow history class as an honors class.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:honour#e-a682444098ca6763",
+          "text": "I put into my honors math and science classes.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:honour#s10",
+      "pos": "v.",
+      "glossZh": "尊重；敬重",
+      "pronunciationId": "w:honour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:honour#e-645cedad69de8896",
+          "text": "We urgently need this courage – to see each other and ourselves clearly, and to honor the real truth hidden in plain sight.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -417,6 +449,12 @@
       "reason": "历史或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-honour-of",
+    "w:in-ones-honour"
+  ]
 }

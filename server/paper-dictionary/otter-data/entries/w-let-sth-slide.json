@@ -1,0 +1,131 @@
+{
+  "entryId": "w:let-sth-slide",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "let something slide"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      {
+        "slot": "sth"
+      },
+      "slide"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "let",
+        {
+          "slot": "sth"
+        },
+        "slide"
+      ],
+      [
+        "let",
+        "something",
+        "slide"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "let slide",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let sth slide",
+  "senses": [
+    {
+      "senseId": "w:let-sth-slide#s1",
+      "pos": "短语",
+      "glossZh": "疏于料理；任由某事荒废",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:slide#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-sth-slide#e-dc3e70e4ec1cbbd0",
+          "text": "It is so easy to let an online course slide, but your grades will suffer as a result.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 43
+          },
+          "parts": [
+            [
+              17,
+              20
+            ],
+            [
+              38,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              20
+            ],
+            [
+              38,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:let-sth-slide#s2",
+      "pos": "短语",
+      "glossZh": "（对过错等）不予追究",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

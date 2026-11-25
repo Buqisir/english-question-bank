@@ -1,0 +1,342 @@
+{
+  "entryId": "w:warm-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "warm",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "warm",
+        "up"
+      ],
+      [
+        "warmed",
+        "up"
+      ],
+      [
+        "warming",
+        "up"
+      ],
+      [
+        "warms",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "warm up",
+      "tags": []
+    },
+    {
+      "form": "warming up",
+      "tags": []
+    },
+    {
+      "form": "warms up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "warm (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:warm-up#s1",
+      "pos": "短语",
+      "glossZh": "变暖；暖和起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s47"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:warm-up#e-df1430e75807f07a",
+          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 98
+          },
+          "parts": [
+            [
+              90,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:warm-up#s2",
+      "pos": "短语",
+      "glossZh": "热身；为活动做准备",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s57",
+        "w:warm#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:warm-up#e-2a3e5afe1fa44ceb",
+          "text": "Students from seven different primary schools in and around the small town were warming up and walking the route(路线)through thick evergreen forest.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "writing-continuation-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 90
+          },
+          "parts": [
+            [
+              80,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:warm-up#s3",
+      "pos": "短语",
+      "glossZh": "把……加热；把……重新热一下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:warm-up#e-f806268b7b4d5071",
+          "text": "Warm up the teapot.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:warm-up#s4",
+      "pos": "短语",
+      "glossZh": "（使发动机或设备）预热至工作温度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:warm-up#e-d56dd0df03717acf",
+          "text": "Warming up their cars.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:warm-up#s8",
+      "pos": "短语",
+      "glossZh": "逐渐喜欢或接受",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:warm-up#e-09bae88314dafee7",
+          "text": "On day two, Dion and the dog took some time to warm up to each other, and she even tried to chew his running equipment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "此义用 warm up to sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:warm-up#s5",
+      "pos": "短语",
+      "glossZh": "使观众或听众活跃起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:warm-up#s6",
+      "pos": "短语",
+      "glossZh": "预热缓存",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:warm-up#s7",
+      "pos": "短语",
+      "glossZh": "逐步建立发信域名的信誉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

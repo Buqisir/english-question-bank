@@ -59,8 +59,8 @@
     "mock": 60
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 53
+    "gaokao": 5,
+    "mock": 18
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -252,78 +252,6 @@
       "examples": []
     },
     {
-      "senseId": "w:knock#s5",
-      "pos": "短语",
-      "glossZh": "撞倒；碰翻",
-      "pronunciationId": "w:knock#p-main",
-      "note": "knock sb/sth down/over。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:knock#e-315c6b01c2f2d0f1",
-          "text": "Eric Brown, only three years old, knocked Henry down when he fell.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:knock#e-6e12ca10279dd0af",
-          "text": "What should the students do if a chemical container is knocked over?",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
-            "locator": {
-              "question": 18,
-              "questionId": "question:listening:18",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:knock#e-13eb3f92e8ba7320",
-          "text": "Sometimes he’d accidentally knock over a chair.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
-            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:knock#s6",
       "pos": "n.",
       "glossZh": "打击；挫折",
@@ -335,6 +263,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:knock#s7",
+      "pos": "v.",
+      "glossZh": "使大为震惊（knock sb for six）",
+      "pronunciationId": "w:knock#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:knock#e-32723ae88d058760",
+          "text": "Their enthusiasm for the smallest joy knocked me for six.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -343,6 +304,11 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:knock-sb-sth-down-over"
+  ]
 }

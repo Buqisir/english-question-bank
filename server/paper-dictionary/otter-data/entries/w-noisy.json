@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 0
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -156,6 +156,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:noisy#s3",
+      "pos": "adj.",
+      "glossZh": "有障碍或干扰的（环境）",
+      "pronunciationId": "w:noisy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:noisy#e-dbf36b97f9e881ac",
+          "text": "That is, if we want to transport goods over “noisy” environment, say fallen trees and large rocks, in a reasonable amount of time, could we do it by just adding legs to the robot and do so without expensive sensors and cameras?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 50
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -164,6 +197,6 @@
       "reason": "较少见的比喻义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

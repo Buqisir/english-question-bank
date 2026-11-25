@@ -1,0 +1,173 @@
+{
+  "entryId": "w:track-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "track",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "track",
+        "down"
+      ],
+      [
+        "tracked",
+        "down"
+      ],
+      [
+        "tracking",
+        "down"
+      ],
+      [
+        "tracks",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "track down",
+      "tags": []
+    },
+    {
+      "form": "tracked down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "track sb/sth down",
+  "senses": [
+    {
+      "senseId": "w:track-down#s1",
+      "pos": "短语",
+      "glossZh": "追查到；费力找到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:track-down#e-22d46c099b817e1b",
+          "text": "She tracked down the orphaned cub, adopted it, named it Green and brought it back to Chengdu to look after.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 16
+          },
+          "parts": [
+            [
+              4,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:track-down#e-7f5f03939973274f",
+          "text": "On the way you’ll track down some amazing treasures and learn tales of human history.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          },
+          "parts": [
+            [
+              18,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:track-down#e-d5b9d0afff11fcd2",
+          "text": "Finding safe-enough spots for practice might be tough, yet with a little creativity, parents can track down dead ends or unused parking lots.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 107
+          },
+          "parts": [
+            [
+              97,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

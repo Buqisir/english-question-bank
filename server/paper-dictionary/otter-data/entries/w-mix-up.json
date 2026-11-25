@@ -1,0 +1,195 @@
+{
+  "entryId": "w:mix-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mix",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mix",
+        "up"
+      ],
+      [
+        "mixed",
+        "up"
+      ],
+      [
+        "mixes",
+        "up"
+      ],
+      [
+        "mixing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "mixing up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mix (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:mix-up#s1",
+      "pos": "短语",
+      "glossZh": "把……弄混；混淆",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mix#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mix-up#e-ea191c5d6062dcbd",
+          "text": "Yet, a closer examination reveals methodological flaws: mixing up the enjoyment of cruelty with a general interest in horror narratives.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 65
+          },
+          "parts": [
+            [
+              56,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              65
+            ]
+          ]
+        }
+      ],
+      "note": "常用 mix A up with B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:mix-up#s2",
+      "pos": "短语",
+      "glossZh": "把材料拌匀；调配",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:mix-up#e-01958335b738b6d9",
+          "text": "By six, mom trusted me with chopping boiled eggs and mixing up cookie dough.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 62
+          },
+          "parts": [
+            [
+              53,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:mix-up#s3",
+      "pos": "短语",
+      "glossZh": "混在一起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mix-up#s4",
+      "pos": "短语",
+      "glossZh": "卷入；与……搅在一起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be 或 get mixed up in sth／with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mix-up#s5",
+      "pos": "短语",
+      "glossZh": "打乱顺序",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

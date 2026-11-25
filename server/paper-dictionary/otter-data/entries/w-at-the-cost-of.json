@@ -1,0 +1,159 @@
+{
+  "entryId": "w:at-the-cost-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "cost",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "cost",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the cost of",
+  "senses": [
+    {
+      "senseId": "w:at-the-cost-of#s1",
+      "pos": "短语",
+      "glossZh": "以……为代价",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-cost-of#e-e5b4ba1b3628f546",
+          "text": "Modernity is usually achieved at the cost of elegance.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2022-national-a:35#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 44
+          },
+          "parts": [
+            [
+              30,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-cost-of#e-a821cfbc28f154bf",
+          "text": "“We shouldn't be expanding clean energy at the cost of biodiversity loss,” warns Elisa Stephens, a researcher at the University of California, Davis.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 54
+          },
+          "parts": [
+            [
+              40,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-cost-of#e-d49d0fa305ece8de",
+          "text": "“We shouldn’t be expanding clean energy at the cost of biodiversity loss,” warns Elisa Stephens, a researcher at the University of California, Davis.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 54
+          },
+          "parts": [
+            [
+              40,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

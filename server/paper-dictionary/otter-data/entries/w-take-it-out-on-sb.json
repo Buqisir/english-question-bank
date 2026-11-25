@@ -1,0 +1,71 @@
+{
+  "entryId": "w:take-it-out-on-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "it",
+      "out",
+      "on",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "it",
+        "out",
+        "on",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take it out on sb",
+  "senses": [
+    {
+      "senseId": "w:take-it-out-on-sb#s1",
+      "pos": "短语",
+      "glossZh": "把气撒在某人身上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:it#s17",
+        "w:take#s42"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

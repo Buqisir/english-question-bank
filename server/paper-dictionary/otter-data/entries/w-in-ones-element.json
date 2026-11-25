@@ -1,0 +1,66 @@
+{
+  "entryId": "w:in-ones-element",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      {
+        "slot": "one's"
+      },
+      "element"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        {
+          "slot": "one's"
+        },
+        "element"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in one's element",
+  "senses": [
+    {
+      "senseId": "w:in-ones-element#s1",
+      "pos": "短语",
+      "glossZh": "在擅长或喜欢的环境中如鱼得水",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:element#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

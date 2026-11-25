@@ -1,0 +1,125 @@
+{
+  "entryId": "w:new-normal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "new",
+      "normal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "new",
+        "normal"
+      ],
+      [
+        "new",
+        "normals"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "new normal",
+  "senses": [
+    {
+      "senseId": "w:new-normal#s1",
+      "pos": "短语",
+      "glossZh": "新常态；变化后逐渐成为日常的状态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:new-normal#e-6870c3d28725dcaf",
+          "text": "The future we imagined becomes just the new normal.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:new-normal#e-0ad315bcb7b08288",
+          "text": "But as I add some of the things I loved about living abroad to my home life, while realizing that there are some feelings I can’t replace, I’m starting to find a new normal.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n085:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 162,
+            "end": 172
+          },
+          "parts": [
+            [
+              162,
+              172
+            ]
+          ],
+          "highlightRanges": [
+            [
+              162,
+              172
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

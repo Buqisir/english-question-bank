@@ -1,0 +1,116 @@
+{
+  "entryId": "w:see-the-world",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "saw the world",
+    "seeing the world"
+  ],
+  "pattern": {
+    "tokens": [
+      "see",
+      "the",
+      "world"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "the",
+        "world"
+      ],
+      [
+        "saw",
+        "the",
+        "world"
+      ],
+      [
+        "seeing",
+        "the",
+        "world"
+      ],
+      [
+        "seen",
+        "the",
+        "world"
+      ],
+      [
+        "sees",
+        "the",
+        "world"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see the world",
+  "senses": [
+    {
+      "senseId": "w:see-the-world#s1",
+      "pos": "短语",
+      "glossZh": "周游各地，开阔眼界",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:see-the-world#e-8b753bd6d07c8da4",
+          "text": "Seeing the world is a must for children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-national-a:31#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

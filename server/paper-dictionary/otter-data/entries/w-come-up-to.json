@@ -1,0 +1,179 @@
+{
+  "entryId": "w:come-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came up to"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "up",
+        "to"
+      ],
+      [
+        "came",
+        "up",
+        "to"
+      ],
+      [
+        "comes",
+        "up",
+        "to"
+      ],
+      [
+        "coming",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come up to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:come-up-to#s1",
+      "pos": "动词短语",
+      "glossZh": "走近；来到……跟前",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-up-to#e-2cbe381ac47d2027",
+          "text": "Paragraph 2: Many of my classmates got interested and came up to me after class.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 64
+          },
+          "parts": [
+            [
+              54,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-up-to#e-adc6322e5accbd3a",
+          "text": "Five minutes later, a little boy wearing worn-out clothes came up to Harry with a doubtful look, his eyes glued to a blue bike, “Is it really free?” the boy asked.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-up-to#s2",
+      "pos": "动词短语",
+      "glossZh": "达到标准；符合期望",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-up-to#s3",
+      "pos": "动词短语",
+      "glossZh": "（水位等）达到某一高度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-up-to#s4",
+      "pos": "动词短语",
+      "glossZh": "（时间）临近某个时点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

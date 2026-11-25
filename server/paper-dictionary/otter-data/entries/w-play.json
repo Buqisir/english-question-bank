@@ -59,8 +59,8 @@
     "mock": 642
   },
   "unassignedCounts": {
-    "gaokao": 10,
-    "mock": 642
+    "gaokao": 20,
+    "mock": 493
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 43,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -360,7 +360,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -431,7 +431,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -497,112 +497,6 @@
       ]
     },
     {
-      "senseId": "w:play#s7",
-      "pos": "短语",
-      "glossZh": "发挥作用；担当角色",
-      "pronunciationId": "w:play#p-main",
-      "note": "play a role 或 play a part。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:play#e-5d5c59d63bf44339",
-          "text": "Yet the researchers suggest that single parents still may play a role in teaching the benefits of persistence, which is an avenue of future research.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 58,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:play#e-c4419eda99c17bed",
-          "text": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        },
-        {
-          "exampleId": "w:play#e-79f87ff7aee18345",
-          "text": "Beyond visitor interaction, AI plays a crucial role in preserving priceless artworks.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 36
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:play#s8",
-      "pos": "短语",
-      "glossZh": "配合；假装附和",
-      "pronunciationId": "w:play#p-main",
-      "note": "play along。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:play#e-d0fe8368bc343e3d",
-          "text": "He tried it several times, but the card machine just did not play along.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 65
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:play#s9",
       "pos": "v.",
       "glossZh": "装作",
@@ -638,40 +532,6 @@
       ]
     },
     {
-      "senseId": "w:play#s10",
-      "pos": "短语",
-      "glossZh": "逐步展开；演变",
-      "pronunciationId": "w:play#p-main",
-      "note": "play out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:play#e-6d2faf9b5bfa864d",
-          "text": "I find that doing so energizes my instruction, engages my students, and demonstrates to them how abstract concepts play out in the real world.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 115,
-            "end": 119
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:play#s11",
       "pos": "v.",
       "glossZh": "播放（录音、音乐等）",
@@ -679,7 +539,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -743,6 +603,191 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:play#s12",
+      "pos": "短语",
+      "glossZh": "在起作用；在发生影响（at play）",
+      "pronunciationId": "w:play#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:play#e-42a0e3080984d62e",
+          "text": "There is another problem at play.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:play#e-8c01ebb1547f490d",
+          "text": "It may seem like they have consciously copied you, but it is more likely that this is the chameleon(变色龙) effect at play.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:play#s13",
+      "pos": "v.",
+      "glossZh": "（戏剧等）上演",
+      "pronunciationId": "w:play#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:play#e-bc89d3a0a44f1b8f",
+          "text": "The Phantom of the Opera is composer Andrew Lloyd Webber’s award-winning musical, now playing at His Majesty’s Theatre in London.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:play#s14",
+      "pos": "v.",
+      "glossZh": "捉弄某人（play a joke on sb）",
+      "pronunciationId": "w:play#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:play#e-de326e864c4b14a3",
+          "text": "He often interrupted lessons, played jokes on younger children, and sometimes even walked out angrily.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:play#s15",
+      "pos": "v.",
+      "glossZh": "尝试；随意试验（play with）",
+      "pronunciationId": "w:play#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:play#e-30699c9d13dc237a",
+          "text": "The images also evidence an artist continually willing to take chances and play with new approaches and forms.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:play#s16",
+      "pos": "v.",
+      "glossZh": "偏袒；偏爱（play favorites）",
+      "pronunciationId": "w:play#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:play#e-9293bdc52ba28e7e",
+          "text": "The human brain tends to play favorites.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -751,6 +796,27 @@
       "reason": "馆方活动名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:come-into-play",
+    "w:play-a-part",
+    "w:play-a-role",
+    "w:play-along",
+    "w:play-around",
+    "w:play-at",
+    "w:play-ball",
+    "w:play-dead",
+    "w:play-down",
+    "w:play-dumb",
+    "w:play-fair",
+    "w:play-it-safe",
+    "w:play-on",
+    "w:play-ones-part",
+    "w:play-out",
+    "w:play-the-game",
+    "w:play-to"
+  ]
 }

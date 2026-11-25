@@ -1,0 +1,250 @@
+{
+  "entryId": "w:pass-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing on"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "on"
+      ],
+      [
+        "passing",
+        "on"
+      ],
+      [
+        "passed",
+        "on"
+      ],
+      [
+        "passes",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pass on",
+      "tags": []
+    },
+    {
+      "form": "passed on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass (sth) on",
+  "senses": [
+    {
+      "senseId": "w:pass-on#s1",
+      "pos": "短语",
+      "glossZh": "转达（消息）；转交；传给下一代",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-on#e-871df2d6d81bab0d",
+          "text": "Joy of reading passed on in the family.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2020-national-ii:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-on#e-3aa19a6eb3900893",
+          "text": "To pass on a message.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-on#e-7600b221dcfc7c8f",
+          "text": "“I will pass on my training methods and competition experience, so that the younger athletes can progress faster.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          },
+          "parts": [
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:pass-on#s2",
+      "pos": "短语",
+      "glossZh": "谢绝；放弃（机会等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-on#e-9d69570983bb267c",
+          "text": "On occasion, an entire building or part of a building is just completely inaccessible, so we split up or pass on an activity we planned to enjoy because we literally can’t get everyone in the door.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 112
+          },
+          "parts": [
+            [
+              105,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              112
+            ]
+          ]
+        }
+      ],
+      "note": "用 pass on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pass-on#s3",
+      "pos": "短语",
+      "glossZh": "去世",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-on#s4",
+      "pos": "短语",
+      "glossZh": "继续往前走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

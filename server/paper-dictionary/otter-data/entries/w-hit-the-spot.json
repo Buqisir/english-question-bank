@@ -1,0 +1,71 @@
+{
+  "entryId": "w:hit-the-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hit",
+      "the",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hit",
+        "the",
+        "spot"
+      ],
+      [
+        "hits",
+        "the",
+        "spot"
+      ],
+      [
+        "hitting",
+        "the",
+        "spot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hit the spot",
+  "senses": [
+    {
+      "senseId": "w:hit-the-spot#s1",
+      "pos": "短语",
+      "glossZh": "正合当下的需要；令人满足",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常指食物或饮料正合胃口。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

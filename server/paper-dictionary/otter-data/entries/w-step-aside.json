@@ -1,0 +1,73 @@
+{
+  "entryId": "w:step-aside",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "aside"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "aside"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step aside",
+  "senses": [
+    {
+      "senseId": "w:step-aside#s1",
+      "pos": "短语",
+      "glossZh": "走到一旁；让开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:step#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-aside#s2",
+      "pos": "短语",
+      "glossZh": "退出职位；让位",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

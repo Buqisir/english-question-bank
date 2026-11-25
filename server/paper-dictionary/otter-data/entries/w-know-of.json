@@ -1,0 +1,113 @@
+{
+  "entryId": "w:know-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "know",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "know",
+        "of"
+      ],
+      [
+        "knew",
+        "of"
+      ],
+      [
+        "knowing",
+        "of"
+      ],
+      [
+        "known",
+        "of"
+      ],
+      [
+        "knows",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "know of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "know of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:know-of#s1",
+      "pos": "短语",
+      "glossZh": "听说过；知道某人或某事存在",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:know#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:know-of#e-9e0f20d61266de50",
+          "text": "How did the woman know of Systéme?",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 329
+    "mock": 134
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 58,
-        "mock": 0
+        "mock": 191
       },
       "folded": false,
       "examples": [
@@ -143,12 +143,12 @@
       "glossZh": "决定（结果）；左右（胜负）",
       "pronunciationId": "w:decide#p-main",
       "note": "主语是决定结果的人或因素。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -158,6 +158,9 @@
       "reason": "计算机理论术语或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:decide-on"
+  ]
 }

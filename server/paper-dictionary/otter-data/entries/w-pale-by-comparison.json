@@ -1,0 +1,95 @@
+{
+  "entryId": "w:pale-by-comparison",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pale",
+      "by",
+      "comparison"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pale",
+        "by",
+        "comparison"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pale by comparison",
+  "senses": [
+    {
+      "senseId": "w:pale-by-comparison#s1",
+      "pos": "短语",
+      "glossZh": "相形见绌",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pale#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pale-by-comparison#e-a0b8439611d1a2e2",
+          "text": "Pale by comparison.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:24#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

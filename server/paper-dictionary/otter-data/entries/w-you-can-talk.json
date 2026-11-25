@@ -1,0 +1,61 @@
+{
+  "entryId": "w:you-can-talk",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "you",
+      "can",
+      "talk"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "you",
+        "can",
+        "talk"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "you can talk",
+  "senses": [
+    {
+      "senseId": "w:you-can-talk#s1",
+      "pos": "短语",
+      "glossZh": "你也好意思说别人（你自己也一样）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用来调侃或反驳同样有该缺点的人。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

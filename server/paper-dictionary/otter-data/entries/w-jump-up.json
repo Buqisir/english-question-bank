@@ -1,0 +1,195 @@
+{
+  "entryId": "w:jump-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "up"
+      ],
+      [
+        "jumped",
+        "up"
+      ],
+      [
+        "jumping",
+        "up"
+      ],
+      [
+        "jumps",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "jumped up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump up",
+  "senses": [
+    {
+      "senseId": "w:jump-up#s1",
+      "pos": "短语",
+      "glossZh": "猛地跳起来；一下子站起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:jump-up#e-0b1f566797bd2f19",
+          "text": "The other children also jumped up all attention.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-up#e-34a6771dce397e96",
+          "text": "Instead of running away immediately, you might jump up and down with all four legs.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:jump-up#e-dac095c240e6b449",
+          "text": "All of a sudden, Mateo jumped up from where he was sitting on the kitchen floor.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:jump-up#s2",
+      "pos": "短语",
+      "glossZh": "跳到较高处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:jump-up#s3",
+      "pos": "短语",
+      "glossZh": "厉声斥责",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

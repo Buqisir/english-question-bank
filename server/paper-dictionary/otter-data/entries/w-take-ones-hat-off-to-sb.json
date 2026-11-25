@@ -1,0 +1,123 @@
+{
+  "entryId": "w:take-ones-hat-off-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take one’s hat off to sb"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "one's"
+      },
+      "hat",
+      "off",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "one's"
+        },
+        "hat",
+        "off",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take hat off to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take one's hat off to sb",
+  "senses": [
+    {
+      "senseId": "w:take-ones-hat-off-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "向某人致敬；对某人表示钦佩",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hat#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-ones-hat-off-to-sb#e-e9fcc2ca6e62c524",
+          "text": "But our story did end happily, and I take my hat off to the people of Tavistock.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 55
+          },
+          "parts": [
+            [
+              37,
+              41
+            ],
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              41
+            ],
+            [
+              45,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

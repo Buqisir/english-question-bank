@@ -83,7 +83,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 141
+    "mock": 6
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 135
       },
       "folded": false,
       "examples": [
@@ -165,6 +165,6 @@
       "reason": "属于 analysis 的复数，索引同形命中留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

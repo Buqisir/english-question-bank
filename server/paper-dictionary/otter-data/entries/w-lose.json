@@ -61,8 +61,8 @@
     "mock": 151
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 146
+    "gaokao": 2,
+    "mock": 18
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 104
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -278,109 +278,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:lose#s4",
-      "pos": "短语",
-      "glossZh": "迷路",
-      "pronunciationId": "w:lose#p-main",
-      "note": "lose one’s way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lose#e-261a2f6bce9c83b0",
-          "text": "Lose their way.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2021-ii:25",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lose#s5",
-      "pos": "短语",
-      "glossZh": "忽略",
-      "pronunciationId": "w:lose#p-main",
-      "note": "lose sight of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lose#e-5e880ab7ad32d06d",
-          "text": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 45
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lose#s6",
-      "pos": "短语",
-      "glossZh": "沉浸于",
-      "pronunciationId": "w:lose#p-main",
-      "note": "lose oneself in。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lose#e-8e9a6e98128d92cc",
-          "text": "Its car-free policy ensures a quiet environment, where the sound of flowing streams and distant cowbells allows visitors to lose themselves in this peaceful yet lively destination.",
-          "source": {
-            "paperId": "paper-mock-guangdong-2026-04-second",
-            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 124,
-            "end": 128
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -389,6 +286,23 @@
       "reason": "真题无证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:have-nothing-to-lose",
+    "w:lose-control",
+    "w:lose-ground",
+    "w:lose-it",
+    "w:lose-ones-mind",
+    "w:lose-ones-way",
+    "w:lose-oneself-in",
+    "w:lose-sight-of",
+    "w:lose-sleep",
+    "w:lose-touch",
+    "w:lose-track",
+    "w:lose-weight",
+    "w:use-it-or-lose-it"
+  ]
 }

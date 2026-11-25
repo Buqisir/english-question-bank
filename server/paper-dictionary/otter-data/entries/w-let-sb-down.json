@@ -1,0 +1,192 @@
+{
+  "entryId": "w:let-sb-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "let down",
+    "letting down"
+  ],
+  "pattern": {
+    "tokens": [
+      "let",
+      {
+        "slot": "sb"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "let",
+        {
+          "slot": "sb"
+        },
+        "down"
+      ],
+      [
+        "let",
+        "down"
+      ],
+      [
+        "letting",
+        "down"
+      ],
+      [
+        "lets",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "let sb down",
+  "senses": [
+    {
+      "senseId": "w:let-sb-down#s1",
+      "pos": "短语",
+      "glossZh": "使某人失望；辜负某人的期望",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s11",
+        "w:let#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:let-sb-down#e-752271ce99f51668",
+          "text": "“I hope I don’t let the team down.” Ethan was going to be pitching (投球) for the first time.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 33
+          },
+          "parts": [
+            [
+              16,
+              19
+            ],
+            [
+              29,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              19
+            ],
+            [
+              29,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-down#e-9204ea8b6b4abe12",
+          "text": "She hated the thought of letting down her supportive parents, yet she couldn’t bear the idea of giving up her dream.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 37
+          },
+          "parts": [
+            [
+              25,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:let-sb-down#e-6307419f1aaf8a4e",
+          "text": "Maybe you messed up a presentation or let someone down, but you did your best with the knowledge and emotional strength you had then.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 54
+          },
+          "parts": [
+            [
+              38,
+              41
+            ],
+            [
+              50,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              41
+            ],
+            [
+              50,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:split-second",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "split",
+      "second"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "split",
+        "second"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "split second",
+  "senses": [
+    {
+      "senseId": "w:split-second#s1",
+      "pos": "短语",
+      "glossZh": "一瞬间；极短的一刹那",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:split#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:split-second#e-103f6f2815dc2579",
+          "text": "I think I’ve got something!” A split second later, Ben lost his balance and slipped.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:split-second#e-1ad545cbaf5fe58e",
+          "text": "Even tiny differences in brain activity can make a huge impact at the highest level, where “being a split second faster than an opponent separates victory from defeat.” This research helps us understand that individual differences, even minute ones, can lead to unique strengths and successes.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 112
+          },
+          "parts": [
+            [
+              100,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              112
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

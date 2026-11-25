@@ -59,7 +59,7 @@
     "mock": 4
   },
   "unassignedCounts": {
-    "gaokao": 0,
+    "gaokao": 4,
     "mock": 1
   },
   "senses": [
@@ -173,59 +173,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:toast#s5",
-      "pos": "短语",
-      "glossZh": "法式吐司",
-      "pronunciationId": "w:toast#p-main",
-      "note": "French toast。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:toast#e-3eb6cf7ed925e3e6",
-          "text": "They planned to make French toast and chicken porridge.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:toast#e-feceb4246128a9de",
-          "text": "They put some rice into a pot of water and left it to boil while they made the French toast.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 86,
-            "end": 91
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -234,6 +181,8 @@
       "reason": "技术用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,151 @@
+{
+  "entryId": "w:on-behalf-of-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "behalf",
+      "of",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "behalf",
+        "of",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on behalf of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on behalf of sb",
+  "senses": [
+    {
+      "senseId": "w:on-behalf-of-sb#s1",
+      "pos": "短语",
+      "glossZh": "代表某人或某个团体；代……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:behalf#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-behalf-of-sb#e-05d6c49b3827375c",
+          "text": "I’m writing on behalf of the Students’ Union to invite you to our student calligraphy exhibition.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-behalf-of-sb#e-380f4773274bfb02",
+          "text": "“On behalf of millions of children and grown-ups,” said Jeff, “It’s you I like.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 13
+          },
+          "parts": [
+            [
+              1,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:on-behalf-of-sb#s2",
+      "pos": "短语",
+      "glossZh": "为了某人的利益",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:behalf#s1"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

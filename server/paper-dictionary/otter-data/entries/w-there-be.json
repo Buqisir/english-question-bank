@@ -1,0 +1,211 @@
+{
+  "entryId": "w:there-be",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "there are",
+    "there being",
+    "there had been",
+    "there is",
+    "there's been"
+  ],
+  "pattern": {
+    "tokens": [
+      "there",
+      "be"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "there",
+        "be"
+      ],
+      [
+        "there",
+        "being"
+      ],
+      [
+        "there",
+        "is"
+      ],
+      [
+        "there",
+        "are"
+      ],
+      [
+        "there's",
+        "been"
+      ],
+      [
+        "there",
+        "had",
+        "been"
+      ],
+      [
+        "there",
+        "was"
+      ],
+      [
+        "there",
+        "were"
+      ],
+      [
+        "there're"
+      ],
+      [
+        "there's"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "there was",
+      "tags": []
+    },
+    {
+      "form": "there were",
+      "tags": []
+    },
+    {
+      "form": "there're",
+      "tags": []
+    },
+    {
+      "form": "there's",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "there be",
+  "senses": [
+    {
+      "senseId": "w:there-be#s1",
+      "pos": "短语",
+      "glossZh": "有；存在",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:there-be#e-616b304fabe8311b",
+          "text": "There are two parks less than 10 minutes’ walk from home where neighborhood children gather to play.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:there-be#e-74e57f0d5e04db08",
+          "text": "With paper, there is a literal laying on of hands, along with the visual geography of distinct pages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          },
+          "parts": [
+            [
+              12,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:there-be#e-e716db45da5413a1",
+          "text": "And, there are tasks for every age and ability, so all your children can feel proud of their work.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "there is no doing sth 表示某事无法做到。",
+      "counts": {
+        "gaokao": 105,
+        "mock": 657
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 105,
+    "mock": 657
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

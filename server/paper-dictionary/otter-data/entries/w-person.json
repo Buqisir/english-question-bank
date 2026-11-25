@@ -48,8 +48,8 @@
     "mock": 312
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 312
+    "gaokao": 10,
+    "mock": 134
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 58,
-        "mock": 0
+        "mock": 177
       },
       "folded": false,
       "examples": [
@@ -124,80 +124,6 @@
       ]
     },
     {
-      "senseId": "w:person#s2",
-      "pos": "短语",
-      "glossZh": "亲自；线下",
-      "pronunciationId": "w:person#p-main",
-      "note": "in person。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 9,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:person#e-8c37f333c1e89bf5",
-          "text": "Talk to Sara in person.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 22
-          }
-        },
-        {
-          "exampleId": "w:person#e-84f37a4fc9eeed9e",
-          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 128,
-            "end": 134
-          }
-        },
-        {
-          "exampleId": "w:person#e-2e8ea6df45b06784",
-          "text": "Professor Alex Davidson teaches the same course in person and online.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 51,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:person#s3",
       "pos": "n.",
       "glossZh": "人称",
@@ -205,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -232,6 +158,12 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-person",
+    "w:third-person"
+  ]
 }

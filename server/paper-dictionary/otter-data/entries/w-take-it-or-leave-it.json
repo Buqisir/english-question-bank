@@ -1,0 +1,111 @@
+{
+  "entryId": "w:take-it-or-leave-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "it",
+      "or",
+      "leave",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "it",
+        "or",
+        "leave",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take it or leave it",
+  "senses": [
+    {
+      "senseId": "w:take-it-or-leave-it#s1",
+      "pos": "短语",
+      "glossZh": "可有可无；有也行，没有也行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-it-or-leave-it#e-e6e57344e812476d",
+          "text": "He could take it or leave it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 28
+          },
+          "parts": [
+            [
+              9,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              28
+            ]
+          ]
+        }
+      ],
+      "note": "常用 could take it or leave it 表示不太在意。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-it-or-leave-it#s2",
+      "pos": "短语",
+      "glossZh": "要么接受，要么作罢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于说明条件没有商量余地。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

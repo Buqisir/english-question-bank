@@ -1,0 +1,140 @@
+{
+  "entryId": "w:stand-up-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing up for"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "up",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "up",
+        "for"
+      ],
+      [
+        "standing",
+        "up",
+        "for"
+      ],
+      [
+        "stands",
+        "up",
+        "for"
+      ],
+      [
+        "stood",
+        "up",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand up for",
+  "senses": [
+    {
+      "senseId": "w:stand-up-for#s1",
+      "pos": "短语",
+      "glossZh": "站出来支持；维护（权益、立场等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-up-for#e-441316779f98c71c",
+          "text": "She remained calm when things went wrong, and stuck to minute-by-minute schedules, but she struggled to stand up for herself.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 116
+          },
+          "parts": [
+            [
+              104,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-up-for#e-7fc56499de461060",
+          "text": "The solutions we now have for climate change, like electric vehicles, also fix ocean acidification, so it’s critical that we stand up for them.”",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 137
+          },
+          "parts": [
+            [
+              125,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

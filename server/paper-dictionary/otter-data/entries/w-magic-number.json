@@ -1,0 +1,173 @@
+{
+  "entryId": "w:magic-number",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "magic",
+      "number"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "magic",
+        "number"
+      ],
+      [
+        "magic",
+        "numbers"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "magic number",
+  "senses": [
+    {
+      "senseId": "w:magic-number#s1",
+      "pos": "短语",
+      "glossZh": "被视为能决定结果的关键数值",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:magic-number#e-7d4da498242c52cf",
+          "text": "“Instead of focusing on a ‘magic number,’ we examine blood pressure, cholesterol(胆固醇), sleep quality and energy levels,” notes Dr. Jay.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 39
+          },
+          "parts": [
+            [
+              27,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:magic-number#s2",
+      "pos": "短语",
+      "glossZh": "锁定晋级资格或名次所需的关键数值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "体育赛制用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-number#s3",
+      "pos": "短语",
+      "glossZh": "幻数；恰好填满核壳层的质子数或中子数",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-number#s4",
+      "pos": "短语",
+      "glossZh": "代码中直接写入的无名数值常量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-number#s5",
+      "pos": "短语",
+      "glossZh": "表示特定状态的保留数值；哨兵值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-number#s6",
+      "pos": "短语",
+      "glossZh": "用于识别文件格式的固定字节标记",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:magic-number#s7",
+      "pos": "短语",
+      "glossZh": "用于跟踪会话的数字标识",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

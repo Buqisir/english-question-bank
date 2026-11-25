@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 10
+    "mock": 9
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -183,74 +183,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:cow#s4",
-      "pos": "短语",
-      "glossZh": "摇钱树；稳定的赚钱来源",
-      "pronunciationId": "w:cow#p-main",
-      "note": "cash cow。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cow#e-5625b9e10e461fb9",
-          "text": "“They don’t want to lose their cash cow, so they’re willing to put millions into fighting government restrictions on UPFs as well as funding nutritionists to voice evidence of their harmlessness,” Popkin said.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n093",
-            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
-            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 39
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:cow#s5",
-      "pos": "短语",
-      "glossZh": "不容质疑的事物",
-      "pronunciationId": "w:cow#p-main",
-      "note": "sacred cow。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cow#e-024084a845f8ae2b",
-          "text": "In many cities, preserving every old structure, no matter its function or relevance, has become something of a sacred cow, admired by all but discussed by few.",
-          "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 118,
-            "end": 121
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -259,6 +191,12 @@
       "reason": "专门义或同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cash-cow",
+    "w:sacred-cow"
+  ]
 }

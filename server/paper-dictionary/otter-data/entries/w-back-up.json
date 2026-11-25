@@ -1,0 +1,137 @@
+{
+  "entryId": "w:back-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "back",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "back",
+        "up"
+      ],
+      [
+        "backed",
+        "up"
+      ],
+      [
+        "backing",
+        "up"
+      ],
+      [
+        "backs",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "back (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:back-up#s1",
+      "pos": "短语",
+      "glossZh": "证实；为……提供依据",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:up#s75"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:back-up#s2",
+      "pos": "短语",
+      "glossZh": "向后退；倒车",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:back-up#s3",
+      "pos": "短语",
+      "glossZh": "退回前一步；回头重新审视",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:back-up#s4",
+      "pos": "短语",
+      "glossZh": "备份（文件、数据等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:back-up#s5",
+      "pos": "短语",
+      "glossZh": "支持（某人）；为……撑腰",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:back-up#s6",
+      "pos": "短语",
+      "glossZh": "（因受阻而）积压；堵塞或倒流",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

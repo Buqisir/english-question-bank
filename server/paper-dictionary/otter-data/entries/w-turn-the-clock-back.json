@@ -1,0 +1,102 @@
+{
+  "entryId": "w:turn-the-clock-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "the",
+      "clock",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "the",
+        "clock",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned the clock back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn the clock back",
+  "senses": [
+    {
+      "senseId": "w:turn-the-clock-back#s1",
+      "pos": "短语",
+      "glossZh": "使时光倒流；使恢复到从前的状态",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:clock#s2",
+        "w:turn#s19"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-the-clock-back#e-6e64b99e497495a6",
+          "text": "“We took these 50-year-old hearts and turned the clock back to 30-or 35-year-old hearts,” says Levine.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 59
+          },
+          "parts": [
+            [
+              38,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

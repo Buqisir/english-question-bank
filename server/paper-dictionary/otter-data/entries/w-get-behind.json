@@ -1,0 +1,113 @@
+{
+  "entryId": "w:get-behind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "behind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "behind"
+      ],
+      [
+        "gets",
+        "behind"
+      ],
+      [
+        "getting",
+        "behind"
+      ],
+      [
+        "got",
+        "behind"
+      ],
+      [
+        "gotten",
+        "behind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get behind sb/sth",
+  "senses": [
+    {
+      "senseId": "w:get-behind#s1",
+      "pos": "短语",
+      "glossZh": "表示支持；为某人、某队或某项提议撑腰",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-behind#s2",
+      "pos": "短语",
+      "glossZh": "开始喜欢上或享受某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-behind#s3",
+      "pos": "短语",
+      "glossZh": "（俚语）因使用毒品而产生快感",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-behind#s4",
+      "pos": "短语",
+      "glossZh": "（方言）反复催逼或纠缠某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

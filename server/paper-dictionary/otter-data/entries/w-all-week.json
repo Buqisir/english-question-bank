@@ -1,0 +1,124 @@
+{
+  "entryId": "w:all-week",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "week"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "week"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all week",
+  "senses": [
+    {
+      "senseId": "w:all-week#s1",
+      "pos": "短语",
+      "glossZh": "整个星期；一连一周",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-week#e-e0a7f17a60c5118e",
+          "text": "Keeping the same intensity all week.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-cq-nankai-2025-11-third-quality-test:23#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          },
+          "parts": [
+            [
+              27,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-week#e-c187b38d369b36bc",
+          "text": "To make matters more challenging, my three children – Mike, Emma, and little Sam – had been bursting with restless energy all week, their stored excitement from school ready to burst forth before a long weekend.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 130
+          },
+          "parts": [
+            [
+              122,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

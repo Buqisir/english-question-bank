@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 397
+    "mock": 197
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 55,
-        "mock": 0
+        "mock": 200
       },
       "folded": false,
       "examples": [
@@ -125,6 +125,6 @@
       "reason": "街名的一部分，无法据此判断大学指称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,197 @@
+{
+  "entryId": "w:shake-ones-head",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shake",
+      {
+        "slot": "one's"
+      },
+      "head"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shake",
+        {
+          "slot": "one's"
+        },
+        "head"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shake head",
+      "tags": []
+    },
+    {
+      "form": "shaking head",
+      "tags": []
+    },
+    {
+      "form": "shook head",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shake one's head",
+  "senses": [
+    {
+      "senseId": "w:shake-ones-head#s1",
+      "pos": "短语",
+      "glossZh": "摇头（表示否定、拒绝等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shake#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shake-ones-head#e-38a396c09ea3530a",
+          "text": "But when I hear that people are using apps to try to read more in less time, I just shake my head.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 97
+          },
+          "parts": [
+            [
+              84,
+              89
+            ],
+            [
+              93,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              89
+            ],
+            [
+              93,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shake-ones-head#e-b6a8904b485de0cd",
+          "text": "When Mary asked why skipping just one race hurt so much, Tom shook his head and said it wasn’t just the race.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 75
+          },
+          "parts": [
+            [
+              61,
+              66
+            ],
+            [
+              71,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              66
+            ],
+            [
+              71,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shake-ones-head#e-dd41117c9bb24918",
+          "text": "I slowly shook my head as I looked more closely at the previously unnoticed imperfections of her living room walls.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 22
+          },
+          "parts": [
+            [
+              9,
+              14
+            ],
+            [
+              18,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              14
+            ],
+            [
+              18,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 20
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

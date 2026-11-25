@@ -61,8 +61,8 @@
     "mock": 764
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 761
+    "gaokao": 18,
+    "mock": 587
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 58,
-        "mock": 0
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -359,7 +359,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -431,7 +431,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -503,7 +503,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -569,7 +569,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -639,413 +639,44 @@
       "pos": "v.",
       "glossZh": "遵守（承诺、约定）",
       "pronunciationId": "w:keep#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 9
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:keep#s11",
+      "senseId": "w:keep#s20",
       "pos": "短语",
-      "glossZh": "持续留意；掌握情况",
+      "glossZh": "陪伴某人（keep sb company）",
       "pronunciationId": "w:keep#p-main",
-      "note": "keep track of。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:keep#e-02b2151f08136fd0",
-          "text": "●Keep track of how you are feeling.",
+          "exampleId": "w:keep#e-a8a8fc2e606f3137",
+          "text": "He kept Romano company for several hours.",
           "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 1,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:keep#e-384435b739f25f56",
-          "text": "Gardening season is in full bloom, but keeping track of which seedling (幼苗) is which can be really tricky.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s12",
-      "pos": "短语",
-      "glossZh": "掌握动向",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep tabs on / keep an eye on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-7a84e7bd18720132",
-          "text": "One nonprofit organization, which monitors the treatment of animals in filmed entertainment, is keeping tabs on more than 2,000 productions this year.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 96,
-            "end": 103
-          }
-        },
-        {
-          "exampleId": "w:keep#e-f4c9513e4ca9485c",
-          "text": "So __45__ tying him up, I just kept a close eye on him.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "cloze-2",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s13",
-      "pos": "短语",
-      "glossZh": "记录以免忘记",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep track of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-e65a4cd2685c9584",
-          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s14",
-      "pos": "短语",
-      "glossZh": "牢记",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep sth in mind。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-8d634d6ec702bfa8",
-          "text": "Keep their audience in mind.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:23",
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:25",
               "option": "D",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:keep#e-4b9b244190a574ed",
-          "text": "However, many make a number of common mistakes, which can interfere （妨碍） with training or lead to injury __36__ , keep these things in mind to help you increase your chances of running success.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 118
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s15",
-      "pos": "短语",
-      "glossZh": "避开",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep off / keep away from。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-8645722d0c3b9a05",
-          "text": "Keeping away from.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:28",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s16",
-      "pos": "短语",
-      "glossZh": "使不至于发生",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep sth in check / at bay。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-13a9a8b264f5169d",
-          "text": "The fur trade kept nutria in check for decades, but when the market for nutria collapsed in the late 1980s, the cat-sized animals multiplied like crazy.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:keep#e-5e5091ae2ece5571",
-          "text": "Their __41__ was nearly enough to keep my loneliness at bay.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 34,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s17",
-      "pos": "短语",
-      "glossZh": "不与人交往",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep to oneself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-03040defa912afff",
-          "text": "They kept very much to themselves.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
-              "sentence": 8
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s18",
-      "pos": "短语",
-      "glossZh": "与……保持同步",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep up (with)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-65a39e187abfdd81",
-          "text": "Ho recognizes the psychological benefit of helping kids keep up with their peers（同龄人）outside the hospital.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        },
-        {
-          "exampleId": "w:keep#e-d9c53eabe20b8338",
-          "text": "“I’m fully booked with tours and struggling to keep up,” says Gao Jun, an English-speaking tour guide with over 20 years of experience.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-c:3",
-              "sentence": 2
-            }
-          },
           "tier": "mock",
           "target": {
-            "start": 47,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:keep#s19",
-      "pos": "短语",
-      "glossZh": "勉强应付",
-      "pronunciationId": "w:keep#p-main",
-      "note": "keep one’s head above water。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:keep#e-88d2cf47a446fd14",
-          "text": "Eva spent the first week of high school trying to keep her head above water.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 54
+            "start": 3,
+            "end": 7
           }
         }
       ]
@@ -1057,6 +688,35 @@
       "reason": "罕见名词或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:keep-an-eye-on",
+    "w:keep-an-eye-out",
+    "w:keep-at",
+    "w:keep-away",
+    "w:keep-away-from",
+    "w:keep-fit",
+    "w:keep-house",
+    "w:keep-in-mind",
+    "w:keep-in-touch-with",
+    "w:keep-it-up",
+    "w:keep-off",
+    "w:keep-on",
+    "w:keep-ones-head-above-water",
+    "w:keep-pace-with",
+    "w:keep-quiet",
+    "w:keep-sth-at-bay",
+    "w:keep-sth-in-check",
+    "w:keep-sth-in-mind",
+    "w:keep-tabs-on",
+    "w:keep-time",
+    "w:keep-to",
+    "w:keep-to-oneself",
+    "w:keep-track-of",
+    "w:keep-up",
+    "w:keep-up-with"
+  ]
 }

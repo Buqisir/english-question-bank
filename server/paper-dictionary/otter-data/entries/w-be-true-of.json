@@ -1,0 +1,99 @@
+{
+  "entryId": "w:be-true-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "true",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "true",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "is true of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be true of",
+  "senses": [
+    {
+      "senseId": "w:be-true-of#s1",
+      "pos": "短语",
+      "glossZh": "对……适用；符合……的实际情况",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:true#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-true-of#e-062add829691c7a8",
+          "text": "Which of the following is true of Grinter’s story?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:27",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

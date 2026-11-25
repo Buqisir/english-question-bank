@@ -1,0 +1,205 @@
+{
+  "entryId": "w:fall-behind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell behind"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "behind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "behind"
+      ],
+      [
+        "fell",
+        "behind"
+      ],
+      [
+        "fallen",
+        "behind"
+      ],
+      [
+        "falling",
+        "behind"
+      ],
+      [
+        "falls",
+        "behind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fallen behind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall behind",
+  "senses": [
+    {
+      "senseId": "w:fall-behind#s1",
+      "pos": "短语",
+      "glossZh": "（学习、工作或发展进度）落后；跟不上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fall#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fall-behind#e-675236e3027c3486",
+          "text": "However, while some of her classmates edged ahead, others actually fell behind.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-behind#e-846dae1f6cedb7da",
+          "text": "While 81 countries have adopted Extended Producer Responsibility laws, collection rates still fall behind policy goals.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 105
+          },
+          "parts": [
+            [
+              94,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-behind#e-4593af9ddfd99fd2",
+          "text": "I admit, I fell behind sometimes.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 22
+          },
+          "parts": [
+            [
+              11,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:fall-behind#s2",
+      "pos": "短语",
+      "glossZh": "掉队；落在别人后面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "指实际移动中的位置。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-behind#s3",
+      "pos": "短语",
+      "glossZh": "未按时交付；拖欠（款项）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 fall behind on payments。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

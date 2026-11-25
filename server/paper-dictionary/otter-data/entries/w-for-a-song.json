@@ -1,0 +1,63 @@
+{
+  "entryId": "w:for-a-song",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "a",
+      "song"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "a",
+        "song"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for a song",
+  "senses": [
+    {
+      "senseId": "w:for-a-song#s1",
+      "pos": "短语",
+      "glossZh": "以极低的价格",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:song#s3"
+      ],
+      "examples": [],
+      "note": "常用于买卖或购得某物。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -48,8 +48,8 @@
     "mock": 19
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 16
+    "gaokao": 4,
+    "mock": 10
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -174,131 +174,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:crazy#s3",
-      "pos": "短语",
-      "glossZh": "非常喜欢；对……着迷",
-      "pronunciationId": "w:crazy#p-main",
-      "note": "be crazy about。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:crazy#e-78e29e6f6d48c430",
-          "text": "This season, Avisard is crazy about growing a taller pelargonium （天竺葵）, a clumped-flower （簇状花） cousin to the geranium （老鹳草） that Monet famously planted in several red and pink beds in front of his pink house.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n123",
-            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
-            "groupId": "group:paper-mock-import-20261026-n123:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-import-20261026-n123:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 24,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:crazy#e-2e28c997fb13140c",
-          "text": "Peter and Oliver were crazy about basketball.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
-            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
-            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:crazy#e-6235f9a48abd298f",
-          "text": "Jake and Leo were the star shooting guards of East High and West High respectively, both crazy about basketball and skateboarding.",
-          "source": {
-            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
-            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
-            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 89,
-            "end": 94
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:crazy#s4",
-      "pos": "短语",
-      "glossZh": "发疯似地；猛烈地",
-      "pronunciationId": "w:crazy#p-main",
-      "note": "like crazy。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:crazy#e-bae49fb9c8ffbc5f",
-          "text": "The fur trade kept nutria in check for decades, but when the market for nutria collapsed in the late 1980s, the cat-sized animals multiplied like crazy.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 146,
-            "end": 151
-          }
-        },
-        {
-          "exampleId": "w:crazy#e-eb57b0a691329d32",
-          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 48
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -307,6 +182,13 @@
       "reason": "罕见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-crazy-about",
+    "w:go-crazy",
+    "w:like-crazy"
+  ]
 }

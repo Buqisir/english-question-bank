@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 260
+    "mock": 70
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -254,7 +254,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -359,7 +359,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -404,41 +404,85 @@
       ]
     },
     {
-      "senseId": "w:quiet#s7",
-      "pos": "短语",
-      "glossZh": "平静下来",
+      "senseId": "w:quiet#s8",
+      "pos": "v.",
+      "glossZh": "使安静或平静；变得安静或平静",
       "pronunciationId": "w:quiet#p-main",
-      "note": "quiet down。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:quiet#e-1b204898055e300c",
-          "text": "The prefrontal cortex (前额叶皮层), largely responsible for self-monitoring, tends to quiet down, mirroring what is often seen in “flow states,” where the boundaries between self and task dissolve.",
+          "exampleId": "w:quiet#e-1929fd5a88ac30c3",
+          "text": "My mind quiets, focusing only on the present.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
             "locator": {
               "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:5",
-              "sentence": 4
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b:5",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 81,
-            "end": 86
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:quiet#e-080f261dd9d39a0f",
+          "text": "I’d missed the point of what all the masters were saying: Quiet the mind, and find pleasure in small acts and observations.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:quiet#e-02b8b694c384633f",
+          "text": "So, are you ready to quiet the mental popcorn and get your focus back?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:keep-quiet",
+    "w:peace-and-quiet",
+    "w:quiet-down"
+  ]
 }

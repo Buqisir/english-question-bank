@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 235
+    "mock": 56
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 37,
-        "mock": 0
+        "mock": 178
       },
       "folded": false,
       "examples": [
@@ -134,12 +134,12 @@
       "pos": "n.",
       "glossZh": "创意人员",
       "pronunciationId": "w:creative#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -149,6 +149,6 @@
       "reason": "行业简称或特定搭配的引申"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

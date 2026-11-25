@@ -35,8 +35,8 @@
     "mock": 193
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 193
+    "gaokao": 5,
+    "mock": 1
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 192
       },
       "folded": false,
       "examples": [
@@ -109,108 +109,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:nothing#s2",
-      "pos": "短语",
-      "glossZh": "并非没有缘故",
-      "pronunciationId": "w:nothing#p-main",
-      "note": "not … for nothing。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nothing#e-2d069725c63cff41",
-          "text": "They are not called rainforests for nothing!",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:nothing#s3",
-      "pos": "短语",
-      "glossZh": "不用费劲；很简单",
-      "pronunciationId": "w:nothing#p-main",
-      "note": "nothing to it。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nothing#e-ca7a451535e06f98",
-          "text": "There was nothing to it.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:nothing#s4",
-      "pos": "短语",
-      "glossZh": "无偿；免费",
-      "pronunciationId": "w:nothing#p-main",
-      "note": "for nothing。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nothing#e-e4ee8c703414c20c",
-          "text": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 67,
-            "end": 74
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -219,6 +117,19 @@
       "reason": "专名或少见义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:better-than-nothing",
+    "w:for-nothing",
+    "w:have-nothing-to-lose",
+    "w:its-nothing",
+    "w:not-for-nothing",
+    "w:nothing-but",
+    "w:nothing-like",
+    "w:nothing-more-than",
+    "w:nothing-to-it"
+  ]
 }

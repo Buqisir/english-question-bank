@@ -1,0 +1,63 @@
+{
+  "entryId": "w:to-the-power-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "the",
+      "power",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "the",
+        "power",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to the power of",
+  "senses": [
+    {
+      "senseId": "w:to-the-power-of#s1",
+      "pos": "短语",
+      "glossZh": "（数学）……的……次方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "前面是底数，of 后面是指数。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,201 @@
+{
+  "entryId": "w:take-advantage-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take advantage",
+    "takes advantage of",
+    "taking advantage of"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "advantage",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "advantage",
+        "of"
+      ],
+      [
+        "takes",
+        "advantage",
+        "of"
+      ],
+      [
+        "taking",
+        "advantage",
+        "of"
+      ],
+      [
+        "taken",
+        "advantage",
+        "of"
+      ],
+      [
+        "took",
+        "advantage",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken advantage of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take advantage of",
+  "senses": [
+    {
+      "senseId": "w:take-advantage-of#s1",
+      "pos": "短语",
+      "glossZh": "利用（机会、资源或有利条件）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:advantage#s2",
+        "w:take#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-advantage-of#e-fe9c7b7ca5046b56",
+          "text": "You can take advantage of this tendency to make instinctive decisions to get people to do things.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 25
+          },
+          "parts": [
+            [
+              8,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-advantage-of#e-98fe1ec1450c2dee",
+          "text": "As a result, her plannings were taken advantage of, and she was trapped in unmanageable anxiety.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 50
+          },
+          "parts": [
+            [
+              32,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-advantage-of#e-af9b407af9980d4d",
+          "text": "By attending the Open House, you can take advantage of the following exclusive offers:",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 54
+          },
+          "parts": [
+            [
+              37,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:take-advantage-of#s2",
+      "pos": "短语",
+      "glossZh": "占某人的便宜；利用他人的信任或弱点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:advantage#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

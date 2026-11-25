@@ -1,0 +1,61 @@
+{
+  "entryId": "w:speak-volumes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "speak",
+      "volumes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speak",
+        "volumes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speak volumes",
+  "senses": [
+    {
+      "senseId": "w:speak-volumes#s1",
+      "pos": "短语",
+      "glossZh": "充分说明问题；不言而喻地表明",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:volume#s5"
+      ],
+      "examples": [],
+      "note": "常用 speak volumes about sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

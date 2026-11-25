@@ -1,0 +1,128 @@
+{
+  "entryId": "w:on-ones-behalf",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on sb’s behalf"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      {
+        "slot": "one's"
+      },
+      "behalf"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        {
+          "slot": "one's"
+        },
+        "behalf"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on behalf",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on one's behalf",
+  "senses": [
+    {
+      "senseId": "w:on-ones-behalf#s1",
+      "pos": "短语",
+      "glossZh": "代表某人；代某人行事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:behalf#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-behalf#e-e3fd87ae18efd441",
+          "text": "Why struggle with an essay when AI can generate one on your behalf in seconds?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 66
+          },
+          "parts": [
+            [
+              52,
+              54
+            ],
+            [
+              60,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              54
+            ],
+            [
+              60,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:on-ones-behalf#s2",
+      "pos": "短语",
+      "glossZh": "为了某人的利益",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:behalf#s1"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

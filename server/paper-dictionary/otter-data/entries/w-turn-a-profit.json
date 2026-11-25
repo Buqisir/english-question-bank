@@ -1,0 +1,112 @@
+{
+  "entryId": "w:turn-a-profit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "a",
+      "profit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "a",
+        "profit"
+      ],
+      [
+        "turned",
+        "a",
+        "profit"
+      ],
+      [
+        "turning",
+        "a",
+        "profit"
+      ],
+      [
+        "turns",
+        "a",
+        "profit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned a profit",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn a profit",
+  "senses": [
+    {
+      "senseId": "w:turn-a-profit#s1",
+      "pos": "短语",
+      "glossZh": "实现盈利；赚取利润",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-a-profit#e-c895d92b44fc4f56",
+          "text": "It was not until ninety days later that the company finally turned a profit, a hard-won victory that would fuel her next, most meaningful business.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 75
+          },
+          "parts": [
+            [
+              60,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

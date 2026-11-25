@@ -1,0 +1,264 @@
+{
+  "entryId": "w:in-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in time",
+  "senses": [
+    {
+      "senseId": "w:in-time#s1",
+      "pos": "短语",
+      "glossZh": "及时；来得及",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s48",
+        "w:time#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-time#e-533d7452b3c3c16c",
+          "text": "With their ability to see ahead, they could signal any problem, so that fast-moving trains would be able to react in time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 121
+          },
+          "parts": [
+            [
+              114,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              121
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-time#e-ab85511dea27e741",
+          "text": "I regretted that I hadn’t fixed the cage in time for the lack of proper tools.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          },
+          "parts": [
+            [
+              41,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-time#e-874cb519d4843a89",
+          "text": "Pay at the garage manager’s office in time.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-shandong-zaozhuang-2026-05-third-mock:23#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          },
+          "parts": [
+            [
+              35,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:in-time#s2",
+      "pos": "短语",
+      "glossZh": "过一段时间；终有一天",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-time#e-f7f083edc726798e",
+          "text": "But in time both the consumers of AI and its regulators will have to assess whether its wider benefits outweigh any cognitive (认知) costs.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          },
+          "parts": [
+            [
+              4,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-time#e-e81768f84fc52494",
+          "text": "Then in time, you will find something that you love.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-time#e-657fed1e445f66c2",
+          "text": "The Rens began to decline as its players got older and the tens of thousands of miles of traveling took its toll, but in time, they were recognized for the important role they played in advancing black athletes in basketball.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 125
+          },
+          "parts": [
+            [
+              118,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              118,
+              125
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

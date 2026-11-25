@@ -1,0 +1,108 @@
+{
+  "entryId": "w:soft-power",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "soft",
+      "power"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "soft",
+        "power"
+      ],
+      [
+        "soft",
+        "powers"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "soft power",
+  "senses": [
+    {
+      "senseId": "w:soft-power#s1",
+      "pos": "短语",
+      "glossZh": "软实力（凭文化、价值观等的吸引力施加影响的能力）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:soft-power#e-7bb05ea66a41f44c",
+          "text": "China aims to boost its soft power by enhancing the appeal of Chinese culture during the 15th Five-Year Plan period (2026-2030).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 34
+          },
+          "parts": [
+            [
+              24,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:soft-power#s2",
+      "pos": "短语",
+      "glossZh": "拥有软实力的国家",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "指国家本身时可数。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

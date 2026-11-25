@@ -1,0 +1,60 @@
+{
+  "entryId": "w:nod-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nod",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nod",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nod off",
+  "senses": [
+    {
+      "senseId": "w:nod-off#s1",
+      "pos": "短语",
+      "glossZh": "打瞌睡；不知不觉睡着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:nod#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

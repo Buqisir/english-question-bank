@@ -1,0 +1,205 @@
+{
+  "entryId": "w:go-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes against",
+    "going against",
+    "went against"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "against"
+      ],
+      [
+        "goes",
+        "against"
+      ],
+      [
+        "going",
+        "against"
+      ],
+      [
+        "went",
+        "against"
+      ],
+      [
+        "gone",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go against",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go against sb/sth",
+  "senses": [
+    {
+      "senseId": "w:go-against#s1",
+      "pos": "短语",
+      "glossZh": "违背（规则、原则等）；与……相冲突",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s34"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-against#e-7387170e886738ae",
+          "text": "In a world where nearly 800 million people a year go hungry, “food waste goes against the moral grain,” as Elizabeth Royte writes in this month’s cover story.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-b-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 85
+          },
+          "parts": [
+            [
+              73,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-against#e-615da8ad8b240c36",
+          "text": "This is to avoid confirmation bias; when we ignore evidence that goes against a prior belief.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 77
+          },
+          "parts": [
+            [
+              65,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-against#e-5268fdf32a10ca66",
+          "text": "They may refuse to accept new information that goes against their existing beliefs.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 59
+          },
+          "parts": [
+            [
+              47,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:go-against#s2",
+      "pos": "短语",
+      "glossZh": "（裁决、事态等）对某人或某方不利",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-against#s3",
+      "pos": "短语",
+      "glossZh": "反对；与某人或某方对抗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -56,7 +56,7 @@
     "mock": 3529
   },
   "unassignedCounts": {
-    "gaokao": 347,
+    "gaokao": 348,
     "mock": 3529
   },
   "senses": [
@@ -239,72 +239,10 @@
       ]
     },
     {
-      "senseId": "w:but#s4",
-      "pos": "短语",
-      "glossZh": "一点也不；根本不",
-      "pronunciationId": "w:but#p-strong",
-      "note": "anything but",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:but#e-8c6b48c92dade2e0",
-          "text": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 73
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:but#s5",
       "pos": "adv.",
       "glossZh": "仅仅；只",
       "pronunciationId": "w:but#p-strong",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:but#s6",
-      "pos": "短语",
-      "glossZh": "几乎；差一点就",
-      "pronunciationId": "w:but#p-strong",
-      "note": "all but",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:but#s7",
-      "pos": "短语",
-      "glossZh": "要不是；如果没有",
-      "pronunciationId": "w:but#p-strong",
-      "note": "but for",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -333,6 +271,18 @@
       "reason": "冷僻同形义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-but",
+    "w:anything-but",
+    "w:but-for",
+    "w:cant-help-but-do-sth",
+    "w:couldnt-help-but",
+    "w:last-but-one",
+    "w:not-only-but-also",
+    "w:nothing-but"
+  ]
 }

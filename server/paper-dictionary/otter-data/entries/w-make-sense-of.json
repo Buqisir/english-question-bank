@@ -1,0 +1,167 @@
+{
+  "entryId": "w:make-sense-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "sense",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "sense",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "makes sense of",
+      "tags": []
+    },
+    {
+      "form": "making sense of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make sense of",
+  "senses": [
+    {
+      "senseId": "w:make-sense-of#s1",
+      "pos": "短语",
+      "glossZh": "理解；弄懂",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s17",
+        "w:sense#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-sense-of#e-5faceea9d086993e",
+          "text": "I hear him making sense of friendship and its limits.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 26
+          },
+          "parts": [
+            [
+              11,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sense-of#e-1a25fa633393165f",
+          "text": "make sense of human faces",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sense-of#e-e73665ac03f75be9",
+          "text": "The shade from the trees did little to ease the burning sun as I struggled to make sense of the maps.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 91
+          },
+          "parts": [
+            [
+              78,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 20
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

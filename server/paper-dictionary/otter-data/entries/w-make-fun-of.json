@@ -1,0 +1,183 @@
+{
+  "entryId": "w:make-fun-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making fun of"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "fun",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "fun",
+        "of"
+      ],
+      [
+        "making",
+        "fun",
+        "of"
+      ],
+      [
+        "made",
+        "fun",
+        "of"
+      ],
+      [
+        "makes",
+        "fun",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made fun of",
+      "tags": []
+    },
+    {
+      "form": "make fun of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make fun of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:make-fun-of#s1",
+      "pos": "短语",
+      "glossZh": "取笑；嘲弄",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fun#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-fun-of#e-cc0e7db160747e51",
+          "text": "Later, Sam, a quiet boy who sat in front of him, explained, “Bob is making fun of you.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 81
+          },
+          "parts": [
+            [
+              68,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-fun-of#e-4b329ec38a4cd25b",
+          "text": "We knew it was because he needed to get medicine from the nurse, but this didn’t stop the kids in the class from making fun of him.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 126
+          },
+          "parts": [
+            [
+              113,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              126
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-fun-of#e-20bf81061a1897d6",
+          "text": "make fun of the foolishness of the emperor and his courtiers",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-hunan-yali-2026-second:32#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

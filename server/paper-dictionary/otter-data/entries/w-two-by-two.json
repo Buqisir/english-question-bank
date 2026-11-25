@@ -1,0 +1,94 @@
+{
+  "entryId": "w:two-by-two",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "two",
+      "by",
+      "two"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "two",
+        "by",
+        "two"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "two by two",
+  "senses": [
+    {
+      "senseId": "w:two-by-two#s1",
+      "pos": "短语",
+      "glossZh": "两个一组地；成对地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:two#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:two-by-two#e-cc957b05ce886493",
+          "text": "So two by two,I read library books as fast as I could go: rushing them home in the basket of my bicycle.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

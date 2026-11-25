@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 42
+    "mock": 10
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -116,6 +116,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:hill#s2",
+      "pos": "phr.",
+      "glossZh": "（over the hill）已过壮年；过了巅峰期",
+      "pronunciationId": "w:hill#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hill#e-597e50899eac278e",
+          "text": "Those unexpected words warmed my heart and eased my fear of being “over the hill.” Being valued for what we had accomplished felt like winning an Olympic medal – even if just for participation.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -128,6 +161,6 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

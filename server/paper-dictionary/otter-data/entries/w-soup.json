@@ -42,8 +42,8 @@
     "mock": 47
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 44
+    "gaokao": 2,
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -116,73 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:soup#s2",
-      "pos": "短语",
-      "glossZh": "施粥所",
-      "pronunciationId": "w:soup#p-main",
-      "note": "soup kitchen，为有需要的人免费提供餐食。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:soup#e-de2abbe61a6fa6c5",
-          "text": "It saddened me to think of how many people there were who didn’t have a place to call home and the only food they got came from a soup kitchen.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 130,
-            "end": 134
-          }
-        },
-        {
-          "exampleId": "w:soup#e-74717d7e647cde80",
-          "text": "David, a primary school student, worked as a volunteer at the soup kitchen in his community park.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
-            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:soup#s3",
-      "pos": "短语",
-      "glossZh": "陷入麻烦",
-      "pronunciationId": "w:soup#p-main",
-      "note": "in the soup，非正式。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -191,6 +124,11 @@
       "reason": "技术义或历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-soup"
+  ]
 }

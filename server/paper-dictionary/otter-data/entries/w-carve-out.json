@@ -1,0 +1,148 @@
+{
+  "entryId": "w:carve-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "carve",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "carve",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "carved out",
+      "tags": []
+    },
+    {
+      "form": "carving out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carve (sth) out",
+  "senses": [
+    {
+      "senseId": "w:carve-out#s1",
+      "pos": "短语",
+      "glossZh": "挤出（时间）；腾出（空闲）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:carve#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:carve-out#e-f0d45c508bea1792",
+          "text": "I carved out precious, daily writing time, starting small and manageable.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:carve-out#s2",
+      "pos": "短语",
+      "glossZh": "努力开辟（空间、机会等）；开创（事业）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:carve#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:carve-out#e-c24ae4b7c3348474",
+          "text": "By engaging with communities and fishing cooperatives, they have gradually gained recognition, carving out a space for women in marine conservation within the male-dominated fishing industry.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 106
+          },
+          "parts": [
+            [
+              95,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

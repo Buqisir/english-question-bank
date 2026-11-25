@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 24
+    "mock": 7
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -177,7 +177,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -285,55 +285,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:bottom#s6",
-      "pos": "短语",
-      "glossZh": "打心底里；发自内心",
-      "pronunciationId": "w:bottom#p-main",
-      "note": "from the bottom of one's heart",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bottom#e-a7290c8ceb4b98bc",
-          "text": "So, she questioned her parents’ decision from the bottom of her heart",
-          "source": {
-            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
-            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
-            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:bottom#s7",
-      "pos": "短语",
-      "glossZh": "跌至最低点；触底",
-      "pronunciationId": "w:bottom#p-main",
-      "note": "bottom out",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -342,6 +293,13 @@
       "reason": "专业义或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-the-bottom-of",
+    "w:bottom-out",
+    "w:from-the-bottom-of-ones-heart"
+  ]
 }

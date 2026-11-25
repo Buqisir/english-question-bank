@@ -1,0 +1,123 @@
+{
+  "entryId": "w:i-see",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I see"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "see"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "see"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "I see",
+  "senses": [
+    {
+      "senseId": "w:i-see#s1",
+      "pos": "短语",
+      "glossZh": "明白了；懂了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-see#e-8579c1b503a625fc",
+          "text": "“I see,” Ivy said, though she didn’t have a clue what her daughter was talking about.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 6
+          },
+          "parts": [
+            [
+              1,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-see#e-7f8940ee42110af8",
+          "text": "Coined by Swedish author Fredrik Haren from the Latin “we see,” it describes the instant someone else truly grasps your idea and says, “Oh, I see!” That recognition makes innovators feel they are no longer alone.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 145
+          },
+          "parts": [
+            [
+              140,
+              145
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              145
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

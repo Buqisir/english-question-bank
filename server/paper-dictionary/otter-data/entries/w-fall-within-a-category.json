@@ -1,0 +1,64 @@
+{
+  "entryId": "w:fall-within-a-category",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "within",
+      "a",
+      "category"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "within",
+        "a",
+        "category"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall within a category",
+  "senses": [
+    {
+      "senseId": "w:fall-within-a-category#s1",
+      "pos": "短语",
+      "glossZh": "属于某一类别；归入某一类",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fall#s10"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

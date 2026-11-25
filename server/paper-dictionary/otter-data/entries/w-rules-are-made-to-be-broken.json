@@ -1,0 +1,99 @@
+{
+  "entryId": "w:rules-are-made-to-be-broken",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rules",
+      "are",
+      "made",
+      "to",
+      "be",
+      "broken"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rules",
+        "are",
+        "made",
+        "to",
+        "be",
+        "broken"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rules are made to be broken",
+  "senses": [
+    {
+      "senseId": "w:rules-are-made-to-be-broken#s1",
+      "pos": "短语",
+      "glossZh": "规矩是可以破的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rules-are-made-to-be-broken#e-5225ecaf522b0354",
+          "text": "Rules are made to be broken.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 27
+          },
+          "parts": [
+            [
+              0,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

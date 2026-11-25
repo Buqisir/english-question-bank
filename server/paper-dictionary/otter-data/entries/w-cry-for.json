@@ -1,0 +1,213 @@
+{
+  "entryId": "w:cry-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cry",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cry",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cried for",
+      "tags": []
+    },
+    {
+      "form": "cries for",
+      "tags": []
+    },
+    {
+      "form": "crying for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cry for",
+  "senses": [
+    {
+      "senseId": "w:cry-for#s1",
+      "pos": "短语",
+      "glossZh": "迫切需要；急需",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:cry#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cry-for#e-ec7a190603b0c964",
+          "text": "“What suburbia cries for are the means for people to gather easily, inexpensively, regularly, and pleasurably – a ‘place on the corner.’”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 24
+          },
+          "parts": [
+            [
+              15,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cry-for#e-5cb771c51f6ee807",
+          "text": "Housing Demand Is Crying for More",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zj-wenzhou-2026-m2:31#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          },
+          "parts": [
+            [
+              18,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:cry-for#s2",
+      "pos": "短语",
+      "glossZh": "哭着喊（某人）；哭着要",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cry-for#e-15cf5e21f95720d0",
+          "text": "Page after page, Eleanor described their daughter’s first steps and the sharp sorrow when the little girl cried for “Daddy”.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 115
+          },
+          "parts": [
+            [
+              106,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cry-for#e-0783e3e17faddc90",
+          "text": "She woke in the night, crying for my father.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

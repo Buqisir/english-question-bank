@@ -59,8 +59,8 @@
     "mock": 167
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 167
+    "gaokao": 7,
+    "mock": 3
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 148
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -182,40 +182,6 @@
           "target": {
             "start": 31,
             "end": 35
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:club#s3",
-      "pos": "短语",
-      "glossZh": "我也一样；同病相怜",
-      "pronunciationId": "w:club#p-main",
-      "note": "welcome to the club。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:club#e-089bb755123e9ac9",
-          "text": "Welcome to the club; we’ve all been there.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 19
           }
         }
       ]
@@ -266,6 +232,12 @@
       "reason": "专业义或独立的复合词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:join-the-club",
+    "w:welcome-to-the-club"
+  ]
 }

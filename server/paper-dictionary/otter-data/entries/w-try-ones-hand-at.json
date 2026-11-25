@@ -1,0 +1,117 @@
+{
+  "entryId": "w:try-ones-hand-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "try your hand at sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "try",
+      {
+        "slot": "one's"
+      },
+      "hand",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "try",
+        {
+          "slot": "one's"
+        },
+        "hand",
+        "at"
+      ],
+      [
+        "try",
+        "your",
+        "hand",
+        "at",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "try your hand at",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "try one's hand at sth",
+  "senses": [
+    {
+      "senseId": "w:try-ones-hand-at#s1",
+      "pos": "短语",
+      "glossZh": "尝试做某事；试着参加某项活动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s19",
+        "w:try#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:try-ones-hand-at#e-a05912eb84c997ff",
+          "text": "Try your hand at some of the painting tricks used by artists whose works will be in the upcoming exhibition of American Watercolors 1880-1990: Into the Light.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

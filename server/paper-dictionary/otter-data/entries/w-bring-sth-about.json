@@ -1,0 +1,185 @@
+{
+  "entryId": "w:bring-sth-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bring about",
+    "brings about"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      {
+        "slot": "sth"
+      },
+      "about"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "bring",
+        {
+          "slot": "sth"
+        },
+        "about"
+      ],
+      [
+        "bring",
+        "about"
+      ],
+      [
+        "brings",
+        "about"
+      ],
+      [
+        "bringing",
+        "about"
+      ],
+      [
+        "brought",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brought about",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sth about",
+  "senses": [
+    {
+      "senseId": "w:bring-sth-about#s1",
+      "pos": "短语",
+      "glossZh": "引起；导致；促成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:about#s6",
+        "w:bring#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-sth-about#e-1337869cc8ae6a14",
+          "text": "To frame his story, Klein creates the character of Ned, a fictional witness to the progress brought about by",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 105
+          },
+          "parts": [
+            [
+              92,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-about#e-2c76c20af2fd4654",
+          "text": "Andria Zafirakou, a north London secondary school teacher, said she wanted to bring about a classroom revolution（变革）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 89
+          },
+          "parts": [
+            [
+              78,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              89
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-sth-about#e-28bf8313b7388f26",
+          "text": "The 8.2 ka event, occurring 8200 years ago, brought about temperature declines of up to 6°C within mere decades.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 57
+          },
+          "parts": [
+            [
+              44,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

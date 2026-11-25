@@ -48,8 +48,8 @@
     "mock": 1052
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 1052
+    "gaokao": 33,
+    "mock": 884
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 65,
-        "mock": 0
+        "mock": 142
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -204,7 +204,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -268,291 +268,6 @@
       ]
     },
     {
-      "senseId": "w:no#s4",
-      "pos": "短语",
-      "glossZh": "无论；不管",
-      "pronunciationId": "w:no#p-main",
-      "note": "no matter。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 13,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-49de672766f67161",
-          "text": "Knowing some tips will help ensure that you have an enjoyable meal with friends or family – no matter where you are in the world.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:no#e-ec38f831051e675e",
-          "text": "I decided to stick to it no matter what.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:no#e-d384ee6f68b440ef",
-          "text": "No matter what subject I’m teaching, I find ways to bring my hobbies into the classroom.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:no#s5",
-      "pos": "短语",
-      "glossZh": "没关系；不用担心",
-      "pronunciationId": "w:no#p-main",
-      "note": "no worries。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-ff4a96ba3dc0a89e",
-          "text": "No worries: He handed it to his wife, and she was gone in a flash down the road to buy a new tire iron.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:no#s6",
-      "pos": "短语",
-      "glossZh": "绝不；没门",
-      "pronunciationId": "w:no#p-main",
-      "note": "no way、by no means。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-7eff788c30187176",
-          "text": "No way!",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2021-national-a:29",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:no#e-cb413d1cf9fce955",
-          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:no#e-4893af4d8d09426b",
-          "text": "“If you’re scared about something and thinking only about that, there’s no way you’re going to be able to learn,” Ho says.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 72,
-            "end": 74
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:no#s7",
-      "pos": "短语",
-      "glossZh": "不再",
-      "pronunciationId": "w:no#p-main",
-      "note": "no longer。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-2b8539033e77a5f4",
-          "text": "A few years later, as I stood in the lunch line with my kindergarten class in a school in Brooklyn, I realized things were no longer that simple.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 123,
-            "end": 125
-          }
-        },
-        {
-          "exampleId": "w:no#e-a393b1024070635d",
-          "text": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:no#e-51a8a470e8e0572b",
-          "text": "As it has been many years since I last used one, I should hardly be surprised that there are no longer any public telephones near my house.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 95
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:no#s8",
-      "pos": "短语",
-      "glossZh": "很可能；无疑",
-      "pronunciationId": "w:no#p-main",
-      "note": "no doubt 作副词短语。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-773e4292ccd3ead4",
-          "text": "Such wrinkles will no doubt be ironed out.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:no#s9",
       "pos": "adv.",
       "glossZh": "一点也不（修饰比较级）",
@@ -560,7 +275,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -605,41 +320,6 @@
       ]
     },
     {
-      "senseId": "w:no#s10",
-      "pos": "短语",
-      "glossZh": "不超过",
-      "pronunciationId": "w:no#p-main",
-      "note": "no more than。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:no#e-a5ddb73484ebc3f4",
-          "text": "Experts suggest increasing your running distance by no more than 10% each week",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 54
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:no#s11",
       "pos": "n.",
       "glossZh": "反对票",
@@ -659,6 +339,47 @@
       "reason": "专业缩写或同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-no-use",
+    "w:by-no-means",
+    "w:have-no-idea",
+    "w:have-no-time-for",
+    "w:it-is-no-use",
+    "w:like-no-other",
+    "w:look-no-further",
+    "w:no-big-deal",
+    "w:no-chance",
+    "w:no-doubt",
+    "w:no-end",
+    "w:no-good",
+    "w:no-idea",
+    "w:no-later-than",
+    "w:no-longer",
+    "w:no-longer-with-us",
+    "w:no-matter",
+    "w:no-matter-what",
+    "w:no-more",
+    "w:no-more-than",
+    "w:no-one",
+    "w:no-place",
+    "w:no-pressure",
+    "w:no-problem",
+    "w:no-question",
+    "w:no-strings-attached",
+    "w:no-such-luck",
+    "w:no-such-thing-as",
+    "w:no-such-thing-as-slot",
+    "w:no-thanks",
+    "w:no-way",
+    "w:no-wonder",
+    "w:no-worries",
+    "w:oh-no",
+    "w:spare-no-effort",
+    "w:waste-no-time",
+    "w:yes-and-no"
+  ]
 }

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:like-no-other",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "like",
+      "no",
+      "other"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "like",
+        "no",
+        "other"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "like no other",
+  "senses": [
+    {
+      "senseId": "w:like-no-other#s1",
+      "pos": "短语",
+      "glossZh": "独一无二的；无与伦比的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:like-no-other#e-5744ad32d67f74f6",
+          "text": "Her celebration was one like no other.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zhejiang-zhuji-2025-12-first:25#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 37
+          },
+          "parts": [
+            [
+              24,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "也可修饰动作，表示做得无人能比。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

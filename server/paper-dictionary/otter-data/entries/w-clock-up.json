@@ -1,0 +1,97 @@
+{
+  "entryId": "w:clock-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clock",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "clock",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "clocked up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clock sth up",
+  "senses": [
+    {
+      "senseId": "w:clock-up#s1",
+      "pos": "短语",
+      "glossZh": "累计达到（某一数量、时数或里程）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:clock#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:clock-up#e-a38bf5215b20b7fe",
+          "text": "Since early 2023, the hashtag #DressMyDoll has clocked up 1-2 billion views, with users posting OOTD shots that match their own clothes to 20-cm dolls.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              57
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

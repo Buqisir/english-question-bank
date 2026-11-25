@@ -59,8 +59,8 @@
     "mock": 466
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 462
+    "gaokao": 9,
+    "mock": 289
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 154
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -207,234 +207,6 @@
       ]
     },
     {
-      "senseId": "w:eye#s3",
-      "pos": "短语",
-      "glossZh": "吸引注意力",
-      "pronunciationId": "w:eye#p-main",
-      "note": "catch sb's eye。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:eye#e-2c63591786321fa6",
-          "text": "Suddenly, a movement outside caught his eye.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
-              "sentence": 8
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 43
-          }
-        },
-        {
-          "exampleId": "w:eye#e-e1ff70593505bace",
-          "text": "On a nearby trolley a cat’s cradle (翻花绳) has caught her eye.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 56,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:eye#s4",
-      "pos": "短语",
-      "glossZh": "密切留意",
-      "pronunciationId": "w:eye#p-main",
-      "note": "keep an eye on 或 under the watchful eye of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:eye#e-6edc69fbd6154836",
-          "text": "So __45__ tying him up, I just kept a close eye on him.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "cloze-2",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:eye#e-94fbf7c8ada88c56",
-          "text": "This is a beautifully illustrated tale about a young boy living under the watchful eye of his overly cautious family.",
-          "source": {
-            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
-            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
-            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 83,
-            "end": 86
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:eye#s5",
-      "pos": "短语",
-      "glossZh": "使认清",
-      "pronunciationId": "w:eye#p-main",
-      "note": "open sb's eyes to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:eye#e-6f1acb74db79fba2",
-          "text": "It opened her eyes to the real world.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jun:23",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:eye#e-370dcb5cadd86b30",
-          "text": "Later, tutoring at an Englewood high school opened his eyes to his students’ struggles.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:eye#s6",
-      "pos": "短语",
-      "glossZh": "匆匆看一眼",
-      "pronunciationId": "w:eye#p-main",
-      "note": "cast an eye over sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:eye#e-67b95758cdbea83b",
-          "text": "A few minutes spent casting your eye over a page or two can be a rewarding experience.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:eye#s7",
-      "pos": "短语",
-      "glossZh": "毫不惊讶",
-      "pronunciationId": "w:eye#p-main",
-      "note": "without batting an eye。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:eye#e-2339754e5940eeef",
-          "text": "Without batting an eye, he would __48__ a translated Emerson passage before asking about the literary influence of American __49__ as a whole.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:eye#s8",
       "pos": "n.",
       "glossZh": "观察者",
@@ -442,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -495,7 +267,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -538,12 +310,12 @@
       "pos": "n.",
       "glossZh": "风暴中心",
       "pronunciationId": "w:eye#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -551,12 +323,58 @@
       "pos": "v.",
       "glossZh": "打量",
       "pronunciationId": "w:eye#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:eye#s13",
+      "pos": "n.",
+      "glossZh": "想象中看见事物的能力（mind’s eye）",
+      "pronunciationId": "w:eye#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eye#e-738c843b4cf2dd71",
+          "text": "movie in our mind’s eye, which fits, as contemporary humans are a visually engaged species.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:eye#s14",
+      "pos": "短语",
+      "glossZh": "意见一致（see eye to eye）",
+      "pronunciationId": "w:eye#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -566,6 +384,23 @@
       "reason": "棋类术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cast-an-eye-over-sth",
+    "w:catch-ones-eye",
+    "w:eye-candy",
+    "w:eye-in-the-sky",
+    "w:eye-of-the-storm",
+    "w:eye-up",
+    "w:have-an-eye-for",
+    "w:keep-an-eye-on",
+    "w:keep-an-eye-out",
+    "w:turn-a-blind-eye-to-sth",
+    "w:under-the-watchful-eye-of",
+    "w:with-an-eye-to",
+    "w:without-batting-an-eye"
+  ]
 }

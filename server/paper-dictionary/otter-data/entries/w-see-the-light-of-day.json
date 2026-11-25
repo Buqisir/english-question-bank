@@ -1,0 +1,142 @@
+{
+  "entryId": "w:see-the-light-of-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "see",
+      "the",
+      "light",
+      "of",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "see",
+        "the",
+        "light",
+        "of",
+        "day"
+      ],
+      [
+        "saw",
+        "the",
+        "light",
+        "of",
+        "day"
+      ],
+      [
+        "seeing",
+        "the",
+        "light",
+        "of",
+        "day"
+      ],
+      [
+        "seen",
+        "the",
+        "light",
+        "of",
+        "day"
+      ],
+      [
+        "sees",
+        "the",
+        "light",
+        "of",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "seen the light of day",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "see the light of day",
+  "senses": [
+    {
+      "senseId": "w:see-the-light-of-day#s1",
+      "pos": "短语",
+      "glossZh": "（发明、计划等）问世；成为现实",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:see-the-light-of-day#e-ecd2e752469f649b",
+          "text": "Jen Adams Beason, a 2nd-grade teacher from Louisiana, witnessed this when she asked her students to write about an invention that they didn’t like, or an invention that they wish would have never seen the light of day.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 196,
+            "end": 217
+          },
+          "parts": [
+            [
+              196,
+              217
+            ]
+          ],
+          "highlightRanges": [
+            [
+              196,
+              217
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:see-the-light-of-day#s2",
+      "pos": "短语",
+      "glossZh": "（作品、报告等）得以公开或发表",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,12 +1,24 @@
 {
   "entryId": "w:ought-to",
-  "headword": "ought to",
   "kind": "phrase",
   "lists": [
     "3000",
     "3100"
   ],
   "variants": [],
+  "pattern": {
+    "tokens": [
+      "ought",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ought",
+        "to"
+      ]
+    ]
+  },
   "ipa": {
     "uk": "/ˈɔːt tə/",
     "us": "/ˈɔːt tə/"
@@ -29,30 +41,28 @@
       }
     }
   ],
-  "forms": [],
-  "counts": {
-    "gaokao": 0,
-    "mock": 3
-  },
-  "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 0
-  },
+  "forms": [
+    {
+      "form": "ought to",
+      "tags": []
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "headword": "ought to do sth",
   "senses": [
     {
       "senseId": "w:ought-to#s1",
-      "pos": "情态动词",
+      "pos": "短语",
       "glossZh": "应该做某事；按道理会发生某事",
-      "pronunciationId": "w:ought-to#p-main",
       "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
       "folded": false,
+      "legacySenseIds": [
+        "w:ought-to#s1"
+      ],
       "examples": [
         {
-          "exampleId": "w:ought-to#e-4da54af2948866da",
+          "exampleId": "w:ought-to#e-ae9d34ffd2edb93e",
           "text": "Financial education ought to be treated as essential in schools.",
           "source": {
             "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
@@ -64,10 +74,26 @@
               "sentence": 3
             }
           },
-          "tier": "mock"
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          },
+          "parts": [
+            [
+              20,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              28
+            ]
+          ]
         },
         {
-          "exampleId": "w:ought-to#e-0cf4bca40c5d5e73",
+          "exampleId": "w:ought-to#e-b5de595fce38446b",
           "text": "Norton and his partners argue that tourist dollars being spent in fragile places ought to remain in-country – or better yet, in-community.",
           "source": {
             "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
@@ -79,12 +105,41 @@
               "sentence": 2
             }
           },
-          "tier": "mock"
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 89
+          },
+          "parts": [
+            [
+              81,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              89
+            ]
+          ]
         }
-      ]
+      ],
+      "pronunciationId": "w:ought-to#p-main",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
 }

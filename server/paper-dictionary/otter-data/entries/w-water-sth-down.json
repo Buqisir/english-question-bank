@@ -1,0 +1,101 @@
+{
+  "entryId": "w:water-sth-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "water down"
+  ],
+  "pattern": {
+    "tokens": [
+      "water",
+      {
+        "slot": "sth"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "water",
+        {
+          "slot": "sth"
+        },
+        "down"
+      ],
+      [
+        "water",
+        "down"
+      ],
+      [
+        "watered",
+        "down"
+      ],
+      [
+        "watering",
+        "down"
+      ],
+      [
+        "waters",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "water sth down",
+  "senses": [
+    {
+      "senseId": "w:water-sth-down#s1",
+      "pos": "短语",
+      "glossZh": "加水稀释",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:down#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:water-sth-down#s2",
+      "pos": "短语",
+      "glossZh": "淡化内容；削弱力度或放宽要求",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:water#s5",
+        "w:down#s8"
+      ],
+      "examples": [],
+      "note": "可指过度简化内容，以致丢掉重要细节。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

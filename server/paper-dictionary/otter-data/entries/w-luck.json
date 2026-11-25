@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 48
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -127,7 +127,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -170,40 +170,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:luck#s3",
-      "pos": "短语",
-      "glossZh": "碰巧",
-      "pronunciationId": "w:luck#p-main",
-      "note": "as luck would have it。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:luck#e-df0f67c27d38b032",
-          "text": "As luck would have it, on the last semester, he was __46__ as an exchange student to Harvard University.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
-            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -212,6 +178,14 @@
       "reason": "专名或少见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-luck-would-have-it",
+    "w:best-of-luck",
+    "w:good-luck",
+    "w:no-such-luck"
+  ]
 }

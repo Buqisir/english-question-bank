@@ -53,8 +53,8 @@
     "mock": 97
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 95
+    "gaokao": 4,
+    "mock": 1
   },
   "senses": [
     {
@@ -65,7 +65,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 60
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -209,7 +209,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -271,113 +271,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:american#s4",
-      "pos": "短语",
-      "glossZh": "美洲原住民",
-      "pronunciationId": "w:american#p-main",
-      "note": "Native American。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:american#e-c1846147c5dae27b",
-          "text": "Native Americans had taken care of these precious natural resources wisely.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:american#e-5bf7372b15d62c5a",
-          "text": "The western half of the U.S. was full of grizzlies when Europeans came, with a rough number of 50,000 or more living alongside Native Americans.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 134,
-            "end": 143
-          }
-        },
-        {
-          "exampleId": "w:american#e-5f335e4d84489381",
-          "text": "The support of Native Americans.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2023-national-a:33",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 31
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:american#s5",
-      "pos": "短语",
-      "glossZh": "非裔美国人",
-      "pronunciationId": "w:american#p-main",
-      "note": "African American。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:american#e-ae0b4461d4a122bb",
-          "text": "Who was the first African American with a medical degree?",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-gaokao-2023-national-b:23",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 34
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -386,6 +279,8 @@
       "reason": "专门名称和历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

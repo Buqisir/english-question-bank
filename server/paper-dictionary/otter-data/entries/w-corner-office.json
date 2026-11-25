@@ -1,0 +1,125 @@
+{
+  "entryId": "w:corner-office",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "corner",
+      "office"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "corner",
+        "office"
+      ],
+      [
+        "corner",
+        "offices"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "corner office",
+  "senses": [
+    {
+      "senseId": "w:corner-office#s1",
+      "pos": "名词短语",
+      "glossZh": "高管的转角办公室；借指高管或高管地位",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:corner-office#e-2aca16137f6ac16f",
+          "text": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 168,
+            "end": 181
+          },
+          "parts": [
+            [
+              168,
+              181
+            ]
+          ],
+          "highlightRanges": [
+            [
+              168,
+              181
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:corner-office#e-b4da9842c37d991f",
+          "text": "I had spent fifteen years advancing in my corporate career in Seattle, but the corner office and six-figure salary had left me empty.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 92
+          },
+          "parts": [
+            [
+              79,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

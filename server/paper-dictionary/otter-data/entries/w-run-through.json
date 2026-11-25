@@ -1,0 +1,299 @@
+{
+  "entryId": "w:run-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran through",
+    "running through",
+    "runs through"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "through"
+      ],
+      [
+        "ran",
+        "through"
+      ],
+      [
+        "running",
+        "through"
+      ],
+      [
+        "runs",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run through",
+  "senses": [
+    {
+      "senseId": "w:run-through#s1",
+      "pos": "短语",
+      "glossZh": "快速过一遍；简要查看或讲解",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-through#e-827bc98afe67e959",
+          "text": "If your body is still but your mind is racing – running through long to-do lists or things you feel you “should” be doing – you are not meaningfully resting.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 63
+          },
+          "parts": [
+            [
+              48,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              63
+            ]
+          ]
+        }
+      ],
+      "note": "也可指在脑中过一遍清单等内容。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-through#s2",
+      "pos": "短语",
+      "glossZh": "（管道、河流、路线等）穿过；贯通",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-through#e-bbd80f988c3ac4b4",
+          "text": "Using a 3D bio-printer, the researchers created a thick ring loaded with human cells and built a network of 25 vessels running through it.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 134
+          },
+          "parts": [
+            [
+              119,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              134
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-through#e-7cf0f9a206359a09",
+          "text": "Green space runs through its core.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:run-through#s3",
+      "pos": "短语",
+      "glossZh": "（感觉）掠过某人；（特征）贯穿整体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-through#e-4a4998e8489f286c",
+          "text": "I felt a brief thrill run through me – until I thought about all the work ahead.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-through#e-25b02c2a1fd4ee4d",
+          "text": "A wave of excitement ran through him – he was ready.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:run-through#s4",
+      "pos": "短语",
+      "glossZh": "把演出、流程等演练一遍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-through#s5",
+      "pos": "短语",
+      "glossZh": "很快用完（金钱等资源）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-through#s6",
+      "pos": "短语",
+      "glossZh": "用刀剑刺穿某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "run sb through。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

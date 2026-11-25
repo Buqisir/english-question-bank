@@ -1,0 +1,138 @@
+{
+  "entryId": "w:storm-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "storm",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "storm",
+        "off"
+      ],
+      [
+        "stormed",
+        "off"
+      ],
+      [
+        "storming",
+        "off"
+      ],
+      [
+        "storms",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stormed off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "storm off",
+  "senses": [
+    {
+      "senseId": "w:storm-off#s1",
+      "pos": "短语",
+      "glossZh": "怒气冲冲地离开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:storm-off#e-c2ea62e5f4f5bd14",
+          "text": "Their teammates pulled them apart and the two stormed off.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:storm-off#e-415ab875860d982f",
+          "text": "Once after he stormed off, I came to him and said, “I know you’re not being difficult – want to tell me what’s bothering you?” He stared at his shoes, silent, but didn’t walk away.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

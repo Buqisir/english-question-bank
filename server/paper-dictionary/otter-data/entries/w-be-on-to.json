@@ -1,0 +1,131 @@
+{
+  "entryId": "w:be-on-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "on",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "on",
+        "to"
+      ],
+      [
+        "been",
+        "on",
+        "to"
+      ],
+      [
+        "being",
+        "on",
+        "to"
+      ],
+      [
+        "is",
+        "on",
+        "to"
+      ],
+      [
+        "was",
+        "on",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "be on to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be on to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:be-on-to#s1",
+      "pos": "短语",
+      "glossZh": "找到了有价值的线索；想到了有道理的点子",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-on-to#e-223ef315c498aa3f",
+          "text": "However, shoes-off-ers might be on to something.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          },
+          "parts": [
+            [
+              29,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "be on to something。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:be-on-to#s2",
+      "pos": "短语",
+      "glossZh": "识破某人的把戏；察觉隐情",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

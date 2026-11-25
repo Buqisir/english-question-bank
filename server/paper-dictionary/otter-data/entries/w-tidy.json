@@ -71,7 +71,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 27
+    "mock": 1
   },
   "senses": [
     {
@@ -82,7 +82,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -166,7 +166,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -237,6 +237,9 @@
       "reason": "罕用义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:tidy-up"
+  ]
 }

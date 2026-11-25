@@ -1,0 +1,60 @@
+{
+  "entryId": "w:square-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "square",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "square",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "square with sth",
+  "senses": [
+    {
+      "senseId": "w:square-with#s1",
+      "pos": "短语",
+      "glossZh": "与某事相符；与某事一致",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:square#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

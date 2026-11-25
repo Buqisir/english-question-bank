@@ -1,0 +1,80 @@
+{
+  "entryId": "w:have-little-time-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "little",
+      "time",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "little",
+        "time",
+        "for"
+      ],
+      [
+        "had",
+        "little",
+        "time",
+        "for"
+      ],
+      [
+        "has",
+        "little",
+        "time",
+        "for"
+      ],
+      [
+        "having",
+        "little",
+        "time",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have little time for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:have-little-time-for#s1",
+      "pos": "短语",
+      "glossZh": "对……没什么兴趣或耐心；不愿理会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

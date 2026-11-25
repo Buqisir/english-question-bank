@@ -1,0 +1,153 @@
+{
+  "entryId": "w:ring-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ring",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ring",
+        "up"
+      ],
+      [
+        "rang",
+        "up"
+      ],
+      [
+        "ringing",
+        "up"
+      ],
+      [
+        "rings",
+        "up"
+      ],
+      [
+        "rung",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rang up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ring (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:ring-up#s1",
+      "pos": "短语",
+      "glossZh": "给……打电话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s78"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:ring-up#e-bd0cf423256635b6",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          },
+          "parts": [
+            [
+              68,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-up#s2",
+      "pos": "短语",
+      "glossZh": "用收银机登记商品或款项",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-up#s3",
+      "pos": "短语",
+      "glossZh": "判某人犯规或出局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "棒球中常指判击球手三振出局。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-up#s4",
+      "pos": "短语",
+      "glossZh": "用铃声叫醒或召来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

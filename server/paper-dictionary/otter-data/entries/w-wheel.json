@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 42
+    "mock": 3
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -342,38 +342,17 @@
       "examples": []
     },
     {
-      "senseId": "w:wheel#s6",
-      "pos": "短语",
-      "glossZh": "重做已有的东西",
+      "senseId": "w:wheel#s7",
+      "pos": "v.",
+      "glossZh": "（在空中）盘旋",
       "pronunciationId": "w:wheel#p-main",
-      "note": "reinvent the wheel。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wheel#e-96772750e6487c07",
-          "text": "But you don’t have to reinvent the wheel!",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
-            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-a:11",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 35,
-            "end": 40
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -382,6 +361,11 @@
       "reason": "历史或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:reinvent-the-wheel"
+  ]
 }

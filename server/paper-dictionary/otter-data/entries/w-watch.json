@@ -62,8 +62,8 @@
     "mock": 414
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 414
+    "gaokao": 4,
+    "mock": 228
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 102
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -301,7 +301,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -364,60 +364,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:watch#s6",
-      "pos": "短语",
-      "glossZh": "提防",
-      "pronunciationId": "w:watch#p-main",
-      "note": "watch out for sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:watch#e-91cb97e5c6d94d82",
-          "text": "Watch Out for the Textalyzer",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2022-ii:31",
-              "option": "B",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:watch#e-a7ec0425fd8a8034",
-          "text": "As prey animals, parrots are constantly watching out for danger and they instinctively（本能地）react to risks.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 48
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -426,6 +372,14 @@
       "reason": "航海或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:watch-it",
+    "w:watch-out",
+    "w:watch-out-for-sth",
+    "w:watch-over"
+  ]
 }

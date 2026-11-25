@@ -1,0 +1,164 @@
+{
+  "entryId": "w:in-the-form-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "form",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "form",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in the form of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the form of sth",
+  "senses": [
+    {
+      "senseId": "w:in-the-form-of#s1",
+      "pos": "短语",
+      "glossZh": "以……的形式；表现为……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s65"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-the-form-of#e-179728d300bbbb09",
+          "text": "Today, most records of biodiversity are often in the form of photos, videos, and other digital records.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 60
+          },
+          "parts": [
+            [
+              46,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-form-of#e-eb1eca9934cfb322",
+          "text": "Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 126,
+            "end": 140
+          },
+          "parts": [
+            [
+              126,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              126,
+              140
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-form-of#e-9603691b1ff281d6",
+          "text": "Put the related ideas in the form of a chart or a picture.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 36
+          },
+          "parts": [
+            [
+              22,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

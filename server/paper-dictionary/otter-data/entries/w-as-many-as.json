@@ -1,0 +1,206 @@
+{
+  "entryId": "w:as-many-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "many",
+      {
+        "slot": "…"
+      },
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "many",
+        {
+          "slot": "…"
+        },
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "as many as",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as many … as",
+  "senses": [
+    {
+      "senseId": "w:as-many-as#s1",
+      "pos": "短语",
+      "glossZh": "尽可能多的……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-many-as#e-e555554857cef8aa",
+          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 49
+          },
+          "parts": [
+            [
+              33,
+              40
+            ],
+            [
+              47,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ],
+            [
+              47,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-many-as#e-7e2da0545bf32f2e",
+          "text": "Make as many notes as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 21
+          },
+          "parts": [
+            [
+              5,
+              12
+            ],
+            [
+              19,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ],
+            [
+              19,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-many-as#e-592a81e4dc86d02f",
+          "text": "We have to remember: we don’t get a prize at the end of life for having rushed through as many books as possible.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 103
+          },
+          "parts": [
+            [
+              87,
+              94
+            ],
+            [
+              101,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              94
+            ],
+            [
+              101,
+              103
+            ]
+          ]
+        }
+      ],
+      "note": "第二个 as 后常接 possible 或主语加 can/could。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:as-many-as#s2",
+      "pos": "短语",
+      "glossZh": "与……数量一样多",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:many#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

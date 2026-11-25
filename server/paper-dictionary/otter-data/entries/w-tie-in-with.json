@@ -1,0 +1,125 @@
+{
+  "entryId": "w:tie-in-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tie",
+      "in",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tie",
+        "in",
+        "with"
+      ],
+      [
+        "tied",
+        "in",
+        "with"
+      ],
+      [
+        "ties",
+        "in",
+        "with"
+      ],
+      [
+        "tying",
+        "in",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tie in with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tie in with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:tie-in-with#s1",
+      "pos": "短语",
+      "glossZh": "与……有关联；与……相呼应",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tie-in-with#e-c94a1889d564110c",
+          "text": "Combined with a large sample size and a lengthy observation period, the findings offer especially valuable insight into how online habits tie in with stress.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 149
+          },
+          "parts": [
+            [
+              138,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              138,
+              149
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:tie-in-with#s2",
+      "pos": "短语",
+      "glossZh": "与某人或某团体建立联系或合作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

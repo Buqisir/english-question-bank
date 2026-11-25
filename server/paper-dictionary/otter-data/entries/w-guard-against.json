@@ -1,0 +1,104 @@
+{
+  "entryId": "w:guard-against",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "guard",
+      "against"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "guard",
+        "against"
+      ],
+      [
+        "guarded",
+        "against"
+      ],
+      [
+        "guarding",
+        "against"
+      ],
+      [
+        "guards",
+        "against"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "guard against",
+  "senses": [
+    {
+      "senseId": "w:guard-against#s1",
+      "pos": "短语",
+      "glossZh": "防范；提防不良情况或倾向",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:guard#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:guard-against#e-9c4307b52981f2a6",
+          "text": "Second, guard against the “true enough” mindset.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 21
+          },
+          "parts": [
+            [
+              8,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

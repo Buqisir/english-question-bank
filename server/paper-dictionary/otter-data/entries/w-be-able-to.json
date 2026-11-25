@@ -1,0 +1,192 @@
+{
+  "entryId": "w:be-able-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "being able to",
+    "is able to",
+    "was able to"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "able",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "able",
+        "to"
+      ],
+      [
+        "being",
+        "able",
+        "to"
+      ],
+      [
+        "is",
+        "able",
+        "to"
+      ],
+      [
+        "was",
+        "able",
+        "to"
+      ],
+      [
+        "been",
+        "able",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are able to",
+      "tags": []
+    },
+    {
+      "form": "been able to",
+      "tags": []
+    },
+    {
+      "form": "were able to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be able to",
+  "senses": [
+    {
+      "senseId": "w:be-able-to#s1",
+      "pos": "短语",
+      "glossZh": "能够；有能力或条件做",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-able-to#e-d40cc0177b2da6bf",
+          "text": "Dogs may indeed be able to distinguish between happy and angry human faces, according to a new study.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-able-to#e-dc6d9bb4e040c33a",
+          "text": "They are able to have entire conversations with humans using meows and you’re able to interpret it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 16
+          },
+          "parts": [
+            [
+              5,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-able-to#e-d3550f78c893434d",
+          "text": "Since I had my own toiletries(洗漱用品),I was able to start personalizing my routine to be more sustainable.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        }
+      ],
+      "note": "在具体的过去情境中，was/were able to 可表示当时成功做到了。",
+      "counts": {
+        "gaokao": 32,
+        "mock": 100
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 32,
+    "mock": 100
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

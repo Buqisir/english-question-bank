@@ -1,0 +1,125 @@
+{
+  "entryId": "w:power-couple",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "power",
+      "couple"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "power",
+        "couple"
+      ],
+      [
+        "power",
+        "couples"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "power couple",
+  "senses": [
+    {
+      "senseId": "w:power-couple#s1",
+      "pos": "短语",
+      "glossZh": "双方都很成功或有影响力的一对伴侣",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:power-couple#e-b7da78b64a438c75",
+          "text": "The newest, hottest power couple doesn’t live in Hollywood.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:power-couple#e-9707d057a8731647",
+          "text": "The newest, hottest power couple doesn't live in Hollywood.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam",
+            "paperTitle": "26届湖北圆创第一次联考 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-2025-12-senior-three-first-joint-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

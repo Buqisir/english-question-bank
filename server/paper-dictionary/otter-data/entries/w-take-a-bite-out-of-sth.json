@@ -1,0 +1,110 @@
+{
+  "entryId": "w:take-a-bite-out-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "bite",
+      "out",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "bite",
+        "out",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take a bite out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a bite out of sth",
+  "senses": [
+    {
+      "senseId": "w:take-a-bite-out-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "耗掉；占去……的一大部分",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bite#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-a-bite-out-of-sth#e-294acfc392a9b111",
+          "text": "Do your own cooking: sit-down restaurants can take a bite out of your savings.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 64
+          },
+          "parts": [
+            [
+              46,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              64
+            ]
+          ]
+        }
+      ],
+      "note": "常用于存款、预算等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

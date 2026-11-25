@@ -1,0 +1,279 @@
+{
+  "entryId": "w:take-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes time",
+    "taking time"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "time"
+      ],
+      [
+        "takes",
+        "time"
+      ],
+      [
+        "taking",
+        "time"
+      ],
+      [
+        "taken",
+        "time"
+      ],
+      [
+        "took",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take time",
+  "senses": [
+    {
+      "senseId": "w:take-time#s1",
+      "pos": "短语",
+      "glossZh": "需要时间；耗费时间",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-time#e-3343f8d42bb2597d",
+          "text": "Building effective communication skills takes time, but the effects are worth the effort.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-time#e-1ef3e77f7ce567c9",
+          "text": "Growth takes time, and even life's hardest moments are our greatest teachers.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-time#e-737c15a09b5092c8",
+          "text": "It takes time to learn how to wrestle with the urge to say more.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      }
+    },
+    {
+      "senseId": "w:take-time#s2",
+      "pos": "短语",
+      "glossZh": "抽出时间做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-time#e-6cf03571c224f579",
+          "text": "Instead of using vague (含糊的) phrases like “You can do this!”, take time to understand the underlying concerns.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          },
+          "parts": [
+            [
+              62,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-time#e-06d46ecd049fcb41",
+          "text": "Taking time for myself has made me happier, more relaxed, and a better family man.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-time#e-2104bae26e91cf1a",
+          "text": "Art historian Katy Hessel emphasizes that taking time to immerse oneself in art deeply is vital to its therapeutic effect.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          },
+          "parts": [
+            [
+              42,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "take time to do sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

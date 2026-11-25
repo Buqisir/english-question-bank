@@ -1,0 +1,181 @@
+{
+  "entryId": "w:take-the-place-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "the",
+      "place",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "the",
+        "place",
+        "of"
+      ],
+      [
+        "taken",
+        "the",
+        "place",
+        "of"
+      ],
+      [
+        "takes",
+        "the",
+        "place",
+        "of"
+      ],
+      [
+        "taking",
+        "the",
+        "place",
+        "of"
+      ],
+      [
+        "took",
+        "the",
+        "place",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take the place of",
+  "senses": [
+    {
+      "senseId": "w:take-the-place-of#s1",
+      "pos": "短语",
+      "glossZh": "代替；取代",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-the-place-of#e-1b37fdf136d9b724",
+          "text": "Given this fact, plants will never glow bright enough to take the place of streetlights.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 74
+          },
+          "parts": [
+            [
+              57,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-place-of#e-03293ceb33ab2f5c",
+          "text": "Physicist Himanshu Mishra adds it’s “interesting science” but can’t take the place of fossil fuels, as it can’t power larger electrical machines.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 85
+          },
+          "parts": [
+            [
+              68,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-the-place-of#e-acc05edc75c3817d",
+          "text": "To take the place of blood tests in hospitals.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-zj-ningbo-2026-mar:32#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 20
+          },
+          "parts": [
+            [
+              3,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

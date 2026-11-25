@@ -1,0 +1,60 @@
+{
+  "entryId": "w:soldier-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "soldier",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "soldier",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "soldier on",
+  "senses": [
+    {
+      "senseId": "w:soldier-on#s1",
+      "pos": "短语",
+      "glossZh": "尽管困难仍坚持做下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:soldier#s2"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

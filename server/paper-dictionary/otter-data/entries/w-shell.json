@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 28
+    "mock": 5
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -280,60 +280,6 @@
       ]
     },
     {
-      "senseId": "w:shell#s7",
-      "pos": "短语",
-      "glossZh": "敞开心扉",
-      "pronunciationId": "w:shell#p-main",
-      "note": "come out of one's shell；draw sb out of their shell。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shell#e-5d9771ddb5497f0e",
-          "text": "Break out of your shell.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-03-first",
-            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-mock-shandong-jining-2026-03-first:27",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 18,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:shell#e-d680e61c3a0e7fea",
-          "text": "MacColl was enrolled in dance lessons by her parents, initially to draw her out of her shell.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
-            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 87,
-            "end": 92
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:shell#s8",
       "pos": "v.",
       "glossZh": "剥去外壳",
@@ -358,20 +304,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:shell#s10",
-      "pos": "短语",
-      "glossZh": "掏钱",
-      "pronunciationId": "w:shell#p-main",
-      "note": "shell out。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -380,6 +312,13 @@
       "reason": "计算机专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:come-out-of-ones-shell",
+    "w:draw-sb-out-of-their-shell",
+    "w:shell-out"
+  ]
 }

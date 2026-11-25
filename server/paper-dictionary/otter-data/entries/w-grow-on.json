@@ -1,0 +1,91 @@
+{
+  "entryId": "w:grow-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "grew on",
+    "growing on"
+  ],
+  "pattern": {
+    "tokens": [
+      "grow",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "grow",
+        "on"
+      ],
+      [
+        "grew",
+        "on"
+      ],
+      [
+        "growing",
+        "on"
+      ],
+      [
+        "grown",
+        "on"
+      ],
+      [
+        "grows",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "grow on sb",
+  "senses": [
+    {
+      "senseId": "w:grow-on#s1",
+      "pos": "短语",
+      "glossZh": "渐渐让某人喜欢上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "主语是逐渐变得讨人喜欢的人或事物。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:grow-on#s2",
+      "pos": "短语",
+      "glossZh": "（某个认识或感受）在某人心中逐渐变得清晰或强烈",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

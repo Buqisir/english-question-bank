@@ -1,0 +1,121 @@
+{
+  "entryId": "w:not-much-of-a",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "much",
+      "of",
+      "a",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "much",
+        "of",
+        "a",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "not much of a",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not much of a …",
+  "senses": [
+    {
+      "senseId": "w:not-much-of-a#s1",
+      "pos": "短语",
+      "glossZh": "没有多大的……；不算明显的……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-much-of-a#e-3bee06a2320c861f",
+          "text": "A recent meta-analysis led by academics at the University of Waterloo in Canada found that up to 1.5x there was not much of a difference in performance, although scores started to decrease noticeably as playback speeds approached or exceeded 2x.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 125
+          },
+          "parts": [
+            [
+              112,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              125
+            ]
+          ]
+        }
+      ],
+      "note": "可接 difference 等表示程度或大小的名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:not-much-of-a#s2",
+      "pos": "短语",
+      "glossZh": "称不上像样的……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:much#s11"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

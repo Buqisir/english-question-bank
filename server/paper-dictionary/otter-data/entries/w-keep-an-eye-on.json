@@ -1,0 +1,185 @@
+{
+  "entryId": "w:keep-an-eye-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeps an eye on"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "an",
+      "eye",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "an",
+        "eye",
+        "on"
+      ],
+      [
+        "keeps",
+        "an",
+        "eye",
+        "on"
+      ],
+      [
+        "keeping",
+        "an",
+        "eye",
+        "on"
+      ],
+      [
+        "kept",
+        "an",
+        "eye",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kept an eye on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep an eye on",
+  "senses": [
+    {
+      "senseId": "w:keep-an-eye-on#s1",
+      "pos": "短语",
+      "glossZh": "留意；盯着；照看",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eye#s4",
+        "w:keep#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-an-eye-on#e-a9bce60ecc6b2706",
+          "text": "It also keeps an eye on their daily habits: how well they sleep, how much they bark, and any small changes in their health.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 23
+          },
+          "parts": [
+            [
+              8,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-an-eye-on#e-0ce65f7df85cd992",
+          "text": "At the same time, in the corner grocery, Grace kept an eye on this family.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 61
+          },
+          "parts": [
+            [
+              47,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-an-eye-on#e-daa0966a814a2880",
+          "text": "Remember to keep an eye on it.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

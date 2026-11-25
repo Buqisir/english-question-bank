@@ -1,0 +1,148 @@
+{
+  "entryId": "w:lose-sight-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "sight",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "sight",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lose sight of",
+      "tags": []
+    },
+    {
+      "form": "losing sight of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose sight of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:lose-sight-of#s1",
+      "pos": "短语",
+      "glossZh": "忽视；忘了顾及",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lose#s5",
+        "w:sight#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lose-sight-of#e-c86dcbe9d6ac42ee",
+          "text": "The key is balance – enjoying memories without losing sight of the present.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 62
+          },
+          "parts": [
+            [
+              47,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lose-sight-of#e-af2fb582f3ff75f0",
+          "text": "Helping others can be one of the most meaningful things you do, but it can also take a lot out of you, making you lose sight of the fact that you need support, too.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 127
+          },
+          "parts": [
+            [
+              114,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              127
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lose-sight-of#s2",
+      "pos": "短语",
+      "glossZh": "看不见了；从视线中失去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,72 @@
+{
+  "entryId": "w:sleep-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sleeping in"
+  ],
+  "pattern": {
+    "tokens": [
+      "sleep",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sleep",
+        "in"
+      ],
+      [
+        "sleeping",
+        "in"
+      ],
+      [
+        "sleeps",
+        "in"
+      ],
+      [
+        "slept",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sleep in",
+  "senses": [
+    {
+      "senseId": "w:sleep-in#s1",
+      "pos": "短语",
+      "glossZh": "睡懒觉；比平常起得晚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

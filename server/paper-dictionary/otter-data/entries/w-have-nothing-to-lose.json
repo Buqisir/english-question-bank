@@ -1,0 +1,148 @@
+{
+  "entryId": "w:have-nothing-to-lose",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "nothing",
+      "to",
+      "lose"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "nothing",
+        "to",
+        "lose"
+      ],
+      [
+        "had",
+        "nothing",
+        "to",
+        "lose"
+      ],
+      [
+        "has",
+        "nothing",
+        "to",
+        "lose"
+      ],
+      [
+        "having",
+        "nothing",
+        "to",
+        "lose"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had nothing to lose",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have nothing to lose",
+  "senses": [
+    {
+      "senseId": "w:have-nothing-to-lose#s1",
+      "pos": "短语",
+      "glossZh": "即使失败也没有损失；可以放手一试",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-nothing-to-lose#e-57c86ed2e2bba87c",
+          "text": "I doubted it, but let him go ahead, for I had nothing to lose.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 61
+          },
+          "parts": [
+            [
+              42,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-nothing-to-lose#e-a32c50df7ee7cb99",
+          "text": "After King called one last timeout, Academy played as if they had nothing to lose, sinking shot after shot to pull within a few points of Apache.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 81
+          },
+          "parts": [
+            [
+              62,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,74 @@
+{
+  "entryId": "w:find-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "find",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "find",
+        "oneself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "find oneself",
+  "senses": [
+    {
+      "senseId": "w:find-oneself#s1",
+      "pos": "短语",
+      "glossZh": "发觉自己处于某种境地或正在做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:find#s4"
+      ],
+      "examples": [],
+      "note": "后接地点、状态或动词的 -ing 形式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:find-oneself#s2",
+      "pos": "短语",
+      "glossZh": "找到自我；认清自己和自己想要的生活",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

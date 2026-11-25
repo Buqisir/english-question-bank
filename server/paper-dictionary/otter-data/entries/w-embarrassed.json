@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 48
+    "mock": 0
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -122,6 +122,58 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:embarrassed#s2",
+      "pos": "v.",
+      "glossZh": "使尴尬；使难堪",
+      "pronunciationId": "w:embarrassed#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:embarrassed#e-134c3084ce8abd15",
+          "text": "I routinely embarrassed myself.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:embarrassed#e-6667fdb4c5f0ccfa",
+          "text": "In a presentation, I embarrassed myself by confusing “gene dilution” with “gene deletion”.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -130,6 +182,6 @@
       "reason": "属于另一词头"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

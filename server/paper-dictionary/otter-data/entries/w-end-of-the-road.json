@@ -1,0 +1,94 @@
+{
+  "entryId": "w:end-of-the-road",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "end",
+      "of",
+      "the",
+      "road"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "end",
+        "of",
+        "the",
+        "road"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "end of the road",
+  "senses": [
+    {
+      "senseId": "w:end-of-the-road#s1",
+      "pos": "短语",
+      "glossZh": "（事业、过程或生命的）尽头；终结",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:end-of-the-road#e-18d6c963e5aca147",
+          "text": "In Turner’s The Fighting Temeraire, the old boat, bathed in an orange and purple sunset, is packed with significance and symbolism about a lost life and the end of the road.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 172
+          },
+          "parts": [
+            [
+              157,
+              172
+            ]
+          ],
+          "highlightRanges": [
+            [
+              157,
+              172
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

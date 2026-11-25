@@ -1,0 +1,123 @@
+{
+  "entryId": "w:up-close",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "close"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "close"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up close",
+  "senses": [
+    {
+      "senseId": "w:up-close#s1",
+      "pos": "短语",
+      "glossZh": "近距离地；从近处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:close#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:up-close#e-5d4ee64aa2661ed3",
+          "text": "“In outdoor performances, I can see everyone’s expressions up close.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 67
+          },
+          "parts": [
+            [
+              59,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:up-close#e-7783e89f436cc50f",
+          "text": "“Harvard Library not only has remarkable materials gathered over generations but also expert staff who allow students to experience these treasures up close and from new views,” said Blair, a professor in the History Department.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 148,
+            "end": 156
+          },
+          "parts": [
+            [
+              148,
+              156
+            ]
+          ],
+          "highlightRanges": [
+            [
+              148,
+              156
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

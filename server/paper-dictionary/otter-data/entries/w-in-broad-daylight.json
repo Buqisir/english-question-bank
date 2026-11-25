@@ -1,0 +1,94 @@
+{
+  "entryId": "w:in-broad-daylight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "broad",
+      "daylight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "broad",
+        "daylight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in broad daylight",
+  "senses": [
+    {
+      "senseId": "w:in-broad-daylight#s1",
+      "pos": "短语",
+      "glossZh": "在大白天；在光天化日之下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:broad#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-broad-daylight#e-1713fb0a19855e57",
+          "text": "Aerospace engineers of the Beijing-based Academy of Sciences have struck a satellite with an infrared (红外) laser in broad daylight and across a distance of 130,000 km.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 130
+          },
+          "parts": [
+            [
+              113,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

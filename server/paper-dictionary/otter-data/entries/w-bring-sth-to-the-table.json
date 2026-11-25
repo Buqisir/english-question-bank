@@ -1,0 +1,79 @@
+{
+  "entryId": "w:bring-sth-to-the-table",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bring something to the table"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      {
+        "slot": "sth"
+      },
+      "to",
+      "the",
+      "table"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        {
+          "slot": "sth"
+        },
+        "to",
+        "the",
+        "table"
+      ],
+      [
+        "bring",
+        "something",
+        "to",
+        "the",
+        "table"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sth to the table",
+  "senses": [
+    {
+      "senseId": "w:bring-sth-to-the-table#s1",
+      "pos": "短语",
+      "glossZh": "带来有用的技能、资源或想法；作出贡献",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:table#s9"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -82,8 +82,8 @@
     "mock": 356
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 354
+    "gaokao": 4,
+    "mock": 169
   },
   "senses": [
     {
@@ -94,7 +94,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 115
       },
       "folded": false,
       "examples": [
@@ -199,7 +199,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -233,7 +233,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -306,7 +306,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -377,7 +377,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -449,7 +449,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -520,7 +520,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -547,35 +547,34 @@
       ]
     },
     {
-      "senseId": "w:free#s9",
-      "pos": "短语",
-      "glossZh": "腾出",
+      "senseId": "w:free#s10",
+      "pos": "phr.",
+      "glossZh": "搭便车者（free rider，享受利益却不付出的人）",
       "pronunciationId": "w:free#p-main",
-      "note": "free sb/sth up。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:free#e-bf93cfe2c0f127c2",
-          "text": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+          "exampleId": "w:free#e-15f6552caccc27cb",
+          "text": "Surprisingly, the most generous contributors in this game are often criticized as much as the selfish “free riders”.",
           "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
-              "sentence": 1
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c:2",
+              "sentence": 4
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 145,
-            "end": 152
+            "start": 103,
+            "end": 107
           }
         }
       ]
@@ -587,6 +586,17 @@
       "reason": "数学术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:break-free",
+    "w:buy-one-get-one-free",
+    "w:feel-free",
+    "w:for-free",
+    "w:free-of-charge",
+    "w:free-sb-sth-up",
+    "w:free-up"
+  ]
 }

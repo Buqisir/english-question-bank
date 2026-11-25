@@ -1,0 +1,185 @@
+{
+  "entryId": "w:move-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moved in",
+    "moves in",
+    "moving in"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "in"
+      ],
+      [
+        "moves",
+        "in"
+      ],
+      [
+        "moving",
+        "in"
+      ],
+      [
+        "moved",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move in",
+  "senses": [
+    {
+      "senseId": "w:move-in#s1",
+      "pos": "短语",
+      "glossZh": "搬入；搬进去住",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s43"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:move-in#e-aec8ee7df52e955d",
+          "text": "In India, particularly outside cities, young women are expected to move in with their husband’s family when they get married.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-in#e-23e19ec10e6f0bf3",
+          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-in#e-2cde160a0df5aeac",
+          "text": "As a teenager, Mia had moved in with her aunt’s family when her mother became ill.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "move in with sb 表示搬去和某人同住。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:move-in#s2",
+      "pos": "短语",
+      "glossZh": "向目标靠近；逼近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 on，也可指警方等进入现场采取行动。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

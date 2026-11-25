@@ -1,0 +1,64 @@
+{
+  "entryId": "w:have-a-sweet-tooth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "a",
+      "sweet",
+      "tooth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "a",
+        "sweet",
+        "tooth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have a sweet tooth",
+  "senses": [
+    {
+      "senseId": "w:have-a-sweet-tooth#s1",
+      "pos": "短语",
+      "glossZh": "爱吃甜食",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:tooth#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

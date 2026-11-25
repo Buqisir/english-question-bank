@@ -1,0 +1,124 @@
+{
+  "entryId": "w:put-to-sleep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "to",
+      "sleep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "to",
+        "sleep"
+      ],
+      [
+        "puts",
+        "to",
+        "sleep"
+      ],
+      [
+        "putting",
+        "to",
+        "sleep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sb/sth to sleep",
+  "senses": [
+    {
+      "senseId": "w:put-to-sleep#s1",
+      "pos": "短语",
+      "glossZh": "给动物实施安乐死",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:put#s23"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-to-sleep#s2",
+      "pos": "短语",
+      "glossZh": "使某人睡着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-to-sleep#s3",
+      "pos": "短语",
+      "glossZh": "安顿某人上床睡觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-to-sleep#s4",
+      "pos": "短语",
+      "glossZh": "使某事暂时沉寂或停止活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-to-sleep#s5",
+      "pos": "短语",
+      "glossZh": "给病人施行全身麻醉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

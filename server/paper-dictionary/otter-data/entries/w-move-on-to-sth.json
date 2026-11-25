@@ -1,0 +1,175 @@
+{
+  "entryId": "w:move-on-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "move",
+      "on",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "on",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "move on to",
+      "tags": []
+    },
+    {
+      "form": "moved on to",
+      "tags": []
+    },
+    {
+      "form": "moving on to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move on to sth",
+  "senses": [
+    {
+      "senseId": "w:move-on-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "转到下一项；接着做……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:move#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:move-on-to-sth#e-7f37aea33a58a380",
+          "text": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 200,
+            "end": 212
+          },
+          "parts": [
+            [
+              200,
+              212
+            ]
+          ],
+          "highlightRanges": [
+            [
+              200,
+              212
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-on-to-sth#e-6d5f39d4b3d0f69e",
+          "text": "I had been rushing through the brushstrokes, eager to finish and move on to the next project.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 75
+          },
+          "parts": [
+            [
+              65,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:move-on-to-sth#e-1f00cf3af0042779",
+          "text": "We moved on to making dog toys, but I badly underestimated how long each would take.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation:3",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

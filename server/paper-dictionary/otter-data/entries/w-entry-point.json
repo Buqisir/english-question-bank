@@ -1,0 +1,139 @@
+{
+  "entryId": "w:entry-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "entry",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "entry",
+        "point"
+      ],
+      [
+        "entry",
+        "points"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "entry point",
+  "senses": [
+    {
+      "senseId": "w:entry-point#s1",
+      "pos": "短语",
+      "glossZh": "入门途径；切入点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:entry-point#e-e85a9b4ce234b837",
+          "text": "If you’re not there yet, walking or jogging may be a better entry point.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 71
+          },
+          "parts": [
+            [
+              60,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:entry-point#e-671b8a29e6cf1cb9",
+          "text": "The demonstration of brewing and sharing offered a practical entry point into a centuries-old practice without losing the essence of gongfu cha.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 72
+          },
+          "parts": [
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              72
+            ]
+          ]
+        }
+      ],
+      "note": "可接 into，说明由此接触的领域或活动。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:entry-point#s2",
+      "pos": "短语",
+      "glossZh": "程序入口；程序开始执行的位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

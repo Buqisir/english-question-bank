@@ -1,0 +1,158 @@
+{
+  "entryId": "w:cover-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cover",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cover",
+        "up"
+      ],
+      [
+        "covered",
+        "up"
+      ],
+      [
+        "covering",
+        "up"
+      ],
+      [
+        "covers",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cover up",
+      "tags": []
+    },
+    {
+      "form": "covered up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cover (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:cover-up#s1",
+      "pos": "动词短语",
+      "glossZh": "遮住；盖严",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s71"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cover-up#e-7a0b2419fb07c675",
+          "text": "So, it’s been useful to know how to cover up holes and repaint a room to avoid any charges when I’ve moved out.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cover-up#e-114476aeb1bf7906",
+          "text": "“Recalling the decision or activity made in a different room is difficult because it has been filed and covered up,” he explained.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 114
+          },
+          "parts": [
+            [
+              104,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              114
+            ]
+          ]
+        }
+      ],
+      "note": "可指遮住墙洞，也可指用衣物或被子盖住身体。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:cover-up#s2",
+      "pos": "动词短语",
+      "glossZh": "掩盖；隐瞒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,116 @@
+{
+  "entryId": "w:make-ones-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "make sb's day",
+    "make someone’s day"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      {
+        "slot": "one's"
+      },
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        {
+          "slot": "one's"
+        },
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made day",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make one's day",
+  "senses": [
+    {
+      "senseId": "w:make-ones-day#s1",
+      "pos": "短语",
+      "glossZh": "使某人开心极了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:day#s6",
+        "w:make#s24"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-ones-day#e-941e871cff9d3e5f",
+          "text": "made her day",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 55,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:55#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              9,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              9,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

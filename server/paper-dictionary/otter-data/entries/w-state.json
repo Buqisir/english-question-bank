@@ -77,8 +77,8 @@
     "mock": 211
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 209
+    "gaokao": 7,
+    "mock": 45
   },
   "senses": [
     {
@@ -89,7 +89,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -160,7 +160,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -231,7 +231,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -257,78 +257,6 @@
       ]
     },
     {
-      "senseId": "w:state#s4",
-      "pos": "短语",
-      "glossZh": "美国",
-      "pronunciationId": "w:state#p-main",
-      "note": "the United States，亦称 the States（非正式）。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:state#e-57a9394c6513cf9f",
-          "text": "And there are questions about the films made outside the States, which sometimes are not monitored as closely as productions filmed in the States.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 139,
-            "end": 145
-          }
-        },
-        {
-          "exampleId": "w:state#e-5b1923a31087edcf",
-          "text": "The United States rose to global power on the strength of its technology, and the lifeblood of that technology has long been electricity.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:state#e-aed5c604bb62c055",
-          "text": "I was born and raised in Cleveland, Ohio in the United States.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 61
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:state#s5",
       "pos": "v.",
       "glossZh": "陈述",
@@ -336,7 +264,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -411,6 +339,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:state#s7",
+      "pos": "adj.",
+      "glossZh": "政府出资的；公立的",
+      "pronunciationId": "w:state#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:state#e-2240aea7ffab0c83",
+          "text": "The random trial involved hundreds of Year 5 pupils (aged nine and ten) at 45 state primary schools.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -419,6 +380,12 @@
       "reason": "专名或技术义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:deep-state",
+    "w:state-of-mind"
+  ]
 }

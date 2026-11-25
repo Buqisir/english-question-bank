@@ -65,8 +65,8 @@
     "mock": 7
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 4
+    "gaokao": 1,
+    "mock": 1
   },
   "senses": [
     {
@@ -110,7 +110,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -199,40 +199,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:bat#s5",
-      "pos": "短语",
-      "glossZh": "毫不惊讶；眼都不眨一下",
-      "pronunciationId": "w:bat#p-main",
-      "note": "without batting an eye（英式也说 without batting an eyelid）。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:bat#e-e244fa9c387ced24",
-          "text": "Without batting an eye, he would __48__ a translated Emerson passage before asking about the literary influence of American __49__ as a whole.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -241,6 +207,8 @@
       "reason": "贬义、罕见或专业义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

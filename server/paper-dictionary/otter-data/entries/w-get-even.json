@@ -1,0 +1,75 @@
+{
+  "entryId": "w:get-even",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "even"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "even"
+      ],
+      [
+        "gets",
+        "even"
+      ],
+      [
+        "getting",
+        "even"
+      ],
+      [
+        "got",
+        "even"
+      ],
+      [
+        "gotten",
+        "even"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get even",
+  "senses": [
+    {
+      "senseId": "w:get-even#s1",
+      "pos": "短语",
+      "glossZh": "报复；找人算账",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 get even with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

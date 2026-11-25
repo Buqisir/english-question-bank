@@ -42,8 +42,8 @@
     "mock": 202
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 195
+    "gaokao": 1,
+    "mock": 16
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 130
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -179,7 +179,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -212,7 +212,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -245,7 +245,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -278,7 +278,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -328,89 +328,21 @@
       "pos": "n.",
       "glossZh": "亏损",
       "pronunciationId": "w:loss#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:loss#s8",
-      "pos": "短语",
-      "glossZh": "不知所措",
-      "pronunciationId": "w:loss#p-main",
-      "note": "at a loss。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
         "mock": 2
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:loss#e-c3700beda29268f7",
-          "text": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 70
-          }
-        },
-        {
-          "exampleId": "w:loss#e-0ff5b603499ed42c",
-          "text": "But in the beginning, you may find yourself at a loss.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 49,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:loss#e-60427f3c9a246fc0",
-          "text": "I was totally at a loss.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:6",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 23
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-a-loss"
+  ]
 }

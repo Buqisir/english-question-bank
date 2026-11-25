@@ -35,8 +35,8 @@
     "mock": 10
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 8
+    "gaokao": 7,
+    "mock": 7
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -92,78 +92,6 @@
       ]
     },
     {
-      "senseId": "w:polar#s2",
-      "pos": "短语",
-      "glossZh": "北极熊",
-      "pronunciationId": "w:polar#p-main",
-      "note": "polar bear。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:polar#e-9f401f7e25fcb720",
-          "text": "One fall, my wife Elli and I had a single goal: to photograph polar bears.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:polar#e-e16388af65a86fdf",
-          "text": "Taking pictures of polar bears is amazing but also dangerous.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:polar#e-491e9020fd2b3da2",
-          "text": "As Elli and I cooked dinner, a young male polar bear who was playing in a nearby lake sniffed, and smelled our garlic bread.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:polar#s3",
       "pos": "adj.",
       "glossZh": "截然相反的",
@@ -191,6 +119,8 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

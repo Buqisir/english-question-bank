@@ -35,8 +35,8 @@
     "mock": 54
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 50
+    "gaokao": 1,
+    "mock": 6
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -180,64 +180,15 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:twice#s3",
-      "pos": "短语",
-      "glossZh": "仔细考虑再行动",
-      "pronunciationId": "w:twice#p-main",
-      "note": "think twice。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:twice#e-14419f91c90956d2",
-          "text": "Think twice.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
-            "locator": {
-              "question": 12,
-              "questionId": "question:listening:12",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:twice#e-e885d1c7c942e8ab",
-          "text": "You should think twice before making a decision.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-mock-cq-nankai-2026-01-fifth-quality-test:27",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 22
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:once-or-twice",
+    "w:think-twice"
+  ]
 }

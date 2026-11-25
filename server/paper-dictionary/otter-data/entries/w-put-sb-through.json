@@ -1,0 +1,284 @@
+{
+  "entryId": "w:put-sb-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "put someone through"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sb"
+      },
+      "through"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sb"
+        },
+        "through"
+      ],
+      [
+        "put",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sb through",
+  "senses": [
+    {
+      "senseId": "w:put-sb-through#s1",
+      "pos": "短语",
+      "glossZh": "让某人经历；让某人接受（训练、考验等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:through#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-sb-through#e-c344cfaf688c2e43",
+          "text": "“We put healthy 70-year-olds through a yearlong exercise training program, and nothing happened to them at all.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 36
+          },
+          "parts": [
+            [
+              4,
+              7
+            ],
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              7
+            ],
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-sb-through#e-967a8cb32d58ad9c",
+          "text": "It uses 2500 questions drawn from “the frontier of human knowledge” to put LLMs through their paces.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 87
+          },
+          "parts": [
+            [
+              71,
+              74
+            ],
+            [
+              80,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              74
+            ],
+            [
+              80,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-sb-through#e-c3c4d2824dd14a59",
+          "text": "“It can be easy to forget that bone is a living tissue, one that responds to the difficulties we put our bodies through,” said lead author Alison Macintosh.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 119
+          },
+          "parts": [
+            [
+              97,
+              100
+            ],
+            [
+              112,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              100
+            ],
+            [
+              112,
+              119
+            ]
+          ]
+        }
+      ],
+      "note": "put sb through sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:put-sb-through#s2",
+      "pos": "短语",
+      "glossZh": "给某人接通或转接电话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:through#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-sb-through#e-40341bd7548a1042",
+          "text": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 50
+          },
+          "parts": [
+            [
+              39,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-sb-through#e-d8d479291146bfa0",
+          "text": "Put her through to Mr. Burton’s secretary.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              3
+            ],
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              3
+            ],
+            [
+              8,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "常用 put sb through to sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

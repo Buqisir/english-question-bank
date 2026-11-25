@@ -1,0 +1,184 @@
+{
+  "entryId": "w:make-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "with"
+      ],
+      [
+        "made",
+        "with"
+      ],
+      [
+        "makes",
+        "with"
+      ],
+      [
+        "making",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make sth with sth",
+  "senses": [
+    {
+      "senseId": "w:make-with#s1",
+      "pos": "短语",
+      "glossZh": "用（某种材料、工具或方法）制作",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-with#e-514df7c1b59e7b7a",
+          "text": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 15
+          },
+          "parts": [
+            [
+              6,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-with#e-d012be204fef05ee",
+          "text": "In recent years, consumers have increasingly sought “clean-label” foods – products made with natural ingredients.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 92
+          },
+          "parts": [
+            [
+              83,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-with#e-5e3c51522dadea81",
+          "text": "She asked in a bright voice, “Auntie, was this made with magic?",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "原句用被动式 be made with sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:make-with#s2",
+      "pos": "短语",
+      "glossZh": "拿出；给出；展示",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常用于催促，如 make with the jokes。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

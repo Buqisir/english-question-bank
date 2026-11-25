@@ -1,0 +1,70 @@
+{
+  "entryId": "w:bottle-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bottle",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bottle",
+        "out"
+      ],
+      [
+        "bottled",
+        "out"
+      ],
+      [
+        "bottles",
+        "out"
+      ],
+      [
+        "bottling",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bottle out",
+  "senses": [
+    {
+      "senseId": "w:bottle-out#s1",
+      "pos": "短语",
+      "glossZh": "（英俚）因害怕而临阵退缩",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,120 @@
+{
+  "entryId": "w:force-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "force",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "force",
+        "out"
+      ],
+      [
+        "forced",
+        "out"
+      ],
+      [
+        "forces",
+        "out"
+      ],
+      [
+        "forcing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "forced out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "force sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:force-out#s1",
+      "pos": "短语",
+      "glossZh": "用力把某物挤出原位；强行赶走某人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:force-out#e-6e496fdf96738c9b",
+          "text": "When I finally stopped, I found my prosthetic leg had been forced out of its place.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 69
+          },
+          "parts": [
+            [
+              59,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:force-out#s2",
+      "pos": "短语",
+      "glossZh": "（棒球）封杀跑垒员使其出局；封杀出局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

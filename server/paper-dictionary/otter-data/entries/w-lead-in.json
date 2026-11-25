@@ -1,0 +1,87 @@
+{
+  "entryId": "w:lead-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leading in",
+    "leads in"
+  ],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "in"
+      ],
+      [
+        "leading",
+        "in"
+      ],
+      [
+        "leads",
+        "in"
+      ],
+      [
+        "led",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead (sb) in",
+  "senses": [
+    {
+      "senseId": "w:lead-in#s1",
+      "pos": "短语",
+      "glossZh": "领某人进去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lead-in#s2",
+      "pos": "短语",
+      "glossZh": "用一段开场引出后续内容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用 lead in with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

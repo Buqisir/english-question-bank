@@ -1,0 +1,136 @@
+{
+  "entryId": "w:be-caught-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "caught",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "caught",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are caught in",
+      "tags": []
+    },
+    {
+      "form": "was caught in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be caught in sth",
+  "senses": [
+    {
+      "senseId": "w:be-caught-in#s1",
+      "pos": "短语",
+      "glossZh": "遇上（堵车、风暴等）；陷入困境",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:catch#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-caught-in#e-de912c61481ddd20",
+          "text": "Cities Are Caught in Crisis",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-zj-wenzhou-2026-m2:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 20
+          },
+          "parts": [
+            [
+              7,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-caught-in#e-e3a267dacc4fb63a",
+          "text": "She was caught in traffic.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

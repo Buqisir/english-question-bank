@@ -1,0 +1,151 @@
+{
+  "entryId": "w:go-back-and-do-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "back",
+      "and",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "back",
+        "and",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go back and",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go back and do sth",
+  "senses": [
+    {
+      "senseId": "w:go-back-and-do-sth#s1",
+      "pos": "短语",
+      "glossZh": "回过头来再做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s17"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-back-and-do-sth#e-4ac93dd742a8a677",
+          "text": "During your initial reading of material, do you ever go back and reread sentences or paragraphs?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 64
+          },
+          "parts": [
+            [
+              53,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              64
+            ]
+          ]
+        }
+      ],
+      "note": "如回头重读前面的内容。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-back-and-do-sth#s2",
+      "pos": "短语",
+      "glossZh": "回到原处去做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-back-and-do-sth#e-ea52d6deba8ecdfc",
+          "text": "“After I leave you at the swimming center, I’ll go back and catch her and hold her for her owner, who’s probably trying to find her.” Having milked cows as a boy and worked with beef cattle, I knew – so I thought – all about cows.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 59
+          },
+          "parts": [
+            [
+              48,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

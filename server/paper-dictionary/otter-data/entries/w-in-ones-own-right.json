@@ -1,0 +1,194 @@
+{
+  "entryId": "w:in-ones-own-right",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in one’s own right"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      {
+        "slot": "one's"
+      },
+      "own",
+      "right"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        {
+          "slot": "one's"
+        },
+        "own",
+        "right"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in own right",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in one's own right",
+  "senses": [
+    {
+      "senseId": "w:in-ones-own-right#s1",
+      "pos": "短语",
+      "glossZh": "凭自身条件；本身就够资格",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:own#s4",
+        "w:right#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-ones-own-right#e-c77a5aed11aadd04",
+          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 116
+          },
+          "parts": [
+            [
+              98,
+              100
+            ],
+            [
+              107,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              100
+            ],
+            [
+              107,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-ones-own-right#e-9943c567f2fc8e92",
+          "text": "Nathalie Pettorelli of the Zoological Society of London argues that cities are ecosystems in their own right.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 108
+          },
+          "parts": [
+            [
+              90,
+              92
+            ],
+            [
+              99,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              92
+            ],
+            [
+              99,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-ones-own-right#e-86bc8f2a87a6fbb6",
+          "text": "What the new survey suggests is that management is now seen as a career-ladder move, not something good in its own right.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 120
+          },
+          "parts": [
+            [
+              104,
+              106
+            ],
+            [
+              111,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              106
+            ],
+            [
+              111,
+              120
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

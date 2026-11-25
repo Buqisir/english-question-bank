@@ -1,0 +1,123 @@
+{
+  "entryId": "w:on-view",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "view"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "view"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on view",
+  "senses": [
+    {
+      "senseId": "w:on-view#s1",
+      "pos": "短语",
+      "glossZh": "在展出；供人观看",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:view#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-view#e-33103293cabfcf15",
+          "text": "Yellowstone Poster Exhibition to Be on View at UW’s Coe Library",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-view#e-51e2bb1c1cc4fbd1",
+          "text": "It will be on view through Tuesday, May 31.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

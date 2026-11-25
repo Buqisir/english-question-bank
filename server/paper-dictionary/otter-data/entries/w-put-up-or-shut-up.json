@@ -1,0 +1,86 @@
+{
+  "entryId": "w:put-up-or-shut-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "up",
+      "or",
+      "shut",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "up",
+        "or",
+        "shut",
+        "up"
+      ],
+      [
+        "put",
+        "up"
+      ],
+      [
+        "puts",
+        "up",
+        "or",
+        "shuts",
+        "up"
+      ],
+      [
+        "putting",
+        "up",
+        "or",
+        "shutting",
+        "up"
+      ],
+      [
+        "shut",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put up or shut up",
+  "senses": [
+    {
+      "senseId": "w:put-up-or-shut-up#s1",
+      "pos": "短语",
+      "glossZh": "拿出证据或用行动证明，否则就闭嘴",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

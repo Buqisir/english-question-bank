@@ -1,0 +1,167 @@
+{
+  "entryId": "w:brand-new",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "brand",
+      "new"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "brand",
+        "new"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "brand new",
+  "senses": [
+    {
+      "senseId": "w:brand-new#s1",
+      "pos": "短语",
+      "glossZh": "崭新的；全新的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:brand#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:brand-new#e-71ab562d6985ba14",
+          "text": "“I just bought a brand new table that matches my modern dining room perfectly,” Hilary began.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:brand-new#e-355ebc3eed050216",
+          "text": "My film experience consists of mostly talkies（有声电影）, so watching The Barker, I felt like I witnessed something brand new.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 120
+          },
+          "parts": [
+            [
+              111,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:brand-new#e-a68aebb144355142",
+          "text": "I knew a convertible was a fantasy, so my birthday wish was simple: a genuine, store-bought fashion set for my doll, anything brand new.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 135
+          },
+          "parts": [
+            [
+              126,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              126,
+              135
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:brand-new#s2",
+      "pos": "短语",
+      "glossZh": "（俚语）突然装作不认识对方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,372 @@
+{
+  "entryId": "w:a-lot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "lot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "lot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a lot",
+  "senses": [
+    {
+      "senseId": "w:a-lot#s1",
+      "pos": "短语",
+      "glossZh": "很；……得多",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lot#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-lot#e-9ae2caa08659152f",
+          "text": "Chances are the cost will be a lot less than the cost of one bedroom.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          },
+          "parts": [
+            [
+              29,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-cc9fd5df5d5f919e",
+          "text": "In my opinion, students can benefit a lot doing some housework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 41
+          },
+          "parts": [
+            [
+              36,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-7d464d1e278c6875",
+          "text": "His visit, however, ended up involving a lot more than that.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          },
+          "parts": [
+            [
+              39,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "可修饰动词或比较级。",
+      "counts": {
+        "gaokao": 13,
+        "mock": 39
+      }
+    },
+    {
+      "senseId": "w:a-lot#s2",
+      "pos": "短语",
+      "glossZh": "很多；许多事情或东西",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-lot#e-f7b881050920281c",
+          "text": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          },
+          "parts": [
+            [
+              10,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-04e7eab8dc85d71c",
+          "text": "You can tell a lot about a man by how he treats his dogs.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          },
+          "parts": [
+            [
+              13,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-62929672de58b958",
+          "text": "But if a thin person eats a lot, I’ll follow suit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          },
+          "parts": [
+            [
+              26,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 25
+      }
+    },
+    {
+      "senseId": "w:a-lot#s3",
+      "pos": "短语",
+      "glossZh": "经常；频繁地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lot#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-lot#e-00291336532cd91b",
+          "text": "But one question has been on my mind a lot lately: is it better to buy new eco-friendly products or used traditionally produced goods?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 42
+          },
+          "parts": [
+            [
+              37,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-b3fc4b4afba22723",
+          "text": "I got a good bike and rode a lot.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 32
+          },
+          "parts": [
+            [
+              27,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot#e-4e8f27d1e1a54759",
+          "text": "Thomas Jones, one of around 200 musicians working with the foundation, has been using Suno’s tools a lot lately.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 104
+          },
+          "parts": [
+            [
+              99,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 19,
+    "mock": 74
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

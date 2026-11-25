@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 12
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -131,20 +131,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:virtue#s3",
-      "pos": "短语",
-      "glossZh": "凭借",
-      "pronunciationId": "w:virtue#p-main",
-      "note": "by virtue of sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -153,6 +139,11 @@
       "reason": "宗教或历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-virtue-of-sth"
+  ]
 }

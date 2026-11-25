@@ -1,0 +1,169 @@
+{
+  "entryId": "w:in-and-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "and",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "and",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in and out",
+  "senses": [
+    {
+      "senseId": "w:in-and-out#s1",
+      "pos": "短语",
+      "glossZh": "进进出出；时进时出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-and-out#e-adb2e9f36d55e2a5",
+          "text": "It was full of ideas that were new to me, so I spent the summer with my head in and out of that book.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 87
+          },
+          "parts": [
+            [
+              77,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-and-out#e-0d3c5f39b16b90e8",
+          "text": "“It’s certainly possible to get in and out, but it will take a significant amount of construction of support systems.”",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-and-out#e-469d2b1c3211909f",
+          "text": "A new study has found that breathing does more than just move air in and out of your lungs – it could even be used to identify who you are.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 76
+          },
+          "parts": [
+            [
+              66,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              76
+            ]
+          ]
+        }
+      ],
+      "note": "接 of 可指反复进出某处，也可比喻断断续续地参与某事。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:in-and-out#s2",
+      "pos": "短语",
+      "glossZh": "短暂的性交",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

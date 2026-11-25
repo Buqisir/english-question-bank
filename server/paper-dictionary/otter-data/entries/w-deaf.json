@@ -48,8 +48,8 @@
     "mock": 12
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 8
+    "gaokao": 1,
+    "mock": 1
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -122,59 +122,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:deaf#s2",
-      "pos": "短语",
-      "glossZh": "对……充耳不闻",
-      "pronunciationId": "w:deaf#p-main",
-      "note": "fall on deaf ears 或 turn a deaf ear to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:deaf#e-6551b89e04e208f8",
-          "text": "My parents urged me to get out of this so-called unhealthy habit, but their repeated requests fell on deaf ears.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 102,
-            "end": 106
-          }
-        },
-        {
-          "exampleId": "w:deaf#e-cad930646c0b2366",
-          "text": "I turned a deaf ear to him.",
-          "source": {
-            "paperId": "paper-mock-shandong-zibo-2026-03-first",
-            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -183,6 +130,12 @@
       "reason": "罕见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fall-on-deaf-ears",
+    "w:turn-a-deaf-ear-to-sth"
+  ]
 }

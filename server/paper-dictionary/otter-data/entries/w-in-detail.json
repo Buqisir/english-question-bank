@@ -1,0 +1,155 @@
+{
+  "entryId": "w:in-detail",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "detail"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "detail"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in detail",
+  "senses": [
+    {
+      "senseId": "w:in-detail#s1",
+      "pos": "短语",
+      "glossZh": "详细地；详尽地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:detail#s3",
+        "w:in#s55"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-detail#e-0bf59ba4aaa3ac47",
+          "text": "You don’t have to write these things in detail.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          },
+          "parts": [
+            [
+              37,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-detail#e-c9e0db7bdab159be",
+          "text": "When you’re asked to do something you don’t really want to do, it can be difficult not to explain in detail.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 107
+          },
+          "parts": [
+            [
+              98,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              107
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-detail#e-3f7e8dd46c323692",
+          "text": "The researchers asked 125 healthy adults, aged 18 to 90, to describe a scene in detail.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 86
+          },
+          "parts": [
+            [
+              77,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

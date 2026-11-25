@@ -1,0 +1,155 @@
+{
+  "entryId": "w:take-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "home"
+      ],
+      [
+        "taken",
+        "home"
+      ],
+      [
+        "takes",
+        "home"
+      ],
+      [
+        "taking",
+        "home"
+      ],
+      [
+        "took",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take home",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sb/sth home",
+  "senses": [
+    {
+      "senseId": "w:take-home#s2",
+      "pos": "短语",
+      "glossZh": "把某人或某物带回家",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-home#e-484ec002a143dd94",
+          "text": "Campers learn technical skills of roasting, frying and cutting, as well as some recipes that they can take home and share with their families.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 111
+          },
+          "parts": [
+            [
+              102,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              111
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-home#e-24d5ced0f1a24b5a",
+          "text": "You can even buy some of our seasonal fruit to take home with you.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-home#s1",
+      "pos": "短语",
+      "glossZh": "赢得（奖项或奖金）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

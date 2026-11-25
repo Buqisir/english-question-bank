@@ -1,0 +1,134 @@
+{
+  "entryId": "w:stand-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing to",
+    "stands to"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "to"
+      ],
+      [
+        "standing",
+        "to"
+      ],
+      [
+        "stands",
+        "to"
+      ],
+      [
+        "stood",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand to",
+  "senses": [
+    {
+      "senseId": "w:stand-to#s1",
+      "pos": "短语",
+      "glossZh": "很可能获得或遭受某种结果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-to#e-92262b4ab77cf2c9",
+          "text": "The travel industry must work to persuade consumers to switch to online tools, yet it also stands to benefit from a growing market.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        }
+      ],
+      "note": "stand to benefit/gain/lose",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stand-to#s2",
+      "pos": "短语",
+      "glossZh": "进入戒备状态；准备行动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "军事用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-to#s3",
+      "pos": "短语",
+      "glossZh": "坚持；维护（立场、原则等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法，stand to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

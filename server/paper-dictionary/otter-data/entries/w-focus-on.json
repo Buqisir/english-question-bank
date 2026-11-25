@@ -1,0 +1,167 @@
+{
+  "entryId": "w:focus-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "focus",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "focus",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "focused on",
+      "tags": []
+    },
+    {
+      "form": "focuses on",
+      "tags": []
+    },
+    {
+      "form": "focusing on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "focus on",
+  "senses": [
+    {
+      "senseId": "w:focus-on#s1",
+      "pos": "短语",
+      "glossZh": "把注意力集中在……上；以……为重点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:on#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:focus-on#e-badb0be4bc5397ae",
+          "text": "Too often when you stand up to give a speech, you focus on the “public” at the expense of the” speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 58
+          },
+          "parts": [
+            [
+              50,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:focus-on#e-a143da0b50497164",
+          "text": "class and focuses on a range of topics that emphasize active learning, exploration and, most of all, fun!",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:focus-on#e-a229b028239ab7f3",
+          "text": "Emotional intelligence, with its focus on both head and heart, may serve to point us in the right direction.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 29,
+        "mock": 375
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 29,
+    "mock": 375
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

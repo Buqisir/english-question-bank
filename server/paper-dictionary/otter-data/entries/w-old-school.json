@@ -1,0 +1,87 @@
+{
+  "entryId": "w:old-school",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "old",
+      "school"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "old",
+        "school"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "old school",
+  "senses": [
+    {
+      "senseId": "w:old-school#s1",
+      "pos": "短语",
+      "glossZh": "老派的；沿用传统做法的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:school#s10"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:old-school#s2",
+      "pos": "短语",
+      "glossZh": "老派做法；传统派",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "名词用法常见于 the old school。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:old-school#s3",
+      "pos": "短语",
+      "glossZh": "老派音乐风格（尤指早期嘻哈或说唱）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

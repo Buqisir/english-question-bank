@@ -48,8 +48,8 @@
     "mock": 399
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 397
+    "gaokao": 4,
+    "mock": 207
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 45,
-        "mock": 0
+        "mock": 101
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 29,
-        "mock": 0
+        "mock": 85
       },
       "folded": false,
       "examples": [
@@ -234,12 +234,12 @@
       "glossZh": "年长的；年龄较大的",
       "pronunciationId": "w:big#p-main",
       "note": "如 big brother。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -250,7 +250,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -275,146 +275,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:big#s6",
-      "pos": "短语",
-      "glossZh": "大事；重要的事",
-      "pronunciationId": "w:big#p-main",
-      "note": "a big deal；make a big deal of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:big#e-1bfce8234148f59e",
-          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:big#e-21cd86ea4ad63e29",
-          "text": "“We didn’t make a big deal of that,” said Novem Auyeung, a Parks Department senior scientist.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:big#s7",
-      "pos": "短语",
-      "glossZh": "大有影响；程度显著",
-      "pronunciationId": "w:big#p-main",
-      "note": "in a big way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:big#e-38901a964de30aeb",
-          "text": "Every completion is a small victory that adds up in a big way.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 64
-          }
-        },
-        {
-          "exampleId": "w:big#e-6385af95c04841f7",
-          "text": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 106,
-            "end": 109
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:big#s8",
-      "pos": "短语",
-      "glossZh": "大获成功",
-      "pronunciationId": "w:big#p-main",
-      "note": "make it big。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:big#e-c758290270eb56a6",
-          "text": "“I understand, from an environmental standpoint, that they’re wasteful, and I understand why producers, cost-wise and for other reasons, don’t want them,” said Julie Benko, a former understudy who caught a break and made it big.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 224,
-            "end": 227
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -423,6 +283,20 @@
       "reason": "方言、旧义或圈内用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-big-deal",
+    "w:big-deal",
+    "w:big-picture",
+    "w:big-time",
+    "w:big-word",
+    "w:in-a-big-way",
+    "w:make-a-big-deal-of-sth",
+    "w:make-it-big",
+    "w:next-big-thing",
+    "w:no-big-deal"
+  ]
 }

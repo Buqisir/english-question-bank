@@ -51,7 +51,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 122
+    "mock": 2
   },
   "senses": [
     {
@@ -62,7 +62,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -134,7 +134,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 81
       },
       "folded": false,
       "examples": [
@@ -205,7 +205,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -276,6 +276,6 @@
       "reason": "同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

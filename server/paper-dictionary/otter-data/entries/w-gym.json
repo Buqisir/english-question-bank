@@ -57,7 +57,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 90
+    "mock": 16
   },
   "senses": [
     {
@@ -68,7 +68,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -139,7 +139,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -208,12 +208,12 @@
       "glossZh": "体育课",
       "pronunciationId": "w:gym#p-main",
       "note": "美式。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -223,6 +223,6 @@
       "reason": "对 Gymnasium 的少见简称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

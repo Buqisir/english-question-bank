@@ -1,0 +1,182 @@
+{
+  "entryId": "w:tune-sth-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tune",
+      {
+        "slot": "sth"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "tune",
+        {
+          "slot": "sth"
+        },
+        "out"
+      ],
+      [
+        "tune",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tune out",
+      "tags": []
+    },
+    {
+      "form": "tuning out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tune sth out",
+  "senses": [
+    {
+      "senseId": "w:tune-sth-out#s1",
+      "pos": "短语",
+      "glossZh": "不再留意；有意屏蔽（声音、想法等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tune#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tune-sth-out#e-e20fbfa5a972b2c6",
+          "text": "When people deliberately tune out perspectives that challenge their worldview, they lose opportunities for growth, understanding, and connection.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tune-sth-out#e-e59cf558428a1285",
+          "text": "One of life's “simplest pleasures” remains “falling into a story” and “tuning the world out”, without “worrying about what someone's going to think of you”, said Demopoulos.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 91
+          },
+          "parts": [
+            [
+              71,
+              77
+            ],
+            [
+              88,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              77
+            ],
+            [
+              88,
+              91
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tune-sth-out#e-25d366bb81e77085",
+          "text": "To tune out is to tune in.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-jining-2026-04-second-mock:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

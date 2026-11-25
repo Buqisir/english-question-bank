@@ -1,0 +1,61 @@
+{
+  "entryId": "w:smile-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "smile",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "smile",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "smile on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:smile-on#s1",
+      "pos": "短语",
+      "glossZh": "眷顾；给……带来好运",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:smile#s4"
+      ],
+      "examples": [],
+      "note": "主语常为 fortune 或 luck，也可用 smile upon。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

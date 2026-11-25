@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 133
+    "mock": 17
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -211,12 +211,12 @@
       "pos": "n.",
       "glossZh": "流量",
       "pronunciationId": "w:flow#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -227,7 +227,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -257,13 +257,80 @@
       "pos": "v.",
       "glossZh": "顺畅进行",
       "pronunciationId": "w:flow#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 16
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:flow#s6",
+      "pos": "n.",
+      "glossZh": "流程",
+      "pronunciationId": "w:flow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:flow#e-0eadb5eb9369db19",
+          "text": "By drawing a flow chart.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:flow#s7",
+      "pos": "n.",
+      "glossZh": "一组连贯的瑜伽动作",
+      "pronunciationId": "w:flow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:flow#e-2d87d377ec40084c",
+          "text": "A 10-minute walk, a quick yoga flow, or a few sets of bodyweight exercises can boost endorphins (内啡肽) and increase alertness.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -272,6 +339,9 @@
       "reason": "地域义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:go-with-the-flow"
+  ]
 }

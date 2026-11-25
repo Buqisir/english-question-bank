@@ -1,0 +1,127 @@
+{
+  "entryId": "w:as-it-turned-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "it",
+      "turned",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "it",
+        "turned",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as it turned out",
+  "senses": [
+    {
+      "senseId": "w:as-it-turned-out#s1",
+      "pos": "短语",
+      "glossZh": "结果是；后来发现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-it-turned-out#e-3efa059cf0806ae9",
+          "text": "He was most kind, and, as it turned out, much faster and more comfortable than a bus.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 39
+          },
+          "parts": [
+            [
+              23,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-it-turned-out#e-ee4f0fb9e931394b",
+          "text": "As it turned out, they were nearly four times as likely to act aggressively(好斗) at 25° Celsius, much warmer than their stream habitats.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

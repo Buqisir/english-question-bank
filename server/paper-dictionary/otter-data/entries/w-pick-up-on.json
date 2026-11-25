@@ -1,0 +1,169 @@
+{
+  "entryId": "w:pick-up-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pick",
+      "up",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pick",
+        "up",
+        "on"
+      ],
+      [
+        "picked",
+        "up",
+        "on"
+      ],
+      [
+        "picking",
+        "up",
+        "on"
+      ],
+      [
+        "picks",
+        "up",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pick up on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pick up on sth",
+  "senses": [
+    {
+      "senseId": "w:pick-up-on#s1",
+      "pos": "短语",
+      "glossZh": "察觉并领会（暗示、信号等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pick-up-on#e-1bce233fba1bd12f",
+          "text": "But kids can’t learn to pick up on things like body language from a chatbot.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 34
+          },
+          "parts": [
+            [
+              24,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pick-up-on#e-8d82432d341b7f4d",
+          "text": "Interacting with others in person helps them learn how to pick up on physical signs, understand different tones of voice, and react appropriately in social situations.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 68
+          },
+          "parts": [
+            [
+              58,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:pick-up-on#s2",
+      "pos": "短语",
+      "glossZh": "接着谈论或探究已提到的话题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pick-up-on#s3",
+      "pos": "短语",
+      "glossZh": "沿用别人的做法；跟进某种趋势",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

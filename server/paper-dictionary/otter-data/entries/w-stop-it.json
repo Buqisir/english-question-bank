@@ -1,0 +1,102 @@
+{
+  "entryId": "w:stop-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stop",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stop",
+        "it"
+      ],
+      [
+        "stopped",
+        "it"
+      ],
+      [
+        "stopping",
+        "it"
+      ],
+      [
+        "stops",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stop it",
+  "senses": [
+    {
+      "senseId": "w:stop-it#s1",
+      "pos": "短语",
+      "glossZh": "别这样了；别闹了；住手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stop-it#e-60158623ed725a9c",
+          "text": "“Stop it!” Mia said, throwing potato chips at him.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

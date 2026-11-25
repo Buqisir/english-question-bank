@@ -1,0 +1,284 @@
+{
+  "entryId": "w:long-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "long",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "long",
+        "for"
+      ],
+      [
+        "longed",
+        "for"
+      ],
+      [
+        "longing",
+        "for"
+      ],
+      [
+        "longs",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "longed for",
+      "tags": []
+    },
+    {
+      "form": "longing for",
+      "tags": []
+    },
+    {
+      "form": "longs for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "long for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:long-for#s1",
+      "pos": "短语",
+      "glossZh": "渴望；盼望",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:long-for#e-c5b721113795f1fb",
+          "text": "Every dream lost in the dark longs for a ray of light – and for Lily, that light came from a stranger.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-for#e-d599ced15877cc58",
+          "text": "I longed for strength and happiness, yet the future seemed so hopeless.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          },
+          "parts": [
+            [
+              2,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-for#e-636e00fedf1ac016",
+          "text": "As I’ve sent more random voice messages to loved ones, it’s become obvious how much I was longing for this point of connection with them.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 101
+          },
+          "parts": [
+            [
+              90,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:long-for#s2",
+      "pos": "短语",
+      "glossZh": "深切思念（某人或往昔）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:long-for#e-83ce935ab8b519b2",
+          "text": "Nostalgia – the warm feeling of longing for the past – is everywhere in today’s culture.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-for#e-875dbc69a8fb447b",
+          "text": "Longing for the past and fearing the future can be a barrier to what drives progress.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:long-for#e-01bc2a02d1cee92a",
+          "text": "According to tales, Nebuchadnezzar, then King of Babylon, had them built for his queen who longed for the forested mountains of her homeland.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 101
+          },
+          "parts": [
+            [
+              91,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

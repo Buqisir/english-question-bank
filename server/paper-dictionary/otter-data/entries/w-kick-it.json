@@ -1,0 +1,113 @@
+{
+  "entryId": "w:kick-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kick",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kick",
+        "it"
+      ],
+      [
+        "kicked",
+        "it"
+      ],
+      [
+        "kicking",
+        "it"
+      ],
+      [
+        "kicks",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kick it",
+  "senses": [
+    {
+      "senseId": "w:kick-it#s1",
+      "pos": "短语",
+      "glossZh": "放松闲待；一起消磨时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-it#s2",
+      "pos": "短语",
+      "glossZh": "表现出色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，可用于音乐演出。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-it#s3",
+      "pos": "短语",
+      "glossZh": "去世",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-it#s4",
+      "pos": "短语",
+      "glossZh": "戒掉坏习惯；摆脱成瘾",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "it 指前文提到的习惯或瘾。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

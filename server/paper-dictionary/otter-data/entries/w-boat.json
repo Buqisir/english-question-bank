@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 68
+    "mock": 1
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -146,26 +146,12 @@
       "pos": "v.",
       "glossZh": "乘船；用船运送",
       "pronunciationId": "w:boat#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:boat#s3",
-      "pos": "短语",
-      "glossZh": "处于同样的困境",
-      "pronunciationId": "w:boat#p-main",
-      "note": "in the same boat。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -175,6 +161,11 @@
       "reason": "专业、历史或同形缩写。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-same-boat"
+  ]
 }

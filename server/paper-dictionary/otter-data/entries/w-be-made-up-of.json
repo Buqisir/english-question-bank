@@ -1,0 +1,134 @@
+{
+  "entryId": "w:be-made-up-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "made",
+      "up",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "made",
+        "up",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "is made up of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be made up of sth",
+  "senses": [
+    {
+      "senseId": "w:be-made-up-of#s1",
+      "pos": "句型",
+      "glossZh": "由……组成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s10",
+        "w:up#s20"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-made-up-of#e-946bea3c13b34638",
+          "text": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 32
+          },
+          "parts": [
+            [
+              19,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-made-up-of#e-9dddfe121d26416c",
+          "text": "History is made up of fun stories.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 21
+          },
+          "parts": [
+            [
+              8,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

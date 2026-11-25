@@ -1,0 +1,97 @@
+{
+  "entryId": "w:in-anothers-skin",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "in another’s skin"
+  ],
+  "pattern": {
+    "tokens": [
+      "in",
+      "another's",
+      "skin"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "another's",
+        "skin"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in another's skin",
+  "senses": [
+    {
+      "senseId": "w:in-anothers-skin#s1",
+      "pos": "短语",
+      "glossZh": "设身处地体会他人的处境",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:skin#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-anothers-skin#e-f463ebe17b669d4d",
+          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 167,
+            "end": 184
+          },
+          "parts": [
+            [
+              167,
+              184
+            ]
+          ],
+          "highlightRanges": [
+            [
+              167,
+              184
+            ]
+          ]
+        }
+      ],
+      "note": "put sb in another's skin 指让某人体会另一个人的处境。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

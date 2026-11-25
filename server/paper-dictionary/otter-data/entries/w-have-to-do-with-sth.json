@@ -1,0 +1,77 @@
+{
+  "entryId": "w:have-to-do-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "to do with"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "to",
+      {
+        "slot": "do"
+      },
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "to",
+        {
+          "slot": "do"
+        },
+        "with",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have to do with sth",
+  "senses": [
+    {
+      "senseId": "w:have-to-do-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "与……有关；涉及……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:do#s17"
+      ],
+      "examples": [],
+      "note": "常用 have something/nothing to do with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

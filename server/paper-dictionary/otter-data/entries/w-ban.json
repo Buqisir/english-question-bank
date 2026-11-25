@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 60
+    "mock": 1
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -220,6 +220,6 @@
       "reason": "历史义、专业义或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

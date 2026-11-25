@@ -35,8 +35,8 @@
     "mock": 189
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 189
+    "gaokao": 13,
+    "mock": 80
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -161,243 +161,27 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:along#s3",
-      "pos": "短语",
-      "glossZh": "连同；和……一起",
-      "pronunciationId": "w:along#p-main",
-      "note": "along with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:along#e-d10fc8fb2f39976e",
-          "text": "Presenting the best of the West End along with the pick of the UK’s touring shows, the New Theatre is Cardiff’s oldest surviving traditional theatre.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:15",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:along#e-71f4a7952d907fd7",
-          "text": "A torch（手电筒）along with suitable clothing is essential for walking in the dark.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:along#e-8e92875bb52da8e0",
-          "text": "That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 115,
-            "end": 120
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:along#s4",
-      "pos": "短语",
-      "glossZh": "相处；相处融洽",
-      "pronunciationId": "w:along#p-main",
-      "note": "get along (with)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:along#e-250e7c808c8b1049",
-          "text": "He doesn’t get along with the host family.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
-            "locator": {
-              "question": 15,
-              "questionId": "question:listening:15",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:along#e-e9a6f1f0bc864037",
-          "text": "They may fail to get along.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 13,
-              "questionId": "question:listening:13",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:along#e-30a28bbe0e97e5cd",
-          "text": "He’s difficult to get along with.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
-            "locator": {
-              "question": 4,
-              "questionId": "question:listening:4",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:along#s5",
-      "pos": "短语",
-      "glossZh": "配合；赞同",
-      "pronunciationId": "w:along#p-main",
-      "note": "play along 或 go along with。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:along#e-00272b015184bd78",
-          "text": "He tried it several times, but the card machine just did not play along.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 66,
-            "end": 71
-          }
-        },
-        {
-          "exampleId": "w:along#e-f7ef6d1750a44ae1",
-          "text": "So just go along with it!",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:along#s6",
-      "pos": "短语",
-      "glossZh": "始终；一直",
-      "pronunciationId": "w:along#p-main",
-      "note": "all along。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:along#e-8645b4d6044bc2cd",
-          "text": "She said she had felt __57__ all along that she would win.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 38
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-along",
+    "w:along-the-lines-of",
+    "w:along-the-way",
+    "w:along-with",
+    "w:bring-along",
+    "w:come-along",
+    "w:follow-along",
+    "w:get-along",
+    "w:get-along-with",
+    "w:go-along",
+    "w:go-along-with",
+    "w:move-along",
+    "w:play-along",
+    "w:ride-along"
+  ]
 }

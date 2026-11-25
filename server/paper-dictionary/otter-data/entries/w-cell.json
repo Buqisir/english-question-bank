@@ -42,8 +42,8 @@
     "mock": 271
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 267
+    "gaokao": 6,
+    "mock": 82
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 159
       },
       "folded": false,
       "examples": [
@@ -118,59 +118,6 @@
       ]
     },
     {
-      "senseId": "w:cell#s2",
-      "pos": "短语",
-      "glossZh": "手机；移动电话",
-      "pronunciationId": "w:cell#p-main",
-      "note": "cell phone",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cell#e-3ab608f043c74040",
-          "text": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\"",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 107,
-            "end": 111
-          }
-        },
-        {
-          "exampleId": "w:cell#e-3875e7b23bb99d66",
-          "text": "In a panic, I reached down for my purse to grab my cell phone.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:8",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cell#s3",
       "pos": "n.",
       "glossZh": "电池单元；电池",
@@ -178,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -204,50 +151,16 @@
       ]
     },
     {
-      "senseId": "w:cell#s4",
-      "pos": "短语",
-      "glossZh": "风暴单体",
-      "pronunciationId": "w:cell#p-main",
-      "note": "storm cell",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cell#e-f517ec07242300eb",
-          "text": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 83
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:cell#s5",
       "pos": "n.",
       "glossZh": "牢房；单人小室",
       "pronunciationId": "w:cell#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -275,6 +188,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:cell#s8",
+      "pos": "n.",
+      "glossZh": "器件中的小型功能单元",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cell#e-9eb2de78e4484614",
+          "text": "At the heart of this invention are tiny pixels, which are tiny cells built with a thin film stretched above a small air cavity（腔）.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -283,6 +229,8 @@
       "reason": "专名或行业专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:adams-apple",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "Adam’s apple"
+  ],
+  "pattern": {
+    "tokens": [
+      "adam's",
+      "apple"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "adam's",
+        "apple"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "adam's apple",
+  "senses": [
+    {
+      "senseId": "w:adams-apple#s1",
+      "pos": "短语",
+      "glossZh": "喉结",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:apple#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:adams-apple#e-fe9758b1015d070f",
+          "text": "The father nodded, his Adam’s apple rolling slightly but his eyes never left the hopping swallow.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

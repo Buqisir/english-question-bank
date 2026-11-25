@@ -35,8 +35,8 @@
     "mock": 35
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 31
+    "gaokao": 1,
+    "mock": 8
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -112,78 +112,6 @@
       ]
     },
     {
-      "senseId": "w:prior#s2",
-      "pos": "短语",
-      "glossZh": "在……之前",
-      "pronunciationId": "w:prior#p-main",
-      "note": "prior to，较正式。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:prior#e-4ffceeae45bd1f73",
-          "text": "Prior to SLEAP, tracking the physical characteristics of both plants and animals required a lot of labor that slowed the scientific process.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:prior#e-41e04b96105108ac",
-          "text": "Register Online: All visitors to United Nations Headquarters must register on the United Nations Security Website prior to arrival.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 114,
-            "end": 119
-          }
-        },
-        {
-          "exampleId": "w:prior#e-318e57d391faa1e7",
-          "text": "“Although these fossils suggest certain animal groups were present prior to the Cambrian period, they don’t invalidate the idea of the Cambrian explosion,” says Joe Moysiuk at Manitoba Museum in Winnipeg, Canada.",
-          "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
-            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 67,
-            "end": 72
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:prior#s3",
       "pos": "adj.",
       "glossZh": "优先的",
@@ -207,6 +135,11 @@
       "reason": "统计学术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:prior-to"
+  ]
 }

@@ -1,0 +1,102 @@
+{
+  "entryId": "w:i-know-it-when-i-see-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I know it when I see it"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "know",
+      "it",
+      "when",
+      "i",
+      "see",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "know",
+        "it",
+        "when",
+        "i",
+        "see",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i know it when i see it",
+  "senses": [
+    {
+      "senseId": "w:i-know-it-when-i-see-it#s1",
+      "pos": "短语",
+      "glossZh": "说不清怎么定义，但一见就能认出来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-know-it-when-i-see-it#e-ab09b6e0ddaeaa39",
+          "text": "While rest can feel like one of those “I know it when I see it” concepts, I would argue that many of us don’t.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 62
+          },
+          "parts": [
+            [
+              39,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

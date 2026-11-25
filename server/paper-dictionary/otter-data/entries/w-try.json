@@ -62,8 +62,8 @@
     "mock": 736
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 735
+    "gaokao": 12,
+    "mock": 555
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 85,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -281,59 +281,6 @@
       ]
     },
     {
-      "senseId": "w:try#s4",
-      "pos": "短语",
-      "glossZh": "试穿",
-      "pronunciationId": "w:try#p-main",
-      "note": "try sth on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:try#e-48083609bf626b29",
-          "text": "Place a few mirrors around your room so people can see how things look when they try them on.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 81,
-            "end": 84
-          }
-        },
-        {
-          "exampleId": "w:try#e-ada14f060556989d",
-          "text": "One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:try#s5",
       "pos": "n.",
       "glossZh": "尝试",
@@ -341,7 +288,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -439,66 +386,51 @@
       ]
     },
     {
-      "senseId": "w:try#s7",
+      "senseId": "w:try#s9",
       "pos": "短语",
-      "glossZh": "试用以检验效果",
+      "glossZh": "参加选拔；试演",
       "pronunciationId": "w:try#p-main",
-      "note": "try sth out。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:try#e-0de962259ba3e03a",
-          "text": "I’ve been trying out these strategies and I’ve found that when I’m less restrictive, they do make better decisions.",
+          "exampleId": "w:try#e-fe2711f6a65fae4e",
+          "text": "Maybe back at the community theater, where I’d just tried out for a play and felt easy with the assistant director, a woman my age who I could imagine becoming a friend.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:try#e-e580aa1a5ee92a19",
+          "text": "Try out for the basketball team.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "B",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 16
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:try#s8",
-      "pos": "短语",
-      "glossZh": "试着参与某项活动",
-      "pronunciationId": "w:try#p-main",
-      "note": "try your hand at sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:try#e-65bf347060702a4c",
-          "text": "Try your hand at some of the painting tricks used by artists whose works will be in the upcoming exhibition of American Watercolors 1880-1990: Into the Light.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
             "start": 0,
             "end": 3
@@ -513,6 +445,14 @@
       "reason": "体育、器具或计算机专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:try-ones-best",
+    "w:try-ones-hand-at",
+    "w:try-sth-on",
+    "w:try-sth-out"
+  ]
 }

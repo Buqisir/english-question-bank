@@ -61,8 +61,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 57
+    "gaokao": 7,
+    "mock": 25
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -208,79 +208,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:blame#s3",
-      "pos": "短语",
-      "glossZh": "应负责任；应受责备",
-      "pronunciationId": "w:blame#p-main",
-      "note": "be to blame。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blame#e-25b72d683a84bb47",
-          "text": "Both are to blame.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2026-zhejiang-jan:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        },
-        {
-          "exampleId": "w:blame#e-2289906f1a9c8514",
-          "text": "When the fruit trees he planted were not producing anything, he realized the absence of bees was to blame.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 100,
-            "end": 105
-          }
-        },
-        {
-          "exampleId": "w:blame#e-1caaee9f857a7c69",
-          "text": "Do scientists really not know what's good for us, or is the news report to blame for the confusion?",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
-            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 75,
-            "end": 80
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -289,6 +216,12 @@
       "reason": "技术用法或罕见语气用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-to-blame",
+    "w:to-blame"
+  ]
 }

@@ -1,0 +1,85 @@
+{
+  "entryId": "w:spirit-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spirit",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spirit",
+        "away"
+      ],
+      [
+        "spirited",
+        "away"
+      ],
+      [
+        "spiriting",
+        "away"
+      ],
+      [
+        "spirits",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spirit sb/sth away",
+  "senses": [
+    {
+      "senseId": "w:spirit-away#s1",
+      "pos": "短语",
+      "glossZh": "迅速而悄悄地把某人或某物带走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:spirit#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:spirit-away#s2",
+      "pos": "短语",
+      "glossZh": "用魔法或超自然力量带走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

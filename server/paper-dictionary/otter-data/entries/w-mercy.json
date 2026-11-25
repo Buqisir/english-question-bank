@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 2
   },
   "senses": [
     {
@@ -120,40 +120,6 @@
       ]
     },
     {
-      "senseId": "w:mercy#s2",
-      "pos": "短语",
-      "glossZh": "任由……摆布；完全受制于",
-      "pronunciationId": "w:mercy#p-main",
-      "note": "at the mercy of。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mercy#e-d76f2bc68d58d8fb",
-          "text": "Like many small businesses, I’m at the mercy of a rising cost of living, a harsh economy and consumers who might devote their Saturdays to something else.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
-            "paperTitle": "浙江省七校2025年12月高三联考 英语",
-            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:mercy#s3",
       "pos": "n.",
       "glossZh": "幸事；值得庆幸的事",
@@ -173,6 +139,11 @@
       "reason": "游戏名称或同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-the-mercy-of"
+  ]
 }

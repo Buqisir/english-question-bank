@@ -1,0 +1,186 @@
+{
+  "entryId": "w:do-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "do with"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "with",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "do",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "doing with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do with sth",
+  "senses": [
+    {
+      "senseId": "w:do-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "处理；利用；拿……怎么办",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:do#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:do-with-sth#e-2a166d68ddf9f287",
+          "text": "Paragraph 2: We tied the rope around the tree and began to discuss what to do with the cow.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 82
+          },
+          "parts": [
+            [
+              75,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-with-sth#e-392aab8d65ce8dd3",
+          "text": "So what to do with all those perfectly-good-but-you're-maybe-a-little-sick-of-them clothes piled on your bedroom floor?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          },
+          "parts": [
+            [
+              11,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-with-sth#e-3eae53452a5fd521",
+          "text": "What does the author suggest readers do with the practices offered in part two?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-i:31",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 44
+          },
+          "parts": [
+            [
+              37,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 what to do with sth 或 what … do with sth。",
+      "counts": {
+        "gaokao": 10,
+        "mock": 31
+      }
+    },
+    {
+      "senseId": "w:do-with-sth#s2",
+      "pos": "短语",
+      "glossZh": "需要；有……就好了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于 can/could do with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

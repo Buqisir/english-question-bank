@@ -1,0 +1,139 @@
+{
+  "entryId": "w:help-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "help",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "help",
+        "out"
+      ],
+      [
+        "helped",
+        "out"
+      ],
+      [
+        "helping",
+        "out"
+      ],
+      [
+        "helps",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "help out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "help (sb) out",
+  "senses": [
+    {
+      "senseId": "w:help-out#s1",
+      "pos": "短语",
+      "glossZh": "帮忙；搭把手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:help-out#e-315aadc18f17c5c2",
+          "text": "I can help out.” Hearing his words, the weight lifted off me.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          },
+          "parts": [
+            [
+              6,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:help-out#e-b0817ed855c4ec10",
+          "text": "Help out at the bank.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

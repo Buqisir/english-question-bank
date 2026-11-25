@@ -1,0 +1,135 @@
+{
+  "entryId": "w:quiet-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "quiet",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "quiet",
+        "down"
+      ],
+      [
+        "quieted",
+        "down"
+      ],
+      [
+        "quieting",
+        "down"
+      ],
+      [
+        "quiets",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "quiet down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "quiet (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:quiet-down#s1",
+      "pos": "短语",
+      "glossZh": "活动减弱；逐渐平息",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:quiet-down#e-62260100172c1538",
+          "text": "The prefrontal cortex (前额叶皮层), largely responsible for self-monitoring, tends to quiet down, mirroring what is often seen in “flow states,” where the boundaries between self and task dissolve.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 91
+          },
+          "parts": [
+            [
+              81,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:quiet-down#s2",
+      "pos": "短语",
+      "glossZh": "安静下来；平静下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:quiet#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:quiet-down#s3",
+      "pos": "短语",
+      "glossZh": "使……安静下来；使……停止喧闹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

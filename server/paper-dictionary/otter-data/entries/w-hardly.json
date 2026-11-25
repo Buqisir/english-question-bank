@@ -60,8 +60,8 @@
     "mock": 40
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 38
+    "gaokao": 1,
+    "mock": 8
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -134,59 +134,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:hardly#s2",
-      "pos": "短语",
-      "glossZh": "刚……就……",
-      "pronunciationId": "w:hardly#p-main",
-      "note": "hardly … when …；hardly 置于句首时，前一分句用部分倒装。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hardly#e-358fab1867d32dc8",
-          "text": "Hardly had I written half a page when I felt a sharp pain in my chest.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:hardly#e-e9a938c59b3d9a8a",
-          "text": "Hardly had he touched the microscope when it split into two parts.",
-          "source": {
-            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:3",
-              "sentence": 7
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -195,6 +142,11 @@
       "reason": "旧义，现代英语用 hard 表示"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hardly-when"
+  ]
 }

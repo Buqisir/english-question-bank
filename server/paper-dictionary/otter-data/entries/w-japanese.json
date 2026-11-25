@@ -54,7 +54,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 5
+    "mock": 0
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -215,6 +215,6 @@
       "reason": "上下文中的省略用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

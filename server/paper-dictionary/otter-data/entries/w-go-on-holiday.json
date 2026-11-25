@@ -1,0 +1,113 @@
+{
+  "entryId": "w:go-on-holiday",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "on",
+      "holiday"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "on",
+        "holiday"
+      ],
+      [
+        "goes",
+        "on",
+        "holiday"
+      ],
+      [
+        "going",
+        "on",
+        "holiday"
+      ],
+      [
+        "gone",
+        "on",
+        "holiday"
+      ],
+      [
+        "went",
+        "on",
+        "holiday"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go on holiday",
+  "senses": [
+    {
+      "senseId": "w:go-on-holiday#s1",
+      "pos": "短语",
+      "glossZh": "去度假",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-on-holiday#e-ea802efe6615803e",
+          "text": "To go on holiday.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 16
+          },
+          "parts": [
+            [
+              3,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

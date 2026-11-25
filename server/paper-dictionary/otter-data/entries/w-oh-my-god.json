@@ -1,0 +1,75 @@
+{
+  "entryId": "w:oh-my-god",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "oh my God"
+  ],
+  "pattern": {
+    "tokens": [
+      "oh",
+      "my",
+      "god"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "oh",
+        "my",
+        "god"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "oh my god",
+  "senses": [
+    {
+      "senseId": "w:oh-my-god#s1",
+      "pos": "短语",
+      "glossZh": "我的天哪（表示强烈的惊讶等情绪）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:oh-my-god#s2",
+      "pos": "短语",
+      "glossZh": "啊，我的上帝（祈祷时的呼告）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

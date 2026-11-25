@@ -1,0 +1,110 @@
+{
+  "entryId": "w:9-to-5",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "9",
+      "to",
+      "5"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "9",
+        "to",
+        "5"
+      ],
+      [
+        "9",
+        "to",
+        "5s"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "9 to 5",
+  "senses": [
+    {
+      "senseId": "w:9-to-5#s1",
+      "pos": "短语",
+      "glossZh": "朝九晚五；按早九点到晚五点的时段上班",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:9-to-5#e-cfd2e4885e1ed1da",
+          "text": "Working 9 to 5 really resonates with individuals, he says.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 14
+          },
+          "parts": [
+            [
+              8,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:9-to-5#s2",
+      "pos": "短语",
+      "glossZh": "朝九晚五的固定工作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

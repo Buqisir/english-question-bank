@@ -1,0 +1,99 @@
+{
+  "entryId": "w:make-it-big",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "it",
+      "big"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "it",
+        "big"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made it big",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make it big",
+  "senses": [
+    {
+      "senseId": "w:make-it-big#s1",
+      "pos": "短语",
+      "glossZh": "大获成功；闯出名堂",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:big#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-it-big#e-dca0c49caed451e6",
+          "text": "“I understand, from an environmental standpoint, that they’re wasteful, and I understand why producers, cost-wise and for other reasons, don’t want them,” said Julie Benko, a former understudy who caught a break and made it big.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 216,
+            "end": 227
+          },
+          "parts": [
+            [
+              216,
+              227
+            ]
+          ],
+          "highlightRanges": [
+            [
+              216,
+              227
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

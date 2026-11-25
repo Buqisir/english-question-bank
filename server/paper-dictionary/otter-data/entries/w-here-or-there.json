@@ -1,0 +1,94 @@
+{
+  "entryId": "w:here-or-there",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "here",
+      "or",
+      "there"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "here",
+        "or",
+        "there"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "here or there",
+  "senses": [
+    {
+      "senseId": "w:here-or-there#s1",
+      "pos": "短语",
+      "glossZh": "在零星几处；在不同地方或不同时候零星地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:here#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:here-or-there#e-6d3f1f7a6db3e1cf",
+          "text": "Always be looking for a new way to gain back an hour here or there.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 66
+          },
+          "parts": [
+            [
+              53,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              66
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

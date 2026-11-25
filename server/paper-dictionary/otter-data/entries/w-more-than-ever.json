@@ -1,0 +1,125 @@
+{
+  "entryId": "w:more-than-ever",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "more",
+      "than",
+      "ever"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "more",
+        "than",
+        "ever"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "more than ever",
+  "senses": [
+    {
+      "senseId": "w:more-than-ever#s1",
+      "pos": "短语",
+      "glossZh": "比以往任何时候都更……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ever#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:more-than-ever#e-d459fd9aa0c1fdbf",
+          "text": "more than ever in our schools.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:more-than-ever#e-b159afafc44f36c7",
+          "text": "As digital writing extends deeper into our lives and minds, we need dictionaries more than ever.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 95
+          },
+          "parts": [
+            [
+              81,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              95
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

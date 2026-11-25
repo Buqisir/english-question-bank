@@ -1,0 +1,66 @@
+{
+  "entryId": "w:a-nail-in-the-coffin",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "nail",
+      "in",
+      "the",
+      "coffin"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "nail",
+        "in",
+        "the",
+        "coffin"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a nail in the coffin",
+  "senses": [
+    {
+      "senseId": "w:a-nail-in-the-coffin#s1",
+      "pos": "短语",
+      "glossZh": "促使某事最终失败的又一次打击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:nail#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

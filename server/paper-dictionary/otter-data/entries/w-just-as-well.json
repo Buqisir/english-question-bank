@@ -1,0 +1,138 @@
+{
+  "entryId": "w:just-as-well",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "as",
+      "well"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "as",
+        "well"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just as well",
+  "senses": [
+    {
+      "senseId": "w:just-as-well#s1",
+      "pos": "短语",
+      "glossZh": "幸好；那样倒也好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:just-as-well#e-76c714ec283a9a87",
+          "text": "The scenery was breathtaking and, as our guide suggested, maybe It’s just as well not to get our hopes up about seeing a moose, because our visit happened to be at the time of year that the animals were typically in an aggressive (好斗的) mood.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 81
+          },
+          "parts": [
+            [
+              69,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              81
+            ]
+          ]
+        }
+      ],
+      "note": "常用 it's just as well (that) 或 it's just as well to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:just-as-well#s2",
+      "pos": "短语",
+      "glossZh": "同样有效；同样行得通",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:just-as-well#e-31df7446feb6bb54",
+          "text": "Quantum mechanics (量子力学) does not naturally treat time as special – many processes could run backward just as well.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 114
+          },
+          "parts": [
+            [
+              102,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              114
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

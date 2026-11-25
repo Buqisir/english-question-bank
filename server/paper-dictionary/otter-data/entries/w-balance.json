@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 244
+    "mock": 72
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -180,7 +180,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -250,12 +250,12 @@
       "pos": "v.",
       "glossZh": "保持平衡；使某物稳住",
       "pronunciationId": "w:balance#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -263,12 +263,12 @@
       "pos": "n.",
       "glossZh": "余额；余款；余下的部分",
       "pronunciationId": "w:balance#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -304,6 +304,10 @@
       "reason": "专业义或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:balance-out",
+    "w:strike-a-balance"
+  ]
 }

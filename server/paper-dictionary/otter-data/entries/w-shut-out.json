@@ -1,0 +1,192 @@
+{
+  "entryId": "w:shut-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shut",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shut",
+        "out"
+      ],
+      [
+        "shuts",
+        "out"
+      ],
+      [
+        "shutting",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shut out",
+      "tags": []
+    },
+    {
+      "form": "shutting out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shut sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:shut-out#s1",
+      "pos": "短语",
+      "glossZh": "隔绝外界；屏蔽干扰",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shut#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shut-out#e-526508db4db713f6",
+          "text": "Nevertheless, I didn’t shut out the world entirely.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          },
+          "parts": [
+            [
+              23,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shut-out#e-2a9562c9561893ef",
+          "text": "It’s also about shutting out distraction, because I think that whatever is happening around me is disturbing, at the very least extraneous to my central purpose, which is getting from A to B.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 28
+          },
+          "parts": [
+            [
+              16,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:shut-out#s2",
+      "pos": "短语",
+      "glossZh": "阻止进入；排除在活动之外",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shut-out#s3",
+      "pos": "短语",
+      "glossZh": "挡住光线或视线",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shut-out#s4",
+      "pos": "短语",
+      "glossZh": "拒绝让某人走近自己的内心",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:shut-out#s5",
+      "pos": "短语",
+      "glossZh": "使对手一分未得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

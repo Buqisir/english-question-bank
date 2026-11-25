@@ -78,8 +78,8 @@
     "mock": 48
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 44
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -90,7 +90,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -154,78 +154,6 @@
       ]
     },
     {
-      "senseId": "w:row#s2",
-      "pos": "短语",
-      "glossZh": "连续",
-      "pronunciationId": "w:row#p-main",
-      "note": "in a row。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:row#e-ccbe5873ff8befa7",
-          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 128,
-            "end": 131
-          }
-        },
-        {
-          "exampleId": "w:row#e-c901ecca0a10edcc",
-          "text": "Tom had run every City Marathon for twenty-three years in a row.",
-          "source": {
-            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
-            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
-            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 60,
-            "end": 63
-          }
-        },
-        {
-          "exampleId": "w:row#e-86a262ba0bd4744a",
-          "text": "Now, a decade on, MacColl can pump out 17 of them in a row.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
-            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:row#s3",
       "pos": "v.",
       "glossZh": "划船",
@@ -233,7 +161,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -325,6 +253,11 @@
       "reason": "大写 ROW 缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-a-row"
+  ]
 }

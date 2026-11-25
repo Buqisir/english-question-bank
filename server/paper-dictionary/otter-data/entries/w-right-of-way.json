@@ -1,0 +1,186 @@
+{
+  "entryId": "w:right-of-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "of",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "of",
+        "way"
+      ],
+      [
+        "right",
+        "of",
+        "ways"
+      ],
+      [
+        "rights",
+        "of",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right of way",
+  "senses": [
+    {
+      "senseId": "w:right-of-way#s1",
+      "pos": "短语",
+      "glossZh": "（交通中的）优先通行权",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:right-of-way#e-0d9feffe81ee3a65",
+          "text": "Even with the right of way, try to make eye contact with drivers or look for signs that they see you, like slowing down.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices:8",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 26
+          },
+          "parts": [
+            [
+              14,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:right-of-way#e-a31cf4e700a5ec58",
+          "text": "Don’t put yourself in danger just because you have the right of way.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:seven-choices:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:right-of-way#s2",
+      "pos": "短语",
+      "glossZh": "依法经由他人土地通行的权利",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:right-of-way#s3",
+      "pos": "短语",
+      "glossZh": "供通行或铺设道路、铁路及管线的地带",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:right-of-way#s4",
+      "pos": "短语",
+      "glossZh": "（击剑中的）进攻优先权",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:right-of-way#s5",
+      "pos": "短语",
+      "glossZh": "人行道与车道之间的草地带",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美国威斯康星州部分地区用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

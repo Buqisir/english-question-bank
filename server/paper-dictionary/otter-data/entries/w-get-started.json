@@ -1,0 +1,231 @@
+{
+  "entryId": "w:get-started",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting started",
+    "got started"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "started"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "started"
+      ],
+      [
+        "getting",
+        "started"
+      ],
+      [
+        "got",
+        "started"
+      ],
+      [
+        "gets",
+        "started"
+      ],
+      [
+        "gotten",
+        "started"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get started",
+  "senses": [
+    {
+      "senseId": "w:get-started#s1",
+      "pos": "短语",
+      "glossZh": "开始做；着手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-started#e-4fe55dcefd38933d",
+          "text": "To help you get started, the platform suggests using AI tools as volunteer mentors (导师).",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-started#e-fe92c8168a68df5e",
+          "text": "No experience is needed, but here are some things to know before you get started.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 80
+          },
+          "parts": [
+            [
+              69,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-started#e-a6bbbc3200ca995e",
+          "text": "We knew that the sooner we got started, the sooner we would be done.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:get-started#s2",
+      "pos": "短语",
+      "glossZh": "使（项目、活动等）启动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-started#e-9fdad96fc7ae2cc8",
+          "text": "Do you have a research or conservation project you’d like to get started?",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 72
+          },
+          "parts": [
+            [
+              61,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              72
+            ]
+          ]
+        }
+      ],
+      "note": "用 get sth started。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-started#s3",
+      "pos": "短语",
+      "glossZh": "让某人开始谈论某个话题",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 don’t get me started on sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

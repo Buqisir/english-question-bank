@@ -1,0 +1,110 @@
+{
+  "entryId": "w:run-a-temperature",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running a temperature"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "a",
+      "temperature"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "a",
+        "temperature"
+      ],
+      [
+        "running",
+        "a",
+        "temperature"
+      ],
+      [
+        "ran",
+        "a",
+        "temperature"
+      ],
+      [
+        "runs",
+        "a",
+        "temperature"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run a temperature",
+  "senses": [
+    {
+      "senseId": "w:run-a-temperature#s1",
+      "pos": "短语",
+      "glossZh": "发烧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-a-temperature#e-d5df25f8e2dfa8d2",
+          "text": "She’s running a temperature.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 27
+          },
+          "parts": [
+            [
+              6,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

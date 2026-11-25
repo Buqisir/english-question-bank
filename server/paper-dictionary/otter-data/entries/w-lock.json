@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 15
+    "mock": 11
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -319,108 +319,34 @@
       ]
     },
     {
-      "senseId": "w:lock#s7",
-      "pos": "短语",
-      "glossZh": "目光紧盯着",
+      "senseId": "w:lock#s9",
+      "pos": "v.",
+      "glossZh": "锁定；确定（lock down）",
       "pronunciationId": "w:lock#p-main",
-      "note": "lock (on)to。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:lock#e-639d93cf0d5c1477",
-          "text": "But Emma, once eager to lead our dance, now stayed away from the group during practices, her movements slow, her eyes locked on the floor.",
+          "exampleId": "w:lock#e-27572e55e927e063",
+          "text": "In selected regions, fishing nets bear unique identifiers, enabling the precise tracking of their ownership by individuals or commercial fisheries post-recovery and instantly locking down whoever is at fault.",
           "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 118,
-            "end": 124
-          }
-        },
-        {
-          "exampleId": "w:lock#e-58c4824a5f1914e4",
-          "text": "Her wide eyes locked onto mine.",
-          "source": {
-            "paperId": "paper-mock-hubei-tengyun-2025-08",
-            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
-            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lock#s8",
-      "pos": "短语",
-      "glossZh": "留住；保存",
-      "pronunciationId": "w:lock#p-main",
-      "note": "lock sth in。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lock#e-d716f80a5fd19058",
-          "text": "This bag keeps bad smells locked in, thanks to a built-in air freshener.",
-          "source": {
-            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
-            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
-            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-a:7",
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c:5",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:lock#e-4ae656a762518481",
-          "text": "To lock in the vegetables’ color.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
-            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
-            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-mock-shandong-jining-2026-05-third-mock:23",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
+            "start": 175,
+            "end": 182
           }
         }
       ]
@@ -432,6 +358,14 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:lock-on",
+    "w:lock-onto",
+    "w:lock-sth-in",
+    "w:lock-to"
+  ]
 }

@@ -1,0 +1,98 @@
+{
+  "entryId": "w:the-lady-of-the-house",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "the",
+      "lady",
+      "of",
+      "the",
+      "house"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "the",
+        "lady",
+        "of",
+        "the",
+        "house"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "the lady of the house",
+  "senses": [
+    {
+      "senseId": "w:the-lady-of-the-house#s1",
+      "pos": "短语",
+      "glossZh": "这家的女主人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lady#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:the-lady-of-the-house#e-129537ab58fa3b26",
+          "text": "A particularly touching scene is when the lady of the house, Rina, decides to adopt Miene, extending her hand and saying, “I will give you my twenty years”, which showcases the deep commitment one needs to take on such responsibility.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 59
+          },
+          "parts": [
+            [
+              38,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

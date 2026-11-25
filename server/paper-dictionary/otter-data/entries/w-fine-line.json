@@ -1,0 +1,95 @@
+{
+  "entryId": "w:fine-line",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fine",
+      "line"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fine",
+        "line"
+      ],
+      [
+        "fine",
+        "lines"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fine line",
+  "senses": [
+    {
+      "senseId": "w:fine-line#s1",
+      "pos": "短语",
+      "glossZh": "难以分辨的细微界限",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fine-line#e-c4a2aaee1eb9c96a",
+          "text": "Was I crossing the fine line between magic and lying?",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          },
+          "parts": [
+            [
+              19,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              28
+            ]
+          ]
+        }
+      ],
+      "note": "常作 a fine line between A and B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

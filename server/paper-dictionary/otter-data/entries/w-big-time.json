@@ -1,0 +1,109 @@
+{
+  "entryId": "w:big-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "big",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "big",
+        "time"
+      ],
+      [
+        "big",
+        "times"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "big time",
+  "senses": [
+    {
+      "senseId": "w:big-time#s1",
+      "pos": "短语",
+      "glossZh": "非常；程度很深",
+      "note": "非正式，用来加强语气。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:big-time#e-8adc8e8e3d5f4972",
+          "text": "I was really looking forward to saying, ‘I am done.’ But you also know you’re going to miss this big time.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          },
+          "parts": [
+            [
+              97,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              105
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:big-time#s2",
+      "pos": "短语",
+      "glossZh": "顶尖行列；最高水平",
+      "note": "常用 the big time，如 hit the big time。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

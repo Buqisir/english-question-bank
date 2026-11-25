@@ -1,0 +1,270 @@
+{
+  "entryId": "w:fall-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falling on",
+    "falls on",
+    "fell on"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "on"
+      ],
+      [
+        "falling",
+        "on"
+      ],
+      [
+        "falls",
+        "on"
+      ],
+      [
+        "fell",
+        "on"
+      ],
+      [
+        "fallen",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall on",
+  "senses": [
+    {
+      "senseId": "w:fall-on#s1",
+      "pos": "短语",
+      "glossZh": "（目光）落在……上；看到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-on#e-2c2e210fdd609884",
+          "text": "Inside, my eye fell on rows of students typing in front of old-fashioned Smith-Corona or Royal typewriters.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          },
+          "parts": [
+            [
+              15,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-on#e-927882169677e55f",
+          "text": "Then her eye fell on her family photo on the desk, with her parents on either side.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation:13",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-on#e-2d9e8b2472e8d60b",
+          "text": "As Jack struggled for a solution, his eyes fell on the PE score sheet and the teacher’s words echoed, “If you can’t overcome such a small challenge…”",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          },
+          "parts": [
+            [
+              43,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:fall-on#s2",
+      "pos": "短语",
+      "glossZh": "（光线）照到……上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-on#e-61fe31cdd6b5743a",
+          "text": "It’s estimated that most plants capture less than 2 percent of the light that falls on them, and they need part of it to survive and grow.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 86
+          },
+          "parts": [
+            [
+              78,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fall-on#s3",
+      "pos": "短语",
+      "glossZh": "（责任、负担）落到某人身上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-on#s4",
+      "pos": "短语",
+      "glossZh": "（节日、事件）适逢某一天",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-on#s5",
+      "pos": "短语",
+      "glossZh": "遭遇（困难、不幸）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 fall on hard times。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-on#s6",
+      "pos": "短语",
+      "glossZh": "突然袭击；扑向",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

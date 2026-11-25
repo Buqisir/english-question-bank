@@ -1,0 +1,123 @@
+{
+  "entryId": "w:by-extension",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "extension"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "extension"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by extension",
+  "senses": [
+    {
+      "senseId": "w:by-extension#s1",
+      "pos": "短语",
+      "glossZh": "以此类推；由此推及",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:extension#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-extension#e-cec42c7215620d81",
+          "text": "We must then teach ourselves, and by extension, our students to reframe those flaws as strengths rather than weaknesses.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 46
+          },
+          "parts": [
+            [
+              34,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-extension#e-00fa5781ee5f5d7d",
+          "text": "We must then teach ourselves – and by extension our students – to reframe those flaws as strengths rather than weaknesses.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

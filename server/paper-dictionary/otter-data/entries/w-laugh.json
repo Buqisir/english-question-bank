@@ -62,8 +62,8 @@
     "mock": 137
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 135
+    "gaokao": 8,
+    "mock": 18
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -190,78 +190,6 @@
       ]
     },
     {
-      "senseId": "w:laugh#s3",
-      "pos": "短语",
-      "glossZh": "嘲笑",
-      "pronunciationId": "w:laugh#p-main",
-      "note": "laugh at。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 5,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:laugh#e-43f7f40fada65506",
-          "text": "“I was afraid that kids from other schools would laugh at him,” he explained uncomfortably.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "writing-continuation-5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:laugh#e-ccca79227e3e31ac",
-          "text": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 97
-          }
-        },
-        {
-          "exampleId": "w:laugh#e-a2787905d170605e",
-          "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 29
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:laugh#s4",
       "pos": "n.",
       "glossZh": "笑声",
@@ -269,7 +197,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -295,40 +223,6 @@
       ]
     },
     {
-      "senseId": "w:laugh#s5",
-      "pos": "短语",
-      "glossZh": "笑到最后",
-      "pronunciationId": "w:laugh#p-main",
-      "note": "have the last laugh。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:laugh#e-df335290f5481b36",
-          "text": "But Farber is certain he’ll have the last laugh.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:laugh#s6",
       "pos": "n.",
       "glossZh": "有趣的事",
@@ -340,9 +234,101 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:laugh#s7",
+      "pos": "v.",
+      "glossZh": "一笑置之（laugh sth off）",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-4b0c9f54c259963f",
+          "text": "I laughed it off at first but decided to go without mine for a month.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-heze-2026-03-first:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-86e51281c26c09f6",
+          "text": "I laughed it off.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-80a3dc59b94212aa",
+          "text": "I laughed it off, knowing that was impossible.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:cloze:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s8",
+      "pos": "n.",
+      "glossZh": "笑柄（laughing stock）",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:have-the-last-laugh",
+    "w:laugh-at",
+    "w:laugh-off"
+  ]
 }

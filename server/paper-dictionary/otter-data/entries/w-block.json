@@ -59,8 +59,8 @@
     "mock": 168
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 157
+    "gaokao": 1,
+    "mock": 35
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -136,81 +136,6 @@
       ]
     },
     {
-      "senseId": "w:block#s2",
-      "pos": "短语",
-      "glossZh": "遮挡；隔绝",
-      "pronunciationId": "w:block#p-main",
-      "note": "block out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:block#e-8b955069bc684bf2",
-          "text": "It blocks out background noise.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
-            "locator": {
-              "question": 32,
-              "questionId": "question:paper-gaokao-2021-national-b:32",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        },
-        {
-          "exampleId": "w:block#e-cc155f2b351dfc44",
-          "text": "Escape into books and block out noise.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-10-fifth:27",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:block#e-1665dade69b599c4",
-          "text": "It blocks out distractions.",
-          "source": {
-            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
-            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
-            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:33",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:block#s3",
       "pos": "v.",
       "glossZh": "屏蔽（消息、账号等）",
@@ -218,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -252,7 +177,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -304,7 +229,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -370,7 +295,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -403,7 +328,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -449,11 +374,44 @@
       ]
     },
     {
-      "senseId": "w:block#s9",
+      "senseId": "w:block#s10",
       "pos": "短语",
-      "glossZh": "基础组成部分；基本单元",
+      "glossZh": "预留一段时间（block out）",
       "pronunciationId": "w:block#p-main",
-      "note": "building block。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:block#e-63ed1bc9fd05b6a8",
+          "text": "Begin by blocking it out on a calendar.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:block#s11",
+      "pos": "adj.",
+      "glossZh": "按主题分组集中进行的",
+      "pronunciationId": "w:block#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -462,22 +420,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:block#e-3e416c6ba932ea96",
-          "text": "The PV cell is the basic building block of a PV system.",
+          "exampleId": "w:block#e-d2e478e0b8d00130",
+          "text": "Recently, I learnt from a journal that my previous reading method is known as “Blocked Practice”, which involves studying one topic thoroughly before moving on to another.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
             "locator": {
               "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:4",
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:4",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 34,
-            "end": 39
+            "start": 79,
+            "end": 86
           }
         }
       ]
@@ -489,6 +447,14 @@
       "reason": "俚语、行业用法或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:block-off",
+    "w:block-out",
+    "w:building-block",
+    "w:mental-block"
+  ]
 }

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:third-person",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "third",
+      "person"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "third",
+        "person"
+      ],
+      [
+        "third",
+        "persons"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "third person",
+  "senses": [
+    {
+      "senseId": "w:third-person#s1",
+      "pos": "短语",
+      "glossZh": "第三人称",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:third#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:third-person#e-7c965a0aab247c30",
+          "text": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 114
+          },
+          "parts": [
+            [
+              102,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              114
+            ]
+          ]
+        }
+      ],
+      "note": "write in the third person 指用姓名或 he、she、they 等第三人称来写。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:third-person#s2",
+      "pos": "短语",
+      "glossZh": "（游戏中的）第三人称视角",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:third-person#s3",
+      "pos": "短语",
+      "glossZh": "第三方；当事双方以外的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

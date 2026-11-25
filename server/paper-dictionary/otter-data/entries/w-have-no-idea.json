@@ -1,0 +1,178 @@
+{
+  "entryId": "w:have-no-idea",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "has no idea"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "no",
+      "idea"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "no",
+        "idea"
+      ],
+      [
+        "has",
+        "no",
+        "idea"
+      ],
+      [
+        "had",
+        "no",
+        "idea"
+      ],
+      [
+        "having",
+        "no",
+        "idea"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had no idea",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have no idea",
+  "senses": [
+    {
+      "senseId": "w:have-no-idea#s1",
+      "pos": "短语",
+      "glossZh": "完全不知道；一点儿也不清楚",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:idea#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:have-no-idea#e-dd8c08ce3b3f7b0f",
+          "text": "“I had no idea about what I’d find there and I wasn’t nervous, I just wanted to do it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-no-idea#e-7b27da4c7ee40e5e",
+          "text": "Halfway down the page you realize that you have no idea what you have read.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-no-idea#e-250105e5638e4fda",
+          "text": "The lab was full of complex instruments I had only ever seen in textbooks, and I had no idea how to use them.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 92
+          },
+          "parts": [
+            [
+              81,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,147 @@
+{
+  "entryId": "w:push-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "push",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "push",
+        "out"
+      ],
+      [
+        "pushed",
+        "out"
+      ],
+      [
+        "pushes",
+        "out"
+      ],
+      [
+        "pushing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pushing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "push out",
+  "senses": [
+    {
+      "senseId": "w:push-out#s1",
+      "pos": "短语",
+      "glossZh": "把……推出；挤出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:push-out#e-f3a4b7e7a96a601f",
+          "text": "Cuckoos are brood parasites – they lay eggs in other birds’ nests, often pushing out the hosts’ own eggs, to trick host birds into raising their chicks.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 84
+          },
+          "parts": [
+            [
+              73,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              84
+            ]
+          ]
+        }
+      ],
+      "note": "也可指把材料从模具挤压出来。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:push-out#s2",
+      "pos": "短语",
+      "glossZh": "排挤某人；迫使某人离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:push-out#s3",
+      "pos": "短语",
+      "glossZh": "把船推离岸边；划船离岸",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:push-out#s4",
+      "pos": "短语",
+      "glossZh": "推杆（九球开球后可选择的特殊击球）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

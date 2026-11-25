@@ -35,8 +35,8 @@
     "mock": 3558
   },
   "unassignedCounts": {
-    "gaokao": 366,
-    "mock": 3555
+    "gaokao": 381,
+    "mock": 3556
   },
   "senses": [
     {
@@ -417,259 +417,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:by#s9",
-      "pos": "短语",
-      "glossZh": "独自；自行",
-      "pronunciationId": "w:by#p-main",
-      "note": "by oneself",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-9ac28bad9a390d3e",
-          "text": "With no other kids of my age in the neighborhood, I had to spend hours by myself.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 73
-          }
-        },
-        {
-          "exampleId": "w:by#e-3ad703756d54da09",
-          "text": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 88,
-            "end": 90
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:by#s10",
-      "pos": "短语",
-      "glossZh": "凭记忆；熟记",
-      "pronunciationId": "w:by#p-main",
-      "note": "by heart",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-66dd67efc987ef55",
-          "text": "You may find yourself having to learn something by heart.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:by#s11",
-      "pos": "短语",
-      "glossZh": "偶然地；碰巧",
-      "pronunciationId": "w:by#p-main",
-      "note": "by chance",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
-    },
-    {
-      "senseId": "w:by#s12",
-      "pos": "短语",
-      "glossZh": "错误地；无意中",
-      "pronunciationId": "w:by#p-main",
-      "note": "by mistake",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-04427ed6545faa19",
-          "text": "He got on a train by mistake.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:by#s13",
-      "pos": "短语",
-      "glossZh": "顺便说一下",
-      "pronunciationId": "w:by#p-main",
-      "note": "by the way",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
-    },
-    {
-      "senseId": "w:by#s14",
-      "pos": "短语",
-      "glossZh": "并排；一起",
-      "pronunciationId": "w:by#p-main",
-      "note": "side by side",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-816346f358a7d9f2",
-          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 111
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:by#s15",
-      "pos": "短语",
-      "glossZh": "到现在；到这时",
-      "pronunciationId": "w:by#p-main",
-      "note": "by now",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-68f2d9e70efa082e",
-          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:by#s16",
-      "pos": "短语",
-      "glossZh": "相比之下",
-      "pronunciationId": "w:by#p-main",
-      "note": "by contrast",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:by#e-c5e43d044af91efb",
-          "text": "By contrast, the wealthy landowners, large companies and illegal loggers, in their pursuit of financial gain, have done huge damage.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -678,6 +425,60 @@
       "reason": "专名缩写或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bit-by-bit",
+    "w:by-accident",
+    "w:by-all-means",
+    "w:by-and-large",
+    "w:by-chance",
+    "w:by-contrast",
+    "w:by-design",
+    "w:by-extension",
+    "w:by-george",
+    "w:by-hand",
+    "w:by-heart",
+    "w:by-herself",
+    "w:by-himself",
+    "w:by-itself",
+    "w:by-mistake",
+    "w:by-myself",
+    "w:by-name",
+    "w:by-no-means",
+    "w:by-now",
+    "w:by-oneself",
+    "w:by-the-time",
+    "w:by-the-way",
+    "w:by-virtue-of-sth",
+    "w:by-way-of",
+    "w:close-by",
+    "w:come-by",
+    "w:day-by-day",
+    "w:drop-by",
+    "w:fly-by",
+    "w:get-by",
+    "w:get-by-with",
+    "w:go-by",
+    "w:judge-a-book-by-its-cover",
+    "w:lead-by-example",
+    "w:little-by-little",
+    "w:month-by-month",
+    "w:one-by-one",
+    "w:pale-by-comparison",
+    "w:pass-by",
+    "w:piece-by-piece",
+    "w:run-by",
+    "w:side-by-side",
+    "w:sit-by",
+    "w:slip-by-sb",
+    "w:stand-by",
+    "w:step-by-step",
+    "w:stop-by",
+    "w:swear-by",
+    "w:take-sth-by-storm",
+    "w:two-by-two"
+  ]
 }

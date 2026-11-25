@@ -372,6 +372,10 @@
       "reason": "历史计量用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:just-a-minute",
+    "w:last-minute"
+  ]
 }

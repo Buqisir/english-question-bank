@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 379
+    "mock": 183
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 49,
-        "mock": 0
+        "mock": 196
       },
       "folded": false,
       "examples": [
@@ -194,6 +194,11 @@
       "reason": "同形专名、俚语或行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:every-dog-has-its-day",
+    "w:hot-dog",
+    "w:walk-the-dog"
+  ]
 }

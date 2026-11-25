@@ -1,0 +1,156 @@
+{
+  "entryId": "w:as-well",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "well"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "well"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as well",
+  "senses": [
+    {
+      "senseId": "w:as-well#s1",
+      "pos": "短语",
+      "glossZh": "也；还",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s7",
+        "w:well#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-well#e-d3a38aced0e7007b",
+          "text": "He reports that his students are taking more care with their work, and their self-confidence has improved as well.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 113
+          },
+          "parts": [
+            [
+              106,
+              113
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              113
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-well#e-dacc468e4f620448",
+          "text": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 126
+          },
+          "parts": [
+            [
+              119,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              126
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-well#e-1a77495b47b990de",
+          "text": "The piece of bread in the pan had turned black as well.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 11
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          },
+          "parts": [
+            [
+              47,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "通常置于句末。",
+      "counts": {
+        "gaokao": 5,
+        "mock": 43
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

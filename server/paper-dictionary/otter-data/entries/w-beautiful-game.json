@@ -1,0 +1,135 @@
+{
+  "entryId": "w:beautiful-game",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beautiful",
+      "game"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "beautiful",
+        "game"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beautiful game",
+  "senses": [
+    {
+      "senseId": "w:beautiful-game#s1",
+      "pos": "短语",
+      "glossZh": "足球运动的美称",
+      "note": "通常用 the beautiful game。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:beautiful-game#e-4b885c410c03b477",
+          "text": "Yet for most of my life, I wasn’t into football – the “beautiful game” never held my attention.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 69
+          },
+          "parts": [
+            [
+              55,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:beautiful-game#e-73ca1ad322a7f287",
+          "text": "His family didn’t share his love of the beautiful game, so he seemed happy to chat with Ella.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 54
+          },
+          "parts": [
+            [
+              40,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:beautiful-game#s2",
+      "pos": "短语",
+      "glossZh": "冰球运动的美称（加拿大）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:family-man",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "family",
+      "man"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "family",
+        "man"
+      ],
+      [
+        "family",
+        "men"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "family man",
+  "senses": [
+    {
+      "senseId": "w:family-man#s1",
+      "pos": "短语",
+      "glossZh": "顾家的男人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:family-man#e-06d46ecd049fcb41",
+          "text": "Taking time for myself has made me happier, more relaxed, and a better family man.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 81
+          },
+          "parts": [
+            [
+              71,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

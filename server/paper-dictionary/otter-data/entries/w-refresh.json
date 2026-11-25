@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 34
+    "mock": 12
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -275,21 +275,79 @@
       ]
     },
     {
-      "senseId": "w:refresh#s5",
-      "pos": "短语",
-      "glossZh": "唤起某人的记忆",
+      "senseId": "w:refresh#s6",
+      "pos": "n.",
+      "glossZh": "更新；翻新",
       "pronunciationId": "w:refresh#p-main",
-      "note": "refresh sb’s memory。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-112e2661b398994b",
+          "text": "If it’s been a while, you might want to give it a refresh.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:refresh#s7",
+      "pos": "v.",
+      "glossZh": "更换为新鲜的",
+      "pronunciationId": "w:refresh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-2159c5ee93a653f1",
+          "text": "Refresh water and flower food regularly.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zj-qiangji-2026-mar:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:refresh-ones-memory"
+  ]
 }

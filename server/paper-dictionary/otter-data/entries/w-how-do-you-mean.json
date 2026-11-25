@@ -1,0 +1,94 @@
+{
+  "entryId": "w:how-do-you-mean",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "do",
+      "you",
+      "mean"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "do",
+        "you",
+        "mean"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how do you mean",
+  "senses": [
+    {
+      "senseId": "w:how-do-you-mean#s1",
+      "pos": "短语",
+      "glossZh": "你是什么意思？能说具体一点吗？",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:how-do-you-mean#e-e332a0e3d484654e",
+          "text": "“How do you mean?” I asked.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 16
+          },
+          "parts": [
+            [
+              1,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

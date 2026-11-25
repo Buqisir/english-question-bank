@@ -1,0 +1,60 @@
+{
+  "entryId": "w:ping-pong-phrase",
+  "kind": "phrase",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ping",
+      "pong"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ping",
+        "pong"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ping pong",
+  "senses": [
+    {
+      "senseId": "w:ping-pong-phrase#s1",
+      "pos": "短语",
+      "glossZh": "乒乓球运动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

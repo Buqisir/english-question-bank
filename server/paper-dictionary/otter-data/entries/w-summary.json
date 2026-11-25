@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 16
+    "mock": 1
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -176,40 +176,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:summary#s4",
-      "pos": "短语",
-      "glossZh": "总之",
-      "pronunciationId": "w:summary#p-main",
-      "note": "in summary。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:summary#e-dc8a2571019b1bb8",
-          "text": "In summary, classical music is a rich and diverse tradition that has evolved over centuries,",
-          "source": {
-            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
-            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
-            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
-            "locator": {
-              "paragraph": 28,
-              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:28",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 10
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -218,6 +184,11 @@
       "reason": "专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-summary"
+  ]
 }

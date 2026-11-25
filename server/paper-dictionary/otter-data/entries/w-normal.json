@@ -79,7 +79,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 62
+    "mock": 7
   },
   "senses": [
     {
@@ -90,7 +90,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -159,12 +159,25 @@
       "glossZh": "常态",
       "pronunciationId": "w:normal#p-main",
       "note": "如 return to normal。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 7
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:normal#s3",
+      "pos": "adj.",
+      "glossZh": "垂直于接触面的",
+      "pronunciationId": "w:normal#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -174,6 +187,9 @@
       "reason": "物理、数学或化学义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:new-normal"
+  ]
 }

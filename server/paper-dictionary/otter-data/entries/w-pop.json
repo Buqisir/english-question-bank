@@ -77,7 +77,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 47
+    "mock": 8
   },
   "senses": [
     {
@@ -88,7 +88,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -121,7 +121,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -366,7 +366,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -417,6 +417,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:pop#s10",
+      "pos": "v.",
+      "glossZh": "使爆裂；戳破",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-99a07b9dbad1950c",
+          "text": "I realized the beautiful bubble I had blown for her was bound to be mercilessly popped by scientific facts.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s11",
+      "pos": "adj.",
+      "glossZh": "大众流行的（尤指文化）",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-e38b5072186303d3",
+          "text": "The same could be said of Anne of Green Gables – except that it saw so many adaptations that it faded into the background of pop culture, almost invisible.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 128
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -433,6 +499,11 @@
       "reason": "大写专业缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:pop-in",
+    "w:pop-out",
+    "w:pop-up"
+  ]
 }

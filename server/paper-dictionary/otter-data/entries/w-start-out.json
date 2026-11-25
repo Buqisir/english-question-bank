@@ -1,0 +1,188 @@
+{
+  "entryId": "w:start-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "starting out"
+  ],
+  "pattern": {
+    "tokens": [
+      "start",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "start",
+        "out"
+      ],
+      [
+        "starting",
+        "out"
+      ],
+      [
+        "started",
+        "out"
+      ],
+      [
+        "starts",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "started out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "start out",
+  "senses": [
+    {
+      "senseId": "w:start-out#s1",
+      "pos": "短语",
+      "glossZh": "起步；开始某段经历或活动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:start#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:start-out#e-97c1bf44476d4098",
+          "text": "Farber, a graduate of Colorado State University, started out as a more conventional veterinarian.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 60
+          },
+          "parts": [
+            [
+              49,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:start-out#e-80424a34c4cff2ef",
+          "text": "With everything ready, Bernard started out on his new business.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 42
+          },
+          "parts": [
+            [
+              31,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:start-out#e-aae7c8dc03e2da4c",
+          "text": "If you’re just starting out",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "可用 start out as sb 或 start out on sth，说明起初的身份或所开始的事情。",
+      "counts": {
+        "gaokao": 9,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:start-out#s2",
+      "pos": "短语",
+      "glossZh": "出发；动身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

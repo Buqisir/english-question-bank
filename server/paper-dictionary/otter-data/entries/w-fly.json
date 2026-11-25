@@ -81,8 +81,8 @@
     "mock": 136
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 130
+    "gaokao": 4,
+    "mock": 20
   },
   "senses": [
     {
@@ -93,7 +93,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -164,7 +164,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -236,7 +236,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -262,40 +262,6 @@
       ]
     },
     {
-      "senseId": "w:fly#s4",
-      "pos": "短语",
-      "glossZh": "离开父母独立生活",
-      "pronunciationId": "w:fly#p-main",
-      "note": "fly the nest。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:fly#e-feec8f22b35c6534",
-          "text": "When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 58
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:fly#s5",
       "pos": "v.",
       "glossZh": "飞快移动",
@@ -303,7 +269,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -374,7 +340,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -439,7 +405,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -476,6 +442,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:fly#s10",
+      "pos": "n.",
+      "glossZh": "仿昆虫的钓饵",
+      "pronunciationId": "w:fly#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fly#e-32646ebaf0f4cc18",
+          "text": "But then Ben announced they would be fly fishing, something completely new to Alex.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 40
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -488,6 +487,17 @@
       "reason": "金融专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fly-at",
+    "w:fly-by",
+    "w:fly-in",
+    "w:fly-in-the-face-of",
+    "w:fly-off",
+    "w:fly-the-nest",
+    "w:on-the-fly"
+  ]
 }

@@ -1,0 +1,382 @@
+{
+  "entryId": "w:ahead-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ahead",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ahead",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ahead of",
+  "senses": [
+    {
+      "senseId": "w:ahead-of#s1",
+      "pos": "短语",
+      "glossZh": "在……前面；在……前方",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ahead-of#e-0e3c8ca4abb017f1",
+          "text": "They will be moving on the track ahead of the train, and programmed to run autonomously.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-b56d994be38b4349",
+          "text": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 90
+          },
+          "parts": [
+            [
+              82,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-e6e1b75d59a78370",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ahead-of#s2",
+      "pos": "短语",
+      "glossZh": "领先于；超出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ahead-of#e-9ccfadd674a31638",
+          "text": "“I am ahead of my time.” If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          },
+          "parts": [
+            [
+              6,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-1e8da9f748c4b845",
+          "text": "Although popular beliefs regarding emotional intelligence run far ahead of what research can reasonably support, the overall effects of the publicity have been more beneficial than harmful.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 74
+          },
+          "parts": [
+            [
+              66,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-4ad280e6663d2614",
+          "text": "The Lions were ahead of us, 24 - 14, and the game would end at 25.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-168",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          },
+          "parts": [
+            [
+              15,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:ahead-of#s3",
+      "pos": "短语",
+      "glossZh": "早于……；在……之前",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ahead-of#e-8afd2ac86aad649e",
+          "text": "The country has met its 2030 goals for forest growth and solar and wind power capacity years ahead of schedule.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 101
+          },
+          "parts": [
+            [
+              93,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-7afe29a833966265",
+          "text": "However, if you wish to book your tickets well ahead of time, go to the booking page of Golden Pass Express: https://www.gpx.swiss/en/.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          },
+          "parts": [
+            [
+              47,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ahead-of#e-72caed191d95efd8",
+          "text": "The Artemis moon base will be built ahead of schedule.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:23#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          },
+          "parts": [
+            [
+              36,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "如 ahead of schedule（提前于预定进度）。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:ahead-of#s4",
+      "pos": "短语",
+      "glossZh": "（未来的路程、经历等）还有待某人经历",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 have a long journey ahead of you。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

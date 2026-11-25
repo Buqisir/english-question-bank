@@ -1,0 +1,72 @@
+{
+  "entryId": "w:sit-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting by"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "by"
+      ],
+      [
+        "sitting",
+        "by"
+      ],
+      [
+        "sat",
+        "by"
+      ],
+      [
+        "sits",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit by",
+  "senses": [
+    {
+      "senseId": "w:sit-by#s1",
+      "pos": "短语",
+      "glossZh": "袖手旁观；坐视不管",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

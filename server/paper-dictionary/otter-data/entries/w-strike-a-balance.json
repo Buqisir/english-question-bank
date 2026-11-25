@@ -1,0 +1,63 @@
+{
+  "entryId": "w:strike-a-balance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strike",
+      "a",
+      "balance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        "a",
+        "balance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike a balance",
+  "senses": [
+    {
+      "senseId": "w:strike-a-balance#s1",
+      "pos": "短语",
+      "glossZh": "在不同需求或目标之间取得平衡",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:strike#s13"
+      ],
+      "examples": [],
+      "note": "常用 strike a balance between A and B。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

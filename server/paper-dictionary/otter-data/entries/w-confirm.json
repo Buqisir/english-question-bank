@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 108
+    "mock": 18
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 73
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -211,13 +211,47 @@
       "pos": "v.",
       "glossZh": "加强；使更加坚定（信念等）",
       "pronunciationId": "w:confirm#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:confirm#s4",
+      "pos": "adj.",
+      "glossZh": "（信念或立场）坚定的",
+      "pronunciationId": "w:confirm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:confirm#e-703a636dafc6acfa",
+          "text": "Nelly Voskuijl was a confirmed Nazi sympathizer.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:25",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -226,6 +260,6 @@
       "reason": "宗教专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

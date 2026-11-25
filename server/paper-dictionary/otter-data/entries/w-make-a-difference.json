@@ -1,0 +1,190 @@
+{
+  "entryId": "w:make-a-difference",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes a difference",
+    "making a difference"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "a",
+      "difference"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "a",
+        "difference"
+      ],
+      [
+        "makes",
+        "a",
+        "difference"
+      ],
+      [
+        "making",
+        "a",
+        "difference"
+      ],
+      [
+        "made",
+        "a",
+        "difference"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make a difference",
+  "senses": [
+    {
+      "senseId": "w:make-a-difference#s1",
+      "pos": "短语",
+      "glossZh": "产生实际影响；起作用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:difference#s2",
+        "w:make#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-a-difference#e-ebcc65cc59c6b480",
+          "text": "“Just five more minutes outdoors can make a difference,” David Bond says.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 54
+          },
+          "parts": [
+            [
+              37,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-a-difference#e-be1a0eae6c6f97f8",
+          "text": "But does one plastic straw or cup really make a difference?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 58
+          },
+          "parts": [
+            [
+              41,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-a-difference#e-ce4a9044aad232dd",
+          "text": "Art can make a difference.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 25
+          },
+          "parts": [
+            [
+              8,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:make-a-difference#s2",
+      "pos": "短语",
+      "glossZh": "要紧；关系到结果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 it makes a difference whether …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

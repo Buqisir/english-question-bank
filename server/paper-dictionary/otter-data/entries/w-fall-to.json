@@ -1,0 +1,122 @@
+{
+  "entryId": "w:fall-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell to"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "to"
+      ],
+      [
+        "fell",
+        "to"
+      ],
+      [
+        "fallen",
+        "to"
+      ],
+      [
+        "falling",
+        "to"
+      ],
+      [
+        "falls",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall to",
+  "senses": [
+    {
+      "senseId": "w:fall-to#s1",
+      "pos": "短语",
+      "glossZh": "（任务、责任等）落到某人头上；由某人承担",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-to#e-fa31b7d5440d92e2",
+          "text": "Consequently, the central role in bridging this gap must fall to our schools.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:fall-to#s2",
+      "pos": "短语",
+      "glossZh": "开始动手干起来；开始吃起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,495 @@
+{
+  "entryId": "w:go-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going over",
+    "went over"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "over"
+      ],
+      [
+        "going",
+        "over"
+      ],
+      [
+        "went",
+        "over"
+      ],
+      [
+        "goes",
+        "over"
+      ],
+      [
+        "gone",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go over",
+  "senses": [
+    {
+      "senseId": "w:go-over#s1",
+      "pos": "短语",
+      "glossZh": "超过（限额、限速等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s31"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-over#e-c79a6b55eae0381a",
+          "text": "She went over the speed limit.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 13
+          },
+          "parts": [
+            [
+              4,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-b3c1813026d51a17",
+          "text": "He went over budget.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          },
+          "parts": [
+            [
+              3,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-over#s2",
+      "pos": "短语",
+      "glossZh": "走过去；到另一处去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-over#e-b76b7f89c5b17c5f",
+          "text": "She went over and sat down on the top of the closed lid（罐盖）.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          },
+          "parts": [
+            [
+              4,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-35bc34a85ffc9c61",
+          "text": "Curious, she went over to ask what he was doing.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-51083d563076645c",
+          "text": "Worried, she went over.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:go-over#s3",
+      "pos": "短语",
+      "glossZh": "仔细查看；检查或复习一遍",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-over#e-a635d35523367214",
+          "text": "Then, offer to go over it with him one more time before the big day.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          },
+          "parts": [
+            [
+              15,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-8edf2f110193fb2b",
+          "text": "Go over the history of art.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-c59ef4672219e486",
+          "text": "Go over his lessons.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-over#s4",
+      "pos": "短语",
+      "glossZh": "逐项讲解；详细讨论",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-over#e-30e776ee5c86221d",
+          "text": "I listened carefully as he went over expected and unexpected situations, including what to do if the parachute（降落伞）didn’t open.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2026-09-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测英语",
+            "groupId": "group:paper-mock-hubei-five-cities-2026-09-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2026-09-first-quality-monitoring:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-86bfa8cca11d285f",
+          "text": "I listened carefully as he went over expected and unexpected situations, including what to do if the parachute (降落伞) didn’t open.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-over#e-a7dc78f49639f505",
+          "text": "I went over every keystroke, breaking complex steps into simple ones.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-over#s5",
+      "pos": "短语",
+      "glossZh": "引起某种反响；受到某种评价",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 go over well 或 go over badly。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-over#s6",
+      "pos": "短语",
+      "glossZh": "转到另一方；倒向另一阵营",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 go over to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,119 @@
+{
+  "entryId": "w:look-on-the-bright-side",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking on the bright side"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "on",
+      "the",
+      "bright",
+      "side"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "on",
+        "the",
+        "bright",
+        "side"
+      ],
+      [
+        "looking",
+        "on",
+        "the",
+        "bright",
+        "side"
+      ],
+      [
+        "looked",
+        "on",
+        "the",
+        "bright",
+        "side"
+      ],
+      [
+        "looks",
+        "on",
+        "the",
+        "bright",
+        "side"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look on the bright side",
+  "senses": [
+    {
+      "senseId": "w:look-on-the-bright-side#s1",
+      "pos": "短语",
+      "glossZh": "往好处想；看到不利处境中有利的一面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-on-the-bright-side#e-59bb41675c5e553a",
+          "text": "While looking on the bright side is generally seen as a virtue, new research suggests that “toxic positivity” might actually harm our mental health.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 32
+          },
+          "parts": [
+            [
+              6,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

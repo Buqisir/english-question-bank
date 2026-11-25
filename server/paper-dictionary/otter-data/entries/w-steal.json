@@ -69,7 +69,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 36
+    "mock": 6
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -220,12 +220,12 @@
       "glossZh": "悄悄移动",
       "pronunciationId": "w:steal#p-main",
       "note": "常见 steal away。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -241,74 +241,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:steal#s5",
-      "pos": "短语",
-      "glossZh": "偷偷瞥一眼",
-      "pronunciationId": "w:steal#p-main",
-      "note": "steal a glance。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:steal#e-f9c06a333ae15d4d",
-          "text": "He even stole a quick glance at Ella as if they had known each other.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
-            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:steal#s6",
-      "pos": "短语",
-      "glossZh": "抢尽风头",
-      "pronunciationId": "w:steal#p-main",
-      "note": "steal the spotlight。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:steal#e-1a590cc147fa19e0",
-          "text": "While bioluminescence – the ability of living things to produce their own light – has long interested scientists, a lesser-known phenomenon called bio-fluorescence (生物荧光) is now stealing the spotlight.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
-            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
-            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 178,
-            "end": 186
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -317,6 +249,12 @@
       "reason": "运动或技术专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:steal-a-glance",
+    "w:steal-the-spotlight"
+  ]
 }

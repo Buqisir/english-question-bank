@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 120
+    "mock": 3
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 43
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -241,7 +241,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -284,20 +284,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:dark#s5",
-      "pos": "短语",
-      "glossZh": "蒙在鼓里；不知情",
-      "pronunciationId": "w:dark#p-main",
-      "note": "in the dark，须与字面的「在黑暗中」区分。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -306,6 +292,13 @@
       "reason": "行业用法、旧义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:after-dark",
+    "w:in-the-dark",
+    "w:shot-in-the-dark"
+  ]
 }

@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 123
+    "mock": 6
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 88
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -178,6 +178,6 @@
       "reason": "游戏专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

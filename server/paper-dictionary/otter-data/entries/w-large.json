@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 39,
-    "mock": 359
+    "mock": 161
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 174
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -205,40 +205,12 @@
       "pos": "n.",
       "glossZh": "大号",
       "pronunciationId": "w:large#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:large#s4",
-      "pos": "短语",
-      "glossZh": "大体上",
-      "pronunciationId": "w:large#p-main",
-      "note": "by and large。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:large#s5",
-      "pos": "短语",
-      "glossZh": "尚未被捕",
-      "pronunciationId": "w:large#p-main",
-      "note": "at large。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -248,6 +220,12 @@
       "reason": "罕见或专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-large",
+    "w:by-and-large"
+  ]
 }

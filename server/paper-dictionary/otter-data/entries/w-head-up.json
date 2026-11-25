@@ -1,0 +1,99 @@
+{
+  "entryId": "w:head-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "head",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "head",
+        "up"
+      ],
+      [
+        "headed",
+        "up"
+      ],
+      [
+        "heading",
+        "up"
+      ],
+      [
+        "heads",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "head up",
+  "senses": [
+    {
+      "senseId": "w:head-up#s1",
+      "pos": "短语",
+      "glossZh": "领导；负责某个团队或项目",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "head up sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:head-up#s2",
+      "pos": "短语",
+      "glossZh": "给桶装上顶盖",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "制桶用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:head-up#s3",
+      "pos": "短语",
+      "glossZh": "使船头转向来风方向",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "航海用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

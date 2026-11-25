@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 297
+    "mock": 98
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 167
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -188,7 +188,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -271,6 +271,6 @@
       "reason": "技术用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -59,8 +59,8 @@
     "mock": 317
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 317
+    "gaokao": 8,
+    "mock": 124
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -194,7 +194,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -265,7 +265,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -336,7 +336,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -400,50 +400,16 @@
       ]
     },
     {
-      "senseId": "w:view#s6",
-      "pos": "短语",
-      "glossZh": "展出",
-      "pronunciationId": "w:view#p-main",
-      "note": "on view。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:view#e-2dc909b8c459cdbe",
-          "text": "It will be on view through Tuesday, May 31.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:view#s7",
       "pos": "n.",
       "glossZh": "观看次数",
       "pronunciationId": "w:view#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -457,6 +423,12 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-view",
+    "w:point-of-view"
+  ]
 }

@@ -1,0 +1,96 @@
+{
+  "entryId": "w:at-a-loose-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "a",
+      "loose",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "a",
+        "loose",
+        "end"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at a loose end",
+  "senses": [
+    {
+      "senseId": "w:at-a-loose-end#s1",
+      "pos": "短语",
+      "glossZh": "无事可做；一时不知道该做什么",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:loose#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-a-loose-end#e-85b3e176fa402675",
+          "text": "She says she found herself asking: “How do I fit back into the life I had before when I feel so different?” So it’s hardly surprising that once it’s over, many exchange students feel at a loose end.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n085:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 183,
+            "end": 197
+          },
+          "parts": [
+            [
+              183,
+              197
+            ]
+          ],
+          "highlightRanges": [
+            [
+              183,
+              197
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

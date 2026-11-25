@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 484
+    "mock": 286
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 48,
-        "mock": 0
+        "mock": 119
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -295,7 +295,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -397,6 +397,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:tell#s8",
+      "pos": "adj.",
+      "glossZh": "能说明问题的；揭示实情的",
+      "pronunciationId": "w:tell#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tell#e-5dbbba1f0d66402e",
+          "text": "“I’ve observed something telling,” he said, glancing at their chosen cups.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:tell#e-a23a077ec8c113f6",
+          "text": "In Shakespeare’s The Winter’s Tale, he announced the emergence of the daffodil (水仙花) as the telling sign that we had reached “the sweet o’ the year,” that the winds of March’s beauty had arrived, and that a brighter season had begun.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 99
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -405,6 +457,13 @@
       "reason": "专业义、历史义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:i-tell-you",
+    "w:ill-tell-you-what",
+    "w:tell-of",
+    "w:tell-you-what",
+    "w:you-tell-me"
+  ]
 }

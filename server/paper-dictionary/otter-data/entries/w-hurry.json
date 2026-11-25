@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 57
+    "mock": 4
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -221,6 +221,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:hurry#s4",
+      "pos": "adj.",
+      "glossZh": "匆忙的；仓促完成的（hurried）",
+      "pronunciationId": "w:hurry#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hurry#e-fbfc7f41a808a6a5",
+          "text": "These small changes turn reading from a hurried chore into a calming, rewarding activity.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -229,6 +262,9 @@
       "reason": "行业或体育专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:hurry-up"
+  ]
 }

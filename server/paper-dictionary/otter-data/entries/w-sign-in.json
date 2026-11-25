@@ -1,0 +1,158 @@
+{
+  "entryId": "w:sign-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "signs in"
+  ],
+  "pattern": {
+    "tokens": [
+      "sign",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sign",
+        "in"
+      ],
+      [
+        "signs",
+        "in"
+      ],
+      [
+        "signed",
+        "in"
+      ],
+      [
+        "signing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "signed in",
+      "tags": []
+    },
+    {
+      "form": "signing in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sign in",
+  "senses": [
+    {
+      "senseId": "w:sign-in#s1",
+      "pos": "短语",
+      "glossZh": "签到；登记到场",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sign-in#e-a2dfaafc0553736e",
+          "text": "“Well, there were five signed in.” So I went straight out and called the first name.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sign-in#e-b61fbaa3883590bd",
+          "text": "By signing in on arrival.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:sign-in#s2",
+      "pos": "短语",
+      "glossZh": "登录（网站、系统或账户）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

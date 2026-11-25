@@ -1,0 +1,97 @@
+{
+  "entryId": "w:pack-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pack",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pack",
+        "in"
+      ],
+      [
+        "packed",
+        "in"
+      ],
+      [
+        "packing",
+        "in"
+      ],
+      [
+        "packs",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pack sth in",
+  "senses": [
+    {
+      "senseId": "w:pack-in#s1",
+      "pos": "短语",
+      "glossZh": "不再继续；放弃正在做的事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常说 pack it in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pack-in#s2",
+      "pos": "短语",
+      "glossZh": "在有限篇幅或时间内塞进大量内容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pack-in#s3",
+      "pos": "短语",
+      "glossZh": "把物资背运进营地等地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,170 @@
+{
+  "entryId": "w:talk-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "talking through"
+  ],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "through"
+      ],
+      [
+        "talking",
+        "through"
+      ],
+      [
+        "talked",
+        "through"
+      ],
+      [
+        "talks",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "talk through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk (sb) through sth",
+  "senses": [
+    {
+      "senseId": "w:talk-through#s1",
+      "pos": "短语",
+      "glossZh": "充分讨论；通过交谈把问题理清楚",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:talk#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:talk-through#e-e07d0c64fafa6c86",
+          "text": "“There are so many things in parenting that are good to talk through, but I’m not convinced that food is one of them,” she says.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 68
+          },
+          "parts": [
+            [
+              56,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:talk-through#e-839a53af36c5637e",
+          "text": "“My therapist was an excellent listener and could tell when I was in a place to hear a suggestion or insight and when I clearly just needed to keep talking through it,” said Jack, a Talkspace tester, who’d recently lost a loved one.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 148,
+            "end": 163
+          },
+          "parts": [
+            [
+              148,
+              163
+            ]
+          ],
+          "highlightRanges": [
+            [
+              148,
+              163
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:talk-through#s2",
+      "pos": "短语",
+      "glossZh": "逐步给某人讲解；口头指导某人完成",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 talk sb through sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:talk-through#s3",
+      "pos": "短语",
+      "glossZh": "通过交谈帮助某人理清或度过难关",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 talk sb through sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

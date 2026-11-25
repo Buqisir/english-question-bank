@@ -1,0 +1,164 @@
+{
+  "entryId": "w:get-along-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "along",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "along",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get along with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get along with sb",
+  "senses": [
+    {
+      "senseId": "w:get-along-with#s1",
+      "pos": "短语",
+      "glossZh": "与某人相处；与某人合得来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:along#s4",
+        "w:with#s35"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-along-with#e-5665640d992899ef",
+          "text": "He doesn’t get along with the host family.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 25
+          },
+          "parts": [
+            [
+              11,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-along-with#e-109e88e8eff549ed",
+          "text": "He’s difficult to get along with.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 32
+          },
+          "parts": [
+            [
+              18,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-along-with#e-c388bc974f25b9c2",
+          "text": "However, Rose was difficult to get along with.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 45
+          },
+          "parts": [
+            [
+              31,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

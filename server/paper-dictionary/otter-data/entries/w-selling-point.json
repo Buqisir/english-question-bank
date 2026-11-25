@@ -1,0 +1,125 @@
+{
+  "entryId": "w:selling-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "selling",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "selling",
+        "point"
+      ],
+      [
+        "selling",
+        "points"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "selling point",
+  "senses": [
+    {
+      "senseId": "w:selling-point#s1",
+      "pos": "短语",
+      "glossZh": "卖点；吸引顾客的特点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:selling-point#e-9214858d00973301",
+          "text": "Which feature is a key selling point of the product?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 36
+          },
+          "parts": [
+            [
+              23,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:selling-point#e-97170262dc5324b1",
+          "text": "What is a selling point of the lamp?",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 23
+          },
+          "parts": [
+            [
+              10,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

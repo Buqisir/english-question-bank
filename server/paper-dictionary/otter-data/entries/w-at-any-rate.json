@@ -1,0 +1,95 @@
+{
+  "entryId": "w:at-any-rate",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "any",
+      "rate"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "any",
+        "rate"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at any rate",
+  "senses": [
+    {
+      "senseId": "w:at-any-rate#s1",
+      "pos": "短语",
+      "glossZh": "无论如何",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rate#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-any-rate#e-edfad94b524c1c47",
+          "text": "at any rate",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "question": 45,
+              "questionId": "question:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:45#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

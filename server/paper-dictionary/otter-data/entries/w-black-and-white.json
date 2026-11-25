@@ -1,0 +1,165 @@
+{
+  "entryId": "w:black-and-white",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "black",
+      "and",
+      "white"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "black",
+        "and",
+        "white"
+      ],
+      [
+        "black",
+        "and",
+        "whites"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "black and white",
+  "senses": [
+    {
+      "senseId": "w:black-and-white#s1",
+      "pos": "短语",
+      "glossZh": "黑白的；无彩色的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:black-and-white#e-4fbdef4b8c3c5a54",
+          "text": "From black and white strips to illustrated graphic novels, this transformation has come a long way.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 20
+          },
+          "parts": [
+            [
+              5,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              20
+            ]
+          ]
+        }
+      ],
+      "note": "指照片、影片、漫画等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:black-and-white#s2",
+      "pos": "短语",
+      "glossZh": "非黑即白的；无中间余地的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:black-and-white#s3",
+      "pos": "短语",
+      "glossZh": "黑白配色的巡逻警车",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美国俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:black-and-white#s4",
+      "pos": "短语",
+      "glossZh": "警察；警察制服",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美国俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:black-and-white#s5",
+      "pos": "短语",
+      "glossZh": "一半白糖霜、一半巧克力糖霜的大圆饼干",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:black-and-white#s6",
+      "pos": "短语",
+      "glossZh": "巧克力香草冰淇淋汽水",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

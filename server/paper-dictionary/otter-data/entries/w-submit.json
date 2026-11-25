@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 104
+    "mock": 8
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 96
       },
       "folded": false,
       "examples": [
@@ -169,6 +169,6 @@
       "reason": "格斗专义或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

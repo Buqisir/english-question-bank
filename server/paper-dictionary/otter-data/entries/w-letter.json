@@ -42,8 +42,8 @@
     "mock": 148
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 147
+    "gaokao": 2,
+    "mock": 9
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 108
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 31
       },
       "folded": false,
       "examples": [
@@ -189,40 +189,6 @@
       ]
     },
     {
-      "senseId": "w:letter#s3",
-      "pos": "短语",
-      "glossZh": "邮递员",
-      "pronunciationId": "w:letter#p-main",
-      "note": "letter carrier，美式用法。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:letter#e-45c9d06a37df9318",
-          "text": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 122,
-            "end": 128
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:letter#s4",
       "pos": "n.",
       "glossZh": "字面含义",
@@ -246,6 +212,8 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

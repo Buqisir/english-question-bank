@@ -1,0 +1,94 @@
+{
+  "entryId": "w:up-for-grabs",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "for",
+      "grabs"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "for",
+        "grabs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up for grabs",
+  "senses": [
+    {
+      "senseId": "w:up-for-grabs#s1",
+      "pos": "短语",
+      "glossZh": "（职位、奖品等）可供争取",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:grab#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:up-for-grabs#e-7566980fc29fc641",
+          "text": "Volunteer Positions up for Grabs",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

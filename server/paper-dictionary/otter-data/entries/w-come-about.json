@@ -1,0 +1,165 @@
+{
+  "entryId": "w:come-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came about"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "about"
+      ],
+      [
+        "came",
+        "about"
+      ],
+      [
+        "comes",
+        "about"
+      ],
+      [
+        "coming",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come about",
+  "senses": [
+    {
+      "senseId": "w:come-about#s1",
+      "pos": "短语",
+      "glossZh": "发生；产生；形成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:about#s7",
+        "w:come#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-about#e-d2602b575abb079a",
+          "text": "How did the national park system come about?",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-about#e-c6fa4a198efe89f1",
+          "text": "It feels like this change has come about gradually, and been accompanied by challenges like loneliness, and a breakdown of our community ties – and I can’t help but think they must be connected.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          },
+          "parts": [
+            [
+              30,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-about#s2",
+      "pos": "短语",
+      "glossZh": "（帆船）迎风换舷",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:come-about#s3",
+      "pos": "短语",
+      "glossZh": "（风）转向",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较少见。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

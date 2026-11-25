@@ -1,0 +1,355 @@
+{
+  "entryId": "w:come-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "comes together",
+    "coming together"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "together"
+      ],
+      [
+        "comes",
+        "together"
+      ],
+      [
+        "coming",
+        "together"
+      ],
+      [
+        "came",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "came together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come together",
+  "senses": [
+    {
+      "senseId": "w:come-together#s1",
+      "pos": "短语",
+      "glossZh": "聚集；汇合",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-together#e-87afcecbd6d36d69",
+          "text": "The mud, sand, gravel (砾石), and cobbles they release are washed into streams, which come together to form rivers.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 97
+          },
+          "parts": [
+            [
+              84,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-together#e-3a2357beaaa4cd9b",
+          "text": "“The more we can keep improving public space, the more we can make our cities better places for people to come together.”",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 119
+          },
+          "parts": [
+            [
+              106,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              119
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-together#e-deae86462bdc6775",
+          "text": "Parsons observed: “People come together to meet friends, to gather with family.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:grammar-fill:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 39
+          },
+          "parts": [
+            [
+              26,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:come-together#s2",
+      "pos": "短语",
+      "glossZh": "联合起来；携手合作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-together#e-4185ab9f943d9fba",
+          "text": "Endless possibilities will unfold when distinct fields of science – ultrasound technology, materials science and environmental engineering – come together.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 154
+          },
+          "parts": [
+            [
+              141,
+              154
+            ]
+          ],
+          "highlightRanges": [
+            [
+              141,
+              154
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-together#e-f433b0971737201e",
+          "text": "This project began five years ago, when the local magazine asked if anyone was interested in coming together as volunteers to make their village become more sustainable and environmentally friendly.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 108
+          },
+          "parts": [
+            [
+              93,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:come-together#s3",
+      "pos": "短语",
+      "glossZh": "各部分配合起来；顺利成形",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-together#e-5759fed86e89d4e9",
+          "text": "Occasionally, everything comes together and we produce a few seconds of surprising beauty.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 39
+          },
+          "parts": [
+            [
+              25,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-together#e-afecf5b15541267e",
+          "text": "“So when you finish and finally see it come together, it’s a wonderful feeling.”",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-b:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 52
+          },
+          "parts": [
+            [
+              39,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-together#e-633ccbf1cbb2460b",
+          "text": "Could their recall come together",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-c:20",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 32
+          },
+          "parts": [
+            [
+              19,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

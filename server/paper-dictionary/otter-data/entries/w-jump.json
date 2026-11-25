@@ -62,8 +62,8 @@
     "mock": 125
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 118
+    "gaokao": 4,
+    "mock": 27
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -265,12 +265,12 @@
       "pos": "v.",
       "glossZh": "骤增",
       "pronunciationId": "w:jump#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 14
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -281,7 +281,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -314,7 +314,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -347,7 +347,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -399,7 +399,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -425,69 +425,125 @@
       ]
     },
     {
-      "senseId": "w:jump#s9",
+      "senseId": "w:jump#s11",
       "pos": "短语",
-      "glossZh": "跟风",
+      "glossZh": "欣然抓住机会（jump at the chance）",
       "pronunciationId": "w:jump#p-main",
-      "note": "jump on the bandwagon。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:jump#s12",
+      "pos": "短语",
+      "glossZh": "仓促下结论（jump to conclusions）",
+      "pronunciationId": "w:jump#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:jump#s13",
+      "pos": "v.",
+      "glossZh": "突然浮现于（脑海）",
+      "pronunciationId": "w:jump#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:jump#s14",
+      "pos": "n.",
+      "glossZh": "（滑雪等运动的）起跳坡台",
+      "pronunciationId": "w:jump#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:jump#e-5bf8eaf4efd7fd90",
-          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
+          "exampleId": "w:jump#e-b428207cc9b62b50",
+          "text": "Going strong for five years now, the dads train in freestyle skiing, which essentially turns a mountain into a skate park: large-scale jumps, boxes and other obstacles.",
           "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
-              "sentence": 3
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:4",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 114,
-            "end": 118
+            "start": 135,
+            "end": 140
           }
         }
       ]
     },
     {
-      "senseId": "w:jump#s10",
-      "pos": "短语",
-      "glossZh": "折叠式辅助座椅",
+      "senseId": "w:jump#s15",
+      "pos": "v.",
+      "glossZh": "马上着手；迅速投入",
       "pronunciationId": "w:jump#p-main",
-      "note": "jump seat。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 3
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:jump#e-ffb41fa8d131c243",
-          "text": "And just like every day before, he got into the jump seat and they were off.",
+          "exampleId": "w:jump#e-e9db90e0869e1a4c",
+          "text": "Robb suggested they should start by talking to their teens about AI companions without judgment and listening patiently to learn what was appealing about these tools before jumping into concerns; then, it’s a good idea to point out that “AI companions are programmed to be agreeable” and discuss why that’s a concern.",
           "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
-              "sentence": 4
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:5",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 48,
-            "end": 52
+            "start": 173,
+            "end": 180
+          }
+        },
+        {
+          "exampleId": "w:jump#e-0a58e849e4861981",
+          "text": "She ignored my fear, and we jumped into strict workouts and nutrition planning.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:writing-continuation:5",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
           }
         }
       ]
@@ -499,6 +555,19 @@
       "reason": "行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:jump-at",
+    "w:jump-at-the-chance",
+    "w:jump-in",
+    "w:jump-into-action",
+    "w:jump-on",
+    "w:jump-on-the-bandwagon",
+    "w:jump-out",
+    "w:jump-to",
+    "w:jump-up"
+  ]
 }

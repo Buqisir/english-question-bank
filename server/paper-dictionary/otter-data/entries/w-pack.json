@@ -59,8 +59,8 @@
     "mock": 124
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 118
+    "gaokao": 5,
+    "mock": 7
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -389,7 +389,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -413,40 +413,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:pack#s7",
-      "pos": "短语",
-      "glossZh": "放弃；不再做",
-      "pronunciationId": "w:pack#p-main",
-      "note": "pack it in。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pack#e-0dec0ecf5e1765e1",
-          "text": "There were times when I found myself wondering if I should pack it all in, but the boy’s words kept ringing in my ears.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 59,
-            "end": 63
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -455,6 +421,13 @@
       "reason": "语境不足"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:pack-in",
+    "w:pack-it-in",
+    "w:pack-up"
+  ]
 }

@@ -62,8 +62,8 @@
     "mock": 394
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 393
+    "gaokao": 7,
+    "mock": 209
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 33,
-        "mock": 0
+        "mock": 87
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -392,7 +392,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -413,59 +413,6 @@
           "target": {
             "start": 5,
             "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:stop#s7",
-      "pos": "短语",
-      "glossZh": "顺路拜访",
-      "pronunciationId": "w:stop#p-main",
-      "note": "stop by。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:stop#e-bc7030540d8123f8",
-          "text": "As he often did, he stopped by the “after work auction(拍卖)” __43__ by the Italian police where things __44__ on the trains were sold to the highest bidder.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:stop#e-42284746d560224f",
-          "text": "Then Ms. Lee, our science teacher, stopped by my desk.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 35,
-            "end": 42
           }
         }
       ]
@@ -496,6 +443,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:stop#s10",
+      "pos": "n.",
+      "glossZh": "停止；停下",
+      "pronunciationId": "w:stop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stop#e-51d3fa1ce5a29e28",
+          "text": "While companies advocate using nodule-collecting robots, 437 scientists from 44 countries demand an immediate stop.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:stop#e-17596171047e1dbf",
+          "text": "Then I saw a car slowing to a stop.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -504,6 +503,16 @@
       "reason": "乐器、摄影或物理专义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:call-a-stop-to",
+    "w:stop-by",
+    "w:stop-in",
+    "w:stop-in-its-tracks",
+    "w:stop-it",
+    "w:stop-short"
+  ]
 }

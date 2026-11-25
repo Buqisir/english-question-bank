@@ -1,0 +1,111 @@
+{
+  "entryId": "w:run-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "running with"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "with"
+      ],
+      [
+        "running",
+        "with"
+      ],
+      [
+        "ran",
+        "with"
+      ],
+      [
+        "runs",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:run-with#s1",
+      "pos": "短语",
+      "glossZh": "接过一个想法或计划并继续推进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-with#s2",
+      "pos": "短语",
+      "glossZh": "抓住未经证实的消息大肆发挥或传播",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-with#s3",
+      "pos": "短语",
+      "glossZh": "与某些人来往；跟某伙人混在一起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-with#s4",
+      "pos": "短语",
+      "glossZh": "（某处）流淌着汗水、血等液体",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

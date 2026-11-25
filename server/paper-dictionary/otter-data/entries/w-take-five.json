@@ -1,0 +1,76 @@
+{
+  "entryId": "w:take-five",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took five"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "five"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "five"
+      ],
+      [
+        "took",
+        "five"
+      ],
+      [
+        "taken",
+        "five"
+      ],
+      [
+        "takes",
+        "five"
+      ],
+      [
+        "taking",
+        "five"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take five",
+  "senses": [
+    {
+      "senseId": "w:take-five#s1",
+      "pos": "短语",
+      "glossZh": "休息片刻（通常约五分钟）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

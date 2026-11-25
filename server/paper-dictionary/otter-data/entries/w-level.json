@@ -98,7 +98,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 263
+    "mock": 69
   },
   "senses": [
     {
@@ -109,7 +109,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -180,7 +180,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -265,7 +265,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -399,12 +399,12 @@
       "pos": "adj.",
       "glossZh": "平坦的",
       "pronunciationId": "w:level#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -458,78 +458,43 @@
       "pos": "v.",
       "glossZh": "夷平",
       "pronunciationId": "w:level#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:level#s11",
-      "pos": "短语",
-      "glossZh": "创造公平的竞争条件",
+      "senseId": "w:level#s13",
+      "pos": "v.",
+      "glossZh": "消除差距；使平等",
       "pronunciationId": "w:level#p-main",
-      "note": "level the playing field。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:level#e-ff57acf2583f6a63",
-          "text": "“It’s just leveling the playing field,” said Shinbane.",
+          "exampleId": "w:level#e-9529dbb94526c0b0",
+          "text": "The physical trail was steep, but the human impulse（冲动）to connect, to stay beside someone in difficulty, was a powerful, leveling force.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:cloze",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:7",
-              "sentence": 1
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:cloze:4",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 11,
-            "end": 19
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:level#s12",
-      "pos": "短语",
-      "glossZh": "升到下一级",
-      "pronunciationId": "w:level#p-main",
-      "note": "level up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:level#e-12b39a014c1e3fa0",
-          "text": "What can users get by leveling up in Workshop mode?",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-a",
-            "locator": {
-              "question": 22,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-05-ninth:22",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 30
+            "start": 121,
+            "end": 129
           }
         }
       ]
@@ -541,6 +506,12 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:level-the-playing-field",
+    "w:level-up"
+  ]
 }

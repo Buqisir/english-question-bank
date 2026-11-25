@@ -62,8 +62,8 @@
     "mock": 591
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 591
+    "gaokao": 7,
+    "mock": 394
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 65,
-        "mock": 0
+        "mock": 140
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -320,7 +320,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -350,97 +350,62 @@
       "pos": "v.",
       "glossZh": "带动物散步",
       "pronunciationId": "w:walk#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:walk#s7",
-      "pos": "短语",
-      "glossZh": "社会各行各业",
+      "senseId": "w:walk#s9",
+      "pos": "v.",
+      "glossZh": "逐步指导（walk someone through）",
       "pronunciationId": "w:walk#p-main",
-      "note": "all walks of life。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 3
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:walk#e-590cae03425a0e0c",
-          "text": "Tan treated women from all walks of life.",
+          "exampleId": "w:walk#e-2718bab28e4cda5c",
+          "text": "With one pound of clay, Jennelle will walk you through the steps of handling your clay on a mold (模具).",
           "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
-              "sentence": 4
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:5",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 27,
-            "end": 32
+            "start": 38,
+            "end": 42
           }
         },
         {
-          "exampleId": "w:walk#e-0a62b37c1534c84b",
-          "text": "In the course of a couple of hours, he __53__ me just how much one can gain from __54__ with an open mind, and a willingness to __55__ with locals from all walks of life.",
+          "exampleId": "w:walk#e-691348afda434e97",
+          "text": "●Walk you through the process of selecting the right exhibition to meet your programmatic goals and space.",
           "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-a",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
-              "sentence": 3
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-a:10",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 156,
-            "end": 161
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:walk#s8",
-      "pos": "短语",
-      "glossZh": "追随某人的足迹",
-      "pronunciationId": "w:walk#p-main",
-      "note": "walk in sb’s footsteps，这里亦指走访其曾到过的地方。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:walk#e-204f825fc84541c6",
-          "text": "Our tour also includes a chance to walk in the footsteps of Van Gogh and Gauguin.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 35,
-            "end": 39
+            "start": 1,
+            "end": 5
           }
         }
       ]
@@ -452,6 +417,25 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-a-walk",
+    "w:walk-away",
+    "w:walk-away-from",
+    "w:walk-away-with",
+    "w:walk-in",
+    "w:walk-in-ones-footsteps",
+    "w:walk-in-the-park",
+    "w:walk-into",
+    "w:walk-of-life",
+    "w:walk-off",
+    "w:walk-on",
+    "w:walk-out",
+    "w:walk-over",
+    "w:walk-the-dog",
+    "w:walk-through"
+  ]
 }

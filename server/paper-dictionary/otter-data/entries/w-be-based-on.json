@@ -1,0 +1,202 @@
+{
+  "entryId": "w:be-based-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "based on"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "based",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "based",
+        "on"
+      ],
+      [
+        "based",
+        "on"
+      ],
+      [
+        "been",
+        "based",
+        "on"
+      ],
+      [
+        "being",
+        "based",
+        "on"
+      ],
+      [
+        "is",
+        "based",
+        "on"
+      ],
+      [
+        "was",
+        "based",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are based on",
+      "tags": []
+    },
+    {
+      "form": "be based on",
+      "tags": []
+    },
+    {
+      "form": "been based on",
+      "tags": []
+    },
+    {
+      "form": "is based on",
+      "tags": []
+    },
+    {
+      "form": "was based on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be based on sth",
+  "senses": [
+    {
+      "senseId": "w:be-based-on#s1",
+      "pos": "短语",
+      "glossZh": "以……为基础或依据；取材于……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-based-on#e-e2902b8739305284",
+          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-based-on#e-c334b36f0f5222ba",
+          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 55
+          },
+          "parts": [
+            [
+              47,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-based-on#e-671f428e5b1baa64",
+          "text": "What is the author’s statement about multigenerational family based on?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-national-iii:30",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "based on sth 作状语时常译为“根据……”。",
+      "counts": {
+        "gaokao": 10,
+        "mock": 113
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 113
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,166 @@
+{
+  "entryId": "w:get-the-most-out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "the",
+      "most",
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "the",
+        "most",
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting the most out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get the most out of",
+  "senses": [
+    {
+      "senseId": "w:get-the-most-out-of#s1",
+      "pos": "短语",
+      "glossZh": "充分利用……；尽可能从……中受益",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s43",
+        "w:most#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-the-most-out-of#e-8c205f2fef8d6396",
+          "text": "To get the most out of reading these plays, try to picture the play on stage, with you, the reader, in the audience.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 22
+          },
+          "parts": [
+            [
+              3,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-the-most-out-of#e-fc32502e9e14973a",
+          "text": "To truly get the most out of your journey, you need to prepare with an eye to everything from start to the end.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 28
+          },
+          "parts": [
+            [
+              9,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-the-most-out-of#e-4cfc5337e6be6862",
+          "text": "Getting the most out of going to galleries involves more than just showing up.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 23
+          },
+          "parts": [
+            [
+              0,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

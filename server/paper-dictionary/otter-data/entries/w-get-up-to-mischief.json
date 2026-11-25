@@ -1,0 +1,127 @@
+{
+  "entryId": "w:get-up-to-mischief",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "up",
+      "to",
+      "mischief"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "up",
+        "to",
+        "mischief"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get up to mischief",
+  "senses": [
+    {
+      "senseId": "w:get-up-to-mischief#s1",
+      "pos": "短语",
+      "glossZh": "淘气捣蛋；做调皮惹事的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s29"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-up-to-mischief#e-3dd5f5afdcd63164",
+          "text": "What do the underlined words “get up to mischief' mean in paragraph 3?",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-ii:25",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 48
+          },
+          "parts": [
+            [
+              30,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-up-to-mischief#e-20fa84ca3776e584",
+          "text": "As they grew more mobile, we let them move freely around the house during the day, but when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 164,
+            "end": 182
+          },
+          "parts": [
+            [
+              164,
+              182
+            ]
+          ],
+          "highlightRanges": [
+            [
+              164,
+              182
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

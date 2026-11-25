@@ -1,0 +1,93 @@
+{
+  "entryId": "w:as-ever",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "ever"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "ever"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as ever",
+  "senses": [
+    {
+      "senseId": "w:as-ever#s1",
+      "pos": "短语",
+      "glossZh": "一如既往；和往常一样",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ever#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-ever#e-a1f3615ed58f2bdb",
+          "text": "As ever",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
+            "locator": {
+              "question": 47,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:47#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

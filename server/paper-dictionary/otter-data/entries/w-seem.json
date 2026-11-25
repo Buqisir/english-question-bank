@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 83,
-    "mock": 367
+    "mock": 169
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 198
       },
       "folded": false,
       "examples": [
@@ -132,20 +132,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:seem#s2",
-      "pos": "短语",
-      "glossZh": "似乎怎么也无法",
-      "pronunciationId": "w:seem#p-main",
-      "note": "can't seem to do sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -154,6 +140,11 @@
       "reason": "旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cant-seem-to-do"
+  ]
 }

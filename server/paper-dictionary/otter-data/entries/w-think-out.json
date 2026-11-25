@@ -1,0 +1,70 @@
+{
+  "entryId": "w:think-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "think",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "out"
+      ],
+      [
+        "thinking",
+        "out"
+      ],
+      [
+        "thinks",
+        "out"
+      ],
+      [
+        "thought",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think sth out",
+  "senses": [
+    {
+      "senseId": "w:think-out#s1",
+      "pos": "短语",
+      "glossZh": "仔细想清楚；周密考虑后想出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

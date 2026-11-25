@@ -72,8 +72,8 @@
     "mock": 242
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 241
+    "gaokao": 5,
+    "mock": 65
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 158
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -219,40 +219,6 @@
       ]
     },
     {
-      "senseId": "w:hide#s3",
-      "pos": "短语",
-      "glossZh": "捉迷藏",
-      "pronunciationId": "w:hide#p-main",
-      "note": "hide and seek。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hide#e-d4e9b51cd183c523",
-          "text": "Young children across the globe enjoy playing games of hide and seek.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 59
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hide#s4",
       "pos": "n.",
       "glossZh": "（厚的）兽皮",
@@ -285,6 +251,12 @@
       "reason": "罕见或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hide-and-seek",
+    "w:hide-away"
+  ]
 }

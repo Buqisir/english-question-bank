@@ -1,0 +1,122 @@
+{
+  "entryId": "w:well-aware",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "well",
+      "aware"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "well",
+        "aware"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "well aware",
+  "senses": [
+    {
+      "senseId": "w:well-aware#s1",
+      "pos": "短语",
+      "glossZh": "很清楚；充分意识到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:well-aware#e-5a2b2255fbca1de0",
+          "text": "Let us remember that advertisers are well aware of the way our minds work, and they can easily make us purchase what we may later regret buying.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 47
+          },
+          "parts": [
+            [
+              37,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:well-aware#e-72f662999db712d0",
+          "text": "Let us remember that advertisers are well aware of the way our minds work, and they can easily persuade us into making purchases we may later regret.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 47
+          },
+          "parts": [
+            [
+              37,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "常接 of 或 that 从句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

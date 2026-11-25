@@ -42,8 +42,8 @@
     "mock": 324
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 324
+    "gaokao": 1,
+    "mock": 127
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 33,
-        "mock": 0
+        "mock": 197
       },
       "folded": false,
       "examples": [
@@ -117,20 +117,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:bird#s2",
-      "pos": "短语",
-      "glossZh": "一举两得；一石二鸟",
-      "pronunciationId": "w:bird#p-main",
-      "note": "kill two birds with one stone。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -139,6 +125,11 @@
       "reason": "俚语、过时义或行业别称。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:early-bird"
+  ]
 }

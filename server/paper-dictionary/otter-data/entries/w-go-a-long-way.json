@@ -1,0 +1,201 @@
+{
+  "entryId": "w:go-a-long-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes a long way"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "a",
+      "long",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "goes",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "going",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "gone",
+        "a",
+        "long",
+        "way"
+      ],
+      [
+        "went",
+        "a",
+        "long",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go a long way",
+  "senses": [
+    {
+      "senseId": "w:go-a-long-way#s1",
+      "pos": "短语",
+      "glossZh": "大有帮助；能起很大作用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s40",
+        "w:long#s8",
+        "w:way#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-a-long-way#e-65c22a020e566c13",
+          "text": "Although technology might make day-to-day communication possible, extra effort goes a long way on special days.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 94
+          },
+          "parts": [
+            [
+              79,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              79,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-a-long-way#e-4f5dfb34aea45290",
+          "text": "A little self-forgiveness also goes a long way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 46
+          },
+          "parts": [
+            [
+              31,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-a-long-way#e-7860cfb0e9ce7381",
+          "text": "As we continue to engineer the ocean, such efforts could go a long way toward protecting ocean life.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 70
+          },
+          "parts": [
+            [
+              57,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "常接 toward 或 in 加名词或动名词。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:go-a-long-way#s2",
+      "pos": "短语",
+      "glossZh": "（人）大有前途；取得很大成就",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

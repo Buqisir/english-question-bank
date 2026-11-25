@@ -1,0 +1,94 @@
+{
+  "entryId": "w:for-the-most-part",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "for",
+      "the",
+      "most",
+      "part"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "for",
+        "the",
+        "most",
+        "part"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "for the most part",
+  "senses": [
+    {
+      "senseId": "w:for-the-most-part#s1",
+      "pos": "短语",
+      "glossZh": "总体上；大多数情况下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:for-the-most-part#e-da7014dcf16ca46b",
+          "text": "I’m a Canadian; my feeling of pride in my native land is enhanced by small verbal Canadianisms like “eaves trough” or “serviette”, which are well-documented in dictionaries but rarely used by AI chatbots, for the most part.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 205,
+            "end": 222
+          },
+          "parts": [
+            [
+              205,
+              222
+            ]
+          ],
+          "highlightRanges": [
+            [
+              205,
+              222
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,121 @@
+{
+  "entryId": "w:critical-mass",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "critical",
+      "mass"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "critical",
+        "mass"
+      ],
+      [
+        "critical",
+        "masses"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "critical mass",
+  "senses": [
+    {
+      "senseId": "w:critical-mass#s1",
+      "pos": "短语",
+      "glossZh": "使某事得以发生或持续的最低规模",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:critical-mass#e-bb8fc611a4422ce0",
+          "text": "Finally, urban communities grow better in places where a critical mass of people live, work, and interact.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 70
+          },
+          "parts": [
+            [
+              57,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:critical-mass#s2",
+      "pos": "短语",
+      "glossZh": "临界质量（维持核链式反应所需的最低裂变材料质量）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:critical-mass#s3",
+      "pos": "短语",
+      "glossZh": "城市街头集体骑行活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作活动名称时写作 Critical Mass。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

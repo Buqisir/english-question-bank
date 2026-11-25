@@ -1,0 +1,265 @@
+{
+  "entryId": "w:at-all",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "all"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "all"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at all",
+  "senses": [
+    {
+      "senseId": "w:at-all#s1",
+      "pos": "短语",
+      "glossZh": "一点儿也不；丝毫不（加强否定）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s3",
+        "w:at#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-all#e-c344cfaf688c2e43",
+          "text": "“We put healthy 70-year-olds through a yearlong exercise training program, and nothing happened to them at all.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 110
+          },
+          "parts": [
+            [
+              104,
+              110
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              110
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all#e-4a61c866a3c8ccec",
+          "text": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until,suddenly, it does not work at all anymore.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 152
+          },
+          "parts": [
+            [
+              146,
+              152
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              152
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all#e-3f7978e3a1f1e734",
+          "text": "In fact, in some medical settings, “fat” refers strictly to fat tissue and isn’t an adjective at all.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 100
+          },
+          "parts": [
+            [
+              94,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              94,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 41
+      }
+    },
+    {
+      "senseId": "w:at-all#s2",
+      "pos": "短语",
+      "glossZh": "到底；哪怕一点儿（用于疑问或条件）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s3",
+        "w:at#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-all#e-9bd1cc12c8d0eb76",
+          "text": "Yet, surprisingly, modern physics struggles to explain why time moves forward at all.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 84
+          },
+          "parts": [
+            [
+              78,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all#e-f5abd1ac3e3d4dba",
+          "text": "I wish I’d attended that workshop earlier, but I’m grateful I did at all.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 72
+          },
+          "parts": [
+            [
+              66,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all#e-a384860bc7b954d3",
+          "text": "So, in an effort to break the boredom, I began to question whether my taste was fixed at all, or whether it might be something I could train.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 92
+          },
+          "parts": [
+            [
+              86,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              92
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,157 @@
+{
+  "entryId": "w:less-is-more",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "less",
+      "is",
+      "more"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "less",
+        "is",
+        "more"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "less is more",
+  "senses": [
+    {
+      "senseId": "w:less-is-more#s1",
+      "pos": "短语",
+      "glossZh": "少即是多；减少数量或简化做法反而效果更好",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:less-is-more#e-0db141b8f1385e38",
+          "text": "According to Charlotte Markey, a professor of psychology, food is one of the rare subjects where, as parents, saying less is more.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 129
+          },
+          "parts": [
+            [
+              117,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              129
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:less-is-more#e-a8ea261c9f0b00b8",
+          "text": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 100
+          },
+          "parts": [
+            [
+              88,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:less-is-more#e-3f80ce0a55afb24b",
+          "text": "Less is more.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-wuchang-2026-05:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

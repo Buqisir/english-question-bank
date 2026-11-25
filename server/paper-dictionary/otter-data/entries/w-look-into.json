@@ -1,0 +1,177 @@
+{
+  "entryId": "w:look-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking into"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "into"
+      ],
+      [
+        "looking",
+        "into"
+      ],
+      [
+        "looked",
+        "into"
+      ],
+      [
+        "looks",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look into",
+      "tags": []
+    },
+    {
+      "form": "looked into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look into sth",
+  "senses": [
+    {
+      "senseId": "w:look-into#s1",
+      "pos": "短语",
+      "glossZh": "调查；研究（问题或可行方案）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:look#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:look-into#e-aceda532f85968fd",
+          "text": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 26
+          },
+          "parts": [
+            [
+              14,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-into#e-ae86f37e933640b3",
+          "text": "The last day dawned bright and sunny, perfect for visiting the environmental center I’d looked into.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 99
+          },
+          "parts": [
+            [
+              88,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-into#e-48da2a2f8ea176cc",
+          "text": "When we cease looking into how people lost weight, we start to undo a small but powerful part of that narrative.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:21",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 26
+          },
+          "parts": [
+            [
+              14,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

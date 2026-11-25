@@ -1,0 +1,64 @@
+{
+  "entryId": "w:beside-oneself-with-anger",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "beside",
+      "oneself",
+      "with",
+      "anger"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "beside",
+        "oneself",
+        "with",
+        "anger"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "beside oneself with anger",
+  "senses": [
+    {
+      "senseId": "w:beside-oneself-with-anger#s1",
+      "pos": "短语",
+      "glossZh": "气得失去自制；怒不可遏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:beside#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

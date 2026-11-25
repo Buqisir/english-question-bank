@@ -1,0 +1,233 @@
+{
+  "entryId": "w:back-and-forth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "back",
+      "and",
+      "forth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "back",
+        "and",
+        "forth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "back and forth",
+  "senses": [
+    {
+      "senseId": "w:back-and-forth#s1",
+      "pos": "短语",
+      "glossZh": "来回；往返",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:back-and-forth#e-d4f3a771cc4fc13f",
+          "text": "Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 46
+          },
+          "parts": [
+            [
+              32,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:back-and-forth#e-fca152dd4fa4be5b",
+          "text": "Toby was using up his energy by running back and forth in the backyard and giving the kids plenty of room.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 54
+          },
+          "parts": [
+            [
+              40,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:back-and-forth#e-ad0bb47950850aab",
+          "text": "I spent the whole morning shuttling back and forth across the harbor.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 50
+          },
+          "parts": [
+            [
+              36,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:back-and-forth#s2",
+      "pos": "短语",
+      "glossZh": "双方交替；此起彼落",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:back-and-forth#e-9b8b4f5abdd3264f",
+          "text": "Scoring was back and forth until the fourth quarter, when Apache pulled away by 14 points.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:back-and-forth#e-144026a0b942648f",
+          "text": "The back and forth is endless.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "可形容比赛双方交替得分。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,168 @@
+{
+  "entryId": "w:date-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "dates back",
+    "dating back"
+  ],
+  "pattern": {
+    "tokens": [
+      "date",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "date",
+        "back"
+      ],
+      [
+        "dates",
+        "back"
+      ],
+      [
+        "dating",
+        "back"
+      ],
+      [
+        "dated",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "date back",
+  "senses": [
+    {
+      "senseId": "w:date-back#s1",
+      "pos": "短语",
+      "glossZh": "始于；可追溯到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:date-back#e-c9db0b0b3c8ed8ce",
+          "text": "But new research suggests this urge may be a social survival tool dating back millions of years.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:date-back#e-c9221a432a18972e",
+          "text": "Dating back over 600 years, clay whistles once were blown through rural festivals and family gatherings.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:grammar-fill:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:date-back#e-54bcbc04c262cba9",
+          "text": "The popularity of communal bathhouses dates back to the Northern Song Dynasty.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 48
+          },
+          "parts": [
+            [
+              38,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              48
+            ]
+          ]
+        }
+      ],
+      "note": "后接时间段，或用 date back to 接具体时间。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

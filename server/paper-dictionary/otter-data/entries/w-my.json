@@ -131,6 +131,14 @@
       "reason": "同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:in-my-name",
+    "w:in-my-opinion",
+    "w:my-bad",
+    "w:my-name-is",
+    "w:oh-my",
+    "w:oh-my-god"
+  ]
 }

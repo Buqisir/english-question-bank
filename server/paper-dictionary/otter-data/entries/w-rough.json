@@ -70,7 +70,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 34
+    "mock": 7
   },
   "senses": [
     {
@@ -81,7 +81,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -296,7 +296,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -326,12 +326,12 @@
       "pos": "adj.",
       "glossZh": "波涛汹涌的",
       "pronunciationId": "w:rough#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -339,12 +339,12 @@
       "pos": "adj.",
       "glossZh": "粗暴的",
       "pronunciationId": "w:rough#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -414,6 +414,6 @@
       "reason": "马具专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

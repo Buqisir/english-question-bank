@@ -62,8 +62,8 @@
     "mock": 606
   },
   "unassignedCounts": {
-    "gaokao": 10,
-    "mock": 603
+    "gaokao": 14,
+    "mock": 409
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -359,7 +359,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -431,7 +431,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -494,12 +494,12 @@
       "pos": "v.",
       "glossZh": "由此可知",
       "pronunciationId": "w:follow#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -511,7 +511,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -583,7 +583,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -655,7 +655,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 40,
-        "mock": 0
+        "mock": 65
       },
       "folded": false,
       "examples": [
@@ -727,7 +727,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -753,88 +753,72 @@
       ]
     },
     {
-      "senseId": "w:follow#s13",
-      "pos": "短语",
-      "glossZh": "照着做",
+      "senseId": "w:follow#s15",
+      "pos": "prep.",
+      "glossZh": "在……之后",
       "pronunciationId": "w:follow#p-main",
-      "note": "follow suit。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 3,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 6
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:follow#e-af54b6f6a2b377cb",
-          "text": "The participants followed suit, taking more food than they normally would have.",
+          "exampleId": "w:follow#e-e75019228425ec2f",
+          "text": "“The community in Crich have been, and continue to be, an amazing support to my family, following my cancer diagnosis（诊断）,” he says.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:4",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:3",
               "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 17,
-            "end": 25
+            "start": 88,
+            "end": 97
           }
         },
         {
-          "exampleId": "w:follow#e-0691b6a931ae596f",
-          "text": "But if a thin person eats a lot, I’ll follow suit.",
+          "exampleId": "w:follow#e-8bda87f980a0f70a",
+          "text": "Approximately 4000 years following the last glacial period, hunter-gatherer communities encountered another sudden climate shift that forced rapid adaptation to significantly colder conditions.",
           "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
             "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
-              "sentence": 5
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c:1",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 38,
-            "end": 44
+            "start": 25,
+            "end": 34
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:follow#s14",
-      "pos": "短语",
-      "glossZh": "跟进",
-      "pronunciationId": "w:follow#p-main",
-      "note": "follow up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:follow#e-faf7c21837e37d88",
-          "text": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+          "exampleId": "w:follow#e-87e832b509a96e09",
+          "text": "Easthope is an emergency planner whose job is to support the survivors of major disasters, in which capacity she acted following the 2004 Indian Ocean tsunami and the fire at Grenfell Tower.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b",
             "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
-              "sentence": 2
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-b:2",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 89,
-            "end": 95
+            "start": 119,
+            "end": 128
           }
         }
       ]
@@ -846,6 +830,15 @@
       "reason": "常作 follow-through，单独作名词罕见"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:follow-along",
+    "w:follow-on",
+    "w:follow-suit",
+    "w:follow-the-crowd",
+    "w:follow-up"
+  ]
 }

@@ -58,8 +58,8 @@
     "mock": 264
   },
   "unassignedCounts": {
-    "gaokao": 5,
-    "mock": 263
+    "gaokao": 6,
+    "mock": 74
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 121
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -205,40 +205,6 @@
       ]
     },
     {
-      "senseId": "w:hear#s3",
-      "pos": "短语",
-      "glossZh": "收到……的消息",
-      "pronunciationId": "w:hear#p-main",
-      "note": "hear from sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hear#e-8a6a44ab0d9e1b77",
-          "text": "A few days passed, and I hadn’t heard anything from my brother.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hear#s4",
       "pos": "v.",
       "glossZh": "在庭上听取（证词）",
@@ -281,7 +247,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -305,6 +271,111 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:hear#s6",
+      "pos": "n.",
+      "glossZh": "听力；听觉",
+      "pronunciationId": "w:hear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hear#e-ce645fd5a5822f71",
+          "text": "Students with hearing challenges can use tools that turn speech into text.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:hear#e-23b537c8c6617285",
+          "text": "To improve babies’ sense of hearing.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:hear#e-d571e476d28195b9",
+          "text": "Alex is an ear, nose and throat specialist, who works wonders restoring people's hearing.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hear#s7",
+      "pos": "adj.",
+      "glossZh": "有听力的",
+      "pronunciationId": "w:hear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hear#e-ea82909e13bcb564",
+          "text": "At that time, however, the great majority of deaf children grew up without exposure to structured language until they started school, especially those with hearing parents.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 163
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -313,6 +384,12 @@
       "reason": "少见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hear-from-sb",
+    "w:hear-of"
+  ]
 }

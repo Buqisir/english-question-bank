@@ -1,0 +1,107 @@
+{
+  "entryId": "w:to-begin-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "begin",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "begin",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to begin with",
+  "senses": [
+    {
+      "senseId": "w:to-begin-with#s1",
+      "pos": "短语",
+      "glossZh": "起初；一开始",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:to-begin-with#e-579f8c687b23e030",
+          "text": "Which group did the researchers focus on to begin with?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 54
+          },
+          "parts": [
+            [
+              41,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "强调某种情况原先就存在时，也可译为「本来」。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:to-begin-with#s2",
+      "pos": "短语",
+      "glossZh": "首先；先说第一点",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于引出第一项理由或说明。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

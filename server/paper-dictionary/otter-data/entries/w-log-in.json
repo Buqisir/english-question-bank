@@ -1,0 +1,167 @@
+{
+  "entryId": "w:log-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "log",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "log",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "logged in",
+      "tags": []
+    },
+    {
+      "form": "logging in",
+      "tags": []
+    },
+    {
+      "form": "logs in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "log in",
+  "senses": [
+    {
+      "senseId": "w:log-in#s1",
+      "pos": "短语",
+      "glossZh": "登录账户、网站或系统",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:log#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:log-in#e-4bd7046fa038bf0e",
+          "text": "To log in, you will only need the email address you used to register with AARP along with your secure password.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-a:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          },
+          "parts": [
+            [
+              3,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:log-in#e-717a7d4aeaa22edf",
+          "text": "Every day, he eagerly logged in, diving into the vibrant world of the game.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 31
+          },
+          "parts": [
+            [
+              22,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:log-in#e-47868f683e25a0e0",
+          "text": "The morning after I activated Cora, I logged in with nervousness.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 47
+          },
+          "parts": [
+            [
+              38,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

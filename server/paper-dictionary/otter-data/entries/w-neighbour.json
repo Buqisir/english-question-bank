@@ -85,7 +85,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 198
+    "mock": 0
   },
   "senses": [
     {
@@ -97,7 +97,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 194
       },
       "folded": false,
       "examples": [
@@ -182,7 +182,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -214,6 +214,6 @@
       "reason": "罕见动词义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,99 @@
+{
+  "entryId": "w:bring-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bringing to"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "to"
+      ],
+      [
+        "bringing",
+        "to"
+      ],
+      [
+        "brings",
+        "to"
+      ],
+      [
+        "brought",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth to",
+  "senses": [
+    {
+      "senseId": "w:bring-to#s1",
+      "pos": "短语",
+      "glossZh": "使某人恢复知觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于 bring sb to，to 后不接宾语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-to#s2",
+      "pos": "短语",
+      "glossZh": "使总数达到（某个数值）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-to#s3",
+      "pos": "短语",
+      "glossZh": "使船迎风停住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

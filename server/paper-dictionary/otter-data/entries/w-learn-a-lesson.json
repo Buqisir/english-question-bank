@@ -1,0 +1,62 @@
+{
+  "entryId": "w:learn-a-lesson",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "learn",
+      "a",
+      "lesson"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "learn",
+        "a",
+        "lesson"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "learn a lesson",
+  "senses": [
+    {
+      "senseId": "w:learn-a-lesson#s1",
+      "pos": "短语",
+      "glossZh": "从经历中吸取教训",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:learn#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

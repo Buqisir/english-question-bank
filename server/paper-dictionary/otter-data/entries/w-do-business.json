@@ -1,0 +1,142 @@
+{
+  "entryId": "w:do-business",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "doing business"
+  ],
+  "pattern": {
+    "tokens": [
+      "do",
+      "business"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        "business"
+      ],
+      [
+        "doing",
+        "business"
+      ],
+      [
+        "did",
+        "business"
+      ],
+      [
+        "does",
+        "business"
+      ],
+      [
+        "done",
+        "business"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do business",
+  "senses": [
+    {
+      "senseId": "w:do-business#s1",
+      "pos": "动词短语",
+      "glossZh": "做生意；进行商业往来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:do-business#e-778a657296a43db8",
+          "text": "She is doing business there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 21
+          },
+          "parts": [
+            [
+              7,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:do-business#e-27266cf6974db2db",
+          "text": "He was interested in doing business.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常用 do business with sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

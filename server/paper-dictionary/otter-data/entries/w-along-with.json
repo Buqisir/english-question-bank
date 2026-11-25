@@ -1,0 +1,154 @@
+{
+  "entryId": "w:along-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "along",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "along",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "along with",
+  "senses": [
+    {
+      "senseId": "w:along-with#s1",
+      "pos": "短语",
+      "glossZh": "连同；和……一起",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:along#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:along-with#e-74e57f0d5e04db08",
+          "text": "With paper, there is a literal laying on of hands, along with the visual geography of distinct pages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          },
+          "parts": [
+            [
+              51,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:along-with#e-7efe1e1712621129",
+          "text": "A torch（手电筒）along with suitable clothing is essential for walking in the dark.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 22
+          },
+          "parts": [
+            [
+              12,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:along-with#e-b0dc55fff42e6264",
+          "text": "Presenting the best of the West End along with the pick of the UK’s touring shows, the New Theatre is Cardiff’s oldest surviving traditional theatre.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:15",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          },
+          "parts": [
+            [
+              36,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 47
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

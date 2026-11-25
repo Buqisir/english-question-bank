@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 2
   },
   "senses": [
     {
@@ -271,74 +271,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:nail#s5",
-      "pos": "短语",
-      "glossZh": "确定；敲定",
-      "pronunciationId": "w:nail#p-main",
-      "note": "nail down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nail#e-cc68c454cc895a17",
-          "text": "Instead of trying to nail down that number, we would be better served focusing on an ecosystem’s functions; that is, keeping the plane in the sky, rather than saving every rivet.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 21,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:nail#s6",
-      "pos": "短语",
-      "glossZh": "造成最终失败的又一打击",
-      "pronunciationId": "w:nail#p-main",
-      "note": "a nail in the coffin。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nail#e-60f637aa27bd1d65",
-          "text": "Still, this study provides the know-how to avoid the axolotl’s “last nail in the coffin,” showing that even species on the edge of extinction may have a path to recovery.",
-          "source": {
-            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
-            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
-            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 69,
-            "end": 73
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -347,6 +279,12 @@
       "reason": "专业或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-nail-in-the-coffin",
+    "w:nail-down"
+  ]
 }

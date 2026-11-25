@@ -1,0 +1,221 @@
+{
+  "entryId": "w:hang-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "around"
+      ],
+      [
+        "hanging",
+        "around"
+      ],
+      [
+        "hangs",
+        "around"
+      ],
+      [
+        "hung",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hanging around",
+      "tags": []
+    },
+    {
+      "form": "hung around",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang around",
+  "senses": [
+    {
+      "senseId": "w:hang-around#s1",
+      "pos": "短语",
+      "glossZh": "在附近闲待；闲逛",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:around#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hang-around#e-5bea3e8b02993790",
+          "text": "We soon found out what was wrong: a group of teenagers wearing hoods（兜帽） had been hanging around the park.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 96
+          },
+          "parts": [
+            [
+              82,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              96
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-around#e-6ea073718935f7c6",
+          "text": "At first, people hung around, sniffing（闻）cautiously, but few bought.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hang-around#e-825914dc8118e2ce",
+          "text": "He said a group of teenagers wearing dark clothes hung around the park constantly – laughing loudly, playing loud music, and rushing about with wild, youthful energy.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          },
+          "parts": [
+            [
+              50,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:hang-around#s2",
+      "pos": "短语",
+      "glossZh": "常和某人待在一起；跟某人混在一起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hang-around#e-cdf90e17151255d7",
+          "text": "I used bad language, hung around with other “bad” boys, skipped school and ran through the fields.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "用作 hang around with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

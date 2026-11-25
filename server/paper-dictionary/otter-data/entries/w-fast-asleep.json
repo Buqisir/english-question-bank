@@ -1,0 +1,92 @@
+{
+  "entryId": "w:fast-asleep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fast",
+      "asleep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fast",
+        "asleep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fast asleep",
+  "senses": [
+    {
+      "senseId": "w:fast-asleep#s1",
+      "pos": "短语",
+      "glossZh": "熟睡的；睡得很沉的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fast#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fast-asleep#e-3d3ec678f8943d58",
+          "text": "There we found my son, and he was just inches away from the edges of the cliff, fast asleep.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 91
+          },
+          "parts": [
+            [
+              80,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              91
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

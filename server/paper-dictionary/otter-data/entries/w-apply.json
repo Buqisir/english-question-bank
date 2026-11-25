@@ -58,8 +58,8 @@
     "mock": 254
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 249
+    "gaokao": 2,
+    "mock": 63
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -285,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 3
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -347,40 +347,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:apply#s5",
-      "pos": "短语",
-      "glossZh": "努力；专心致志",
-      "pronunciationId": "w:apply#p-main",
-      "note": "apply oneself (to sth)。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:apply#e-10c2da9d85debc46",
-          "text": "If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 26
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -389,6 +355,13 @@
       "reason": "过时或罕见用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:apply-oneself",
+    "w:apply-oneself-to-sth",
+    "w:apply-yourself"
+  ]
 }

@@ -1,0 +1,135 @@
+{
+  "entryId": "w:bottle-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bottle",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bottle",
+        "up"
+      ],
+      [
+        "bottled",
+        "up"
+      ],
+      [
+        "bottles",
+        "up"
+      ],
+      [
+        "bottling",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bottle up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bottle (sth) up",
+  "senses": [
+    {
+      "senseId": "w:bottle-up#s1",
+      "pos": "短语",
+      "glossZh": "压抑情绪；把感受憋在心里",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bottle#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bottle-up#e-f7f9f98978c5e724",
+          "text": "They suppress emotions like anger, hide true feelings and bottle up distress instead of speaking out.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          },
+          "parts": [
+            [
+              58,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:bottle-up#s2",
+      "pos": "短语",
+      "glossZh": "装瓶并封存",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bottle-up#s3",
+      "pos": "短语",
+      "glossZh": "把对方困在原处；压制对方的行动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

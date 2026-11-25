@@ -1,0 +1,202 @@
+{
+  "entryId": "w:tear-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tear",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "tear",
+        "down"
+      ],
+      [
+        "tear",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tear down",
+      "tags": []
+    },
+    {
+      "form": "tearing down",
+      "tags": []
+    },
+    {
+      "form": "tore down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tear (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:tear-down#s1",
+      "pos": "短语",
+      "glossZh": "拆掉；拆毁（建筑、围栏等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s4",
+        "w:tear#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:tear-down#e-c4f13441c99b4212",
+          "text": "Not this polar bear though-he just kept trying to tear down the fence with his massive paws(爪子).",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 59
+          },
+          "parts": [
+            [
+              50,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tear-down#e-206a978cdce0338a",
+          "text": "One day, while we firefighters were tearing down an old warehouse, we found something interesting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tear-down#e-2b75145459901d30",
+          "text": "Tear down unused buildings.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-zj-wenzhou-2026-m2:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:tear-down#s2",
+      "pos": "短语",
+      "glossZh": "消除；破除（障碍、壁垒等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tear-down#s3",
+      "pos": "短语",
+      "glossZh": "猛烈抨击；贬低",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,60 @@
+{
+  "entryId": "w:chew-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "chew",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chew",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chew sth over",
+  "senses": [
+    {
+      "senseId": "w:chew-over#s1",
+      "pos": "短语",
+      "glossZh": "仔细琢磨；反复考虑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:chew#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

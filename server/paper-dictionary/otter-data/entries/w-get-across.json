@@ -1,0 +1,187 @@
+{
+  "entryId": "w:get-across",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "got across"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "across"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "across"
+      ],
+      [
+        "got",
+        "across"
+      ],
+      [
+        "gets",
+        "across"
+      ],
+      [
+        "getting",
+        "across"
+      ],
+      [
+        "gotten",
+        "across"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get across",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get (sth) across",
+  "senses": [
+    {
+      "senseId": "w:get-across#s1",
+      "pos": "短语",
+      "glossZh": "把（意思或信息）讲清楚；使人理解",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-across#e-c508d48a40e84c8c",
+          "text": "Each play has a theme or central idea which the playwright(剧作家) hopes to get across through dialogue and action.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 83
+          },
+          "parts": [
+            [
+              73,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-across#e-13e023b03268d879",
+          "text": "However, for the person answering, they feel worried that the “direct and simple response” doesn’t get across enough information.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 109
+          },
+          "parts": [
+            [
+              99,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-across#s2",
+      "pos": "短语",
+      "glossZh": "越过；到达另一边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-across#s3",
+      "pos": "短语",
+      "glossZh": "成功；表现出色",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见的旧俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-across#s4",
+      "pos": "短语",
+      "glossZh": "惹恼某人；使某人不高兴",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

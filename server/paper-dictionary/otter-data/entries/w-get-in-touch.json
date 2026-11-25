@@ -1,0 +1,80 @@
+{
+  "entryId": "w:get-in-touch",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "in",
+      "touch"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "in",
+        "touch"
+      ],
+      [
+        "gets",
+        "in",
+        "touch"
+      ],
+      [
+        "getting",
+        "in",
+        "touch"
+      ],
+      [
+        "got",
+        "in",
+        "touch"
+      ],
+      [
+        "gotten",
+        "in",
+        "touch"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get in touch",
+  "senses": [
+    {
+      "senseId": "w:get-in-touch#s1",
+      "pos": "短语",
+      "glossZh": "联系；取得联系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

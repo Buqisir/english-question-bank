@@ -1,0 +1,232 @@
+{
+  "entryId": "w:come-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "by"
+      ],
+      [
+        "came",
+        "by"
+      ],
+      [
+        "comes",
+        "by"
+      ],
+      [
+        "coming",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "came by",
+      "tags": []
+    },
+    {
+      "form": "come by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come by (sth)",
+  "senses": [
+    {
+      "senseId": "w:come-by#s1",
+      "pos": "短语",
+      "glossZh": "顺道来访；从旁边经过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-by#e-61d491bd7d0be8c7",
+          "text": "Occasionally, a spider or a fly came by; he wore spider webs, and a light layer of dust.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          },
+          "parts": [
+            [
+              32,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-by#e-ffad7552bed20f77",
+          "text": "She rolled down her window and called out to several homeless people, “Come by later!",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 78
+          },
+          "parts": [
+            [
+              71,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-by#e-63d5e6b35de23999",
+          "text": "Paragraph 2: The next day, Mr. Miller came by, and my mother brought up the past.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          },
+          "parts": [
+            [
+              38,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:come-by#s2",
+      "pos": "短语",
+      "glossZh": "获得；弄到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-by#e-c6b8994a5c9d3758",
+          "text": "Not too long ago, I heard a friend of mine saying that hiring a young person who was raised on a farm is a dream find and getting harder to come by as our landscape changes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 147
+          },
+          "parts": [
+            [
+              140,
+              147
+            ]
+          ],
+          "highlightRanges": [
+            [
+              140,
+              147
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 hard to come by。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:come-by#s3",
+      "pos": "短语",
+      "glossZh": "顺时针绕羊群走（牧羊犬口令）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

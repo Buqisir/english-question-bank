@@ -1,0 +1,215 @@
+{
+  "entryId": "w:pass-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing by"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "by"
+      ],
+      [
+        "passing",
+        "by"
+      ],
+      [
+        "passed",
+        "by"
+      ],
+      [
+        "passes",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passed by",
+      "tags": []
+    },
+    {
+      "form": "passes by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass by",
+  "senses": [
+    {
+      "senseId": "w:pass-by#s1",
+      "pos": "短语",
+      "glossZh": "经过；路过",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-by#e-17ab26bebcc1fa3e",
+          "text": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 102
+          },
+          "parts": [
+            [
+              95,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-by#e-be4512cbab5e27da",
+          "text": "It was then that a couple, Cruse and Michelle, passed by.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pass-by#e-18b5b8da78892de6",
+          "text": "Neighbors hardly passed by, let alone strangers.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:pass-by#s2",
+      "pos": "短语",
+      "glossZh": "放过（机会）；忽略",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-by#s3",
+      "pos": "短语",
+      "glossZh": "（时间）流逝",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-by#s4",
+      "pos": "短语",
+      "glossZh": "顺道拜访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "菲律宾英语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

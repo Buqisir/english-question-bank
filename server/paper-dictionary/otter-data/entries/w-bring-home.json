@@ -1,0 +1,167 @@
+{
+  "entryId": "w:bring-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bringing home"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "home"
+      ],
+      [
+        "bringing",
+        "home"
+      ],
+      [
+        "brings",
+        "home"
+      ],
+      [
+        "brought",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "brought home",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth home",
+  "senses": [
+    {
+      "senseId": "w:bring-home#s1",
+      "pos": "短语",
+      "glossZh": "把（人、动物或物品）带回家",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bring-home#e-198148653606c2b9",
+          "text": "Alia Bhatt grew up in Mumbai surrounded by animals, largely because her sister Shaheen kept bringing home stray kittens.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 105
+          },
+          "parts": [
+            [
+              92,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-home#e-0b8940b3588b5e42",
+          "text": "One day, Tom’s parents brought home a gift – a smart watch.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 35
+          },
+          "parts": [
+            [
+              23,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:bring-home#s2",
+      "pos": "短语",
+      "glossZh": "挣得（收入）；把赚的钱带回家",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-home#s3",
+      "pos": "短语",
+      "glossZh": "使某人切实体会到（事实或问题的重要性）",
+      "note": "常用 bring sth home to sb。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

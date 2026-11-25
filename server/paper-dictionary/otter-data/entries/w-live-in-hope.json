@@ -1,0 +1,145 @@
+{
+  "entryId": "w:live-in-hope",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "live",
+      "in",
+      "hope"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "in",
+        "hope"
+      ],
+      [
+        "lived",
+        "in",
+        "hope"
+      ],
+      [
+        "lives",
+        "in",
+        "hope"
+      ],
+      [
+        "living",
+        "in",
+        "hope"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lived in hope",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live in hope",
+  "senses": [
+    {
+      "senseId": "w:live-in-hope#s1",
+      "pos": "短语",
+      "glossZh": "始终抱有希望",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:live-in-hope#e-16174c93d9ad85c0",
+          "text": "It helps them live in hope.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2025-ii:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 26
+          },
+          "parts": [
+            [
+              14,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:live-in-hope#e-f03a847ebc970ea3",
+          "text": "He was proud of his children and grandkids, though, and lived in hope that, one day, Theo, his youngest grandson, might understand and come along.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 69
+          },
+          "parts": [
+            [
+              56,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "可接 that 从句，说明所盼望的事。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

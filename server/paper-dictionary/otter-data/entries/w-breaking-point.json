@@ -1,0 +1,138 @@
+{
+  "entryId": "w:breaking-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "breaking",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "breaking",
+        "point"
+      ],
+      [
+        "breaking",
+        "points"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "breaking point",
+  "senses": [
+    {
+      "senseId": "w:breaking-point#s1",
+      "pos": "短语",
+      "glossZh": "承受压力的极限；濒临崩溃的临界点",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:breaking-point#e-4f9e8af542671ecb",
+          "text": "AI-generated and AI-assisted papers are pushing an already overstressed system to the breaking point.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 100
+          },
+          "parts": [
+            [
+              86,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:breaking-point#e-354781163448aef0",
+          "text": "Middle age has become a critical breaking point in the US.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 47
+          },
+          "parts": [
+            [
+              33,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:breaking-point#s2",
+      "pos": "短语",
+      "glossZh": "材料受力时的断裂极限",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

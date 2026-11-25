@@ -1,0 +1,312 @@
+{
+  "entryId": "w:wear-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wear",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "wear",
+        "out"
+      ],
+      [
+        "wear",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "wearing",
+        "out"
+      ],
+      [
+        "wears",
+        "out"
+      ],
+      [
+        "wore",
+        "out"
+      ],
+      [
+        "worn",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wear out",
+      "tags": []
+    },
+    {
+      "form": "wears out",
+      "tags": []
+    },
+    {
+      "form": "worn out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wear (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:wear-out#s1",
+      "pos": "短语",
+      "glossZh": "把……磨坏、用坏；因使用过久而磨损",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wear-out#e-3a6b3dcd4f6393c3",
+          "text": "Clara picked up a box of old dolls（玩偶）—their plastic arms broken, button eyes missing, dresses worn out, asking me to throw them out.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 103
+          },
+          "parts": [
+            [
+              95,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wear-out#e-fd31425db884a163",
+          "text": "However, here’s the issue: during charging and discharging, silicon particles expand up to 300% and then shrink back, causing cracks that quickly wear out the battery.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 154
+          },
+          "parts": [
+            [
+              146,
+              154
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              154
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wear-out#e-a7bc859462a9285f",
+          "text": "That night, I was looking through a photographers’ forum（论坛）when a post caught my eye: “The best photo I ever took was of my father’s hands.” It showed a wonderful picture of rough, scarred hands, just like my father’s, worn out from long factory work.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 220,
+            "end": 228
+          },
+          "parts": [
+            [
+              220,
+              228
+            ]
+          ],
+          "highlightRanges": [
+            [
+              220,
+              228
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:wear-out#s2",
+      "pos": "短语",
+      "glossZh": "使筋疲力尽；累垮",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wear-out#e-8f7fd227bad17136",
+          "text": "We recommend starting with two sessions a week and capping at three; otherwise, you may overdo it and wear your body out.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 120
+          },
+          "parts": [
+            [
+              102,
+              106
+            ],
+            [
+              117,
+              120
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              106
+            ],
+            [
+              117,
+              120
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wear-out#e-010bf9167ff42f8f",
+          "text": "By following these simple rules, you can truly appreciate the beauty of art and explore it more deeply, without feeling worn out.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 128
+          },
+          "parts": [
+            [
+              120,
+              128
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              128
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wear-out#e-522cde85db2b70f6",
+          "text": "Fellow teacher Melinda Parker voices what many think: “We’re so lucky to have her in Drumright.” Though the workload sometimes wears her out, her commitment never declines.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 140
+          },
+          "parts": [
+            [
+              127,
+              132
+            ],
+            [
+              137,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              127,
+              132
+            ],
+            [
+              137,
+              140
+            ]
+          ]
+        }
+      ],
+      "note": "be 或 feel worn out 表示筋疲力尽。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

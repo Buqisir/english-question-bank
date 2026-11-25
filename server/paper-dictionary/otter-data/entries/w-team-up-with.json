@@ -1,0 +1,179 @@
+{
+  "entryId": "w:team-up-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "team",
+      "up",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "team",
+        "up",
+        "with"
+      ],
+      [
+        "teamed",
+        "up",
+        "with"
+      ],
+      [
+        "teaming",
+        "up",
+        "with"
+      ],
+      [
+        "teams",
+        "up",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "teamed up with",
+      "tags": []
+    },
+    {
+      "form": "teaming up with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "team up with",
+  "senses": [
+    {
+      "senseId": "w:team-up-with#s1",
+      "pos": "短语",
+      "glossZh": "与……联手合作",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:team-up-with#e-dc38a8ddbe799a1c",
+          "text": "Now, Pereira has teamed up with plant scientist Professor Wolfgang Busch to apply SLEAP to plants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 31
+          },
+          "parts": [
+            [
+              17,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:team-up-with#e-ac367fbc7c14f049",
+          "text": "By teaming up with other photographers.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2023-national-b:24#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 18
+          },
+          "parts": [
+            [
+              3,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:team-up-with#e-ca16d0bf288674b5",
+          "text": "To celebrate its 30th anniversary – marking decades of reliable service – Key Publishing has teamed up with easyJet to host a special competition, giving one lucky reader the chance to fly away with a companion on a return trip to any destination in its network.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 107
+          },
+          "parts": [
+            [
+              93,
+              107
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              107
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

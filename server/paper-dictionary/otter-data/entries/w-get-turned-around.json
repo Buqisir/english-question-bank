@@ -1,0 +1,117 @@
+{
+  "entryId": "w:get-turned-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "turned",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "turned",
+        "around"
+      ],
+      [
+        "gets",
+        "turned",
+        "around"
+      ],
+      [
+        "getting",
+        "turned",
+        "around"
+      ],
+      [
+        "got",
+        "turned",
+        "around"
+      ],
+      [
+        "gotten",
+        "turned",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got turned around",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get turned around",
+  "senses": [
+    {
+      "senseId": "w:get-turned-around#s1",
+      "pos": "短语",
+      "glossZh": "迷失方向；弄不清该往哪走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-turned-around#e-62ff129442577e8c",
+          "text": "The more turns I made, the more I got turned around.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 51
+          },
+          "parts": [
+            [
+              34,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

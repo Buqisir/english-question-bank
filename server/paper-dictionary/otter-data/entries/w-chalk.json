@@ -59,8 +59,8 @@
     "mock": 6
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 2
+    "gaokao": 2,
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -179,40 +179,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:chalk#s4",
-      "pos": "短语",
-      "glossZh": "把……归因于",
-      "pronunciationId": "w:chalk#p-main",
-      "note": "chalk something up to something",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chalk#e-c3eb1abc940db4af",
-          "text": "Older and wiser now, Burchill chalked up the incident to youthful indiscretion (莽撞).",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 37
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -221,6 +187,11 @@
       "reason": "军事、博弈或专名用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:chalk-sth-up-to-sth"
+  ]
 }

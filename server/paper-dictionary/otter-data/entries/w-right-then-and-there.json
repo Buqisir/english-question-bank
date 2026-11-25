@@ -1,0 +1,97 @@
+{
+  "entryId": "w:right-then-and-there",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "then",
+      "and",
+      "there"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "then",
+        "and",
+        "there"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right then and there",
+  "senses": [
+    {
+      "senseId": "w:right-then-and-there#s1",
+      "pos": "短语",
+      "glossZh": "当时当地；当场",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:then#s7",
+        "w:there#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:right-then-and-there#e-d0431f23c604b4ca",
+          "text": "Right then and there I decided enough was enough!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 20
+          },
+          "parts": [
+            [
+              0,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

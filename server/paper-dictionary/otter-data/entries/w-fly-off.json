@@ -1,0 +1,87 @@
+{
+  "entryId": "w:fly-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fly",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fly",
+        "off"
+      ],
+      [
+        "flew",
+        "off"
+      ],
+      [
+        "flies",
+        "off"
+      ],
+      [
+        "flown",
+        "off"
+      ],
+      [
+        "flying",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fly off",
+  "senses": [
+    {
+      "senseId": "w:fly-off#s1",
+      "pos": "短语",
+      "glossZh": "迅速离开；飞快逃走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fly-off#s2",
+      "pos": "短语",
+      "glossZh": "突然激动地说起来；突然开始怒斥",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

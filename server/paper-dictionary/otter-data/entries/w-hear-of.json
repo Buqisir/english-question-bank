@@ -1,0 +1,187 @@
+{
+  "entryId": "w:hear-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hear",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hear",
+        "of"
+      ],
+      [
+        "heard",
+        "of"
+      ],
+      [
+        "hearing",
+        "of"
+      ],
+      [
+        "hears",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "hear of",
+      "tags": []
+    },
+    {
+      "form": "heard of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hear of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:hear-of#s1",
+      "pos": "短语",
+      "glossZh": "听说过；得知某人或某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hear-of#e-474c0a3683e67825",
+          "text": "I told him where I was going, but he said he hadn’t heard of the bus station.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          },
+          "parts": [
+            [
+              52,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hear-of#e-720bb52f6452a5de",
+          "text": "When Mrs. Meredith heard of John's idea, she thought it was a good one, too.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hear-of#e-e00d9fa7f1607f59",
+          "text": "When Mrs. Meredith heard of John’s idea, she thought it was a good one, too.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-ii:writing-continuation:starter:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:hear-of#s2",
+      "pos": "短语",
+      "glossZh": "坚决不同意；不肯考虑",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 won't/wouldn't hear of it。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

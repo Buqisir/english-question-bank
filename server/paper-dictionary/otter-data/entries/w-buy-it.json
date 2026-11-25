@@ -1,0 +1,87 @@
+{
+  "entryId": "w:buy-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "buying it"
+  ],
+  "pattern": {
+    "tokens": [
+      "buy",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "buy",
+        "it"
+      ],
+      [
+        "buying",
+        "it"
+      ],
+      [
+        "bought",
+        "it"
+      ],
+      [
+        "buys",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "buy it",
+  "senses": [
+    {
+      "senseId": "w:buy-it#s1",
+      "pos": "短语",
+      "glossZh": "相信；接受某种说法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常见于否定句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:buy-it#s2",
+      "pos": "短语",
+      "glossZh": "死去；丧命",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

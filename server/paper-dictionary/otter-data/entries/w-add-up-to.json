@@ -1,0 +1,161 @@
+{
+  "entryId": "w:add-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "add",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "add",
+        "up",
+        "to"
+      ],
+      [
+        "added",
+        "up",
+        "to"
+      ],
+      [
+        "adding",
+        "up",
+        "to"
+      ],
+      [
+        "adds",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "adds up to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "add up to",
+  "senses": [
+    {
+      "senseId": "w:add-up-to#s1",
+      "pos": "短语",
+      "glossZh": "合在一起造成（某种结果）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:add#s3",
+        "w:up#s72"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:add-up-to#e-72ae26e4b82808a0",
+          "text": "All this adds up to a state of hurry",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-a:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 19
+          },
+          "parts": [
+            [
+              9,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:add-up-to#s2",
+      "pos": "短语",
+      "glossZh": "加起来等于；总计达",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:add-up-to#e-1a90682a78b030d3",
+          "text": "In a zero-sum game, the total of gains and losses among the players always adds up to zero.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

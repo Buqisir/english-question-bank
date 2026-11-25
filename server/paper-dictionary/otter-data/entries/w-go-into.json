@@ -1,0 +1,285 @@
+{
+  "entryId": "w:go-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes into",
+    "going into",
+    "went into"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "into"
+      ],
+      [
+        "goes",
+        "into"
+      ],
+      [
+        "going",
+        "into"
+      ],
+      [
+        "went",
+        "into"
+      ],
+      [
+        "gone",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go into",
+      "tags": []
+    },
+    {
+      "form": "gone into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go into sth",
+  "senses": [
+    {
+      "senseId": "w:go-into#s1",
+      "pos": "短语",
+      "glossZh": "（资金、精力等）投入；用于",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-into#e-254f41b3121f3f48",
+          "text": "Since 1934, better than half a billion dollars has gone into that Fund to purchase more than 5 million acres of habitat.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          },
+          "parts": [
+            [
+              51,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-into#e-42b9621764d3d84f",
+          "text": "The main concern here is the amount of energy that goes into the making of new products and whether or not that extra carbon is worth the footprint the product will make once it gets to you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          },
+          "parts": [
+            [
+              51,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-into#e-2cdf382155f2aa0c",
+          "text": "Millions of hours of Minecraft gameplay videos went into training the world model behind Oasis.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-d:2",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-into#s2",
+      "pos": "短语",
+      "glossZh": "开始从事（某职业）；进入（某行业）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-into#e-df0b397634176d2f",
+          "text": "However, But her parents, both practicing doctors, urged her hard to go into medicine, arguing it would give her a stable, secure future.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 76
+          },
+          "parts": [
+            [
+              69,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-into#s3",
+      "pos": "短语",
+      "glossZh": "详细谈论；深入探究",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-into#e-055c484c0bd5e7ab",
+          "text": "When asked for a reasoning or answer to a question, do you find yourself needing to explain your thoughts at length, going into too much detail to ensure that your points are made?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 127
+          },
+          "parts": [
+            [
+              117,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              117,
+              127
+            ]
+          ]
+        }
+      ],
+      "note": "常用 go into detail。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-into#s4",
+      "pos": "短语",
+      "glossZh": "（一个数）整除（另一个数）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

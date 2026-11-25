@@ -83,8 +83,8 @@
     "mock": 336
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 334
+    "gaokao": 4,
+    "mock": 157
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 96
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -238,7 +238,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -291,7 +291,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -317,50 +317,16 @@
       ]
     },
     {
-      "senseId": "w:game#s5",
-      "pos": "短语",
-      "glossZh": "需要长期努力的事",
-      "pronunciationId": "w:game#p-main",
-      "note": "a long game。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:game#e-f7ce2930af555531",
-          "text": "“Feeding is a long game,” says Markey.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:game#s6",
       "pos": "n.",
       "glossZh": "猎物",
       "pronunciationId": "w:game#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -368,12 +334,12 @@
       "pos": "adj.",
       "glossZh": "愿意尝试的",
       "pronunciationId": "w:game#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -388,9 +354,93 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:game#s9",
+      "pos": "phr.",
+      "glossZh": "彻底改变局面的人或事物（game changer）",
+      "pronunciationId": "w:game#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-e12c9d906303518d",
+          "text": "The wheelchair was a game changer in regaining some of my independence.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:game#e-2ac44c3a6a0151c0",
+          "text": "Eufy says its new model, E15 (out in June), is fully “self-driving” – no wires or pegs (钉子) needed, which could make it a game changer.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:game#e-46a6e33d73838e1a",
+          "text": "It is a game changer.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-long-game",
+    "w:beautiful-game",
+    "w:game-on",
+    "w:game-over",
+    "w:game-time",
+    "w:mind-game",
+    "w:play-the-game",
+    "w:rules-of-the-game"
+  ]
 }

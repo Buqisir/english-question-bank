@@ -1,0 +1,174 @@
+{
+  "entryId": "w:a-great-deal",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "great deal"
+  ],
+  "pattern": {
+    "tokens": [
+      "a",
+      "great",
+      "deal"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "great",
+        "deal"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a great deal",
+  "senses": [
+    {
+      "senseId": "w:a-great-deal#s1",
+      "pos": "短语",
+      "glossZh": "很多；在很大程度上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-great-deal#e-5b6ab40afec63ff2",
+          "text": "But if you have to read a great deal for study, you will appreciate the benefits of being able to read more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-great-deal#e-833a00278031036a",
+          "text": "What they found was that women’s leg strength hasn’t changed a great deal, but their arms used to be very powerful.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 73
+          },
+          "parts": [
+            [
+              61,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-great-deal#e-f72fb3e1f2899ec9",
+          "text": "That was the moment I figured out that resting to recover would require a great deal more time spent lying around than I had expected.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 84
+          },
+          "parts": [
+            [
+              72,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              84
+            ]
+          ]
+        }
+      ],
+      "note": "修饰动作或程度，在比较级前表示“……得多”。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:a-great-deal#s2",
+      "pos": "短语",
+      "glossZh": "大量的；许多的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:deal#s2",
+        "w:great#s5"
+      ],
+      "examples": [],
+      "note": "a great deal of 后接不可数名词。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

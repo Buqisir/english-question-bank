@@ -1,0 +1,265 @@
+{
+  "entryId": "w:at-the-same-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "same",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "same",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the same time",
+  "senses": [
+    {
+      "senseId": "w:at-the-same-time#s1",
+      "pos": "短语",
+      "glossZh": "同时；在同一时间",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:same#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-same-time#e-0ee0b5d24f76be30",
+          "text": "Low intensity speakers find it rude to talk at the same time and prefer people speak one after another in conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 60
+          },
+          "parts": [
+            [
+              44,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-same-time#e-24277e4cb9527e5c",
+          "text": "It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 121
+          },
+          "parts": [
+            [
+              105,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              121
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-same-time#e-555960a214d7f655",
+          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 43
+          },
+          "parts": [
+            [
+              27,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 10,
+        "mock": 36
+      }
+    },
+    {
+      "senseId": "w:at-the-same-time#s2",
+      "pos": "短语",
+      "glossZh": "另一方面；不过（引出需要兼顾的情况）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-the-same-time#e-92db974b667cef71",
+          "text": "At the same time, the experience of community repair has exposed a deeper problem in manufacturing.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-same-time#e-7faad28702883192",
+          "text": "Your body goes still, you can’t feel much but, at the same time, your senses are working overtime.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 63
+          },
+          "parts": [
+            [
+              47,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-the-same-time#e-f68f68cd62ceafa6",
+          "text": "At the same time, it is the focus on quotation that limits the course’s value as a creative-writing toolbox.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

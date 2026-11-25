@@ -1,0 +1,185 @@
+{
+  "entryId": "w:keep-fit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "fit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "fit"
+      ],
+      [
+        "keeping",
+        "fit"
+      ],
+      [
+        "keeps",
+        "fit"
+      ],
+      [
+        "kept",
+        "fit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keeping fit",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep fit",
+  "senses": [
+    {
+      "senseId": "w:keep-fit#s1",
+      "pos": "短语",
+      "glossZh": "保持身体健康；锻炼以保持体能",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-fit#e-55d848723341f91e",
+          "text": "They can help you out in just about every area of your life, whether it’s keeping fit, communicating with friends, or even learning a language.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 85
+          },
+          "parts": [
+            [
+              74,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-fit#e-b4b491a75796a1ef",
+          "text": "the tempting foods and our efforts to keep fit",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:33#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          },
+          "parts": [
+            [
+              38,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-fit#e-968f46533a388984",
+          "text": "The difficulty of keeping fit.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2022-ii:32#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:keep-fit#s2",
+      "pos": "短语",
+      "glossZh": "健身活动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "名词用法也写作 keep-fit。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

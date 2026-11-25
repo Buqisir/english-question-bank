@@ -1,0 +1,144 @@
+{
+  "entryId": "w:make-the-difference",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "difference"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "difference"
+      ],
+      [
+        "made",
+        "the",
+        "difference"
+      ],
+      [
+        "makes",
+        "the",
+        "difference"
+      ],
+      [
+        "making",
+        "the",
+        "difference"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made the difference",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the difference",
+  "senses": [
+    {
+      "senseId": "w:make-the-difference#s1",
+      "pos": "短语",
+      "glossZh": "起决定作用；左右结果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-the-difference#e-7c26e138ca3c1611",
+          "text": "What made the difference?",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 24
+          },
+          "parts": [
+            [
+              5,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-the-difference#e-f11d6ead2e5c4a22",
+          "text": "“That could make the difference between passing and failing, and potentially reduce dropout rates and increase graduation rates over time,” says Dr. Beland, an economist at Carleton University.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 31
+          },
+          "parts": [
+            [
+              12,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "常接 between A and B，说明取决于这一因素的两种结果。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

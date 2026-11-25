@@ -73,8 +73,8 @@
     "mock": 28
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 22
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -85,7 +85,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -216,40 +216,6 @@
           "target": {
             "start": 137,
             "end": 144
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:blanket#s3",
-      "pos": "短语",
-      "glossZh": "给人安全感的东西",
-      "pronunciationId": "w:blanket#p-main",
-      "note": "security blanket。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blanket#e-6db7cc3b31ade7d5",
-          "text": "necessary and they’re keeping it as a security blanket - 19 percent say they never use it while a further 13 percent keep it in case of emergencies.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 54
           }
         }
       ]
@@ -314,7 +280,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -346,6 +312,11 @@
       "reason": "行业专门义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:security-blanket"
+  ]
 }

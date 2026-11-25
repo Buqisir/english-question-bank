@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 2
   },
   "senses": [
     {
@@ -123,7 +123,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -290,12 +290,25 @@
       "pos": "n.",
       "glossZh": "（音乐销量等的）排行榜",
       "pronunciationId": "w:chart#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:chart#s7",
+      "pos": "v.",
+      "glossZh": "规划（路线或方向）",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
     }
   ],
@@ -305,6 +318,6 @@
       "reason": "领域旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -59,8 +59,8 @@
     "mock": 132
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 127
+    "gaokao": 5,
+    "mock": 16
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -337,7 +337,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -363,52 +363,207 @@
       ]
     },
     {
-      "senseId": "w:station#s6",
-      "pos": "短语",
-      "glossZh": "太空站",
+      "senseId": "w:station#s7",
+      "pos": "v.",
+      "glossZh": "派驻",
       "pronunciationId": "w:station#p-main",
-      "note": "space station。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:station#s8",
+      "pos": "n.",
+      "glossZh": "消防站",
+      "pronunciationId": "w:station#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:station#e-a387a1cbf274b09a",
-          "text": "Space Station.",
+          "exampleId": "w:station#e-970f5503b4c5c2ea",
+          "text": "So we brought it down to the fire station.",
           "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
             "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "C",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:3",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 6,
-            "end": 13
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:station#e-93cce1e93bd1f027",
+          "text": "He has already taken the initiative to educate local fire stations on safe bee removal, in the hope of saving local hives.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:station#e-906b07e5f328a061",
+          "text": "The results come from an interesting experiment involving five-year-old participants who became familiar with a virtual location called “Tiny Town” full of entertaining landmarks like ice cream stores, playgrounds and fire stations.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 223,
+            "end": 231
           }
         }
       ]
     },
     {
-      "senseId": "w:station#s7",
-      "pos": "v.",
-      "glossZh": "派驻",
+      "senseId": "w:station#s9",
+      "pos": "n.",
+      "glossZh": "工业厂站，如发电站或加工站",
       "pronunciationId": "w:station#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:station#e-f7b14745604432a2",
+          "text": "This breakthrough brings efficient and practical osmotic power stations one step closer to reality.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:station#e-c0daf3449a39ebb5",
+          "text": "They overheard a plan to build a processing station for natural gas 14 miles off the coast of Oxnard.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:station#s10",
+      "pos": "n.",
+      "glossZh": "电视台",
+      "pronunciationId": "w:station#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:station#e-1002392dbd423c0a",
+          "text": "At a TV station.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:station#s11",
+      "pos": "n.",
+      "glossZh": "大型牧场",
+      "pronunciationId": "w:station#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:station#e-5f68d6fd6a33fc90",
+          "text": "Offering both 4WD and hiking tours, Tekapo Adventures provides exclusive access to these stations, some of which are as large as Wellington, New Zealand’s capital city.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -417,6 +572,8 @@
       "reason": "专名或专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

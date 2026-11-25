@@ -42,7 +42,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 46
+    "mock": 0
   },
   "senses": [
     {
@@ -53,7 +53,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -128,20 +128,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:butterfly#s3",
-      "pos": "短语",
-      "glossZh": "紧张得心里直打鼓",
-      "pronunciationId": "w:butterfly#p-main",
-      "note": "have butterflies in one's stomach",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -150,6 +136,8 @@
       "reason": "行业、科幻专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

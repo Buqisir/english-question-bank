@@ -62,8 +62,8 @@
     "mock": 692
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 689
+    "gaokao": 11,
+    "mock": 499
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 89,
-        "mock": 0
+        "mock": 94
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 26,
-        "mock": 0
+        "mock": 90
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -281,286 +281,6 @@
       ]
     },
     {
-      "senseId": "w:best#s4",
-      "pos": "短语",
-      "glossZh": "尽力；竭尽全力",
-      "pronunciationId": "w:best#p-main",
-      "note": "do/try one’s best；to the best of one’s ability。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-7aaeaadb525b041a",
-          "text": "He always participated to the best of his ability in whatever they were doing.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "writing-continuation-7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 30,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:best#e-50ca9e6d7e37ac9e",
-          "text": "Reisley said he’s tried his best to be a good steward (管家) not just of the Wright creation he lives in, but all others as well.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:best#e-37a70758f7dd1c78",
-          "text": "“Although it is a sticky mission, we’re trying our best to create a space where everyone, regardless of their abilities, can build a future in animal care,” Mcvilly said excitedly, pointing out that the dogs play an important role in the project.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 55
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:best#s5",
-      "pos": "短语",
-      "glossZh": "尽量利用（不利处境）",
-      "pronunciationId": "w:best#p-main",
-      "note": "make the best of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-beb0b1b30a9de497",
-          "text": "Making the best of this close encounter(相遇), I took some pictures of the bear.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 15
-          }
-        },
-        {
-          "exampleId": "w:best#e-18e042db9fc61c16",
-          "text": "Needless to say, I didn’t look forward to an entire term of being brushed off, but I tried to make the best of it and didn’t say anything for fear that I would make things worse.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 103,
-            "end": 107
-          }
-        },
-        {
-          "exampleId": "w:best#e-ad03d6614d7e713c",
-          "text": "Some looked like they had totally given up on life, while others seemed to be making the best of the situation, smiling and joking.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 89,
-            "end": 93
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:best#s6",
-      "pos": "短语",
-      "glossZh": "处于最佳状态",
-      "pronunciationId": "w:best#p-main",
-      "note": "at one’s best。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-5200a2c452be7302",
-          "text": "Culinary theater at its best.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 28
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:best#s7",
-      "pos": "短语",
-      "glossZh": "至多；充其量",
-      "pronunciationId": "w:best#p-main",
-      "note": "at best。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-5c0c0f2fc1abafd1",
-          "text": "Many societies tend to view fat as soft body tissue that keeps us warm at best, if not something annoying to be rid of.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:1",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:best#s8",
-      "pos": "短语",
-      "glossZh": "胜过；占上风",
-      "pronunciationId": "w:best#p-main",
-      "note": "get the best of sth/sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-b0c1746c7c5a3f26",
-          "text": "In his 1936 work How to Win Friends and Influence People, Dale Carnegie wrote: “I have come to the conclusion that there is only one way to get the best of an argument- and that is to avoid it.” This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 148,
-            "end": 152
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:best#s9",
-      "pos": "短语",
-      "glossZh": "最妙的是；最重要的是",
-      "pronunciationId": "w:best#p-main",
-      "note": "best of all。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:best#e-473ec45991c1aa45",
-          "text": "Best of all, my passion for my hobbies seems to inspire them to be passionate about finding their own.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:best#s10",
       "pos": "v.",
       "glossZh": "打败；超越",
@@ -581,6 +301,21 @@
       "reason": "同形专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-best",
+    "w:at-ones-best",
+    "w:best-of-all",
+    "w:best-of-luck",
+    "w:best-part-of",
+    "w:do-ones-best",
+    "w:get-the-best-of-sb-sth",
+    "w:it-happens-to-the-best-of-us",
+    "w:make-the-best-of-sth",
+    "w:to-the-best-of-ones-ability",
+    "w:try-ones-best"
+  ]
 }

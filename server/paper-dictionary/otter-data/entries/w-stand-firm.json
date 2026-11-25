@@ -1,0 +1,120 @@
+{
+  "entryId": "w:stand-firm",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "firm"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "firm"
+      ],
+      [
+        "standing",
+        "firm"
+      ],
+      [
+        "stands",
+        "firm"
+      ],
+      [
+        "stood",
+        "firm"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stood firm",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand firm",
+  "senses": [
+    {
+      "senseId": "w:stand-firm#s1",
+      "pos": "短语",
+      "glossZh": "（建筑等）经受冲击而屹立不倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-firm#e-f63f04a19e8a4e22",
+          "text": "His inspiration came during a visit to his hometown, where the ancient Luoyang Bridge has stood firm for centuries despite the wearing effect of seawater.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 100
+          },
+          "parts": [
+            [
+              90,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stand-firm#s2",
+      "pos": "短语",
+      "glossZh": "顶住压力；坚定立场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

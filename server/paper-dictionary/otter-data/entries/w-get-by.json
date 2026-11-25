@@ -1,0 +1,171 @@
+{
+  "entryId": "w:get-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting by",
+    "got by"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "by"
+      ],
+      [
+        "getting",
+        "by"
+      ],
+      [
+        "got",
+        "by"
+      ],
+      [
+        "gets",
+        "by"
+      ],
+      [
+        "gotten",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get by",
+  "senses": [
+    {
+      "senseId": "w:get-by#s1",
+      "pos": "短语",
+      "glossZh": "勉强维持生活；凑合应付",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-by#e-29d3bdef9789ddf2",
+          "text": "Muh listened attentively, as she always did, and after I finished, she said very calmly, “Honey, don’t just do enough to get by.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 127
+          },
+          "parts": [
+            [
+              121,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              127
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-by#e-efb89600fab6ab08",
+          "text": "So it’s worth asking: Do I want to spend my whole life just getting by?",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 70
+          },
+          "parts": [
+            [
+              60,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-by#e-961db756dfac1bb5",
+          "text": "I could get by, but I was still speaking English.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 14
+          },
+          "parts": [
+            [
+              8,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

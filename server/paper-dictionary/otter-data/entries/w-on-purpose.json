@@ -1,0 +1,157 @@
+{
+  "entryId": "w:on-purpose",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "purpose"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "purpose"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on purpose",
+  "senses": [
+    {
+      "senseId": "w:on-purpose#s1",
+      "pos": "短语",
+      "glossZh": "故意地；有意地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:on#s19",
+        "w:purpose#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-purpose#e-f484df5fe8dc4146",
+          "text": "Communicating messages on purpose.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-purpose#e-7462e8aaac82209a",
+          "text": "An assistant practices a foreigner’s tones on purpose.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-zj-taizhou-2026-m2:32#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-purpose#e-1c85e1bfe458a3c2",
+          "text": "This was no accident: this was damage on purpose!",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 48
+          },
+          "parts": [
+            [
+              38,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

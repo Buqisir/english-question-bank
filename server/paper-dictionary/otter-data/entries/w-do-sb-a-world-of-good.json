@@ -1,0 +1,73 @@
+{
+  "entryId": "w:do-sb-a-world-of-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "do",
+      {
+        "slot": "sb"
+      },
+      "a",
+      "world",
+      "of",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "do",
+        {
+          "slot": "sb"
+        },
+        "a",
+        "world",
+        "of",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "do sb a world of good",
+  "senses": [
+    {
+      "senseId": "w:do-sb-a-world-of-good#s1",
+      "pos": "短语",
+      "glossZh": "对某人大有好处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:world#s8"
+      ],
+      "examples": [],
+      "note": "常指让某人的身体或心情大为好转。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

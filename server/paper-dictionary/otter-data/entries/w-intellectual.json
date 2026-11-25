@@ -54,7 +54,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 14
+    "mock": 3
   },
   "senses": [
     {
@@ -65,7 +65,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -160,59 +160,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:intellectual#s3",
-      "pos": "短语",
-      "glossZh": "知识产权",
-      "pronunciationId": "w:intellectual#p-main",
-      "note": "intellectual property。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:intellectual#e-495885fa8045bbfb",
-          "text": "While tech companies argue that such data is essential for improving AI, many authors, including Jack, believe they should be paid for the use of their intellectual property.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 152,
-            "end": 164
-          }
-        },
-        {
-          "exampleId": "w:intellectual#e-70fb544a549acd78",
-          "text": "Dr Randazzo said current regulation failed to prioritize fundamental human rights and freedoms such as privacy, anti-discrimination, user autonomy, and intellectual property rights – mainly thanks to the lack of transparency（透明性）of many algorithmic models.",
-          "source": {
-            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
-            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
-            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 152,
-            "end": 164
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -221,6 +168,8 @@
       "reason": "通常用 intellect"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false
 }

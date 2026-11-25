@@ -1,0 +1,157 @@
+{
+  "entryId": "w:i-love-you",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I love you"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "love",
+      "you"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "love",
+        "you"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i love you",
+  "senses": [
+    {
+      "senseId": "w:i-love-you#s1",
+      "pos": "短语",
+      "glossZh": "我爱你",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-love-you#e-382e4c7d004de4a6",
+          "text": "The closest match I can think of in English to this would be something like “I <3 you” or “I heart you”, representing “I love you”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 129
+          },
+          "parts": [
+            [
+              119,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              129
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-love-you#e-ba58676d35ee692c",
+          "text": "A parent who values their child can say, “I love you, and I’m not buying you that toy.” Validation may ease an emotional state, but being valued shapes the self.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 52
+          },
+          "parts": [
+            [
+              42,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-love-you#e-6db6095df84a09e3",
+          "text": "I love you, Mom, forever and always.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "可用于家人、伴侣或亲密的朋友。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

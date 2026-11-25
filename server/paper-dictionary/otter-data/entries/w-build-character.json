@@ -1,0 +1,108 @@
+{
+  "entryId": "w:build-character",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "build",
+      "character"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "character"
+      ],
+      [
+        "building",
+        "character"
+      ],
+      [
+        "builds",
+        "character"
+      ],
+      [
+        "built",
+        "character"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "builds character",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build character",
+  "senses": [
+    {
+      "senseId": "w:build-character#s1",
+      "pos": "短语",
+      "glossZh": "磨炼品格；使人更坚韧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:build-character#e-82747fb3a1fdb512",
+          "text": "Suffering builds character.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-heze-2026-03-first:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 26
+          },
+          "parts": [
+            [
+              10,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

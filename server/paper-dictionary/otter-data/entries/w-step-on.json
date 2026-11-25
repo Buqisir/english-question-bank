@@ -1,0 +1,241 @@
+{
+  "entryId": "w:step-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "steps on"
+  ],
+  "pattern": {
+    "tokens": [
+      "step",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "on"
+      ],
+      [
+        "steps",
+        "on"
+      ],
+      [
+        "stepped",
+        "on"
+      ],
+      [
+        "stepping",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "step on",
+      "tags": []
+    },
+    {
+      "form": "stepped on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:step-on#s1",
+      "pos": "短语",
+      "glossZh": "踩到；踩在……上",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:step-on#e-cbe45f5ae49d93b4",
+          "text": "You wouldn’t wanna get stepped on by members of the track team in the middle of your beauty sleep, right?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          },
+          "parts": [
+            [
+              23,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-on#e-ab2fe843cdc07c40",
+          "text": "Moose aren’t carnivorous（食肉动物）, but they’ll charge at, kick or step on anything fiercely they sense a threat.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          },
+          "parts": [
+            [
+              63,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-on#e-05a770024d9b57ee",
+          "text": "Deema Assaf walked slowly through Birgish, one of only a few forests in Jordan, careful not to step on one of the delicate wild orchids.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 102
+          },
+          "parts": [
+            [
+              95,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              95,
+              102
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:step-on#s2",
+      "pos": "短语",
+      "glossZh": "欺压；霸凌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-on#s3",
+      "pos": "短语",
+      "glossZh": "侵入他人的地盘或业务范围",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-on#s4",
+      "pos": "短语",
+      "glossZh": "干扰或压过同频无线电信号",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-on#s5",
+      "pos": "短语",
+      "glossZh": "给毒品掺假增量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:step-on#s6",
+      "pos": "短语",
+      "glossZh": "上前对抗；上前交战",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

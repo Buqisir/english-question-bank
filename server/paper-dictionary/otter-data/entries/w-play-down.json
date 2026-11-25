@@ -1,0 +1,70 @@
+{
+  "entryId": "w:play-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "play",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "down"
+      ],
+      [
+        "played",
+        "down"
+      ],
+      [
+        "playing",
+        "down"
+      ],
+      [
+        "plays",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play sth down",
+  "senses": [
+    {
+      "senseId": "w:play-down#s1",
+      "pos": "短语",
+      "glossZh": "淡化；轻描淡写",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,104 @@
+{
+  "entryId": "w:order-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "orders in"
+  ],
+  "pattern": {
+    "tokens": [
+      "order",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "order",
+        "in"
+      ],
+      [
+        "orders",
+        "in"
+      ],
+      [
+        "ordered",
+        "in"
+      ],
+      [
+        "ordering",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "order in",
+  "senses": [
+    {
+      "senseId": "w:order-in#s1",
+      "pos": "短语",
+      "glossZh": "点外卖；叫人送餐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:order-in#e-bd272295e1bb475b",
+          "text": "It is easy to order in, or to hire someone to cook if you have the resources.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          },
+          "parts": [
+            [
+              14,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

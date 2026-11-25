@@ -1,0 +1,178 @@
+{
+  "entryId": "w:result-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "results in"
+  ],
+  "pattern": {
+    "tokens": [
+      "result",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "result",
+        "in"
+      ],
+      [
+        "results",
+        "in"
+      ],
+      [
+        "resulted",
+        "in"
+      ],
+      [
+        "resulting",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "resulted in",
+      "tags": []
+    },
+    {
+      "form": "resulting in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "result in",
+  "senses": [
+    {
+      "senseId": "w:result-in#s1",
+      "pos": "短语",
+      "glossZh": "导致；造成；带来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s89"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:result-in#e-67db8349ce3ed3bd",
+          "text": "Failure to provide enough chaperones will result in an extra charge of $50 per absent adult.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 51
+          },
+          "parts": [
+            [
+              42,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:result-in#e-cdfafc72e4ddc33d",
+          "text": "His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          },
+          "parts": [
+            [
+              17,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:result-in#e-cb5d5d68a19c3df0",
+          "text": "This seemingly unusual way of demonstrating fondness can result in unpleasant behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 66
+          },
+          "parts": [
+            [
+              57,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              66
+            ]
+          ]
+        }
+      ],
+      "note": "in 后接所产生的结果。",
+      "counts": {
+        "gaokao": 15,
+        "mock": 57
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 15,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

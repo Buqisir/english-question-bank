@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 10,
-    "mock": 133
+    "mock": 0
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 38,
-        "mock": 0
+        "mock": 133
       },
       "folded": false,
       "examples": [
@@ -129,6 +129,6 @@
       "reason": "比喻义少见，姓氏是专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

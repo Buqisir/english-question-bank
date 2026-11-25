@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 24
+    "mock": 7
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -122,6 +122,40 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:frightened#s2",
+      "pos": "v.",
+      "glossZh": "使害怕",
+      "pronunciationId": "w:frightened#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frightened#e-0ee7aedcad4df0ef",
+          "text": "It frightened him.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -130,6 +164,6 @@
       "reason": "g1 是及物动词，归 frighten"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

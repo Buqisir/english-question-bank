@@ -1,0 +1,138 @@
+{
+  "entryId": "w:cant-help-but-do-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "can’t help but do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "can't",
+      "help",
+      "but",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can't",
+        "help",
+        "but",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "can't help but",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can't help but do sth",
+  "senses": [
+    {
+      "senseId": "w:cant-help-but-do-sth#s1",
+      "pos": "短语",
+      "glossZh": "忍不住做某事；不由得做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:help#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cant-help-but-do-sth#e-162be98c9684f4d1",
+          "text": "When the night really falls and the sound of my family’s chatter flows from the living room, I still can’t help but reach for the recipe book.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 115
+          },
+          "parts": [
+            [
+              101,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-help-but-do-sth#e-c6fa4a198efe89f1",
+          "text": "It feels like this change has come about gradually, and been accompanied by challenges like loneliness, and a breakdown of our community ties – and I can’t help but think they must be connected.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 164
+          },
+          "parts": [
+            [
+              150,
+              164
+            ]
+          ],
+          "highlightRanges": [
+            [
+              150,
+              164
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,261 @@
+{
+  "entryId": "w:a-little",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "little"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "little"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a little",
+  "senses": [
+    {
+      "senseId": "w:a-little#s1",
+      "pos": "短语",
+      "glossZh": "有点；稍微",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-little#e-921770e3d3832b26",
+          "text": "Eric woke up a little later when he heard children playing outside.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little#e-2b33d928cac4fafc",
+          "text": "Does your soul die a little every time you throw away unused food?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little#e-a6adc16ac20d918d",
+          "text": "“I have an idea, but it might be a little crazy,” smiled Mom.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 14,
+        "mock": 60
+      }
+    },
+    {
+      "senseId": "w:a-little#s2",
+      "pos": "短语",
+      "glossZh": "一点；少量",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-little#e-c065641d1a639f13",
+          "text": "I bought a handful of perfectly ripe small strawberries and a little sweet melon.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little#e-a6844b15931e94c8",
+          "text": "The wise old man told him to travel to the Li River ~ perhaps he could learn a little from the greatest artist in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:grammar-fill:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 85
+          },
+          "parts": [
+            [
+              77,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little#e-4f5dfb34aea45290",
+          "text": "A little self-forgiveness also goes a long way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "note": "可接不可数名词，也可单用。",
+      "counts": {
+        "gaokao": 9,
+        "mock": 42
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 23,
+    "mock": 102
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

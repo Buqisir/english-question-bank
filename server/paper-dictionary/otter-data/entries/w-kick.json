@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 17
+    "mock": 14
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -175,12 +175,12 @@
       "pos": "n.",
       "glossZh": "踢；一脚",
       "pronunciationId": "w:kick#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -195,184 +195,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:kick#s5",
-      "pos": "短语",
-      "glossZh": "开始",
-      "pronunciationId": "w:kick#p-main",
-      "note": "kick off。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:kick#e-1f57108fc533ade7",
-          "text": "To kick off your garden marker project, you’ll need to get hands-on with some oven-bake clay.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:kick#e-f0b933d93a35b30e",
-          "text": "Their __46__ kicked off four years ago.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:kick#e-a683221744670add",
-          "text": "Kick off your day with a calm activity.",
-          "source": {
-            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
-            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
-            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:seven-choices:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:kick#s6",
-      "pos": "短语",
-      "glossZh": "开始起作用",
-      "pronunciationId": "w:kick#p-main",
-      "note": "kick in。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:kick#e-8a11a776c06d0dd4",
-          "text": "When Claude is asked for the opposite of “big” in English, or the same concept in Chinese, the same feature lights up in every case, before more language-specific circuits kick in to “translate” the concept of smallness into a particular word.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 172,
-            "end": 176
-          }
-        },
-        {
-          "exampleId": "w:kick#e-9f370f3cd9928c8e",
-          "text": "When it comes to navigating(导航) areas, past studies showed that the abilities don't truly kick in until 12.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
-            "paperTitle": "南京市2026届高三年级学情调研 英语",
-            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 90,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:kick#e-4783ecc9e161c41f",
-          "text": "Stage fright would kick in.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
-            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
-            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:kick#s7",
-      "pos": "短语",
-      "glossZh": "把……赶走",
-      "pronunciationId": "w:kick#p-main",
-      "note": "kick sb out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:kick#e-59f7ab8bbaf7a553",
-          "text": "Was I getting kicked out of the __45__?",
-          "source": {
-            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
-            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
-            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:cloze:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -381,6 +203,15 @@
       "reason": "专业用法或旧俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:kick-around",
+    "w:kick-in",
+    "w:kick-it",
+    "w:kick-off",
+    "w:kick-sb-out"
+  ]
 }

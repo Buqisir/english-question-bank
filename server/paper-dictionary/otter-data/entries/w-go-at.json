@@ -1,0 +1,87 @@
+{
+  "entryId": "w:go-at",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "at"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "at"
+      ],
+      [
+        "goes",
+        "at"
+      ],
+      [
+        "going",
+        "at"
+      ],
+      [
+        "gone",
+        "at"
+      ],
+      [
+        "went",
+        "at"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go at sb/sth",
+  "senses": [
+    {
+      "senseId": "w:go-at#s1",
+      "pos": "短语",
+      "glossZh": "着手处理；努力攻克",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-at#s2",
+      "pos": "短语",
+      "glossZh": "扑向并攻击（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

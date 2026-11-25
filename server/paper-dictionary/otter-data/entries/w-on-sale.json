@@ -1,0 +1,169 @@
+{
+  "entryId": "w:on-sale",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "sale"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "sale"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on sale",
+  "senses": [
+    {
+      "senseId": "w:on-sale#s1",
+      "pos": "短语",
+      "glossZh": "在售；上市销售",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sale#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-sale#e-602b55c15d823a16",
+          "text": "“Blind boxes” containing randomly flavored ice creams are also on sale to attract customers.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          },
+          "parts": [
+            [
+              63,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-sale#e-5338980b3674b399",
+          "text": "Last year, US biotech company Light Bio launched the Firefly Petunia, the first genetically engineered glowing plant to go on sale.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 130
+          },
+          "parts": [
+            [
+              123,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              130
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-sale#e-c75dcfe53cce52ee",
+          "text": "This is because most chewing gum on sale is made from oil-based synthetic (合成的) rubbers, similar to the material used in car tyres.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          },
+          "parts": [
+            [
+              33,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:on-sale#s2",
+      "pos": "短语",
+      "glossZh": "降价出售；打折",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sale#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

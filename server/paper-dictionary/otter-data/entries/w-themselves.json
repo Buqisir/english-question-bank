@@ -35,8 +35,8 @@
     "mock": 139
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 138
+    "gaokao": 2,
+    "mock": 1
   },
   "senses": [
     {
@@ -48,7 +48,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 109
       },
       "folded": false,
       "examples": [
@@ -120,7 +120,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -191,7 +191,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -234,43 +234,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:themselves#s4",
-      "pos": "短语",
-      "glossZh": "独自",
-      "pronunciationId": "w:themselves#p-main",
-      "note": "by themselves。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:themselves#e-3671d4b4904cfcad",
-          "text": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 91,
-            "end": 101
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:god-helps-those-who-help-themselves"
+  ]
 }

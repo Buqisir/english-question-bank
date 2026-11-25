@@ -1,0 +1,182 @@
+{
+  "entryId": "w:run-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran out",
+    "running out",
+    "runs out"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "out"
+      ],
+      [
+        "ran",
+        "out"
+      ],
+      [
+        "running",
+        "out"
+      ],
+      [
+        "runs",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run out",
+  "senses": [
+    {
+      "senseId": "w:run-out#s1",
+      "pos": "短语",
+      "glossZh": "（时间、耐心、资源等）耗尽；用完",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-out#e-f3ca77f376c3ec04",
+          "text": "“I’m so sorry, but my...” she began, only to be cut off by Sophia whose patience had run out.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          },
+          "parts": [
+            [
+              85,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-out#e-5300bcba4f8b40d2",
+          "text": "Halfway through the test, I blanked on a formula, and time was running out.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 74
+          },
+          "parts": [
+            [
+              63,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-out#e-abce171b4c9842bf",
+          "text": "Power runs out fast.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          },
+          "parts": [
+            [
+              6,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:run-out#s2",
+      "pos": "短语",
+      "glossZh": "（合同、证件等）到期；失效",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

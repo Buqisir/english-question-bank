@@ -1,0 +1,156 @@
+{
+  "entryId": "w:at-times",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "times"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "times"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at times",
+  "senses": [
+    {
+      "senseId": "w:at-times#s1",
+      "pos": "短语",
+      "glossZh": "有时；间或",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-times#e-bc62ea3736bf6ce6",
+          "text": "And in the process, I’ve experienced things that really surprise me at times.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:grammar-fill:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 76
+          },
+          "parts": [
+            [
+              68,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-times#e-3c6f264b11fab7b5",
+          "text": "You’ll hit roadblocks, and you’ll feel discouraged at times.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          },
+          "parts": [
+            [
+              51,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-times#e-f889500b08f7aad1",
+          "text": "We waste food unintentionally at times.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-i:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          },
+          "parts": [
+            [
+              30,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 15,
+        "mock": 11
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 15,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

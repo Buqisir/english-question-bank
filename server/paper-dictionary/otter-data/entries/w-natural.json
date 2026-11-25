@@ -54,8 +54,8 @@
     "mock": 333
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 330
+    "gaokao": 4,
+    "mock": 137
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 153
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -210,7 +210,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -281,7 +281,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -326,40 +326,6 @@
       ]
     },
     {
-      "senseId": "w:natural#s5",
-      "pos": "短语",
-      "glossZh": "自然选择",
-      "pronunciationId": "w:natural#p-main",
-      "note": "natural selection。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:natural#e-5f36fc687e1b950d",
-          "text": "“it seemed like the perfect chance for natural selection to act on a population,” said Dr. Ilardo.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:natural#s6",
       "pos": "n.",
       "glossZh": "天生擅长某事的人",
@@ -379,6 +345,8 @@
       "reason": "专业或特定语境用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

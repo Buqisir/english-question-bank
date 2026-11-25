@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 0
+    "mock": 2
   },
   "senses": [
     {
@@ -100,77 +100,10 @@
       ]
     },
     {
-      "senseId": "w:minister#s2",
-      "pos": "短语",
-      "glossZh": "首相；总理",
-      "pronunciationId": "w:minister#p-main",
-      "note": "prime minister。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:minister#e-02a0fad0498ae854",
-          "text": "There, a street honoring anti-apartheid (反种族隔离) leader Albert Luthuli has a sign noting: “Formerly: Louis Botha street,” named after a prime minister of colonial South Africa.",
-          "source": {
-            "paperId": "paper-hz-2026-apr-gaosan-quality",
-            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
-            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 141,
-            "end": 149
-          }
-        },
-        {
-          "exampleId": "w:minister#e-88f61c231ffd21bc",
-          "text": "A letter from a prime minister, a child’s notebook, a prized sporting medal: what do these things have in common?",
-          "source": {
-            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
-            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
-            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:minister#s3",
       "pos": "n.",
       "glossZh": "牧师",
       "pronunciationId": "w:minister#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:minister#s4",
-      "pos": "短语",
-      "glossZh": "照顾；满足……的需要",
-      "pronunciationId": "w:minister#p-main",
-      "note": "minister to sb/sth。",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -186,6 +119,11 @@
       "reason": "外交专门义或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:minister-to-sb-sth"
+  ]
 }

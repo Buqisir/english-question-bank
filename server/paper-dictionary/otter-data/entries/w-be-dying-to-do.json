@@ -1,0 +1,70 @@
+{
+  "entryId": "w:be-dying-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "be dying to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "dying",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "dying",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be dying to do",
+  "senses": [
+    {
+      "senseId": "w:be-dying-to-do#s1",
+      "pos": "短语",
+      "glossZh": "非常想做某事；迫不及待想做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:die#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

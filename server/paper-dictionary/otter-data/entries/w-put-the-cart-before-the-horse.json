@@ -1,0 +1,108 @@
+{
+  "entryId": "w:put-the-cart-before-the-horse",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "the",
+      "cart",
+      "before",
+      "the",
+      "horse"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "the",
+        "cart",
+        "before",
+        "the",
+        "horse"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "putting the cart before the horse",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put the cart before the horse",
+  "senses": [
+    {
+      "senseId": "w:put-the-cart-before-the-horse#s1",
+      "pos": "短语",
+      "glossZh": "本末倒置；颠倒做事的先后顺序",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:before#s6",
+        "w:horse#s2",
+        "w:put#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-the-cart-before-the-horse#e-c72a4e40212b9a6c",
+          "text": "putting the cart before the horse",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 33
+          },
+          "parts": [
+            [
+              0,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

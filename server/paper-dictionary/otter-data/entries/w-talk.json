@@ -62,8 +62,8 @@
     "mock": 647
   },
   "unassignedCounts": {
-    "gaokao": 7,
-    "mock": 647
+    "gaokao": 16,
+    "mock": 448
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 61,
-        "mock": 0
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 60,
-        "mock": 0
+        "mock": 152
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -336,12 +336,12 @@
       "pos": "n.",
       "glossZh": "会谈",
       "pronunciationId": "w:talk#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -358,110 +358,102 @@
       "examples": []
     },
     {
-      "senseId": "w:talk#s7",
-      "pos": "短语",
-      "glossZh": "闲聊",
+      "senseId": "w:talk#s9",
+      "pos": "v.",
+      "glossZh": "说话",
       "pronunciationId": "w:talk#p-main",
-      "note": "small talk。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 8,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:talk#e-7d6338ed91cb710e",
-          "text": "Who would like to make small talk according to the speaker?",
+          "exampleId": "w:talk#e-bb81b4b8402dad47",
+          "text": "Dong Mei’s laughter bubbled over as she described talking dinosaurs on a far-away planet.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
             "locator": {
-              "question": 17,
-              "questionId": "question:listening:17",
-              "sentence": 1
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:3",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 29,
-            "end": 33
+            "start": 50,
+            "end": 57
           }
         },
         {
-          "exampleId": "w:talk#e-77e8a91cd8242fb1",
-          "text": "Why do people have small talk?",
+          "exampleId": "w:talk#e-e0c96efd111505d5",
+          "text": "Recordings of these descriptions were subsequently analyzed by AI software to analyze features such as speed of talking, duration of pauses between words, and the variety of words used.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c",
             "locator": {
-              "question": 18,
-              "questionId": "question:listening:18",
-              "sentence": 1
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-c:3",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 25,
-            "end": 29
-          }
-        },
-        {
-          "exampleId": "w:talk#e-dd941bc88869c271",
-          "text": "Which of the following is a frequent topic in small talk?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 56
+            "start": 112,
+            "end": 119
           }
         }
       ]
     },
     {
-      "senseId": "w:talk#s8",
-      "pos": "短语",
-      "glossZh": "充分讨论",
+      "senseId": "w:talk#s10",
+      "pos": "v.",
+      "glossZh": "说服某人做某事（talk someone into）",
       "pronunciationId": "w:talk#p-main",
-      "note": "talk through。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:talk#e-4779d370707dc4c9",
-          "text": "“There are so many things in parenting that are good to talk through, but I’m not convinced that food is one of them,” she says.",
+          "exampleId": "w:talk#e-7b27bf8215a7089a",
+          "text": "At dinnertime, if I’m anywhere near my favourite restaurant, there’s not a chance you can talk me into going somewhere else – I want to eat at China Fun.",
           "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:1",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 56,
-            "end": 60
+            "start": 90,
+            "end": 94
           }
         }
       ]
+    },
+    {
+      "senseId": "w:talk#s11",
+      "pos": "v.",
+      "glossZh": "向某人详细讲解（talk someone through）",
+      "pronunciationId": "w:talk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -470,6 +462,20 @@
       "reason": "广播节目名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:real-talk",
+    "w:small-talk",
+    "w:talk-at",
+    "w:talk-back",
+    "w:talk-down",
+    "w:talk-down-to",
+    "w:talk-over",
+    "w:talk-shop",
+    "w:talk-through",
+    "w:you-can-talk"
+  ]
 }

@@ -1,0 +1,98 @@
+{
+  "entryId": "w:lose-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "losing it"
+  ],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "it"
+      ],
+      [
+        "losing",
+        "it"
+      ],
+      [
+        "loses",
+        "it"
+      ],
+      [
+        "lost",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose it",
+  "senses": [
+    {
+      "senseId": "w:lose-it#s1",
+      "pos": "短语",
+      "glossZh": "情绪失控；失去冷静",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lose-it#s2",
+      "pos": "短语",
+      "glossZh": "失去原有的本领或水准",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lose-it#s3",
+      "pos": "短语",
+      "glossZh": "头脑失常；失去判断力",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

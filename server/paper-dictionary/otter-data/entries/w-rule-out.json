@@ -1,0 +1,226 @@
+{
+  "entryId": "w:rule-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "rules out"
+  ],
+  "pattern": {
+    "tokens": [
+      "rule",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rule",
+        "out"
+      ],
+      [
+        "rules",
+        "out"
+      ],
+      [
+        "ruled",
+        "out"
+      ],
+      [
+        "ruling",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rule out",
+      "tags": []
+    },
+    {
+      "form": "ruled out",
+      "tags": []
+    },
+    {
+      "form": "ruling out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rule sth out",
+  "senses": [
+    {
+      "senseId": "w:rule-out#s1",
+      "pos": "短语",
+      "glossZh": "排除某种可能性或解释",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rule#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:rule-out#e-5170cdaae41a6098",
+          "text": "\"We can rule out that the dogs simply distinguish between the pictures based on a simple cue, such as the sight of teeth,\" said study author Corsin Muller.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rule-out#e-f7f20c63cb52bdb3",
+          "text": "Crucially, researchers ruled out the simpler explanation – poor health did not simply cause pessimism.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:rule-out#e-e96b3958349a11a9",
+          "text": "When such flawed studies are ruled out, the supposed link between low empathy and horror enjoyment disappears.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          },
+          "parts": [
+            [
+              29,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:rule-out#s2",
+      "pos": "短语",
+      "glossZh": "使某事不可能；使某人无法参加",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:rule-out#e-85bf36c91502bf75",
+          "text": "The young educator’s “A, B, or Not Yet” grading system rules out failure as an option.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 64
+          },
+          "parts": [
+            [
+              55,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              64
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

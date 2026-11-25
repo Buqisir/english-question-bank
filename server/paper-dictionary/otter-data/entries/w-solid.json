@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 60
+    "mock": 2
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -359,7 +359,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -383,6 +383,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:solid#s10",
+      "pos": "n.",
+      "glossZh": "实体部分；实形",
+      "pronunciationId": "w:solid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:solid#e-d197c3e9bcccb283",
+          "text": "“The interaction of solid and void(实与虚) in paper-cutting represents Eastern philosophies of coexistence.” Surprisingly, when she introduced her work to Thomas Bach, president of the International Olympic Committee, he immediately brought up “yin and yang”, making her realize it is a universal language of balance.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -391,6 +424,6 @@
       "reason": "专业缩写或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

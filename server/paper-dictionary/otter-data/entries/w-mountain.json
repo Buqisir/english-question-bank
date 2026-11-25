@@ -48,8 +48,8 @@
     "mock": 141
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 138
+    "gaokao": 2,
+    "mock": 2
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 133
       },
       "folded": false,
       "examples": [
@@ -124,40 +124,6 @@
       ]
     },
     {
-      "senseId": "w:mountain#s2",
-      "pos": "短语",
-      "glossZh": "美洲狮",
-      "pronunciationId": "w:mountain#p-main",
-      "note": "mountain lion。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mountain#e-3237d8e0ebdc09a0",
-          "text": "This __46__ climbing up and down the side of a mountain inhabited (栖息) by mountain lions, although I should say they were only heard, never __47__.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 82
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:mountain#s3",
       "pos": "n.",
       "glossZh": "大量；多得像山一样",
@@ -165,7 +131,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -235,6 +201,8 @@
       "reason": "历史或专门名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

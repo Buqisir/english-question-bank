@@ -1,0 +1,157 @@
+{
+  "entryId": "w:heavy-heart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "heavy",
+      "heart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "heavy",
+        "heart"
+      ],
+      [
+        "heavy",
+        "hearts"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "heavy heart",
+  "senses": [
+    {
+      "senseId": "w:heavy-heart#s1",
+      "pos": "短语",
+      "glossZh": "沉重的心情；悲伤",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:heavy-heart#e-38ca8e69367a867d",
+          "text": "He realized he had spent so much time gaming that he had nothing except tired eyes and a heavy heart.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 100
+          },
+          "parts": [
+            [
+              89,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:heavy-heart#e-29874bd808f387c2",
+          "text": "“They are burning and swollen (肿胀的),” said Grandfather with a heavy heart.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 73
+          },
+          "parts": [
+            [
+              62,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:heavy-heart#e-eab94a872a95108c",
+          "text": "Mia stood among them, clutching her sealed envelope with a heavy heart.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        }
+      ],
+      "note": "with a heavy heart 表示“怀着沉重的心情”。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,213 @@
+{
+  "entryId": "w:throw-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "throw",
+        "in"
+      ],
+      [
+        "threw",
+        "in"
+      ],
+      [
+        "throwing",
+        "in"
+      ],
+      [
+        "thrown",
+        "in"
+      ],
+      [
+        "throws",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thrown in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw (sth) in",
+  "senses": [
+    {
+      "senseId": "w:throw-in#s1",
+      "pos": "短语",
+      "glossZh": "额外加上；把……也算进去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-in#e-367536f943af759d",
+          "text": "With some probability calculations thrown in, the new BCI can recognize up to 125,000 words using only inner speech.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 44
+          },
+          "parts": [
+            [
+              35,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:throw-in#s3",
+      "pos": "短语",
+      "glossZh": "把……扔进去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-in#e-d4d762539803ea06",
+          "text": "There were worse fates, such as being thrown in a fountain.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 47
+          },
+          "parts": [
+            [
+              38,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:throw-in#e-11e5dc60b44a7dbd",
+          "text": "Captured microplastics could be pressed inside the machine to squeeze out remaining water, with the resulting tiny plastic balls removed and thrown in the ordinary garbage.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 150
+          },
+          "parts": [
+            [
+              141,
+              150
+            ]
+          ],
+          "highlightRanges": [
+            [
+              141,
+              150
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:throw-in#s2",
+      "pos": "短语",
+      "glossZh": "免费附送；搭送",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-in#s4",
+      "pos": "短语",
+      "glossZh": "（牌局中）弃牌退出；认输",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

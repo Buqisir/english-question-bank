@@ -1,0 +1,116 @@
+{
+  "entryId": "w:be-on-ones-side",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "be on somebody’s side"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "on",
+      {
+        "slot": "one's"
+      },
+      "side"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "on",
+        {
+          "slot": "one's"
+        },
+        "side"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are on side",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be on one's side",
+  "senses": [
+    {
+      "senseId": "w:be-on-ones-side#s1",
+      "pos": "短语",
+      "glossZh": "支持某人；站在某人一边",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:side#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-on-ones-side#e-9063828b212993cf",
+          "text": "Remember, your doctor and other caregivers are on your side.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 59
+          },
+          "parts": [
+            [
+              43,
+              49
+            ],
+            [
+              55,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              49
+            ],
+            [
+              55,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

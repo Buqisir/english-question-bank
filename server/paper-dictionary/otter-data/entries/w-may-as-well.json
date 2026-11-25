@@ -1,0 +1,115 @@
+{
+  "entryId": "w:may-as-well",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "might as well"
+  ],
+  "pattern": {
+    "tokens": [
+      "may",
+      "as",
+      "well"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "may",
+        "as",
+        "well"
+      ],
+      [
+        "might",
+        "as",
+        "well"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "may as well",
+  "senses": [
+    {
+      "senseId": "w:may-as-well#s1",
+      "pos": "短语",
+      "glossZh": "不妨……；既然如此就……吧",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:may-as-well#e-3eade0e564df7c8b",
+          "text": "You might as well train your senses.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "may 或 might as well 后接动词原形。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:may-as-well#s2",
+      "pos": "短语",
+      "glossZh": "简直等于……；还不如……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 might as well，表示另一选择的结果也差不多。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,263 @@
+{
+  "entryId": "w:i-wish",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I wish"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "wish"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "wish"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "I wish",
+  "senses": [
+    {
+      "senseId": "w:i-wish#s1",
+      "pos": "短语",
+      "glossZh": "真希望能……；要是……就好了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-wish#e-56490f9fd85b11c9",
+          "text": "“I wish you could see him,” she said to her own children, John, Harry, and Clara.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 7
+          },
+          "parts": [
+            [
+              1,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-wish#e-604616f3a85f5570",
+          "text": "“I wish we could help him to earn money,” said Clara.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-ii:writing-continuation:material:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 7
+          },
+          "parts": [
+            [
+              1,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-wish#e-b8e01dc19b9dd84a",
+          "text": "Lily whispered to Grace, “I wish we could go to the beach.” I pretended not to hear.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          },
+          "parts": [
+            [
+              26,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "接从句可表达与现状不同的愿望，单独说时也可回应他人的话。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:i-wish#s2",
+      "pos": "短语",
+      "glossZh": "当初要是……就好了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-wish#e-6c83205a6de3a03c",
+          "text": "“I wish we had never moved,” he complained, kicking a stone across the driveway.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 7
+          },
+          "parts": [
+            [
+              1,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-wish#e-f5abd1ac3e3d4dba",
+          "text": "I wish I’d attended that workshop earlier, but I’m grateful I did at all.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-wish#e-2f8863c612b44c47",
+          "text": "I wish I had been born earlier, in that golden era.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "note": "接过去完成时从句，表示对过去的遗憾。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,119 @@
+{
+  "entryId": "w:boil-sth-down-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "boil",
+      {
+        "slot": "sth"
+      },
+      "down",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "boil",
+        {
+          "slot": "sth"
+        },
+        "down",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "boiled down to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "boil sth down to sth",
+  "senses": [
+    {
+      "senseId": "w:boil-sth-down-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "把……简化或归纳为……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:boil#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:boil-sth-down-to-sth#e-ce265bee6f85f64f",
+          "text": "Through geometric analysis, researchers boiled the data down to a shape.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 63
+          },
+          "parts": [
+            [
+              40,
+              46
+            ],
+            [
+              56,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              46
+            ],
+            [
+              56,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

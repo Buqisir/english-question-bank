@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 6
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -285,54 +285,6 @@
       ]
     },
     {
-      "senseId": "w:double#s4",
-      "pos": "短语",
-      "glossZh": "折返；原路返回",
-      "pronunciationId": "w:double#p-main",
-      "note": "double back。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:double#e-44d412e3664de54b",
-          "text": "Wearily, I pushed myself upright, remounted my bike and started to double back in the hope of spotting clear trail markers, but this only made things worse: the trees seemed to press in around me as I desperately scanned for landmarks – and the cicadas (蝉) had erupted into a deafening chorus.",
-          "source": {
-            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
-            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
-            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 67,
-            "end": 73
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:double#s5",
-      "pos": "短语",
-      "glossZh": "兼作；同时充当",
-      "pronunciationId": "w:double#p-main",
-      "note": "double as sth。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
       "senseId": "w:double#s6",
       "pos": "n.",
       "glossZh": "替身；长得很像的人",
@@ -352,6 +304,14 @@
       "reason": "运动、游戏、计算机或历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:double-as-sth",
+    "w:double-back",
+    "w:double-life",
+    "w:double-standard"
+  ]
 }

@@ -1,0 +1,101 @@
+{
+  "entryId": "w:walk-in-the-park",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "in",
+      "the",
+      "park"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "in",
+        "the",
+        "park"
+      ],
+      [
+        "walks",
+        "in",
+        "the",
+        "park"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk in the park",
+  "senses": [
+    {
+      "senseId": "w:walk-in-the-park#s1",
+      "pos": "短语",
+      "glossZh": "轻而易举的事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-in-the-park#e-222307a8c921af04",
+          "text": "The first fortnight was tough – terrible pain and the rapid realization that running 200 marathons in 200 days would not be a walk in the park.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 142
+          },
+          "parts": [
+            [
+              126,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              126,
+              142
+            ]
+          ]
+        }
+      ],
+      "note": "常用 a walk in the park。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

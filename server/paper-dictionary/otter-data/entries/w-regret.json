@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 7,
-    "mock": 63
+    "mock": 33
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -272,6 +272,40 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:regret#s5",
+      "pos": "v.",
+      "glossZh": "对……感到遗憾",
+      "pronunciationId": "w:regret#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regret#e-f5be91edc513eae0",
+          "text": "It regretted the project’s high expense.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -280,6 +314,6 @@
       "reason": "决策理论术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

@@ -1,0 +1,197 @@
+{
+  "entryId": "w:walk-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "over"
+      ],
+      [
+        "walked",
+        "over"
+      ],
+      [
+        "walking",
+        "over"
+      ],
+      [
+        "walks",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "walked over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk over",
+  "senses": [
+    {
+      "senseId": "w:walk-over#s1",
+      "pos": "短语",
+      "glossZh": "走过去；走到某人或某处跟前",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-over#e-aa0869f651fd50d7",
+          "text": "I walked over and asked him why he wasn’t with the other children.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "writing-continuation-3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 13
+          },
+          "parts": [
+            [
+              2,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-over#e-90c21eb90d2c9ce4",
+          "text": "Yesterday, when Megan walked over and reminded him gently again, Liam’s face turned red.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-over#e-d4645836e54927b6",
+          "text": "He walked over to the man, 43-year-old Eric, and calmly asked, “What’s wrong?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          },
+          "parts": [
+            [
+              3,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              14
+            ]
+          ]
+        }
+      ],
+      "note": "可接 to sb/sth。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:walk-over#s2",
+      "pos": "短语",
+      "glossZh": "轻松取胜；轻易战胜",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-over#s3",
+      "pos": "短语",
+      "glossZh": "任意摆布；欺负",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 walk all over sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

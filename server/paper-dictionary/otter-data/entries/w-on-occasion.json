@@ -1,0 +1,92 @@
+{
+  "entryId": "w:on-occasion",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "occasion"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "occasion"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on occasion",
+  "senses": [
+    {
+      "senseId": "w:on-occasion#s1",
+      "pos": "短语",
+      "glossZh": "偶尔；有时",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:occasion#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-occasion#e-9d69570983bb267c",
+          "text": "On occasion, an entire building or part of a building is just completely inaccessible, so we split up or pass on an activity we planned to enjoy because we literally can’t get everyone in the door.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

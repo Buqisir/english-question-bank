@@ -1,0 +1,83 @@
+{
+  "entryId": "w:rock-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "rock",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rock",
+        "on"
+      ],
+      [
+        "rocked",
+        "on"
+      ],
+      [
+        "rocking",
+        "on"
+      ],
+      [
+        "rocks",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rock on",
+  "senses": [
+    {
+      "senseId": "w:rock-on#s1",
+      "pos": "短语",
+      "glossZh": "太棒了！继续加油！（表示赞同或鼓励）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:rock-on#s2",
+      "pos": "短语",
+      "glossZh": "继续演奏或尽情享受摇滚乐",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

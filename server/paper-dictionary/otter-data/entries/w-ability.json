@@ -125,6 +125,9 @@
       "reason": "前者属法律用语，后者可由一般「能力」理解"
     }
   ],
-  "version": 2,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:to-the-best-of-ones-ability"
+  ]
 }

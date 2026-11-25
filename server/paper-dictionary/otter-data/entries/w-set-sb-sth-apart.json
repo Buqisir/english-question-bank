@@ -1,0 +1,293 @@
+{
+  "entryId": "w:set-sb-sth-apart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "set apart"
+  ],
+  "pattern": {
+    "tokens": [
+      "set",
+      {
+        "slot": "sb/sth"
+      },
+      "apart"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "set",
+        {
+          "slot": "sb/sth"
+        },
+        "apart"
+      ],
+      [
+        "set",
+        "apart"
+      ],
+      [
+        "sets",
+        "apart"
+      ],
+      [
+        "setting",
+        "apart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sets apart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set sb/sth apart",
+  "senses": [
+    {
+      "senseId": "w:set-sb-sth-apart#s1",
+      "pos": "短语",
+      "glossZh": "使……与众不同；使……区别于其他人或事物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:apart#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-sb-sth-apart#e-0df19ddb2057c058",
+          "text": "The Red Cross was my passion and what I relied on to set me apart from other applicants.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 65
+          },
+          "parts": [
+            [
+              53,
+              56
+            ],
+            [
+              60,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              56
+            ],
+            [
+              60,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-sb-sth-apart#e-3ab9c8337af0da33",
+          "text": "Their story set Nike apart; it was more than just about shoes – it was about revolutionizing athletic performance.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 26
+          },
+          "parts": [
+            [
+              12,
+              15
+            ],
+            [
+              21,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              15
+            ],
+            [
+              21,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-sb-sth-apart#e-b7fc3b0f4dd6e1ae",
+          "text": "Many think that language is what sets humans apart from other animals, and that for us to think, language is a decisive factor.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 50
+          },
+          "parts": [
+            [
+              33,
+              37
+            ],
+            [
+              45,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              37
+            ],
+            [
+              45,
+              50
+            ]
+          ]
+        }
+      ],
+      "note": "常用 set sb/sth apart from …。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:set-sb-sth-apart#s2",
+      "pos": "短语",
+      "glossZh": "分开；隔离",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-sb-sth-apart#e-fe5a2481900a5ced",
+          "text": "Consequently, dietary effects are hard to set apart.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 51
+          },
+          "parts": [
+            [
+              42,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-sb-sth-apart#e-4893d4b80b6d3e69",
+          "text": "Still, Anne often felt set apart.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          },
+          "parts": [
+            [
+              23,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:set-sb-sth-apart#s3",
+      "pos": "短语",
+      "glossZh": "专门留出；拨作专用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

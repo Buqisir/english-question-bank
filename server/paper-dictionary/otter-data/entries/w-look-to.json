@@ -1,0 +1,231 @@
+{
+  "entryId": "w:look-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking to",
+    "looks to"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "to"
+      ],
+      [
+        "looking",
+        "to"
+      ],
+      [
+        "looks",
+        "to"
+      ],
+      [
+        "looked",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look to",
+  "senses": [
+    {
+      "senseId": "w:look-to#s1",
+      "pos": "短语",
+      "glossZh": "求助于；指望……提供帮助或支持",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-to#e-7c53cc46d5e454ef",
+          "text": "As the wild shrinks, zoos are increasingly being looked to as modern-day arks (方舟): the last shelter against a",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-to#e-6dc1d5055005d48d",
+          "text": "We worked outside and traveled by its light; we planted and harvested by its phases; we looked to it to forecast the weather.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 97
+          },
+          "parts": [
+            [
+              88,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-to#e-9bf91a7427aef61a",
+          "text": "So we did our research and looked to the most advanced technology.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          },
+          "parts": [
+            [
+              27,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:look-to#s2",
+      "pos": "短语",
+      "glossZh": "打算；谋求",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-to#e-71c4ceba4074c610",
+          "text": "His start-up is looking to commercialize this “heat battery” technology for repowering retired coal power plants, especially at sites with nearby solar or wind power sources.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "look to do sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:look-to#s3",
+      "pos": "短语",
+      "glossZh": "照管；负责处理",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

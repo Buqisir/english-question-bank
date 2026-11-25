@@ -62,8 +62,8 @@
     "mock": 239
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 237
+    "gaokao": 4,
+    "mock": 59
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 171
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -249,7 +249,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -309,79 +309,6 @@
       ]
     },
     {
-      "senseId": "w:rule#s6",
-      "pos": "短语",
-      "glossZh": "排除",
-      "pronunciationId": "w:rule#p-main",
-      "note": "rule out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rule#e-fbeb39ee38972d8a",
-          "text": "\"We can rule out that the dogs simply distinguish between the pictures based on a simple cue, such as the sight of teeth,\" said study author Corsin Muller.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:rule#e-ecf83ac518df5ad8",
-          "text": "A number of __53__ ruled out that the children misunderstood what they were being asked.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:rule#e-4be255d4c4e8399a",
-          "text": "It ruled out non-Shakespearean possibilities.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-mock-cq-nankai-2025-12-fourth-quality-test:29",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:rule#s7",
       "pos": "v.",
       "glossZh": "裁定",
@@ -406,6 +333,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:rule#s9",
+      "pos": "n.",
+      "glossZh": "裁定；决定",
+      "pronunciationId": "w:rule#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rule#e-53eb60c8a1b3ce9b",
+          "text": "My official ruling?",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -414,6 +374,13 @@
       "reason": "印刷专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:ground-rule",
+    "w:rule-in",
+    "w:rule-out"
+  ]
 }

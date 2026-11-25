@@ -35,7 +35,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 172
+    "mock": 7
   },
   "senses": [
     {
@@ -46,7 +46,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 165
       },
       "folded": false,
       "examples": [
@@ -168,6 +168,10 @@
       "reason": "特定机构用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:nine-to-five",
+    "w:take-five"
+  ]
 }

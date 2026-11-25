@@ -1,0 +1,104 @@
+{
+  "entryId": "w:move-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "moves off"
+  ],
+  "pattern": {
+    "tokens": [
+      "move",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "move",
+        "off"
+      ],
+      [
+        "moves",
+        "off"
+      ],
+      [
+        "moved",
+        "off"
+      ],
+      [
+        "moving",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "move off",
+  "senses": [
+    {
+      "senseId": "w:move-off#s1",
+      "pos": "短语",
+      "glossZh": "移动离开；开动出发",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:move-off#e-3abbb48f53a2aef6",
+          "text": "“The high moves off to the east and pushes the system our way.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:1",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 19
+          },
+          "parts": [
+            [
+              10,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

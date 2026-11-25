@@ -1,0 +1,160 @@
+{
+  "entryId": "w:go-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went together"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "together"
+      ],
+      [
+        "went",
+        "together"
+      ],
+      [
+        "goes",
+        "together"
+      ],
+      [
+        "going",
+        "together"
+      ],
+      [
+        "gone",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go together",
+  "senses": [
+    {
+      "senseId": "w:go-together#s1",
+      "pos": "短语",
+      "glossZh": "彼此对应；配成一组",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-together#e-47af41fad505ebf2",
+          "text": "The participants also stated whether they recalled that two images went together, were unsure, or were guessing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 80
+          },
+          "parts": [
+            [
+              67,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-together#s2",
+      "pos": "短语",
+      "glossZh": "（颜色、风格等）相配；搭配得好",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-together#s3",
+      "pos": "短语",
+      "glossZh": "相伴出现；常同时存在",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-together#s4",
+      "pos": "短语",
+      "glossZh": "一起去；结伴同行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-together#s5",
+      "pos": "短语",
+      "glossZh": "（两人）交往；谈恋爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

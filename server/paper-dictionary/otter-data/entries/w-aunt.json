@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -131,40 +131,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:aunt#s3",
-      "pos": "短语",
-      "glossZh": "（在专栏等中）解答烦恼的人",
-      "pronunciationId": "w:aunt#p-main",
-      "note": "英式用语 agony aunt。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:aunt#e-3ab0991f31631761",
-          "text": "Alongside their craft, hairdressers are known for their conversation skills, who often act as an agony aunt, adviser and friend rolled into one.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
-            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
-            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 103,
-            "end": 107
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -173,6 +139,11 @@
       "reason": "历史用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:agony-aunt"
+  ]
 }

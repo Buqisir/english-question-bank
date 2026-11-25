@@ -1,0 +1,111 @@
+{
+  "entryId": "w:piece-of-work",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "piece",
+      "of",
+      "work"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "piece",
+        "of",
+        "work"
+      ],
+      [
+        "pieces",
+        "of",
+        "work"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "piece of work",
+  "senses": [
+    {
+      "senseId": "w:piece-of-work#s1",
+      "pos": "短语",
+      "glossZh": "一件作品；一项工作成果",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:piece-of-work#e-808be984986e695c",
+          "text": "“This is an exciting and important piece of work, especially because the authors opted for a nondemanding task",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 48
+          },
+          "parts": [
+            [
+              35,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:piece-of-work#s2",
+      "pos": "短语",
+      "glossZh": "难对付的人；令人讨厌的家伙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语，常带贬义。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

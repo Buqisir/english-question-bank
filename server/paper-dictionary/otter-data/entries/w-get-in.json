@@ -1,0 +1,311 @@
+{
+  "entryId": "w:get-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets in",
+    "getting in"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "in"
+      ],
+      [
+        "gets",
+        "in"
+      ],
+      [
+        "getting",
+        "in"
+      ],
+      [
+        "got",
+        "in"
+      ],
+      [
+        "gotten",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got in",
+      "tags": []
+    },
+    {
+      "form": "gotten in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get in",
+  "senses": [
+    {
+      "senseId": "w:get-in#s1",
+      "pos": "短语",
+      "glossZh": "进去；进入；上车",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-in#e-26c57ab65e4dc24f",
+          "text": "People who you swear got in other lines long after you are already checked out and off to the parking lot.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 27
+          },
+          "parts": [
+            [
+              21,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in#e-d7ae45da7c32150e",
+          "text": "With the bird in my cupped hand, I looked around to see how she had gotten in.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 77
+          },
+          "parts": [
+            [
+              68,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in#e-6db23e5d8e0dfe5d",
+          "text": "It was only when I tried to remove my head that I realized getting out was going to be less straightforward than getting in.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 123
+          },
+          "parts": [
+            [
+              113,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              123
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:get-in#s3",
+      "pos": "短语",
+      "glossZh": "被录取；获准进入",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-in#e-1ada52a5df63f2a7",
+          "text": "“We’re both getting in.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 22
+          },
+          "parts": [
+            [
+              12,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-in#s5",
+      "pos": "短语",
+      "glossZh": "抽空做成（某事）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-in#e-cea94697f1b96166",
+          "text": "If you’re looking for a nice spot to get in a nap (小睡) on the River Campus, here are my top three napping spots below (ranked from worst to best).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 43
+          },
+          "parts": [
+            [
+              37,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              43
+            ]
+          ]
+        }
+      ],
+      "note": "如 get in a nap，抽空小睡一会儿。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-in#s2",
+      "pos": "短语",
+      "glossZh": "到达；抵达",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于人、航班或火车到达。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-in#s4",
+      "pos": "短语",
+      "glossZh": "当选",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-in#s6",
+      "pos": "短语",
+      "glossZh": "成功了！进了！（英式口语中的欢呼）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

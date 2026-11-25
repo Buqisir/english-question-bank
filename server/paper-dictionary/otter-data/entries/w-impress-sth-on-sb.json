@@ -1,0 +1,73 @@
+{
+  "entryId": "w:impress-sth-on-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "impress",
+      {
+        "slot": "sth"
+      },
+      "on",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "impress",
+        {
+          "slot": "sth"
+        },
+        "on",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "impress sth on sb",
+  "senses": [
+    {
+      "senseId": "w:impress-sth-on-sb#s1",
+      "pos": "短语",
+      "glossZh": "使某人深刻认识到某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:impress#s2"
+      ],
+      "examples": [],
+      "note": "宾语常为某事的重要性或必要性。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

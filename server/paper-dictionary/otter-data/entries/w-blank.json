@@ -84,7 +84,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 5
   },
   "senses": [
     {
@@ -95,7 +95,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -312,40 +312,6 @@
       ]
     },
     {
-      "senseId": "w:blank#s6",
-      "pos": "短语",
-      "glossZh": "想不起来；找不到结果",
-      "pronunciationId": "w:blank#p-main",
-      "note": "draw a blank。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blank#e-d2f2ea671d103bb4",
-          "text": "My mind raced back to my first-aid class, but I drew a blank, afraid of getting it wrong.",
-          "source": {
-            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
-            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 55,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:blank#s7",
       "pos": "v.",
       "glossZh": "突然忘记",
@@ -386,6 +352,11 @@
       "reason": "历史或专门用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:draw-a-blank"
+  ]
 }

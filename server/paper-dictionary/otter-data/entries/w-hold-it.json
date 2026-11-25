@@ -1,0 +1,86 @@
+{
+  "entryId": "w:hold-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "holding it"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "it"
+      ],
+      [
+        "holding",
+        "it"
+      ],
+      [
+        "held",
+        "it"
+      ],
+      [
+        "holds",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold it",
+  "senses": [
+    {
+      "senseId": "w:hold-it#s1",
+      "pos": "短语",
+      "glossZh": "等一下；先停住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用作祈使句 Hold it!。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-it#s2",
+      "pos": "短语",
+      "glossZh": "憋住；暂时忍住不上厕所",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

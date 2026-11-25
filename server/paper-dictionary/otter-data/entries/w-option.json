@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 138
+    "mock": 8
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -123,12 +123,12 @@
       "glossZh": "选择权",
       "pronunciationId": "w:option#p-main",
       "note": "如 have the option of doing sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -146,6 +146,6 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

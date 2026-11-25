@@ -1,0 +1,156 @@
+{
+  "entryId": "w:in-depth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "depth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "depth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in depth",
+  "senses": [
+    {
+      "senseId": "w:in-depth#s1",
+      "pos": "短语",
+      "glossZh": "深入地；详尽地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:depth#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-depth#e-133714dd57d9bfd4",
+          "text": "The focus on concerts can sometimes overshadow the opportunity to experience local culture in depth.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          },
+          "parts": [
+            [
+              91,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-depth#e-7448df12b75f1ac2",
+          "text": "By analyzing economic theories in depth.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-zj-2026-xinzhendi-2:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          },
+          "parts": [
+            [
+              31,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-depth#e-f29af4dc0071ced9",
+          "text": "Writing stories in depth.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

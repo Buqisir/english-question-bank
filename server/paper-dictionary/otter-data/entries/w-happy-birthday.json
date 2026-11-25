@@ -1,0 +1,178 @@
+{
+  "entryId": "w:happy-birthday",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "happy",
+      "birthday"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "happy",
+        "birthday"
+      ],
+      [
+        "happy",
+        "birthdayed"
+      ],
+      [
+        "happy",
+        "birthdaying"
+      ],
+      [
+        "happy",
+        "birthdays"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "happy birthday",
+  "senses": [
+    {
+      "senseId": "w:happy-birthday#s1",
+      "pos": "短语",
+      "glossZh": "生日快乐！",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:happy-birthday#e-8cce0d8932a06428",
+          "text": "The next morning, I said “Happy birthday” to him.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 40
+          },
+          "parts": [
+            [
+              26,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:happy-birthday#e-f74b231d0e005afd",
+          "text": "Afterwards, I brought out a big chocolate cake and we covered it with candles, singing “Happy Birthday” for my grandma back in America in five different languages.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 102
+          },
+          "parts": [
+            [
+              88,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:happy-birthday#e-91f141eec4bbb7d2",
+          "text": "“Happy birthday,” it read.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 15
+          },
+          "parts": [
+            [
+              1,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:happy-birthday#s2",
+      "pos": "短语",
+      "glossZh": "向某人祝贺生日",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见的动词用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

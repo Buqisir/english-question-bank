@@ -1,0 +1,162 @@
+{
+  "entryId": "w:loved-one",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "loved",
+      "one"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "loved",
+        "one"
+      ],
+      [
+        "loved",
+        "ones"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "loved ones",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "loved one",
+  "senses": [
+    {
+      "senseId": "w:loved-one#s1",
+      "pos": "短语",
+      "glossZh": "亲人；挚爱的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:loved-one#e-d55644db2f169691",
+          "text": "These physical things let people hold their missing loved ones close – and that matters a lot.”",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          },
+          "parts": [
+            [
+              52,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:loved-one#e-c5177e2b800445c3",
+          "text": "Don’t hesitate to reach out to your boss, coworker, or loved one if you need an extra hand with a commitment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 64
+          },
+          "parts": [
+            [
+              55,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:loved-one#e-59a32a35f84c618e",
+          "text": "Loneliness is the negative perception that one has no or too few friends and loved ones.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 87
+          },
+          "parts": [
+            [
+              77,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              87
+            ]
+          ]
+        }
+      ],
+      "note": "在丧亲语境中可指已故亲友。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 31
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

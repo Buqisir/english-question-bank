@@ -1,0 +1,126 @@
+{
+  "entryId": "w:at-all-times",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "all",
+      "times"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "all",
+        "times"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at all times",
+  "senses": [
+    {
+      "senseId": "w:at-all-times#s1",
+      "pos": "固定短语",
+      "glossZh": "始终；在任何时候",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s8",
+        "w:at#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-all-times#e-865d6fc8aab44142",
+          "text": "Teachers and chaperones should model good behavior for the group and remain with students at all times.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 102
+          },
+          "parts": [
+            [
+              90,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-all-times#e-6268952976e19794",
+          "text": "VPPs help ensure “resource adequacy,” a term experts use to refer to the ability of the grid to supply enough electricity at all times.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 134
+          },
+          "parts": [
+            [
+              122,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

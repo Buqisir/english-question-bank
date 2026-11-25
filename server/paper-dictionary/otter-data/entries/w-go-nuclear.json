@@ -1,0 +1,174 @@
+{
+  "entryId": "w:go-nuclear",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going nuclear"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "nuclear"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "nuclear"
+      ],
+      [
+        "going",
+        "nuclear"
+      ],
+      [
+        "goes",
+        "nuclear"
+      ],
+      [
+        "gone",
+        "nuclear"
+      ],
+      [
+        "went",
+        "nuclear"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go nuclear",
+  "senses": [
+    {
+      "senseId": "w:go-nuclear#s1",
+      "pos": "短语",
+      "glossZh": "转向利用核能；采用核技术",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-nuclear#e-e964d4472ebaa559",
+          "text": "Going Nuclear: A Potential Solution to Power Shortage",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-nuclear#s2",
+      "pos": "短语",
+      "glossZh": "走向核武装；获得核武器",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-nuclear#s3",
+      "pos": "短语",
+      "glossZh": "（冲突）升级到动用核武器的地步",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-nuclear#s4",
+      "pos": "短语",
+      "glossZh": "突然大发雷霆",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-nuclear#s5",
+      "pos": "短语",
+      "glossZh": "把事态推向极端；采取极端手段",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-nuclear#s6",
+      "pos": "短语",
+      "glossZh": "（声势或热度）迅速攀升到极高程度",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

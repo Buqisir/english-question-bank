@@ -1,0 +1,220 @@
+{
+  "entryId": "w:print-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "print",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "print",
+        "out"
+      ],
+      [
+        "printed",
+        "out"
+      ],
+      [
+        "printing",
+        "out"
+      ],
+      [
+        "prints",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "print out",
+      "tags": []
+    },
+    {
+      "form": "printing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "print sth out",
+  "senses": [
+    {
+      "senseId": "w:print-out#s1",
+      "pos": "短语",
+      "glossZh": "把文档、数据等打印到纸上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:print-out#e-a80dfa6c0de3ce0a",
+          "text": "Then you can print out a fresh draft, again setting your text on triple-space.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-ii:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          },
+          "parts": [
+            [
+              13,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:print-out#e-98aab8fd85a5f181",
+          "text": "If cook mode isn’t for you, you can also print out all your favorite recipes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          },
+          "parts": [
+            [
+              41,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:print-out#e-91121834dffd6f1d",
+          "text": "By asking the NG staff to print out the copies.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          },
+          "parts": [
+            [
+              26,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:print-out#s2",
+      "pos": "短语",
+      "glossZh": "（程序等）把内容以文字形式输出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:print-out#e-1ea175628acfa7d1",
+          "text": "When Claude itself is asked to reason, printing out its chain of thought to answer maths questions, the microscope suggests that the way the model says it reached a conclusion, and what it actually thought, might not always be the same.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 51
+          },
+          "parts": [
+            [
+              39,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

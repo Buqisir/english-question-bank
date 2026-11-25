@@ -1,0 +1,157 @@
+{
+  "entryId": "w:trial-and-error",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "trial",
+      "and",
+      "error"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "trial",
+        "and",
+        "error"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "trial and error",
+  "senses": [
+    {
+      "senseId": "w:trial-and-error#s1",
+      "pos": "短语",
+      "glossZh": "反复试错；在尝试中摸索可行办法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:error#s3",
+        "w:trial#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:trial-and-error#e-ff99c501cc1bb416",
+          "text": "To bridge this gap, the students learn through trial and error, like real scientists do.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 62
+          },
+          "parts": [
+            [
+              47,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              62
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:trial-and-error#e-ed89f216398bd23e",
+          "text": "However, the only way to learn how to make the best use of new technologies and reduce their risks is through trial and error.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 125
+          },
+          "parts": [
+            [
+              110,
+              125
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              125
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:trial-and-error#e-d3317039836bcf8f",
+          "text": "Through trial and error, they created Scent of the Afterlife, a mix of scent that would have accompanied mummification processes in ancient Egypt.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 23
+          },
+          "parts": [
+            [
+              8,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

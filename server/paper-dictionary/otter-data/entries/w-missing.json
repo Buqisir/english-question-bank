@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 8,
-    "mock": 72
+    "mock": 13
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -182,6 +182,301 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:missing#s3",
+      "pos": "v.",
+      "glossZh": "缺少；缺乏",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:missing#e-76345129b24ca1f3",
+          "text": "New developers with less than a year’s experience can actually be less efficient with AI tools than without, because they are missing critical skills and knowledge needed to evaluate and correct what the AI produces.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:missing#e-201d8d8a1769a67e",
+          "text": "They’re missing that connective, human element.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b:6",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:missing#e-ab1a73a50904f693",
+          "text": "Maybe among the busy crowds and messy city life, I could find what I was missing.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:missing#s4",
+      "pos": "v.",
+      "glossZh": "没注意到；漏掉",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:missing#e-ad9924134b982156",
+          "text": "I worry I’m missing some parental duty, so I pick up my phone and open the camera app.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:missing#e-e892b9a3e0363aed",
+          "text": "First is “urban blindness” – the tendency to drive through familiar streets on autopilot, missing the rich detail of one’s surroundings.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:missing#e-384b12a3ee2462ef",
+          "text": "I noticed things I had been missing for years.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-heze-2026-03-first:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:missing#s5",
+      "pos": "v.",
+      "glossZh": "缺席；没赶上；未能如期做",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:missing#e-fc03665f74e26579",
+          "text": "She regrets missing the show.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:missing#e-46514d73c282dc4e",
+          "text": "Despite a busy day of rides, he signed Romano into the ER and sat with him from 2 to 8 p. m., missing hours of work.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:missing#e-f4bd72916ccbab99",
+          "text": "Why does Chelsea say missing classes is bad for her?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:missing#s6",
+      "pos": "v.",
+      "glossZh": "错失（机会、体验等）",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:missing#e-aad6c0362fb557b2",
+          "text": "The fear of missing better alternatives.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-shandong-jiuwu-2026-final:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:missing#s7",
+      "pos": "v.",
+      "glossZh": "没有击中；没有投进",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:missing#e-990967f4e7218ecb",
+          "text": "This experience drove home a point: my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:missing#s8",
+      "pos": "v.",
+      "glossZh": "想念",
+      "pronunciationId": "w:missing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -194,6 +489,9 @@
       "reason": "机械专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:go-missing"
+  ]
 }

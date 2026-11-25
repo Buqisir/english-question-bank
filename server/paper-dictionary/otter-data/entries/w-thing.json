@@ -48,8 +48,8 @@
     "mock": 667
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 665
+    "gaokao": 5,
+    "mock": 469
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -131,7 +131,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 72,
-        "mock": 0
+        "mock": 125
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -274,7 +274,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -340,7 +340,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -383,93 +383,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:thing#s7",
-      "pos": "短语",
-      "glossZh": "根本没有……这种事",
-      "pronunciationId": "w:thing#p-main",
-      "note": "no such thing as。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thing#e-1ac9836820734655",
-          "text": "Remember—there’s no such thing as a stupid question.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:thing#e-f72b4caf7ddbc960",
-          "text": "By using tools like advanced brain imaging and studying babies and people from relatively isolated cultures, she has concluded there’s no such thing as a basic emotional palette (调色板).",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 143,
-            "end": 148
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:thing#s8",
-      "pos": "短语",
-      "glossZh": "问题是",
-      "pronunciationId": "w:thing#p-main",
-      "note": "the thing is。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:thing#e-47cfc51ad006c420",
-          "text": "The thing is, it’s true.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 9
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -478,6 +391,22 @@
       "reason": "专名或历史义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-thing-or-two",
+    "w:be-a-thing",
+    "w:done-thing",
+    "w:first-thing",
+    "w:heres-the-thing",
+    "w:next-big-thing",
+    "w:no-such-thing-as",
+    "w:no-such-thing-as-slot",
+    "w:poor-thing",
+    "w:sure-thing",
+    "w:thats-the-thing",
+    "w:the-thing-is"
+  ]
 }

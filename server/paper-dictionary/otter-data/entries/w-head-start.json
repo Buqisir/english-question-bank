@@ -1,0 +1,109 @@
+{
+  "entryId": "w:head-start",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "head",
+      "start"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "head",
+        "start"
+      ],
+      [
+        "head",
+        "starts"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "head start",
+  "senses": [
+    {
+      "senseId": "w:head-start#s1",
+      "pos": "短语",
+      "glossZh": "美国联邦政府资助的启蒙教育项目",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:head-start#e-51119bf47a5f4703",
+          "text": "My mom was a teacher – a great Head Start teacher – and she made sure I partook of everything New York had to offer people who didn’t have any money, because she knew it was the greatest education in the world.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 41
+          },
+          "parts": [
+            [
+              31,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              41
+            ]
+          ]
+        }
+      ],
+      "note": "专名写作 Head Start，主要服务于低收入家庭的儿童。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:head-start#s2",
+      "pos": "短语",
+      "glossZh": "因提前出发或及早准备而获得的领先优势",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 get a head start 或 give sb a head start。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

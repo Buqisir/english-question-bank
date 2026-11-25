@@ -61,8 +61,8 @@
     "mock": 46
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 41
+    "gaokao": 1,
+    "mock": 11
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -190,46 +190,10 @@
       ]
     },
     {
-      "senseId": "w:kill#s3",
-      "pos": "短语",
-      "glossZh": "消磨时间",
+      "senseId": "w:kill#s6",
+      "pos": "n.",
+      "glossZh": "杀戮；捕杀",
       "pronunciationId": "w:kill#p-main",
-      "note": "kill time。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:kill#e-811c131287eff83e",
-          "text": "To kill his spare time.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
-            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
-            "locator": {
-              "question": 24,
-              "questionId": "question:paper-mock-fujian-putian-2026-01-first-quality-test:24",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:kill#s4",
-      "pos": "短语",
-      "glossZh": "使彻底消亡",
-      "pronunciationId": "w:kill#p-main",
-      "note": "kill off。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -238,76 +202,55 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:kill#e-4ae56a6026732354",
-          "text": "Lybarger realized that he had killed off an area with a wild seed bank of countless species that were ideal for attracting wildlife, all in order to plant two or three species that weren’t part of the native ecosystem.",
+          "exampleId": "w:kill#e-a69dbb2a3d46c3ef",
+          "text": "But both sides are mad about a new film, which shows cruel killing and suggests that hunting is reducing the population.",
           "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
-            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:3",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:1",
+              "sentence": 5
             }
           },
           "tier": "mock",
           "target": {
-            "start": 30,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:kill#e-f9ab657ecd96833f",
-          "text": "Lybarger realized he had nearly killed off an area with a wild seed bank of countless species just to plant a few foreign ones.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 32,
-            "end": 38
+            "start": 59,
+            "end": 66
           }
         }
       ]
     },
     {
-      "senseId": "w:kill#s5",
-      "pos": "短语",
-      "glossZh": "一举两得",
+      "senseId": "w:kill#s7",
+      "pos": "n.",
+      "glossZh": "（比赛中）一边倒的碾压",
       "pronunciationId": "w:kill#p-main",
-      "note": "kill two birds with one stone。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:kill#e-5f352d524b7530db",
-          "text": "killing two birds with one stone",
+          "exampleId": "w:kill#e-6e06f53475cded9b",
+          "text": "But still, it was a one-sided killing, with my little players struggling to fight a losing battle.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
             "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
-              "option": "D",
-              "sentence": 1
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:5",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 0,
-            "end": 7
+            "start": 30,
+            "end": 37
           }
         }
       ]
@@ -319,6 +262,13 @@
       "reason": "专业用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:kill-off",
+    "w:kill-time",
+    "w:kill-two-birds-with-one-stone"
+  ]
 }

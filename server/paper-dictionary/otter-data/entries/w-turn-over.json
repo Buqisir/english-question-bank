@@ -1,0 +1,235 @@
+{
+  "entryId": "w:turn-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turning over"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "over"
+      ],
+      [
+        "turning",
+        "over"
+      ],
+      [
+        "turned",
+        "over"
+      ],
+      [
+        "turns",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn (sth) over",
+  "senses": [
+    {
+      "senseId": "w:turn-over#s1",
+      "pos": "短语",
+      "glossZh": "翻过来；翻面；翻倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-over#e-f7a120483a5e8d7c",
+          "text": "After a two-day summer camp, Mia came home and found Leo lying on her bedroom floor, her box turned over.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 104
+          },
+          "parts": [
+            [
+              93,
+              104
+            ]
+          ],
+          "highlightRanges": [
+            [
+              93,
+              104
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:turn-over#s2",
+      "pos": "短语",
+      "glossZh": "（发动机）转动起来；使发动机转动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-over#e-68273e64aa987740",
+          "text": "After two weeks of work, the engine finally turned over with a smooth rumble – the sound of an engine coming back to life after months of silence, and the most satisfying sound in automotive work.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 55
+          },
+          "parts": [
+            [
+              44,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-over#s3",
+      "pos": "短语",
+      "glossZh": "交出；移交（物品、责任或控制权）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:over#s16"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-over#s4",
+      "pos": "短语",
+      "glossZh": "在一定时间内周转或处理一定数量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-over#s5",
+      "pos": "短语",
+      "glossZh": "营业额达到（某个数额）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-over#s6",
+      "pos": "短语",
+      "glossZh": "反复思量；仔细琢磨",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 turn sth over in one's mind。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-over#s7",
+      "pos": "短语",
+      "glossZh": "（球赛中）丢掉球权",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-over#s8",
+      "pos": "短语",
+      "glossZh": "搜翻；把某处翻得凌乱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

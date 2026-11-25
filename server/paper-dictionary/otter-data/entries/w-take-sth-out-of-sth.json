@@ -1,0 +1,208 @@
+{
+  "entryId": "w:take-sth-out-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "take something out of something"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "sth"
+      },
+      "out",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "out",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "take",
+        "something",
+        "out",
+        "of",
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sth out of sth",
+  "senses": [
+    {
+      "senseId": "w:take-sth-out-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "消除某事带来的感受；使某事失去原有的特质",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s31"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-sth-out-of-sth#e-ec1e2deacbb797a3",
+          "text": "Take the fear out of public speaking by focusing on your listeners",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 20
+          },
+          "parts": [
+            [
+              0,
+              4
+            ],
+            [
+              14,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              4
+            ],
+            [
+              14,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-sth-out-of-sth#e-ca064638200db381",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 208,
+            "end": 227
+          },
+          "parts": [
+            [
+              208,
+              212
+            ],
+            [
+              221,
+              227
+            ]
+          ],
+          "highlightRanges": [
+            [
+              208,
+              212
+            ],
+            [
+              221,
+              227
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-sth-out-of-sth#e-182e2e28574e4c8d",
+          "text": "Beyond its recipe library, Feast comes packed with smart, unique features designed to take the stress out of making new dishes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 108
+          },
+          "parts": [
+            [
+              86,
+              90
+            ],
+            [
+              102,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              90
+            ],
+            [
+              102,
+              108
+            ]
+          ]
+        }
+      ],
+      "note": "常见宾语有 fear、stress、fun。",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,112 @@
+{
+  "entryId": "w:carry-the-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "carry",
+      "the",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "carry",
+        "the",
+        "day"
+      ],
+      [
+        "carried",
+        "the",
+        "day"
+      ],
+      [
+        "carries",
+        "the",
+        "day"
+      ],
+      [
+        "carrying",
+        "the",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "carries the day",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carry the day",
+  "senses": [
+    {
+      "senseId": "w:carry-the-day#s1",
+      "pos": "短语",
+      "glossZh": "取得胜利；最终占上风",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:carry-the-day#e-ea9c89f852297b2f",
+          "text": "Conversely, needing careful thought demands intentionally slowing the process to awaken System 2 like investing in a retirement plan; otherwise, the automatic system wins, and its swift, effortless answer carries the day.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 205,
+            "end": 220
+          },
+          "parts": [
+            [
+              205,
+              220
+            ]
+          ],
+          "highlightRanges": [
+            [
+              205,
+              220
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

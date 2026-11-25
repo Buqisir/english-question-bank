@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 12
+    "mock": 11
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -205,81 +205,11 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:owe#s3",
-      "pos": "短语",
-      "glossZh": "由于",
-      "pronunciationId": "w:owe#p-main",
-      "note": "owing to。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:owe#e-7941eaec19ec6ca5",
-          "text": "They say that using this product is necessary owing to the increased move towards electric cars and green energy at large.",
-          "source": {
-            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
-            "paperTitle": "惠州市2026届高三第二次调研考试英语",
-            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 46,
-            "end": 51
-          }
-        },
-        {
-          "exampleId": "w:owe#e-7cae518ed63e2c61",
-          "text": "Luckily, owing to his academic __44__, Bannister was awarded a scholarship by Oxford University, where his exceptional speed on the track soon earned him the attention and __45__ from the sports media.",
-          "source": {
-            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
-            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
-            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:cloze:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:owe#e-8198e0899b2d1f11",
-          "text": "Women’s scores are typically 15% lower, owing to smaller hearts and less muscle mass.",
-          "source": {
-            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
-            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
-            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c:4",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 40,
-            "end": 45
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

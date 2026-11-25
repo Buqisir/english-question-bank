@@ -59,8 +59,8 @@
     "mock": 649
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 648
+    "gaokao": 6,
+    "mock": 451
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 95,
-        "mock": 0
+        "mock": 159
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -213,7 +213,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -290,104 +290,34 @@
       "examples": []
     },
     {
-      "senseId": "w:water#s5",
+      "senseId": "w:water#s8",
       "pos": "短语",
-      "glossZh": "淡化",
+      "glossZh": "彻底击败；远远胜过（blow out of the water）",
       "pronunciationId": "w:water#p-main",
-      "note": "water sth down，字面义为「加水稀释」。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:water#e-63be26919a9ef2b2",
-          "text": "Always water it down and don’t let your ego (自我) get __58__.",
+          "exampleId": "w:water#e-667e8b72d3a4526f",
+          "text": "A settler, Nintendo, acquired the Odyssey’s distribution rights for Japan in 1975, and then blew Magnavox out of the water in the following decade by creating an original Nintendo Entertainment System.",
           "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:3",
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:5",
               "sentence": 5
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 7,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:water#s6",
-      "pos": "短语",
-      "glossZh": "勉强应付得过来",
-      "pronunciationId": "w:water#p-main",
-      "note": "keep one’s head above water。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:water#e-89a69a86cf8708ac",
-          "text": "Eva spent the first week of high school trying to keep her head above water.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 75
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:water#s7",
-      "pos": "短语",
-      "glossZh": "静水流深",
-      "pronunciationId": "w:water#p-main",
-      "note": "still waters run deep。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:water#e-d9a5cf364b27db93",
-          "text": "Still waters run deep.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2025-i:27",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 12
+            "start": 117,
+            "end": 122
           }
         }
       ]
@@ -399,6 +329,15 @@
       "reason": "专名或金融专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:hold-water",
+    "w:keep-ones-head-above-water",
+    "w:oil-and-water",
+    "w:pass-water",
+    "w:water-sth-down"
+  ]
 }

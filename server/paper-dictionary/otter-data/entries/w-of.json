@@ -35,7 +35,7 @@
     "mock": 16122
   },
   "unassignedCounts": {
-    "gaokao": 2493,
+    "gaokao": 2502,
     "mock": 16122
   },
   "senses": [
@@ -410,238 +410,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:of#s7",
-      "pos": "短语",
-      "glossZh": "因为",
-      "pronunciationId": "w:of#p-main",
-      "note": "because of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:of#e-29e9aac68adfadb4",
-          "text": "“Nicolo,” whose real name cannot be __41__ to the public because of Italy’s privacy laws, __42__ working the whole night at a factory in Turin.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 67
-          }
-        },
-        {
-          "exampleId": "w:of#e-f2f790033bee3db8",
-          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 175,
-            "end": 177
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:of#s8",
-      "pos": "短语",
-      "glossZh": "代替；而不是",
-      "pronunciationId": "w:of#p-main",
-      "note": "instead of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:of#e-919afc63a48861aa",
-          "text": "From then on instead of coming to ask their possessions back, the students would say, “That’s okay.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-b",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:of#e-87774d9fed5f3928",
-          "text": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 86,
-            "end": 88
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:of#s9",
-      "pos": "短语",
-      "glossZh": "当然",
-      "pronunciationId": "w:of#p-main",
-      "note": "of course。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:of#e-862722f30eebc6e0",
-          "text": "The solution, of course, was to plant trees so the animals could seek __48__",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:cloze:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:of#e-2150cf50ee4ef1b2",
-          "text": "Of course, our brains can decline as we grow older for lots of reasons-including other environmental influences or genetic factors.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        },
-        {
-          "exampleId": "w:of#e-eada862ffe9d74fc",
-          "text": "My brother, of course, raced off to be with his friends, while I had plenty to do myself.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 12,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:of#s10",
-      "pos": "短语",
-      "glossZh": "照顾；处理",
-      "pronunciationId": "w:of#p-main",
-      "note": "take care of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:of#e-e058950da1979f11",
-          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 173,
-            "end": 175
-          }
-        },
-        {
-          "exampleId": "w:of#e-8997fdef73baf32b",
-          "text": "To take care of her kids easily.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2020-i:25",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 13,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -650,6 +418,235 @@
       "reason": "专业缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-battery-of-sth",
+    "w:a-bit-of-sth",
+    "w:a-couple-of",
+    "w:a-good-deal-of",
+    "w:a-great-deal-of",
+    "w:a-host-of",
+    "w:a-lot-of",
+    "w:a-number-of",
+    "w:a-piece-of-cake",
+    "w:a-shadow-of-doubt",
+    "w:a-wealth-of-sth",
+    "w:a-world-of",
+    "w:ahead-of",
+    "w:all-kinds-of",
+    "w:all-of-a-sudden",
+    "w:all-walks-of-life",
+    "w:along-the-lines-of",
+    "w:any-day-of-the-week",
+    "w:any-number-of",
+    "w:as-a-result-of",
+    "w:as-of",
+    "w:at-risk-of",
+    "w:at-the-bottom-of",
+    "w:at-the-cost-of",
+    "w:at-the-end-of-the-day",
+    "w:at-the-expense-of-sth",
+    "w:at-the-hands-of",
+    "w:at-the-heart-of",
+    "w:at-the-mercy-of",
+    "w:at-the-risk-of",
+    "w:at-the-sight-of",
+    "w:ball-of-fire",
+    "w:be-made-up-of",
+    "w:be-rid-of",
+    "w:be-short-of",
+    "w:be-sick-of",
+    "w:be-the-home-of",
+    "w:be-true-of",
+    "w:because-of",
+    "w:best-of-all",
+    "w:best-of-luck",
+    "w:best-part-of",
+    "w:both-sides-of-the-coin",
+    "w:breathe-a-sigh-of-relief",
+    "w:by-virtue-of-sth",
+    "w:by-way-of",
+    "w:catch-a-glimpse-of",
+    "w:catch-sight-of",
+    "w:center-of-attention",
+    "w:circle-of-life",
+    "w:come-at-the-hands-of",
+    "w:come-of",
+    "w:come-out-of-ones-shell",
+    "w:course-of-action",
+    "w:do-sb-a-world-of-good",
+    "w:dozens-of",
+    "w:draw-sb-out-of-their-shell",
+    "w:end-of-the-day",
+    "w:end-of-the-line",
+    "w:end-of-the-road",
+    "w:end-of-the-world",
+    "w:eye-of-the-storm",
+    "w:fall-out-of-favour",
+    "w:fall-out-of-use",
+    "w:fall-short-of-sth",
+    "w:first-of-all",
+    "w:fly-in-the-face-of",
+    "w:for-fear-of",
+    "w:for-lack-of",
+    "w:frame-of-reference",
+    "w:free-of-charge",
+    "w:from-the-bottom-of-ones-heart",
+    "w:get-a-taste-of",
+    "w:get-out-of",
+    "w:get-out-of-doing-sth",
+    "w:get-out-of-your-comfort-zone",
+    "w:get-rid-of",
+    "w:get-the-best-of-sb-sth",
+    "w:get-the-better-of-sb",
+    "w:get-the-hang-of-sth",
+    "w:get-the-most-out-of",
+    "w:get-wind-of-sth",
+    "w:go-the-way-of-sth",
+    "w:grow-out-of",
+    "w:hear-of",
+    "w:heart-of-gold",
+    "w:hundreds-of-thousands",
+    "w:in-and-of-itself",
+    "w:in-case-of",
+    "w:in-charge-of",
+    "w:in-favor-of",
+    "w:in-front-of",
+    "w:in-honour-of",
+    "w:in-light-of",
+    "w:in-memory-of",
+    "w:in-need-of",
+    "w:in-place-of",
+    "w:in-search-of",
+    "w:in-spite-of",
+    "w:in-terms-of",
+    "w:in-the-dead-of-night",
+    "w:in-the-dead-of-winter",
+    "w:in-the-event-of-sth",
+    "w:in-the-face-of",
+    "w:in-the-form-of",
+    "w:in-the-hope-of",
+    "w:in-the-middle-of-nowhere",
+    "w:in-the-middle-of-sth",
+    "w:in-the-name-of",
+    "w:in-the-neighbourhood-of",
+    "w:in-the-process-of",
+    "w:in-the-region-of",
+    "w:in-the-shoes-of",
+    "w:in-the-wake-of-sth",
+    "w:in-the-way-of",
+    "w:inside-of",
+    "w:instead-of",
+    "w:it-happens-to-the-best-of-us",
+    "w:keep-track-of",
+    "w:kind-of",
+    "w:know-of",
+    "w:life-of-its-own",
+    "w:lose-sight-of",
+    "w:lots-of",
+    "w:lots-of-love",
+    "w:make-a-big-deal-of-sth",
+    "w:make-a-day-of-it",
+    "w:make-a-fool-of-oneself",
+    "w:make-fun-of",
+    "w:make-good-use-of",
+    "w:make-of",
+    "w:make-sense-of",
+    "w:make-something-of",
+    "w:make-the-best-of-sth",
+    "w:make-the-most-of",
+    "w:make-use-of",
+    "w:man-of-few-words",
+    "w:matter-of-life-and-death",
+    "w:matter-of-time",
+    "w:more-of-a",
+    "w:most-of-all",
+    "w:most-of-the-time",
+    "w:not-much-of-a",
+    "w:not-the-end-of-the-world",
+    "w:of-color",
+    "w:of-course",
+    "w:of-its-kind",
+    "w:off-of",
+    "w:on-account-of",
+    "w:on-behalf-of-sb",
+    "w:on-the-back-of",
+    "w:on-the-basis-of",
+    "w:on-the-edge-of-sth",
+    "w:on-the-order-of",
+    "w:on-the-other-side-of",
+    "w:on-the-strength-of",
+    "w:on-top-of",
+    "w:on-top-of-that",
+    "w:one-of-those-days",
+    "w:out-of",
+    "w:out-of-business",
+    "w:out-of-context",
+    "w:out-of-date",
+    "w:out-of-hand",
+    "w:out-of-nowhere",
+    "w:out-of-order",
+    "w:out-of-place",
+    "w:out-of-pocket",
+    "w:out-of-sight",
+    "w:out-of-the-blue",
+    "w:out-of-the-picture",
+    "w:out-of-the-way",
+    "w:outside-of",
+    "w:pay-out-of-pocket",
+    "w:peace-of-mind",
+    "w:piece-of-work",
+    "w:plant-the-seed-of",
+    "w:plenty-of",
+    "w:point-of-view",
+    "w:ray-of-hope",
+    "w:ray-of-light",
+    "w:regardless-of",
+    "w:right-of-way",
+    "w:rules-of-the-game",
+    "w:run-out-of",
+    "w:run-out-of-road",
+    "w:see-the-light-of-day",
+    "w:short-of",
+    "w:some-kind-of",
+    "w:something-of-a",
+    "w:sort-of",
+    "w:speak-of",
+    "w:stand-in-the-way-of",
+    "w:stand-the-test-of-time",
+    "w:state-of-mind",
+    "w:step-out-of",
+    "w:take-a-bite-out-of-sth",
+    "w:take-a-leap-of-faith",
+    "w:take-account-of",
+    "w:take-advantage-of",
+    "w:take-care-of",
+    "w:take-note-of",
+    "w:take-sth-out-of-sth",
+    "w:take-sth-with-a-pinch-of-salt",
+    "w:take-the-liberty-of-doing-sth",
+    "w:take-the-place-of",
+    "w:tell-of",
+    "w:tens-of",
+    "w:tens-of-millions",
+    "w:tens-of-thousands",
+    "w:the-lady-of-the-house",
+    "w:the-law-of-the-jungle",
+    "w:the-other-side-of-the-coin",
+    "w:think-little-of",
+    "w:think-much-of",
+    "w:think-of",
+    "w:think-of-as",
+    "w:to-the-best-of-ones-ability",
+    "w:to-the-power-of",
+    "w:train-of-thought",
+    "w:under-the-watchful-eye-of",
+    "w:walk-of-life",
+    "w:word-of-mouth",
+    "w:work-of-art",
+    "w:wrong-side-of-town"
+  ]
 }

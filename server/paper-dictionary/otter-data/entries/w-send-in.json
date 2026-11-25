@@ -1,0 +1,97 @@
+{
+  "entryId": "w:send-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "send",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "send",
+        "in"
+      ],
+      [
+        "sending",
+        "in"
+      ],
+      [
+        "sends",
+        "in"
+      ],
+      [
+        "sent",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "send sb/sth in",
+  "senses": [
+    {
+      "senseId": "w:send-in#s1",
+      "pos": "短语",
+      "glossZh": "寄交；提交（申请、表格等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:send-in#s2",
+      "pos": "短语",
+      "glossZh": "派人进入现场处理情况",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:send-in#s3",
+      "pos": "短语",
+      "glossZh": "（拜访时）递上名片或通报名姓",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

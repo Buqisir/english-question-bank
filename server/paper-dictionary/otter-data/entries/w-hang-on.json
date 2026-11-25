@@ -1,0 +1,125 @@
+{
+  "entryId": "w:hang-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hanging on"
+  ],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "on"
+      ],
+      [
+        "hanging",
+        "on"
+      ],
+      [
+        "hangs",
+        "on"
+      ],
+      [
+        "hung",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang on",
+  "senses": [
+    {
+      "senseId": "w:hang-on#s1",
+      "pos": "短语",
+      "glossZh": "等一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-on#s2",
+      "pos": "短语",
+      "glossZh": "抓牢；抓紧不放",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-on#s3",
+      "pos": "短语",
+      "glossZh": "撑住；坚持下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-on#s4",
+      "pos": "短语",
+      "glossZh": "取决于……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hang-on#s5",
+      "pos": "短语",
+      "glossZh": "聚精会神地听",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hang on sb’s every word。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

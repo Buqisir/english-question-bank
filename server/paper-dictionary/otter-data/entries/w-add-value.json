@@ -1,0 +1,117 @@
+{
+  "entryId": "w:add-value",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "add",
+      "value"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "add",
+        "value"
+      ],
+      [
+        "added",
+        "value"
+      ],
+      [
+        "adding",
+        "value"
+      ],
+      [
+        "adds",
+        "value"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "add value",
+  "senses": [
+    {
+      "senseId": "w:add-value#s1",
+      "pos": "短语",
+      "glossZh": "增加价值；带来实际益处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:add-value#e-e4d61760b871fb4f",
+          "text": "Like underconsumption, deinfluencing is also part of a modern approach to consumerism that encourages people to question whether items can add value to their life and the impact they have.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 148
+          },
+          "parts": [
+            [
+              139,
+              148
+            ]
+          ],
+          "highlightRanges": [
+            [
+              139,
+              148
+            ]
+          ]
+        }
+      ],
+      "note": "常用 add value to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:add-value#s2",
+      "pos": "短语",
+      "glossZh": "给储值卡或账户充值",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "香港英语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

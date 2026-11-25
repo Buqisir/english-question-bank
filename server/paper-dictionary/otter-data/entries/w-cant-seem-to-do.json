@@ -1,0 +1,108 @@
+{
+  "entryId": "w:cant-seem-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "can't seem",
+    "can't seem to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "can't",
+      "seem",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can't",
+        "seem",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "can't seem to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can't seem to do",
+  "senses": [
+    {
+      "senseId": "w:cant-seem-to-do#s1",
+      "pos": "短语",
+      "glossZh": "好像怎么也做不到某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:seem#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:cant-seem-to-do#e-bec1fe1a41038533",
+          "text": "“We can’t seem to make up our minds whether we want a modern city or a traditional one.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 17
+          },
+          "parts": [
+            [
+              4,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

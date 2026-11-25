@@ -1,0 +1,486 @@
+{
+  "entryId": "w:leave-behind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "Left Behind",
+    "leaving behind",
+    "left behind"
+  ],
+  "pattern": {
+    "tokens": [
+      "leave",
+      "behind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leave",
+        "behind"
+      ],
+      [
+        "leaving",
+        "behind"
+      ],
+      [
+        "left",
+        "behind"
+      ],
+      [
+        "leaves",
+        "behind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leave behind",
+  "senses": [
+    {
+      "senseId": "w:leave-behind#s1",
+      "pos": "短语",
+      "glossZh": "留下；离开时不带走",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-behind#e-e6748d9a013fed82",
+          "text": "If your cat keeps running away from you, consider leaving behind a small treat in a place it can find.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 64
+          },
+          "parts": [
+            [
+              50,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-7cb7b8815b9eb38f",
+          "text": "As I got older, trips back to Thanet opened my eyes to what I had left behind.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 77
+          },
+          "parts": [
+            [
+              66,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-ed32054c43b7c096",
+          "text": "To assist the elderly left behind.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          },
+          "parts": [
+            [
+              22,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:leave-behind#s2",
+      "pos": "短语",
+      "glossZh": "把……抛在身后；舍弃（过去的梦想等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-behind#e-98572f1b93118cbc",
+          "text": "I also worried about leaving behind my dream of medicine to pursue a path that I was excited about but that might not lead to a job in Puerto Rico.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:leave-behind#s3",
+      "pos": "短语",
+      "glossZh": "留下（痕迹、影响等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-behind#e-7db2b23a7bcfc9a3",
+          "text": "Cars release metals like zinc and copper, and tires leave behind microplastics.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 64
+          },
+          "parts": [
+            [
+              52,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-dbb12474b8f02574",
+          "text": "His canvas is the beach, and his creations, though they eventually disappear, leave behind something far more lasting: deep thought.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 90
+          },
+          "parts": [
+            [
+              78,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              90
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-b0383c9ba9fd12e3",
+          "text": "On April 8, 1973, Picasso passed away in the city of Mougins, France, leaving behind a treasure of art that is celebrated still to this day.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 84
+          },
+          "parts": [
+            [
+              70,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:leave-behind#s4",
+      "pos": "短语",
+      "glossZh": "使……掉队；把……落在后面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-behind#e-1aee5dba0b2114c1",
+          "text": "What do Hotel Goodbyes and No Woman Left Behind have in common?",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-chongqing-nankai-2026-m2:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-02f839ba48bec409",
+          "text": "“Through SMS, we ensure women aren’t left behind.”",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 48
+          },
+          "parts": [
+            [
+              37,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-behind#e-3103e6f8384a42ee",
+          "text": "NO WOMAN LEFT BEHIND",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 20
+          },
+          "parts": [
+            [
+              9,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:leave-behind#s5",
+      "pos": "短语",
+      "glossZh": "忘了带走；遗落",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-behind#e-239228d380deb5c0",
+          "text": "What did the woman leave behind?",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 31
+          },
+          "parts": [
+            [
+              19,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:leave-behind#s6",
+      "pos": "短语",
+      "glossZh": "去世后留下（亲属等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

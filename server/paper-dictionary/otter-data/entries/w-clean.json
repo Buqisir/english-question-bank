@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 9,
-    "mock": 265
+    "mock": 77
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -208,7 +208,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 85
       },
       "folded": false,
       "examples": [
@@ -279,7 +279,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -325,7 +325,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -349,6 +349,86 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:clean#s7",
+      "pos": "adv.",
+      "glossZh": "以健康的方式",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:clean#s8",
+      "pos": "adv.",
+      "glossZh": "完全地；彻底地",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-4d2e5ecd46034c83",
+          "text": "Not only was her paper gone, but a beautiful, prize-worthy rose from her front garden bed had been taken clean off.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clean#s9",
+      "pos": "adj.",
+      "glossZh": "公平的；不犯规的",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-ef19bb14ad8f6b9a",
+          "text": "Keep your play clean until the last whistle.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -357,6 +437,13 @@
       "reason": "运动或音乐术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:clean-break",
+    "w:clean-down",
+    "w:clean-off",
+    "w:clean-out",
+    "w:clean-up"
+  ]
 }

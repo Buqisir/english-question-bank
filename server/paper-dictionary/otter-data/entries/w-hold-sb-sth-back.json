@@ -1,0 +1,560 @@
+{
+  "entryId": "w:hold-sb-sth-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hold back",
+    "holding back",
+    "holds back"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      {
+        "slot": "sb/sth"
+      },
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "hold",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "hold",
+        "back"
+      ],
+      [
+        "holding",
+        "back"
+      ],
+      [
+        "holds",
+        "back"
+      ],
+      [
+        "held",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:hold-sb-sth-back#s1",
+      "pos": "短语",
+      "glossZh": "阻碍；拖累；妨碍进展",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hold#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-sb-sth-back#e-c5054938ff6b8d34",
+          "text": "I felt he treated me as though I would hold him back and probably make him fail to get an A in the course.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 52
+          },
+          "parts": [
+            [
+              39,
+              43
+            ],
+            [
+              48,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              43
+            ],
+            [
+              48,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-7467d1aa8278c67c",
+          "text": "James worked odd jobs, like busing tables and bartending, but his inability to read held him back.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 97
+          },
+          "parts": [
+            [
+              84,
+              88
+            ],
+            [
+              93,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              88
+            ],
+            [
+              93,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-9f5b925541cc3a3c",
+          "text": "She refuses to let age hold her back and accepts every stage of life with joy and confidence.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 36
+          },
+          "parts": [
+            [
+              23,
+              27
+            ],
+            [
+              32,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              27
+            ],
+            [
+              32,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:hold-sb-sth-back#s2",
+      "pos": "短语",
+      "glossZh": "阻挡；遏制（前进或蔓延）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-sb-sth-back#e-e0800697bb4a5d2c",
+          "text": "Holding back the Sahara",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-8aae87c4d872ee95",
+          "text": "The sight of a squirrel turned him into a frantic creature, leaping and howling, while I tried desperately to hold him back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 123
+          },
+          "parts": [
+            [
+              110,
+              114
+            ],
+            [
+              119,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              114
+            ],
+            [
+              119,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-7d3c9da22fa5dc36",
+          "text": "Holding back MLI1 cells.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-shandong-jinan-2026-05-third:34#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:hold-sb-sth-back#s3",
+      "pos": "短语",
+      "glossZh": "克制自己；有所保留",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hold#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-sb-sth-back#e-3629eea4076e5250",
+          "text": "If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 65
+          },
+          "parts": [
+            [
+              56,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-76cd2b7518d349cd",
+          "text": "If you hold back to avoid hurting feelings or spare tension, the result may be the opposite.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          },
+          "parts": [
+            [
+              7,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-3ea69b5729c0d73d",
+          "text": "Once you recognize it, you can try to hold back a little.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 47
+          },
+          "parts": [
+            [
+              38,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "不带宾语，可用 hold back from doing sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:hold-sb-sth-back#s4",
+      "pos": "短语",
+      "glossZh": "忍住（眼泪）；抑制（情绪）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:back#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-sb-sth-back#e-f489be6654079524",
+          "text": "Oliver’s shoulders slumped, and he stared out the window, blinking hard to hold back tears.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 84
+          },
+          "parts": [
+            [
+              75,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-281555353ed753d1",
+          "text": "Ricky could no longer hold back his feelings.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 31
+          },
+          "parts": [
+            [
+              22,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-sb-sth-back#e-46b6608a7cf77b93",
+          "text": "One tired evening, after wasting plenty of time and failing to finish his homework smoothly because of the noise, he could no longer hold back his annoyance.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 142
+          },
+          "parts": [
+            [
+              133,
+              142
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              142
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:hold-sb-sth-back#s5",
+      "pos": "短语",
+      "glossZh": "使（学生）留级",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

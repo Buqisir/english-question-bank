@@ -54,8 +54,8 @@
     "mock": 49
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 44
+    "gaokao": 9,
+    "mock": 28
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -144,131 +144,6 @@
       ]
     },
     {
-      "senseId": "w:middle#s3",
-      "pos": "短语",
-      "glossZh": "中学",
-      "pronunciationId": "w:middle#p-main",
-      "note": "middle school。在美国一般指小学和高中之间的学段。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:middle#e-f0816fd1b66b9ada",
-          "text": "My life as a tax-paying employed person began in middle school, when, for three whole days, I worked in a baking factory.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 55
-          }
-        },
-        {
-          "exampleId": "w:middle#e-4cd11e8ebacc2639",
-          "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 20
-          }
-        },
-        {
-          "exampleId": "w:middle#e-f6c8d001a762f808",
-          "text": "Urban Sprouts’ classes, at two middle schools and two high schools, include hands-on experiments such as soil testing, flower-and-seed dissection, tastings of fresh or dried produce, and work in the garden.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 37
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:middle#s4",
-      "pos": "短语",
-      "glossZh": "中年",
-      "pronunciationId": "w:middle#p-main",
-      "note": "middle age。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:middle#e-d0bfaf30266f5ed1",
-          "text": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 80,
-            "end": 86
-          }
-        },
-        {
-          "exampleId": "w:middle#e-788e8c6226aa7c50",
-          "text": "Lead researcher Dr. Helena Horder, of the University of Gothenburg in Sweden, said: “These findings are exciting because it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 191,
-            "end": 197
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:middle#s5",
       "pos": "专名",
       "glossZh": "中东",
@@ -277,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -320,93 +195,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:middle#s6",
-      "pos": "短语",
-      "glossZh": "在偏僻的地方",
-      "pronunciationId": "w:middle#p-main",
-      "note": "in the middle of nowhere。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:middle#e-a394b40a5bb1109f",
-          "text": "Sure, my friends and I loved to __46__ about how bored we were in the middle of nowhere; __47__, as I finish up my junior year of college, I’m convinced that it took __48__ our small town to realize how much we actually loved it and what exactly we loved about it.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 70,
-            "end": 76
-          }
-        },
-        {
-          "exampleId": "w:middle#e-f37c42465451b6d5",
-          "text": "“I was just blown away when I __43__ a hut in the middle of nowhere.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
-            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
-            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 50,
-            "end": 56
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:middle#s7",
-      "pos": "短语",
-      "glossZh": "在……进行当中",
-      "pronunciationId": "w:middle#p-main",
-      "note": "in the middle of sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:middle#e-877cf21314d3715e",
-          "text": "In the middle of all this, I realized that Mike, who was supposed to help with the setup, was nowhere to be found.",
-          "source": {
-            "paperId": "paper-mock-hubei-mingxiao-2025-09",
-            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
-            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 13
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -415,6 +203,13 @@
       "reason": "语法、建筑或体育专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-middle-of-nowhere",
+    "w:in-the-middle-of-sth",
+    "w:middle-ground"
+  ]
 }

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:not-to-say",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "to",
+      "say"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "to",
+        "say"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not to say",
+  "senses": [
+    {
+      "senseId": "w:not-to-say#s1",
+      "pos": "短语",
+      "glossZh": "这并不意味着……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-to-say#e-1eca248277d5e280",
+          "text": "That’s not to say material things don’t have their place – some pieces bring joy and meaning, especially if they have emotional value.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-to-say#e-db1e0a39252071b1",
+          "text": "That’s not to say this is easy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-to-say#e-d3ec7bf43f894039",
+          "text": "This is not to say they’re fixed, just that they may require intervention to break.” Researchers confirmed Compulsives’ choices weren’t habits: participants could explain their wrong choices.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:reading-d:3",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "用于 this/that is not to say (that) ...。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

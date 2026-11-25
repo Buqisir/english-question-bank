@@ -1,0 +1,222 @@
+{
+  "entryId": "w:carry-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "carry",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "carry",
+        "on"
+      ],
+      [
+        "carried",
+        "on"
+      ],
+      [
+        "carries",
+        "on"
+      ],
+      [
+        "carrying",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "carry on",
+  "senses": [
+    {
+      "senseId": "w:carry-on#s1",
+      "pos": "短语",
+      "glossZh": "继续做；坚持下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:carry#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:carry-on#e-aa19a41fe287b8fa",
+          "text": "What’s more, it was the perfect fit for two 70-somethings to carry on late afternoon chats.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          },
+          "parts": [
+            [
+              61,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:carry-on#e-9327c163a570a597",
+          "text": "and then carry on with my day, no matter how these moments might make me feel.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          },
+          "parts": [
+            [
+              9,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:carry-on#e-fa4b4b64a5706a60",
+          "text": "Music lovers should also visit the Ground Zero Blues Club to see modern blues musicians carry on the tradition any night of the week.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 96
+          },
+          "parts": [
+            [
+              88,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              96
+            ]
+          ]
+        }
+      ],
+      "note": "可接 with sth 或 doing sth，也可直接接活动名称。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:carry-on#s2",
+      "pos": "短语",
+      "glossZh": "随身带上飞机",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 carry a bag on。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-on#s3",
+      "pos": "短语",
+      "glossZh": "没完没了地说",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 carry on about sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-on#s4",
+      "pos": "短语",
+      "glossZh": "吵闹；大惊小怪",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:carry-on#s5",
+      "pos": "短语",
+      "glossZh": "与某人有不正当关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法，常用 carry on with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

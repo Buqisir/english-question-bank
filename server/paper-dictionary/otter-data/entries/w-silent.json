@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 93
+    "mock": 17
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -299,6 +299,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:silent#s7",
+      "pos": "adj.",
+      "glossZh": "（社交模式）限制互动或减少活动可见度的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silent#e-920b5891eedf84f8",
+          "text": "Even social platforms have evolved to meet this need: many now offer “silent modes”, such as hidden interaction records and one-way posting features, acknowledging the widespread acceptance of light socializing.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -307,6 +340,6 @@
       "reason": "医学缩写或特定世代名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

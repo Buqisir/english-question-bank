@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 37
+    "mock": 10
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -145,78 +145,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:carve#s3",
-      "pos": "短语",
-      "glossZh": "开创；挤出（时间等）；开辟",
-      "pronunciationId": "w:carve#p-main",
-      "note": "carve out",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:carve#e-81b537d1c52e0fc7",
-          "text": "I carved out precious, daily writing time, starting small and manageable.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
-            "paperTitle": "南昌市2025年高三年级九月测试英语",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 2,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:carve#e-5ef12e087d947432",
-          "text": "This homecoming, __54__, was not just a return, but a(n) __55__ of the soul, empowering me to stay rooted and carve out a new life on my own land.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
-            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
-            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:cloze:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:carve#e-9a2244051f87b8e9",
-          "text": "By engaging with communities and fishing cooperatives, they have gradually gained recognition, carving out a space for women in marine conservation within the male-dominated fishing industry.",
-          "source": {
-            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
-            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
-            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-c:3",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 95,
-            "end": 102
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -225,6 +153,11 @@
       "reason": "历史或运动专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:carve-out"
+  ]
 }

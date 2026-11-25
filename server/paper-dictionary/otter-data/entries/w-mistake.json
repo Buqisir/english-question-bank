@@ -65,8 +65,8 @@
     "mock": 149
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 144
+    "gaokao": 1,
+    "mock": 10
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 45,
-        "mock": 0
+        "mock": 126
       },
       "folded": false,
       "examples": [
@@ -141,60 +141,6 @@
       ]
     },
     {
-      "senseId": "w:mistake#s2",
-      "pos": "短语",
-      "glossZh": "由于弄错；无意中",
-      "pronunciationId": "w:mistake#p-main",
-      "note": "by mistake。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:mistake#e-c6c1646927780368",
-          "text": "He got on a train by mistake.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:mistake#e-e7e5291e4fd0b7d1",
-          "text": "“Oh no, the lady took my phone by mistake!” Meanwhile, the guy on the bike stayed close to me.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:writing-continuation:8",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 34,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:mistake#s3",
       "pos": "v.",
       "glossZh": "把……错当成……",
@@ -203,7 +149,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -275,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -326,6 +272,12 @@
       "reason": "属于普通的「失误」义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:by-mistake",
+    "w:make-a-mistake"
+  ]
 }

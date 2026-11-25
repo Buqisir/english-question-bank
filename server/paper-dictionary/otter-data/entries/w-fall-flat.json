@@ -1,0 +1,74 @@
+{
+  "entryId": "w:fall-flat",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "flat"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "flat"
+      ],
+      [
+        "fallen",
+        "flat"
+      ],
+      [
+        "falling",
+        "flat"
+      ],
+      [
+        "falls",
+        "flat"
+      ],
+      [
+        "fell",
+        "flat"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall flat",
+  "senses": [
+    {
+      "senseId": "w:fall-flat#s1",
+      "pos": "短语",
+      "glossZh": "（笑话、表演等）反应冷淡；未达到预期效果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

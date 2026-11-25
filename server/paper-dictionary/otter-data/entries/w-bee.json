@@ -54,7 +54,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 49
+    "mock": 0
   },
   "senses": [
     {
@@ -65,7 +65,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -161,6 +161,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:bee#s3",
+      "pos": "短语",
+      "glossZh": "在群体中居支配地位的女性（queen bee）",
+      "pronunciationId": "w:bee#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bee#e-bf4a74100d98127b",
+          "text": "I was the “Queen Bee” at school.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -169,6 +202,6 @@
       "reason": "专名、技术或过时用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

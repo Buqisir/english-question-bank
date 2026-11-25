@@ -1,0 +1,157 @@
+{
+  "entryId": "w:by-the-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "the",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "the",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by the time",
+  "senses": [
+    {
+      "senseId": "w:by-the-time#s1",
+      "pos": "短语",
+      "glossZh": "到……的时候；到……为止",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:time#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-the-time#e-3943c4c194147757",
+          "text": "Hopefully, the bikers would have gone away by the time the film was over.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 54
+          },
+          "parts": [
+            [
+              43,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-the-time#e-03caa146490fbd84",
+          "text": "By the time 250,000 were on the bridge, engineers noticed something terrible: the roadway was flattening under what turned out to be the heaviest load it had ever been asked to carry.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-the-time#e-7e41583d5aec484d",
+          "text": "I didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 142,
+            "end": 153
+          },
+          "parts": [
+            [
+              142,
+              153
+            ]
+          ],
+          "highlightRanges": [
+            [
+              142,
+              153
+            ]
+          ]
+        }
+      ],
+      "note": "引导时间从句，主句常表示届时已发生的事或已出现的状态。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 17
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

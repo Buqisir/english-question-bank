@@ -1,0 +1,199 @@
+{
+  "entryId": "w:shake-ones-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "shake sb's hand"
+  ],
+  "pattern": {
+    "tokens": [
+      "shake",
+      {
+        "slot": "one's"
+      },
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shake",
+        {
+          "slot": "one's"
+        },
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shake hand",
+      "tags": []
+    },
+    {
+      "form": "shaking hand",
+      "tags": []
+    },
+    {
+      "form": "shook hand",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shake sb's hand",
+  "senses": [
+    {
+      "senseId": "w:shake-ones-hand#s1",
+      "pos": "短语",
+      "glossZh": "和某人握手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shake#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shake-ones-hand#e-b76c07d3993b836c",
+          "text": "I would walk up from one side, shake everyone’s hand, and then walk down the stairs on the other side to leave the stage.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 52
+          },
+          "parts": [
+            [
+              31,
+              36
+            ],
+            [
+              48,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              36
+            ],
+            [
+              48,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shake-ones-hand#e-5097fa8dec35d784",
+          "text": "“Li Ming, from China,” I replied, shaking her hand tentatively.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 50
+          },
+          "parts": [
+            [
+              34,
+              41
+            ],
+            [
+              46,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ],
+            [
+              46,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shake-ones-hand#e-85f28df893b7f6d4",
+          "text": "Mr. Smith shook them all and shook Adam’s hand last.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 46
+          },
+          "parts": [
+            [
+              29,
+              34
+            ],
+            [
+              42,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              34
+            ],
+            [
+              42,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,200 @@
+{
+  "entryId": "w:not-only-but-also",
+  "headword": "not only … but also …",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "only",
+      {
+        "slot": "…"
+      },
+      "but",
+      "also",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "only",
+        {
+          "slot": "…"
+        },
+        "but",
+        "also",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "not only but also",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:not-only-but-also#s1",
+      "pos": "短语",
+      "glossZh": "不但……而且……",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 47
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:not#s2",
+        "w:only#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-only-but-also#e-9e75e380ec3bbf25",
+          "text": "I loved talking about the imaginary box, not only with my students but also with my own children.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 75
+          },
+          "parts": [
+            [
+              41,
+              49
+            ],
+            [
+              67,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ],
+            [
+              67,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-only-but-also#e-3d6ad841a955a7f0",
+          "text": "The rich narrative not only entertains but also evokes a profound appreciation for life and existence.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 47
+          },
+          "parts": [
+            [
+              19,
+              27
+            ],
+            [
+              39,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ],
+            [
+              39,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-only-but-also#e-f7bf47f4e66fa1bf",
+          "text": "Specific goals not only avoid aimlessness but also give your spare time a clear direction and purpose.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 50
+          },
+          "parts": [
+            [
+              15,
+              23
+            ],
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              23
+            ],
+            [
+              42,
+              50
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

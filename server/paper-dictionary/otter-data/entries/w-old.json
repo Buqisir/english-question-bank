@@ -66,8 +66,8 @@
     "mock": 599
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 599
+    "gaokao": 3,
+    "mock": 405
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 46
       },
       "folded": false,
       "examples": [
@@ -292,7 +292,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -363,7 +363,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -435,7 +435,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -488,7 +488,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -560,7 +560,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -603,40 +603,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:old#s9",
-      "pos": "短语",
-      "glossZh": "老派地；用老办法",
-      "pronunciationId": "w:old#p-main",
-      "note": "go old school。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:old#e-d80c755efd89ef8f",
-          "text": "Yes, we all have our phones, but many of us still like to go old school and read something printed.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 64
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -645,6 +611,19 @@
       "reason": "活动专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:any-old",
+    "w:go-old-school",
+    "w:good-old",
+    "w:little-old-me",
+    "w:old-bag",
+    "w:old-hand",
+    "w:old-hat",
+    "w:old-saw",
+    "w:old-school"
+  ]
 }

@@ -1,0 +1,162 @@
+{
+  "entryId": "w:lend-a-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lend",
+      "a",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lend",
+        "a",
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lent a hand",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lend a hand",
+  "senses": [
+    {
+      "senseId": "w:lend-a-hand#s1",
+      "pos": "短语",
+      "glossZh": "帮忙；搭把手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lend#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lend-a-hand#e-72133d75e5fca0e5",
+          "text": "America’s space agency is asking everyday inventors and hobbyists to lend a hand in creating a toilet that works beyond Earth’s atmosphere.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 80
+          },
+          "parts": [
+            [
+              69,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lend-a-hand#e-22eb1c09afcdbcd5",
+          "text": "A couple hiking that day also lent a hand.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 41
+          },
+          "parts": [
+            [
+              30,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lend-a-hand#e-b047e34ea0e994a9",
+          "text": "Everyone was glad to lend a hand.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

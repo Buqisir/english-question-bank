@@ -1,0 +1,70 @@
+{
+  "entryId": "w:feel-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "out"
+      ],
+      [
+        "feeling",
+        "out"
+      ],
+      [
+        "feels",
+        "out"
+      ],
+      [
+        "felt",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:feel-out#s1",
+      "pos": "短语",
+      "glossZh": "试探；摸清某人的态度或情况",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

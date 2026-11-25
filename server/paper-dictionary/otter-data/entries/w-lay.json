@@ -81,7 +81,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 58
+    "mock": 18
   },
   "senses": [
     {
@@ -93,7 +93,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -165,7 +165,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -237,7 +237,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -335,7 +335,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -380,127 +380,6 @@
       ]
     },
     {
-      "senseId": "w:lay#s7",
-      "pos": "短语",
-      "glossZh": "奠定基础",
-      "pronunciationId": "w:lay#p-main",
-      "note": "lay the foundation。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lay#e-a0755063a8643072",
-          "text": "Every day, he devoted himself fully to his studies, hoping to lay a solid foundation for his future studies.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 62,
-            "end": 65
-          }
-        },
-        {
-          "exampleId": "w:lay#e-9fa8f8414326241f",
-          "text": "Scientists believe this could lay the foundation for a revolution in cancer detection.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 33
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lay#s8",
-      "pos": "短语",
-      "glossZh": "阐明",
-      "pronunciationId": "w:lay#p-main",
-      "note": "lay sth out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lay#e-3a7f4b32523fead5",
-          "text": "The path she lays out is simple yet requires __45__.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lay#s9",
-      "pos": "短语",
-      "glossZh": "使不再困扰",
-      "pronunciationId": "w:lay#p-main",
-      "note": "lay sth to rest。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lay#e-fc5f33242897fe3f",
-          "text": "At first, she had no __41__ of returning to her high school under any circumstances, but later she wondered, “could tonight’s reunion be the __42__ to lay old terrible memory to rest?” She checked her __43__ again in the mirror: perfect makeup, newly highlighted hair and a lovely dress.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
-            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:cloze:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 151,
-            "end": 154
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:lay#s10",
       "pos": "adj.",
       "glossZh": "非专业的",
@@ -525,6 +404,73 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:lay#s12",
+      "pos": "v.",
+      "glossZh": "把……归因于（lay sth to sth）",
+      "pronunciationId": "w:lay#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lay#e-35fe97a3aef9789f",
+          "text": "Nowadays, people lay everything to heredity (遗传); that is, we receive our special talents from our ancestors.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lay#s13",
+      "pos": "v.",
+      "glossZh": "强调；重视（lay emphasis on）",
+      "pronunciationId": "w:lay#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lay#e-94402eedc25738ba",
+          "text": "It lays emphasis on people’s mental health.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zj-shaoxing-2026-apr-m181:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -533,6 +479,14 @@
       "reason": "古旧或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:lay-on",
+    "w:lay-sth-out",
+    "w:lay-sth-to-rest",
+    "w:lay-the-foundation"
+  ]
 }

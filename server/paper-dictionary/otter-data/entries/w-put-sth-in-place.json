@@ -1,0 +1,113 @@
+{
+  "entryId": "w:put-sth-in-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sth"
+      },
+      "in",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sth"
+        },
+        "in",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "putting in place",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sth in place",
+  "senses": [
+    {
+      "senseId": "w:put-sth-in-place#s1",
+      "pos": "短语",
+      "glossZh": "设立并落实（规定、措施等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s66"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-sth-in-place#e-b810a213d0c996b0",
+          "text": "By putting boundaries in place at the beginning, everyone knows where they stand from the start.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 30
+          },
+          "parts": [
+            [
+              3,
+              10
+            ],
+            [
+              22,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ],
+            [
+              22,
+              30
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

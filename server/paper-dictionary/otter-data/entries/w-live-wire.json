@@ -1,0 +1,92 @@
+{
+  "entryId": "w:live-wire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "live",
+      "wire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "live",
+        "wire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "live wire",
+  "senses": [
+    {
+      "senseId": "w:live-wire#s1",
+      "pos": "短语",
+      "glossZh": "精力充沛、活跃的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wire#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:live-wire#e-1ca3ce1fbeb996ea",
+          "text": "It’s a real live wire, hard to leave.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

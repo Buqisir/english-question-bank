@@ -1,0 +1,156 @@
+{
+  "entryId": "w:break-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking in"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "in"
+      ],
+      [
+        "breaking",
+        "in"
+      ],
+      [
+        "breaks",
+        "in"
+      ],
+      [
+        "broke",
+        "in"
+      ],
+      [
+        "broken",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break in",
+  "senses": [
+    {
+      "senseId": "w:break-in#s1",
+      "pos": "短语",
+      "glossZh": "强行闯入；破门而入",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s2",
+      "pos": "短语",
+      "glossZh": "突然插话；打断别人的话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s3",
+      "pos": "短语",
+      "glossZh": "磨合（新设备）；把新鞋穿软",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s4",
+      "pos": "短语",
+      "glossZh": "初入某一行业或领域",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s5",
+      "pos": "短语",
+      "glossZh": "驯服（马等动物）；训练新手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s6",
+      "pos": "短语",
+      "glossZh": "使女性初次发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "冒犯性的旧俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-in#s7",
+      "pos": "短语",
+      "glossZh": "强迫新人接受性行为",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "极少见的冒犯性俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

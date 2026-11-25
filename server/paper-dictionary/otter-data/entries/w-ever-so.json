@@ -1,0 +1,155 @@
+{
+  "entryId": "w:ever-so",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ever",
+      "so"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ever",
+        "so"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ever so",
+  "senses": [
+    {
+      "senseId": "w:ever-so#s1",
+      "pos": "短语",
+      "glossZh": "非常；极其",
+      "note": "常见于英式口语，修饰形容词或副词。",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ever#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:ever-so#e-9a3422267fd0ddaf",
+          "text": "Her tail began wagging（摆动）ever so slowly, then faster as she caught the smell.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          },
+          "parts": [
+            [
+              26,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ever-so#e-a80afbf44c57682f",
+          "text": "Why did they vary ever so slightly from one instrument to the next?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          },
+          "parts": [
+            [
+              18,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ever-so#e-3d4add5fa939ee96",
+          "text": "Then, just a few metres away, two eyes break the surface as a huge head rises ever so slightly out of the water.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 85
+          },
+          "parts": [
+            [
+              78,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

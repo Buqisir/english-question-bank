@@ -1,0 +1,99 @@
+{
+  "entryId": "w:deal-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "deal",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "deal",
+        "in"
+      ],
+      [
+        "dealing",
+        "in"
+      ],
+      [
+        "deals",
+        "in"
+      ],
+      [
+        "dealt",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "deal in",
+  "senses": [
+    {
+      "senseId": "w:deal-in#s1",
+      "pos": "短语",
+      "glossZh": "经营；买卖某类商品",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "deal in sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:deal-in#s2",
+      "pos": "短语",
+      "glossZh": "给某人发牌让其加入牌局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "deal sb in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:deal-in#s3",
+      "pos": "短语",
+      "glossZh": "把某人算进去；让某人参与",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "deal sb in。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

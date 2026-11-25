@@ -1,0 +1,520 @@
+{
+  "entryId": "w:bring-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "bringing in"
+  ],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "in"
+      ],
+      [
+        "bringing",
+        "in"
+      ],
+      [
+        "brings",
+        "in"
+      ],
+      [
+        "brought",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bring in",
+      "tags": []
+    },
+    {
+      "form": "brought in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring (sb/sth) in",
+  "senses": [
+    {
+      "senseId": "w:bring-in#s1",
+      "pos": "短语",
+      "glossZh": "把……带进来；带回交来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s88"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-in#e-eb4050825cda02d3",
+          "text": "Hunters bring in more than 300,000 nutria tails a year, so part of Mouton’s job these days is trying to promote fur.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          },
+          "parts": [
+            [
+              8,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-c55f62e908462be4",
+          "text": "Prospective members have to bring in at least 5 kilograms of solid waste and establish a savings goal.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-18000c89a3db7f2a",
+          "text": "Jamie, a ten-year-old boy full of curiosity, brought in some old bicycle parts from his garage.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 55
+          },
+          "parts": [
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:bring-in#s2",
+      "pos": "短语",
+      "glossZh": "赚得；带来收入",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s13",
+        "w:in#s45"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-in#e-9d3fe66f56a0490d",
+          "text": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-126dc288c922a946",
+          "text": "A gourd-shaped bookmark she designed brought in over 100,000 yuan in a single month.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 47
+          },
+          "parts": [
+            [
+              37,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-d150f2c688ef346a",
+          "text": "Repurposed coal plants can bring in economic benefits.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-chongqing-nankai-2026-m2:35#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          },
+          "parts": [
+            [
+              27,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:bring-in#s3",
+      "pos": "短语",
+      "glossZh": "引进；纳入（物种、观点、规则等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s6",
+        "w:in#s46"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-in#e-9a226c319148b7c2",
+          "text": "Even when I’m planning classes, I tend to think about how I can bring in my hobbies.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          },
+          "parts": [
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-88d39c1771c1cdc2",
+          "text": "To bring in foreign species of plants.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:29#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-fb1d7bed75a8d582",
+          "text": "Bringing in technologies used by electric cars.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:30#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:bring-in#s4",
+      "pos": "短语",
+      "glossZh": "引入人员；请某人参与；吸引顾客",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:bring-in#e-26aba2466688bf00",
+          "text": "I suspect the company felt that it was time to bring in a younger person at a lower salary in this period of economic stress.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          },
+          "parts": [
+            [
+              47,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-2405eb2b82eb6613",
+          "text": "These patients have very few chances to see live entertainment of any kind, so they enjoy any kind of musical talent that we can bring in.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 137
+          },
+          "parts": [
+            [
+              129,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              137
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-in#e-08af8dee3fc6e3fd",
+          "text": "Create exclusive (独有的) blind box series that feature one-of-a-kind items or unique packaging, which can increase demand and bring in regular customers.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 132
+          },
+          "parts": [
+            [
+              124,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              132
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:bring-in#s5",
+      "pos": "短语",
+      "glossZh": "（陪审团）作出裁决",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

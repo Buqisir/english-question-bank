@@ -1,0 +1,85 @@
+{
+  "entryId": "w:bring-under",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "under"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "under"
+      ],
+      [
+        "bringing",
+        "under"
+      ],
+      [
+        "brings",
+        "under"
+      ],
+      [
+        "brought",
+        "under"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb/sth under",
+  "senses": [
+    {
+      "senseId": "w:bring-under#s1",
+      "pos": "短语",
+      "glossZh": "把……纳入管理、管辖或控制",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 bring sth under control 或 bring sth under the authority of sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-under#s2",
+      "pos": "短语",
+      "glossZh": "制服；征服",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

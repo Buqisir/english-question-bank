@@ -54,7 +54,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 14
+    "mock": 2
   },
   "senses": [
     {
@@ -65,7 +65,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -271,6 +271,58 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:neutral#s7",
+      "pos": "adj.",
+      "glossZh": "既非正面也非负面的",
+      "pronunciationId": "w:neutral#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:neutral#e-3c8b7602e9bf236e",
+          "text": "Over 30 years ago, communication scientist Julia A. Goldberg at the University of Wyoming categorized interruptions into three types – bad, good and neutral.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:neutral#e-4c0704cf0d981a40",
+          "text": "As a result, expressions of personal stability can be misunderstood as indifference or privilege, making people hesitate to share their neutral or positive wellbeing.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 143
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -279,6 +331,6 @@
       "reason": "电气或行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

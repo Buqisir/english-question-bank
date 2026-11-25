@@ -48,8 +48,8 @@
     "mock": 28
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 26
+    "gaokao": 1,
+    "mock": 7
   },
   "senses": [
     {
@@ -61,7 +61,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -149,40 +149,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:leaf#s4",
-      "pos": "短语",
-      "glossZh": "翻阅",
-      "pronunciationId": "w:leaf#p-main",
-      "note": "leaf through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:leaf#e-ebe267c0b40d89cf",
-          "text": "Of course, these days there are plenty of online dictionaries and thesauruses, but I’m old-fashioned enough to prefer a hard cover and pages I can leaf through with my fingers.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 154,
-            "end": 158
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -191,6 +157,11 @@
       "reason": "行业用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:leaf-through"
+  ]
 }

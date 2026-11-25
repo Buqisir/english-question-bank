@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 30
+    "mock": 4
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -129,59 +129,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:tale#s3",
-      "pos": "短语",
-      "glossZh": "童话",
-      "pronunciationId": "w:tale#p-main",
-      "note": "fairy tale。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:tale#e-6bc418526dd39144",
-          "text": "Watching her eagerly combine logical facts with my fairy tales, a quiet worry began to bother me.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 57,
-            "end": 62
-          }
-        },
-        {
-          "exampleId": "w:tale#e-48ff12b78e946805",
-          "text": "I can’t remember exactly how the story was told, but it sounded like a fairy tale.",
-          "source": {
-            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
-            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
-            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 77,
-            "end": 81
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -190,6 +137,8 @@
       "reason": "少见或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

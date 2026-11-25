@@ -1,0 +1,112 @@
+{
+  "entryId": "w:be-rid-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "rid",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "rid",
+        "of"
+      ],
+      [
+        "been",
+        "rid",
+        "of"
+      ],
+      [
+        "being",
+        "rid",
+        "of"
+      ],
+      [
+        "is",
+        "rid",
+        "of"
+      ],
+      [
+        "was",
+        "rid",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be rid of",
+  "senses": [
+    {
+      "senseId": "w:be-rid-of#s1",
+      "pos": "短语",
+      "glossZh": "摆脱；除掉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-rid-of#e-a236f8f029af41cf",
+          "text": "Many societies tend to view fat as soft body tissue that keeps us warm at best, if not something annoying to be rid of.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 118
+          },
+          "parts": [
+            [
+              109,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              118
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

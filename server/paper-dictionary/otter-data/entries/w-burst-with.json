@@ -1,0 +1,133 @@
+{
+  "entryId": "w:burst-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "burst",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "burst",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bursting with",
+      "tags": []
+    },
+    {
+      "form": "bursts with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "burst with sth",
+  "senses": [
+    {
+      "senseId": "w:burst-with#s1",
+      "pos": "短语",
+      "glossZh": "充满；满是",
+      "note": "可接 energy、excitement 等，也可接具体事物。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:burst#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:burst-with#e-c187b38d369b36bc",
+          "text": "To make matters more challenging, my three children – Mike, Emma, and little Sam – had been bursting with restless energy all week, their stored excitement from school ready to burst forth before a long weekend.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 105
+          },
+          "parts": [
+            [
+              92,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:burst-with#e-271a2ff35e0161f9",
+          "text": "Every surface bursts with colorful creations: posters and paper fill every corner and a handmade sign declares her the “Teacher of Awesome (Math).” This transformation mirrors her revolutionary approach to education – one that relies not only on textbooks but also on student-crafted learning journals filled with origami folds(折纸), hand-drawn diagrams, and lessons printed on rainbow-colored paper.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

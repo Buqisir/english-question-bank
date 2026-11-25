@@ -1,0 +1,96 @@
+{
+  "entryId": "w:sooner-or-later",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sooner",
+      "or",
+      "later"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sooner",
+        "or",
+        "later"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sooner or later",
+  "senses": [
+    {
+      "senseId": "w:sooner-or-later#s1",
+      "pos": "短语",
+      "glossZh": "迟早；早晚有一天",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:later#s3",
+        "w:soon#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sooner-or-later#e-1b3be6c0535f22f8",
+          "text": "It will come to an end sooner or later.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:24#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 38
+          },
+          "parts": [
+            [
+              23,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

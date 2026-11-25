@@ -42,8 +42,8 @@
     "mock": 19
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 14
+    "gaokao": 1,
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -200,40 +200,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:circuit#s4",
-      "pos": "短语",
-      "glossZh": "循环训练",
-      "pronunciationId": "w:circuit#p-main",
-      "note": "circuit training",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:circuit#e-2e18e4f995b971e2",
-          "text": "Half of the exercisers did circuit training on an exercise bike for 35 minutes immediately after the test.",
-          "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 34
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -242,6 +208,8 @@
       "reason": "制度专称或历史用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

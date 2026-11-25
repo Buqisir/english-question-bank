@@ -54,8 +54,8 @@
     "mock": 296
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 294
+    "gaokao": 2,
+    "mock": 102
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -138,7 +138,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -210,7 +210,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 82
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -335,7 +335,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -397,59 +397,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:public#s6",
-      "pos": "短语",
-      "glossZh": "在公开场合",
-      "pronunciationId": "w:public#p-main",
-      "note": "in public。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:public#e-6b3b04da49d5094a",
-          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 207,
-            "end": 213
-          }
-        },
-        {
-          "exampleId": "w:public#e-a02cdfe390a30a39",
-          "text": "For example, you can try to finish a task within a limited time, volunteer to speak in public, or end your shower with a short burst of cold water.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
-            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
-            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices:8",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 87,
-            "end": 93
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -462,6 +409,11 @@
       "reason": "旧式简称，通常用 pub"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-public"
+  ]
 }

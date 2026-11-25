@@ -1,0 +1,95 @@
+{
+  "entryId": "w:go-old-school",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "old",
+      "school"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "old",
+        "school"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go old school",
+  "senses": [
+    {
+      "senseId": "w:go-old-school#s1",
+      "pos": "短语",
+      "glossZh": "采用传统做法；用老办法",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s46",
+        "w:old#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-old-school#e-55c25eab0759758a",
+          "text": "Yes, we all have our phones, but many of us still like to go old school and read something printed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 71
+          },
+          "parts": [
+            [
+              58,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

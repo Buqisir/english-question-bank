@@ -1,0 +1,156 @@
+{
+  "entryId": "w:anything-but",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "anything",
+      "but"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "anything",
+        "but"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "anything but",
+  "senses": [
+    {
+      "senseId": "w:anything-but#s1",
+      "pos": "短语",
+      "glossZh": "绝非；一点也不",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:anything#s2",
+        "w:but#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:anything-but#e-fde202295ba2135c",
+          "text": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 73
+          },
+          "parts": [
+            [
+              61,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              73
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anything-but#e-b133d787523980f4",
+          "text": "The first frost of November painted Mrs. Henderson’s rose bushes silver, but her mood was anything but cheerful.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 102
+          },
+          "parts": [
+            [
+              90,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:anything-but#e-956309c2ef65bf5c",
+          "text": "The teacher handed me a pair of child-safe scissors, which turned out to be anything but safe for a left-hander.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 88
+          },
+          "parts": [
+            [
+              76,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "可省略上文已出现的成分，表示情况恰恰相反。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

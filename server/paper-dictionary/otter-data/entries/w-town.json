@@ -42,8 +42,8 @@
     "mock": 129
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 129
+    "gaokao": 7,
+    "mock": 4
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 36,
-        "mock": 0
+        "mock": 107
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -189,69 +189,34 @@
       ]
     },
     {
-      "senseId": "w:town#s3",
+      "senseId": "w:town#s5",
       "pos": "短语",
-      "glossZh": "市政厅",
+      "glossZh": "公开交流会",
       "pronunciationId": "w:town#p-main",
-      "note": "town hall。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 2,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:town#e-9f4751670245bec1",
-          "text": "Start Point: The Town Hall",
+          "exampleId": "w:town#e-d0ce4c88ae64bdfd",
+          "text": "P. S. All entrants will be invited to participate in a Pulitzer Center town hall event, held virtually in August, to share solutions with other students from around the world.",
           "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-a",
             "locator": {
-              "paragraph": 16,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:16",
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-a:17",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:town#s4",
-      "pos": "短语",
-      "glossZh": "市中心",
-      "pronunciationId": "w:town#p-main",
-      "note": "town centre 或 town center。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:town#e-1751b606eff2e54d",
-          "text": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-a",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 96
+            "start": 71,
+            "end": 75
           }
         }
       ]
@@ -263,6 +228,11 @@
       "reason": "站名留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:wrong-side-of-town"
+  ]
 }

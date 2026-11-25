@@ -1,0 +1,63 @@
+{
+  "entryId": "w:once-upon-a-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "once",
+      "upon",
+      "a",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "once",
+        "upon",
+        "a",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "once upon a time",
+  "senses": [
+    {
+      "senseId": "w:once-upon-a-time#s1",
+      "pos": "短语",
+      "glossZh": "从前；很久以前",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于童话开头，也可用来回顾从前的情况。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,206 @@
+{
+  "entryId": "w:wear-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "wearing down"
+  ],
+  "pattern": {
+    "tokens": [
+      "wear",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wear",
+        "down"
+      ],
+      [
+        "wearing",
+        "down"
+      ],
+      [
+        "wears",
+        "down"
+      ],
+      [
+        "wore",
+        "down"
+      ],
+      [
+        "worn",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wears down",
+      "tags": []
+    },
+    {
+      "form": "worn down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wear (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:wear-down#s1",
+      "pos": "短语",
+      "glossZh": "逐渐磨损；磨掉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wear-down#e-35995b2d1a0a9c27",
+          "text": "But users have to cut the pen many times a day, as the tip wears down during writing.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 69
+          },
+          "parts": [
+            [
+              59,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wear-down#e-18cad94495d33cf8",
+          "text": "Rough grains of the same type of sand have not traveled as far as smooth round grains, which have been more worn down.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 117
+          },
+          "parts": [
+            [
+              108,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              108,
+              117
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:wear-down#s2",
+      "pos": "短语",
+      "glossZh": "逐渐消耗体力或精神；使日渐疲惫",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wear-down#e-c09c81d2e6a19aa0",
+          "text": "This dynamic ultimately creates more pressure to look busy than to deliver value, which is getting in the way of actually getting work done and holding back organizational productivity while wearing down workers’ well-being.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 191,
+            "end": 203
+          },
+          "parts": [
+            [
+              191,
+              203
+            ]
+          ],
+          "highlightRanges": [
+            [
+              191,
+              203
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:wear-down#s3",
+      "pos": "短语",
+      "glossZh": "不断施压使某人最终让步",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

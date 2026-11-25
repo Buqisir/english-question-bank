@@ -77,8 +77,8 @@
     "mock": 283
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 279
+    "gaokao": 11,
+    "mock": 125
   },
   "senses": [
     {
@@ -89,7 +89,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -160,7 +160,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -231,7 +231,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -283,7 +283,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -336,7 +336,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -434,93 +434,6 @@
       ]
     },
     {
-      "senseId": "w:green#s7",
-      "pos": "短语",
-      "glossZh": "绿地",
-      "pronunciationId": "w:green#p-main",
-      "note": "green space。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:green#e-7663c783ecaced70",
-          "text": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 64,
-            "end": 69
-          }
-        },
-        {
-          "exampleId": "w:green#e-eb150288c046b52e",
-          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:green#s8",
-      "pos": "短语",
-      "glossZh": "许可",
-      "pronunciationId": "w:green#p-main",
-      "note": "give/get the green light。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:green#e-ff00d7e5f8a53c38",
-          "text": "They __48__ at first, unwilling to take a risk, but I finally __49__ to get the green light,” she says.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 80,
-            "end": 85
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:green#s9",
       "pos": "adj.",
       "glossZh": "未成熟的",
@@ -538,12 +451,12 @@
       "pos": "adj.",
       "glossZh": "缺乏经验的",
       "pronunciationId": "w:green#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -558,6 +471,91 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:green#s12",
+      "pos": "phr.",
+      "glossZh": "园艺天赋（green thumb）",
+      "pronunciationId": "w:green#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:green#e-22d8dc5dca6a5b01",
+          "text": "I was ready to quit, convinced I had no green thumb.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:green#e-dea52a4203e5ef3c",
+          "text": "But even if you have somewhat of a green thumb, those blooms are on borrowed time.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:green#s13",
+      "pos": "n.",
+      "glossZh": "变绿；绿色加深",
+      "pronunciationId": "w:green#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:green#e-3a913b8f7071750e",
+          "text": "Moreover, over the past 20 years, there has been a significant greening of the oceans, according to the study.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 71
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -566,6 +564,15 @@
       "reason": "人物专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-the-green-light",
+    "w:give-the-green-light",
+    "w:go-green",
+    "w:green-hand",
+    "w:green-light"
+  ]
 }

@@ -1,0 +1,272 @@
+{
+  "entryId": "w:get-in-the-way",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets in the way"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "in",
+      "the",
+      "way"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "gets",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "getting",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "got",
+        "in",
+        "the",
+        "way"
+      ],
+      [
+        "gotten",
+        "in",
+        "the",
+        "way"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "getting in the way",
+      "tags": []
+    },
+    {
+      "form": "got in the way",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get in the way",
+  "senses": [
+    {
+      "senseId": "w:get-in-the-way#s1",
+      "pos": "短语",
+      "glossZh": "妨碍；干扰（行动或进展）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s27",
+        "w:in#s47",
+        "w:way#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-in-the-way#e-40a94a9bda86958e",
+          "text": "Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 71
+          },
+          "parts": [
+            [
+              57,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in-the-way#e-3a28d4e982dd7cd4",
+          "text": "Maintaining a healthy lifestyle, though, can get in the way of typical teenage pursuits.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-b:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 59
+          },
+          "parts": [
+            [
+              45,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in-the-way#e-5ef50a522a102b0f",
+          "text": "Too often, we let the dull reality of life get in the way of the arts.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 57
+          },
+          "parts": [
+            [
+              43,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "可接 of sth 或 of doing sth。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:get-in-the-way#s2",
+      "pos": "短语",
+      "glossZh": "挡路；挡在前面",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-in-the-way#e-6140699ef0e7d813",
+          "text": "When I pulled hard, my nose got in the way.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 42
+          },
+          "parts": [
+            [
+              28,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-in-the-way#e-fe1bf182d16ed9e3",
+          "text": "This habit can cause unexpectedly big problems, especially when human-built structures get in the way.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 101
+          },
+          "parts": [
+            [
+              87,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

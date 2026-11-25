@@ -1,0 +1,126 @@
+{
+  "entryId": "w:a-dab-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "dab",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "dab",
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a dab hand",
+  "senses": [
+    {
+      "senseId": "w:a-dab-hand#s1",
+      "pos": "短语",
+      "glossZh": "能手；擅长某事的人",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hand#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-dab-hand#e-c0c1df1d1464c3b1",
+          "text": "Terri Bolton is a dab hand when it comes to DIY (do-it-yourself).",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-dab-hand#e-054c37c99cf14e26",
+          "text": "Which is closest in meaning to “a dab hand” in paragraph 1?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2023-national-a:24",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "英式非正式用法，常用 a dab hand at sth。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

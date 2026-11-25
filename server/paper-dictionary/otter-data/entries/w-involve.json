@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 285
+    "mock": 90
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 143
       },
       "folded": false,
       "examples": [
@@ -147,7 +147,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -210,6 +210,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:involve#s3",
+      "pos": "adj.",
+      "glossZh": "引人投入的（involving）",
+      "pronunciationId": "w:involve#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:involve#e-1391032b71599845",
+          "text": "Join an involving, hands-on activity to explore topics within your academic track.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "cell:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a:ocr-916a21169272a7ae:4:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 17
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -218,6 +251,6 @@
       "reason": "旧义或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

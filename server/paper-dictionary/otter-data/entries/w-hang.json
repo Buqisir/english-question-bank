@@ -71,8 +71,8 @@
     "mock": 103
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 99
+    "gaokao": 3,
+    "mock": 47
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 37
       },
       "folded": false,
       "examples": [
@@ -147,59 +147,6 @@
       ]
     },
     {
-      "senseId": "w:hang#s2",
-      "pos": "短语",
-      "glossZh": "一起消遣；闲逛",
-      "pronunciationId": "w:hang#p-main",
-      "note": "hang out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hang#e-a3f53641b17ab108",
-          "text": "There’s also an area on the rooftop for hanging out with other travelers during the summer.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:hang#e-b8ee4723761a151d",
-          "text": "You might think college will be a breeze – studying your favorite courses and hanging out with your friends all day.",
-          "source": {
-            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
-            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
-            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 78,
-            "end": 85
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hang#s3",
       "pos": "v.",
       "glossZh": "悬浮；弥漫",
@@ -207,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -252,59 +199,6 @@
       ]
     },
     {
-      "senseId": "w:hang#s4",
-      "pos": "短语",
-      "glossZh": "挂断电话",
-      "pronunciationId": "w:hang#p-main",
-      "note": "hang up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hang#e-7ed3c03340c4a288",
-          "text": "Hanging up, I felt my stomach tighten.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
-            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:hang#e-f1edd0502ea136ef",
-          "text": "After hanging up, my dad thought aloud about the whole thing.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
-            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:hang#s5",
       "pos": "v.",
       "glossZh": "处以绞刑",
@@ -319,18 +213,84 @@
       "examples": []
     },
     {
-      "senseId": "w:hang#s6",
+      "senseId": "w:hang#s7",
       "pos": "短语",
-      "glossZh": "掌握……的窍门",
+      "glossZh": "（时间）过得很慢",
       "pronunciationId": "w:hang#p-main",
-      "note": "get the hang of sth。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hang#e-13c927e5c5cff86f",
+          "text": "The feeling that time hangs heavy.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hunan-changjun-2025-11-monthly-exam-3:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hang#s8",
+      "pos": "短语",
+      "glossZh": "全神贯注地听",
+      "pronunciationId": "w:hang#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:hang#s9",
+      "pos": "n.",
+      "glossZh": "壁挂；悬挂的装饰品",
+      "pronunciationId": "w:hang#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hang#e-7225144381aa31ea",
+          "text": "This will be a beautiful piece of art to add to any table arrangement, or as a wall hanging.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 91
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -339,6 +299,20 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:get-the-hang-of-sth",
+    "w:hang-about",
+    "w:hang-around",
+    "w:hang-back",
+    "w:hang-in",
+    "w:hang-on",
+    "w:hang-onto",
+    "w:hang-out",
+    "w:hang-over",
+    "w:hang-up"
+  ]
 }

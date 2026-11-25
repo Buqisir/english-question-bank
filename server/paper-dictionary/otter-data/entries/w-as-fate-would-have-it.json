@@ -1,0 +1,67 @@
+{
+  "entryId": "w:as-fate-would-have-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "fate",
+      "would",
+      "have",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "fate",
+        "would",
+        "have",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as fate would have it",
+  "senses": [
+    {
+      "senseId": "w:as-fate-would-have-it#s1",
+      "pos": "短语",
+      "glossZh": "偏偏就这么巧；仿佛命运如此安排",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:it#s18",
+        "w:would#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

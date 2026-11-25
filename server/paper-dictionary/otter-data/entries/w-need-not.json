@@ -1,0 +1,95 @@
+{
+  "entryId": "w:need-not",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "need",
+      "not"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "need",
+        "not"
+      ],
+      [
+        "needed",
+        "not"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "need not",
+  "senses": [
+    {
+      "senseId": "w:need-not#s1",
+      "pos": "短语",
+      "glossZh": "无需；不必",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:need-not#e-1b293fe71104dc6e",
+          "text": "Stamps: The 2026 contest will continue to require at least one stamp on the contest entry envelope (preferably one that integrates with the design), but it need not have the full correct postage.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 164
+          },
+          "parts": [
+            [
+              156,
+              164
+            ]
+          ],
+          "highlightRanges": [
+            [
+              156,
+              164
+            ]
+          ]
+        }
+      ],
+      "note": "后接动词原形。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

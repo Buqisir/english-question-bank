@@ -1,0 +1,166 @@
+{
+  "entryId": "w:step-out-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "step",
+      "out",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "step",
+        "out",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "step out of",
+      "tags": []
+    },
+    {
+      "form": "stepping out of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "step out of sth",
+  "senses": [
+    {
+      "senseId": "w:step-out-of#s1",
+      "pos": "短语",
+      "glossZh": "走出（舒适区等）；离开熟悉的环境或状态",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:step#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:step-out-of#e-28247377f771f373",
+          "text": "Walking at night-time is a great way to step out of your comfort zone.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 51
+          },
+          "parts": [
+            [
+              40,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-out-of#e-c58cbf8fcc427e1a",
+          "text": "But I also want this one hour at the end of the day when I step out of work and measure and preheat and marinate（腌制）.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          },
+          "parts": [
+            [
+              59,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:step-out-of#e-e473c3f7933a9299",
+          "text": "Step out of your comfort zone and take a language lesson, join a cooking class, or learn a new skill in a hands-on workshop.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "常用 step out of one's comfort zone。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

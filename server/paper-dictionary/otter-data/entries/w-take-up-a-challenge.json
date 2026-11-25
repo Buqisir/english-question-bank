@@ -1,0 +1,133 @@
+{
+  "entryId": "w:take-up-a-challenge",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "up",
+      "a",
+      "challenge"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "up",
+        "a",
+        "challenge"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "took up a challenge",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take up a challenge",
+  "senses": [
+    {
+      "senseId": "w:take-up-a-challenge#s1",
+      "pos": "短语",
+      "glossZh": "接受挑战；着手应对挑战",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s23"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-up-a-challenge#e-b9f8df1b53944382",
+          "text": "I once took up a challenge to create a painting every day for a month and post the works online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 26
+          },
+          "parts": [
+            [
+              7,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-up-a-challenge#e-d4f24c807e9487a4",
+          "text": "To take up a challenge.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 22
+          },
+          "parts": [
+            [
+              3,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

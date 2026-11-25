@@ -1,0 +1,100 @@
+{
+  "entryId": "w:race-to-the-top",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "race",
+      "to",
+      "the",
+      "top"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "race",
+        "to",
+        "the",
+        "top"
+      ],
+      [
+        "races",
+        "to",
+        "the",
+        "top"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "race to the top",
+  "senses": [
+    {
+      "senseId": "w:race-to-the-top#s1",
+      "pos": "短语",
+      "glossZh": "争当第一的竞争；竞相提升",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:race-to-the-top#e-e86105e059e79827",
+          "text": "It was delicate and resilient, utterly unaware of the race to the top.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 69
+          },
+          "parts": [
+            [
+              54,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              69
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

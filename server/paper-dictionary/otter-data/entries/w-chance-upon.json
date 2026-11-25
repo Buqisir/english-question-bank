@@ -1,0 +1,138 @@
+{
+  "entryId": "w:chance-upon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "chance",
+      "upon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chance",
+        "upon"
+      ],
+      [
+        "chanced",
+        "upon"
+      ],
+      [
+        "chances",
+        "upon"
+      ],
+      [
+        "chancing",
+        "upon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "chanced upon",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chance upon sb/sth",
+  "senses": [
+    {
+      "senseId": "w:chance-upon#s1",
+      "pos": "短语",
+      "glossZh": "偶然遇到；碰巧发现",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:chance-upon#e-0cfeb4312dc41267",
+          "text": "The significant turning point came on a quiet afternoon when I chanced upon David in his room.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 75
+          },
+          "parts": [
+            [
+              63,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:chance-upon#e-da018ff860a2003c",
+          "text": "Following her brother’s death in the chaos of war, Ali and her family spent a year as refugees(难民) before resettling in London, where Ali chanced upon boxing.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 150
+          },
+          "parts": [
+            [
+              138,
+              150
+            ]
+          ],
+          "highlightRanges": [
+            [
+              138,
+              150
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

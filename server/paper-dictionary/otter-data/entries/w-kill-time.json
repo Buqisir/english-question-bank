@@ -1,0 +1,72 @@
+{
+  "entryId": "w:kill-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kill",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kill",
+        "time"
+      ],
+      [
+        "killed",
+        "time"
+      ],
+      [
+        "killing",
+        "time"
+      ],
+      [
+        "kills",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kill time",
+  "senses": [
+    {
+      "senseId": "w:kill-time#s1",
+      "pos": "短语",
+      "glossZh": "打发时间；消磨时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:kill#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

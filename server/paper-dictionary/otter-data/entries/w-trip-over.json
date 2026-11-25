@@ -1,0 +1,255 @@
+{
+  "entryId": "w:trip-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "trip",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "trip",
+        "over"
+      ],
+      [
+        "tripped",
+        "over"
+      ],
+      [
+        "tripping",
+        "over"
+      ],
+      [
+        "trips",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "trip over",
+      "tags": []
+    },
+    {
+      "form": "tripped over",
+      "tags": []
+    },
+    {
+      "form": "tripping over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "trip over sth",
+  "senses": [
+    {
+      "senseId": "w:trip-over#s1",
+      "pos": "短语",
+      "glossZh": "被……绊了一下；被……绊倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:trip-over#e-11a38b1c199bd9c9",
+          "text": "Rushing to catch the train one October day, I tripped over a loose sidewalk brick, dropping my textbooks everywhere.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:trip-over#e-51cff2fd90af46c4",
+          "text": "bike tripped over a stone halfway there.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:trip-over#s2",
+      "pos": "短语",
+      "glossZh": "说话或朗读时卡壳；把词念磕巴了",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:trip-over#e-8a8c2beb34c0670d",
+          "text": "It’s normal to occasionally trip over your words, but those with a stammer can struggle to always speak fluently.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          },
+          "parts": [
+            [
+              28,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:trip-over#e-3440b8fe7646f139",
+          "text": "He read aloud, slowly, tripping over easy words.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 36
+          },
+          "parts": [
+            [
+              23,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:trip-over#e-198376ff1f12d271",
+          "text": "Tripped over my words.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:25#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "note": "常用 trip over one's words。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

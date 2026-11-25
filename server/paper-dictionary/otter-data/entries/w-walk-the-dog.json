@@ -1,0 +1,168 @@
+{
+  "entryId": "w:walk-the-dog",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walking the dog"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "the",
+      "dog"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "the",
+        "dog"
+      ],
+      [
+        "walking",
+        "the",
+        "dog"
+      ],
+      [
+        "walked",
+        "the",
+        "dog"
+      ],
+      [
+        "walks",
+        "the",
+        "dog"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk the dog",
+  "senses": [
+    {
+      "senseId": "w:walk-the-dog#s1",
+      "pos": "短语",
+      "glossZh": "遛狗；带狗散步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:walk-the-dog#e-1ddd79ea623ebc91",
+          "text": "How did the author initially feel about walking the dog?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 55
+          },
+          "parts": [
+            [
+              40,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:walk-the-dog#e-f58f80a531470bd2",
+          "text": "Walk the dog.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 12
+          },
+          "parts": [
+            [
+              0,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:walk-the-dog#s2",
+      "pos": "短语",
+      "glossZh": "让悠悠球连着线贴地滚动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-the-dog#s3",
+      "pos": "短语",
+      "glossZh": "让球沿球杆滚下，再用杆头接住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "长曲棍球技巧。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

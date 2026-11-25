@@ -1,0 +1,153 @@
+{
+  "entryId": "w:just-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just about",
+  "senses": [
+    {
+      "senseId": "w:just-about#s1",
+      "pos": "短语",
+      "glossZh": "差不多；几乎",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:just-about#e-1fa719cca09e81f5",
+          "text": "Running is a great way to get in shape and just about everyone can do it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:just-about#e-a418971363ff30c7",
+          "text": "Yet the problem, by just about any measure, appears to be getting worse.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 30
+          },
+          "parts": [
+            [
+              20,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:just-about#e-55d848723341f91e",
+          "text": "They can help you out in just about every area of your life, whether it’s keeping fit, communicating with friends, or even learning a language.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 35
+          },
+          "parts": [
+            [
+              25,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              35
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 just about every/any 或 just about everyone。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

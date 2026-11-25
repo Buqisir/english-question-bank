@@ -72,8 +72,8 @@
     "mock": 710
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 707
+    "gaokao": 21,
+    "mock": 528
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 74,
-        "mock": 0
+        "mock": 133
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 1
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -226,7 +226,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -290,152 +290,6 @@
       ]
     },
     {
-      "senseId": "w:find#s4",
-      "pos": "短语",
-      "glossZh": "发觉自己处于某种状况",
-      "pronunciationId": "w:find#p-main",
-      "note": "find oneself。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 13,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:find#e-5c0670f5c9d8f45d",
-          "text": "You may find yourself having to learn something by heart.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:find#e-e051945a77aa85aa",
-          "text": "As you make your lifestyle changes, you may find yourself wanting to speak up for yourself if others comment on what you’re doing, which can turn itself into a whole household debate.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:find#e-d626849b19417360",
-          "text": "Many drivers find themselves temporarily blinded while driving directly into the glare of the sun.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:find#s5",
-      "pos": "短语",
-      "glossZh": "查明",
-      "pronunciationId": "w:find#p-main",
-      "note": "find out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:find#e-7dd786fb0f41f94e",
-          "text": "To find out what she would do in the two tests.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-d",
-            "locator": {
-              "question": 34,
-              "questionId": "question:paper-gaokao-2020-i:34",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:find#e-37653530da20e406",
-          "text": "What can the Textalyzer help a police officer find out?",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2022-ii:29",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 46,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:find#e-6551bf57f10d782f",
-          "text": "What does the follow-up test aim to find out about the cockatoos?",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
-            "locator": {
-              "question": 26,
-              "questionId": "question:paper-gaokao-2022-national-a:26",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 40
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:find#s6",
       "pos": "n.",
       "glossZh": "有价值的发现物",
@@ -443,7 +297,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -489,6 +343,13 @@
       "reason": "体育专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:find-fault-with-sb-sth",
+    "w:find-oneself",
+    "w:find-out"
+  ]
 }

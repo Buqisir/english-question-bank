@@ -85,8 +85,8 @@
     "mock": 111
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 103
+    "gaokao": 1,
+    "mock": 12
   },
   "senses": [
     {
@@ -97,7 +97,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -168,7 +168,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -239,7 +239,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -272,7 +272,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -317,107 +317,67 @@
       ]
     },
     {
-      "senseId": "w:tear#s5",
-      "pos": "短语",
-      "glossZh": "拆毁",
+      "senseId": "w:tear#s7",
+      "pos": "adj.",
+      "glossZh": "左右为难的",
       "pronunciationId": "w:tear#p-main",
-      "note": "tear down。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
+        "gaokao": 0,
         "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:tear#e-d3ecc8822928a1ba",
-          "text": "Not this polar bear though-he just kept trying to tear down the fence with his massive paws(爪子).",
+          "exampleId": "w:tear#e-e0e030d44433d9bf",
+          "text": "Stacey was torn.",
           "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:tear#e-9013300f2cdd5004",
-          "text": "One day, while we firefighters were tearing down an old warehouse, we found something interesting.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:2",
-              "sentence": 2
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:writing-continuation:4",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 36,
-            "end": 43
+            "start": 11,
+            "end": 15
           }
         }
       ]
     },
     {
-      "senseId": "w:tear#s6",
-      "pos": "短语",
-      "glossZh": "眼里涌出泪水",
-      "pronunciationId": "w:tear#p-eye",
-      "note": "tear up。",
+      "senseId": "w:tear#s8",
+      "pos": "v.",
+      "glossZh": "费力移开（tear ... away）",
+      "pronunciationId": "w:tear#p-main",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:tear#e-885ac0863a5b790f",
-          "text": "Tearing up, sweating, nose running and other bodily functions are all signs when you’re eating spicy foods.",
+          "exampleId": "w:tear#e-babcbe2dd1a94ecc",
+          "text": "Back at the office, I find it hard to tear my eyes away from the app.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
-            "paperTitle": "重庆市高2026届高三第五次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-b",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:1",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-b:4",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 0,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:tear#e-6882ff683072526a",
-          "text": "Mrs. Henderson, an 82-year-old resident living alone, teared up as she said, “I used to have a garden, but I can’t bend down anymore.",
-          "source": {
-            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
-            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
-            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 54,
-            "end": 60
+            "start": 38,
+            "end": 42
           }
         }
       ]
@@ -429,6 +389,12 @@
       "reason": "制造业或旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:tear-down",
+    "w:tear-up"
+  ]
 }

@@ -1,0 +1,100 @@
+{
+  "entryId": "w:enter-into-conversation",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "enter",
+      "into",
+      "conversation"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "enter",
+        "into",
+        "conversation"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "enters into conversation",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "enter into conversation",
+  "senses": [
+    {
+      "senseId": "w:enter-into-conversation#s1",
+      "pos": "短语",
+      "glossZh": "开始交谈；加入谈话",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:enter#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:enter-into-conversation#e-b7b96eff72dfdadb",
+          "text": "Weiner enters into conversation with some of the most important philosophers in",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 31
+          },
+          "parts": [
+            [
+              7,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "常接 with sb。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

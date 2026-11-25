@@ -1,0 +1,107 @@
+{
+  "entryId": "w:executive-produce",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "executive",
+      "produce"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "executive",
+        "produce"
+      ],
+      [
+        "executive",
+        "produced"
+      ],
+      [
+        "executive",
+        "produces"
+      ],
+      [
+        "executive",
+        "producing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "executive produced",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "executive produce sth",
+  "senses": [
+    {
+      "senseId": "w:executive-produce#s1",
+      "pos": "短语",
+      "glossZh": "担任某部影视作品的执行制片人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:executive-produce#e-06268a408085944e",
+          "text": "She executive produced Poacher, a 2024 hit miniseries based on a real elephant poaching investigation in India.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 22
+          },
+          "parts": [
+            [
+              4,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

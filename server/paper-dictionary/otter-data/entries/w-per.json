@@ -35,8 +35,8 @@
     "mock": 168
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 168
+    "gaokao": 4,
+    "mock": 13
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 155
       },
       "folded": false,
       "examples": [
@@ -109,81 +109,15 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:per#s2",
-      "pos": "短语",
-      "glossZh": "百分之……",
-      "pronunciationId": "w:per#p-main",
-      "note": "per cent。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:per#e-bc492e322b6e487d",
-          "text": "In the early 1970s, 40 per cent of children walked to school, while in 2010, it was as low as 15 per cent.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:per#e-7d269dbfaea72fe8",
-          "text": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 108,
-            "end": 111
-          }
-        },
-        {
-          "exampleId": "w:per#e-d0fc2ce377cbda31",
-          "text": "By September 2016, more than 130,000 acacia trees had been planted on 20 pilot farms, with farmers recording a 60 per cent survival rate.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 114,
-            "end": 117
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-per",
+    "w:per-cent"
+  ]
 }

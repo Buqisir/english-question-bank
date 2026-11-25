@@ -36,7 +36,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 594
+    "mock": 394
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 65,
-        "mock": 0
+        "mock": 155
       },
       "folded": false,
       "examples": [
@@ -189,6 +189,18 @@
       "reason": "g51 搭配有误"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:all-too",
+    "w:can-too",
+    "w:go-too-far",
+    "w:life-is-too-short",
+    "w:me-too",
+    "w:much-too",
+    "w:only-too",
+    "w:too-bad",
+    "w:too-good-to-be-true",
+    "w:way-too"
+  ]
 }

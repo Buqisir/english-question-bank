@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 75
+    "mock": 17
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 56
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -218,12 +218,12 @@
       "pos": "v.",
       "glossZh": "扇风",
       "pronunciationId": "w:fan#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -231,20 +231,6 @@
       "pos": "v.",
       "glossZh": "煽动",
       "pronunciationId": "w:fan#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:fan#s6",
-      "pos": "短语",
-      "glossZh": "呈扇形散开",
-      "pronunciationId": "w:fan#p-main",
-      "note": "fan out。",
       "origin": "dictionary",
       "counts": {
         "gaokao": 0,
@@ -264,6 +250,11 @@
       "reason": "同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fan-out"
+  ]
 }

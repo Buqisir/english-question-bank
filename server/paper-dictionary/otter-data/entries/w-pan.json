@@ -77,8 +77,8 @@
     "mock": 18
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 15
+    "gaokao": 1,
+    "mock": 2
   },
   "senses": [
     {
@@ -89,7 +89,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -160,7 +160,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -205,40 +205,6 @@
       ]
     },
     {
-      "senseId": "w:pan#s3",
-      "pos": "短语",
-      "glossZh": "结果如何；发展成",
-      "pronunciationId": "w:pan#p-main",
-      "note": "pan out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pan#e-44afa0050c72efa4",
-          "text": "We need to consider how we want our future with AI to pan out.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:pan#s4",
       "pos": "v.",
       "glossZh": "猛烈批评",
@@ -271,6 +237,11 @@
       "reason": "同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:pan-out"
+  ]
 }

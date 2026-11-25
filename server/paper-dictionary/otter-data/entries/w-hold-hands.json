@@ -1,0 +1,107 @@
+{
+  "entryId": "w:hold-hands",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "hands"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "hands"
+      ],
+      [
+        "held",
+        "hands"
+      ],
+      [
+        "holding",
+        "hands"
+      ],
+      [
+        "holds",
+        "hands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held hands",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold hands",
+  "senses": [
+    {
+      "senseId": "w:hold-hands#s1",
+      "pos": "短语",
+      "glossZh": "手牵手；相互握住对方的手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-hands#e-3b64c011d536d59f",
+          "text": "During a local festival, I watched Aria run to embrace a stranger of her age, while around them, punk-rock cooks and elderly people from all walks of life held hands in a community dance.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 165
+          },
+          "parts": [
+            [
+              155,
+              165
+            ]
+          ],
+          "highlightRanges": [
+            [
+              155,
+              165
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

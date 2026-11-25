@@ -1,0 +1,71 @@
+{
+  "entryId": "w:roll-about",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "roll",
+      "about"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "roll",
+        "about"
+      ],
+      [
+        "rolled",
+        "about"
+      ],
+      [
+        "rolling",
+        "about"
+      ],
+      [
+        "rolls",
+        "about"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "roll about",
+  "senses": [
+    {
+      "senseId": "w:roll-about#s1",
+      "pos": "短语",
+      "glossZh": "笑得前仰后合；笑得打滚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 roll about laughing。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

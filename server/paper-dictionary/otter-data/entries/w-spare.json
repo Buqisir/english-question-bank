@@ -75,7 +75,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 41
+    "mock": 15
   },
   "senses": [
     {
@@ -86,7 +86,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -157,7 +157,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -281,7 +281,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -367,7 +367,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -477,11 +477,10 @@
       ]
     },
     {
-      "senseId": "w:spare#s9",
+      "senseId": "w:spare#s10",
       "pos": "短语",
-      "glossZh": "不遗余力",
+      "glossZh": "不惜费用",
       "pronunciationId": "w:spare#p-main",
-      "note": "spare no effort。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -490,22 +489,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:spare#e-a27af4a42ed5821d",
-          "text": "Faced with endless daily tests and heavy learning tasks, he spared no effort to make progress step by step.",
+          "exampleId": "w:spare#e-a3f40a57e459a4f7",
+          "text": "Impressed by the picturesque landscape of the Jiangnan area (the southern regions of the lower reaches of the Yangtze River) and the precious records of a time in the 1930s, when some other areas started to have the smoke of war, he spared no expense to purchase them.",
           "source": {
-            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
-            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
-            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b",
             "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b:1",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 60,
-            "end": 66
+            "start": 233,
+            "end": 239
           }
         }
       ]
@@ -517,6 +516,11 @@
       "reason": "运动、工艺用语或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:spare-no-effort"
+  ]
 }

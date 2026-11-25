@@ -1,0 +1,140 @@
+{
+  "entryId": "w:hold-true",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "true"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "true"
+      ],
+      [
+        "held",
+        "true"
+      ],
+      [
+        "holding",
+        "true"
+      ],
+      [
+        "holds",
+        "true"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held true",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold true",
+  "senses": [
+    {
+      "senseId": "w:hold-true#s1",
+      "pos": "动词短语",
+      "glossZh": "仍然成立；依旧适用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:true#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-true#e-28ef3cdcdc9c3f85",
+          "text": "The results held true even after the scientists accounted for the participants’ overall health status.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hold-true#e-55b52667a0c869b1",
+          "text": "However, a new study suggests these expectations may not always hold true.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          },
+          "parts": [
+            [
+              64,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

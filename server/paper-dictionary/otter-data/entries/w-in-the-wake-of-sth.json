@@ -1,0 +1,71 @@
+{
+  "entryId": "w:in-the-wake-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "wake",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "wake",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the wake of sth",
+  "senses": [
+    {
+      "senseId": "w:in-the-wake-of-sth#s1",
+      "pos": "短语",
+      "glossZh": "紧随某事发生；在某事发生之后",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:wake#s6"
+      ],
+      "examples": [],
+      "note": "常暗示后续情况由前一事件引发。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

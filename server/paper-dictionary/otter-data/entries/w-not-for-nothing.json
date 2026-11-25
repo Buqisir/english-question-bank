@@ -1,0 +1,113 @@
+{
+  "entryId": "w:not-for-nothing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      {
+        "slot": "…"
+      },
+      "for",
+      "nothing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        {
+          "slot": "…"
+        },
+        "for",
+        "nothing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "not for nothing",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not … for nothing",
+  "senses": [
+    {
+      "senseId": "w:not-for-nothing#s1",
+      "pos": "短语",
+      "glossZh": "并非无缘无故；自有其道理",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:nothing#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-for-nothing#e-a22afd17dc9f0aef",
+          "text": "They are not called rainforests for nothing!",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 43
+          },
+          "parts": [
+            [
+              9,
+              12
+            ],
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              12
+            ],
+            [
+              32,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

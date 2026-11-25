@@ -1,0 +1,98 @@
+{
+  "entryId": "w:cross-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cross",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cross",
+        "out"
+      ],
+      [
+        "crossed",
+        "out"
+      ],
+      [
+        "crosses",
+        "out"
+      ],
+      [
+        "crossing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cross sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:cross-out#s1",
+      "pos": "短语",
+      "glossZh": "划掉；用线删去（文字、名字等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cross#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cross-out#s2",
+      "pos": "短语",
+      "glossZh": "涂掉别人的涂鸦以示挑衅",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cross-out#s3",
+      "pos": "短语",
+      "glossZh": "（俚语）欺骗；背叛",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

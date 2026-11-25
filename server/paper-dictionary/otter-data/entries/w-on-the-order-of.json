@@ -1,0 +1,139 @@
+{
+  "entryId": "w:on-the-order-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "the",
+      "order",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "the",
+        "order",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on the order of",
+  "senses": [
+    {
+      "senseId": "w:on-the-order-of#s1",
+      "pos": "短语",
+      "glossZh": "大约；约为",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-the-order-of#e-3aef0a9fa155d637",
+          "text": "The average improvement was on the order of 0.086 standard deviations（标准差）.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 43
+          },
+          "parts": [
+            [
+              28,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-the-order-of#e-453fe4b9684c6612",
+          "text": "“To be able to breathe out 13 times per second and inhale on the order of 40 milliseconds is really impressive.” Songbirds, which aren’t closely related to woodpeckers, are the only other birds known to so precisely time their breaths, which they do as they sing.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 73
+          },
+          "parts": [
+            [
+              58,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "常接数量、时长等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:on-the-order-of#s2",
+      "pos": "短语",
+      "glossZh": "类似于；与……性质相近",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

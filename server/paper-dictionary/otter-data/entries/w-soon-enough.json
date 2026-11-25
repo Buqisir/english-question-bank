@@ -1,0 +1,154 @@
+{
+  "entryId": "w:soon-enough",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "soon",
+      "enough"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "soon",
+        "enough"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "soon enough",
+  "senses": [
+    {
+      "senseId": "w:soon-enough#s1",
+      "pos": "短语",
+      "glossZh": "不久就；很快便",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:enough#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:soon-enough#e-77352dd83554b7bd",
+          "text": "Paragraph 1: Soon enough it was show time, and we stepped out of the thick curtain onto the stage.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 24
+          },
+          "parts": [
+            [
+              13,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:soon-enough#e-8be9878a569bca7f",
+          "text": "Soon enough, I found myself reading every issue of Skateboarder, a popular magazine back then, and our neighborhood was full of kids skating together.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-nb-2026-m2:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:soon-enough#e-d6e3c8638d507e5c",
+          "text": "Soon enough she is transported to the playground of her youth, offering cheerfully-recalled anecdotes from when she learnt double dutch with friends as her mother could not afford to buy her a Sindy doll.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

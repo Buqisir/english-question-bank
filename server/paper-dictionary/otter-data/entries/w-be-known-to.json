@@ -1,0 +1,188 @@
+{
+  "entryId": "w:be-known-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "known",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "known",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are known to",
+      "tags": []
+    },
+    {
+      "form": "been known to",
+      "tags": []
+    },
+    {
+      "form": "is known to",
+      "tags": []
+    },
+    {
+      "form": "were known to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be known to",
+  "senses": [
+    {
+      "senseId": "w:be-known-to#s1",
+      "pos": "短语",
+      "glossZh": "已知会做……；据知曾做过……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:be-known-to#e-369ee51ee51c1f06",
+          "text": "This area is known to be active when recalling memories that contain details from various senses.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 21
+          },
+          "parts": [
+            [
+              10,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-to#e-72748cf0b04a1234",
+          "text": "Many famous creative thinkers like Thomas Edison and Salvador Dali were known to take regular daytime naps.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 80
+          },
+          "parts": [
+            [
+              67,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-known-to#e-fbf1a8bcaf09a2e6",
+          "text": "These EC cells are known to produce senses such as pain, and general gut discomfort.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              27
+            ]
+          ]
+        }
+      ],
+      "note": "be known to do sth，to 后接动词原形。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:be-known-to#s2",
+      "pos": "短语",
+      "glossZh": "为某人所知",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:know#s8"
+      ],
+      "examples": [],
+      "note": "be known to sb，to 后接知情者。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

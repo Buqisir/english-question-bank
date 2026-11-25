@@ -59,8 +59,8 @@
     "mock": 233
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 232
+    "gaokao": 15,
+    "mock": 68
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 112
       },
       "folded": false,
       "examples": [
@@ -144,7 +144,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -262,103 +262,16 @@
       ]
     },
     {
-      "senseId": "w:chance#s4",
-      "pos": "短语",
-      "glossZh": "很可能……",
-      "pronunciationId": "w:chance#p-main",
-      "note": "chances are",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chance#e-2edc13a25ee86a96",
-          "text": "It turns out, it’s just math working against you; chances are, the other line really is faster.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 57
-          }
-        },
-        {
-          "exampleId": "w:chance#e-1598103df0412752",
-          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:chance#s5",
-      "pos": "短语",
-      "glossZh": "绝无可能；想都别想",
-      "pronunciationId": "w:chance#p-main",
-      "note": "not a chance",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:chance#e-e40a012e20506dd1",
-          "text": "His reply came as a surprise – a shock, actually: “Not a chance.” Clearly, he was unhappy over the way we had parted.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 57,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:chance#s6",
       "pos": "adj.",
       "glossZh": "偶然的",
       "pronunciationId": "w:chance#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -366,12 +279,12 @@
       "pos": "v.",
       "glossZh": "碰巧；偶然遇到",
       "pronunciationId": "w:chance#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -386,6 +299,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:chance#s9",
+      "pos": "n.",
+      "glossZh": "风险；冒险之举",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-eab74fdefbb9facb",
+          "text": "The images also evidence an artist continually willing to take chances and play with new approaches and forms.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -394,6 +340,19 @@
       "reason": "专名、俚语或少见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-fighting-chance",
+    "w:by-chance",
+    "w:chance-upon",
+    "w:fighting-chance",
+    "w:jump-at-the-chance",
+    "w:no-chance",
+    "w:not-a-chance",
+    "w:stand-a-chance",
+    "w:take-a-chance"
+  ]
 }

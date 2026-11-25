@@ -1,0 +1,97 @@
+{
+  "entryId": "w:share-in-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "share in"
+  ],
+  "pattern": {
+    "tokens": [
+      "share",
+      "in",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "share",
+        "in",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "share",
+        "in"
+      ],
+      [
+        "shared",
+        "in"
+      ],
+      [
+        "shares",
+        "in"
+      ],
+      [
+        "sharing",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "share in sth",
+  "senses": [
+    {
+      "senseId": "w:share-in-sth#s1",
+      "pos": "短语",
+      "glossZh": "共同感受；共同经历",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:share#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:share-in-sth#s2",
+      "pos": "短语",
+      "glossZh": "共同分得利益或分担损失",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

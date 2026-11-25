@@ -1,0 +1,297 @@
+{
+  "entryId": "w:speed-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "speed",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "speed",
+        "up"
+      ],
+      [
+        "sped",
+        "up"
+      ],
+      [
+        "speeded",
+        "up"
+      ],
+      [
+        "speeding",
+        "up"
+      ],
+      [
+        "speeds",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sped up",
+      "tags": []
+    },
+    {
+      "form": "speed up",
+      "tags": []
+    },
+    {
+      "form": "speeding up",
+      "tags": []
+    },
+    {
+      "form": "speeds up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "speed (sth) up",
+  "senses": [
+    {
+      "senseId": "w:speed-up#s1",
+      "pos": "短语",
+      "glossZh": "使……加速；加快……的进程",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s31"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:speed-up#e-b60304f4b84ef076",
+          "text": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          },
+          "parts": [
+            [
+              12,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speed-up#e-7ca4937b0fcd2ed3",
+          "text": "To speed up the process, please make sure the information you submit through the ILL Request Form is accurate.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speed-up#e-045075caef0069e2",
+          "text": "Instead, it will slow down everyone a little bit but speed up checkout overall.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 61
+          },
+          "parts": [
+            [
+              53,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 29
+      }
+    },
+    {
+      "senseId": "w:speed-up#s2",
+      "pos": "短语",
+      "glossZh": "加速；变快",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s31"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:speed-up#e-e94990174e8b5cd1",
+          "text": "Speed up.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:31#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speed-up#e-20e735e584077d7d",
+          "text": "It rises slowly, speeds up when it’s at the highest point in the sky, and then slows down as it sets.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:speed-up#e-26ba9e1f3e31bbd6",
+          "text": "Without this interaction, coral bleaching (白化) — a major threat to coral ecosystems – would speed up.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 100
+          },
+          "parts": [
+            [
+              92,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              100
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 9
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

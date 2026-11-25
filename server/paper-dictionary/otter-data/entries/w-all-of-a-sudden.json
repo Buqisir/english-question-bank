@@ -1,0 +1,159 @@
+{
+  "entryId": "w:all-of-a-sudden",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "all",
+      "of",
+      "a",
+      "sudden"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "all",
+        "of",
+        "a",
+        "sudden"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "all of a sudden",
+  "senses": [
+    {
+      "senseId": "w:all-of-a-sudden#s1",
+      "pos": "短语",
+      "glossZh": "突然；一下子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:all#s9",
+        "w:sudden#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:all-of-a-sudden#e-b6d275fecc7ac606",
+          "text": "And then all of a sudden it clicks.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 24
+          },
+          "parts": [
+            [
+              9,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-of-a-sudden#e-dac095c240e6b449",
+          "text": "All of a sudden, Mateo jumped up from where he was sitting on the kitchen floor.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:all-of-a-sudden#e-d5be1712725afc67",
+          "text": "The gout（痛风）struck all of a sudden, but I took some medicine and it went away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 34
+          },
+          "parts": [
+            [
+              19,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

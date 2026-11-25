@@ -1,0 +1,97 @@
+{
+  "entryId": "w:gain-steam",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "gain",
+      "steam"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "gain",
+        "steam"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gains steam",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "gain steam",
+  "senses": [
+    {
+      "senseId": "w:gain-steam#s1",
+      "pos": "短语",
+      "glossZh": "势头增强；发展加快",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:steam#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:gain-steam#e-405d36dbe3cc5667",
+          "text": "But that is no longer true: as AI promises to transform how we work, and the four-day-workweek movement gains steam, it is time to admit once and for all that working more does not make you more productive.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 115
+          },
+          "parts": [
+            [
+              104,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

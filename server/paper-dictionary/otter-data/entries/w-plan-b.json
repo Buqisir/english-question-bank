@@ -1,0 +1,127 @@
+{
+  "entryId": "w:plan-b",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "plan B"
+  ],
+  "pattern": {
+    "tokens": [
+      "plan",
+      "b"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "plan",
+        "b"
+      ],
+      [
+        "plan",
+        "bs"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "plan b",
+  "senses": [
+    {
+      "senseId": "w:plan-b#s1",
+      "pos": "短语",
+      "glossZh": "原计划行不通时采用的备用方案",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:plan-b#e-b4edd7f711b7e439",
+          "text": "“However, reintroduction is only a ‘plan B’,” says ecologist Luis Zambrano.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          },
+          "parts": [
+            [
+              36,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:plan-b#e-ab260b371e09c864",
+          "text": "What does the phrase “plan B” in the last paragraph mean?",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          },
+          "parts": [
+            [
+              22,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

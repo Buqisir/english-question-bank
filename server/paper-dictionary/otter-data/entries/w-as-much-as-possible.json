@@ -1,0 +1,160 @@
+{
+  "entryId": "w:as-much-as-possible",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "much",
+      "as",
+      "possible"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "much",
+        "as",
+        "possible"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as much as possible",
+  "senses": [
+    {
+      "senseId": "w:as-much-as-possible#s1",
+      "pos": "短语",
+      "glossZh": "尽量；尽可能多地",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:much#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-much-as-possible#e-37f1422e8f34affb",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 92
+          },
+          "parts": [
+            [
+              73,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as-possible#e-7de438fed9750709",
+          "text": "Practice cooking as much as possible.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 36
+          },
+          "parts": [
+            [
+              17,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-much-as-possible#e-7e474204be8478bd",
+          "text": "By speaking as much as possible.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 31
+          },
+          "parts": [
+            [
+              12,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

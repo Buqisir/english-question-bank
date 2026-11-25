@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 13
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -116,40 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:cottage#s2",
-      "pos": "短语",
-      "glossZh": "家庭手工业",
-      "pronunciationId": "w:cottage#p-main",
-      "note": "cottage industry。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cottage#e-0f8bef36d7a774e7",
-          "text": "However, technology changed everything: one machine outperformed 10-20 handweavers, ending cottage industry.",
-          "source": {
-            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
-            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
-            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 91,
-            "end": 98
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -158,6 +124,11 @@
       "reason": "地域俚语或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cottage-industry"
+  ]
 }

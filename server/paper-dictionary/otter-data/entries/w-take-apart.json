@@ -1,0 +1,214 @@
+{
+  "entryId": "w:take-apart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking apart"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "apart"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "apart"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "apart"
+      ],
+      [
+        "taking",
+        "apart"
+      ],
+      [
+        "taken",
+        "apart"
+      ],
+      [
+        "takes",
+        "apart"
+      ],
+      [
+        "took",
+        "apart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take apart",
+      "tags": []
+    },
+    {
+      "form": "taken apart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) apart",
+  "senses": [
+    {
+      "senseId": "w:take-apart#s1",
+      "pos": "短语",
+      "glossZh": "拆开；拆散",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s34"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-apart#e-f42818ae07fe0fde",
+          "text": "A literary journal accepted a story – but requested thorough revisions that would take apart its hopeful ending.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 92
+          },
+          "parts": [
+            [
+              82,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-apart#e-14ea55b88e880a83",
+          "text": "His only escape was taking apart old toy cars and remote controls, then putting them back together – sometimes even better than before.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-apart#e-76e08a544f3fbb79",
+          "text": "Tiny House Shadow is entirely mobile and can be taken apart.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 59
+          },
+          "parts": [
+            [
+              48,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:take-apart#s2",
+      "pos": "短语",
+      "glossZh": "彻底击败（对手）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-apart#s3",
+      "pos": "短语",
+      "glossZh": "严厉批评；逐条驳斥",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

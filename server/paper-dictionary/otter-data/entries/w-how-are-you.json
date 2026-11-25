@@ -1,0 +1,169 @@
+{
+  "entryId": "w:how-are-you",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "how",
+      "are",
+      "you"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "how",
+        "are",
+        "you"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "how are you",
+  "senses": [
+    {
+      "senseId": "w:how-are-you#s1",
+      "pos": "短语",
+      "glossZh": "你好吗？近来怎么样？",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:how-are-you#e-a53426fa47b8b83f",
+          "text": "When they say, ‘Hey, how are you?’, you don’t say, ‘I’m good, thanks’, you say something different.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          },
+          "parts": [
+            [
+              21,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:how-are-you#e-980859a5f9c37f63",
+          "text": "Texting has developed its own dialect（方言）, filled with abbreviations like “hru?” (how are you?).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 93
+          },
+          "parts": [
+            [
+              82,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              93
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:how-are-you#e-d85d4519b6caf733",
+          "text": "might not appear as genuine as taking the time to spell out: “How are you?”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 73
+          },
+          "parts": [
+            [
+              62,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              73
+            ]
+          ]
+        }
+      ],
+      "note": "常用于见面问候。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:how-are-you#s2",
+      "pos": "短语",
+      "glossZh": "这也配叫……？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "爱尔兰英语中的讽刺用法，可接在名词短语之后。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

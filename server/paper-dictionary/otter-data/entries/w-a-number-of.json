@@ -1,0 +1,159 @@
+{
+  "entryId": "w:a-number-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "number",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "number",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a number of",
+  "senses": [
+    {
+      "senseId": "w:a-number-of#s1",
+      "pos": "短语",
+      "glossZh": "若干；一些；许多",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:number#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-number-of#e-e15ec773e069a8f0",
+          "text": "She also said there were likely a number of other genes that help the Bajau dive.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-number-of#e-0470e5e59c430689",
+          "text": "It was based on a number of large families.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:27#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-number-of#e-25cd93f033d4fb35",
+          "text": "It is led by a number of schools.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 24
+          },
+          "parts": [
+            [
+              13,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              24
+            ]
+          ]
+        }
+      ],
+      "note": "常接复数名词，表示数目不确切。",
+      "counts": {
+        "gaokao": 6,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

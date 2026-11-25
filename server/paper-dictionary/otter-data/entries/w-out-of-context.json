@@ -1,0 +1,124 @@
+{
+  "entryId": "w:out-of-context",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "out",
+      "of",
+      "context"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "out",
+        "of",
+        "context"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "out of context",
+  "senses": [
+    {
+      "senseId": "w:out-of-context#s1",
+      "pos": "短语",
+      "glossZh": "脱离上下文或原有语境",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:out-of-context#e-35819d0ac0338517",
+          "text": "But these vocabulary words are not learned because they were spoken out of context, as current AI-infused toys do, but from caregivers who make the words come alive.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 82
+          },
+          "parts": [
+            [
+              68,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:out-of-context#e-044d6dec53781f6a",
+          "text": "Here again, the reply from climate experts is direct: The literature shows clear increases in many of these risks, with regional differences, while the DOE draft quotes the records selectively or out of context.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 196,
+            "end": 210
+          },
+          "parts": [
+            [
+              196,
+              210
+            ]
+          ],
+          "highlightRanges": [
+            [
+              196,
+              210
+            ]
+          ]
+        }
+      ],
+      "note": "常与 quote、take 连用，指引述时断章取义。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

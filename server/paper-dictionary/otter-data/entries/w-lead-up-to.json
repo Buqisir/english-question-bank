@@ -1,0 +1,198 @@
+{
+  "entryId": "w:lead-up-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leading up to"
+  ],
+  "pattern": {
+    "tokens": [
+      "lead",
+      "up",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lead",
+        "up",
+        "to"
+      ],
+      [
+        "leading",
+        "up",
+        "to"
+      ],
+      [
+        "leads",
+        "up",
+        "to"
+      ],
+      [
+        "led",
+        "up",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lead up to",
+  "senses": [
+    {
+      "senseId": "w:lead-up-to#s1",
+      "pos": "短语",
+      "glossZh": "紧接在……之前；是……前的一段时间",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lead-up-to#e-42cb9d464a2048f1",
+          "text": "With all the craziness in the weeks leading up to the craft show, she’d put off getting it repaired.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 49
+          },
+          "parts": [
+            [
+              36,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-up-to#e-7642bbbb58d195b0",
+          "text": "Across all groups, regardless of artificial light access, participants slept less and took longer to fall asleep in the nights leading up to a full moon.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 140
+          },
+          "parts": [
+            [
+              127,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              127,
+              140
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lead-up-to#e-1e14c0d36b6ea013",
+          "text": "She said, “I couldn’t check my social media until I got to work, which was annoying.” In the days leading up to Ida, people contacted Orr through Twitter to get individualized, practical advice.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 111
+          },
+          "parts": [
+            [
+              98,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "常用 the days/weeks leading up to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:lead-up-to#s2",
+      "pos": "短语",
+      "glossZh": "逐步引向；为……作铺垫",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lead-up-to#s3",
+      "pos": "短语",
+      "glossZh": "（道路、台阶等）向上通到……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

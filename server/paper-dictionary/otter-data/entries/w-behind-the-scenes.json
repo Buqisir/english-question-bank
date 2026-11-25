@@ -1,0 +1,172 @@
+{
+  "entryId": "w:behind-the-scenes",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "behind",
+      "the",
+      "scenes"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "behind",
+        "the",
+        "scenes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "behind the scenes",
+  "senses": [
+    {
+      "senseId": "w:behind-the-scenes#s1",
+      "pos": "短语",
+      "glossZh": "在幕后；私下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:behind#s6",
+        "w:scene#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:behind-the-scenes#e-d07e953258e0c373",
+          "text": "Tharp worked behind the scenes, receiving little recognition for her groundbreaking work.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 30
+          },
+          "parts": [
+            [
+              13,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:behind-the-scenes#e-d209be82175c7959",
+          "text": "Behind the scenes, however, opposition was growing, so Erica became the spokesperson for the youth of the town.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 17
+          },
+          "parts": [
+            [
+              0,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:behind-the-scenes#e-c0fc2a4db3179068",
+          "text": "“The people that work behind the scenes are the ones that need all the praise.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 39
+          },
+          "parts": [
+            [
+              22,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              39
+            ]
+          ]
+        }
+      ],
+      "note": "表示工作或事情发生在公众视线之外。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:behind-the-scenes#s2",
+      "pos": "短语",
+      "glossZh": "披露幕后情况的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "前置修饰报道、特辑等时通常写作 behind-the-scenes。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

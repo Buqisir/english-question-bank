@@ -1,0 +1,74 @@
+{
+  "entryId": "w:monkey-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "monkey",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "monkey",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "monkey around",
+  "senses": [
+    {
+      "senseId": "w:monkey-around#s1",
+      "pos": "短语",
+      "glossZh": "胡闹；瞎折腾",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:monkey-around#s2",
+      "pos": "短语",
+      "glossZh": "胡乱摆弄",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:monkey#s3"
+      ],
+      "examples": [],
+      "note": "常接 with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,326 @@
+{
+  "entryId": "w:look-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking around",
+    "looks around"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "around"
+      ],
+      [
+        "looking",
+        "around"
+      ],
+      [
+        "looks",
+        "around"
+      ],
+      [
+        "looked",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked around",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look around",
+  "senses": [
+    {
+      "senseId": "w:look-around#s1",
+      "pos": "短语",
+      "glossZh": "环顾四周；四下张望",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-around#e-9590e43be3080bab",
+          "text": "I looked around and finally spotted David, who was standing by himself off to the side by a fence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "writing-continuation-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 15
+          },
+          "parts": [
+            [
+              2,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-around#e-d7ae45da7c32150e",
+          "text": "With the bird in my cupped hand, I looked around to see how she had gotten in.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 48
+          },
+          "parts": [
+            [
+              35,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-around#e-1f6a3c404f7182fd",
+          "text": "As the twins looked around them in disappointment, their father appeared.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:look-around#s2",
+      "pos": "短语",
+      "glossZh": "四处逛逛；参观",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-around#e-8ab9c3a330d9c88e",
+          "text": "Look around the shops.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-around#e-a1e710d58e40187b",
+          "text": "Searching the web or looking around a major grocery store, we’ll find trendy household and beauty products labelled “natural,” or “green”.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 35
+          },
+          "parts": [
+            [
+              21,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:look-around#s3",
+      "pos": "短语",
+      "glossZh": "四处寻找",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-around#e-953f96f8df143340",
+          "text": "Sea otters spend their days looking around for food in kelp (海草) forests.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 42
+          },
+          "parts": [
+            [
+              28,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-around#e-84662d507c89fd3d",
+          "text": "Begin by looking around your home for objects that are no longer in use.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常接 for，说明寻找的对象。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

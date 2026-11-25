@@ -65,8 +65,8 @@
     "mock": 134
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 133
+    "gaokao": 1,
+    "mock": 2
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 25,
-        "mock": 0
+        "mock": 110
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -179,12 +179,12 @@
       "pos": "n.",
       "glossZh": "小费",
       "pronunciationId": "w:tip#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -192,12 +192,12 @@
       "pos": "v.",
       "glossZh": "给小费",
       "pronunciationId": "w:tip#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -205,12 +205,12 @@
       "pos": "v.",
       "glossZh": "使倾斜",
       "pronunciationId": "w:tip#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -221,7 +221,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -248,35 +248,67 @@
       ]
     },
     {
-      "senseId": "w:tip#s7",
-      "pos": "短语",
-      "glossZh": "转折点",
+      "senseId": "w:tip#s8",
+      "pos": "n.",
+      "glossZh": "秘密消息；线报",
       "pronunciationId": "w:tip#p-main",
-      "note": "tipping point。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:tip#e-6cb555daf70cde35",
-          "text": "She explains we are at a “tipping point\" in history and must act now to prevent an extinction-level event for humanity.",
+          "exampleId": "w:tip#e-ec3c4b38025c4e9f",
+          "text": "It purchased the stock based on the illegal tip and, when later questioned, repeatedly lied about its actions, claiming it had relied only on public data.",
           "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d",
             "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
-              "sentence": 2
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d:1",
+              "sentence": 3
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 26,
-            "end": 33
+            "start": 44,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tip#s9",
+      "pos": "v.",
+      "glossZh": "转入；过渡到",
+      "pronunciationId": "w:tip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tip#e-b1dead90be32b2ac",
+          "text": "As we move out of the depths of winter, and tip gently into spring, our moods and tastes can transition too; some days we still miss the comfort of winter foods, while, on others, we may feel ready to welcome the lighter, fresher flavors of the new season.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 47
           }
         }
       ]
@@ -288,6 +320,11 @@
       "reason": "专业义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:tip-over"
+  ]
 }

@@ -1,0 +1,92 @@
+{
+  "entryId": "w:better-than-nothing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "better",
+      "than",
+      "nothing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "better",
+        "than",
+        "nothing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "better than nothing",
+  "senses": [
+    {
+      "senseId": "w:better-than-nothing#s1",
+      "pos": "短语",
+      "glossZh": "总比没有强；聊胜于无",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:better-than-nothing#e-419cca3e00ce4f41",
+          "text": "Doing just one of these a few times a week is better than nothing.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 65
+          },
+          "parts": [
+            [
+              46,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

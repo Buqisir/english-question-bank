@@ -1,0 +1,166 @@
+{
+  "entryId": "w:as-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as to",
+  "senses": [
+    {
+      "senseId": "w:as-to#s1",
+      "pos": "短语",
+      "glossZh": "关于；至于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:as-to#e-a50579891dde6ef6",
+          "text": "But being able to gain insight into the mind of an LLM provides clues as to how to stop it doing the same in the future.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 75
+          },
+          "parts": [
+            [
+              70,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-to#e-c4e944ada0f1940e",
+          "text": "Realizing we would be inviting guests from both sides of the family, I was fearful as to how people might view my house.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 88
+          },
+          "parts": [
+            [
+              83,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-to#e-c9c8b18ea4133213",
+          "text": "What does the author suggest a company do as to assembling an effective team?",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-hunan-yali-2026-second:34",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          },
+          "parts": [
+            [
+              42,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "可接名词，也可接 how、why 等引导的从句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:as-to#s2",
+      "pos": "短语",
+      "glossZh": "按照；以……为依据",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

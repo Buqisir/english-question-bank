@@ -59,8 +59,8 @@
     "mock": 97
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 95
+    "gaokao": 3,
+    "mock": 21
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -188,103 +188,16 @@
       ]
     },
     {
-      "senseId": "w:wash#s3",
-      "pos": "短语",
-      "glossZh": "（情绪）涌上心头",
-      "pronunciationId": "w:wash#p-main",
-      "note": "wash over sb。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wash#e-01362f554c6417a1",
-          "text": "A feeling of helplessness washed over me as I saw the bus queue thinning out.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 26,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:wash#e-53aa6c2f3421186a",
-          "text": "Shame washed over Amy.",
-          "source": {
-            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
-            "paperTitle": "2026届广州市高三年级调研测试英语",
-            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation:10",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 12
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:wash#s4",
-      "pos": "短语",
-      "glossZh": "用饮料送服或送下食物",
-      "pronunciationId": "w:wash#p-main",
-      "note": "wash sth down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wash#e-2c159c24783b8077",
-          "text": "He has cereal, bacon, cake and fish and chips for dinner, washed down with a couple of beers.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:4",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 58,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:wash#s5",
       "pos": "n.",
       "glossZh": "一次清洗",
       "pronunciationId": "w:wash#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -299,6 +212,19 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:wash#s7",
+      "pos": "v.",
+      "glossZh": "（水）拍打；冲刷",
+      "pronunciationId": "w:wash#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -307,6 +233,12 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:wash-over-sb",
+    "w:wash-sth-down"
+  ]
 }

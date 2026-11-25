@@ -1,0 +1,117 @@
+{
+  "entryId": "w:set-the-stage",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "the",
+      "stage"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "the",
+        "stage"
+      ],
+      [
+        "sets",
+        "the",
+        "stage"
+      ],
+      [
+        "setting",
+        "the",
+        "stage"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set the stage",
+  "senses": [
+    {
+      "senseId": "w:set-the-stage#s1",
+      "pos": "短语",
+      "glossZh": "为后续事态创造条件；为……铺路",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-the-stage#e-af615d69b922cdd9",
+          "text": "These set the stage for the tragedy.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 19
+          },
+          "parts": [
+            [
+              6,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "常接 for。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:set-the-stage#s2",
+      "pos": "短语",
+      "glossZh": "为下文交代背景；为接下来的叙述作铺垫",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

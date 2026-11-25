@@ -1,0 +1,161 @@
+{
+  "entryId": "w:in-contrast-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "contrast",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "contrast",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "in contrast to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in contrast to sth",
+  "senses": [
+    {
+      "senseId": "w:in-contrast-to#s1",
+      "pos": "短语",
+      "glossZh": "与……形成对比；与……截然不同",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:contrast#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-contrast-to#e-ea848260fac0169b",
+          "text": "And in contrast to our increasingly networked lives where the information we consume is monitored and tracked, a printed book still offers the chance of a wholly private, “off-line” activity.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-contrast-to#e-3a757617a3243ba4",
+          "text": "In contrast to the declines observed in the West, some Asian countries have experienced stable or even growing bee populations.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-contrast-to#e-2a74db5503920bdb",
+          "text": "So in contrast to its demoralizing effects on young children, identity-focused language may help teens stay interested in science.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 17
+          },
+          "parts": [
+            [
+              3,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

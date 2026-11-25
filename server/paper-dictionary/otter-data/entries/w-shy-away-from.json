@@ -1,0 +1,166 @@
+{
+  "entryId": "w:shy-away-from",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shy",
+      "away",
+      "from"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shy",
+        "away",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shied away from",
+      "tags": []
+    },
+    {
+      "form": "shies away from",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shy away from",
+  "senses": [
+    {
+      "senseId": "w:shy-away-from#s1",
+      "pos": "短语",
+      "glossZh": "有顾虑而回避；不愿面对",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:shy#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:shy-away-from#e-24f84d8d72635629",
+          "text": "This doesn’t mean the project shies away from the dark aspects of our past.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 45
+          },
+          "parts": [
+            [
+              30,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shy-away-from#e-c292071528298255",
+          "text": "Green has never shied away from challenging topics.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 31
+          },
+          "parts": [
+            [
+              16,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:shy-away-from#e-386b7d74a363964b",
+          "text": "She tends to shy away from meetings.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 26
+          },
+          "parts": [
+            [
+              13,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

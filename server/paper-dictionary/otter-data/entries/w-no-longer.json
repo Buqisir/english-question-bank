@@ -1,0 +1,155 @@
+{
+  "entryId": "w:no-longer",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "longer"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "longer"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no longer",
+  "senses": [
+    {
+      "senseId": "w:no-longer#s1",
+      "pos": "短语",
+      "glossZh": "不再",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:long#s5",
+        "w:no#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-longer#e-141ce951c552a82e",
+          "text": "Walking through the streets of Brooklyn today, I am no longer confused by this city’s sounds and smells.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-longer#e-bd66ccaac1033077",
+          "text": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-longer#e-694e63acf51c058f",
+          "text": "If I ever get trapped outside my house again, my local telephone box will, sadly no longer be able to connect me with my keys.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 90
+          },
+          "parts": [
+            [
+              81,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 90
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 90
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

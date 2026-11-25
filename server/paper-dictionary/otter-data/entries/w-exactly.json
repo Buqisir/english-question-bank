@@ -48,8 +48,8 @@
     "mock": 112
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 109
+    "gaokao": 3,
+    "mock": 12
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 1
+        "mock": 69
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -196,74 +196,26 @@
       ]
     },
     {
-      "senseId": "w:exactly#s3",
-      "pos": "短语",
-      "glossZh": "算不上",
-      "pronunciationId": "w:exactly#p-main",
-      "note": "not exactly，用于委婉或反讽地否定。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:exactly#e-df8d3fc5ed888b35",
-          "text": "Of course, with its 2,672 pages, it’s not exactly short.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:exactly#e-6ab026d8cc63ff9f",
-          "text": "It is not exactly a rule.",
-          "source": {
-            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
-            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
-            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 10,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:exactly#s4",
       "pos": "int.",
       "glossZh": "完全正确",
       "pronunciationId": "w:exactly#p-main",
       "note": "用于回答，表示完全同意。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:not-exactly"
+  ]
 }

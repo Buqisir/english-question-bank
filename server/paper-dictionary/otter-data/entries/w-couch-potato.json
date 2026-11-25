@@ -1,0 +1,92 @@
+{
+  "entryId": "w:couch-potato",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "couch",
+      "potato"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "couch",
+        "potato"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "couch potato",
+  "senses": [
+    {
+      "senseId": "w:couch-potato#s1",
+      "pos": "短语",
+      "glossZh": "成天窝在沙发上看电视、很少运动的人",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:potato#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:couch-potato#e-f6f48ff34d57397d",
+          "text": "Stay Active: Don’t Let The Cold Make You A Couch Potato!",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 55
+          },
+          "parts": [
+            [
+              43,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

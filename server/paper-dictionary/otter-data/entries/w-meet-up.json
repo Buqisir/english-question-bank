@@ -1,0 +1,70 @@
+{
+  "entryId": "w:meet-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "meet",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "meet",
+        "up"
+      ],
+      [
+        "meeting",
+        "up"
+      ],
+      [
+        "meets",
+        "up"
+      ],
+      [
+        "met",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "meet up",
+  "senses": [
+    {
+      "senseId": "w:meet-up#s1",
+      "pos": "短语",
+      "glossZh": "约好见面；碰头",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

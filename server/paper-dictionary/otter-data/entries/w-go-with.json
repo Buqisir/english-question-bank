@@ -1,0 +1,406 @@
+{
+  "entryId": "w:go-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "going with",
+    "went with"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "with"
+      ],
+      [
+        "going",
+        "with"
+      ],
+      [
+        "went",
+        "with"
+      ],
+      [
+        "goes",
+        "with"
+      ],
+      [
+        "gone",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "go with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:go-with#s1",
+      "pos": "短语",
+      "glossZh": "选择；采纳",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s20",
+        "w:with#s28"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-with#e-9b800e9e185a72a3",
+          "text": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 76
+          },
+          "parts": [
+            [
+              69,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-287aa9d6e9deb682",
+          "text": "Did they tend to go with those most confident about their estimates?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          },
+          "parts": [
+            [
+              17,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-855ec9509fc47a70",
+          "text": "That changed in 2017 when Netflix presented an all-new adaptation of the novels as Anne with an E. As opposed to almost every other adaptation of the books, Netflix dug into the story’s implied darkness and went with an “edgy” (前卫的) approach to the story that had its devoted fans up in arms.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 207,
+            "end": 216
+          },
+          "parts": [
+            [
+              207,
+              216
+            ]
+          ],
+          "highlightRanges": [
+            [
+              207,
+              216
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:go-with#s2",
+      "pos": "短语",
+      "glossZh": "与……搭配；与……配套",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-with#e-1ffa7743b6c39772",
+          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 117
+          },
+          "parts": [
+            [
+              110,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              110,
+              117
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-77e60ed35629a139",
+          "text": "At the same time, I was setting up the lighting to show the details of the artworks and preparing the informational cards that would go with each piece.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 140
+          },
+          "parts": [
+            [
+              133,
+              140
+            ]
+          ],
+          "highlightRanges": [
+            [
+              133,
+              140
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-fe2ef89f5d97f483",
+          "text": "You might need to read it out to students or it may also serve as a reference point to you, depending on the activities that go with the particular piece of news.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 132
+          },
+          "parts": [
+            [
+              125,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              132
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:go-with#s3",
+      "pos": "短语",
+      "glossZh": "和某人一起去；陪同",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-with#e-e0842027306075e6",
+          "text": "However, none of my co-workers would go with me, and I was worried about walking on the street alone at night.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 44
+          },
+          "parts": [
+            [
+              37,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-1fc2ac8e4f6c8efd",
+          "text": "His team is composed of approximately 30 registered volunteers who go with him to poor towns and villages in Brazil.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          },
+          "parts": [
+            [
+              67,
+              74
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              74
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-with#e-d34ce075b668be2c",
+          "text": "You can see backstage and meet our friends.” The invitation beat any flavor of ice-cream, and Charlotte gladly accepted and went with them.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 133
+          },
+          "parts": [
+            [
+              124,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              133
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-with#s4",
+      "pos": "短语",
+      "glossZh": "与某人约会；和某人谈恋爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

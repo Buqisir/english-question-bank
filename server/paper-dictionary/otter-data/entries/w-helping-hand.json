@@ -1,0 +1,170 @@
+{
+  "entryId": "w:helping-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "helping",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "helping",
+        "hand"
+      ],
+      [
+        "helping",
+        "hands"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "helping hand",
+  "senses": [
+    {
+      "senseId": "w:helping-hand#s1",
+      "pos": "短语",
+      "glossZh": "援手；帮助",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:helping-hand#e-8e438da7ed7b804d",
+          "text": "The Student Leader can act as a resource, a helping hand, a sounding board or just a person to talk to whatever the issue might be.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 56
+          },
+          "parts": [
+            [
+              44,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:helping-hand#e-2138f5ceb388486d",
+          "text": "Right now, I want to give young people a helping hand.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:helping-hand#e-f66cd809220dbd35",
+          "text": "To Lear, this discovery supported a surprising new idea that ocean animals, much like land species, need a helping hand getting around human-built structures.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 119
+          },
+          "parts": [
+            [
+              107,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              119
+            ]
+          ]
+        }
+      ],
+      "note": "常用 a helping hand，搭配 give、lend 或 need。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:helping-hand#s2",
+      "pos": "短语",
+      "glossZh": "焊接用辅助夹具",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

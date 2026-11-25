@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-return-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "return",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "return",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in return for",
+  "senses": [
+    {
+      "senseId": "w:in-return-for#s1",
+      "pos": "短语",
+      "glossZh": "作为对……的回报；作为……的交换",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s49",
+        "w:return#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-return-for#e-45d41a5eeac6e836",
+          "text": "In return for a food reward one bear, Brutus, would touch the more heavily dotted pattern with his nose.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          },
+          "parts": [
+            [
+              0,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-return-for#e-1f7b3acacd69ac19",
+          "text": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 105
+          },
+          "parts": [
+            [
+              92,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-return-for#e-13e39112cae4f9de",
+          "text": "They include “debt-for-nature-swapping” agreements under which some donor countries and organisations reduce their debt repayment demands in return for calling a stop to destructive logging.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 151
+          },
+          "parts": [
+            [
+              138,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              138,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

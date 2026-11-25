@@ -1,0 +1,157 @@
+{
+  "entryId": "w:i-guess",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I guess"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "guess"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "guess"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i guess",
+  "senses": [
+    {
+      "senseId": "w:i-guess#s1",
+      "pos": "短语",
+      "glossZh": "我想；我看大概是这样",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:guess#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:i-guess#e-c8628ddb44af45e0",
+          "text": "“I guess this is it,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-guess#e-e02790bfedba77e7",
+          "text": "But that’s progress, I guess.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          },
+          "parts": [
+            [
+              21,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              21,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:i-guess#e-3c8725ce56ef58be",
+          "text": "But I guess it’s not my job to correct them.” Then, I added that I only did what they paid me to do.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          },
+          "parts": [
+            [
+              4,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "口语中用于表达推测或缓和判断，可放在句末。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -71,8 +71,8 @@
     "mock": 477
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 475
+    "gaokao": 17,
+    "mock": 345
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -297,7 +297,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -330,7 +330,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -394,180 +394,6 @@
       ]
     },
     {
-      "senseId": "w:end#s6",
-      "pos": "短语",
-      "glossZh": "最终落得某结果",
-      "pronunciationId": "w:end#p-main",
-      "note": "end up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 8,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:end#e-278bfc490ad334d1",
-          "text": "His visit, however, ended up involving a lot more than that.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:end#e-ffc71e1774030d8d",
-          "text": "But I ended up working late.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "reading-b-1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:end#e-22428321723e2a02",
-          "text": "Even when you win, you end up no better off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 23,
-            "end": 26
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:end#s7",
-      "pos": "短语",
-      "glossZh": "勉强维持生计",
-      "pronunciationId": "w:end#p-main",
-      "note": "make ends meet。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:end#e-7cd151704414b600",
-          "text": "Many of their families were struggling to make ends meet.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 51
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:end#s8",
-      "pos": "短语",
-      "glossZh": "最后",
-      "pronunciationId": "w:end#p-main",
-      "note": "in the end。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:end#e-291fe8f7b5727c1e",
-          "text": "In the end, I gave in.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 7,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:end#s9",
-      "pos": "短语",
-      "glossZh": "说到底",
-      "pronunciationId": "w:end#p-main",
-      "note": "at the end of the day。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:end#e-d8c1a7f565bc974d",
-          "text": "\"At the end of the day all transit agencies right now are doing everything they can to improve the rider experience.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:reading-b",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 8,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:end#s10",
       "pos": "n.",
       "glossZh": "目的",
@@ -576,7 +402,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -600,6 +426,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:end#s11",
+      "pos": "adv.",
+      "glossZh": "连续不断地（on end）",
+      "pronunciationId": "w:end#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:end#e-dfd7f03fb881047b",
+          "text": "The tofu vendor’s daughter, who had watched silently for weeks on end, finally stepped forward to borrow a comic.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 69
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -612,6 +471,28 @@
       "reason": "体育术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-good-things-come-to-an-end",
+    "w:at-a-loose-end",
+    "w:at-the-end-of-the-day",
+    "w:come-to-an-end",
+    "w:dead-end",
+    "w:end-in",
+    "w:end-of-the-day",
+    "w:end-of-the-line",
+    "w:end-of-the-road",
+    "w:end-of-the-world",
+    "w:end-times",
+    "w:end-up",
+    "w:end-up-with",
+    "w:in-the-end",
+    "w:means-to-an-end",
+    "w:no-end",
+    "w:not-the-end-of-the-world",
+    "w:stand-on-end"
+  ]
 }

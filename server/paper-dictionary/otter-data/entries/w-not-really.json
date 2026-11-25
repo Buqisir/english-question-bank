@@ -1,0 +1,260 @@
+{
+  "entryId": "w:not-really",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "really"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "really"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not really",
+  "senses": [
+    {
+      "senseId": "w:not-really#s1",
+      "pos": "短语",
+      "glossZh": "其实并非如此；并不完全是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-really#e-32cc40daa13f684d",
+          "text": "“People get in their minds an idea of what teachers do, but that’s not really what it is here.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 77
+          },
+          "parts": [
+            [
+              67,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-really#e-df9ca69d818bdd76",
+          "text": "And it wasn’t, ultimately, the dictionary that got me there – not really.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 72
+          },
+          "parts": [
+            [
+              62,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-really#e-e52528e36da1b9bf",
+          "text": "In this five-part ABC TV series and accompanying exhibition at the National Museum of Australia, it’s not really the objects themselves that matter; it’s the stories and people behind them that construct a story about the nation and its past.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 112
+          },
+          "parts": [
+            [
+              102,
+              112
+            ]
+          ],
+          "highlightRanges": [
+            [
+              102,
+              112
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:not-really#s2",
+      "pos": "短语",
+      "glossZh": "不太；不怎么",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:not-really#e-d7066b902fd553b1",
+          "text": "Of those Australians who still have a landline, a third concede that it’s not really",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 84
+          },
+          "parts": [
+            [
+              74,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-really#e-e52d27c074fe3f4c",
+          "text": "“Not really,” she responded while glancing around the living room and into the kitchen.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-really#e-ea69ad39fc3d904c",
+          "text": "“Not really my game,” I said.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "可用于委婉地作否定回答。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

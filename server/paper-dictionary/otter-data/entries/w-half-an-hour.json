@@ -1,0 +1,156 @@
+{
+  "entryId": "w:half-an-hour",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "half",
+      "an",
+      "hour"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "half",
+        "an",
+        "hour"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "half an hour",
+  "senses": [
+    {
+      "senseId": "w:half-an-hour#s1",
+      "pos": "短语",
+      "glossZh": "半小时；三十分钟",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:half-an-hour#e-da21d6525cc59376",
+          "text": "Paragraph 2: Half an hour later, a new higher castle stood before the two mothers.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:half-an-hour#e-5670ddd93f54d8e0",
+          "text": "Chatting with a senior for half an hour.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:23#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 39
+          },
+          "parts": [
+            [
+              27,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:half-an-hour#e-b3215f2766bae52c",
+          "text": "Every half an hour.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 18
+          },
+          "parts": [
+            [
+              6,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

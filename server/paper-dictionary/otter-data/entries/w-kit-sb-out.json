@@ -1,0 +1,108 @@
+{
+  "entryId": "w:kit-sb-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kit",
+      {
+        "slot": "sb"
+      },
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "kit",
+        {
+          "slot": "sb"
+        },
+        "out"
+      ],
+      [
+        "kit",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kit out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kit sb out",
+  "senses": [
+    {
+      "senseId": "w:kit-sb-out#s1",
+      "pos": "短语",
+      "glossZh": "给某人配齐所需用品或装备",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:kit#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:kit-sb-out#e-5a0f5e3523d5573e",
+          "text": "The program works with more than 140 foster youth headed to college, hosting an annual event in July to kit out each student with sheet sets, pillows and connections to other people in the same situation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 111
+          },
+          "parts": [
+            [
+              104,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "常用 kit sb out with sth 或 kit out sb with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

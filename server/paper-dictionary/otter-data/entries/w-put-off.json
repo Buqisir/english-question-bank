@@ -1,0 +1,248 @@
+{
+  "entryId": "w:put-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting off"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "off"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "off"
+      ],
+      [
+        "putting",
+        "off"
+      ],
+      [
+        "puts",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put off",
+      "tags": []
+    },
+    {
+      "form": "puts off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sb/sth) off",
+  "senses": [
+    {
+      "senseId": "w:put-off#s1",
+      "pos": "短语",
+      "glossZh": "推迟；拖延",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:off#s15",
+        "w:put#s21"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-off#e-95e42db6496671fb",
+          "text": "Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-off#e-42cb9d464a2048f1",
+          "text": "With all the craziness in the weeks leading up to the craft show, she’d put off getting it repaired.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          },
+          "parts": [
+            [
+              72,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              72,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-off#e-616de7685461a151",
+          "text": "“If it had been put off by over three minutes, my attempt would have failed.”",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          },
+          "parts": [
+            [
+              16,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              23
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:put-off#s2",
+      "pos": "短语",
+      "glossZh": "使反感；使失去兴趣或打消念头",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-off#e-6591d56dfd36497b",
+          "text": "What puts the man off living in Los Angeles?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 21
+          },
+          "parts": [
+            [
+              5,
+              9
+            ],
+            [
+              18,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              9
+            ],
+            [
+              18,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "常用 put sb off (doing) sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:put-off#s3",
+      "pos": "短语",
+      "glossZh": "使某人分心",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

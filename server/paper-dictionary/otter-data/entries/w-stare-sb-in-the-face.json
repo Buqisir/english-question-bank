@@ -1,0 +1,80 @@
+{
+  "entryId": "w:stare-sb-in-the-face",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stare somebody in the face"
+  ],
+  "pattern": {
+    "tokens": [
+      "stare",
+      {
+        "slot": "sb"
+      },
+      "in",
+      "the",
+      "face"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stare",
+        {
+          "slot": "sb"
+        },
+        "in",
+        "the",
+        "face"
+      ],
+      [
+        "stare",
+        "somebody",
+        "in",
+        "the",
+        "face"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stare sb in the face",
+  "senses": [
+    {
+      "senseId": "w:stare-sb-in-the-face#s1",
+      "pos": "短语",
+      "glossZh": "明摆在某人眼前；显而易见",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:stare#s3"
+      ],
+      "examples": [],
+      "note": "主语常是答案、事实或问题等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,90 @@
+{
+  "entryId": "w:up-and-leave",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "up",
+      "and",
+      "leave"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "up",
+        "and",
+        "leave"
+      ],
+      [
+        "up",
+        "and",
+        "leaves"
+      ],
+      [
+        "up",
+        "and",
+        "leaving"
+      ],
+      [
+        "up",
+        "and",
+        "left"
+      ],
+      [
+        "upped",
+        "and",
+        "left"
+      ],
+      [
+        "upping",
+        "and",
+        "leaving"
+      ],
+      [
+        "ups",
+        "and",
+        "leaves"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "up and leave",
+  "senses": [
+    {
+      "senseId": "w:up-and-leave#s1",
+      "pos": "短语",
+      "glossZh": "冷不防就离开；说走就走",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

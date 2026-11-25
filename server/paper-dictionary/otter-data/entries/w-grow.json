@@ -71,8 +71,8 @@
     "mock": 694
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 693
+    "gaokao": 15,
+    "mock": 547
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 19,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 59
       },
       "folded": false,
       "examples": [
@@ -225,7 +225,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 28
       },
       "folded": false,
       "examples": [
@@ -297,7 +297,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -368,7 +368,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -402,7 +402,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -445,165 +445,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:grow#s7",
-      "pos": "短语",
-      "glossZh": "长大",
-      "pronunciationId": "w:grow#p-main",
-      "note": "grow up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 11,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grow#e-7ec80268da59bf92",
-          "text": "Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:grow#e-b055b86e5f489eda",
-          "text": "At home, my dad said, \"A job’s a big step to growing up.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 52
-          }
-        },
-        {
-          "exampleId": "w:grow#e-69052adf77aa4bf6",
-          "text": "I grew up in a little town in northeast Ohio.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 2,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:grow#s8",
-      "pos": "短语",
-      "glossZh": "源于",
-      "pronunciationId": "w:grow#p-main",
-      "note": "grow out of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grow#e-7b0cec9e5f886602",
-          "text": "A few characters are used to create a single impression growing out of the theme.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 56,
-            "end": 63
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:grow#s9",
-      "pos": "短语",
-      "glossZh": "长成",
-      "pronunciationId": "w:grow#p-main",
-      "note": "grow into。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:grow#e-9cf80418214bf715",
-          "text": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 111,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:grow#e-1a8234ce2590c811",
-          "text": "The job gave me opportunities to speak, and over time I grew into a __44__ speaker in my thirties.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
-            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
-            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 56,
-            "end": 60
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -612,6 +453,15 @@
       "reason": "罕见旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:grow-into",
+    "w:grow-on",
+    "w:grow-out",
+    "w:grow-out-of",
+    "w:grow-up"
+  ]
 }

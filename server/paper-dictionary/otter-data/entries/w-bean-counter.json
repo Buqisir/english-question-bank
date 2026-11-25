@@ -1,0 +1,124 @@
+{
+  "entryId": "w:bean-counter",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bean",
+      "counter"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bean",
+        "counter"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bean counter",
+  "senses": [
+    {
+      "senseId": "w:bean-counter#s1",
+      "pos": "短语",
+      "glossZh": "只盯着账目和数字的人",
+      "note": "非正式，常略带贬义。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bean#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bean-counter#e-05bcadedb9082b37",
+          "text": "Who is most probably called a “bean counter” ?",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 43
+          },
+          "parts": [
+            [
+              31,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bean-counter#e-45d1754190d19972",
+          "text": "Who is probably called a “bean counter”?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

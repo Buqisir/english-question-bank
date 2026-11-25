@@ -1,0 +1,160 @@
+{
+  "entryId": "w:stand-on-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "on",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "on",
+        "end"
+      ],
+      [
+        "standing",
+        "on",
+        "end"
+      ],
+      [
+        "stands",
+        "on",
+        "end"
+      ],
+      [
+        "stood",
+        "on",
+        "end"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stands on end",
+      "tags": []
+    },
+    {
+      "form": "stood on end",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand (sth) on end",
+  "senses": [
+    {
+      "senseId": "w:stand-on-end#s1",
+      "pos": "短语",
+      "glossZh": "（头发、汗毛等）竖起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-on-end#e-f88123d24e1374b3",
+          "text": "Next, I planned to rub it on my hair until it stood on end, as if I were a rock star.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stand-on-end#e-fd601892643e6ceb",
+          "text": "Take off a sweater in winter, and you might hear a sudden sound: brush a balloon against your hair, and the hair stands on end.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 126
+          },
+          "parts": [
+            [
+              113,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              126
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:stand-on-end#s2",
+      "pos": "短语",
+      "glossZh": "把物体竖起来，使一端着地",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

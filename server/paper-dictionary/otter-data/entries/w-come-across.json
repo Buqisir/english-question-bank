@@ -1,0 +1,237 @@
+{
+  "entryId": "w:come-across",
+  "headword": "come across sb/sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came across",
+    "comes across"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "across",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "across",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "came",
+        "across",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "comes",
+        "across",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "coming",
+        "across",
+        {
+          "slot": "sb/sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "come across",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:come-across#s1",
+      "pos": "短语",
+      "glossZh": "偶然遇见；无意中发现",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 21
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-across#e-5f547c568989afa0",
+          "text": "But I recently came across a study that shows why his approach works.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-across#e-65f0ffd432bd1872",
+          "text": "In 2011, he came across something familiar.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 23
+          },
+          "parts": [
+            [
+              12,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-across#e-ac2d132bb4f3a508",
+          "text": "Walking up a path through the forest towards Shutlingsloe, a local high point, I came across a small clearing and immediately noticed the dead yellow grasses set against the fresh snow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-2-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 92
+          },
+          "parts": [
+            [
+              81,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              92
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:come-across#s2",
+      "pos": "短语",
+      "glossZh": "给人以某种印象；表达得清楚",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-across#e-bbcc6770fd910348",
+          "text": "It often comes across as going through the motions of life without truly connecting to it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 21
+          },
+          "parts": [
+            [
+              9,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              21
+            ]
+          ]
+        }
+      ],
+      "note": "给人印象多用 come across as。"
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

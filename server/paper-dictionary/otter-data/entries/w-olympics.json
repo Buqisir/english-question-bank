@@ -35,7 +35,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 6
+    "mock": 0
   },
   "senses": [
     {
@@ -46,7 +46,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -116,6 +116,6 @@
       "reason": "公园活动名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

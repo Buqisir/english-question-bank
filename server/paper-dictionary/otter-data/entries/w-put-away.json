@@ -1,0 +1,256 @@
+{
+  "entryId": "w:put-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting away"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "away"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "away"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "away"
+      ],
+      [
+        "putting",
+        "away"
+      ],
+      [
+        "puts",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sb/sth) away",
+  "senses": [
+    {
+      "senseId": "w:put-away#s1",
+      "pos": "短语",
+      "glossZh": "把……收起来；放回存放处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-away#e-26d24969cd6e78b6",
+          "text": "So next time you have a few minutes free, put away your phone and let your mind wander.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-away#e-8df0da44c3a4b8c7",
+          "text": "Write down exactly what it is on a small card, put the card away, and don’t think about it for the rest of the day.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 64
+          },
+          "parts": [
+            [
+              47,
+              50
+            ],
+            [
+              60,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              50
+            ],
+            [
+              60,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-away#e-107c75d0b8fe0caf",
+          "text": "This applies to so many things – putting your shoes away, cleaning the kitchen counter, folding that blanket on the couch.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 56
+          },
+          "parts": [
+            [
+              33,
+              40
+            ],
+            [
+              52,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              40
+            ],
+            [
+              52,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:put-away#s2",
+      "pos": "短语",
+      "glossZh": "存起来备用（尤指钱）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-away#s3",
+      "pos": "短语",
+      "glossZh": "大量吃下或喝下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-away#s4",
+      "pos": "短语",
+      "glossZh": "把某人关进监狱或送入精神病院",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-away#s5",
+      "pos": "短语",
+      "glossZh": "摒弃（旧习惯或旧观念等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-away#s6",
+      "pos": "短语",
+      "glossZh": "彻底击败对手；锁定胜局",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

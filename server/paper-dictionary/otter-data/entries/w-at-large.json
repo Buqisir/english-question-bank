@@ -1,0 +1,106 @@
+{
+  "entryId": "w:at-large",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "large"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "large"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at large",
+  "senses": [
+    {
+      "senseId": "w:at-large#s1",
+      "pos": "短语",
+      "glossZh": "整体而言；作为一个整体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-large#e-a3222f2a0f407dd2",
+          "text": "They say that using this product is necessary owing to the increased move towards electric cars and green energy at large.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 121
+          },
+          "parts": [
+            [
+              113,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              121
+            ]
+          ]
+        }
+      ],
+      "note": "用于名词之后，如 the public at large。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:at-large#s2",
+      "pos": "短语",
+      "glossZh": "尚未被捕；仍在逃",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:large#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

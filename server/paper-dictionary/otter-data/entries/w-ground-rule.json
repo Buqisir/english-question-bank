@@ -1,0 +1,143 @@
+{
+  "entryId": "w:ground-rule",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ground rules"
+  ],
+  "pattern": {
+    "tokens": [
+      "ground",
+      "rule"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ground",
+        "rule"
+      ],
+      [
+        "ground",
+        "rules"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ground rule",
+  "senses": [
+    {
+      "senseId": "w:ground-rule#s1",
+      "pos": "名词短语",
+      "glossZh": "事先约定的基本规则",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ground#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:ground-rule#e-096b63ca4ed7dabb",
+          "text": "One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:ground-rule#e-418ce682b220e740",
+          "text": "It’s important to set ground rules from the start, like keeping the car a phone-free zone.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 34
+          },
+          "parts": [
+            [
+              22,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              34
+            ]
+          ]
+        }
+      ],
+      "note": "这个意思常用复数 ground rules。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:ground-rule#s2",
+      "pos": "名词短语",
+      "glossZh": "特定比赛场地的专用规则",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

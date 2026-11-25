@@ -54,8 +54,8 @@
     "mock": 233
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 228
+    "gaokao": 1,
+    "mock": 37
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 1
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 77
       },
       "folded": false,
       "examples": [
@@ -209,7 +209,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -261,7 +261,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 2
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -333,7 +333,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -354,59 +354,6 @@
           "target": {
             "start": 20,
             "end": 26
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:behind#s6",
-      "pos": "短语",
-      "glossZh": "在幕后；不为公众所见",
-      "pronunciationId": "w:behind#p-main",
-      "note": "通常说 behind the scenes。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:behind#e-02d6c3a2b690b4b2",
-          "text": "Tharp worked behind the scenes, receiving little recognition for her groundbreaking work.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:6",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 13,
-            "end": 19
-          }
-        },
-        {
-          "exampleId": "w:behind#e-bf08b3888b02b265",
-          "text": "At the Weissman Preservation Center, students learn what happens behind the scenes when conservators step in to keep materials usable and preserve them for the future.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
-            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 71
           }
         }
       ]
@@ -445,6 +392,20 @@
       "reason": "体育专门义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-left-behind",
+    "w:behind-the-scenes",
+    "w:come-from-behind",
+    "w:fall-behind",
+    "w:get-behind",
+    "w:leave-behind",
+    "w:lie-behind",
+    "w:run-behind",
+    "w:stand-behind",
+    "w:stay-behind"
+  ]
 }

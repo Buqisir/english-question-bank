@@ -1,0 +1,101 @@
+{
+  "entryId": "w:be-pressed-for-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "pressed",
+      "for",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "pressed",
+        "for",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are pressed for time",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be pressed for time",
+  "senses": [
+    {
+      "senseId": "w:be-pressed-for-time#s1",
+      "pos": "短语",
+      "glossZh": "时间紧迫；时间不够用",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:press#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-pressed-for-time#e-e0707d93fe723765",
+          "text": "Families are pressed for time, many with both parents working to",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 29
+          },
+          "parts": [
+            [
+              9,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

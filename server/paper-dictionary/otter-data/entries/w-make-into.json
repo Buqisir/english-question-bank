@@ -1,0 +1,107 @@
+{
+  "entryId": "w:make-into",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "into"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "into"
+      ],
+      [
+        "made",
+        "into"
+      ],
+      [
+        "makes",
+        "into"
+      ],
+      [
+        "making",
+        "into"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made into",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make sth into sth",
+  "senses": [
+    {
+      "senseId": "w:make-into#s1",
+      "pos": "短语",
+      "glossZh": "把……制成……；使……变成……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-into#e-acb45cf6b80dba3f",
+          "text": "Unusual fashion shows in New Orleans and Brooklyn have showcased nutria fur made into clothes in different styles.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 85
+          },
+          "parts": [
+            [
+              76,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              85
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

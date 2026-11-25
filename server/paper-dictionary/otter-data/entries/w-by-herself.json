@@ -1,0 +1,264 @@
+{
+  "entryId": "w:by-herself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "herself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "herself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by herself",
+  "senses": [
+    {
+      "senseId": "w:by-herself#s1",
+      "pos": "短语",
+      "glossZh": "她独自一人；无人陪伴",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:herself#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-herself#e-b840558f0406aa84",
+          "text": "She often traveled by herself.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-herself#e-5e9189ef15ae378c",
+          "text": "She often traveled by herself",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-herself#e-c75ccfbfe6b2724f",
+          "text": "The next day, Siya spent her time at the guest house all by herself.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 67
+          },
+          "parts": [
+            [
+              57,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:by-herself#s2",
+      "pos": "短语",
+      "glossZh": "她独力完成；靠她自己",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:by-herself#e-356a11c4b4b8758d",
+          "text": "She ran Jackson’s Carnegie Library absolutely by herself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 56
+          },
+          "parts": [
+            [
+              46,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-herself#e-9d78c02c85d2ee36",
+          "text": "Later in her college, she told me her writing became much easier because that tough struggle had taught her to improve by herself.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:cloze:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 129
+          },
+          "parts": [
+            [
+              119,
+              129
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              129
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-herself#e-30c48d7e8a3d5f1c",
+          "text": "Read the ad by herself.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 22
+          },
+          "parts": [
+            [
+              12,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

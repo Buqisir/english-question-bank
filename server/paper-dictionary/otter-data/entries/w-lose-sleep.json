@@ -1,0 +1,71 @@
+{
+  "entryId": "w:lose-sleep",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lose",
+      "sleep"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lose",
+        "sleep"
+      ],
+      [
+        "loses",
+        "sleep"
+      ],
+      [
+        "losing",
+        "sleep"
+      ],
+      [
+        "lost",
+        "sleep"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lose sleep",
+  "senses": [
+    {
+      "senseId": "w:lose-sleep#s1",
+      "pos": "短语",
+      "glossZh": "为某事担心得睡不好；为某事操心",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 lose sleep over sth，尤见于否定句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

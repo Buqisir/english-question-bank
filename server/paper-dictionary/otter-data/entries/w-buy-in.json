@@ -1,0 +1,130 @@
+{
+  "entryId": "w:buy-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "buying in"
+  ],
+  "pattern": {
+    "tokens": [
+      "buy",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "buy",
+        "in"
+      ],
+      [
+        "buying",
+        "in"
+      ],
+      [
+        "bought",
+        "in"
+      ],
+      [
+        "buys",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "buy (sth) in",
+  "senses": [
+    {
+      "senseId": "w:buy-in#s1",
+      "pos": "短语",
+      "glossZh": "从外部购入（所需物品）；外购",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:buy-in#e-9c09d9007f61b42d",
+          "text": "Coffi Lab began doing its own baking in 2023, when Shapland decided that buying in pre-packaged baked goods and sandwiches wouldn’t keep customers coming back.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 82
+          },
+          "parts": [
+            [
+              73,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              82
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:buy-in#s2",
+      "pos": "短语",
+      "glossZh": "认同并支持（计划、想法等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:buy-in#s3",
+      "pos": "短语",
+      "glossZh": "出资入股；买入一份权益",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

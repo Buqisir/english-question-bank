@@ -1,0 +1,107 @@
+{
+  "entryId": "w:run-counter",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "run",
+      "counter"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "counter"
+      ],
+      [
+        "ran",
+        "counter"
+      ],
+      [
+        "running",
+        "counter"
+      ],
+      [
+        "runs",
+        "counter"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "run counter",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run counter to sth",
+  "senses": [
+    {
+      "senseId": "w:run-counter#s1",
+      "pos": "短语",
+      "glossZh": "与……相冲突；违背",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-counter#e-50c10f564e96e8b5",
+          "text": "The results, published in the British Medical Bulletin, challenge long-held assumptions about human connection in medicine and run counter to a 2019 UK government report that called empathy an “essential human skill that AI cannot replicate（复制）.”",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 138
+          },
+          "parts": [
+            [
+              127,
+              138
+            ]
+          ],
+          "highlightRanges": [
+            [
+              127,
+              138
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

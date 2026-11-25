@@ -42,8 +42,8 @@
     "mock": 375
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 373
+    "gaokao": 10,
+    "mock": 197
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 36
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 108
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -293,94 +293,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:memory#s5",
-      "pos": "短语",
-      "glossZh": "肌肉记忆",
-      "pronunciationId": "w:memory#p-main",
-      "note": "muscle memory 指反复练习后形成的熟练动作反应。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:memory#e-45a73329d6d81463",
-          "text": "You’ll develop that painting muscle memory that only comes with repetition.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-ii:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 36,
-            "end": 42
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:memory#s6",
-      "pos": "短语",
-      "glossZh": "为了纪念",
-      "pronunciationId": "w:memory#p-main",
-      "note": "in memory of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:memory#e-05bbe152dc97f6d3",
-          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-a",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 113,
-            "end": 119
-          }
-        },
-        {
-          "exampleId": "w:memory#e-60d6a44f836e8831",
-          "text": "First, they presented her with a custom-designed cup in Sierra’s memory.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:3",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 71
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -389,6 +301,13 @@
       "reason": "罕用集合名词或游戏名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-memory-of",
+    "w:jog-ones-memory",
+    "w:refresh-ones-memory"
+  ]
 }

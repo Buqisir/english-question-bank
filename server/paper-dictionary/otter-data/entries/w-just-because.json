@@ -1,0 +1,167 @@
+{
+  "entryId": "w:just-because",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "because"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "because"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just because",
+  "senses": [
+    {
+      "senseId": "w:just-because#s1",
+      "pos": "短语",
+      "glossZh": "仅仅因为……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:just-because#e-34cc8e222dd59310",
+          "text": "The world won’t come to an end in most cases just because you left a few things undone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 57
+          },
+          "parts": [
+            [
+              45,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:just-because#e-f71cfa1fde1e9c1e",
+          "text": "So I absolutely think we will get more riders just because of short stories,\" she says.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:just-because#e-b23fe66e55ecb441",
+          "text": "Don’t shut yourself off just because you feel uncomfortable with unfamiliar faces at the beginning.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "note": "常见于否定句，或 Just because A doesn’t mean B（仅凭 A 不能推出 B）。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:just-because#s2",
+      "pos": "短语",
+      "glossZh": "没有什么特别的理由",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可单独作答，不接原因从句。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

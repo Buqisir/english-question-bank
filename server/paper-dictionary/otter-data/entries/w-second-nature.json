@@ -1,0 +1,91 @@
+{
+  "entryId": "w:second-nature",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "second",
+      "nature"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "second",
+        "nature"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "second nature",
+  "senses": [
+    {
+      "senseId": "w:second-nature#s1",
+      "pos": "短语",
+      "glossZh": "习惯成自然的行为或技能",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:second-nature#e-de7e8c5fec5e7217",
+          "text": "Although driving your car is likely second nature, a successful road trip is more than just shifting your vehicle to “drive”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 49
+          },
+          "parts": [
+            [
+              36,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              49
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be 或 become second nature to sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

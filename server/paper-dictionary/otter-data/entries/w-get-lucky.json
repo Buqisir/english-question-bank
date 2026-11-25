@@ -1,0 +1,120 @@
+{
+  "entryId": "w:get-lucky",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "lucky"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "lucky"
+      ],
+      [
+        "gets",
+        "lucky"
+      ],
+      [
+        "getting",
+        "lucky"
+      ],
+      [
+        "got",
+        "lucky"
+      ],
+      [
+        "gotten",
+        "lucky"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get lucky",
+  "senses": [
+    {
+      "senseId": "w:get-lucky#s1",
+      "pos": "短语",
+      "glossZh": "走运；碰巧如愿",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-lucky#e-aa84563a47d4bb15",
+          "text": "Holding up her phone, Corinne recorded the bird’s distinctive call while silently hoping to get lucky with a sighting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 101
+          },
+          "parts": [
+            [
+              92,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              101
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-lucky#s2",
+      "pos": "短语",
+      "glossZh": "有机会与人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，委婉说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

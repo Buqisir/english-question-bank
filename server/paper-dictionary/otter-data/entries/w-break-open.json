@@ -1,0 +1,124 @@
+{
+  "entryId": "w:break-open",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "break",
+      "open"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "open"
+      ],
+      [
+        "breaking",
+        "open"
+      ],
+      [
+        "breaks",
+        "open"
+      ],
+      [
+        "broke",
+        "open"
+      ],
+      [
+        "broken",
+        "open"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "break open",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break (sth) open",
+  "senses": [
+    {
+      "senseId": "w:break-open#s1",
+      "pos": "短语",
+      "glossZh": "用力弄开；砸开或撬开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-open#e-508fb0acbb50d48d",
+          "text": "Facing intense competition for foods, sea otters (海獭) survive with the help of tools – like rocks and even glass bottles – that let them break open tougher prey(猎物) that they wouldn't otherwise be able to eat.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 147
+          },
+          "parts": [
+            [
+              137,
+              147
+            ]
+          ],
+          "highlightRanges": [
+            [
+              137,
+              147
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:break-open#s2",
+      "pos": "短语",
+      "glossZh": "破解谜团；使案件有突破",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

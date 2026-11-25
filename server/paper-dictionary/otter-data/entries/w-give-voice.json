@@ -1,0 +1,136 @@
+{
+  "entryId": "w:give-voice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gives voice"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "voice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "voice"
+      ],
+      [
+        "gives",
+        "voice"
+      ],
+      [
+        "gave",
+        "voice"
+      ],
+      [
+        "given",
+        "voice"
+      ],
+      [
+        "giving",
+        "voice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give voice (to sth)",
+  "senses": [
+    {
+      "senseId": "w:give-voice#s1",
+      "pos": "短语",
+      "glossZh": "表达意见或感受；使……得到表达",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-voice#e-da8ed2c0ecf0be73",
+          "text": "Poetry gives voice to our shared human emotions and experiences.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-2025-12-second-joint-survey:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 18
+          },
+          "parts": [
+            [
+              7,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              18
+            ]
+          ]
+        }
+      ],
+      "note": "这一义项常用 give voice to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:give-voice#s2",
+      "pos": "短语",
+      "glossZh": "（尤指狗）发出叫声",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:give-voice#s3",
+      "pos": "短语",
+      "glossZh": "放声唱歌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:give-birth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gave birth",
+    "giving birth"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "birth"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "birth"
+      ],
+      [
+        "gave",
+        "birth"
+      ],
+      [
+        "giving",
+        "birth"
+      ],
+      [
+        "given",
+        "birth"
+      ],
+      [
+        "gives",
+        "birth"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give birth",
+  "senses": [
+    {
+      "senseId": "w:give-birth#s1",
+      "pos": "短语",
+      "glossZh": "分娩；生下（孩子或幼崽）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-birth#e-46e0c892fde05e6e",
+          "text": "She branched out into TV commercials during the 70s and 80s, acting as “a housewife and mum, smiling with my product beside me...Folgers coffee, Jordache jeans...” She got married and had two children, even shooting one commercial three days after giving birth.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 248,
+            "end": 260
+          },
+          "parts": [
+            [
+              248,
+              260
+            ]
+          ],
+          "highlightRanges": [
+            [
+              248,
+              260
+            ]
+          ]
+        }
+      ],
+      "note": "说明生下的对象时用 give birth to。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:give-birth#s2",
+      "pos": "短语",
+      "glossZh": "孕育出；催生（思想、运动等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "此义用 give birth to sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -50,7 +50,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 636
+    "mock": 437
   },
   "senses": [
     {
@@ -62,7 +62,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 113,
-        "mock": 1
+        "mock": 191
       },
       "folded": false,
       "examples": [
@@ -133,7 +133,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -236,12 +236,12 @@
       "glossZh": "（正式条件句）万一",
       "pronunciationId": "w:should#p-main",
       "note": "常见 If you should …，也可用 Should you … 倒装。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -285,6 +285,6 @@
       "reason": "将情态动词名词化的罕见用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

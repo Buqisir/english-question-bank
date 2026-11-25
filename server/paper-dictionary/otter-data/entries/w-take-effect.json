@@ -1,0 +1,91 @@
+{
+  "entryId": "w:take-effect",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "effect"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "effect"
+      ],
+      [
+        "taken",
+        "effect"
+      ],
+      [
+        "takes",
+        "effect"
+      ],
+      [
+        "taking",
+        "effect"
+      ],
+      [
+        "took",
+        "effect"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take effect",
+  "senses": [
+    {
+      "senseId": "w:take-effect#s1",
+      "pos": "短语",
+      "glossZh": "（药物、措施等）开始起作用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:effect#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-effect#s2",
+      "pos": "短语",
+      "glossZh": "（法律、规定等）正式生效",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:effect#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

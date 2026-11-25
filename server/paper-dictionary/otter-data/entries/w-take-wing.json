@@ -1,0 +1,126 @@
+{
+  "entryId": "w:take-wing",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "wing"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "wing"
+      ],
+      [
+        "taken",
+        "wing"
+      ],
+      [
+        "takes",
+        "wing"
+      ],
+      [
+        "taking",
+        "wing"
+      ],
+      [
+        "took",
+        "wing"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "took wing",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take wing",
+  "senses": [
+    {
+      "senseId": "w:take-wing#s1",
+      "pos": "短语",
+      "glossZh": "（鸟等）起飞；飞起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wing#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-wing#e-6a71d27d8bf8ced8",
+          "text": "I stopped, and she soon took wing but did not immediately fly away.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          },
+          "parts": [
+            [
+              24,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-wing#s2",
+      "pos": "短语",
+      "glossZh": "（人）离开；启程",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

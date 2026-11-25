@@ -1,0 +1,160 @@
+{
+  "entryId": "w:break-the-ice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "breaking the ice"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "the",
+      "ice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "the",
+        "ice"
+      ],
+      [
+        "breaking",
+        "the",
+        "ice"
+      ],
+      [
+        "breaks",
+        "the",
+        "ice"
+      ],
+      [
+        "broke",
+        "the",
+        "ice"
+      ],
+      [
+        "broken",
+        "the",
+        "ice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break the ice",
+  "senses": [
+    {
+      "senseId": "w:break-the-ice#s1",
+      "pos": "短语",
+      "glossZh": "打破冷场；消除初次交往的拘谨",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:ice#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:break-the-ice#e-442940ef98d54923",
+          "text": "Paragraph 1: Amazingly, Rose stepped forward to break the ice.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-the-ice#e-788d564e2f24c5ee",
+          "text": "Scientists argue that playful teasing in apes or “laughter” in dogs could serve a similar purpose – breaking the ice and reinforcing relationships.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 116
+          },
+          "parts": [
+            [
+              100,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              116
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-the-ice#s2",
+      "pos": "短语",
+      "glossZh": "克服开头的障碍；打开局面",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

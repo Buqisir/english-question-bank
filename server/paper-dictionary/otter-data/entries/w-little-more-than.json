@@ -1,0 +1,141 @@
+{
+  "entryId": "w:little-more-than",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "little",
+      "more",
+      "than"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "little",
+        "more",
+        "than"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "little more than",
+  "senses": [
+    {
+      "senseId": "w:little-more-than#s2",
+      "pos": "短语",
+      "glossZh": "不过是；几乎只有",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:little#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:little-more-than#e-f8c58c3adb325ea7",
+          "text": "He built a hugely successful career with little more than plain old hard work and determination.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 57
+          },
+          "parts": [
+            [
+              41,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:little-more-than#e-381513a5a5f27444",
+          "text": "I climbed to the top of a small rise and realised that the mist was little more than a few feet deep, and though it was only a short climb, I found myself completely above it and looking at a wonderfully clear view of Skiddaw with the sun setting in the west.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-1-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 84
+          },
+          "parts": [
+            [
+              68,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              84
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:little-more-than#s1",
+      "pos": "短语",
+      "glossZh": "仅比……略多；只稍超过……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:little#s11",
+        "w:more#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

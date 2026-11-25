@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 70
+    "mock": 22
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 42
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -226,7 +226,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -256,20 +256,19 @@
       "pos": "n.",
       "glossZh": "蛋清",
       "pronunciationId": "w:white#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:white#s5",
-      "pos": "短语",
-      "glossZh": "善意的谎言",
+      "senseId": "w:white#s6",
+      "pos": "adj.",
+      "glossZh": "各频率的功率谱密度相同的",
       "pronunciationId": "w:white#p-main",
-      "note": "white lie。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -278,22 +277,23 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:white#e-e68fefb7ab6dbd96",
-          "text": "In a moment of exhausted inspiration, she told her girl a little white lie, “Your teacher texted me, and you’re the new gate leader.” __36__ The video Lauren shared to TikTok that day shows the little girl proudly waving classmates through the school gate, smiling beside her teacher.",
+          "exampleId": "w:white#e-58981681d85416d7",
+          "text": "It plays white noise.",
           "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:listening.long-form",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:seven-choices:1",
-              "sentence": 3
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 65,
-            "end": 70
+            "start": 9,
+            "end": 14
           }
         }
       ]
@@ -305,6 +305,14 @@
       "reason": "姓氏或专名，真题 g3、g7、g12、g13 不绑定"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:black-and-white",
+    "w:in-black-and-white",
+    "w:white-lie",
+    "w:white-paper"
+  ]
 }

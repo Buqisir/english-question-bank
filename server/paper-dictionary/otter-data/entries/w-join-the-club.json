@@ -1,0 +1,60 @@
+{
+  "entryId": "w:join-the-club",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "join",
+      "the",
+      "club"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "join",
+        "the",
+        "club"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "join the club",
+  "senses": [
+    {
+      "senseId": "w:join-the-club#s1",
+      "pos": "短语",
+      "glossZh": "我也一样；我也遇到过这种麻烦",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

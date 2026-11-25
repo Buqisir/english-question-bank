@@ -1,0 +1,101 @@
+{
+  "entryId": "w:get-out-of-your-comfort-zone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "out",
+      "of",
+      "your",
+      "comfort",
+      "zone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "out",
+        "of",
+        "your",
+        "comfort",
+        "zone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get out of your comfort zone",
+  "senses": [
+    {
+      "senseId": "w:get-out-of-your-comfort-zone#s1",
+      "pos": "短语",
+      "glossZh": "走出舒适区；尝试自己不熟悉或没把握的事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s50"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-out-of-your-comfort-zone#e-1dd8d99c7f41fe3d",
+          "text": "Get out of your comfort zone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 28
+          },
+          "parts": [
+            [
+              0,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              28
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

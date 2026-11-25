@@ -1,0 +1,110 @@
+{
+  "entryId": "w:i-dont-think-so",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I don't think so"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "don't",
+      "think",
+      "so"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "don't",
+        "think",
+        "so"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i don't think so",
+  "senses": [
+    {
+      "senseId": "w:i-dont-think-so#s1",
+      "pos": "短语",
+      "glossZh": "我觉得不是这样；我想不会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-dont-think-so#e-baaf08dc4d12be9b",
+          "text": "I don’t think so.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:i-dont-think-so#s2",
+      "pos": "短语",
+      "glossZh": "不行；想都别想",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "以强调或讽刺的语气断然拒绝。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

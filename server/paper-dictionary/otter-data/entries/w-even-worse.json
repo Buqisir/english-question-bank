@@ -1,0 +1,124 @@
+{
+  "entryId": "w:even-worse",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "even",
+      "worse"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "even",
+        "worse"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "even worse",
+  "senses": [
+    {
+      "senseId": "w:even-worse#s1",
+      "pos": "短语",
+      "glossZh": "更糟的是",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:worse#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:even-worse#e-f91c492ed83280fc",
+          "text": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:even-worse#e-d99ee767adec9242",
+          "text": "A study recently published by Science found that as young as age six, girls are less likely than boys to say that members of their gender(性别)are “really, really smart.” Even worse, the study found that girls act on that belief: Around age six they start to avoid activities said to be for children who are “really, really smart.” Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 169,
+            "end": 179
+          },
+          "parts": [
+            [
+              169,
+              179
+            ]
+          ],
+          "highlightRanges": [
+            [
+              169,
+              179
+            ]
+          ]
+        }
+      ],
+      "note": "常放在句首，引出更糟的情况。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

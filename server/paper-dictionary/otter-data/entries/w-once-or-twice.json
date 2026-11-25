@@ -1,0 +1,92 @@
+{
+  "entryId": "w:once-or-twice",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "once",
+      "or",
+      "twice"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "once",
+        "or",
+        "twice"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "once or twice",
+  "senses": [
+    {
+      "senseId": "w:once-or-twice#s1",
+      "pos": "短语",
+      "glossZh": "一两次",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:once-or-twice#e-76fd752ddeb0391d",
+          "text": "Harvey lost himself in countless stories, and now he only asks me to read for him once or twice a week.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:cloze:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 95
+          },
+          "parts": [
+            [
+              82,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              95
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

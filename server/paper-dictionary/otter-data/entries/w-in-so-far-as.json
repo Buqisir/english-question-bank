@@ -1,0 +1,99 @@
+{
+  "entryId": "w:in-so-far-as",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "so",
+      "far",
+      "as"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "so",
+        "far",
+        "as"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in so far as",
+  "senses": [
+    {
+      "senseId": "w:in-so-far-as#s1",
+      "pos": "短语",
+      "glossZh": "就……这一点而言；在……范围内",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s19",
+        "w:far#s8",
+        "w:in#s81",
+        "w:so#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-so-far-as#e-51533de6edd88116",
+          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 99
+          },
+          "parts": [
+            [
+              87,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              99
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,114 @@
+{
+  "entryId": "w:catch-a-break",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "a",
+      "break"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "a",
+        "break"
+      ],
+      [
+        "catches",
+        "a",
+        "break"
+      ],
+      [
+        "catching",
+        "a",
+        "break"
+      ],
+      [
+        "caught",
+        "a",
+        "break"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "caught a break",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch a break",
+  "senses": [
+    {
+      "senseId": "w:catch-a-break#s1",
+      "pos": "短语",
+      "glossZh": "交上好运；碰到转机或好机会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:catch#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-a-break#e-dca0c49caed451e6",
+          "text": "“I understand, from an environmental standpoint, that they’re wasteful, and I understand why producers, cost-wise and for other reasons, don’t want them,” said Julie Benko, a former understudy who caught a break and made it big.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 197,
+            "end": 211
+          },
+          "parts": [
+            [
+              197,
+              211
+            ]
+          ],
+          "highlightRanges": [
+            [
+              197,
+              211
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

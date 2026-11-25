@@ -1,0 +1,179 @@
+{
+  "entryId": "w:close-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "close",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "close",
+        "by"
+      ],
+      [
+        "more",
+        "close",
+        "by"
+      ],
+      [
+        "most",
+        "close",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "close by",
+  "senses": [
+    {
+      "senseId": "w:close-by#s1",
+      "pos": "短语",
+      "glossZh": "就在附近；离得很近",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-by#e-23ae7dc770cc2899",
+          "text": "A workout partner usually needs to live close by.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-i:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          },
+          "parts": [
+            [
+              40,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:close-by#e-e44eafd2047bac1f",
+          "text": "It’s convenient as it’s close by.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 32
+          },
+          "parts": [
+            [
+              24,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:close-by#s2",
+      "pos": "短语",
+      "glossZh": "紧靠……；在……附近",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:close-by#e-bd5fd26415cad65a",
+          "text": "My crew mate, Phil, and I were working close by each other, and the sound of our tools echoed through the humid forest.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          },
+          "parts": [
+            [
+              39,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              47
+            ]
+          ]
+        }
+      ],
+      "note": "后接所靠近的人或地点。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

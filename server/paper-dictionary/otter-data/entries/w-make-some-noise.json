@@ -1,0 +1,122 @@
+{
+  "entryId": "w:make-some-noise",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "some",
+      "noise"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "some",
+        "noise"
+      ],
+      [
+        "made",
+        "some",
+        "noise"
+      ],
+      [
+        "makes",
+        "some",
+        "noise"
+      ],
+      [
+        "making",
+        "some",
+        "noise"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make some noise",
+  "senses": [
+    {
+      "senseId": "w:make-some-noise#s1",
+      "pos": "短语",
+      "glossZh": "公开发声，引起对某事的关注",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-some-noise#e-49a0511365292ee5",
+          "text": "Make some noise about it.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make some noise about sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-some-noise#s2",
+      "pos": "短语",
+      "glossZh": "大声欢呼助威",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于现场招呼观众为某人欢呼。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

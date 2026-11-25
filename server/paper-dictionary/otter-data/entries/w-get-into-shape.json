@@ -1,0 +1,112 @@
+{
+  "entryId": "w:get-into-shape",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "into",
+      "shape"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "into",
+        "shape"
+      ],
+      [
+        "gets",
+        "into",
+        "shape"
+      ],
+      [
+        "getting",
+        "into",
+        "shape"
+      ],
+      [
+        "got",
+        "into",
+        "shape"
+      ],
+      [
+        "gotten",
+        "into",
+        "shape"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get into shape",
+  "senses": [
+    {
+      "senseId": "w:get-into-shape#s1",
+      "pos": "短语",
+      "glossZh": "通过锻炼达到良好的身体状态",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-into-shape#e-1151c93735b20a5b",
+          "text": "What ball game does the man play to get into shape?",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 50
+          },
+          "parts": [
+            [
+              36,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

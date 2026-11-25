@@ -1,0 +1,116 @@
+{
+  "entryId": "w:set-the-table",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "the",
+      "table"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "the",
+        "table"
+      ],
+      [
+        "sets",
+        "the",
+        "table"
+      ],
+      [
+        "setting",
+        "the",
+        "table"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set the table",
+  "senses": [
+    {
+      "senseId": "w:set-the-table#s1",
+      "pos": "短语",
+      "glossZh": "摆好餐具，准备开饭",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-the-table#e-7ecc9264c8aaa64d",
+          "text": "She helped set the table.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 24
+          },
+          "parts": [
+            [
+              11,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:set-the-table#s2",
+      "pos": "短语",
+      "glossZh": "为后续行动做好准备；为后续发展铺路",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

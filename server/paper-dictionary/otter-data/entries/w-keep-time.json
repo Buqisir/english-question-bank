@@ -1,0 +1,157 @@
+{
+  "entryId": "w:keep-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping time"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "time"
+      ],
+      [
+        "keeping",
+        "time"
+      ],
+      [
+        "keeps",
+        "time"
+      ],
+      [
+        "kept",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep time",
+  "senses": [
+    {
+      "senseId": "w:keep-time#s1",
+      "pos": "短语",
+      "glossZh": "合着节拍；与……的节奏同步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-time#e-3966b9d0e98f0297",
+          "text": "The constant pulling turned into a gentle rhythm except for an occasional excited one, the clinking of his tags keeping time with my steps.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 124
+          },
+          "parts": [
+            [
+              112,
+              124
+            ]
+          ],
+          "highlightRanges": [
+            [
+              112,
+              124
+            ]
+          ]
+        }
+      ],
+      "note": "用 keep time with sth 指明所配合的节奏。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-time#s2",
+      "pos": "短语",
+      "glossZh": "计时；记录经过的时间",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-time#s3",
+      "pos": "短语",
+      "glossZh": "（钟表）走时准确",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-time#s4",
+      "pos": "短语",
+      "glossZh": "为演奏维持稳定的节拍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-time#s5",
+      "pos": "短语",
+      "glossZh": "（列车等）按时刻表运行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

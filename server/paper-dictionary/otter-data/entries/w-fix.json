@@ -76,7 +76,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 210
+    "mock": 43
   },
   "senses": [
     {
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -161,7 +161,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -232,7 +232,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 1
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -353,12 +353,12 @@
       "pos": "v.",
       "glossZh": "准备（食物或饮料）",
       "pronunciationId": "w:fix#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -379,12 +379,12 @@
       "pos": "n.",
       "glossZh": "解决办法",
       "pronunciationId": "w:fix#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 10
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -399,6 +399,40 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:fix#s9",
+      "pos": "v.",
+      "glossZh": "确定（价格等）",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fix#e-6b9af94007f18b45",
+          "text": "To prove that the original price was fixed in a reasonable way.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:33",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -407,6 +441,11 @@
       "reason": "专业缩写 FIX"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:fix-on",
+    "w:fix-up",
+    "w:quick-fix"
+  ]
 }

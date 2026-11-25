@@ -1,0 +1,102 @@
+{
+  "entryId": "w:pop-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pop",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pop",
+        "in"
+      ],
+      [
+        "popped",
+        "in"
+      ],
+      [
+        "popping",
+        "in"
+      ],
+      [
+        "pops",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pop in",
+  "senses": [
+    {
+      "senseId": "w:pop-in#s1",
+      "pos": "短语",
+      "glossZh": "顺便进去一下；顺道短暂拜访",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pop-in#e-5ea0787aa4e3b34c",
+          "text": "However, you can ask the staff when the delivery day is and then pop in that day to collect some cardboard boxes before they are sent to recycling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
+          },
+          "parts": [
+            [
+              65,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:better-safe-than-sorry",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "better",
+      "safe",
+      "than",
+      "sorry"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "better",
+        "safe",
+        "than",
+        "sorry"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "better safe than sorry",
+  "senses": [
+    {
+      "senseId": "w:better-safe-than-sorry#s1",
+      "pos": "短语",
+      "glossZh": "宁可事先谨慎，也免得事后后悔",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:better-safe-than-sorry#e-deac4b30c7320039",
+          "text": "That morning, Lila had carefully checked her backpack: painting book, pencils, and the small toolbox from her grandfather, a retired mechanical repairman, who always said, “Better safe than sorry.” Though she wasn’t sure why she’d need tools for an art competition, she carried it anyway.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 195
+          },
+          "parts": [
+            [
+              173,
+              195
+            ]
+          ],
+          "highlightRanges": [
+            [
+              173,
+              195
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

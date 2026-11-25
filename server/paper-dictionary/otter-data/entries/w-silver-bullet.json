@@ -1,0 +1,155 @@
+{
+  "entryId": "w:silver-bullet",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "silver",
+      "bullet"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "silver",
+        "bullet"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "silver bullet",
+  "senses": [
+    {
+      "senseId": "w:silver-bullet#s1",
+      "pos": "短语",
+      "glossZh": "能轻易解决棘手问题的办法",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:silver#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:silver-bullet#e-4909ec9d6e52180c",
+          "text": "It's an exciting approach, but she warns that this method is not a silver bullet for all methane emissions.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 80
+          },
+          "parts": [
+            [
+              67,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:silver-bullet#e-42005d5073d3cb27",
+          "text": "While there is no silver bullet, practical steps – rooted in policy and personal awareness – can narrow the gap.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 31
+          },
+          "parts": [
+            [
+              18,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              31
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:silver-bullet#e-8105ef9ee1874aab",
+          "text": "What does “not a silver bullet” imply in paragraph 3?",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:34",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 30
+          },
+          "parts": [
+            [
+              17,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              30
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 no silver bullet 或 not a silver bullet。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

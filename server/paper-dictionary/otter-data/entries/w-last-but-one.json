@@ -1,0 +1,92 @@
+{
+  "entryId": "w:last-but-one",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "last",
+      "but",
+      "one"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "last",
+        "but",
+        "one"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "last but one",
+  "senses": [
+    {
+      "senseId": "w:last-but-one#s1",
+      "pos": "短语",
+      "glossZh": "倒数第二的",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:last-but-one#e-1a36650cc88b73a6",
+          "text": "What can be inferred from the last but one paragraph?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 42
+          },
+          "parts": [
+            [
+              30,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,274 @@
+{
+  "entryId": "w:far-from-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "far from"
+  ],
+  "pattern": {
+    "tokens": [
+      "far",
+      "from",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "far",
+        "from",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "far",
+        "from"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "far from sth",
+  "senses": [
+    {
+      "senseId": "w:far-from-sth#s1",
+      "pos": "短语",
+      "glossZh": "远非；远未达到……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:far#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:far-from-sth#e-72b4511ae774e43e",
+          "text": "The results were far from satisfactory.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:29#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:far-from-sth#e-fc15206bf641258f",
+          "text": "Yet for all their advantages, parcel lockers are still far from being widely adopted by online shoppers.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          },
+          "parts": [
+            [
+              55,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:far-from-sth#e-f5f4da17682b43ca",
+          "text": "It’s far from the storybook picture of a farm – no mud, no boots, no hens pecking in the yard.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          },
+          "parts": [
+            [
+              5,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 29
+      }
+    },
+    {
+      "senseId": "w:far-from-sth#s2",
+      "pos": "短语",
+      "glossZh": "离……很远",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:far-from-sth#e-b8700d321499d299",
+          "text": "Around 15 years ago, I was working at a Veterans’ Home（老兵之家） in a small town which was not far from my home.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          },
+          "parts": [
+            [
+              91,
+              99
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              99
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:far-from-sth#e-a7e31a6aebeda07c",
+          "text": "Not far from where my brother lives in north London is a street called Kitchener Road.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          },
+          "parts": [
+            [
+              4,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:far-from-sth#e-b8a15eb7d356b8f7",
+          "text": "He looked at several rooms, but either the rent was too high or the place was too far from his training institute.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 90
+          },
+          "parts": [
+            [
+              82,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              82,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

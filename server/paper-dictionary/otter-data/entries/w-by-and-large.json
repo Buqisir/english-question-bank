@@ -1,0 +1,107 @@
+{
+  "entryId": "w:by-and-large",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "by",
+      "and",
+      "large"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "and",
+        "large"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by and large",
+  "senses": [
+    {
+      "senseId": "w:by-and-large#s1",
+      "pos": "短语",
+      "glossZh": "大体上；总的来说",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:large#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-and-large#e-de0aca4c35ca35ca",
+          "text": "“SETI is looking for science and technology beyond the solar system as the evidence of life and intelligence, and that’s by and large a needle in haystack problem,” Mr Diamond says.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 133
+          },
+          "parts": [
+            [
+              121,
+              133
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              133
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:by-and-large#s2",
+      "pos": "短语",
+      "glossZh": "（旧航海用语）迎风和顺风航行",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 352
+    "mock": 161
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 67,
-        "mock": 0
+        "mock": 172
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -214,12 +214,12 @@
       "pos": "n.",
       "glossZh": "买到的东西；合算的东西",
       "pronunciationId": "w:buy#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -240,12 +240,12 @@
       "pos": "v.",
       "glossZh": "收买；贿赂",
       "pronunciationId": "w:buy#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -253,12 +253,12 @@
       "pos": "v.",
       "glossZh": "争取；换取（时间等）",
       "pronunciationId": "w:buy#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -268,6 +268,12 @@
       "reason": "扑克专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:buy-in",
+    "w:buy-it",
+    "w:buy-one-get-one-free",
+    "w:buy-up"
+  ]
 }

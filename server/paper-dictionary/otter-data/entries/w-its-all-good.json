@@ -1,0 +1,92 @@
+{
+  "entryId": "w:its-all-good",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "it's",
+      "all",
+      "good"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "it's",
+        "all",
+        "good"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "it's all good",
+  "senses": [
+    {
+      "senseId": "w:its-all-good#s1",
+      "pos": "短语",
+      "glossZh": "一切都好；没事，不用担心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:its-all-good#e-7f70cd12f67a3588",
+          "text": "Many live by the motto, “Tudo bem,” which means “It's all good.” Honestly, they seem to be onto something.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 62
+          },
+          "parts": [
+            [
+              49,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

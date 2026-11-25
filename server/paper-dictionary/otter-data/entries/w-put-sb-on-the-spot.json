@@ -1,0 +1,80 @@
+{
+  "entryId": "w:put-sb-on-the-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "put somebody on the spot"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      {
+        "slot": "sb"
+      },
+      "on",
+      "the",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        {
+          "slot": "sb"
+        },
+        "on",
+        "the",
+        "spot"
+      ],
+      [
+        "put",
+        "somebody",
+        "on",
+        "the",
+        "spot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put sb on the spot",
+  "senses": [
+    {
+      "senseId": "w:put-sb-on-the-spot#s1",
+      "pos": "短语",
+      "glossZh": "让某人当场陷入窘境",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:spot#s10"
+      ],
+      "examples": [],
+      "note": "常指突然要求对方回答难题或作出决定。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

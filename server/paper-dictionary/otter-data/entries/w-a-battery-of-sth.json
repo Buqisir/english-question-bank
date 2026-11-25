@@ -1,0 +1,137 @@
+{
+  "entryId": "w:a-battery-of-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "battery",
+      "of",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "battery",
+        "of",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "a battery of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a battery of sth",
+  "senses": [
+    {
+      "senseId": "w:a-battery-of-sth#s1",
+      "pos": "固定短语",
+      "glossZh": "一整套；一系列",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:battery#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-battery-of-sth#e-be0546eda1aedee8",
+          "text": "Researchers from the University of Leipzig in Germany gathered more than 1, 000 retired workers who were over age 75 and assessed the volunteers’ memory and thinking skills through a battery of tests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 181,
+            "end": 193
+          },
+          "parts": [
+            [
+              181,
+              193
+            ]
+          ],
+          "highlightRanges": [
+            [
+              181,
+              193
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-battery-of-sth#e-86a6d2482ec1cb00",
+          "text": "The study, conducted by Davis, Locker, and Williams, recruited 215 undergraduates, mostly women, who completed a battery of questionnaires measuring their attitudes toward celebrities, materialistic values, and narcissistic tendencies.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 123
+          },
+          "parts": [
+            [
+              111,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              123
+            ]
+          ]
+        }
+      ],
+      "note": "常接 tests、questions 等。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

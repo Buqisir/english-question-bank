@@ -1,0 +1,105 @@
+{
+  "entryId": "w:good-night",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "good",
+      "night"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "good",
+        "night"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "good night",
+  "senses": [
+    {
+      "senseId": "w:good-night#s1",
+      "pos": "短语",
+      "glossZh": "晚安（睡前或夜间道别用语）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:good-night#e-e75ef8c6a3ab1c99",
+          "text": "Mom kissed me good night and said softly, “I’m sure everything will turn out fine.”",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          },
+          "parts": [
+            [
+              14,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              24
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 say good night 和 kiss sb good night。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:good-night#s2",
+      "pos": "短语",
+      "glossZh": "天哪；不会吧（表示惊讶或不敢相信）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较旧的口语用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

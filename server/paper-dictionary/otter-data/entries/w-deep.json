@@ -60,8 +60,8 @@
     "mock": 313
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 308
+    "gaokao": 2,
+    "mock": 113
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 53
       },
       "folded": false,
       "examples": [
@@ -215,7 +215,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -286,7 +286,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -390,7 +390,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -416,35 +416,34 @@
       ]
     },
     {
-      "senseId": "w:deep#s7",
-      "pos": "短语",
-      "glossZh": "深度学习",
+      "senseId": "w:deep#s8",
+      "pos": "adj.",
+      "glossZh": "（用于 deep freeze）深度冷冻的",
       "pronunciationId": "w:deep#p-main",
-      "note": "deep learning。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:deep#e-f9b055519131088c",
-          "text": "SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly.",
+          "exampleId": "w:deep#e-7272370d194cdb7a",
+          "text": "For now, at least, all but one of the species in deep freeze still have flesh-and-blood members.",
           "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
-              "sentence": 3
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:19",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 80,
-            "end": 84
+            "start": 49,
+            "end": 53
           }
         }
       ]
@@ -456,6 +455,13 @@
       "reason": "运动专门用法或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:deep-down",
+    "w:deep-state",
+    "w:still-waters-run-deep"
+  ]
 }

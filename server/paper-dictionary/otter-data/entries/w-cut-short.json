@@ -1,0 +1,79 @@
+{
+  "entryId": "w:cut-short",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cut",
+      "short"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cut",
+        "short"
+      ],
+      [
+        "cuts",
+        "short"
+      ],
+      [
+        "cutting",
+        "short"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cut sb/sth short",
+  "senses": [
+    {
+      "senseId": "w:cut-short#s1",
+      "pos": "短语",
+      "glossZh": "使（活动、旅程等）提前结束",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cut-short#s2",
+      "pos": "短语",
+      "glossZh": "打断某人的话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

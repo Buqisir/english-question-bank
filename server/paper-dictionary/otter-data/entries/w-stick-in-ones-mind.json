@@ -1,0 +1,159 @@
+{
+  "entryId": "w:stick-in-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "stick in one’s mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "stick",
+      "in",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stick",
+        "in",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stick in mind",
+      "tags": []
+    },
+    {
+      "form": "stuck in mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stick in one's mind",
+  "senses": [
+    {
+      "senseId": "w:stick-in-ones-mind#s1",
+      "pos": "短语",
+      "glossZh": "留在记忆里；令人难忘",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mind#s9",
+        "w:stick#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stick-in-ones-mind#e-cd7e0d1c01136b12",
+          "text": "Although my kindergarten experience feels like a century ago, the lessons I learned will stick in my mind forever.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 105
+          },
+          "parts": [
+            [
+              89,
+              97
+            ],
+            [
+              101,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              97
+            ],
+            [
+              101,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stick-in-ones-mind#e-7268ccd52b387ffc",
+          "text": "I found myself grinning, and the happy moment stuck in my mind.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 62
+          },
+          "parts": [
+            [
+              46,
+              54
+            ],
+            [
+              58,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              54
+            ],
+            [
+              58,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

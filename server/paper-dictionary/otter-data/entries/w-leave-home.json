@@ -1,0 +1,247 @@
+{
+  "entryId": "w:leave-home",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "leaving home"
+  ],
+  "pattern": {
+    "tokens": [
+      "leave",
+      "home"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "leave",
+        "home"
+      ],
+      [
+        "leaving",
+        "home"
+      ],
+      [
+        "leaves",
+        "home"
+      ],
+      [
+        "left",
+        "home"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "left home",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "leave home",
+  "senses": [
+    {
+      "senseId": "w:leave-home#s1",
+      "pos": "短语",
+      "glossZh": "离开父母家，独立生活",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-home#e-a14b993abe360e7c",
+          "text": "With the young unable to afford to leave home and the old at risk of isolation(孤独), more families are choosing to live together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          },
+          "parts": [
+            [
+              35,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-home#e-058bc8eda311f45a",
+          "text": "As soon as she graduated from high school she left home to live on Catalina Island off the Californian coast, away from her parents, where she enjoyed a life of sailing and off-road biking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:leave-home#s2",
+      "pos": "短语",
+      "glossZh": "从家里出门",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:leave-home#e-89695c0769300899",
+          "text": "Paragraph 1: Early the next morning, John secretly left home with the money.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          },
+          "parts": [
+            [
+              51,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-home#e-cc9d814918a77595",
+          "text": "Be sure to have a full breakfast before leaving home to fuel your morning.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 52
+          },
+          "parts": [
+            [
+              40,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:leave-home#e-4c7e9eb8478c9b59",
+          "text": "They left home early in the morning and came back late at night.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          },
+          "parts": [
+            [
+              5,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -59,8 +59,8 @@
     "mock": 20
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 19
+    "gaokao": 2,
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -212,41 +212,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:nose#s5",
-      "pos": "短语",
-      "glossZh": "摆出傲慢的样子",
-      "pronunciationId": "w:nose#p-main",
-      "note": "nose in the air。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:nose#e-1585038fd49fe98e",
-          "text": "nose in the air",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:cloze",
-            "locator": {
-              "question": 57,
-              "questionId": "question:paper-gaokao-2021-national-a:57",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -255,6 +220,11 @@
       "reason": "局限于具体语境的转义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:nose-in-the-air"
+  ]
 }

@@ -1,0 +1,113 @@
+{
+  "entryId": "w:make-an-effort",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "make",
+      "an",
+      "effort"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "an",
+        "effort"
+      ],
+      [
+        "made",
+        "an",
+        "effort"
+      ],
+      [
+        "makes",
+        "an",
+        "effort"
+      ],
+      [
+        "making",
+        "an",
+        "effort"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made an effort",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make an effort",
+  "senses": [
+    {
+      "senseId": "w:make-an-effort#s1",
+      "pos": "短语",
+      "glossZh": "努力；尽力去做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-an-effort#e-730a2908a4f5aa23",
+          "text": "It wasn’t until my 50s that I made an effort to understand Cage.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 44
+          },
+          "parts": [
+            [
+              30,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              44
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make an effort to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -35,8 +35,8 @@
     "mock": 122
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 122
+    "gaokao": 1,
+    "mock": 7
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 114
       },
       "folded": false,
       "examples": [
@@ -111,41 +111,48 @@
       ]
     },
     {
-      "senseId": "w:anything#s2",
-      "pos": "短语",
-      "glossZh": "决不；一点也不",
+      "senseId": "w:anything#s3",
+      "pos": "adv.",
+      "glossZh": "丝毫；在任何程度上（anything like）",
       "pronunciationId": "w:anything#p-main",
-      "note": "anything but。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:anything#e-9eaa6d4128e5afad",
-          "text": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+          "exampleId": "w:anything#e-0a2d52ab68c040e0",
+          "text": "We disagreed on which boxes to use, struggled to attach parts, and couldn’t make our sculpture look anything like my picture.",
           "source": {
-            "paperId": "paper-gaokao-2025-eight-provinces-jan",
-            "paperTitle": "2025年高考综合改革适应性演练英语",
-            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
-              "sentence": 5
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:writing-continuation:6",
+              "sentence": 2
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 61,
-            "end": 69
+            "start": 100,
+            "end": 108
           }
         }
       ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:anything-but",
+    "w:anything-else",
+    "w:if-anything",
+    "w:or-anything"
+  ]
 }

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:in-progress",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "progress"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "progress"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in progress",
+  "senses": [
+    {
+      "senseId": "w:in-progress#s1",
+      "pos": "短语",
+      "glossZh": "正在进行中",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:progress#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-progress#e-28fda9a90f31e247",
+          "text": "Consider advocating for a solution that has been effective elsewhere or is already in progress.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 94
+          },
+          "parts": [
+            [
+              83,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-progress#e-4e60f44a2226c232",
+          "text": "Road work is in progress.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 24
+          },
+          "parts": [
+            [
+              13,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,104 @@
+{
+  "entryId": "w:make-news",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making news"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "news"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "news"
+      ],
+      [
+        "making",
+        "news"
+      ],
+      [
+        "made",
+        "news"
+      ],
+      [
+        "makes",
+        "news"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make news",
+  "senses": [
+    {
+      "senseId": "w:make-news#s1",
+      "pos": "短语",
+      "glossZh": "成为新闻；受到媒体报道",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-news#e-1e627177ded68df8",
+          "text": "As the poor health of Europe’s rivers and streams continues to make news, communities are turning towards natural solutions to restore their rivers.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

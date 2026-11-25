@@ -1,0 +1,122 @@
+{
+  "entryId": "w:call-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "calls to"
+  ],
+  "pattern": {
+    "tokens": [
+      "call",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "call",
+        "to"
+      ],
+      [
+        "calls",
+        "to"
+      ],
+      [
+        "called",
+        "to"
+      ],
+      [
+        "calling",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "called to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call to sb",
+  "senses": [
+    {
+      "senseId": "w:call-to#s1",
+      "pos": "短语",
+      "glossZh": "向某人呼喊",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-to#e-08a3aa42482aeef2",
+          "text": "“Package!” a man called to me through the window, placing a box on the doorstep.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:call-to#s2",
+      "pos": "短语",
+      "glossZh": "（事物仿佛在召唤）强烈吸引某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

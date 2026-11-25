@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 130
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 127
       },
       "folded": false,
       "examples": [
@@ -116,34 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:toy#s2",
-      "pos": "短语",
-      "glossZh": "随意摆弄",
-      "pronunciationId": "w:toy#p-main",
-      "note": "toy with。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:toy#s3",
-      "pos": "短语",
-      "glossZh": "并不认真地考虑",
-      "pronunciationId": "w:toy#p-main",
-      "note": "toy with。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -152,6 +124,11 @@
       "reason": "罕用义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:toy-with"
+  ]
 }

@@ -1,0 +1,68 @@
+{
+  "entryId": "w:jog-ones-memory",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "jog sb’s memory"
+  ],
+  "pattern": {
+    "tokens": [
+      "jog",
+      {
+        "slot": "one's"
+      },
+      "memory"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jog",
+        {
+          "slot": "one's"
+        },
+        "memory"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jog one's memory",
+  "senses": [
+    {
+      "senseId": "w:jog-ones-memory#s1",
+      "pos": "短语",
+      "glossZh": "提醒某人想起某事；唤起某人的记忆",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:jog#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

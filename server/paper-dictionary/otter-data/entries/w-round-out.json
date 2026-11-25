@@ -1,0 +1,122 @@
+{
+  "entryId": "w:round-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "round",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "round",
+        "out"
+      ],
+      [
+        "rounded",
+        "out"
+      ],
+      [
+        "rounding",
+        "out"
+      ],
+      [
+        "rounds",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "rounding out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "round out",
+  "senses": [
+    {
+      "senseId": "w:round-out#s1",
+      "pos": "短语",
+      "glossZh": "补充所缺的部分，使整体更完整",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:round#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:round-out#e-8c05870069a340ce",
+          "text": "The arugula (芝麻菜)was to make a nice green salad, rounding out a roast chicken dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 61
+          },
+          "parts": [
+            [
+              49,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:round-out#s2",
+      "pos": "短语",
+      "glossZh": "变得丰满；变得圆润",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

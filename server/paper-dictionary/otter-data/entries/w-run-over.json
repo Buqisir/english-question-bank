@@ -1,0 +1,195 @@
+{
+  "entryId": "w:run-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran over"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "over"
+      ],
+      [
+        "ran",
+        "over"
+      ],
+      [
+        "running",
+        "over"
+      ],
+      [
+        "runs",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "run over",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run (sb/sth) over",
+  "senses": [
+    {
+      "senseId": "w:run-over#s1",
+      "pos": "短语",
+      "glossZh": "（车辆）碾过（人或物）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:run#s22"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:run-over#e-f190ee911ff22d1f",
+          "text": "The case fell to the road, unfortunately run over by a passing car.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 49
+          },
+          "parts": [
+            [
+              41,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-over#s2",
+      "pos": "短语",
+      "glossZh": "超时；超过预定时长",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-over#e-0646ac0fa457c0e5",
+          "text": "I practiced my explanations out loud, timing myself to be sure I wouldn’t run over.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 82
+          },
+          "parts": [
+            [
+              74,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              82
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:run-over#s3",
+      "pos": "短语",
+      "glossZh": "快速看一遍；简要讲一遍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-over#s4",
+      "pos": "短语",
+      "glossZh": "快速复习或排练一遍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:run-over#s5",
+      "pos": "短语",
+      "glossZh": "（液体）溢出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

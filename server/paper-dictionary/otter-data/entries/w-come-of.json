@@ -1,0 +1,73 @@
+{
+  "entryId": "w:come-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "coming of"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "of"
+      ],
+      [
+        "coming",
+        "of"
+      ],
+      [
+        "came",
+        "of"
+      ],
+      [
+        "comes",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come of sth",
+  "senses": [
+    {
+      "senseId": "w:come-of#s1",
+      "pos": "短语",
+      "glossZh": "由……产生；是……的结果",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "What came of it? 用来问事情最后有什么结果。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

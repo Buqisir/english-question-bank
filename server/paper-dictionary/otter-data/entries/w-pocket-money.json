@@ -1,0 +1,154 @@
+{
+  "entryId": "w:pocket-money",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pocket",
+      "money"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pocket",
+        "money"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pocket money",
+  "senses": [
+    {
+      "senseId": "w:pocket-money#s1",
+      "pos": "短语",
+      "glossZh": "零花钱",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pocket#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pocket-money#e-16b67edc47a82663",
+          "text": "A day’s work was rewarded with £ 5 in pocket money.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 50
+          },
+          "parts": [
+            [
+              38,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pocket-money#e-71c68651f9e213da",
+          "text": "A month later, I saved up my pocket money and bought a tin of authentic UK shortbread as a gift.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:pocket-money#e-627ac3bd5f04997d",
+          "text": "How did the boy get the pocket money?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

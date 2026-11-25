@@ -1,0 +1,177 @@
+{
+  "entryId": "w:drown-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drown",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drown",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drowned out",
+      "tags": []
+    },
+    {
+      "form": "drowning out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drown out sth",
+  "senses": [
+    {
+      "senseId": "w:drown-out#s1",
+      "pos": "短语",
+      "glossZh": "盖过（声音）；使听不见",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drown#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drown-out#e-6fa882242c68d614",
+          "text": "For example, urban birds may sing louder, start singing earlier in the morning or at higher frequencies to avoid getting drowned out by low-frequency traffic noise.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 132
+          },
+          "parts": [
+            [
+              121,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              121,
+              132
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:drown-out#s2",
+      "pos": "短语",
+      "glossZh": "压过别人的意见或掩盖某种感受，使其难以被注意到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:drown-out#e-d826fe20d40d3245",
+          "text": "The joy of the game was slipping away, drowned out by the constant noise of his friends.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 50
+          },
+          "parts": [
+            [
+              39,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drown-out#e-271b07ffb95e1b95",
+          "text": "Most offensive posts come from a small group of highly active users, whose outsized posts shape public beliefs, creating the “majority illusion” that makes this minority seem like the norm, drowning out the silent majority.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 190,
+            "end": 202
+          },
+          "parts": [
+            [
+              190,
+              202
+            ]
+          ],
+          "highlightRanges": [
+            [
+              190,
+              202
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

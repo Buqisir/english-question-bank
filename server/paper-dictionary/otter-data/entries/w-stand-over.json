@@ -1,0 +1,70 @@
+{
+  "entryId": "w:stand-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "over"
+      ],
+      [
+        "standing",
+        "over"
+      ],
+      [
+        "stands",
+        "over"
+      ],
+      [
+        "stood",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand over sb",
+  "senses": [
+    {
+      "senseId": "w:stand-over#s1",
+      "pos": "短语",
+      "glossZh": "站在某人旁边盯着对方做事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:most-of-the-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "most",
+      "of",
+      "the",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "most",
+        "of",
+        "the",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "most of the time",
+  "senses": [
+    {
+      "senseId": "w:most-of-the-time#s1",
+      "pos": "短语",
+      "glossZh": "大多数时候；通常",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:most-of-the-time#e-2046afbee5b50f21",
+          "text": "However, because they are usually writing to family and friends, they use informal language most of the time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 108
+          },
+          "parts": [
+            [
+              92,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:most-of-the-time#e-293d2b97a3cc8204",
+          "text": "If you want to tell the history of the whole world, a history that does not privilege one part of humanity, you cannot do it through texts alone, because only some of the world has ever had texts, while most of the world, for most of the time, has not.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 226,
+            "end": 242
+          },
+          "parts": [
+            [
+              226,
+              242
+            ]
+          ],
+          "highlightRanges": [
+            [
+              226,
+              242
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:most-of-the-time#e-038ed3dbb2ab0d85",
+          "text": "These dogs picked a new toy right most of the time.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 50
+          },
+          "parts": [
+            [
+              34,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              50
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

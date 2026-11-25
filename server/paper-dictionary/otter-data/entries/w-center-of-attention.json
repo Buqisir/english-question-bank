@@ -1,0 +1,129 @@
+{
+  "entryId": "w:center-of-attention",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "center",
+      "of",
+      "attention"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "center",
+        "of",
+        "attention"
+      ],
+      [
+        "centers",
+        "of",
+        "attention"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "center of attention",
+  "senses": [
+    {
+      "senseId": "w:center-of-attention#s1",
+      "pos": "短语",
+      "glossZh": "众人关注的焦点",
+      "note": "常用 be the center of attention。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:center-of-attention#e-bd498d3e228999dd",
+          "text": "I was always the center of attention, and I loved that feeling.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 36
+          },
+          "parts": [
+            [
+              17,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:center-of-attention#e-039e781684e5aacf",
+          "text": "D makes you feel like the center of attention one moment, and unintentionally disposable the next, because you know, they have a lot going on.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 45
+          },
+          "parts": [
+            [
+              26,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              45
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

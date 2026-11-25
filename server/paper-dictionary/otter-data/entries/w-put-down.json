@@ -1,0 +1,442 @@
+{
+  "entryId": "w:put-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting down"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "down"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "putting",
+        "down"
+      ],
+      [
+        "puts",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:put-down#s1",
+      "pos": "短语",
+      "glossZh": "放下手里拿着的东西",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-down#e-b84c586641e4b62d",
+          "text": "After a heated discussion that lasted for what seemed like a century, Gunter put his phone down and started the car.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 95
+          },
+          "parts": [
+            [
+              77,
+              80
+            ],
+            [
+              91,
+              95
+            ]
+          ],
+          "highlightRanges": [
+            [
+              77,
+              80
+            ],
+            [
+              91,
+              95
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-down#e-ac1fdde67031318a",
+          "text": "When you put them down between bites, always put them down together so they are parallel with the edge of the table in front of you.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 22
+          },
+          "parts": [
+            [
+              9,
+              12
+            ],
+            [
+              18,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              12
+            ],
+            [
+              18,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-down#e-8149a0888f7ff5b6",
+          "text": "“Hey, kid, put that down.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 24
+          },
+          "parts": [
+            [
+              11,
+              14
+            ],
+            [
+              20,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              14
+            ],
+            [
+              20,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 5,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:put-down#s2",
+      "pos": "短语",
+      "glossZh": "铺设（地板等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-down#e-3f2739b98dd23533",
+          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 93
+          },
+          "parts": [
+            [
+              81,
+              93
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              93
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s4",
+      "pos": "短语",
+      "glossZh": "写下；记下",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-down#e-bfc1e7726daa216d",
+          "text": "This meant a daily routine of putting down 500 words.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 42
+          },
+          "parts": [
+            [
+              30,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-down#e-51a51d93cdd2a896",
+          "text": "Put down the writing goal.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:put-down#s3",
+      "pos": "短语",
+      "glossZh": "贬低；挖苦",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s5",
+      "pos": "短语",
+      "glossZh": "支付定金或首付款",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s6",
+      "pos": "短语",
+      "glossZh": "镇压（叛乱、骚乱等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s7",
+      "pos": "短语",
+      "glossZh": "给动物实施安乐死",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s8",
+      "pos": "短语",
+      "glossZh": "把某事归因于……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "put sth down to sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s9",
+      "pos": "短语",
+      "glossZh": "把某人登记为参加者；报名",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "put sb down for sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s10",
+      "pos": "短语",
+      "glossZh": "把婴儿放到床上睡觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s11",
+      "pos": "短语",
+      "glossZh": "（飞机）着陆；使（飞机）降落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-down#s12",
+      "pos": "短语",
+      "glossZh": "在某处让乘客下车",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

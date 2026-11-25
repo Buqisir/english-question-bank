@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 3
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -129,40 +129,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:rabbit#s3",
-      "pos": "短语",
-      "glossZh": "越探究越难脱身的事",
-      "pronunciationId": "w:rabbit#p-main",
-      "note": "rabbit hole。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rabbit#e-8f2727be8f8e5733",
-          "text": "After a recent negative car rental experience, I found myself going down a familiar rabbit hole, scrolling (滚屏) through online reviews of the company.",
-          "source": {
-            "paperId": "paper-mock-shandong-jiuwu-2026-final",
-            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
-            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 84,
-            "end": 90
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -175,6 +141,12 @@
       "reason": "通常拼作 rarebit"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:go-down-a-rabbit-hole",
+    "w:rabbit-hole"
+  ]
 }

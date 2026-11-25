@@ -1,0 +1,380 @@
+{
+  "entryId": "w:take-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "takes out",
+    "taking out",
+    "took out"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "out"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "takes",
+        "out"
+      ],
+      [
+        "taking",
+        "out"
+      ],
+      [
+        "took",
+        "out"
+      ],
+      [
+        "taken",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take out",
+      "tags": []
+    },
+    {
+      "form": "taken out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) out",
+  "senses": [
+    {
+      "senseId": "w:take-out#s1",
+      "pos": "短语",
+      "glossZh": "拿出；取出；移走",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s50"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-out#e-316edb33c543fc67",
+          "text": "Unfortunately we forgot to weigh them before taking out their insides, but I was determined to prove my point.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 55
+          },
+          "parts": [
+            [
+              45,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-out#e-12c888c63d6befed",
+          "text": "So, he’d sigh and quietly take out the garbage, thinking it was a small price for such a good friend.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-out#e-24f76f6ae5aa6a97",
+          "text": "I put on my headphones and listen to a podcast (播客) or take out a book while I’m on the train.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          },
+          "parts": [
+            [
+              55,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:take-out#s2",
+      "pos": "短语",
+      "glossZh": "（从图书馆）借出；借阅",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s52"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-out#e-6201b961a6c8ac60",
+          "text": "You could take out two books at a time and two only.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 18
+          },
+          "parts": [
+            [
+              10,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              18
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-out#e-ee88b85fd917cfcb",
+          "text": "You could not take back a book to the library on the same day you’d taken it out; it made no difference to her that you’d read every word in it and needed another to start.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 80
+          },
+          "parts": [
+            [
+              68,
+              73
+            ],
+            [
+              77,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              73
+            ],
+            [
+              77,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-out#s3",
+      "pos": "短语",
+      "glossZh": "办理并取得（贷款、保险等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-out#e-0ad8cadab41f8be1",
+          "text": "To take out medical insurance.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-out#e-ea48ee7b02750a4b",
+          "text": "By taking out a loan.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:take-out#s4",
+      "pos": "短语",
+      "glossZh": "带某人外出吃饭或娱乐；带某人出去约会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-out#s5",
+      "pos": "短语",
+      "glossZh": "击倒；使出局；摧毁",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -95,8 +95,8 @@
     "mock": 1174
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 1172
+    "gaokao": 9,
+    "mock": 976
   },
   "senses": [
     {
@@ -107,7 +107,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 83,
-        "mock": 0
+        "mock": 74
       },
       "folded": false,
       "examples": [
@@ -178,7 +178,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -252,7 +252,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -323,7 +323,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -394,7 +394,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -465,7 +465,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 24,
-        "mock": 0
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -537,7 +537,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -675,7 +675,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -701,75 +701,6 @@
       ]
     },
     {
-      "senseId": "w:see#s11",
-      "pos": "短语",
-      "glossZh": "给……送行",
-      "pronunciationId": "w:see#p-main",
-      "note": "see sb off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:see#e-7a6423f412e06fff",
-          "text": "Seeing a friend off.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:see#s12",
-      "pos": "短语",
-      "glossZh": "见到阳光",
-      "pronunciationId": "w:see#p-main",
-      "note": "see daylight。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:see#e-d2fc88bd5065302a",
-          "text": "One August afternoon, I sat in my kitchen staring at a glass vase that hadn’t seen daylight since my wedding.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-i:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 82
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:see#s13",
       "pos": "n.",
       "glossZh": "主教教区",
@@ -789,6 +720,24 @@
       "reason": "独立同形词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:i-know-it-when-i-see-it",
+    "w:i-see",
+    "w:see-about",
+    "w:see-beyond",
+    "w:see-daylight",
+    "w:see-sb-off",
+    "w:see-the-light",
+    "w:see-the-light-of-day",
+    "w:see-the-world",
+    "w:see-things",
+    "w:see-through",
+    "w:see-to",
+    "w:see-you",
+    "w:you-see"
+  ]
 }

@@ -118,6 +118,16 @@
       "reason": "同形缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:every-dog-has-its-day",
+    "w:judge-a-book-by-its-cover",
+    "w:let-nature-take-its-course",
+    "w:life-of-its-own",
+    "w:of-its-kind",
+    "w:stop-in-its-tracks",
+    "w:take-its-course",
+    "w:turn-on-its-head"
+  ]
 }

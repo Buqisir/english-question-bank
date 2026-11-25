@@ -1,0 +1,159 @@
+{
+  "entryId": "w:one-step-at-a-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "one",
+      "step",
+      "at",
+      "a",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "one",
+        "step",
+        "at",
+        "a",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "one step at a time",
+  "senses": [
+    {
+      "senseId": "w:one-step-at-a-time#s1",
+      "pos": "短语",
+      "glossZh": "一步一步地；循序渐进地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:one-step-at-a-time#e-be02b963e0d14688",
+          "text": "You can build media literacy into what you’re already doing, one step at a time.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 79
+          },
+          "parts": [
+            [
+              61,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              79
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-step-at-a-time#e-17223f4eb62a0288",
+          "text": "Our work shows that dealing with difficult environment can be as simple as taking it one step at a time – provided you have enough legs.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 103
+          },
+          "parts": [
+            [
+              85,
+              103
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              103
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:one-step-at-a-time#e-6f77564c0af5bf9e",
+          "text": "One step at a time is good enough.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hubei-wuchang-2026-05:30#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 18
+          },
+          "parts": [
+            [
+              0,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,97 @@
+{
+  "entryId": "w:kick-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "kick",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "kick",
+        "around"
+      ],
+      [
+        "kicked",
+        "around"
+      ],
+      [
+        "kicking",
+        "around"
+      ],
+      [
+        "kicks",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "kick (sb/sth) around",
+  "senses": [
+    {
+      "senseId": "w:kick-around#s1",
+      "pos": "短语",
+      "glossZh": "随意讨论；交换看法",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 ideas、plans 等作宾语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-around#s2",
+      "pos": "短语",
+      "glossZh": "欺负；粗暴对待",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:kick-around#s3",
+      "pos": "短语",
+      "glossZh": "闲置在某处；随处搁着",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

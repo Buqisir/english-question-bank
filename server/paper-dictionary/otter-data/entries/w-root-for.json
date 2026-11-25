@@ -1,0 +1,60 @@
+{
+  "entryId": "w:root-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "root",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "root",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "root for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:root-for#s1",
+      "pos": "短语",
+      "glossZh": "为某人或某队加油；盼望其成功",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:root#s11"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

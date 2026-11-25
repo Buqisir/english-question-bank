@@ -1,0 +1,76 @@
+{
+  "entryId": "w:take-note",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "took note"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "note"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "note"
+      ],
+      [
+        "took",
+        "note"
+      ],
+      [
+        "taken",
+        "note"
+      ],
+      [
+        "takes",
+        "note"
+      ],
+      [
+        "taking",
+        "note"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take note",
+  "senses": [
+    {
+      "senseId": "w:take-note#s1",
+      "pos": "短语",
+      "glossZh": "注意；留心",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,113 @@
+{
+  "entryId": "w:jump-into-action",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "jump",
+      "into",
+      "action"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "jump",
+        "into",
+        "action"
+      ],
+      [
+        "jumped",
+        "into",
+        "action"
+      ],
+      [
+        "jumping",
+        "into",
+        "action"
+      ],
+      [
+        "jumps",
+        "into",
+        "action"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "jumped into action",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "jump into action",
+  "senses": [
+    {
+      "senseId": "w:jump-into-action#s1",
+      "pos": "短语",
+      "glossZh": "立即行动起来；迅速采取行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:jump-into-action#e-54b0fa7fb6422a6b",
+          "text": "Many library regulars jumped into action.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shanxi-taiyuan-2026-03-first:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 40
+          },
+          "parts": [
+            [
+              22,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,154 @@
+{
+  "entryId": "w:not-until",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "not until"
+  ],
+  "pattern": {
+    "tokens": [
+      "not",
+      {
+        "slot": "…"
+      },
+      "until",
+      {
+        "slot": "…"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        {
+          "slot": "…"
+        },
+        "until",
+        {
+          "slot": "…"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not … until …",
+  "senses": [
+    {
+      "senseId": "w:not-until#s1",
+      "pos": "短语",
+      "glossZh": "直到……才",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:until#s2",
+        "w:not#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-until#e-28d2003da5e2492e",
+          "text": "The church is expected to reopen at its new location at the end of next year, but the city’s relocation is not scheduled to finish until 2035.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 136
+          },
+          "parts": [
+            [
+              107,
+              110
+            ],
+            [
+              131,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              107,
+              110
+            ],
+            [
+              131,
+              136
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:not-until#e-1011cb590470179d",
+          "text": "While this dark liquid has been studied for use in industries like paint and medicine, its potential for preserving food had not been fully explored until now.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 154
+          },
+          "parts": [
+            [
+              125,
+              128
+            ],
+            [
+              149,
+              154
+            ]
+          ],
+          "highlightRanges": [
+            [
+              125,
+              128
+            ],
+            [
+              149,
+              154
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

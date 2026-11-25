@@ -51,7 +51,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 243
+    "mock": 43
   },
   "senses": [
     {
@@ -62,7 +62,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 196
       },
       "folded": false,
       "examples": [
@@ -131,12 +131,12 @@
       "glossZh": "瓷器；瓷制餐具",
       "pronunciationId": "w:china#p-main",
       "note": "这一义写作小写 china。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 4
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -146,6 +146,6 @@
       "reason": "专名、专称或旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

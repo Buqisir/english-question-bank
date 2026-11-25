@@ -1,0 +1,156 @@
+{
+  "entryId": "w:take-your-time",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "your",
+      "time"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "your",
+        "time"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take your time",
+  "senses": [
+    {
+      "senseId": "w:take-your-time#s1",
+      "pos": "短语",
+      "glossZh": "别着急；慢慢来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s58"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-your-time#e-7c287029cfff467e",
+          "text": "Take your time.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-your-time#e-a5656eb23d9dc9ae",
+          "text": "The mother responded, “Take your time; it’s warm here.” She turned and guided her children into the waiting room.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:9",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 37
+          },
+          "parts": [
+            [
+              23,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-your-time#e-9ab7beed9aea4f4d",
+          "text": "To avoid this, take your time and concentrate on just one museum per visit, allowing for a more relaxed and thoughtful experience.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 29
+          },
+          "parts": [
+            [
+              15,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

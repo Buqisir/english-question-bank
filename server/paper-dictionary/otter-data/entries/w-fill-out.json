@@ -1,0 +1,201 @@
+{
+  "entryId": "w:fill-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fill",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "fill",
+        "out"
+      ],
+      [
+        "fill",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "filled",
+        "out"
+      ],
+      [
+        "filling",
+        "out"
+      ],
+      [
+        "fills",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "fill out",
+      "tags": []
+    },
+    {
+      "form": "filled out",
+      "tags": []
+    },
+    {
+      "form": "filling out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fill (sth) out",
+  "senses": [
+    {
+      "senseId": "w:fill-out#s1",
+      "pos": "短语",
+      "glossZh": "填写（表格、申请表等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fill#s5",
+        "w:out#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fill-out#e-b45137a4acd5b96e",
+          "text": "Register online or fill out a Group Play Registration Form with multiple date and start time options.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          },
+          "parts": [
+            [
+              19,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fill-out#e-800ca11e58ce2591",
+          "text": "of Available Projects and fill out the Group Project Request Form.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fill-out#e-d747493ffb2435d3",
+          "text": "Fill out a form.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:fill-out#s2",
+      "pos": "短语",
+      "glossZh": "（身形）变得丰满",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

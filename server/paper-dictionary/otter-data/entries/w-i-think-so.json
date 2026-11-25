@@ -1,0 +1,94 @@
+{
+  "entryId": "w:i-think-so",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I think so"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "think",
+      "so"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "think",
+        "so"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i think so",
+  "senses": [
+    {
+      "senseId": "w:i-think-so#s1",
+      "pos": "短语",
+      "glossZh": "我想是这样；我觉得应该是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-think-so#e-3fe394bef6cf05aa",
+          "text": "“I think so.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 11
+          },
+          "parts": [
+            [
+              1,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

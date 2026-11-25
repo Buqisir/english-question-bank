@@ -1,0 +1,64 @@
+{
+  "entryId": "w:put-the-handbrake-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "the",
+      "handbrake",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "the",
+        "handbrake",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put the handbrake on",
+  "senses": [
+    {
+      "senseId": "w:put-the-handbrake-on#s1",
+      "pos": "短语",
+      "glossZh": "拉起手刹",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:put#s11"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

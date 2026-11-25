@@ -59,8 +59,8 @@
     "mock": 52
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 51
+    "gaokao": 3,
+    "mock": 14
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -311,41 +311,6 @@
       ]
     },
     {
-      "senseId": "w:register#s5",
-      "pos": "短语",
-      "glossZh": "登记处",
-      "pronunciationId": "w:register#p-main",
-      "note": "register office，英国英语。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:register#e-1e3c6720b21db9c0",
-          "text": "In the register office.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:register#s6",
       "pos": "v.",
       "glossZh": "（仪器）显示（读数）",
@@ -363,12 +328,12 @@
       "pos": "v.",
       "glossZh": "注意到；意识到",
       "pronunciationId": "w:register#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -389,12 +354,12 @@
       "pos": "n.",
       "glossZh": "音域",
       "pronunciationId": "w:register#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -408,6 +373,8 @@
       "reason": "乐器术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

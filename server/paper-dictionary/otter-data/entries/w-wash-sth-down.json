@@ -1,0 +1,108 @@
+{
+  "entryId": "w:wash-sth-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wash",
+      {
+        "slot": "sth"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "wash",
+        {
+          "slot": "sth"
+        },
+        "down"
+      ],
+      [
+        "wash",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "washed down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wash sth down",
+  "senses": [
+    {
+      "senseId": "w:wash-sth-down#s1",
+      "pos": "短语",
+      "glossZh": "用饮料送下食物或药物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:wash#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wash-sth-down#e-345bb2cfaa4da610",
+          "text": "He has cereal, bacon, cake and fish and chips for dinner, washed down with a couple of beers.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 69
+          },
+          "parts": [
+            [
+              58,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              58,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "常用 wash sth down with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

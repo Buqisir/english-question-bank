@@ -1,0 +1,166 @@
+{
+  "entryId": "w:whats-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what's",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what's",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what's that",
+  "senses": [
+    {
+      "senseId": "w:whats-that#s1",
+      "pos": "短语",
+      "glossZh": "那是什么？",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:whats-that#e-4509068da517d64a",
+          "text": "“What’s that?” they asked.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 12
+          },
+          "parts": [
+            [
+              1,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-that#e-f778355743d48382",
+          "text": "The father leaned forward again, his eyes following the swallow’s figure closely, “What’s that?” This time the son slammed the newspaper shut and his voice rose, “A swallow!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 94
+          },
+          "parts": [
+            [
+              83,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              83,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:whats-that#e-9657328df8003930",
+          "text": "“What’s that in your hand?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 12
+          },
+          "parts": [
+            [
+              1,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              12
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:whats-that#s2",
+      "pos": "短语",
+      "glossZh": "你刚才说什么？",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "没听清时请对方重复。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

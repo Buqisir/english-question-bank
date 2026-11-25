@@ -42,8 +42,8 @@
     "mock": 57
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 56
+    "gaokao": 4,
+    "mock": 5
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -122,12 +122,12 @@
       "pos": "n.",
       "glossZh": "专用场地",
       "pronunciationId": "w:yard#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -138,7 +138,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -162,41 +162,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:yard#s4",
-      "pos": "短语",
-      "glossZh": "庭院旧货出售",
-      "pronunciationId": "w:yard#p-main",
-      "note": "yard sale。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yard#e-76992fa29a4da44a",
-          "text": "She went to a yard sale.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
-            "locator": {
-              "question": 10,
-              "questionId": "question:listening:10",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -209,6 +174,8 @@
       "reason": "专业、历史或俚语用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

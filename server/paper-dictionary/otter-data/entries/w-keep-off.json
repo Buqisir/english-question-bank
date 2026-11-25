@@ -1,0 +1,145 @@
+{
+  "entryId": "w:keep-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping off"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "off"
+      ],
+      [
+        "keeping",
+        "off"
+      ],
+      [
+        "keeps",
+        "off"
+      ],
+      [
+        "kept",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep (sb/sth) off sth",
+  "senses": [
+    {
+      "senseId": "w:keep-off#s1",
+      "pos": "动词短语",
+      "glossZh": "避开；不踏上或不接触……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-off#e-cc40658d0f93bb2a",
+          "text": "keep off",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "question": 54,
+              "questionId": "question:paper-gaokao-2020-i:54#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-off#e-ab0f072d6badd70e",
+          "text": "Keeping off.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        }
+      ],
+      "note": "keep sb/sth off sth 表示让某人或某物远离。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

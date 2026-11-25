@@ -1,0 +1,143 @@
+{
+  "entryId": "w:break-the-cycle",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "break",
+      "the",
+      "cycle"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "the",
+        "cycle"
+      ],
+      [
+        "breaking",
+        "the",
+        "cycle"
+      ],
+      [
+        "breaks",
+        "the",
+        "cycle"
+      ],
+      [
+        "broke",
+        "the",
+        "cycle"
+      ],
+      [
+        "broken",
+        "the",
+        "cycle"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break the cycle",
+  "senses": [
+    {
+      "senseId": "w:break-the-cycle#s1",
+      "pos": "短语",
+      "glossZh": "打破不良循环；阻止问题反复发生",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-the-cycle#e-c135db73155c7271",
+          "text": "Yet focusing on energy alone cannot break the cycle of increasing environmental and operational pressures.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 51
+          },
+          "parts": [
+            [
+              36,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-the-cycle#e-c9dcfa18d53c3d6f",
+          "text": "Yet focusing on energy alone cannot break the cycle of compounding environmental and operational pressures.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 51
+          },
+          "parts": [
+            [
+              36,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              51
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

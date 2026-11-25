@@ -1,0 +1,92 @@
+{
+  "entryId": "w:at-length",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "length"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "length"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at length",
+  "senses": [
+    {
+      "senseId": "w:at-length#s1",
+      "pos": "短语",
+      "glossZh": "详尽地；长篇地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:length#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-length#e-055c484c0bd5e7ab",
+          "text": "When asked for a reasoning or answer to a question, do you find yourself needing to explain your thoughts at length, going into too much detail to ensure that your points are made?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 115
+          },
+          "parts": [
+            [
+              106,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

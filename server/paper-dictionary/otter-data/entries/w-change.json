@@ -62,8 +62,8 @@
     "mock": 1267
   },
   "unassignedCounts": {
-    "gaokao": 12,
-    "mock": 1267
+    "gaokao": 21,
+    "mock": 1083
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 43,
-        "mock": 0
+        "mock": 90
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 70
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -315,122 +315,16 @@
       ]
     },
     {
-      "senseId": "w:change#s5",
-      "pos": "短语",
-      "glossZh": "气候变化",
-      "pronunciationId": "w:change#p-main",
-      "note": "climate change",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:change#e-00be2c34152aaac2",
-          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 109,
-            "end": 115
-          }
-        },
-        {
-          "exampleId": "w:change#e-9807a2e7f72ab3bc",
-          "text": "Nobody is better able to understand the impact of desertification and climate change than somebody who is living with no access to water.”",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 78,
-            "end": 84
-          }
-        },
-        {
-          "exampleId": "w:change#e-11e564317c334193",
-          "text": "Carbon removal is crucial for fighting climate change.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 53
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:change#s6",
-      "pos": "短语",
-      "glossZh": "改变主意",
-      "pronunciationId": "w:change#p-main",
-      "note": "change one's mind",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:change#e-d5a067b20b13340e",
-          "text": "Did they follow those least willing to change their minds?",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 45
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:change#s7",
       "pos": "n.",
       "glossZh": "零钱；找零",
       "pronunciationId": "w:change#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -453,6 +347,16 @@
       "reason": "运动、音乐专门用法或旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-change-is-as-good-as-a-rest",
+    "w:and-change",
+    "w:change-ones-mind",
+    "w:change-over",
+    "w:change-up",
+    "w:small-change"
+  ]
 }

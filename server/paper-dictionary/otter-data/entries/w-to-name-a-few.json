@@ -1,0 +1,94 @@
+{
+  "entryId": "w:to-name-a-few",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "to",
+      "name",
+      "a",
+      "few"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "name",
+        "a",
+        "few"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to name a few",
+  "senses": [
+    {
+      "senseId": "w:to-name-a-few#s1",
+      "pos": "短语",
+      "glossZh": "仅举几例；这里只列举几个",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:to-name-a-few#e-f02390edd54db50e",
+          "text": "In this course we will analyze many interesting aspects of the sports industry: sports leagues, ticket pricing, salary negotiations, discrimination, and NCAA policies to name a few.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 167,
+            "end": 180
+          },
+          "parts": [
+            [
+              167,
+              180
+            ]
+          ],
+          "highlightRanges": [
+            [
+              167,
+              180
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

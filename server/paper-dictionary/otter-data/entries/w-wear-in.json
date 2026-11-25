@@ -1,0 +1,112 @@
+{
+  "entryId": "w:wear-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "wear",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "wear",
+        "in"
+      ],
+      [
+        "wearing",
+        "in"
+      ],
+      [
+        "wears",
+        "in"
+      ],
+      [
+        "wore",
+        "in"
+      ],
+      [
+        "worn",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "worn in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wear sth in",
+  "senses": [
+    {
+      "senseId": "w:wear-in#s1",
+      "pos": "短语",
+      "glossZh": "把（新鞋等）穿到合脚",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:wear-in#e-26fd9464827e43a4",
+          "text": "Everyone else in the group seemed so prepared – their boots worn in, their breathing calm.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          },
+          "parts": [
+            [
+              60,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ]
+          ]
+        }
+      ],
+      "note": "也常用过去分词 worn in，表示已穿得合脚。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

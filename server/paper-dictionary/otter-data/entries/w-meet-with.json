@@ -1,0 +1,251 @@
+{
+  "entryId": "w:meet-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "meeting with"
+  ],
+  "pattern": {
+    "tokens": [
+      "meet",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "meet",
+        "with"
+      ],
+      [
+        "meeting",
+        "with"
+      ],
+      [
+        "meets",
+        "with"
+      ],
+      [
+        "met",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "met with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "meet with",
+  "senses": [
+    {
+      "senseId": "w:meet-with#s1",
+      "pos": "短语",
+      "glossZh": "与……会面；与……商谈",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:meet-with#e-9c7d4e2ed47d0188",
+          "text": "Students interested in the MESc degrees must meet with a YSE advisor before applying.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 54
+          },
+          "parts": [
+            [
+              45,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              54
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-with#e-5fa5a20004fd7483",
+          "text": "Meet with his teacher.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:meet-with#s2",
+      "pos": "短语",
+      "glossZh": "遭遇（困难等）；得到（某种反应或结果）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:meet#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:meet-with#e-da10026c805ff1fa",
+          "text": "Our next thought, a drink at the hotel bar, was met with another sign: “Closed on Mondays”.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          },
+          "parts": [
+            [
+              48,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-with#e-d7079583bf1c1988",
+          "text": "It could feel small: the same faces in the same places, and where a new café or gallery was often met with doubt.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 106
+          },
+          "parts": [
+            [
+              98,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              106
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meet-with#e-324a19e26cc26940",
+          "text": "I felt like I was pouring years of love into an empty space, my constant efforts met with a peaceful, yet heartbreaking, apathy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-b:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 89
+          },
+          "parts": [
+            [
+              81,
+              89
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              89
+            ]
+          ]
+        }
+      ],
+      "note": "反应义也常用 be met with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

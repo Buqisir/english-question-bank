@@ -1,0 +1,119 @@
+{
+  "entryId": "w:from-the-bottom-of-ones-heart",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "from",
+      "the",
+      "bottom",
+      "of",
+      {
+        "slot": "one's"
+      },
+      "heart"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "from",
+        "the",
+        "bottom",
+        "of",
+        {
+          "slot": "one's"
+        },
+        "heart"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "from the bottom of heart",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "from the bottom of one's heart",
+  "senses": [
+    {
+      "senseId": "w:from-the-bottom-of-ones-heart#s1",
+      "pos": "短语",
+      "glossZh": "打心底里；发自内心",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bottom#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:from-the-bottom-of-ones-heart#e-9d45bfe24ef4ead0",
+          "text": "So, she questioned her parents’ decision from the bottom of her heart",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 69
+          },
+          "parts": [
+            [
+              41,
+              59
+            ],
+            [
+              64,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              59
+            ],
+            [
+              64,
+              69
+            ]
+          ]
+        }
+      ],
+      "note": "常用来表达真诚的感谢、道歉或祝愿。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

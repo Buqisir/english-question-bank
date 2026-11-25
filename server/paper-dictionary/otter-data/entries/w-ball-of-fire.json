@@ -1,0 +1,98 @@
+{
+  "entryId": "w:ball-of-fire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ball",
+      "of",
+      "fire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ball",
+        "of",
+        "fire"
+      ],
+      [
+        "balls",
+        "of",
+        "fire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ball of fire",
+  "senses": [
+    {
+      "senseId": "w:ball-of-fire#s1",
+      "pos": "短语",
+      "glossZh": "精力特别旺盛的人或动物",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ball-of-fire#e-e32765a4b4700986",
+          "text": "There was just one thing I hadn’t counted on: My brother chose to bring his dog Toby, a 50-pound ball of fire.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 109
+          },
+          "parts": [
+            [
+              97,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              109
+            ]
+          ]
+        }
+      ],
+      "note": "形容人时也可含有能干、干劲十足的赞赏意味。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

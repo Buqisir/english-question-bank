@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 18
+    "mock": 6
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -194,7 +194,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -256,59 +256,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:weigh#s4",
-      "pos": "短语",
-      "glossZh": "使感到负担沉重",
-      "pronunciationId": "w:weigh#p-main",
-      "note": "weigh sb down。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:weigh#e-1b95026c643ecbb9",
-          "text": "“But you look like it’s weighing you down.”",
-          "source": {
-            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
-            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
-            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation:7",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 24,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:weigh#e-6696170cc55375fd",
-          "text": "The mismatch can boil down to the fact that we are weighed down by our day-to-day responsibilities, leaving our schedule packed.",
-          "source": {
-            "paperId": "paper-mock-hunan-yali-2026-first",
-            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
-            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 51,
-            "end": 58
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -317,6 +264,11 @@
       "reason": "专名或航海用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:weigh-sb-down"
+  ]
 }

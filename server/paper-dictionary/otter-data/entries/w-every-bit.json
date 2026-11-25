@@ -1,0 +1,91 @@
+{
+  "entryId": "w:every-bit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "bit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "bit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every bit",
+  "senses": [
+    {
+      "senseId": "w:every-bit#s1",
+      "pos": "短语",
+      "glossZh": "完全地；十足地",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:every-bit#e-a1395697a51882dd",
+          "text": "If a friend mentions feeling overwhelmed by daily chores, send a simple message: “I believe in you.” Small gestures can make a big difference, showing care every bit as meaningful as grand support.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 165
+          },
+          "parts": [
+            [
+              156,
+              165
+            ]
+          ],
+          "highlightRanges": [
+            [
+              156,
+              165
+            ]
+          ]
+        }
+      ],
+      "note": "every bit as ... as ... 强调两者程度完全一样。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

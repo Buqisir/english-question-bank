@@ -1,0 +1,61 @@
+{
+  "entryId": "w:shore-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shore",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shore",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shore sth up",
+  "senses": [
+    {
+      "senseId": "w:shore-up#s1",
+      "pos": "短语",
+      "glossZh": "支撑；加固",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shore#s2"
+      ],
+      "examples": [],
+      "note": "可指加固墙体等，也可指巩固信心、稳定经济等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

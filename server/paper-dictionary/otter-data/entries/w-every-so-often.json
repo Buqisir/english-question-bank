@@ -1,0 +1,127 @@
+{
+  "entryId": "w:every-so-often",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "so",
+      "often"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "so",
+        "often"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every so often",
+  "senses": [
+    {
+      "senseId": "w:every-so-often#s1",
+      "pos": "固定短语",
+      "glossZh": "偶尔；时不时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:every#s4",
+        "w:often#s2",
+        "w:so#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:every-so-often#e-4e2c67c7ae3243f3",
+          "text": "I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 37
+          },
+          "parts": [
+            [
+              23,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:every-so-often#e-622580c609d48eba",
+          "text": "But every so often, I meet someone who reminds me of her, and today, you did.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 18
+          },
+          "parts": [
+            [
+              4,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

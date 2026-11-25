@@ -1,0 +1,127 @@
+{
+  "entryId": "w:set-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "on"
+      ],
+      [
+        "sets",
+        "on"
+      ],
+      [
+        "setting",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set on",
+  "senses": [
+    {
+      "senseId": "w:set-on#s3",
+      "pos": "短语",
+      "glossZh": "一心想要；决心做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:set-on#e-03312607b0f1849d",
+          "text": "After college, Smith moved out to California with his eyes set on a bodybuilding career.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          },
+          "parts": [
+            [
+              59,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ]
+          ]
+        }
+      ],
+      "note": "用法为 be set on sth 或 be set on doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:set-on#s1",
+      "pos": "短语",
+      "glossZh": "扑向并攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 set on sb，也见于被动式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:set-on#s2",
+      "pos": "短语",
+      "glossZh": "驱使人或动物去攻击",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用法为 set sb/sth on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

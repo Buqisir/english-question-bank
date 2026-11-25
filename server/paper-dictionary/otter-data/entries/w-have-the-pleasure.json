@@ -1,0 +1,127 @@
+{
+  "entryId": "w:have-the-pleasure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "have",
+      "the",
+      "pleasure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "the",
+        "pleasure"
+      ],
+      [
+        "had",
+        "the",
+        "pleasure"
+      ],
+      [
+        "has",
+        "the",
+        "pleasure"
+      ],
+      [
+        "having",
+        "the",
+        "pleasure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "had the pleasure",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have the pleasure",
+  "senses": [
+    {
+      "senseId": "w:have-the-pleasure#s1",
+      "pos": "短语",
+      "glossZh": "有幸做某事；很高兴有机会做某事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-the-pleasure#e-25934f1b75e757c5",
+          "text": "This weekend I had the pleasure of seeing the Latvian animated film Flow in the theater.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 31
+          },
+          "parts": [
+            [
+              15,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "have the pleasure of doing sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:have-the-pleasure#s2",
+      "pos": "短语",
+      "glossZh": "可否有幸……（礼貌地询问或邀约）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 May I have the pleasure of ...?，如询问姓名或邀请共舞。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,165 @@
+{
+  "entryId": "w:set-about-doing-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      "about",
+      {
+        "slot": "doing"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        "about",
+        {
+          "slot": "doing"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set about",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set about doing sth",
+  "senses": [
+    {
+      "senseId": "w:set-about-doing-sth#s1",
+      "pos": "短语",
+      "glossZh": "着手做某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:about#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-about-doing-sth#e-3da2908feb7fc5f2",
+          "text": "He documented his journey as he set about treating nature as a brand to be marketed to young people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-about-doing-sth#e-8504849937bf1a2f",
+          "text": "We got a business license, set up a booth at the Country Sampler store and set about entering the major craft show that year.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 84
+          },
+          "parts": [
+            [
+              75,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:set-about-doing-sth#e-5cf82af3de6be47b",
+          "text": "Then, in Harry’s tidy little garage, he set about working.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          },
+          "parts": [
+            [
+              40,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

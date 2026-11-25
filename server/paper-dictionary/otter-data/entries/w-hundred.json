@@ -41,8 +41,8 @@
     "mock": 56
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 56
+    "gaokao": 7,
+    "mock": 37
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -116,78 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:hundred#s2",
-      "pos": "短语",
-      "glossZh": "数以百计",
-      "pronunciationId": "w:hundred#p-main",
-      "note": "hundreds of，也可用于 hundreds of thousands。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:hundred#e-0b0d4992c4fa4664",
-          "text": "The Bajau, as these people are known, number in the hundreds of thousands in Indonesia, Malaysia and the Philippines.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 60
-          }
-        },
-        {
-          "exampleId": "w:hundred#e-d233d8667a66c260",
-          "text": "His parents nodded, and they watched as he walked out of sight into the crowds of hundreds of students and parents.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 82,
-            "end": 90
-          }
-        },
-        {
-          "exampleId": "w:hundred#e-caa673065127ff27",
-          "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 19
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -196,6 +124,11 @@
       "reason": "历史或体育专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:one-hundred-percent"
+  ]
 }

@@ -1,0 +1,119 @@
+{
+  "entryId": "w:keep-ones-head-above-water",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keep one’s head above water"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      {
+        "slot": "one's"
+      },
+      "head",
+      "above",
+      "water"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        {
+          "slot": "one's"
+        },
+        "head",
+        "above",
+        "water"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep head above water",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep one's head above water",
+  "senses": [
+    {
+      "senseId": "w:keep-ones-head-above-water#s1",
+      "pos": "习语",
+      "glossZh": "勉强应付困境；勉强维持下去",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:head#s8",
+        "w:keep#s19",
+        "w:water#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-ones-head-above-water#e-6fab347d825bf024",
+          "text": "Eva spent the first week of high school trying to keep her head above water.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 75
+          },
+          "parts": [
+            [
+              50,
+              54
+            ],
+            [
+              59,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              54
+            ],
+            [
+              59,
+              75
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

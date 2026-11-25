@@ -1,0 +1,186 @@
+{
+  "entryId": "w:be-about-to-do",
+  "headword": "be about to do sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "about to",
+    "be about to do sth"
+  ],
+  "pattern": {
+    "tokens": [
+      "be",
+      "about",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "about",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "are about to",
+      "tags": []
+    },
+    {
+      "form": "be about to",
+      "tags": []
+    },
+    {
+      "form": "is about to",
+      "tags": []
+    },
+    {
+      "form": "was about to",
+      "tags": []
+    },
+    {
+      "form": "were about to",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:be-about-to-do#s1",
+      "pos": "短语",
+      "glossZh": "正要；即将",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 26
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:about#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:be-about-to-do#e-4e18a476fb3a159d",
+          "text": "The curtains are about to open, and in a few minutes the action and dialogue will tell you the story.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 25
+          },
+          "parts": [
+            [
+              13,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-about-to-do#e-3d3028c2a096efc8",
+          "text": "Right as I was about to give up, a Mexican family in a small truck pulled over, and the father bounded out.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:be-about-to-do#e-bd0cf423256635b6",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 19
+          },
+          "parts": [
+            [
+              7,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

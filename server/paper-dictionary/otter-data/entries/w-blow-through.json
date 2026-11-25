@@ -1,0 +1,88 @@
+{
+  "entryId": "w:blow-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "blow",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "blow",
+        "through"
+      ],
+      [
+        "blew",
+        "through"
+      ],
+      [
+        "blowing",
+        "through"
+      ],
+      [
+        "blown",
+        "through"
+      ],
+      [
+        "blows",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "blow through",
+  "senses": [
+    {
+      "senseId": "w:blow-through#s1",
+      "pos": "短语",
+      "glossZh": "很快花光钱；迅速耗尽资源",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:blow-through#s2",
+      "pos": "短语",
+      "glossZh": "迅速离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "澳大利亚俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,66 @@
+{
+  "entryId": "w:without-batting-an-eye",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "without",
+      "batting",
+      "an",
+      "eye"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "without",
+        "batting",
+        "an",
+        "eye"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "without batting an eye",
+  "senses": [
+    {
+      "senseId": "w:without-batting-an-eye#s1",
+      "pos": "短语",
+      "glossZh": "眼都不眨一下；丝毫不显得惊讶或慌张",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:bat#s5",
+        "w:eye#s7"
+      ],
+      "examples": [],
+      "note": "英式英语也说 without batting an eyelid。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,207 @@
+{
+  "entryId": "w:open-ones-eyes-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "open one's eyes to",
+    "open sb's eyes to sth",
+    "open sb’s eyes to"
+  ],
+  "pattern": {
+    "tokens": [
+      "open",
+      {
+        "slot": "one's"
+      },
+      "eyes",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "open",
+        {
+          "slot": "one's"
+        },
+        "eyes",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "opened eyes to",
+      "tags": []
+    },
+    {
+      "form": "opening eyes to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "open sb's eyes to sth",
+  "senses": [
+    {
+      "senseId": "w:open-ones-eyes-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "使某人认识到或看清某事",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eye#s5",
+        "w:open#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:open-ones-eyes-to-sth#e-91726750e613dbd2",
+          "text": "It opened her eyes to the real world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:23#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 21
+          },
+          "parts": [
+            [
+              3,
+              9
+            ],
+            [
+              14,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ],
+            [
+              14,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-ones-eyes-to-sth#e-75b40901958b6cea",
+          "text": "Paragraph 2: University was an ocean of new people, new ideas and new life, opening my eyes to a bigger world.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 94
+          },
+          "parts": [
+            [
+              76,
+              83
+            ],
+            [
+              87,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              83
+            ],
+            [
+              87,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:open-ones-eyes-to-sth#e-82c134329775ea08",
+          "text": "Later, tutoring at an Englewood high school opened his eyes to his students’ struggles.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 62
+          },
+          "parts": [
+            [
+              44,
+              50
+            ],
+            [
+              55,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              50
+            ],
+            [
+              55,
+              62
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

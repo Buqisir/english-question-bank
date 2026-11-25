@@ -1,0 +1,84 @@
+{
+  "entryId": "w:chalk-sth-up-to-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "chalk something up to something"
+  ],
+  "pattern": {
+    "tokens": [
+      "chalk",
+      {
+        "slot": "sth"
+      },
+      "up",
+      "to",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "chalk",
+        {
+          "slot": "sth"
+        },
+        "up",
+        "to",
+        {
+          "slot": "sth"
+        }
+      ],
+      [
+        "chalk",
+        "something",
+        "up",
+        "to",
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "chalk sth up to sth",
+  "senses": [
+    {
+      "senseId": "w:chalk-sth-up-to-sth#s1",
+      "pos": "短语",
+      "glossZh": "把……归因于……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:chalk#s4",
+        "w:up#s28"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

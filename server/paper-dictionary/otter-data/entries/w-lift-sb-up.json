@@ -1,0 +1,251 @@
+{
+  "entryId": "w:lift-sb-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lift",
+      {
+        "slot": "sb"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "lift",
+        {
+          "slot": "sb"
+        },
+        "up"
+      ],
+      [
+        "lift",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lift up",
+      "tags": []
+    },
+    {
+      "form": "lifts up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lift sb up",
+  "senses": [
+    {
+      "senseId": "w:lift-sb-up#s1",
+      "pos": "短语",
+      "glossZh": "鼓舞某人；使某人振作",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s89"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:lift-sb-up#e-2a7384f67c0f12ed",
+          "text": "People who support you and lift you up will give you a greater capacity for self-control.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:seven-choices:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          },
+          "parts": [
+            [
+              27,
+              31
+            ],
+            [
+              36,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              31
+            ],
+            [
+              36,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lift-sb-up#e-009db495587bf3e7",
+          "text": "According to a survey, more than two-thirds of U.S. adults say the arts “lift me up beyond everyday experiences”.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 83
+          },
+          "parts": [
+            [
+              73,
+              77
+            ],
+            [
+              81,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              77
+            ],
+            [
+              81,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lift-sb-up#e-7437d4f734b10465",
+          "text": "The people around us can lift us up and give us strength.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 35
+          },
+          "parts": [
+            [
+              25,
+              29
+            ],
+            [
+              33,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              29
+            ],
+            [
+              33,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:lift-sb-up#s2",
+      "pos": "短语",
+      "glossZh": "扶助某人改善处境",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lift-sb-up#e-fb0fa215f0e1463d",
+          "text": "When technology is guided by wisdom and responsibility, it can become a powerful tool that lifts people up, reduces inequality, and brings greater opportunities to all.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 106
+          },
+          "parts": [
+            [
+              91,
+              96
+            ],
+            [
+              104,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              96
+            ],
+            [
+              104,
+              106
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

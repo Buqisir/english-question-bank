@@ -1,0 +1,178 @@
+{
+  "entryId": "w:miss-the-point",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "miss",
+      "the",
+      "point"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "miss",
+        "the",
+        "point"
+      ],
+      [
+        "missed",
+        "the",
+        "point"
+      ],
+      [
+        "misses",
+        "the",
+        "point"
+      ],
+      [
+        "missing",
+        "the",
+        "point"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "missed the point",
+      "tags": []
+    },
+    {
+      "form": "misses the point",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "miss the point",
+  "senses": [
+    {
+      "senseId": "w:miss-the-point#s1",
+      "pos": "短语",
+      "glossZh": "没抓住重点；没理解真正的用意",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:miss-the-point#e-011f627197858769",
+          "text": "In his 1936 work How to Win Friends and Influence People, Dale Carnegie wrote: “I have come to the conclusion that there is only one way to get the best of an argument- and that is to avoid it.” This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 355,
+            "end": 371
+          },
+          "parts": [
+            [
+              355,
+              371
+            ]
+          ],
+          "highlightRanges": [
+            [
+              355,
+              371
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-the-point#e-5b87d9f297f445a6",
+          "text": "I’d missed the point of what all the masters were saying: Quiet the mind, and find pleasure in small acts and observations.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 20
+          },
+          "parts": [
+            [
+              4,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:miss-the-point#e-660b8c12b1ecdccb",
+          "text": "However, this approach misses the point.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 39
+          },
+          "parts": [
+            [
+              23,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

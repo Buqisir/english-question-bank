@@ -1,0 +1,258 @@
+{
+  "entryId": "w:bring-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        "down"
+      ],
+      [
+        "bringing",
+        "down"
+      ],
+      [
+        "brings",
+        "down"
+      ],
+      [
+        "brought",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "bring down",
+      "tags": []
+    },
+    {
+      "form": "brought down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:bring-down#s1",
+      "pos": "短语",
+      "glossZh": "降低（成本、价格、水平等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-down#e-7001fddc4f71e253",
+          "text": "Bring down the cost of labor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2021-ii:35#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-down#s2",
+      "pos": "短语",
+      "glossZh": "使倒下或坠落",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:bring#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:bring-down#e-f6b0a86f975bd9f3",
+          "text": "People stayed inside, and I could work uninterrupted – until a storm brought down trees and power lines.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 81
+          },
+          "parts": [
+            [
+              69,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:bring-down#e-7200d76592423fe2",
+          "text": "She practised misdirection and laid “false clues” alongside true ones, but insisted that her plots do not cheat or hide key evidence: “I never deceive my readers.” She tells potential writers to use snowstorms to isolate murder scenes (as they bring down telephone wires) and cites the clue-generating value of railway timetables, ink stains and cut-up newspapers.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 244,
+            "end": 254
+          },
+          "parts": [
+            [
+              244,
+              254
+            ]
+          ],
+          "highlightRanges": [
+            [
+              244,
+              254
+            ]
+          ]
+        }
+      ],
+      "note": "如风暴刮倒树木、刮落电线。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:bring-down#s3",
+      "pos": "短语",
+      "glossZh": "从高处把……带下来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-down#s4",
+      "pos": "短语",
+      "glossZh": "推翻（政府、政权等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-down#s5",
+      "pos": "短语",
+      "glossZh": "挫某人的傲气",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-down#s6",
+      "pos": "短语",
+      "glossZh": "使沮丧；使情绪低落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:bring-down#s7",
+      "pos": "短语",
+      "glossZh": "击落（飞行中的目标）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

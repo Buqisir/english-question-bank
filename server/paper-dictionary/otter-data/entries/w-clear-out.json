@@ -1,0 +1,223 @@
+{
+  "entryId": "w:clear-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clear",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "clear",
+        "out"
+      ],
+      [
+        "cleared",
+        "out"
+      ],
+      [
+        "clearing",
+        "out"
+      ],
+      [
+        "clears",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "clearing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clear out",
+  "senses": [
+    {
+      "senseId": "w:clear-out#s1",
+      "pos": "短语",
+      "glossZh": "清空；清走（杂物等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clear-out#e-41200a8f0ae3f3f4",
+          "text": "It makes sense she left you with nothing.” Worse still, Mia announced her plan to sell the house and told Ella to clear out her stuff.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 123
+          },
+          "parts": [
+            [
+              114,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              114,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:clear-out#e-64c5ddba6d3b233b",
+          "text": "Moreover, get creative with items you are clearing out",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-sixth:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          },
+          "parts": [
+            [
+              42,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:clear-out#s2",
+      "pos": "短语",
+      "glossZh": "腾出（一段时间）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clear-out#e-5c961a3c4a0dc8e1",
+          "text": "You don’t need to plan them far in advance or clear out a full afternoon.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:clear-out#s3",
+      "pos": "短语",
+      "glossZh": "赶快离开；撤离",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clear-out#s4",
+      "pos": "短语",
+      "glossZh": "赶走现场的人；清场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:clear-out#s5",
+      "pos": "短语",
+      "glossZh": "使某人的钱财尽失（如偷光或赢光）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

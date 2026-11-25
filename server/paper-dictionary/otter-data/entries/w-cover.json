@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 214
+    "mock": 39
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 50
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -218,7 +218,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 33
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -342,7 +342,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -465,7 +465,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -536,7 +536,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -586,6 +586,130 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:cover#s11",
+      "pos": "短语",
+      "glossZh": "满足某人的需求；替某人解决问题（have someone covered）",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-4bf0f801e80c4ae8",
+          "text": "Whatever type of recipe you’re looking for, the Feast app has got you covered.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:cover#e-59f922d4f37bfdd4",
+          "text": "This vibrant vegetable and chicken one-pot, finished with lemon and fresh herbs, has you covered, whatever your mood.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s12",
+      "pos": "短语",
+      "glossZh": "求职信；附信（cover letter）",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-bf2647db32982120",
+          "text": "Finish the cover letter.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:cover#e-2dcc5c1f1eeb266a",
+          "text": "Write a hello-I’m-wonderful cover letter, put it in an envelope with your résumé, and mail it to the employer.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:cover#e-3065aaae83e1cacc",
+          "text": "For longer gaps, briefly explain them in your cover letter.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -594,6 +718,10 @@
       "reason": "学科或行业专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:cover-up",
+    "w:judge-a-book-by-its-cover"
+  ]
 }

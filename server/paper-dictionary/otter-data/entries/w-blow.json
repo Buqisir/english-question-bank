@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 27
+    "mock": 18
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -252,7 +252,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -349,161 +349,6 @@
       ]
     },
     {
-      "senseId": "w:blow#s6",
-      "pos": "短语",
-      "glossZh": "给……充气；吹胀",
-      "pronunciationId": "w:blow#p-main",
-      "note": "blow up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blow#e-bebfd3e87453d51e",
-          "text": "The entire way home, my grandma encouraged me to stay optimistic, reminding me we had balloons at home to blow up.",
-          "source": {
-            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
-            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
-            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 106,
-            "end": 110
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:blow#s7",
-      "pos": "短语",
-      "glossZh": "迅速走红",
-      "pronunciationId": "w:blow#p-main",
-      "note": "blow up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blow#e-03eb6e4d7a8f6e6f",
-          "text": "Because of its unique focus, it is blowing up online now.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 35,
-            "end": 42
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:blow#s8",
-      "pos": "短语",
-      "glossZh": "使惊叹；使震撼",
-      "pronunciationId": "w:blow#p-main",
-      "note": "blow sb away。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blow#e-7607d1878385b9fb",
-          "text": "“I was just blown away when I __43__ a hut in the middle of nowhere.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
-            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
-            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:cloze:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:blow#s9",
-      "pos": "短语",
-      "glossZh": "使极为惊讶",
-      "pronunciationId": "w:blow#p-main",
-      "note": "blow sb’s mind。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:blow#e-f279ac62d1592b34",
-          "text": "“It's blown my mind how engaged the children are.",
-          "source": {
-            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
-            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
-            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:5",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 6,
-            "end": 11
-          }
-        },
-        {
-          "exampleId": "w:blow#e-83cb454de01b8be8",
-          "text": "“I had my mind blown.” He began volunteering there, labeling and databasing specimens（标本）, and eventually started his career in the field.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
-            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
-            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:blow#s10",
       "pos": "v.",
       "glossZh": "挥霍（钱财）",
@@ -522,26 +367,12 @@
       "pos": "v.",
       "glossZh": "（保险丝等）熔断；（轮胎）爆裂",
       "pronunciationId": "w:blow#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:blow#s12",
-      "pos": "短语",
-      "glossZh": "爆炸；炸毁",
-      "pronunciationId": "w:blow#p-main",
-      "note": "blow up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -550,13 +381,46 @@
       "glossZh": "搞砸（机会等）",
       "pronunciationId": "w:blow#p-main",
       "note": "口语。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:blow#s14",
+      "pos": "短语",
+      "glossZh": "彻底击败；远远胜过（blow sb out of the water）",
+      "pronunciationId": "w:blow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blow#e-f5456f47110e09f1",
+          "text": "A settler, Nintendo, acquired the Odyssey’s distribution rights for Japan in 1975, and then blew Magnavox out of the water in the following decade by creating an original Nintendo Entertainment System.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -565,6 +429,14 @@
       "reason": "旧义、俚语、行业义或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:blow-ones-mind",
+    "w:blow-sb-away",
+    "w:blow-through",
+    "w:blow-up"
+  ]
 }

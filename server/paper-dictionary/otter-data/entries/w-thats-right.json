@@ -1,0 +1,90 @@
+{
+  "entryId": "w:thats-right",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "that's",
+      "right"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "that's",
+        "right"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "that's right",
+  "senses": [
+    {
+      "senseId": "w:thats-right#s1",
+      "pos": "短语",
+      "glossZh": "对；没错；就是这样",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:thats-right#e-d9638841cf8a7853",
+          "text": "“That’s right!” the woman replied in a surprised and joyful voice.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 13
+          },
+          "parts": [
+            [
+              1,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

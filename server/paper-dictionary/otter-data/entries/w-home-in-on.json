@@ -1,0 +1,77 @@
+{
+  "entryId": "w:home-in-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "home",
+      "in",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "home",
+        "in",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "home in on",
+  "senses": [
+    {
+      "senseId": "w:home-in-on#s1",
+      "pos": "短语",
+      "glossZh": "锁定并逼近目标",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:home#s14"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:home-in-on#s2",
+      "pos": "短语",
+      "glossZh": "把注意力集中到某个问题或细节上",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:home#s14"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,98 @@
+{
+  "entryId": "w:both-sides-of-the-coin",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "both",
+      "sides",
+      "of",
+      "the",
+      "coin"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "both",
+        "sides",
+        "of",
+        "the",
+        "coin"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "both sides of the coin",
+  "senses": [
+    {
+      "senseId": "w:both-sides-of-the-coin#s1",
+      "pos": "短语",
+      "glossZh": "同一件事的两个方面",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:coin#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:both-sides-of-the-coin#e-30e333cccdf993bd",
+          "text": "This issue will examine both sides of the coin – how people make their choices on the type of island vacation, and their inevitable impact on the local communities and economies.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 46
+          },
+          "parts": [
+            [
+              24,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

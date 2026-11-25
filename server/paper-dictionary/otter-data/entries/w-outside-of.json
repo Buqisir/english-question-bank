@@ -1,0 +1,198 @@
+{
+  "entryId": "w:outside-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "outside",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "outside",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "outside of",
+  "senses": [
+    {
+      "senseId": "w:outside-of#s1",
+      "pos": "短语",
+      "glossZh": "在……外面；在……范围之外",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:outside-of#e-1def26595d3a2c68",
+          "text": "You can also bike along lovely landscapes outside of Amsterdam.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 52
+          },
+          "parts": [
+            [
+              42,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              52
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:outside-of#e-e4f9a5abebdd937f",
+          "text": "When I let them see an aspect of my life outside of school, some students who were also interested in cars connected with me more and became more engaged in my courses.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 51
+          },
+          "parts": [
+            [
+              41,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:outside-of#e-cab7fba0f80b9e66",
+          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 132
+          },
+          "parts": [
+            [
+              122,
+              132
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              132
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:outside-of#s2",
+      "pos": "短语",
+      "glossZh": "除……之外",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:outside-of#e-3fd3bbefe8cb12de",
+          "text": "The increase was greatest among first-year students who were low performers and studying subjects outside of science and maths.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 108
+          },
+          "parts": [
+            [
+              98,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              108
+            ]
+          ]
+        }
+      ],
+      "note": "用于指出例外。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

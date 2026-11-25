@@ -1,0 +1,173 @@
+{
+  "entryId": "w:join-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "join",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "join",
+        "in"
+      ],
+      [
+        "joined",
+        "in"
+      ],
+      [
+        "joining",
+        "in"
+      ],
+      [
+        "joins",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "joined in",
+      "tags": []
+    },
+    {
+      "form": "joining in",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "join in",
+  "senses": [
+    {
+      "senseId": "w:join-in#s1",
+      "pos": "短语",
+      "glossZh": "参加；加入大家一起做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:join-in#e-0e5a80ebcd382aaa",
+          "text": "“She stood there with her teacher, and they just let her join in.” Once the teacher learned about the idea, he was fully supportive.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          },
+          "parts": [
+            [
+              57,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:join-in#e-8569ad0a83c5fa6b",
+          "text": "By then, their heartwarming story had gained international media coverage, inspiring hundreds of Chinese volunteers to join in his search.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 126
+          },
+          "parts": [
+            [
+              119,
+              126
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              126
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:join-in#e-c102ba59e9902289",
+          "text": "What's one of the qualifications to join in the competition?",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          },
+          "parts": [
+            [
+              36,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 12
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

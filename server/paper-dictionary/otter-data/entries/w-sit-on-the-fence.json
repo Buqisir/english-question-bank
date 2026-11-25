@@ -1,0 +1,64 @@
+{
+  "entryId": "w:sit-on-the-fence",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "on",
+      "the",
+      "fence"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "on",
+        "the",
+        "fence"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit on the fence",
+  "senses": [
+    {
+      "senseId": "w:sit-on-the-fence#s1",
+      "pos": "短语",
+      "glossZh": "持观望态度；迟迟不表明立场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fence#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

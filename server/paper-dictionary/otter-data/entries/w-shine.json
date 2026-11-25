@@ -66,8 +66,8 @@
     "mock": 65
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 51
+    "gaokao": 2,
+    "mock": 13
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -220,7 +220,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -292,7 +292,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -363,7 +363,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -471,112 +471,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:shine#s8",
-      "pos": "短语",
-      "glossZh": "无论晴雨",
-      "pronunciationId": "w:shine#p-main",
-      "note": "rain or shine。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shine#e-6d705c02b49f815d",
-          "text": "We’ll be working rain or shine.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 25,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:shine#e-129c24b833fcd40e",
-          "text": "Rain or shine, the woman performs this essential, though difficult job, always accompanied by her faithful companion.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
-            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
-            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 8,
-            "end": 13
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shine#s9",
-      "pos": "短语",
-      "glossZh": "使人看清",
-      "pronunciationId": "w:shine#p-main",
-      "note": "shine a light on。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shine#e-cfb7a6530cd7d11b",
-          "text": "New research has shined a light on how these little creatures are important for helping to protect the planet against global warming.",
-          "source": {
-            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
-            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
-            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-d:1",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 23
-          }
-        },
-        {
-          "exampleId": "w:shine#e-d3285fd8c633b3e3",
-          "text": "One firm, however, claims to be able to shine a light on the issue.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
-            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
-            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-d:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 40,
-            "end": 45
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -585,6 +479,13 @@
       "reason": "moonshine 的低频省称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:rain-or-shine",
+    "w:shine-a-light-on",
+    "w:shine-through"
+  ]
 }

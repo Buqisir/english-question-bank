@@ -1,0 +1,75 @@
+{
+  "entryId": "w:follow-the-crowd",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "follow",
+      "the",
+      "crowd"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "follow",
+        "the",
+        "crowd"
+      ],
+      [
+        "followed",
+        "the",
+        "crowd"
+      ],
+      [
+        "following",
+        "the",
+        "crowd"
+      ],
+      [
+        "follows",
+        "the",
+        "crowd"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "follow the crowd",
+  "senses": [
+    {
+      "senseId": "w:follow-the-crowd#s1",
+      "pos": "短语",
+      "glossZh": "随大流；跟着多数人想或做",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

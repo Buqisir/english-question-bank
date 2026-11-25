@@ -1,0 +1,61 @@
+{
+  "entryId": "w:lots-of-love",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lots",
+      "of",
+      "love"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lots",
+        "of",
+        "love"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lots of love",
+  "senses": [
+    {
+      "senseId": "w:lots-of-love#s1",
+      "pos": "短语",
+      "glossZh": "爱你的；送上满满的爱",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于写给亲友的信件或消息末尾。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

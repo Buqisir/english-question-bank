@@ -1,0 +1,186 @@
+{
+  "entryId": "w:make-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "making of"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "of"
+      ],
+      [
+        "making",
+        "of"
+      ],
+      [
+        "made",
+        "of"
+      ],
+      [
+        "makes",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make of",
+  "senses": [
+    {
+      "senseId": "w:make-of#s1",
+      "pos": "短语",
+      "glossZh": "由……制成；由……构成",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-of#e-911983072fc967f0",
+          "text": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          },
+          "parts": [
+            [
+              44,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-of#e-4f98c5e838d97dff",
+          "text": "Rock salt is made of sodium chloride, the same compound（化合物）in ordinary table salt.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-of#e-5008eb04defbc06c",
+          "text": "The design features ten steel “sepals（萼片）” made of glass and aluminium（铝）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          },
+          "parts": [
+            [
+              43,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              50
+            ]
+          ]
+        }
+      ],
+      "note": "这一义常用 (be) made of sth。",
+      "counts": {
+        "gaokao": 5,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:make-of#s2",
+      "pos": "短语",
+      "glossZh": "怎么看待；如何理解",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 What do you make of sb/sth? 或 make nothing of sth 表示无法理解。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

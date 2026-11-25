@@ -48,8 +48,8 @@
     "mock": 63
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 59
+    "gaokao": 5,
+    "mock": 22
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -165,7 +165,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -228,47 +228,13 @@
       "pos": "n.",
       "glossZh": "狮群",
       "pronunciationId": "w:pride#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:pride#s6",
-      "pos": "短语",
-      "glossZh": "以……为傲",
-      "pronunciationId": "w:pride#p-main",
-      "note": "pride oneself on sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pride#e-b0cee65c4d9ab691",
-          "text": "But that’s not the thing he prides himself on.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 34
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -277,6 +243,12 @@
       "reason": "动物名称旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:pride-oneself-on-sth",
+    "w:take-pride-in"
+  ]
 }

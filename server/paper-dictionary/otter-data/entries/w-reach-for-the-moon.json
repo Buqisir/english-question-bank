@@ -1,0 +1,148 @@
+{
+  "entryId": "w:reach-for-the-moon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "reach",
+      "for",
+      "the",
+      "moon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reach",
+        "for",
+        "the",
+        "moon"
+      ],
+      [
+        "reached",
+        "for",
+        "the",
+        "moon"
+      ],
+      [
+        "reaches",
+        "for",
+        "the",
+        "moon"
+      ],
+      [
+        "reaching",
+        "for",
+        "the",
+        "moon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reaching for the moon",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reach for the moon",
+  "senses": [
+    {
+      "senseId": "w:reach-for-the-moon#s1",
+      "pos": "短语",
+      "glossZh": "追求远大而难以实现的目标",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:reach-for-the-moon#e-7d2b82237a52db54",
+          "text": "I am still reaching for the moon, but I am no longer afraid.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 32
+          },
+          "parts": [
+            [
+              11,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              32
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-for-the-moon#e-f6a81cf8389f5293",
+          "text": "What does the author mean by saying “reaching for the moon”?",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:27",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 58
+          },
+          "parts": [
+            [
+              37,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              58
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

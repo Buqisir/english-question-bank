@@ -42,8 +42,8 @@
     "mock": 1233
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 1232
+    "gaokao": 27,
+    "mock": 1046
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 107,
-        "mock": 0
+        "mock": 147
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 23,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -268,7 +268,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -340,7 +340,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -366,425 +366,6 @@
       ]
     },
     {
-      "senseId": "w:way#s6",
-      "pos": "短语",
-      "glossZh": "顺便说",
-      "pronunciationId": "w:way#p-main",
-      "note": "by the way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-a38088c64e176735",
-          "text": "By the way",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
-            "locator": {
-              "question": 53,
-              "questionId": "question:paper-gaokao-2021-zhejiang-jan:53",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 10
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s7",
-      "pos": "短语",
-      "glossZh": "挡路；妨碍",
-      "pronunciationId": "w:way#p-main",
-      "note": "get in the way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-8097946681ff70d1",
-          "text": "When I pulled hard, my nose got in the way.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 42
-          }
-        },
-        {
-          "exampleId": "w:way#e-91b18ee265ba9a28",
-          "text": "Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 68,
-            "end": 71
-          }
-        },
-        {
-          "exampleId": "w:way#e-306d23b650c0ba36",
-          "text": "You may jump over your own or another player’s pawn that is in your way, counting it as one space.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
-            "locator": {
-              "paragraph": 19,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:19",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 68,
-            "end": 71
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s8",
-      "pos": "短语",
-      "glossZh": "很有帮助",
-      "pronunciationId": "w:way#p-main",
-      "note": "go a long way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-67d6d93f2ef66d5e",
-          "text": "Although technology might make day-to-day communication possible, extra effort goes a long way on special days.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 91,
-            "end": 94
-          }
-        },
-        {
-          "exampleId": "w:way#e-24b5c6a075b80365",
-          "text": "A little self-forgiveness also goes a long way.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2023-i:36",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 43,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s9",
-      "pos": "短语",
-      "glossZh": "让位给",
-      "pronunciationId": "w:way#p-main",
-      "note": "give way to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-e3c73225cdc17b77",
-          "text": "When I finally finished it, the thought of winning had given way to the enjoyment of writing.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 61,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s10",
-      "pos": "短语",
-      "glossZh": "为……腾出空间",
-      "pronunciationId": "w:way#p-main",
-      "note": "make way for sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-23ee4bdde42792ac",
-          "text": "Whole neighbourhoods were destroyed to make way for new road networks and kids had to play elsewhere.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 47
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s11",
-      "pos": "短语",
-      "glossZh": "绝不可能",
-      "pronunciationId": "w:way#p-main",
-      "note": "no way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-7619bdb2f7264b57",
-          "text": "No way!",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2021-national-a:29",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:way#e-171d06df438ca512",
-          "text": "“If you’re scared about something and thinking only about that, there’s no way you’re going to be able to learn,” Ho says.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 75,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s12",
-      "pos": "短语",
-      "glossZh": "一路到底",
-      "pronunciationId": "w:way#p-main",
-      "note": "all the way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-24426262d571241d",
-          "text": "Bailey then __47__ to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get __48__ attention.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:cloze:2",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 80
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s13",
-      "pos": "短语",
-      "glossZh": "以夸张的方式",
-      "pronunciationId": "w:way#p-main",
-      "note": "in a big way。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-1964194286946816",
-          "text": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 110,
-            "end": 113
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s14",
-      "pos": "短语",
-      "glossZh": "分道扬镳",
-      "pronunciationId": "w:way#p-main",
-      "note": "go one’s separate ways。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-0c2dff873fc4a2f8",
-          "text": "After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city.",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-a",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 74,
-            "end": 78
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:way#s15",
-      "pos": "短语",
-      "glossZh": "遭遇与……相同的命运",
-      "pronunciationId": "w:way#p-main",
-      "note": "go the way of sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:way#e-03497d7daabed203",
-          "text": "How long until they go the way of gas street lamps and morning milk deliveries?",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 30
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:way#s16",
       "pos": "n.",
       "glossZh": "方向",
@@ -792,7 +373,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -865,7 +446,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -908,6 +489,72 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:way#s18",
+      "pos": "短语",
+      "glossZh": "特意费心做某事（go out of one’s way）",
+      "pronunciationId": "w:way#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:way#e-a0b344afa7ffb983",
+          "text": "In a world overflowing with information, it may seem odd that people often go out of their way not to learn something.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:way#s19",
+      "pos": "短语",
+      "glossZh": "如某人所愿（go one’s way）",
+      "pronunciationId": "w:way#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:way#e-3bdd5cd356c9ff67",
+          "text": "But one day, when he was 8, something didn’t go his way.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -916,6 +563,45 @@
       "reason": "专门或旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:across-the-way",
+    "w:all-the-way",
+    "w:along-the-way",
+    "w:by-the-way",
+    "w:by-way-of",
+    "w:come-a-long-way",
+    "w:each-way",
+    "w:either-way",
+    "w:get-in-the-way",
+    "w:give-way",
+    "w:give-way-to",
+    "w:go-a-long-way",
+    "w:go-back-a-long-way",
+    "w:go-the-way-of-sth",
+    "w:in-a-big-way",
+    "w:in-the-way-of",
+    "w:lead-the-way",
+    "w:lose-ones-way",
+    "w:make-ones-way",
+    "w:make-way",
+    "w:make-way-for-sth",
+    "w:no-way",
+    "w:on-ones-way",
+    "w:one-way-or-another",
+    "w:out-of-the-way",
+    "w:right-of-way",
+    "w:stand-in-the-way",
+    "w:stand-in-the-way-of",
+    "w:the-hard-way",
+    "w:the-other-way",
+    "w:the-other-way-around",
+    "w:way-back",
+    "w:way-out",
+    "w:way-to-go",
+    "w:way-too"
+  ]
 }

@@ -1,0 +1,166 @@
+{
+  "entryId": "w:hold-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "holding on"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "on"
+      ],
+      [
+        "holding",
+        "on"
+      ],
+      [
+        "held",
+        "on"
+      ],
+      [
+        "holds",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold on",
+  "senses": [
+    {
+      "senseId": "w:hold-on#s1",
+      "pos": "短语",
+      "glossZh": "等一下；别挂电话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hold#s16"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hold-on#e-2cfacd72170efa27",
+          "text": "“Hold on!",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 8
+          },
+          "parts": [
+            [
+              1,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              1,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hold-on#s3",
+      "pos": "短语",
+      "glossZh": "抓牢；别松手",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-on#e-a8b373388130d91f",
+          "text": "It is something I can hold in my hands, something to hold on to.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 60
+          },
+          "parts": [
+            [
+              53,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:hold-on#s2",
+      "pos": "短语",
+      "glossZh": "坚持住；撑下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:hold#s15"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

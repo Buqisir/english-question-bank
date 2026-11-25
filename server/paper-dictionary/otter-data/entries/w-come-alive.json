@@ -1,0 +1,214 @@
+{
+  "entryId": "w:come-alive",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came alive",
+    "comes alive"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "alive"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "alive"
+      ],
+      [
+        "came",
+        "alive"
+      ],
+      [
+        "comes",
+        "alive"
+      ],
+      [
+        "coming",
+        "alive"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come alive",
+  "senses": [
+    {
+      "senseId": "w:come-alive#s1",
+      "pos": "短语",
+      "glossZh": "（画面、故事等）变得生动；活起来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-alive#e-19885fb914e495f9",
+          "text": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 115
+          },
+          "parts": [
+            [
+              105,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              105,
+              115
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-alive#e-ff66b87b2e614836",
+          "text": "A scene that was once only words on a page suddenly comes alive when I stand in the same light as the characters.”",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 63
+          },
+          "parts": [
+            [
+              52,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              63
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-alive#e-8de1349d3c286d74",
+          "text": "The stories of virtually any famous person came alive with perfect sentences.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:come-alive#s2",
+      "pos": "短语",
+      "glossZh": "（人、场所等）变得活跃或热闹起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-alive#e-5b98e5c3b42131eb",
+          "text": "Sure enough, every time we ate dim sum at local cha lous, my immigrant (移民的) mother came alive.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 94
+          },
+          "parts": [
+            [
+              84,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              94
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

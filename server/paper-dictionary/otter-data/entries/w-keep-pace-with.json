@@ -1,0 +1,216 @@
+{
+  "entryId": "w:keep-pace-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "pace",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "pace",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep pace with",
+      "tags": []
+    },
+    {
+      "form": "keeping pace with",
+      "tags": []
+    },
+    {
+      "form": "kept pace with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep pace with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:keep-pace-with#s1",
+      "pos": "短语",
+      "glossZh": "跟上某人的步速；与某人保持同样的速度",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pace#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-pace-with#e-11125338b0ce97e8",
+          "text": "I kept pace with other runners.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 16
+          },
+          "parts": [
+            [
+              2,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:keep-pace-with#s2",
+      "pos": "短语",
+      "glossZh": "跟上某事物发展的步伐",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-pace-with#e-d27db1f7b62ae608",
+          "text": "Studying these methods is vital to keep pace with the evolving payment ecosystem and deepen understanding of modern consumers’ spending habits.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 49
+          },
+          "parts": [
+            [
+              35,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-pace-with#e-d85615678212fbf5",
+          "text": "With technology like AI evolving faster than any curriculum (课程) can keep pace with and entire industries being upended, it’s no wonder so many feel uncertain.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 83
+          },
+          "parts": [
+            [
+              69,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-pace-with#e-c4307299fe098f43",
+          "text": "His life kept pace with the times.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-zj-jinliqu-2026-mar-m2:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 23
+          },
+          "parts": [
+            [
+              9,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "如 keep pace with the times。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

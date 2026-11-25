@@ -42,7 +42,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 54
+    "mock": 2
   },
   "senses": [
     {
@@ -53,7 +53,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -128,6 +128,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:heritage#s3",
+      "pos": "n.",
+      "glossZh": "自然遗产",
+      "pronunciationId": "w:heritage#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:heritage#e-187c6afa1810573b",
+          "text": "UNESCO has recognized the Flow Country as a world heritage (遗产) site – the first peatland to make the list – due to its natural characteristics: the remarkable variety of plants and animals that live there.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -136,6 +169,6 @@
       "reason": "同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

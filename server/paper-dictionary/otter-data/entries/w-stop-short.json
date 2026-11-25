@@ -1,0 +1,169 @@
+{
+  "entryId": "w:stop-short",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stop",
+      "short"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stop",
+        "short"
+      ],
+      [
+        "stopped",
+        "short"
+      ],
+      [
+        "stopping",
+        "short"
+      ],
+      [
+        "stops",
+        "short"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stopped short",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stop short",
+  "senses": [
+    {
+      "senseId": "w:stop-short#s1",
+      "pos": "短语",
+      "glossZh": "在采取某一步之前收手；没有做到某一步",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stop-short#e-6512340a90e4e27c",
+          "text": "actually wanted to drop the class at one point, but stopped short because I didn’t want to give him the satisfaction of my chickening out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 65
+          },
+          "parts": [
+            [
+              52,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              65
+            ]
+          ]
+        }
+      ],
+      "note": "可接 of doing sth，也可由上文交代原本打算采取的行动。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stop-short#s2",
+      "pos": "短语",
+      "glossZh": "突然停住；戛然而止",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:short#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stop-short#e-06d26d2f568db5db",
+          "text": "You won’t believe the game today...” Eric’s energetic entry stopped short.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 73
+          },
+          "parts": [
+            [
+              60,
+              73
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              73
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stop-short#s3",
+      "pos": "短语",
+      "glossZh": "未到某处就停下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "stop short of a place or target",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

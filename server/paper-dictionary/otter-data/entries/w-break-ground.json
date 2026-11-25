@@ -1,0 +1,159 @@
+{
+  "entryId": "w:break-ground",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "broke ground"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "ground"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "ground"
+      ],
+      [
+        "broke",
+        "ground"
+      ],
+      [
+        "breaking",
+        "ground"
+      ],
+      [
+        "breaks",
+        "ground"
+      ],
+      [
+        "broken",
+        "ground"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "broken ground",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break ground",
+  "senses": [
+    {
+      "senseId": "w:break-ground#s1",
+      "pos": "短语",
+      "glossZh": "破土动工；开始施工",
+      "note": "常用 break ground on a project。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:break-ground#e-a7edf69a7e4fdfdd",
+          "text": "A project in D. C., which broke ground last month, is the largest such conversion(转化) in the city to date.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:break-ground#e-1fb4bcdd871968f8",
+          "text": "Redwood, which has since broken ground on a new facility in South Carolina, was one of the first to apply the lessons of this project to their own operations and environmental footprint.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 38
+          },
+          "parts": [
+            [
+              25,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:break-ground#s2",
+      "pos": "短语",
+      "glossZh": "开创新局面；取得突破",
+      "note": "常用 break new ground。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

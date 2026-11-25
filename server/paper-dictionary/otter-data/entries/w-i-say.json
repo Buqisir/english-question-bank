@@ -1,0 +1,135 @@
+{
+  "entryId": "w:i-say",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I say"
+  ],
+  "pattern": {
+    "tokens": [
+      "i",
+      "say"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i",
+        "say"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "I say",
+  "senses": [
+    {
+      "senseId": "w:i-say#s1",
+      "pos": "短语",
+      "glossZh": "我提议……；我看我们该……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:i-say#e-08641c3d33311b3a",
+          "text": "I say we take a page out of the 1920s playbook and return back to the cinema.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          },
+          "parts": [
+            [
+              0,
+              5
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              5
+            ]
+          ]
+        }
+      ],
+      "note": "I say we do sth 用于直接提出行动建议。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:i-say#s2",
+      "pos": "短语",
+      "glossZh": "哎呀！我说！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较老式的英式感叹语，表示惊讶或抗议。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:i-say#s3",
+      "pos": "短语",
+      "glossZh": "喂！我说……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较老式的英式用语，用来招呼对方或引起注意。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:i-say#s4",
+      "pos": "短语",
+      "glossZh": "我强调的是……；我刚才说的是……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用作插入语，强调要点或接回前面的话题。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,110 @@
+{
+  "entryId": "w:come-to-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came to mind",
+    "comes to mind"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "mind"
+      ],
+      [
+        "came",
+        "to",
+        "mind"
+      ],
+      [
+        "comes",
+        "to",
+        "mind"
+      ],
+      [
+        "coming",
+        "to",
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to mind",
+  "senses": [
+    {
+      "senseId": "w:come-to-mind#s1",
+      "pos": "短语",
+      "glossZh": "浮现在脑海中；被想起",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:come-to-mind#e-67dfb90ae68cddde",
+          "text": "When we think of personality types, two popular models come to mind: Type A and Type B. Type A is the ambitious, competitive overachiever driven by a strong desire for success.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 67
+          },
+          "parts": [
+            [
+              55,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

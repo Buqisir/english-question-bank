@@ -1,0 +1,166 @@
+{
+  "entryId": "w:shape-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "shape",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "shape",
+        "up"
+      ],
+      [
+        "shaped",
+        "up"
+      ],
+      [
+        "shapes",
+        "up"
+      ],
+      [
+        "shaping",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "shaping up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "shape up",
+  "senses": [
+    {
+      "senseId": "w:shape-up#s1",
+      "pos": "短语",
+      "glossZh": "改进表现；规矩起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shape-up#e-9924c69091b78326",
+          "text": "If you don’t start shaping up soon, you’ll end up being a failure.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 29
+          },
+          "parts": [
+            [
+              19,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:shape-up#s2",
+      "pos": "短语",
+      "glossZh": "逐渐成形；显出将要成为……的趋势",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:shape-up#e-199dcbb8719c1487",
+          "text": "It’s a musical adaptation with a different style, though according to award-winning filmmaker Dawn Porter, it’s still “a timeless story of love, friendship and power.” And it’s shaping up to be the next cultural phenomenon, with moviegoers heading to the theaters in big groups while dressed up in purple.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 177,
+            "end": 187
+          },
+          "parts": [
+            [
+              177,
+              187
+            ]
+          ],
+          "highlightRanges": [
+            [
+              177,
+              187
+            ]
+          ]
+        }
+      ],
+      "note": "shape up to be ...",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:shape-up#s3",
+      "pos": "短语",
+      "glossZh": "摆出要打架的架势",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

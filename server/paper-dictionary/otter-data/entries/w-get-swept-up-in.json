@@ -1,0 +1,64 @@
+{
+  "entryId": "w:get-swept-up-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "swept",
+      "up",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "swept",
+        "up",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get swept up in",
+  "senses": [
+    {
+      "senseId": "w:get-swept-up-in#s1",
+      "pos": "短语",
+      "glossZh": "被卷入；受气氛感染而投入其中",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:sweep#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

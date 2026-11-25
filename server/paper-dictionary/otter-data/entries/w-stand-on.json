@@ -1,0 +1,87 @@
+{
+  "entryId": "w:stand-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing on",
+    "stands on"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "on"
+      ],
+      [
+        "standing",
+        "on"
+      ],
+      [
+        "stands",
+        "on"
+      ],
+      [
+        "stood",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand on",
+  "senses": [
+    {
+      "senseId": "w:stand-on#s1",
+      "pos": "短语",
+      "glossZh": "（船只）保持原航向继续前进",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-on#s2",
+      "pos": "短语",
+      "glossZh": "坚持遵守；拘泥于（礼节等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 stand on ceremony（拘泥于礼节）。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

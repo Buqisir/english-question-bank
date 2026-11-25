@@ -1,0 +1,92 @@
+{
+  "entryId": "w:pan-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "pan",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pan",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pan out",
+  "senses": [
+    {
+      "senseId": "w:pan-out#s1",
+      "pos": "短语",
+      "glossZh": "（事情）最终发展成某种结果",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pan#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pan-out#e-97e3c147a0bb6d70",
+          "text": "We need to consider how we want our future with AI to pan out.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 61
+          },
+          "parts": [
+            [
+              54,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              61
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

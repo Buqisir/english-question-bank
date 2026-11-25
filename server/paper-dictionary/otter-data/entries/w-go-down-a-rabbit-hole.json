@@ -1,0 +1,66 @@
+{
+  "entryId": "w:go-down-a-rabbit-hole",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "down",
+      "a",
+      "rabbit",
+      "hole"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "down",
+        "a",
+        "rabbit",
+        "hole"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go down a rabbit hole",
+  "senses": [
+    {
+      "senseId": "w:go-down-a-rabbit-hole#s1",
+      "pos": "短语",
+      "glossZh": "顺着一个话题越挖越深，难以抽身",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:hole#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

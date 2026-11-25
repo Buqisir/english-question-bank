@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 86
+    "mock": 14
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 41
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -197,7 +197,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -265,12 +265,12 @@
       "pos": "n.",
       "glossZh": "一场哭泣；一阵哭",
       "pronunciationId": "w:cry#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -278,47 +278,13 @@
       "pos": "n.",
       "glossZh": "呼吁；呼声",
       "pronunciationId": "w:cry#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:cry#s6",
-      "pos": "短语",
-      "glossZh": "迫切需要",
-      "pronunciationId": "w:cry#p-main",
-      "note": "cry for；cry out for。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cry#e-8def504c7885dd71",
-          "text": "“What suburbia cries for are the means for people to gather easily, inexpensively, regularly, and pleasurably – a ‘place on the corner.’”",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -327,6 +293,14 @@
       "reason": "专门或古旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cry-for",
+    "w:cry-out",
+    "w:cry-out-for",
+    "w:far-cry"
+  ]
 }

@@ -1,0 +1,74 @@
+{
+  "entryId": "w:take-sth-with-a-pinch-of-salt",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      {
+        "slot": "sth"
+      },
+      "with",
+      "a",
+      "pinch",
+      "of",
+      "salt"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        {
+          "slot": "sth"
+        },
+        "with",
+        "a",
+        "pinch",
+        "of",
+        "salt"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take sth with a pinch of salt",
+  "senses": [
+    {
+      "senseId": "w:take-sth-with-a-pinch-of-salt#s1",
+      "pos": "短语",
+      "glossZh": "对某种说法半信半疑；不完全相信",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:salt#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

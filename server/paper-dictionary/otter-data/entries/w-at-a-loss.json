@@ -1,0 +1,204 @@
+{
+  "entryId": "w:at-a-loss",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "a",
+      "loss"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "a",
+        "loss"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at a loss",
+  "senses": [
+    {
+      "senseId": "w:at-a-loss#s1",
+      "pos": "短语",
+      "glossZh": "不知所措；不知该怎么办",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:at#s23",
+        "w:loss#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-a-loss#e-a2ad881a6bfc9385",
+          "text": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 70
+          },
+          "parts": [
+            [
+              61,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-loss#e-7527c7053285934a",
+          "text": "With no one else around at that moment, I was at a loss what to do.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-loss#e-510e3a82d0a4edf7",
+          "text": "But in the beginning, you may find yourself at a loss.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 53
+          },
+          "parts": [
+            [
+              44,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:at-a-loss#s2",
+      "pos": "短语",
+      "glossZh": "亏本地；以低于成本的价格",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:at-a-loss#e-b2e259e4a468318f",
+          "text": "Sell products at a loss and call it a strategy?",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          },
+          "parts": [
+            [
+              14,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              23
+            ]
+          ]
+        }
+      ],
+      "note": "常用 sell sth at a loss。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

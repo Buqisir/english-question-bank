@@ -1,0 +1,102 @@
+{
+  "entryId": "w:under-the-weather",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "under",
+      "the",
+      "weather"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "under",
+        "the",
+        "weather"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "under the weather",
+  "senses": [
+    {
+      "senseId": "w:under-the-weather#s1",
+      "pos": "短语",
+      "glossZh": "身体有些不适",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:weather#s4"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:under-the-weather#s2",
+      "pos": "短语",
+      "glossZh": "情绪低落；精神不振",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:under-the-weather#s3",
+      "pos": "短语",
+      "glossZh": "有点醉；因宿醉而不适",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:under-the-weather#s4",
+      "pos": "短语",
+      "glossZh": "处境不顺；身处逆境",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

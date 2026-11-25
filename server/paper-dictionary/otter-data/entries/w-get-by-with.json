@@ -1,0 +1,128 @@
+{
+  "entryId": "w:get-by-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting by with"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "by",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "by",
+        "with"
+      ],
+      [
+        "getting",
+        "by",
+        "with"
+      ],
+      [
+        "gets",
+        "by",
+        "with"
+      ],
+      [
+        "got",
+        "by",
+        "with"
+      ],
+      [
+        "gotten",
+        "by",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get by with sth",
+  "senses": [
+    {
+      "senseId": "w:get-by-with#s1",
+      "pos": "短语",
+      "glossZh": "靠有限的……勉强应付；靠……维持下去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-by-with#e-d1e7f4d2de0f8c27",
+          "text": "Getting by with less is not a sacrifice.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:get-by-with#s2",
+      "pos": "短语",
+      "glossZh": "做了错事却逃过惩罚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -35,8 +35,8 @@
     "mock": 654
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 654
+    "gaokao": 31,
+    "mock": 485
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 86,
-        "mock": 0
+        "mock": 164
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -180,78 +180,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:each#s3",
-      "pos": "短语",
-      "glossZh": "彼此；互相",
-      "pronunciationId": "w:each#p-main",
-      "note": "each other，所有格是 each other's。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 31,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:each#e-cf71ba10771099a3",
-          "text": "People were trying to help each other meet the challenges.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:each#e-0d4d2bdc101e012a",
-          "text": "The core (核心) of your relationship is that you will always be there to help each other.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "seven-choices-6",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 76,
-            "end": 80
-          }
-        },
-        {
-          "exampleId": "w:each#e-430aa8db52a8dbb6",
-          "text": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 67
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -260,6 +188,12 @@
       "reason": "商业单位用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:each-other",
+    "w:each-way"
+  ]
 }

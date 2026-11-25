@@ -35,8 +35,8 @@
     "mock": 536
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 535
+    "gaokao": 4,
+    "mock": 341
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 27,
-        "mock": 0
+        "mock": 49
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -189,7 +189,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 30,
-        "mock": 0
+        "mock": 64
       },
       "folded": false,
       "examples": [
@@ -260,7 +260,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 21,
-        "mock": 0
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -331,7 +331,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -403,7 +403,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -474,7 +474,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -517,164 +517,43 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:around#s8",
-      "pos": "短语",
-      "glossZh": "即将到来；很快到来",
-      "pronunciationId": "w:around#p-main",
-      "note": "just around the corner。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:around#e-20912f51191f0253",
-          "text": "Yes and no. He was thrilled to be doing the comedy that he always felt he should do, but even during his last few years, he always had a sense of curiosity, wondering what new role or challenge might be just around the corner.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jun",
-            "paperTitle": "2021 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 208,
-            "end": 214
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:around#s9",
-      "pos": "短语",
-      "glossZh": "转变看法；改变态度",
-      "pronunciationId": "w:around#p-main",
-      "note": "come around to sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:around#e-fdf2d6b075b0b0a8",
-          "text": "Designer Jennifer Anderson admits it took her a while to come around to the opinion that using nutria fur for her creations is morally acceptable.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 68
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:around#s10",
-      "pos": "短语",
-      "glossZh": "使转好；扭转（局面）",
-      "pronunciationId": "w:around#p-main",
-      "note": "turn sth around。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:around#e-89381750ac24b9b7",
-          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:around#s11",
-      "pos": "短语",
-      "glossZh": "闲坐；闲逛",
-      "pronunciationId": "w:around#p-main",
-      "note": "如 sit around、hang around。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:around#e-388e863f5cbca757",
-          "text": "Indoor plants might look as if they just sit around not doing much, but in many ways they are the unsung heroes of the home.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 51
-          }
-        },
-        {
-          "exampleId": "w:around#e-392bba2be5c1eb38",
-          "text": "At first, people hung around, sniffing（闻）cautiously, but few bought.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 28
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:all-around",
+    "w:around-the-clock",
+    "w:around-the-corner",
+    "w:build-around",
+    "w:come-around",
+    "w:come-around-to-sth",
+    "w:dance-around",
+    "w:get-around",
+    "w:get-turned-around",
+    "w:go-around",
+    "w:hang-around",
+    "w:horse-around",
+    "w:joke-around",
+    "w:just-around-the-corner",
+    "w:kick-around",
+    "w:kid-around",
+    "w:lie-around",
+    "w:look-around",
+    "w:mess-around",
+    "w:monkey-around",
+    "w:monkey-around-with-sth",
+    "w:pass-around",
+    "w:play-around",
+    "w:roll-around",
+    "w:run-around",
+    "w:sit-around",
+    "w:stick-around",
+    "w:the-other-way-around",
+    "w:turn-sth-around",
+    "w:work-around"
+  ]
 }

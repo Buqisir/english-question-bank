@@ -1,0 +1,78 @@
+{
+  "entryId": "w:win-the-day",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "win",
+      "the",
+      "day"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "win",
+        "the",
+        "day"
+      ],
+      [
+        "winning",
+        "the",
+        "day"
+      ],
+      [
+        "wins",
+        "the",
+        "day"
+      ],
+      [
+        "won",
+        "the",
+        "day"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "win the day",
+  "senses": [
+    {
+      "senseId": "w:win-the-day#s1",
+      "pos": "短语",
+      "glossZh": "最终获胜；取得最后的成功",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:day#s7"
+      ],
+      "examples": [],
+      "note": "主语是观点或提议时，指该观点或提议在争论或竞争后最终被接受。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,82 @@
+{
+  "entryId": "w:right-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "right",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "right",
+        "on"
+      ],
+      [
+        "more",
+        "right",
+        "on"
+      ],
+      [
+        "most",
+        "right",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "right on",
+  "senses": [
+    {
+      "senseId": "w:right-on#s1",
+      "pos": "短语",
+      "glossZh": "完全正确的；很到位的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:right-on#s2",
+      "pos": "短语",
+      "glossZh": "没错！好样的！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用作感叹语，表示赞同或鼓励。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,152 @@
+{
+  "entryId": "w:have-got",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "has got"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "got"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "got"
+      ],
+      [
+        "has",
+        "got"
+      ],
+      [
+        "had",
+        "got"
+      ],
+      [
+        "having",
+        "got"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have got",
+  "senses": [
+    {
+      "senseId": "w:have-got#s1",
+      "pos": "短语",
+      "glossZh": "有；拥有；具有",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-got#e-cd34d1399ae34def",
+          "text": "He has got a new job.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:have-got#e-a81ab968f19df52e",
+          "text": "He has got a new job there.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "口语用法，表示当前状态，常用 have/has got。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:have-got#s2",
+      "pos": "短语",
+      "glossZh": "必须；得",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 have got to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

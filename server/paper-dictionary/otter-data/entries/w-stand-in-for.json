@@ -1,0 +1,125 @@
+{
+  "entryId": "w:stand-in-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "in",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "in",
+        "for"
+      ],
+      [
+        "standing",
+        "in",
+        "for"
+      ],
+      [
+        "stands",
+        "in",
+        "for"
+      ],
+      [
+        "stood",
+        "in",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stand in for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand in for sb/sth",
+  "senses": [
+    {
+      "senseId": "w:stand-in-for#s1",
+      "pos": "短语",
+      "glossZh": "替代某物；充当替代物",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stand-in-for#e-6ab9a527180a5a7d",
+          "text": "Could operations, such as addition, subtraction, multiplication and so on, stand in for verbs?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 87
+          },
+          "parts": [
+            [
+              75,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stand-in-for#s2",
+      "pos": "短语",
+      "glossZh": "暂代某人；替班",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 227
+    "mock": 41
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 26,
-        "mock": 0
+        "mock": 154
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 17
       },
       "folded": false,
       "examples": [
@@ -247,12 +247,12 @@
       "pos": "n.",
       "glossZh": "结束",
       "pronunciationId": "w:finish#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -260,12 +260,12 @@
       "pos": "n.",
       "glossZh": "表面处理效果",
       "pronunciationId": "w:finish#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -273,13 +273,46 @@
       "pos": "v.",
       "glossZh": "给表面做最后处理",
       "pronunciationId": "w:finish#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:finish#s7",
+      "pos": "adj.",
+      "glossZh": "筋疲力尽的",
+      "pronunciationId": "w:finish#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:finish#e-dc472394d3e450b7",
+          "text": "An hour into the climb, I was finished – physically broken, mentally defeated.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -288,6 +321,11 @@
       "reason": "养殖专业义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:finish-off",
+    "w:finish-up",
+    "w:finish-with"
+  ]
 }

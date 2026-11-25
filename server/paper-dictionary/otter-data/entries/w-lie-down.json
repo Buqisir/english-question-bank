@@ -1,0 +1,211 @@
+{
+  "entryId": "w:lie-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "lay down",
+    "lying down"
+  ],
+  "pattern": {
+    "tokens": [
+      "lie",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lie",
+        "down"
+      ],
+      [
+        "lay",
+        "down"
+      ],
+      [
+        "lying",
+        "down"
+      ],
+      [
+        "lain",
+        "down"
+      ],
+      [
+        "lies",
+        "down"
+      ],
+      [
+        "laid",
+        "down"
+      ],
+      [
+        "laying",
+        "down"
+      ],
+      [
+        "lays",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lie down",
+  "senses": [
+    {
+      "senseId": "w:lie-down#s1",
+      "pos": "短语",
+      "glossZh": "躺下",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lie-down#e-044a384866b4ceec",
+          "text": "Bent over my laptop while sitting on the bed in the corner of my room, I suddenly felt a pounding headache, and had to lie down.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 127
+          },
+          "parts": [
+            [
+              119,
+              127
+            ]
+          ],
+          "highlightRanges": [
+            [
+              119,
+              127
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-down#e-0ff6bb48dd8aede5",
+          "text": "lie down on them for sleep.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lie-down#e-dfa632e46eed70e4",
+          "text": "He rolled out his sleeping bag on the floor and lay down with Shyla by his bed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          },
+          "parts": [
+            [
+              48,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "过去式为 lay down。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:lie-down#s2",
+      "pos": "短语",
+      "glossZh": "懈怠；不尽责",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 lie down on the job。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lie-down#s3",
+      "pos": "短语",
+      "glossZh": "屈服；不作抵抗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

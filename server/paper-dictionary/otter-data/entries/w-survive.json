@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 81
+    "mock": 14
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 25
       },
       "folded": false,
       "examples": [
@@ -299,6 +299,6 @@
       "reason": "体育用语，可按挺过理解"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

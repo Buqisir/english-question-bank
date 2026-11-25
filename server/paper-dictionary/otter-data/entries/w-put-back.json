@@ -1,0 +1,291 @@
+{
+  "entryId": "w:put-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "back"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "puts",
+        "back"
+      ],
+      [
+        "putting",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sth) back",
+  "senses": [
+    {
+      "senseId": "w:put-back#s1",
+      "pos": "短语",
+      "glossZh": "把……放回原处",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-back#e-3c703e58c8c5f271",
+          "text": "“I was turning the page to get ready for the next page, but the draft wind from the turn caused the spare pages to fall off the stand,” Mr Titterton said, “Luckily I was able to catch them and put them back.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 193,
+            "end": 206
+          },
+          "parts": [
+            [
+              193,
+              196
+            ],
+            [
+              202,
+              206
+            ]
+          ],
+          "highlightRanges": [
+            [
+              193,
+              196
+            ],
+            [
+              202,
+              206
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-back#e-91cf2320d5270650",
+          "text": "Here are some measures that can make you put something back where it belongs.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 59
+          },
+          "parts": [
+            [
+              41,
+              44
+            ],
+            [
+              55,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              44
+            ],
+            [
+              55,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:put-back#s2",
+      "pos": "短语",
+      "glossZh": "使……恢复原状",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:put-back#e-eecca71d9db60d3e",
+          "text": "But the plan won’t put everything back the way it was.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 38
+          },
+          "parts": [
+            [
+              19,
+              22
+            ],
+            [
+              34,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              22
+            ],
+            [
+              34,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-back#e-44d812af307cc932",
+          "text": "Put everything back to the original state.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2026-09-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测英语",
+            "groupId": "group:paper-mock-hubei-five-cities-2026-09-first-quality-monitoring:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-hubei-five-cities-2026-09-first-quality-monitoring:33#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 19
+          },
+          "parts": [
+            [
+              0,
+              3
+            ],
+            [
+              15,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              3
+            ],
+            [
+              15,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "如 put sth back the way it was。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:put-back#s3",
+      "pos": "短语",
+      "glossZh": "推迟（活动、约定等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-back#s4",
+      "pos": "短语",
+      "glossZh": "把钟表拨慢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-back#s5",
+      "pos": "短语",
+      "glossZh": "很快喝下（酒等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

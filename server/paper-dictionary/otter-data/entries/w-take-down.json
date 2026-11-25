@@ -1,0 +1,247 @@
+{
+  "entryId": "w:take-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking down",
+    "took down"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "take",
+        "down"
+      ],
+      [
+        "take",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "taking",
+        "down"
+      ],
+      [
+        "took",
+        "down"
+      ],
+      [
+        "taken",
+        "down"
+      ],
+      [
+        "takes",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:take-down#s1",
+      "pos": "短语",
+      "glossZh": "从高处取下；摘下悬挂物",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-down#e-e02db7f464d76287",
+          "text": "I took down one of the dictionaries, and we read it together for a few minutes before I handed it to him.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 11
+          },
+          "parts": [
+            [
+              2,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-down#s2",
+      "pos": "短语",
+      "glossZh": "打倒；击败",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-down#e-89271255f879e444",
+          "text": "Who are you to take us down, eh?”",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 27
+          },
+          "parts": [
+            [
+              15,
+              19
+            ],
+            [
+              23,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              19
+            ],
+            [
+              23,
+              27
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-down#s3",
+      "pos": "短语",
+      "glossZh": "拆除；砍倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-down#e-258ce126ace7297b",
+          "text": "It pained me to take down the old sugar maple.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-down#s4",
+      "pos": "短语",
+      "glossZh": "记下（话语、号码等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-down#s5",
+      "pos": "短语",
+      "glossZh": "撤下（网上发布的内容）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

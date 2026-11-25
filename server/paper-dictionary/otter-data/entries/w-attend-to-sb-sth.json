@@ -1,0 +1,201 @@
+{
+  "entryId": "w:attend-to-sb-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "attend to"
+  ],
+  "pattern": {
+    "tokens": [
+      "attend",
+      "to",
+      {
+        "slot": "sb/sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "attend",
+        "to",
+        {
+          "slot": "sb/sth"
+        }
+      ],
+      [
+        "attend",
+        "to"
+      ],
+      [
+        "attended",
+        "to"
+      ],
+      [
+        "attending",
+        "to"
+      ],
+      [
+        "attends",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "attended to",
+      "tags": []
+    },
+    {
+      "form": "attending to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "attend to sb/sth",
+  "senses": [
+    {
+      "senseId": "w:attend-to-sb-sth#s1",
+      "pos": "短语",
+      "glossZh": "留意并处理（事务或需求）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:attend#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:attend-to-sb-sth#e-582c856c9fdcae23",
+          "text": "The act of attending to one’s environment is an exercise that can enhance creativity and observational skills.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          },
+          "parts": [
+            [
+              11,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:attend-to-sb-sth#e-1a0e884de1356117",
+          "text": "The key is to stay balanced and to attend to own emotional needs when it is necessary.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 44
+          },
+          "parts": [
+            [
+              35,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:attend-to-sb-sth#e-57bd1bcbe08d26a3",
+          "text": "There are no conflicts or maintenance that need to be attended to.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-import-20261026-n090:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:attend-to-sb-sth#s2",
+      "pos": "短语",
+      "glossZh": "照料；接待（某人）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

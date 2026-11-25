@@ -58,7 +58,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 9
+    "mock": 2
   },
   "senses": [
     {
@@ -69,7 +69,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -178,6 +178,6 @@
       "reason": "会计术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

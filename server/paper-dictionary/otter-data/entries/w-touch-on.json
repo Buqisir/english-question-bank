@@ -1,0 +1,122 @@
+{
+  "entryId": "w:touch-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "touch",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "touch",
+        "on"
+      ],
+      [
+        "touched",
+        "on"
+      ],
+      [
+        "touches",
+        "on"
+      ],
+      [
+        "touching",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "touched on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "touch on sth",
+  "senses": [
+    {
+      "senseId": "w:touch-on#s1",
+      "pos": "短语",
+      "glossZh": "简要提及；略谈",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:touch#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:touch-on#e-c3a40c4457cfee3c",
+          "text": "The researchers touched on this in their article published in Scientific American, in which they advise avoiding procrastination and pre-crastination by decomposing your large tasks into smaller ones.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          },
+          "parts": [
+            [
+              16,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:touch-on#s2",
+      "pos": "短语",
+      "glossZh": "在某处短暂停留",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

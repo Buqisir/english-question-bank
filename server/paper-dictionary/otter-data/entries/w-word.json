@@ -59,8 +59,8 @@
     "mock": 849
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 848
+    "gaokao": 2,
+    "mock": 659
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 89,
-        "mock": 0
+        "mock": 137
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -266,7 +266,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -329,74 +329,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:word#s8",
-      "pos": "短语",
-      "glossZh": "口耳相传",
-      "pronunciationId": "w:word#p-main",
-      "note": "word of mouth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:word#e-69735fd18cf91903",
-          "text": "Human beings have always loved reviews: word of mouth has long been regarded as one of the most valuable marketing tools available to a company.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 44
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:word#s9",
-      "pos": "短语",
-      "glossZh": "换句话说",
-      "pronunciationId": "w:word#p-main",
-      "note": "in other words。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:word#e-42505acf6ff5ea10",
-          "text": "In other words, a toy’s physical traits (特征) did not dictate how it would be used.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:5",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 9,
-            "end": 14
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -405,6 +337,17 @@
       "reason": "专名、宗教、俚语或古旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:big-word",
+    "w:have-a-word",
+    "w:magic-word",
+    "w:say-the-word",
+    "w:spread-the-word",
+    "w:word-of-mouth",
+    "w:word-on-the-street"
+  ]
 }

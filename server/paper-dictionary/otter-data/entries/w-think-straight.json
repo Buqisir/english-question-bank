@@ -1,0 +1,102 @@
+{
+  "entryId": "w:think-straight",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "think",
+      "straight"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "think",
+        "straight"
+      ],
+      [
+        "thinking",
+        "straight"
+      ],
+      [
+        "thinks",
+        "straight"
+      ],
+      [
+        "thought",
+        "straight"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "think straight",
+  "senses": [
+    {
+      "senseId": "w:think-straight#s1",
+      "pos": "短语",
+      "glossZh": "清醒而有条理地思考",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:think-straight#e-eb30ed238912acf4",
+          "text": "Gillian Mills, a high school teacher with 20 years of classroom experience, explains, “When students feel too stressed to think straight, we often suggest a walk outside.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 136
+          },
+          "parts": [
+            [
+              122,
+              136
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              136
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

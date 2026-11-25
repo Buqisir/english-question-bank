@@ -1,0 +1,169 @@
+{
+  "entryId": "w:face-to-face-with-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "face",
+      "to",
+      "face",
+      "with",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "face",
+        "to",
+        "face",
+        "with",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "face to face with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "face to face with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:face-to-face-with-sb#s1",
+      "pos": "短语",
+      "glossZh": "与……面对面；当面遇见",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:face#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:face-to-face-with-sb#e-d8272074bb06e5fe",
+          "text": "When I'm face to face with a polar bear, I like it to be through a camera with a telephoto lens.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 26
+          },
+          "parts": [
+            [
+              9,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:face-to-face-with-sb#e-11b69013d82c6a22",
+          "text": "I’d come face to face with the homeless: How should I act?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 26
+          },
+          "parts": [
+            [
+              9,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:face-to-face-with-sb#e-357cbf97908c9a4e",
+          "text": "According to her study, teenagers who text the most are also those who spend the most time face to face with friends.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 108
+          },
+          "parts": [
+            [
+              91,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

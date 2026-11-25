@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 128
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 127
       },
       "folded": false,
       "examples": [
@@ -116,19 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:camera#s2",
-      "pos": "短语",
-      "glossZh": "在镜头前；被拍摄",
-      "pronunciationId": "w:camera#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -137,6 +124,11 @@
       "reason": "行业或古义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-camera"
+  ]
 }

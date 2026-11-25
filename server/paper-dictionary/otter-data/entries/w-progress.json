@@ -78,8 +78,8 @@
     "mock": 178
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 176
+    "gaokao": 1,
+    "mock": 16
   },
   "senses": [
     {
@@ -90,7 +90,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 78
       },
       "folded": false,
       "examples": [
@@ -162,7 +162,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 1
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -229,70 +229,16 @@
       ]
     },
     {
-      "senseId": "w:progress#s3",
-      "pos": "短语",
-      "glossZh": "正在进行",
-      "pronunciationId": "w:progress#p-main",
-      "note": "in progress。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:progress#e-b64f2586820d4c2e",
-          "text": "This can be a work in progress rather than a completed piece.",
-          "source": {
-            "paperId": "paper-gaokao-2026-zhejiang-jan",
-            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
-            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 15,
-              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:8",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:progress#e-79b2c09b3ca530be",
-          "text": "Road work is in progress.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.long-form",
-            "locator": {
-              "question": 19,
-              "questionId": "question:listening:19",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 24
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:progress#s4",
       "pos": "v.",
       "glossZh": "继续推进",
       "pronunciationId": "w:progress#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 14
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -300,12 +246,12 @@
       "pos": "v.",
       "glossZh": "进步",
       "pronunciationId": "w:progress#p-verb",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -315,6 +261,12 @@
       "reason": "历史专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-progress",
+    "w:work-in-progress"
+  ]
 }

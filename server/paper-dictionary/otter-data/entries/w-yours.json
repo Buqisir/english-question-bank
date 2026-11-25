@@ -35,8 +35,8 @@
     "mock": 131
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 128
+    "gaokao": 11,
+    "mock": 109
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 22
       },
       "folded": false,
       "examples": [
@@ -109,78 +109,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:yours#s2",
-      "pos": "短语",
-      "glossZh": "信末署名前的客套语",
-      "pronunciationId": "w:yours#p-main",
-      "note": "Yours / Yours sincerely / Yours truly。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:yours#e-3e4530b121ab075f",
-          "text": "Yours,",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-application",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-application:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:yours#e-d9b54f9d9190f502",
-          "text": "Yours sincerely,",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-application",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "writing-application-8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:yours#e-bda749aa050b8288",
-          "text": "Yours truly,",
-          "source": {
-            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
-            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
-            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application:9",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -189,6 +117,12 @@
       "reason": "真题 g0 通常应写 your learning kung fu 或 you learning kung fu"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:yours-sincerely",
+    "w:yours-truly"
+  ]
 }

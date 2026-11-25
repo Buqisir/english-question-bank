@@ -68,8 +68,8 @@
     "mock": 276
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 274
+    "gaokao": 6,
+    "mock": 128
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -152,7 +152,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 55
       },
       "folded": false,
       "examples": [
@@ -224,7 +224,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -289,175 +289,16 @@
       ]
     },
     {
-      "senseId": "w:draw#s4",
-      "pos": "短语",
-      "glossZh": "汲取；利用；取材于",
-      "pronunciationId": "w:draw#p-main",
-      "note": "常用 draw on sth 或 draw sth from sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:draw#e-58be064260b55768",
-          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "reading-a-9",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 116,
-            "end": 121
-          }
-        },
-        {
-          "exampleId": "w:draw#e-69a45ee77235e44a",
-          "text": "Even though this technique won’t work for everyone, it helps many people get a good store of ideas to draw on.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 102,
-            "end": 106
-          }
-        },
-        {
-          "exampleId": "w:draw#e-42218d15b35f62d1",
-          "text": "In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:draw#s5",
-      "pos": "短语",
-      "glossZh": "起草；拟订",
-      "pronunciationId": "w:draw#p-main",
-      "note": "draw up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:draw#e-7c9e189e7f4bc6ed",
-          "text": "We started to meet regularly to draw up our plans.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 14,
-              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:14",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 32,
-            "end": 36
-          }
-        },
-        {
-          "exampleId": "w:draw#e-ce4c4c66baf9fdea",
-          "text": "So Shah wrote one herself, drawing up the blueprints for such a company.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:draw#s6",
-      "pos": "短语",
-      "glossZh": "临近；接近",
-      "pronunciationId": "w:draw#p-main",
-      "note": "draw near。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:draw#e-007c668cc46e7daf",
-          "text": "As our __47__ day drew near, I settled on a new price ($0) and",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 18,
-            "end": 22
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:draw#s7",
       "pos": "v.",
       "glossZh": "拉；拖；拉动",
       "pronunciationId": "w:draw#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -468,7 +309,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -498,12 +339,12 @@
       "pos": "n. / v.",
       "glossZh": "平局；打成平手",
       "pronunciationId": "w:draw#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -511,13 +352,79 @@
       "pos": "n.",
       "glossZh": "吸引人的事物",
       "pronunciationId": "w:draw#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:draw#s11",
+      "pos": "v.",
+      "glossZh": "（draw a breath）吸气；吸一口气",
+      "pronunciationId": "w:draw#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:draw#e-fe02efd0b30c98f0",
+          "text": "Paragraph 2: Behind the microphone on that big day, I drew a deep breath and started.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:draw#s12",
+      "pos": "v.",
+      "glossZh": "（draw sb out of their shell）使某人不再拘谨",
+      "pronunciationId": "w:draw#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:draw#e-75dda0661ecc7596",
+          "text": "MacColl was enrolled in dance lessons by her parents, initially to draw her out of her shell.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -526,6 +433,20 @@
       "reason": "专业语境或俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:draw-a-blank",
+    "w:draw-attention",
+    "w:draw-back",
+    "w:draw-into",
+    "w:draw-near",
+    "w:draw-on-sth",
+    "w:draw-sb-in",
+    "w:draw-sb-out-of-their-shell",
+    "w:draw-sth-from-sth",
+    "w:draw-up"
+  ]
 }

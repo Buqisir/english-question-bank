@@ -1,0 +1,131 @@
+{
+  "entryId": "w:stock-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "stock",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stock",
+        "up"
+      ],
+      [
+        "stocked",
+        "up"
+      ],
+      [
+        "stocking",
+        "up"
+      ],
+      [
+        "stocks",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stock up",
+  "senses": [
+    {
+      "senseId": "w:stock-up#s1",
+      "pos": "短语",
+      "glossZh": "备足；囤积（物资）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:stock-up#e-c577bb46b52966a2",
+          "text": "Along with this quick and simple access to almost anything people want or need comes the impulse（冲动）to stock up on trendy or useful-looking products.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 111
+          },
+          "parts": [
+            [
+              103,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "储备的东西常用 on 引出。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:stock-up#s2",
+      "pos": "短语",
+      "glossZh": "（腿等）肿起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见，常指马腿肿胀。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stock-up#s3",
+      "pos": "短语",
+      "glossZh": "挖除；连根挖出",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

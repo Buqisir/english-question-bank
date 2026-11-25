@@ -1,0 +1,97 @@
+{
+  "entryId": "w:scare-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "scare",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "scare",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "scare away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "scare sb/sth away",
+  "senses": [
+    {
+      "senseId": "w:scare-away#s1",
+      "pos": "短语",
+      "glossZh": "把人或动物吓跑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:scare#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:scare-away#e-4edd82eb65d305b7",
+          "text": "For instance, almost all animals have distinct vocals（声音）that they rely on to either ask for help, scare away any dangerous animals or look for shelter.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 109
+          },
+          "parts": [
+            [
+              99,
+              109
+            ]
+          ],
+          "highlightRanges": [
+            [
+              99,
+              109
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

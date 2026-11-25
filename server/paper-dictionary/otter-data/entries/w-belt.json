@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 6
+    "mock": 1
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -194,7 +194,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -258,40 +258,6 @@
       ]
     },
     {
-      "senseId": "w:belt#s4",
-      "pos": "短语",
-      "glossZh": "已经掌握；已有（经验、成就）",
-      "pronunciationId": "w:belt#p-main",
-      "note": "under one’s belt。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:belt#e-a5c7cd366ac3224a",
-          "text": "He was still getting English under his belt, and, having not won in the matter, he announced, “I want to go back to Russia.”",
-          "source": {
-            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
-            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
-            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:belt#s5",
       "pos": "v.",
       "glossZh": "大声唱出；用力击打",
@@ -312,6 +278,11 @@
       "reason": "专业、俚语或专名。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:under-ones-belt"
+  ]
 }

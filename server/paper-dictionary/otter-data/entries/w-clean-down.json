@@ -1,0 +1,120 @@
+{
+  "entryId": "w:clean-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "clean",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "clean",
+        "down"
+      ],
+      [
+        "cleaned",
+        "down"
+      ],
+      [
+        "cleaning",
+        "down"
+      ],
+      [
+        "cleans",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "cleaned down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "clean sth down",
+  "senses": [
+    {
+      "senseId": "w:clean-down#s1",
+      "pos": "短语",
+      "glossZh": "彻底清洁（设备或表面）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:clean-down#e-d552277bbdb54cc8",
+          "text": "Are machines and weight-lifting equipment cleaned down after each use, at least once a day?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          },
+          "parts": [
+            [
+              42,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              54
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:clean-down#s2",
+      "pos": "短语",
+      "glossZh": "（金融）还清循环信贷余额",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

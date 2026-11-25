@@ -1,0 +1,74 @@
+{
+  "entryId": "w:drive-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drive",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drive",
+        "up"
+      ],
+      [
+        "driven",
+        "up"
+      ],
+      [
+        "drives",
+        "up"
+      ],
+      [
+        "driving",
+        "up"
+      ],
+      [
+        "drove",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drive sth up",
+  "senses": [
+    {
+      "senseId": "w:drive-up#s1",
+      "pos": "短语",
+      "glossZh": "推高（价格、成本、需求等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

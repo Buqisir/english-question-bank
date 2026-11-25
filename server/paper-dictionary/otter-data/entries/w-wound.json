@@ -75,7 +75,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 12
+    "mock": 4
   },
   "senses": [
     {
@@ -86,7 +86,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -230,7 +230,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -322,74 +322,6 @@
       "examples": []
     },
     {
-      "senseId": "w:wound#s6",
-      "pos": "短语",
-      "glossZh": "最终处于某种境地",
-      "pronunciationId": "w:wound#p-past",
-      "note": "wind up 的过去式。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wound#e-67650a2af6a24f45",
-          "text": "On the Neighborhood, Rogers asked Jeff straightforwardly about the mechanics of his wheelchair, and how he wound up in it.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 107,
-            "end": 112
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:wound#s7",
-      "pos": "短语",
-      "glossZh": "逐渐结束",
-      "pronunciationId": "w:wound#p-past",
-      "note": "wind down 的过去式。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:wound#e-d7ae844cb1474051",
-          "text": "As the meal wound down, Mark signaled the waiter over and asked him for the bill, intending to split the cost equally and pay his own share.",
-          "source": {
-            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
-            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
-            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 12,
-            "end": 17
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:wound#s8",
       "pos": "v.",
       "glossZh": "缠绕",
@@ -410,6 +342,8 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

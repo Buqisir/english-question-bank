@@ -1,0 +1,73 @@
+{
+  "entryId": "w:hang-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hanging in"
+  ],
+  "pattern": {
+    "tokens": [
+      "hang",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hang",
+        "in"
+      ],
+      [
+        "hanging",
+        "in"
+      ],
+      [
+        "hangs",
+        "in"
+      ],
+      [
+        "hung",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hang in",
+  "senses": [
+    {
+      "senseId": "w:hang-in#s1",
+      "pos": "短语",
+      "glossZh": "坚持住；撑下去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hang in there 鼓励别人。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

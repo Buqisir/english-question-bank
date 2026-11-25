@@ -1,0 +1,426 @@
+{
+  "entryId": "w:wake-sb-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "wake up"
+  ],
+  "pattern": {
+    "tokens": [
+      "wake",
+      {
+        "slot": "sb"
+      },
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "wake",
+        {
+          "slot": "sb"
+        },
+        "up"
+      ],
+      [
+        "wake",
+        "up"
+      ],
+      [
+        "wake",
+        {
+          "slot": "sb/sth"
+        },
+        "up"
+      ],
+      [
+        "waked",
+        "up"
+      ],
+      [
+        "wakes",
+        "up"
+      ],
+      [
+        "waking",
+        "up"
+      ],
+      [
+        "woke",
+        "up"
+      ],
+      [
+        "woken",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "wakes up",
+      "tags": []
+    },
+    {
+      "form": "waking up",
+      "tags": []
+    },
+    {
+      "form": "woke up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "wake (sb) up",
+  "senses": [
+    {
+      "senseId": "w:wake-sb-up#s1",
+      "pos": "短语",
+      "glossZh": "叫醒某人；使某人醒来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s45"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wake-sb-up#e-6c43c413b4feaa9e",
+          "text": "The twins carried the breakfast upstairs and woke their mother up.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 65
+          },
+          "parts": [
+            [
+              45,
+              49
+            ],
+            [
+              63,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              49
+            ],
+            [
+              63,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-sb-up#e-729e146fb55cf53c",
+          "text": "Just be on the lookout for sports teams and screaming fans waking you up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 72
+          },
+          "parts": [
+            [
+              59,
+              65
+            ],
+            [
+              70,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              65
+            ],
+            [
+              70,
+              72
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-sb-up#e-63ecd28c49b603d6",
+          "text": "That night, the familiar rattle (哐当声) of metal wheels woke her up.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          },
+          "parts": [
+            [
+              54,
+              58
+            ],
+            [
+              63,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              58
+            ],
+            [
+              63,
+              65
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:wake-sb-up#s2",
+      "pos": "短语",
+      "glossZh": "使某人警醒，意识到问题",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s80"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wake-sb-up#e-05fcc47e179e0bf0",
+          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 30
+          },
+          "parts": [
+            [
+              23,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-sb-up#e-53f170e230c33485",
+          "text": "But seeing my son repeat my previous behavior by wrapping a superhero woke me up.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 80
+          },
+          "parts": [
+            [
+              70,
+              74
+            ],
+            [
+              78,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              74
+            ],
+            [
+              78,
+              80
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:wake-sb-up#s3",
+      "pos": "短语",
+      "glossZh": "醒来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s30"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:wake-sb-up#e-921770e3d3832b26",
+          "text": "Eric woke up a little later when he heard children playing outside.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          },
+          "parts": [
+            [
+              5,
+              12
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              12
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-sb-up#e-5783463d72509b4d",
+          "text": "When he woke up and found himself alone, the 4-year-old decided his brother might be on the train he saw in front of him – so he got on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          },
+          "parts": [
+            [
+              8,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:wake-sb-up#e-23e19ec10e6f0bf3",
+          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 152
+          },
+          "parts": [
+            [
+              145,
+              152
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              152
+            ]
+          ]
+        }
+      ],
+      "note": "不带宾语。",
+      "counts": {
+        "gaokao": 5,
+        "mock": 36
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,127 @@
+{
+  "entryId": "w:look-down-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking down on"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "down",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "down",
+        "on"
+      ],
+      [
+        "looking",
+        "down",
+        "on"
+      ],
+      [
+        "looked",
+        "down",
+        "on"
+      ],
+      [
+        "looks",
+        "down",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "look down on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look down on sb/sth",
+  "senses": [
+    {
+      "senseId": "w:look-down-on#s1",
+      "pos": "短语",
+      "glossZh": "看不起；轻视",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-down-on#e-76c40c54492c4910",
+          "text": "He didn’t look down on others; he was just shy.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 22
+          },
+          "parts": [
+            [
+              10,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:look-down-on#s2",
+      "pos": "短语",
+      "glossZh": "从高处俯视",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

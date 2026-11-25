@@ -1,0 +1,199 @@
+{
+  "entryId": "w:go-wrong",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "went wrong"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "wrong"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "wrong"
+      ],
+      [
+        "went",
+        "wrong"
+      ],
+      [
+        "goes",
+        "wrong"
+      ],
+      [
+        "going",
+        "wrong"
+      ],
+      [
+        "gone",
+        "wrong"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go wrong",
+  "senses": [
+    {
+      "senseId": "w:go-wrong#s1",
+      "pos": "短语",
+      "glossZh": "出差错；出岔子",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:go#s22",
+        "w:wrong#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-wrong#e-d8848d5c0a0f944c",
+          "text": "But like all performances, there are moments when things go wrong.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          },
+          "parts": [
+            [
+              57,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              65
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-wrong#e-4aa0f0b48968bd34",
+          "text": "Something could go wrong, though, according to a new study.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-wrong#e-0e66ca5157d227a8",
+          "text": "The harder I try to get this done quickly, the more things go wrong!” said he, getting angry.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 67
+          },
+          "parts": [
+            [
+              59,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              67
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      }
+    },
+    {
+      "senseId": "w:go-wrong#s2",
+      "pos": "短语",
+      "glossZh": "（机器、设备等）发生故障",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-wrong#s3",
+      "pos": "短语",
+      "glossZh": "（人）误入歧途；变坏",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -62,8 +62,8 @@
     "mock": 791
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 790
+    "gaokao": 25,
+    "mock": 695
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 77,
-        "mock": 0
+        "mock": 62
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -287,7 +287,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -340,7 +340,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -373,7 +373,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -445,7 +445,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -498,7 +498,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -531,7 +531,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -571,199 +571,6 @@
           "target": {
             "start": 102,
             "end": 107
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:place#s10",
-      "pos": "短语",
-      "glossZh": "发生；举行",
-      "pronunciationId": "w:place#p-main",
-      "note": "take place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 17,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:place#e-3e479e3b0045e37c",
-          "text": "Where does the conversation probably take place?",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
-            "locator": {
-              "question": 1,
-              "questionId": "question:listening:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 42,
-            "end": 47
-          }
-        },
-        {
-          "exampleId": "w:place#e-ab9d96483f0636ae",
-          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 21,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:place#e-d26f9f88ce0196fe",
-          "text": "Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 49
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:place#s11",
-      "pos": "短语",
-      "glossZh": "起初；本来",
-      "pronunciationId": "w:place#p-main",
-      "note": "in the first place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:place#e-64a379a459e0e3fc",
-          "text": "Do your part to preserve what makes a destination special in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 71,
-            "end": 76
-          }
-        },
-        {
-          "exampleId": "w:place#e-1d8df57bbf41f584",
-          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 201,
-            "end": 206
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:place#s12",
-      "pos": "短语",
-      "glossZh": "不自在；不合场合",
-      "pronunciationId": "w:place#p-main",
-      "note": "out of place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:place#e-0f7cdab8911b8307",
-          "text": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 82,
-            "end": 87
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:place#s13",
-      "pos": "短语",
-      "glossZh": "落实；建立好",
-      "pronunciationId": "w:place#p-main",
-      "note": "put in place。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:place#e-88d490b3175ab554",
-          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 50
           }
         }
       ]
@@ -810,6 +617,23 @@
       "reason": "固定专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:age-in-place",
+    "w:fall-into-place",
+    "w:in-place",
+    "w:in-place-of",
+    "w:in-the-first-place",
+    "w:no-place",
+    "w:out-of-place",
+    "w:place-an-order",
+    "w:place-to-be",
+    "w:put-in-place",
+    "w:put-sth-in-place",
+    "w:take-place",
+    "w:take-the-place-of"
+  ]
 }

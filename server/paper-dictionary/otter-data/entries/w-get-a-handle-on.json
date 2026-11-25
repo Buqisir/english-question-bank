@@ -1,0 +1,123 @@
+{
+  "entryId": "w:get-a-handle-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "a",
+      "handle",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "a",
+        "handle",
+        "on"
+      ],
+      [
+        "gets",
+        "a",
+        "handle",
+        "on"
+      ],
+      [
+        "getting",
+        "a",
+        "handle",
+        "on"
+      ],
+      [
+        "got",
+        "a",
+        "handle",
+        "on"
+      ],
+      [
+        "gotten",
+        "a",
+        "handle",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get a handle on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get a handle on sth",
+  "senses": [
+    {
+      "senseId": "w:get-a-handle-on#s1",
+      "pos": "短语",
+      "glossZh": "对某事有了基本了解；开始掌握要领",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-a-handle-on#e-280c535aaf6a828b",
+          "text": "If you’re just starting out, a beginner’s AI course will help you get a handle on what AI is and how you can start using it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 81
+          },
+          "parts": [
+            [
+              66,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              66,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -95,7 +95,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 22
+    "mock": 5
   },
   "senses": [
     {
@@ -106,7 +106,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 2
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -170,59 +170,6 @@
       ]
     },
     {
-      "senseId": "w:shy#s2",
-      "pos": "短语",
-      "glossZh": "回避",
-      "pronunciationId": "w:shy#p-main",
-      "note": "shy away from。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shy#e-c128a06ef261bcf8",
-          "text": "Hanley-Dafoe never shies away from the pressing issues that can arouse hopelessness, such as the climate crisis, and she demonstrates how hope has always fueled movements for change.",
-          "source": {
-            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
-            "paperTitle": "厦门市2026届高中毕业班模拟测试",
-            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 24
-          }
-        },
-        {
-          "exampleId": "w:shy#e-71e747a708c85cb2",
-          "text": "Green has never shied away from challenging topics.",
-          "source": {
-            "paperId": "paper-mock-hunan-yali-2026-first",
-            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
-            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-b:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 16,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:shy#s3",
       "pos": "v.",
       "glossZh": "受惊后突然退开",
@@ -257,6 +204,11 @@
       "reason": "游戏竞技专门义或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:shy-away-from"
+  ]
 }

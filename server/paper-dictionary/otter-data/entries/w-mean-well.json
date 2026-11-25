@@ -1,0 +1,143 @@
+{
+  "entryId": "w:mean-well",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "means well"
+  ],
+  "pattern": {
+    "tokens": [
+      "mean",
+      "well"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mean",
+        "well"
+      ],
+      [
+        "means",
+        "well"
+      ],
+      [
+        "meaning",
+        "well"
+      ],
+      [
+        "meant",
+        "well"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "meant well",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mean well",
+  "senses": [
+    {
+      "senseId": "w:mean-well#s1",
+      "pos": "短语",
+      "glossZh": "出于好意；本意是好的",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mean#s5",
+        "w:well#s12"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:mean-well#e-d19f4c817d951475",
+          "text": "I knew the coach meant well – he thought he was doing the right thing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 27
+          },
+          "parts": [
+            [
+              17,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:mean-well#e-19afd8a004194a8e",
+          "text": "She may look small and scary, but she means well.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 48
+          },
+          "parts": [
+            [
+              38,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              48
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

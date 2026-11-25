@@ -67,8 +67,8 @@
     "mock": 979
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 979
+    "gaokao": 34,
+    "mock": 808
   },
   "senses": [
     {
@@ -79,7 +79,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 96,
-        "mock": 0
+        "mock": 121
       },
       "folded": false,
       "examples": [
@@ -144,61 +144,6 @@
       ]
     },
     {
-      "senseId": "w:give#s2",
-      "pos": "短语",
-      "glossZh": "打电话",
-      "pronunciationId": "w:give#p-main",
-      "note": "give sb a call。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:give#e-a0695db4ed2cd207",
-          "text": "Give John a phone call.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
-            "locator": {
-              "question": 16,
-              "questionId": "question:listening:16",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        },
-        {
-          "exampleId": "w:give#e-e555d7607dd861c6",
-          "text": "Give Sally a call.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jan",
-            "paperTitle": "2022年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
-            "locator": {
-              "question": 17,
-              "questionId": "question:listening:17",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 4
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:give#s3",
       "pos": "v.",
       "glossZh": "发表（讲话）",
@@ -206,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -278,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -364,7 +309,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -436,7 +381,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -508,7 +453,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -581,7 +526,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -640,182 +585,6 @@
           "target": {
             "start": 133,
             "end": 138
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:give#s10",
-      "pos": "短语",
-      "glossZh": "放弃",
-      "pronunciationId": "w:give#p-main",
-      "note": "give up 或 give up on。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 19,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:give#e-e4ce22e4a4781068",
-          "text": "Right as I was about to give up, a Mexican family in a small truck pulled over, and the father bounded out.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 24,
-            "end": 28
-          }
-        },
-        {
-          "exampleId": "w:give#e-e50d50c23680a855",
-          "text": "He gave up his hobby.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2021-national-a:28",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:give#e-f39f94f288820822",
-          "text": "“Hold on: Consider failure as a __50__ to success and never give up.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 60,
-            "end": 64
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:give#s11",
-      "pos": "短语",
-      "glossZh": "排放",
-      "pronunciationId": "w:give#p-main",
-      "note": "give off。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:give#e-38c2ca51a3948b24",
-          "text": "I heard somewhere that electronics and appliances give off 90% of their carbon footprint after they leave the factory.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:give#s12",
-      "pos": "短语",
-      "glossZh": "让位于",
-      "pronunciationId": "w:give#p-main",
-      "note": "give way to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:give#e-c44b9749d94503c4",
-          "text": "When I finally finished it, the thought of winning had given way to the enjoyment of writing.",
-          "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 60
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:give#s13",
-      "pos": "短语",
-      "glossZh": "回馈",
-      "pronunciationId": "w:give#p-main",
-      "note": "give back to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:give#e-566521c878283dac",
-          "text": "Consider giving back to the communities you’re visiting.",
-          "source": {
-            "paperId": "paper-gaokao-2024-ii",
-            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
-            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2024-ii:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 9,
-            "end": 15
           }
         }
       ]
@@ -900,6 +669,28 @@
       "reason": "未见相关语料且通常属 give sth some time 等结构"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:give-away",
+    "w:give-back",
+    "w:give-back-to",
+    "w:give-birth",
+    "w:give-birth-to",
+    "w:give-in",
+    "w:give-notice",
+    "w:give-off",
+    "w:give-out",
+    "w:give-rise-to",
+    "w:give-sb-a-call",
+    "w:give-sb-a-dirty-look",
+    "w:give-the-green-light",
+    "w:give-up",
+    "w:give-up-on",
+    "w:give-voice",
+    "w:give-way",
+    "w:give-way-to"
+  ]
 }

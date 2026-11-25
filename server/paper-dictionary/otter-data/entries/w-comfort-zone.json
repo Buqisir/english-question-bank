@@ -1,0 +1,155 @@
+{
+  "entryId": "w:comfort-zone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "comfort",
+      "zone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "comfort",
+        "zone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "comfort zone",
+  "senses": [
+    {
+      "senseId": "w:comfort-zone#s1",
+      "pos": "短语",
+      "glossZh": "舒适区；让人感到自在的熟悉环境或范围",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:comfort#s4",
+        "w:zone#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:comfort-zone#e-28247377f771f373",
+          "text": "Walking at night-time is a great way to step out of your comfort zone.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 69
+          },
+          "parts": [
+            [
+              57,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              57,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:comfort-zone#e-cab7fba0f80b9e66",
+          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 137,
+            "end": 149
+          },
+          "parts": [
+            [
+              137,
+              149
+            ]
+          ],
+          "highlightRanges": [
+            [
+              137,
+              149
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:comfort-zone#e-4ddafdbef5fdca06",
+          "text": "When I am universally agreeable, I rarely have to go outside my comfort zone in interpersonal dynamics.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 76
+          },
+          "parts": [
+            [
+              64,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

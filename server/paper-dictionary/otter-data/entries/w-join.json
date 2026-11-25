@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 248
+    "mock": 73
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 17,
-        "mock": 0
+        "mock": 72
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 68
       },
       "folded": false,
       "examples": [
@@ -284,12 +284,12 @@
       "pos": "v.",
       "glossZh": "连接；接合",
       "pronunciationId": "w:join#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 6
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -297,12 +297,12 @@
       "pos": "v.",
       "glossZh": "汇合",
       "pronunciationId": "w:join#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 3
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -317,40 +317,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:join#s7",
-      "pos": "短语",
-      "glossZh": "联手",
-      "pronunciationId": "w:join#p-main",
-      "note": "join forces。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:join#e-89257afce89d043b",
-          "text": "Students, parents, and teachers from Colombo schools joined forces against us, saying they wouldn’t allow the cup to be taken out of Colombo.",
-          "source": {
-            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
-            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
-            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 53,
-            "end": 59
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -359,6 +325,14 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:join-forces",
+    "w:join-in",
+    "w:join-the-club",
+    "w:join-up"
+  ]
 }

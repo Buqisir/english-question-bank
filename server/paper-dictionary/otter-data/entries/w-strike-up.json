@@ -1,0 +1,134 @@
+{
+  "entryId": "w:strike-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strike",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        "up"
+      ],
+      [
+        "strikes",
+        "up"
+      ],
+      [
+        "striking",
+        "up"
+      ],
+      [
+        "struck",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "striking up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike up",
+  "senses": [
+    {
+      "senseId": "w:strike-up#s1",
+      "pos": "短语",
+      "glossZh": "主动攀谈；开始建立关系",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:strike-up#e-ec338077fb53f425",
+          "text": "Fraser’s team of volunteers prepared the items as recollection is thought to be a powerful tool for striking up much-needed conversation in the elderly.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 111
+          },
+          "parts": [
+            [
+              100,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              111
+            ]
+          ]
+        }
+      ],
+      "note": "常接 a conversation、a friendship。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:strike-up#s2",
+      "pos": "短语",
+      "glossZh": "开始演奏；（音乐）响起",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:strike-up#s3",
+      "pos": "短语",
+      "glossZh": "敲压金属板使其成形",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

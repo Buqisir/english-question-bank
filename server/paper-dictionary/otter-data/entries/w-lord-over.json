@@ -1,0 +1,99 @@
+{
+  "entryId": "w:lord-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lord",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lord",
+        "over"
+      ],
+      [
+        "lorded",
+        "over"
+      ],
+      [
+        "lording",
+        "over"
+      ],
+      [
+        "lords",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lord over sb/sth",
+  "senses": [
+    {
+      "senseId": "w:lord-over#s1",
+      "pos": "短语",
+      "glossZh": "盛气凌人地支配；对人摆架子",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见用法为 lord it over sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lord-over#s2",
+      "pos": "短语",
+      "glossZh": "高踞于某处上方；俯瞰周围",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可用于山峰、城堡等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lord-over#s3",
+      "pos": "短语",
+      "glossZh": "拿自己的优势或成就压人；向某人炫耀",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用 lord sth over sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

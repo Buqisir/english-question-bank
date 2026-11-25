@@ -1,0 +1,76 @@
+{
+  "entryId": "w:fly-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "flying in"
+  ],
+  "pattern": {
+    "tokens": [
+      "fly",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fly",
+        "in"
+      ],
+      [
+        "flying",
+        "in"
+      ],
+      [
+        "flew",
+        "in"
+      ],
+      [
+        "flies",
+        "in"
+      ],
+      [
+        "flown",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fly in",
+  "senses": [
+    {
+      "senseId": "w:fly-in#s1",
+      "pos": "短语",
+      "glossZh": "乘飞机抵达；飞抵",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,237 @@
+{
+  "entryId": "w:dry-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dry",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dry",
+        "up"
+      ],
+      [
+        "dried",
+        "up"
+      ],
+      [
+        "dries",
+        "up"
+      ],
+      [
+        "drying",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "drying up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dry up",
+  "senses": [
+    {
+      "senseId": "w:dry-up#s1",
+      "pos": "短语",
+      "glossZh": "变干；干涸",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:dry-up#e-329f00312c9c386e",
+          "text": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 202,
+            "end": 211
+          },
+          "parts": [
+            [
+              202,
+              211
+            ]
+          ],
+          "highlightRanges": [
+            [
+              202,
+              211
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dry-up#e-d2e4057e0f67946e",
+          "text": "They usually take shelter in the coastal wetlands, but it's possible those could dry up as well.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 87
+          },
+          "parts": [
+            [
+              81,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:dry-up#e-5e9f670ef78cb2fb",
+          "text": "Maya Martinez, a high school senior living in a fog-covered coastal village in North California, noticed that the community garden was gradually drying up during the driest summer on record.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 154
+          },
+          "parts": [
+            [
+              145,
+              154
+            ]
+          ],
+          "highlightRanges": [
+            [
+              145,
+              154
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:dry-up#s2",
+      "pos": "短语",
+      "glossZh": "使……干涸或变干",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dry-up#s3",
+      "pos": "短语",
+      "glossZh": "擦干洗过的餐具",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dry-up#s4",
+      "pos": "短语",
+      "glossZh": "（资金、供应、机会等）逐渐枯竭",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dry-up#s5",
+      "pos": "短语",
+      "glossZh": "突然说不出话；突然忘词",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:dry-up#s6",
+      "pos": "短语",
+      "glossZh": "住口；别再说了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "旧式美语口语，多作祈使语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

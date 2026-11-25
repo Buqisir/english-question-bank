@@ -1,0 +1,121 @@
+{
+  "entryId": "w:off-course",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "off",
+      "course"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "off",
+        "course"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "off course",
+  "senses": [
+    {
+      "senseId": "w:off-course#s1",
+      "pos": "短语",
+      "glossZh": "偏离航向；偏离原定路线",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:off-course#e-08b8157484df7ce4",
+          "text": "As currents changed direction during their journey, they avoided being carried too far off course.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 97
+          },
+          "parts": [
+            [
+              87,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:off-course#e-61f7f269114f7247",
+          "text": "Such long ocean journeys require not only a keen sense of direction but skills in negotiating ocean currents, which can either aid movement – like how sea turtles use currents for migration – or sweep animals off course.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-sep-opening",
+            "paperTitle": "2026届全国九五高中协作体高三上学期开学质量检测英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-sep-opening:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 209,
+            "end": 219
+          },
+          "parts": [
+            [
+              209,
+              219
+            ]
+          ],
+          "highlightRanges": [
+            [
+              209,
+              219
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

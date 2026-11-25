@@ -1,0 +1,73 @@
+{
+  "entryId": "w:single-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "single",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "single",
+        "out"
+      ],
+      [
+        "singled",
+        "out"
+      ],
+      [
+        "singles",
+        "out"
+      ],
+      [
+        "singling",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "single sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:single-out#s1",
+      "pos": "短语",
+      "glossZh": "单独挑出某人或某物加以关注",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:single#s7"
+      ],
+      "examples": [],
+      "note": "常用 single sb out for praise/criticism。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

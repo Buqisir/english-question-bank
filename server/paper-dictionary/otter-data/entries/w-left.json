@@ -96,8 +96,8 @@
     "mock": 251
   },
   "unassignedCounts": {
-    "gaokao": 8,
-    "mock": 249
+    "gaokao": 15,
+    "mock": 67
   },
   "senses": [
     {
@@ -108,7 +108,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -209,12 +209,12 @@
       "pos": "adv.",
       "glossZh": "向左",
       "pronunciationId": "w:left#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -239,7 +239,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -311,7 +311,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -383,7 +383,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -447,75 +447,6 @@
       ]
     },
     {
-      "senseId": "w:left#s8",
-      "pos": "短语",
-      "glossZh": "被落下",
-      "pronunciationId": "w:left#p-main",
-      "note": "be left behind。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:left#e-8e51bd65eda56541",
-          "text": "You may be the friend who left or the one who was left behind",
-          "source": {
-            "paperId": "paper-gaokao-2022-national-b",
-            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2022-national-b:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 50,
-            "end": 54
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:left#s9",
-      "pos": "短语",
-      "glossZh": "远远落后",
-      "pronunciationId": "w:left#p-main",
-      "note": "be left in the dust。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:left#e-dceb90f5025f3bad",
-          "text": "When Coach Pitt blew his whistle(哨子), Eva figured she would be left in the dust.",
-          "source": {
-            "paperId": "paper-gaokao-2024-zhejiang-jan",
-            "paperTitle": "2024年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 63,
-            "end": 67
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:left#s10",
       "pos": "v.",
       "glossZh": "托付照顾",
@@ -524,7 +455,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -558,7 +489,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 27
       },
       "folded": false,
       "examples": [
@@ -629,6 +560,14 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:be-left-behind",
+    "w:be-left-in-the-dust",
+    "w:left-and-right",
+    "w:left-over"
+  ]
 }

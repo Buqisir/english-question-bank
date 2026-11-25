@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 12
+    "mock": 0
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -129,6 +129,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:pig#s2",
+      "pos": "n.",
+      "glossZh": "豚鼠（guinea pig）",
+      "pronunciationId": "w:pig#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pig#e-dd04e7f667a3d10e",
+          "text": "Visitors can taste traditional dishes like cuy (roast guinea pig), attend food workshops, watch cultural performances, and shop at handcrafted markets.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cell:m171:mistura",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 64
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -137,6 +170,6 @@
       "reason": "独立动物名称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

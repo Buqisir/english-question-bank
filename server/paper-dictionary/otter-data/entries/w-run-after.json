@@ -1,0 +1,230 @@
+{
+  "entryId": "w:run-after",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "ran after",
+    "running after"
+  ],
+  "pattern": {
+    "tokens": [
+      "run",
+      "after"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "run",
+        "after"
+      ],
+      [
+        "ran",
+        "after"
+      ],
+      [
+        "running",
+        "after"
+      ],
+      [
+        "runs",
+        "after"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "run after",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "run after sb/sth",
+  "senses": [
+    {
+      "senseId": "w:run-after#s1",
+      "pos": "短语",
+      "glossZh": "追赶；跟在……后面跑",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-after#e-4e12c2af826ce488",
+          "text": "Paragraph 1: Peter ran after Oliver, trying to comfort him.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          },
+          "parts": [
+            [
+              19,
+              28
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              28
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-after#e-871bd49eb39edfb1",
+          "text": "Mikaela shouted, running after him.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 30
+          },
+          "parts": [
+            [
+              17,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:run-after#e-94ecfa8b6d04031c",
+          "text": "This can result in your recall becoming unreliable as soon as the dog finds something interesting to do, whether it's as simple as following a quiet path or as dangerous as running after small animals.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 186
+          },
+          "parts": [
+            [
+              173,
+              186
+            ]
+          ],
+          "highlightRanges": [
+            [
+              173,
+              186
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:run-after#s2",
+      "pos": "短语",
+      "glossZh": "追逐；一心寻求得到（某事物）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:run-after#e-0280226ba458cb5b",
+          "text": "While admittedly simple advice, it removes the pressure to constantly run after the latest amazing diet or fear seemingly harmful foods.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          },
+          "parts": [
+            [
+              70,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:run-after#s3",
+      "pos": "短语",
+      "glossZh": "追求某人；设法博得对方的爱慕",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

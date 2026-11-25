@@ -1,0 +1,272 @@
+{
+  "entryId": "w:sit-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "sitting down"
+  ],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "down"
+      ],
+      [
+        "sitting",
+        "down"
+      ],
+      [
+        "sat",
+        "down"
+      ],
+      [
+        "sate",
+        "down"
+      ],
+      [
+        "sits",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sat down",
+      "tags": []
+    },
+    {
+      "form": "sits down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit down",
+  "senses": [
+    {
+      "senseId": "w:sit-down#s1",
+      "pos": "短语",
+      "glossZh": "坐下；落座",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sit#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sit-down#e-e2490252ba1ab6ea",
+          "text": "The invitation is clear: Weiner wants you to pick up a coffee or tea and sit down with this book.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 81
+          },
+          "parts": [
+            [
+              73,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              81
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-down#e-01b3d639ee5fda70",
+          "text": "We sat down next to each other, but David wouldn’t look at me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "writing-continuation-11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-down#e-925f1d08e45117e3",
+          "text": "We sat down next to each other but David wouldn’t look at me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2022-ii:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          },
+          "parts": [
+            [
+              3,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              11
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 4,
+        "mock": 20
+      }
+    },
+    {
+      "senseId": "w:sit-down#s2",
+      "pos": "短语",
+      "glossZh": "坐下来商谈；认真讨论",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-down#e-e414a1678f30f1d0",
+          "text": "Well, we sat down and thought and meditated and decided to put it in Donna’s garage for the winter.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          },
+          "parts": [
+            [
+              9,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-down#e-053be7994366eb3e",
+          "text": "Instead of paying for an official service, they sit down with volunteers and work through the problem together.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          },
+          "parts": [
+            [
+              48,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              56
+            ]
+          ]
+        }
+      ],
+      "note": "常用 sit down with sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:sit-down#s3",
+      "pos": "短语",
+      "glossZh": "让某人坐下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "sit sb down",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 1
+    "mock": 2
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -169,59 +169,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:cough#s3",
-      "pos": "短语",
-      "glossZh": "咳出；（比喻）吐出",
-      "pronunciationId": "w:cough#p-main",
-      "note": "cough up。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cough#e-83a6d381b00410ac",
-          "text": "After several tense moments, the girl finally coughed up water and began breathing again.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
-            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
-            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b:2",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 46,
-            "end": 53
-          }
-        },
-        {
-          "exampleId": "w:cough#e-8c5382258e3bb01e",
-          "text": "In Bali, the ocean coughs up tons of plastic every November through March.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
-            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
-            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -230,6 +177,11 @@
       "reason": "少见俚语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cough-up"
+  ]
 }

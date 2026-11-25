@@ -49,7 +49,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 326
+    "mock": 127
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 16,
-        "mock": 0
+        "mock": 199
       },
       "folded": false,
       "examples": [
@@ -135,20 +135,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:main#s3",
-      "pos": "短语",
-      "glossZh": "大体上",
-      "pronunciationId": "w:main#p-main",
-      "note": "in the main。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -157,6 +143,11 @@
       "reason": "街名，g7-8 留空"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-main"
+  ]
 }

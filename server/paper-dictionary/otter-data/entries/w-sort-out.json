@@ -1,0 +1,237 @@
+{
+  "entryId": "w:sort-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sort",
+      "out"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "sort",
+        "out"
+      ],
+      [
+        "sort",
+        {
+          "slot": "sb/sth"
+        },
+        "out"
+      ],
+      [
+        "sorted",
+        "out"
+      ],
+      [
+        "sorting",
+        "out"
+      ],
+      [
+        "sorts",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sort out",
+      "tags": []
+    },
+    {
+      "form": "sorted out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sort sb/sth out",
+  "senses": [
+    {
+      "senseId": "w:sort-out#s1",
+      "pos": "短语",
+      "glossZh": "整理；分类",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sort-out#e-9fa5cc3c9c2c4a1d",
+          "text": "It can hold all your old photos, videos, memorable documents, talks, artwork, schoolwork to either store or to sort out later.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 119
+          },
+          "parts": [
+            [
+              111,
+              119
+            ]
+          ],
+          "highlightRanges": [
+            [
+              111,
+              119
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sort-out#e-c155ae64fcd1e774",
+          "text": "Sort out some documents.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          },
+          "parts": [
+            [
+              0,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:sort-out#s2",
+      "pos": "短语",
+      "glossZh": "解决（问题）；把事情处理妥当",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:sort#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:sort-out#e-d47cf38a47a22175",
+          "text": "I think what Mum was trying to say was that there’s no fun in having everything sorted out at high school.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 90
+          },
+          "parts": [
+            [
+              80,
+              90
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              90
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:sort-out#s3",
+      "pos": "短语",
+      "glossZh": "理清（思路、情况等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sort-out#s4",
+      "pos": "短语",
+      "glossZh": "辨认并挑出；区分开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:sort-out#s5",
+      "pos": "短语",
+      "glossZh": "替某人弄到所需之物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式口语，可用 sort sb out with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -58,7 +58,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 3
+    "mock": 6
   },
   "senses": [
     {
@@ -106,78 +106,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:drown#s3",
-      "pos": "短语",
-      "glossZh": "盖过（声音）；使难以听见",
-      "pronunciationId": "w:drown#p-main",
-      "note": "drown out。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:drown#e-864cb7e21265c6c2",
-          "text": "Most offensive posts come from a small group of highly active users, whose outsized posts shape public beliefs, creating the “majority illusion” that makes this minority seem like the norm, drowning out the silent majority.",
-          "source": {
-            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
-            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
-            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 190,
-            "end": 198
-          }
-        },
-        {
-          "exampleId": "w:drown#e-981634464c5bdfad",
-          "text": "The joy of the game was slipping away, drowned out by the constant noise of his friends.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
-            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
-            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:drown#e-0c68811e2eb687cd",
-          "text": "For example, urban birds may sing louder, start singing earlier in the morning or at higher frequencies to avoid getting drowned out by low-frequency traffic noise.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
-            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
-            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:3",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 121,
-            "end": 128
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -186,6 +114,11 @@
       "reason": "同形专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:drown-out"
+  ]
 }

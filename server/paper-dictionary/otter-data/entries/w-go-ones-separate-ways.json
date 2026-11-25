@@ -1,0 +1,115 @@
+{
+  "entryId": "w:go-ones-separate-ways",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "go one’s separate ways"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      {
+        "slot": "one's"
+      },
+      "separate",
+      "ways"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        {
+          "slot": "one's"
+        },
+        "separate",
+        "ways"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "went separate ways",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go one's separate ways",
+  "senses": [
+    {
+      "senseId": "w:go-ones-separate-ways#s1",
+      "pos": "短语",
+      "glossZh": "分头走；各自行动",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:way#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:go-ones-separate-ways#e-6224cf2be0bc57bd",
+          "text": "After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 78
+          },
+          "parts": [
+            [
+              56,
+              60
+            ],
+            [
+              65,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              60
+            ],
+            [
+              65,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

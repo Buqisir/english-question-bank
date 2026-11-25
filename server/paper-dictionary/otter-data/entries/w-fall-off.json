@@ -1,0 +1,197 @@
+{
+  "entryId": "w:fall-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "fell off"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "off"
+      ],
+      [
+        "fell",
+        "off"
+      ],
+      [
+        "fallen",
+        "off"
+      ],
+      [
+        "falling",
+        "off"
+      ],
+      [
+        "falls",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall off",
+  "senses": [
+    {
+      "senseId": "w:fall-off#s1",
+      "pos": "短语",
+      "glossZh": "从……上掉下来；脱落",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-off#e-3c703e58c8c5f271",
+          "text": "“I was turning the page to get ready for the next page, but the draft wind from the turn caused the spare pages to fall off the stand,” Mr Titterton said, “Luckily I was able to catch them and put them back.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 123
+          },
+          "parts": [
+            [
+              115,
+              123
+            ]
+          ],
+          "highlightRanges": [
+            [
+              115,
+              123
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-off#e-607a876bdac233ad",
+          "text": "With a sharp sound, the eyepiece fell off and disappeared into the grass.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 41
+          },
+          "parts": [
+            [
+              33,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-off#e-75f2dacab508e73e",
+          "text": "Try to keep the stems unhurt, but do not worry if any parts fall off.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-henan-zhengzhou-2026-04-second:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          },
+          "parts": [
+            [
+              60,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:fall-off#s2",
+      "pos": "短语",
+      "glossZh": "（数量、水平等）下降；减少",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-off#s3",
+      "pos": "短语",
+      "glossZh": "（船头）转向下风处",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,157 @@
+{
+  "entryId": "w:change-ones-mind",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "change",
+      {
+        "slot": "one's"
+      },
+      "mind"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "change",
+        {
+          "slot": "one's"
+        },
+        "mind"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "changed mind",
+      "tags": []
+    },
+    {
+      "form": "changes mind",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "change one's mind",
+  "senses": [
+    {
+      "senseId": "w:change-ones-mind#s1",
+      "pos": "习语",
+      "glossZh": "改变主意",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:change#s6",
+        "w:mind#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:change-ones-mind#e-9f7f4add477010ea",
+          "text": "changed her mind",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 55,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:55#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              7
+            ],
+            [
+              12,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ],
+            [
+              12,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:change-ones-mind#e-39ef64cce68cb1af",
+          "text": "He changes his mind.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 19
+          },
+          "parts": [
+            [
+              3,
+              10
+            ],
+            [
+              15,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ],
+            [
+              15,
+              19
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

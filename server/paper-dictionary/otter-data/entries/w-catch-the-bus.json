@@ -1,0 +1,144 @@
+{
+  "entryId": "w:catch-the-bus",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "the",
+      "bus"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "the",
+        "bus"
+      ],
+      [
+        "catches",
+        "the",
+        "bus"
+      ],
+      [
+        "catching",
+        "the",
+        "bus"
+      ],
+      [
+        "caught",
+        "the",
+        "bus"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catching the bus",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch the bus",
+  "senses": [
+    {
+      "senseId": "w:catch-the-bus#s1",
+      "pos": "短语",
+      "glossZh": "赶上公交车；乘公交车",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:catch-the-bus#e-18c89f3a12c7b60c",
+          "text": "What time does the man suggest catching the bus home?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 47
+          },
+          "parts": [
+            [
+              31,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-the-bus#e-c447adc47041ff05",
+          "text": "Catching the bus.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 16
+          },
+          "parts": [
+            [
+              0,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              16
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

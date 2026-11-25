@@ -1,0 +1,168 @@
+{
+  "entryId": "w:a-little-bit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "little",
+      "bit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "little",
+        "bit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a little bit",
+  "senses": [
+    {
+      "senseId": "w:a-little-bit#s1",
+      "pos": "短语",
+      "glossZh": "稍微；有一点儿",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-little-bit#e-045075caef0069e2",
+          "text": "Instead, it will slow down everyone a little bit but speed up checkout overall.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 48
+          },
+          "parts": [
+            [
+              36,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little-bit#e-f8f7c011e83cbb32",
+          "text": "This energy transition（变革）is global, and the amount of renewable energy the world will need is “a little bit mind-blowing,” says mechanical engineer Keith Wipke at the National Renewable Energy Laboratory.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 108
+          },
+          "parts": [
+            [
+              96,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              96,
+              108
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-little-bit#e-6d1b0eddfb03d86d",
+          "text": "It was something I had always dreamed of trying, and I hoped it might lift my spirits a little bit.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 98
+          },
+          "parts": [
+            [
+              86,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              98
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 14
+      }
+    },
+    {
+      "senseId": "w:a-little-bit#s2",
+      "pos": "短语",
+      "glossZh": "少量；一点儿",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 a little bit of sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

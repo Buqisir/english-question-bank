@@ -1,0 +1,179 @@
+{
+  "entryId": "w:reach-out-to-sb",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "reach",
+      "out",
+      "to",
+      {
+        "slot": "sb"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "reach",
+        "out",
+        "to",
+        {
+          "slot": "sb"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "reach out to",
+      "tags": []
+    },
+    {
+      "form": "reached out to",
+      "tags": []
+    },
+    {
+      "form": "reaches out to",
+      "tags": []
+    },
+    {
+      "form": "reaching out to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "reach out to sb",
+  "senses": [
+    {
+      "senseId": "w:reach-out-to-sb#s1",
+      "pos": "短语",
+      "glossZh": "主动联系（某人或机构）；主动与某人接触",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:reach#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:reach-out-to-sb#e-2e613230a0fcd60e",
+          "text": "Desperate for answers, Taylor reached out to the hospital’s CEO, whose office she occasionally cleaned.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 44
+          },
+          "parts": [
+            [
+              30,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out-to-sb#e-c5177e2b800445c3",
+          "text": "Don’t hesitate to reach out to your boss, coworker, or loved one if you need an extra hand with a commitment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 30
+          },
+          "parts": [
+            [
+              18,
+              30
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              30
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:reach-out-to-sb#e-05dcfa64f88b72e1",
+          "text": "“These are people who’ve reached out to me, inspired by what I’m doing, asking, ‘How can I do it too?’” he said.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 39
+          },
+          "parts": [
+            [
+              25,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

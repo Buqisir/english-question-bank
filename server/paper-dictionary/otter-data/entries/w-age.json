@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 439
+    "mock": 242
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 78,
-        "mock": 0
+        "mock": 119
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 26
       },
       "folded": false,
       "examples": [
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -274,7 +274,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -346,7 +346,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 1
       },
       "folded": false,
       "examples": [
@@ -384,9 +384,87 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:age#s7",
+      "pos": "adj.",
+      "glossZh": "年龄为……的（aged）",
+      "pronunciationId": "w:age#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 27
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:age#e-e9d2b656112e6263",
+          "text": "The program is open to anyone aged 18 or above.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 27,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:age#e-6f4045503a1fb86f",
+          "text": "Adult learners aged 18 and above.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:age#e-19f3cf6740be5fd6",
+          "text": "The school's year 5 children – aged nine and 10 – were struggling to sit still in a tight space so she removed all the furniture.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:age-in-place",
+    "w:day-and-age",
+    "w:from-an-early-age",
+    "w:golden-age"
+  ]
 }

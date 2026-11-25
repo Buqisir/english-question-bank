@@ -1,0 +1,96 @@
+{
+  "entryId": "w:what-day-is-it-today",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "what",
+      "day",
+      "is",
+      "it",
+      "today"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "what",
+        "day",
+        "is",
+        "it",
+        "today"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "what day is it today",
+  "senses": [
+    {
+      "senseId": "w:what-day-is-it-today#s1",
+      "pos": "短语",
+      "glossZh": "今天星期几？",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:what-day-is-it-today#e-986ef7b6031e077c",
+          "text": "What day is it today?",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 20
+          },
+          "parts": [
+            [
+              0,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

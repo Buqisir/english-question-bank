@@ -1,0 +1,203 @@
+{
+  "entryId": "w:catch-fire",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "fire"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "fire"
+      ],
+      [
+        "catches",
+        "fire"
+      ],
+      [
+        "catching",
+        "fire"
+      ],
+      [
+        "caught",
+        "fire"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catches fire",
+      "tags": []
+    },
+    {
+      "form": "catching fire",
+      "tags": []
+    },
+    {
+      "form": "caught fire",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch fire",
+  "senses": [
+    {
+      "senseId": "w:catch-fire#s1",
+      "pos": "短语",
+      "glossZh": "着火；烧起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:catch-fire#e-969dda5cb946d3bf",
+          "text": "While driving for work, he noticed a crashed vehicle that had hit a telephone pole and caught fire.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 98
+          },
+          "parts": [
+            [
+              87,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-fire#e-cabdbf631435b0fb",
+          "text": "The landscaping at the first house catches fire, but the house itself stubbornly refuses to burn.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-fire#e-8e1bf184d3523493",
+          "text": "In an age of endless low-quality information, social media were an ecosystem similar to the Cuyahoga River in the 1960s – so polluted that it repeatedly caught fire.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 164
+          },
+          "parts": [
+            [
+              153,
+              164
+            ]
+          ],
+          "highlightRanges": [
+            [
+              153,
+              164
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:catch-fire#s2",
+      "pos": "短语",
+      "glossZh": "迅速流行；广为传播",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-fire#s3",
+      "pos": "短语",
+      "glossZh": "（热情、想象力等）突然被激发",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

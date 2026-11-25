@@ -1,0 +1,109 @@
+{
+  "entryId": "w:talk-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "talk",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "talk",
+        "down"
+      ],
+      [
+        "talked",
+        "down"
+      ],
+      [
+        "talking",
+        "down"
+      ],
+      [
+        "talks",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "talk sb/sth down",
+  "senses": [
+    {
+      "senseId": "w:talk-down#s1",
+      "pos": "短语",
+      "glossZh": "通过讨价还价压低价格",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:talk-down#s2",
+      "pos": "短语",
+      "glossZh": "用无线电引导飞机降落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:talk-down#s3",
+      "pos": "短语",
+      "glossZh": "劝某人冷静下来；劝阻某人的过激举动",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:talk-down#s4",
+      "pos": "短语",
+      "glossZh": "在争论中辩倒某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

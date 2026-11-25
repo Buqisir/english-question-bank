@@ -1,0 +1,61 @@
+{
+  "entryId": "w:smile-upon",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "smile",
+      "upon"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "smile",
+        "upon"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "smile upon sb/sth",
+  "senses": [
+    {
+      "senseId": "w:smile-upon#s1",
+      "pos": "短语",
+      "glossZh": "眷顾；垂青",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:smile#s4"
+      ],
+      "examples": [],
+      "note": "常以命运、运气等为主语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

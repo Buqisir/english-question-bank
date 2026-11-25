@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 4,
-    "mock": 158
+    "mock": 17
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -147,7 +147,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -201,7 +201,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -265,20 +265,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:repair#s4",
-      "pos": "短语",
-      "glossZh": "完好状态",
-      "pronunciationId": "w:repair#p-main",
-      "note": "in good repair。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -291,6 +277,11 @@
       "reason": "另用 re-pair"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-good-repair"
+  ]
 }

@@ -1,0 +1,112 @@
+{
+  "entryId": "w:age-in-place",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "age",
+      "in",
+      "place"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "age",
+        "in",
+        "place"
+      ],
+      [
+        "aged",
+        "in",
+        "place"
+      ],
+      [
+        "ageing",
+        "in",
+        "place"
+      ],
+      [
+        "ages",
+        "in",
+        "place"
+      ],
+      [
+        "aging",
+        "in",
+        "place"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "age in place",
+  "senses": [
+    {
+      "senseId": "w:age-in-place#s1",
+      "pos": "短语",
+      "glossZh": "在自己的家中或熟悉的社区养老",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:age-in-place#e-76387de14b10dc98",
+          "text": "In response, the government is promoting “smart nursing homes” through initiatives like “Healthy China 2030.” These modern facilities use technological integration to enhance long-term disease management and support the deeply held desire among the elderly to “age in place” safely.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 261,
+            "end": 273
+          },
+          "parts": [
+            [
+              261,
+              273
+            ]
+          ],
+          "highlightRanges": [
+            [
+              261,
+              273
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 273
+    "mock": 88
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 20,
-        "mock": 0
+        "mock": 175
       },
       "folded": false,
       "examples": [
@@ -141,12 +141,12 @@
       "pos": "v.",
       "glossZh": "把……比作……",
       "pronunciationId": "w:compare#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 10
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -154,47 +154,13 @@
       "pos": "v.",
       "glossZh": "比得上；与……相提并论",
       "pronunciationId": "w:compare#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:compare#s4",
-      "pos": "短语",
-      "glossZh": "交流各自的看法或经验",
-      "pronunciationId": "w:compare#p-main",
-      "note": "compare notes。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
         "mock": 1
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:compare#e-b9357d628bd72590",
-          "text": "Some laughed easily, exchanging jokes with their new friends, while others eagerly compared notes on their travel experiences.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
-            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
-            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:2",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 83,
-            "end": 91
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -203,6 +169,11 @@
       "reason": "计算机或语法专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:compare-notes"
+  ]
 }

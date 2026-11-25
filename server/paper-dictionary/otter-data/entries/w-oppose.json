@@ -62,7 +62,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 36
+    "mock": 9
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -146,7 +146,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -190,43 +190,11 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:oppose#s3",
-      "pos": "短语",
-      "glossZh": "与……相对；而非",
-      "pronunciationId": "w:oppose#p-main",
-      "note": "as opposed to。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:oppose#e-93f8e23cac865632",
-          "text": "The use of a third party or generative artificial intelligence or machine learning software to develop an applicant’s work, as opposed to assisting their application to suggest minor edits or to identify grammatical errors, is forbidden.",
-          "source": {
-            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
-            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
-            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a",
-            "locator": {
-              "paragraph": 18,
-              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a:18",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 127,
-            "end": 134
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

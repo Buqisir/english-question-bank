@@ -1,0 +1,239 @@
+{
+  "entryId": "w:give-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gives off",
+    "giving off"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "off"
+      ],
+      [
+        "gives",
+        "off"
+      ],
+      [
+        "giving",
+        "off"
+      ],
+      [
+        "gave",
+        "off"
+      ],
+      [
+        "given",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "give off",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give off sth",
+  "senses": [
+    {
+      "senseId": "w:give-off#s1",
+      "pos": "短语",
+      "glossZh": "散发（气味、热量等）；发出（光、声音等）；排放（气体等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:give#s11",
+        "w:off#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-off#e-6fb743cb0dbdaceb",
+          "text": "I heard somewhere that electronics and appliances give off 90% of their carbon footprint after they leave the factory.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 58
+          },
+          "parts": [
+            [
+              50,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              50,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-off#e-c22eaaad262023e5",
+          "text": "But when they can see or smell real plants, and one gives off stress sounds, they avoid it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          },
+          "parts": [
+            [
+              52,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-off#e-998b63545f36405d",
+          "text": "By giving off an observable signal.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-jiangsu-2026-03-senior-three-march-survey:28#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:give-off#s2",
+      "pos": "短语",
+      "glossZh": "散发出某种气息；营造某种氛围",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-off#e-2ebf826bff40c0dc",
+          "text": "Her door was always piled high with junk, and the potted plants on her windowsill （窗台） were wilted （枯萎的）, giving off a lonely, cold atmosphere.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 116
+          },
+          "parts": [
+            [
+              106,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              116
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:give-off#s3",
+      "pos": "短语",
+      "glossZh": "抱怨；发牢骚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "爱尔兰俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

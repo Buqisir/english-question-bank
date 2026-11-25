@@ -1,0 +1,122 @@
+{
+  "entryId": "w:know-better",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "knowing better"
+  ],
+  "pattern": {
+    "tokens": [
+      "know",
+      "better"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "know",
+        "better"
+      ],
+      [
+        "knowing",
+        "better"
+      ],
+      [
+        "knew",
+        "better"
+      ],
+      [
+        "known",
+        "better"
+      ],
+      [
+        "knows",
+        "better"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "know better",
+  "senses": [
+    {
+      "senseId": "w:know-better#s1",
+      "pos": "短语",
+      "glossZh": "懂得这样做不妥；知道不该这么做",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:know-better#e-0323d3eadd0c8b94",
+          "text": "And vets chasing the fur baby trend should know better.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 54
+          },
+          "parts": [
+            [
+              43,
+              54
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              54
+            ]
+          ]
+        }
+      ],
+      "note": "常用 should know better 或 know better than to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:know-better#s2",
+      "pos": "短语",
+      "glossZh": "清楚事实并非如此；知道某说法不可信",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

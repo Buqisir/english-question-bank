@@ -1,0 +1,154 @@
+{
+  "entryId": "w:on-demand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "demand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "demand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on demand",
+  "senses": [
+    {
+      "senseId": "w:on-demand#s1",
+      "pos": "短语",
+      "glossZh": "按需；一经要求即可获得或启动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:demand#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-demand#e-3c2b6f0a7187dfa1",
+          "text": "Virtual power plants (VPPs) can play a key role in providing reliable and affordable power on demand in seconds.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 100
+          },
+          "parts": [
+            [
+              91,
+              100
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              100
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-demand#e-a99ab11bf04c0ffd",
+          "text": "A world of common thinking available on demand will encourage people to outsource their thinking and reward people who don’t.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 46
+          },
+          "parts": [
+            [
+              37,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-demand#e-11b99c3326aa9a66",
+          "text": "Through modeling, the team predicted that moving ions could change a material’s melting point, allowing it to absorb heat on demand.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 131
+          },
+          "parts": [
+            [
+              122,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              131
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

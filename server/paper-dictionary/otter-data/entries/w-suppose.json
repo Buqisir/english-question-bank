@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 45
+    "mock": 40
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": []
@@ -83,7 +83,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -109,145 +109,34 @@
       ]
     },
     {
-      "senseId": "w:suppose#s3",
-      "pos": "短语",
-      "glossZh": "按规定应当",
+      "senseId": "w:suppose#s5",
+      "pos": "adj.",
+      "glossZh": "所谓的；据认为存在的",
       "pronunciationId": "w:suppose#p-main",
-      "note": "be supposed to。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:suppose#e-10ad76f335bb1fc8",
-          "text": "“Either the birds or the AI or some combination of both are doing what they’re supposed to do and avoiding one another,” Yano said.",
+          "exampleId": "w:suppose#e-6aae04045f8b655c",
+          "text": "When such flawed studies are ruled out, the supposed link between low empathy and horror enjoyment disappears.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-c",
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-d",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-c:5",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 79,
-            "end": 87
-          }
-        },
-        {
-          "exampleId": "w:suppose#e-d10d65e89fdd250f",
-          "text": "What are Field Leaders supposed to do?",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
-            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-a",
-            "locator": {
-              "question": 21,
-              "questionId": "question:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:21",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 23,
-            "end": 31
-          }
-        },
-        {
-          "exampleId": "w:suppose#e-ebdbf58c17329e16",
-          "text": "All applicants are supposed to be at least 18 years old and previous experience with smart devices is a must.",
-          "source": {
-            "paperId": "paper-mock-nb-2026-m2",
-            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
-            "groupId": "group:paper-mock-nb-2026-m2:reading-a",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-nb-2026-m2:reading-a:6",
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-d:2",
               "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 19,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:suppose#s4",
-      "pos": "短语",
-      "glossZh": "本来预期会",
-      "pronunciationId": "w:suppose#p-main",
-      "note": "be supposed to。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:suppose#e-d49482e61882b4ad",
-          "text": "The meteor shower was supposed to peak in thirty minutes, and without that tiny piece of glass, the stars would seem like distant, unclear dots.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:7",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 22,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:suppose#e-95f352cee2bc2548",
-          "text": "The bag that was supposed to set me free had trapped me – in fear, in pride, in a lie about who I was.",
-          "source": {
-            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
-            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
-            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 25
-          }
-        },
-        {
-          "exampleId": "w:suppose#e-a3b53b9d11b5ceec",
-          "text": "In the middle of all this, I realized that Mike, who was supposed to help with the setup, was nowhere to be found.",
-          "source": {
-            "paperId": "paper-mock-hubei-mingxiao-2025-09",
-            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
-            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 57,
-            "end": 65
+            "start": 44,
+            "end": 52
           }
         }
       ]
@@ -259,6 +148,8 @@
       "reason": "罕用旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

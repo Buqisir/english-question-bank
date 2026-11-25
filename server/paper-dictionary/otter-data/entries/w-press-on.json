@@ -1,0 +1,107 @@
+{
+  "entryId": "w:press-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "press",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "press",
+        "on"
+      ],
+      [
+        "pressed",
+        "on"
+      ],
+      [
+        "presses",
+        "on"
+      ],
+      [
+        "pressing",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "pressed on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "press on",
+  "senses": [
+    {
+      "senseId": "w:press-on#s1",
+      "pos": "短语",
+      "glossZh": "坚持做下去；继续前进",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:press-on#e-3aed88013039612a",
+          "text": "But he pressed on.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          },
+          "parts": [
+            [
+              7,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              17
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,141 @@
+{
+  "entryId": "w:take-a-turn",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking a turn",
+    "took a turn"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "a",
+      "turn"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "a",
+        "turn"
+      ],
+      [
+        "taking",
+        "a",
+        "turn"
+      ],
+      [
+        "took",
+        "a",
+        "turn"
+      ],
+      [
+        "taken",
+        "a",
+        "turn"
+      ],
+      [
+        "takes",
+        "a",
+        "turn"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take a turn",
+  "senses": [
+    {
+      "senseId": "w:take-a-turn#s1",
+      "pos": "短语",
+      "glossZh": "发生转变；出现转折",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-a-turn#e-475aa7b07ab51eaa",
+          "text": "Then life took a turn that would change everything.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 21
+          },
+          "parts": [
+            [
+              10,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:take-a-turn#s2",
+      "pos": "短语",
+      "glossZh": "轮到自己做一次",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-a-turn#s3",
+      "pos": "短语",
+      "glossZh": "散步；走一圈",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

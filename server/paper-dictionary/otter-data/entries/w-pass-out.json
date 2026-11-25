@@ -1,0 +1,210 @@
+{
+  "entryId": "w:pass-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing out"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "out"
+      ],
+      [
+        "passing",
+        "out"
+      ],
+      [
+        "passed",
+        "out"
+      ],
+      [
+        "passes",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "passed out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass (sth) out",
+  "senses": [
+    {
+      "senseId": "w:pass-out#s1",
+      "pos": "短语",
+      "glossZh": "分发；发给各人",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:pass#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:pass-out#e-b9a9faeb1a331990",
+          "text": "I thought that we would just be passing out dinners to those in need, but I found out we would be doing everything from preparing to serving the dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 43
+          },
+          "parts": [
+            [
+              32,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-out#s2",
+      "pos": "短语",
+      "glossZh": "昏倒；失去知觉",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:pass-out#e-61f2a1fec4e7ba1c",
+          "text": "He passed out in the street.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          },
+          "parts": [
+            [
+              3,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:pass-out#s3",
+      "pos": "短语",
+      "glossZh": "醉倒；因醉酒或药物作用突然睡过去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-out#s4",
+      "pos": "短语",
+      "glossZh": "完成军警等职业训练并结业",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-out#s5",
+      "pos": "短语",
+      "glossZh": "毕业",
+      "note": "印度英语。",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-out#s6",
+      "pos": "短语",
+      "glossZh": "（桥牌中）四家开局均不叫牌，结束该副牌",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

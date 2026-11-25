@@ -1,0 +1,144 @@
+{
+  "entryId": "w:just-around-the-corner",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "just",
+      "around",
+      "the",
+      "corner"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "just",
+        "around",
+        "the",
+        "corner"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "just around the corner",
+  "senses": [
+    {
+      "senseId": "w:just-around-the-corner#s1",
+      "pos": "短语",
+      "glossZh": "即将发生；很快就会到来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:around#s8",
+        "w:corner#s3",
+        "w:just#s7"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:just-around-the-corner#e-a7834b176e276005",
+          "text": "They frequently warn that a global decline in bee species is just around the corner.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 83
+          },
+          "parts": [
+            [
+              61,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              83
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:just-around-the-corner#s2",
+      "pos": "短语",
+      "glossZh": "就在附近；拐个弯就到",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:just-around-the-corner#e-dc588b4809e1b930",
+          "text": "So when I found a small house just around the corner from the school, I jumped at the chance.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 52
+          },
+          "parts": [
+            [
+              30,
+              52
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              52
+            ]
+          ]
+        }
+      ],
+      "note": "常接 from，说明离哪个地点很近。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

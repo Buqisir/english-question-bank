@@ -1,0 +1,331 @@
+{
+  "entryId": "w:line-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "line up behind"
+  ],
+  "pattern": {
+    "tokens": [
+      "line",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "line",
+        "up"
+      ],
+      [
+        "lined",
+        "up"
+      ],
+      [
+        "lines",
+        "up"
+      ],
+      [
+        "lining",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "line up",
+      "tags": []
+    },
+    {
+      "form": "lined up",
+      "tags": []
+    },
+    {
+      "form": "lining up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "line (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:line-up#s1",
+      "pos": "短语",
+      "glossZh": "排队；使排成一列",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:line#s10",
+        "w:up#s51"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:line-up#e-9a8c7350f5080f0e",
+          "text": "With a serpentine line, a long delay at one register won’t unfairly punish the people who lined up behind it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 98
+          },
+          "parts": [
+            [
+              90,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              90,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:line-up#e-d303608fbc113b81",
+          "text": "As her class lined up outside the lunchroom, May busied herself by reading the posters on the wall.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:line-up#e-7dbe76ace3b042a8",
+          "text": "It was stressful to stand there and look out at the hundred or so chairs lined up below us.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 81
+          },
+          "parts": [
+            [
+              73,
+              81
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              81
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:line-up#s2",
+      "pos": "短语",
+      "glossZh": "事先安排好；备好",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:line-up#e-79f08ef00628a9f7",
+          "text": "Currently, I'm reading six books in various stages, with more lined up to start soon.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          },
+          "parts": [
+            [
+              62,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              70
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:line-up#e-f688001dac3a06bf",
+          "text": "Line up a bunch of comedies to watch.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:line-up#s3",
+      "pos": "短语",
+      "glossZh": "对齐；使对准",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:line-up#e-dfd5bf62b0bf5acc",
+          "text": "Slowly, the landmarks began to line up, and the landscape started to make sense again.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 38
+          },
+          "parts": [
+            [
+              31,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:line-up#s4",
+      "pos": "短语",
+      "glossZh": "（说法、结果等）相符",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:line-up#s5",
+      "pos": "短语",
+      "glossZh": "站到……一边；支持",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于 line up behind sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

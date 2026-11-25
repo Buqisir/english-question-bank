@@ -1,0 +1,147 @@
+{
+  "entryId": "w:strike-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "strike",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "strike",
+        "down"
+      ],
+      [
+        "strikes",
+        "down"
+      ],
+      [
+        "striking",
+        "down"
+      ],
+      [
+        "struck",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "struck down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "strike sb/sth down",
+  "senses": [
+    {
+      "senseId": "w:strike-down#s1",
+      "pos": "短语",
+      "glossZh": "使人突然病倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:strike-down#e-d066d5f812ae3bf8",
+          "text": "I was struck down by both yellow fever and malaria.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 17
+          },
+          "parts": [
+            [
+              6,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              17
+            ]
+          ]
+        }
+      ],
+      "note": "疾病作施动者时常用 be struck down by sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:strike-down#s2",
+      "pos": "短语",
+      "glossZh": "击倒；打倒",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:strike-down#s3",
+      "pos": "短语",
+      "glossZh": "击毙；使突然死亡",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:strike-down#s4",
+      "pos": "短语",
+      "glossZh": "（法院等）裁定法律或规定无效",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

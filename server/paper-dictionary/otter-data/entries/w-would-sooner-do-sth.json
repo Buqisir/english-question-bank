@@ -1,0 +1,77 @@
+{
+  "entryId": "w:would-sooner-do-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "would sooner do something"
+  ],
+  "pattern": {
+    "tokens": [
+      "would",
+      "sooner",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "would",
+        "sooner",
+        {
+          "slot": "do"
+        }
+      ],
+      [
+        "would",
+        "sooner",
+        {
+          "slot": "do"
+        },
+        "something"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "would sooner do sth",
+  "senses": [
+    {
+      "senseId": "w:would-sooner-do-sth#s1",
+      "pos": "短语",
+      "glossZh": "宁愿做某事；更愿意做某事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:soon#s6"
+      ],
+      "examples": [],
+      "note": "可用 than 引出另一选择。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

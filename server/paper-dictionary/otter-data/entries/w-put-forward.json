@@ -1,0 +1,184 @@
+{
+  "entryId": "w:put-forward",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "putting forward"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "forward"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "forward"
+      ],
+      [
+        "putting",
+        "forward"
+      ],
+      [
+        "puts",
+        "forward"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put forward",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sth) forward",
+  "senses": [
+    {
+      "senseId": "w:put-forward#s1",
+      "pos": "短语",
+      "glossZh": "提出（建议、观点等）供考虑",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:forward#s4",
+        "w:put#s25"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-forward#e-7efb40bbd701b534",
+          "text": "Why does Robert put forward the suggestion?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 27
+          },
+          "parts": [
+            [
+              16,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-forward#e-f14f9dd98842467e",
+          "text": "That idea was put forward in an IEA report, which argued that AI applications could cut emissions (排放) by far more than data centres produce.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-forward#e-9eea5385638a6c95",
+          "text": "One reason lies in a theory put forward in 1971.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-mingxiao-2025-09:36#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 39
+          },
+          "parts": [
+            [
+              28,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      }
+    },
+    {
+      "senseId": "w:put-forward#s2",
+      "pos": "短语",
+      "glossZh": "把钟表拨快",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

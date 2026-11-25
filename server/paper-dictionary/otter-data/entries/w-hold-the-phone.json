@@ -1,0 +1,91 @@
+{
+  "entryId": "w:hold-the-phone",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "holding the phone"
+  ],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "the",
+      "phone"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "the",
+        "phone"
+      ],
+      [
+        "holding",
+        "the",
+        "phone"
+      ],
+      [
+        "held",
+        "the",
+        "phone"
+      ],
+      [
+        "holds",
+        "the",
+        "phone"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold the phone",
+  "senses": [
+    {
+      "senseId": "w:hold-the-phone#s1",
+      "pos": "短语",
+      "glossZh": "等等；先停一下",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中也可带有惊讶或难以置信的语气。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-the-phone#s2",
+      "pos": "短语",
+      "glossZh": "别挂电话；请稍等",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

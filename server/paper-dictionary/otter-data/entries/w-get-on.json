@@ -1,0 +1,341 @@
+{
+  "entryId": "w:get-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gets on",
+    "getting on",
+    "got on"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "on"
+      ],
+      [
+        "gets",
+        "on"
+      ],
+      [
+        "getting",
+        "on"
+      ],
+      [
+        "got",
+        "on"
+      ],
+      [
+        "gotten",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get on",
+  "senses": [
+    {
+      "senseId": "w:get-on#s1",
+      "pos": "短语",
+      "glossZh": "登上（公共汽车、火车、飞机等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s34"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-on#e-5783463d72509b4d",
+          "text": "When he woke up and found himself alone, the 4-year-old decided his brother might be on the train he saw in front of him – so he got on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 135
+          },
+          "parts": [
+            [
+              129,
+              135
+            ]
+          ],
+          "highlightRanges": [
+            [
+              129,
+              135
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on#e-b77161845ef5ede0",
+          "text": "He got on a train by mistake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          },
+          "parts": [
+            [
+              3,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on#e-415824e6571e545d",
+          "text": "The more you pay, the sooner you can get on the plane and the less likely you will have to check a bag.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 43
+          },
+          "parts": [
+            [
+              37,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              43
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:get-on#s2",
+      "pos": "短语",
+      "glossZh": "相处；合得来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-on#e-35e7c760f8eb8a06",
+          "text": "How to get on well with other family members.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:27#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          },
+          "parts": [
+            [
+              7,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              13
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on#e-51ecc8f848d69e77",
+          "text": "gets on well with his co-workers",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:28#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          },
+          "parts": [
+            [
+              0,
+              7
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              7
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-on#e-c92839f63406859f",
+          "text": "Her group members didn’t get on well with each other.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          },
+          "parts": [
+            [
+              25,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              31
+            ]
+          ]
+        }
+      ],
+      "note": "get on (well) with sb",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-on#s3",
+      "pos": "短语",
+      "glossZh": "进展；应付得如何",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-on#s4",
+      "pos": "短语",
+      "glossZh": "抓紧做；继续做（手头的事）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "get on with sth",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-on#s5",
+      "pos": "短语",
+      "glossZh": "年纪渐长",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用进行时。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-on#s6",
+      "pos": "短语",
+      "glossZh": "（时间、年龄、数量等）接近……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "be getting on for",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

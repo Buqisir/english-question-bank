@@ -1,0 +1,162 @@
+{
+  "entryId": "w:catch-sight-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "sight",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "sight",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "caught sight of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch sight of sb/sth",
+  "senses": [
+    {
+      "senseId": "w:catch-sight-of#s1",
+      "pos": "短语",
+      "glossZh": "忽然看见；瞥见",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:catch#s9",
+        "w:sight#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:catch-sight-of#e-bab26c097e4708b2",
+          "text": "Moments later, we caught sight of it gently touching the window with his snout (口鼻部) and grunting softly.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 33
+          },
+          "parts": [
+            [
+              18,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              33
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-sight-of#e-561cb3993d65644c",
+          "text": "Yet sometimes Alex caught sight of exhaustion in Ben’s eyes when their father went on about his achievements.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 34
+          },
+          "parts": [
+            [
+              19,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              19,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-sight-of#e-af6fb384c2d9fb0d",
+          "text": "One rainy Saturday in November 2024, he caught sight of a thick, old-fashioned wool coat hidden in a corner of a small shop.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 55
+          },
+          "parts": [
+            [
+              40,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

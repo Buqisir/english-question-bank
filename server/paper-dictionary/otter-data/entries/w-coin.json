@@ -59,8 +59,8 @@
     "mock": 79
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 74
+    "gaokao": 1,
+    "mock": 4
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 61
       },
       "folded": false,
       "examples": [
@@ -116,59 +116,6 @@
       ]
     },
     {
-      "senseId": "w:coin#s2",
-      "pos": "短语",
-      "glossZh": "事情的另一方面或两方面",
-      "pronunciationId": "w:coin#p-main",
-      "note": "the other side of the coin；both sides of the coin。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:coin#e-2fb8e507f70b20e9",
-          "text": "The other side of the coin is equally a deprivation: for health and well-being, as well as lost opportunities（机会）for children to get to know their local surroundings.",
-          "source": {
-            "paperId": "paper-gaokao-2021-zhejiang-jan",
-            "paperTitle": "2021 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:coin#e-64bc5f430fe54a4b",
-          "text": "This issue will examine both sides of the coin – how people make their choices on the type of island vacation, and their inevitable impact on the local communities and economies.",
-          "source": {
-            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
-            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
-            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a",
-            "locator": {
-              "paragraph": 17,
-              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a:17",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 42,
-            "end": 46
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:coin#s3",
       "pos": "v.",
       "glossZh": "创造（词语、说法）",
@@ -176,7 +123,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 14
       },
       "folded": false,
       "examples": [
@@ -240,6 +187,12 @@
       "reason": "缩写或学科术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:both-sides-of-the-coin",
+    "w:the-other-side-of-the-coin"
+  ]
 }

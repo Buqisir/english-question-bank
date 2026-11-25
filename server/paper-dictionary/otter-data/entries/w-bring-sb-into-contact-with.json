@@ -1,0 +1,70 @@
+{
+  "entryId": "w:bring-sb-into-contact-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "bring",
+      {
+        "slot": "sb"
+      },
+      "into",
+      "contact",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "bring",
+        {
+          "slot": "sb"
+        },
+        "into",
+        "contact",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "bring sb into contact with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:bring-sb-into-contact-with#s1",
+      "pos": "短语",
+      "glossZh": "使某人接触到某人或某事物",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:into#s11"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

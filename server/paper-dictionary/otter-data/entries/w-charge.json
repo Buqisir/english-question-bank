@@ -59,8 +59,8 @@
     "mock": 178
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 170
+    "gaokao": 3,
+    "mock": 40
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -207,112 +207,6 @@
       ]
     },
     {
-      "senseId": "w:charge#s3",
-      "pos": "短语",
-      "glossZh": "带头；率先行动",
-      "pronunciationId": "w:charge#p-main",
-      "note": "lead the charge",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:charge#e-fc57a319b552cdc3",
-          "text": "Though DIY has traditionally been seen as a male hobby, the research shows it is women now leading the charge.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:5",
-              "sentence": 5
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 103,
-            "end": 109
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:charge#s4",
-      "pos": "短语",
-      "glossZh": "负责；掌管",
-      "pronunciationId": "w:charge#p-main",
-      "note": "in charge 或 take charge",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:charge#e-fb04e7cf94aa8467",
-          "text": "The movements of the black and white pieces reflect the basic ideas of Eastern philosophy, according to Tu Ningning, who is in charge of the exhibition.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 127,
-            "end": 133
-          }
-        },
-        {
-          "exampleId": "w:charge#e-be51b100c0b10483",
-          "text": "So I left someone else in charge and got to the park to find him.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:6",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 26,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:charge#e-c1bee5d1fc003cc3",
-          "text": "That morning, Ms. White had asked her if she would be willing to take charge of the class bulletin board(板报) for the upcoming competition.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 70,
-            "end": 76
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:charge#s5",
       "pos": "v.",
       "glossZh": "充电；给……充电",
@@ -320,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -391,7 +285,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -454,12 +348,12 @@
       "pos": "n.",
       "glossZh": "电荷；电量",
       "pronunciationId": "w:charge#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 26
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -467,12 +361,12 @@
       "pos": "n.",
       "glossZh": "指控；罪名",
       "pronunciationId": "w:charge#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -513,6 +407,110 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:charge#s13",
+      "pos": "v.",
+      "glossZh": "带上电荷；使带电",
+      "pronunciationId": "w:charge#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:charge#e-76009fcf0d5c29fa",
+          "text": "Batteries store and release energy by moving charged particles (粒子) between electrodes, the two ends of a battery, through an electrolyte, a substance that allows electricity to move; cold temperatures make those processes inactive.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:charge#e-cd82ae6ea040dc2c",
+          "text": "As the name suggests, it uses ions – charged particles（粒子）— to create a cooling effect.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:charge#e-51f70140fc2c7bbb",
+          "text": "This was a fixed ranking system designed to determine exactly which materials would charge positively or negatively upon contact.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:charge#s14",
+      "pos": "adj.",
+      "glossZh": "带有强烈情感或政治意味的",
+      "pronunciationId": "w:charge#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:charge#e-7ce85ff5c950c7a3",
+          "text": "His most remarkable and politically charged work was “Guernica”, produced in response to the Spanish Civil War when the town suffered a horrifying bombing.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -521,6 +519,15 @@
       "reason": "行业或历史专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:free-of-charge",
+    "w:in-charge",
+    "w:in-charge-of",
+    "w:lead-the-charge",
+    "w:take-charge"
+  ]
 }

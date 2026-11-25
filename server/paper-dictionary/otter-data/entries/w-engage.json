@@ -58,8 +58,8 @@
     "mock": 278
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 273
+    "gaokao": 4,
+    "mock": 185
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 40
       },
       "folded": false,
       "examples": [
@@ -141,7 +141,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -212,7 +212,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -284,7 +284,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 18
       },
       "folded": false,
       "examples": [
@@ -305,151 +305,6 @@
           "target": {
             "start": 32,
             "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:engage#s5",
-      "pos": "短语",
-      "glossZh": "从事",
-      "pronunciationId": "w:engage#p-main",
-      "note": "engage in sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:engage#e-9c3b89bedec3fec0",
-          "text": "He co-founded the Frank Lloyd Wright Building Conservancy, an organization engaged in the preservation of all of Wright’s remaining buildings.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
-              "sentence": 6
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 75,
-            "end": 82
-          }
-        },
-        {
-          "exampleId": "w:engage#e-75df67b8d4c383f4",
-          "text": "Engaging in new things does not mean abandoning proven effective methods.",
-          "source": {
-            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
-            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
-            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:36",
-              "option": "G",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:engage#e-f8fc399047a7bfda",
-          "text": "Why do some people engage in performative reading?",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-10-first:28",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 19,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:engage#s6",
-      "pos": "短语",
-      "glossZh": "积极接触",
-      "pronunciationId": "w:engage#p-main",
-      "note": "engage with sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:engage#e-f81e012ef89d61b3",
-          "text": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
-            "locator": {
-              "paragraph": 11,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 40,
-            "end": 48
-          }
-        },
-        {
-          "exampleId": "w:engage#e-0ea3794eb8fcf955",
-          "text": "Yet, while some children frequently visit museums with their families, others – especially those from disadvantaged backgrounds – may never have the opportunity to engage with these rich cultural resources.",
-          "source": {
-            "paperId": "paper-mock-anhui-hefei-2026-02-first",
-            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
-            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 164,
-            "end": 170
-          }
-        },
-        {
-          "exampleId": "w:engage#e-b187abf1f9e36edc",
-          "text": "They chose to engage with the ads, even knowing they were __54__.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:cloze",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:cloze:6",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 14,
-            "end": 20
           }
         }
       ]
@@ -485,13 +340,80 @@
       "pos": "v.",
       "glossZh": "使接合",
       "pronunciationId": "w:engage#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
+    },
+    {
+      "senseId": "w:engage#s10",
+      "pos": "adj.",
+      "glossZh": "已订婚的",
+      "pronunciationId": "w:engage#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engage#e-7e3b1ce80d2376eb",
+          "text": "Life seemed perfect – I was engaged, had great friends and enjoyed stability.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:engage#s11",
+      "pos": "adj.",
+      "glossZh": "有事在忙的",
+      "pronunciationId": "w:engage#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engage#e-2632b17103eddcb4",
+          "text": "They are engaged otherwise.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -500,6 +422,12 @@
       "reason": "低频法律义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:engage-in-sth",
+    "w:engage-with-sth"
+  ]
 }

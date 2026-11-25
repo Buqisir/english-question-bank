@@ -1,0 +1,60 @@
+{
+  "entryId": "w:soft-drink",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "soft",
+      "drink"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "soft",
+        "drink"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "soft drink",
+  "senses": [
+    {
+      "senseId": "w:soft-drink#s1",
+      "pos": "短语",
+      "glossZh": "软饮料；不含酒精的饮料",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:soft#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

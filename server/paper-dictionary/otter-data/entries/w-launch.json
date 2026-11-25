@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 101
+    "mock": 10
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -195,7 +195,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -229,7 +229,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -259,12 +259,12 @@
       "pos": "v.",
       "glossZh": "发射升空",
       "pronunciationId": "w:launch#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -275,7 +275,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -308,7 +308,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -345,40 +345,6 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:launch#s9",
-      "pos": "短语",
-      "glossZh": "突然开始做某事",
-      "pronunciationId": "w:launch#p-main",
-      "note": "launch into。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:launch#e-965e61d665dc283e",
-          "text": "Before she could launch into her prepared speech about community respect and property, her eyes slid past him into the hallway.",
-          "source": {
-            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
-            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
-            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 23
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -387,6 +353,11 @@
       "reason": "较少用的名词或旧动词"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:launch-into"
+  ]
 }

@@ -1,0 +1,156 @@
+{
+  "entryId": "w:as-a-whole",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "as",
+      "a",
+      "whole"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "as",
+        "a",
+        "whole"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "as a whole",
+  "senses": [
+    {
+      "senseId": "w:as-a-whole#s1",
+      "pos": "短语",
+      "glossZh": "作为一个整体；从整体上看",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:as#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:as-a-whole#e-125c260f278435b5",
+          "text": "Nearly all existing research focuses on fear of animals rather than aversion to nature as a whole.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 97
+          },
+          "parts": [
+            [
+              87,
+              97
+            ]
+          ],
+          "highlightRanges": [
+            [
+              87,
+              97
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-whole#e-701a6cf2bac225f7",
+          "text": "Instead, the focus is shifting toward encouraging a healthy and diverse bacterial ecosystem as a whole.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 102
+          },
+          "parts": [
+            [
+              92,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:as-a-whole#e-ecc50a742cc13e03",
+          "text": "Despite the wild motion of its parts, the galaxy as a whole was spinning about an axis(轴).",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

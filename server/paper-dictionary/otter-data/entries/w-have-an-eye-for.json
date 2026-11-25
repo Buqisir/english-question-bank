@@ -1,0 +1,114 @@
+{
+  "entryId": "w:have-an-eye-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "has an eye for"
+  ],
+  "pattern": {
+    "tokens": [
+      "have",
+      "an",
+      "eye",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "have",
+        "an",
+        "eye",
+        "for"
+      ],
+      [
+        "has",
+        "an",
+        "eye",
+        "for"
+      ],
+      [
+        "had",
+        "an",
+        "eye",
+        "for"
+      ],
+      [
+        "having",
+        "an",
+        "eye",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "have an eye for",
+  "senses": [
+    {
+      "senseId": "w:have-an-eye-for#s1",
+      "pos": "短语",
+      "glossZh": "对某类事物有眼光；善于发现或辨别",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:have-an-eye-for#e-49c2a7412112e10f",
+          "text": "A young truck driver who grew up working on tractors（拖拉机）already has an eye for safety.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 79
+          },
+          "parts": [
+            [
+              65,
+              79
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              79
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

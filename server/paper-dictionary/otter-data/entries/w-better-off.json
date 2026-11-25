@@ -1,0 +1,203 @@
+{
+  "entryId": "w:better-off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "better",
+      "off"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "better",
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "better off",
+  "senses": [
+    {
+      "senseId": "w:better-off#s1",
+      "pos": "短语",
+      "glossZh": "处境更好；更有利",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:better#s4",
+        "w:good#s24",
+        "w:off#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:better-off#e-440ddf3f8d998723",
+          "text": "However, research suggests that if we practiced patience, we’d be a whole lot better off.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 88
+          },
+          "parts": [
+            [
+              78,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              78,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:better-off#e-0e8a224b63797ff0",
+          "text": "Even when you win, you end up no better off.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 43
+          },
+          "parts": [
+            [
+              33,
+              43
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              43
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:better-off#e-48e407e7b833360c",
+          "text": "These two approaches are two extremes that are better off avoided.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-jining-2026-04-second-mock:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              57
+            ]
+          ]
+        }
+      ],
+      "note": "be better off doing sth 表示做某事更有利。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 12
+      }
+    },
+    {
+      "senseId": "w:better-off#s2",
+      "pos": "短语",
+      "glossZh": "经济上更宽裕",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:better-off#e-6c18fef48f58582f",
+          "text": "Some were better off than others, but they all needed a good meal and",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          },
+          "parts": [
+            [
+              10,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

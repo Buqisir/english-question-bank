@@ -59,82 +59,10 @@
     "mock": 56
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 49
+    "gaokao": 2,
+    "mock": 20
   },
   "senses": [
-    {
-      "senseId": "w:cheer#s1",
-      "pos": "短语",
-      "glossZh": "使高兴；使振作",
-      "pronunciationId": "w:cheer#p-main",
-      "note": "cheer up",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:cheer#e-6c78e8d20d3e5fd7",
-          "text": "“What should we do to cheer Poppy up?” asked Dad.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:6",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        },
-        {
-          "exampleId": "w:cheer#e-542bc4e992acd2ac",
-          "text": "They had recently lost one of their three beloved dogs, Sierra, and he thought sponsoring the adoptions to help so many shelter dogs find forever homes would help cheer Jennifer up.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
-            "paperTitle": "重庆市高2026届高三第七次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:2",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 163,
-            "end": 168
-          }
-        },
-        {
-          "exampleId": "w:cheer#e-42f60c87ee0a7963",
-          "text": "We tried our best to cheer him up – planning small activities and checking on him regularly – but John still felt lonely.",
-          "source": {
-            "paperId": "paper-mock-import-20261026-n090",
-            "paperTitle": "德州市2026年高考诊断性测试英语试题",
-            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 21,
-            "end": 26
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:cheer#s2",
       "pos": "v.",
@@ -143,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 24
       },
       "folded": false,
       "examples": [
@@ -214,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -271,6 +199,72 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:cheer#s5",
+      "pos": "v.",
+      "glossZh": "使高兴；使振作",
+      "pronunciationId": "w:cheer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cheer#e-83c33d576a74841a",
+          "text": "Whether you’re cheering others or lifting your spirits, a pep talk needn’t be complex.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cheer#s6",
+      "pos": "interj.",
+      "glossZh": "干杯；敬你一杯",
+      "pronunciationId": "w:cheer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cheer#e-21edc9c0131e7ed1",
+          "text": "He lifted his cup, “Cheers to you.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:writing-continuation:10",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -279,6 +273,11 @@
       "reason": "较旧用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:cheer-up"
+  ]
 }

@@ -1,0 +1,280 @@
+{
+  "entryId": "w:side-by-side",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "side",
+      "by",
+      "side"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "side",
+        "by",
+        "side"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "side by side",
+  "senses": [
+    {
+      "senseId": "w:side-by-side#s1",
+      "pos": "短语",
+      "glossZh": "并排；紧挨着",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s14",
+        "w:side#s8"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:side-by-side#e-771bfc653cbe7803",
+          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 116
+          },
+          "parts": [
+            [
+              104,
+              116
+            ]
+          ],
+          "highlightRanges": [
+            [
+              104,
+              116
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:side-by-side#e-388d76490d235132",
+          "text": "Even between those two, side by side, people couldn’t point to the strong one.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:side-by-side#e-76205400145ecb94",
+          "text": "Seeing the past and future X-rays side by side is a powerful motivator.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 46
+          },
+          "parts": [
+            [
+              34,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              46
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:side-by-side#s2",
+      "pos": "短语",
+      "glossZh": "并肩合作；共同做事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:side-by-side#e-8bec9abfc09b33c2",
+          "text": "Over the next two weeks, we worked side by side.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          },
+          "parts": [
+            [
+              35,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:side-by-side#e-c72381eda7f59c3b",
+          "text": "Built on solid academic training and driven by a clear goal – to give AI true mathematical reasoning ability – she is leading Axiom Math toward a future where machines and mathematicians work side by side.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 192,
+            "end": 204
+          },
+          "parts": [
+            [
+              192,
+              204
+            ]
+          ],
+          "highlightRanges": [
+            [
+              192,
+              204
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 work side by side。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:side-by-side#s3",
+      "pos": "短语",
+      "glossZh": "比邻而居；共处",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:side-by-side#e-b7c13f2eeb6fc7f7",
+          "text": "We lived peacefully side by side for 35 years, coming to know each other through our day-to-day ebb and flow – chatting, lending a helping hand, keeping a watchful eye, never overstepping.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 32
+          },
+          "parts": [
+            [
+              20,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              32
+            ]
+          ]
+        }
+      ],
+      "note": "常见于 live side by side。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

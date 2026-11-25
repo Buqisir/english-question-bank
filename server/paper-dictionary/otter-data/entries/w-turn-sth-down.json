@@ -1,0 +1,245 @@
+{
+  "entryId": "w:turn-sth-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turn down",
+    "turned down",
+    "turning down"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      {
+        "slot": "sth"
+      },
+      "down"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "turn",
+        {
+          "slot": "sth"
+        },
+        "down"
+      ],
+      [
+        "turn",
+        "down"
+      ],
+      [
+        "turn",
+        {
+          "slot": "sb/sth"
+        },
+        "down"
+      ],
+      [
+        "turned",
+        "down"
+      ],
+      [
+        "turning",
+        "down"
+      ],
+      [
+        "turns",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn (sb/sth) down",
+  "senses": [
+    {
+      "senseId": "w:turn-sth-down#s1",
+      "pos": "短语",
+      "glossZh": "调低（音量、温度、火力等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:turn#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-down#e-d3bd8a393e3679e5",
+          "text": "This time, she turned down the fire so it cooked nicely.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 11
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          },
+          "parts": [
+            [
+              15,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              15,
+              26
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:turn-sth-down#s2",
+      "pos": "短语",
+      "glossZh": "拒绝；不接受（请求、提议等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-sth-down#e-2e6b7b907abc3e88",
+          "text": "There was one house in particular where I was turned down that evening.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 57
+          },
+          "parts": [
+            [
+              46,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-down#e-ab4895e2a1945db6",
+          "text": "Why does the man turn down the woman?",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-sth-down#e-8e83337fa3f496c0",
+          "text": "“We made thousands of phone calls and sent thousands of postcards telling the governor why this facility was a bad idea.” In July 2007, the governor made an unexpected move: He turned down the project.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 177,
+            "end": 188
+          },
+          "parts": [
+            [
+              177,
+              188
+            ]
+          ],
+          "highlightRanges": [
+            [
+              177,
+              188
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:turn-sth-down#s3",
+      "pos": "短语",
+      "glossZh": "向下翻折",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

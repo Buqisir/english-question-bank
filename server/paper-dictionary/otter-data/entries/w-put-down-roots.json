@@ -1,0 +1,96 @@
+{
+  "entryId": "w:put-down-roots",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "put",
+      "down",
+      "roots"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "put",
+        "down",
+        "roots"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put down roots",
+  "senses": [
+    {
+      "senseId": "w:put-down-roots#s1",
+      "pos": "短语",
+      "glossZh": "在某地扎根；安顿下来长期居住",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s6",
+        "w:put#s28",
+        "w:root#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-down-roots#e-2388f0c7ac73b277",
+          "text": "Back in 1951, Reisley was just 26, newly married and ready to put down roots.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 76
+          },
+          "parts": [
+            [
+              62,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              76
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

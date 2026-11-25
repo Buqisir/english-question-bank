@@ -1,0 +1,168 @@
+{
+  "entryId": "w:ring-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ring",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ring",
+        "out"
+      ],
+      [
+        "rang",
+        "out"
+      ],
+      [
+        "ringing",
+        "out"
+      ],
+      [
+        "rings",
+        "out"
+      ],
+      [
+        "rung",
+        "out"
+      ],
+      [
+        "ringed",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "ringing out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ring out",
+  "senses": [
+    {
+      "senseId": "w:ring-out#s1",
+      "pos": "短语",
+      "glossZh": "（声音）响亮而清晰地传开",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ring-out#e-1368cc0d863498b6",
+          "text": "24, among the sounds of dogs barking, feet marching and police sirens (警笛声) ringing out from a distance.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 87
+          },
+          "parts": [
+            [
+              76,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              87
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:ring-out#s2",
+      "pos": "短语",
+      "glossZh": "拨打外线电话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-out#s3",
+      "pos": "短语",
+      "glossZh": "把对手击出场外而获胜；出界胜",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于格斗游戏。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-out#s4",
+      "pos": "短语",
+      "glossZh": "调试音响以抑制反馈啸叫",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-out#s5",
+      "pos": "短语",
+      "glossZh": "从循环交易中剔除中间方或中间合同",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

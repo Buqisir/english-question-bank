@@ -1,0 +1,164 @@
+{
+  "entryId": "w:get-into-the-habit",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "into",
+      "the",
+      "habit"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "into",
+        "the",
+        "habit"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got into the habit",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get into the habit",
+  "senses": [
+    {
+      "senseId": "w:get-into-the-habit#s1",
+      "pos": "短语",
+      "glossZh": "养成习惯",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s23"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-into-the-habit#e-e1fca1a17af471b4",
+          "text": "And the only way for us to get into the habit of waiting is to practice.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 45
+          },
+          "parts": [
+            [
+              27,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into-the-habit#e-5816ba00d5438cff",
+          "text": "“There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 199,
+            "end": 217
+          },
+          "parts": [
+            [
+              199,
+              217
+            ]
+          ],
+          "highlightRanges": [
+            [
+              199,
+              217
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-into-the-habit#e-d097615aafd11e13",
+          "text": "Try to get into the habit of calling your dog back to you whenever you see another walker approaching.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 25
+          },
+          "parts": [
+            [
+              7,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "常用 get into the habit of doing sth。",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

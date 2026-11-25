@@ -1,0 +1,143 @@
+{
+  "entryId": "w:sit-through",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "sit",
+      "through"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "sit",
+        "through"
+      ],
+      [
+        "sat",
+        "through"
+      ],
+      [
+        "sits",
+        "through"
+      ],
+      [
+        "sitting",
+        "through"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "sat through",
+      "tags": []
+    },
+    {
+      "form": "sit through",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "sit through sth",
+  "senses": [
+    {
+      "senseId": "w:sit-through#s1",
+      "pos": "短语",
+      "glossZh": "耐着性子坐到活动结束",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:sit-through#e-4f005bc0c9c1eb9f",
+          "text": "You sat through the movie you paid for, super bored.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 15
+          },
+          "parts": [
+            [
+              4,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              15
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:sit-through#e-3c96692418cde8d0",
+          "text": "As the speaker stood in front of the entire grade, attempting to get our attention, my friends and I sat back, prepared to sit through another boring speech, but as soon as she started talking, I snapped to attention (立即站立).",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 134
+          },
+          "parts": [
+            [
+              123,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              134
+            ]
+          ]
+        }
+      ],
+      "note": "常接演讲、会议、电影等。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

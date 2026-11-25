@@ -1,0 +1,104 @@
+{
+  "entryId": "w:play-fair",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "playing fair"
+  ],
+  "pattern": {
+    "tokens": [
+      "play",
+      "fair"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "play",
+        "fair"
+      ],
+      [
+        "playing",
+        "fair"
+      ],
+      [
+        "played",
+        "fair"
+      ],
+      [
+        "plays",
+        "fair"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "play fair",
+  "senses": [
+    {
+      "senseId": "w:play-fair#s1",
+      "pos": "短语",
+      "glossZh": "遵守公平规则；公平诚实地行事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:play-fair#e-1eb2d0697c77c9ff",
+          "text": "Many of Christie’s writing rules concern playing fair.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 53
+          },
+          "parts": [
+            [
+              41,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

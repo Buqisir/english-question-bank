@@ -62,8 +62,8 @@
     "mock": 103
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 102
+    "gaokao": 1,
+    "mock": 6
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 10,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -209,40 +209,6 @@
       ]
     },
     {
-      "senseId": "w:rain#s3",
-      "pos": "短语",
-      "glossZh": "风雨无阻",
-      "pronunciationId": "w:rain#p-main",
-      "note": "rain or shine。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:rain#e-93519969bb18cefe",
-          "text": "We’ll be working rain or shine.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:reading-a",
-            "locator": {
-              "paragraph": 9,
-              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 17,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:rain#s4",
       "pos": "v.",
       "glossZh": "雨点般落下",
@@ -262,6 +228,13 @@
       "reason": "与 reign 有关的旧词形"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:rain-or-shine",
+    "w:rain-out",
+    "w:right-as-rain"
+  ]
 }

@@ -1,0 +1,74 @@
+{
+  "entryId": "w:on-hand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "hand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "hand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on hand",
+  "senses": [
+    {
+      "senseId": "w:on-hand#s1",
+      "pos": "短语",
+      "glossZh": "手头有；可随时取用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:hand#s12"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:on-hand#s2",
+      "pos": "短语",
+      "glossZh": "在场；随时可以帮忙",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be on hand to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

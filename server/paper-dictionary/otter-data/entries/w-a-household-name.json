@@ -1,0 +1,125 @@
+{
+  "entryId": "w:a-household-name",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "household",
+      "name"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "household",
+        "name"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a household name",
+  "senses": [
+    {
+      "senseId": "w:a-household-name#s1",
+      "pos": "短语",
+      "glossZh": "家喻户晓的名字（或人、品牌等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:household#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-household-name#e-2b709e9ad36642d0",
+          "text": "Written in first person, this book tracks his 25-year journey as a cartoonist, writer and showrunner, from an Ontario farm kid to a household name.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 146
+          },
+          "parts": [
+            [
+              130,
+              146
+            ]
+          ],
+          "highlightRanges": [
+            [
+              130,
+              146
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-household-name#e-209d4685f10386eb",
+          "text": "Douglas, who had owned and coached the Rens for their entire 25-year run, is today known as the “Father of Black Professional Basketball,” which ensures that although the Rens isn’t a household name, their legacy will never be forgotten.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 182,
+            "end": 198
+          },
+          "parts": [
+            [
+              182,
+              198
+            ]
+          ],
+          "highlightRanges": [
+            [
+              182,
+              198
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

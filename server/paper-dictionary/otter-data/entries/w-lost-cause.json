@@ -1,0 +1,109 @@
+{
+  "entryId": "w:lost-cause",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lost",
+      "cause"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lost",
+        "cause"
+      ],
+      [
+        "lost",
+        "causes"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lost cause",
+  "senses": [
+    {
+      "senseId": "w:lost-cause#s1",
+      "pos": "短语",
+      "glossZh": "无望成功或挽回的人或事",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lost-cause#e-73c9a5aa8c80dd6d",
+          "text": "Classical education is not a lost cause.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-shandong-jiuwu-2026-final:30#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          },
+          "parts": [
+            [
+              29,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              39
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:lost-cause#s2",
+      "pos": "短语",
+      "glossZh": "美化美国南北战争中南方邦联的历史叙事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "专名，写作 the Lost Cause。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,95 @@
+{
+  "entryId": "w:save-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "save",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "save",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "save for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "save for sth",
+  "senses": [
+    {
+      "senseId": "w:save-for#s1",
+      "pos": "短语",
+      "glossZh": "除……之外",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:save-for#e-8ba8955f2df8aeeb",
+          "text": "Jake Morrison, a high school teacher in a small town in Oregon, US, once knew little about community gardening – save for seeing his grandma tending tomato plants in her backyard.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 121
+          },
+          "parts": [
+            [
+              113,
+              121
+            ]
+          ],
+          "highlightRanges": [
+            [
+              113,
+              121
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

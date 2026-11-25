@@ -1,0 +1,402 @@
+{
+  "entryId": "w:account-for",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "accounts for"
+  ],
+  "pattern": {
+    "tokens": [
+      "account",
+      "for"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "account",
+        "for"
+      ],
+      [
+        "accounts",
+        "for"
+      ],
+      [
+        "accounted",
+        "for"
+      ],
+      [
+        "accounting",
+        "for"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "accounted for",
+      "tags": []
+    },
+    {
+      "form": "accounting for",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "account for",
+  "senses": [
+    {
+      "senseId": "w:account-for#s1",
+      "pos": "短语",
+      "glossZh": "占（一定数量或比例）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:account-for#e-eb32042e41cb7b40",
+          "text": "What percentage of global transport emissions did road vehicles account for in 2018?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2025-i:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 75
+          },
+          "parts": [
+            [
+              64,
+              75
+            ]
+          ],
+          "highlightRanges": [
+            [
+              64,
+              75
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-065df748a9d3c56e",
+          "text": "Oaks and sweetgums, which currently account for a majority of the city’s trees, produce huge amounts of a chemical substance called isoprene.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 47
+          },
+          "parts": [
+            [
+              36,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              47
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-b3b9ed446be51bc4",
+          "text": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 115
+          },
+          "parts": [
+            [
+              103,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              103,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 29
+      }
+    },
+    {
+      "senseId": "w:account-for#s2",
+      "pos": "短语",
+      "glossZh": "把……考虑在内；将……计入",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:account-for#e-28ef3cdcdc9c3f85",
+          "text": "The results held true even after the scientists accounted for the participants’ overall health status.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-f7b881050920281c",
+          "text": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-24efbc19206287ae",
+          "text": "Most impressively, the animals even accounted for clues that weakened earlier evidence.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 49
+          },
+          "parts": [
+            [
+              36,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              36,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      }
+    },
+    {
+      "senseId": "w:account-for#s3",
+      "pos": "短语",
+      "glossZh": "解释……的原因；是……的成因",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:account-for#e-9c78ec6d433b9a0e",
+          "text": "According to Dr. Simon, what accounts for leftists’ sport-specific excellence?",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:35",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 41
+          },
+          "parts": [
+            [
+              29,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-b1ea02927242229d",
+          "text": "What accounts for the stronger cooling effect over cleared lands?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:30",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 17
+          },
+          "parts": [
+            [
+              5,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              5,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:account-for#e-35fa6162bfa7e5d2",
+          "text": "What mainly accounts for the team’s technological breakthrough?",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:35",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          },
+          "parts": [
+            [
+              12,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:account-for#s4",
+      "pos": "短语",
+      "glossZh": "交代（人员或物品的去向、下落）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

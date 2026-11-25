@@ -1,0 +1,157 @@
+{
+  "entryId": "w:at-a-glance",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "a",
+      "glance"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "a",
+        "glance"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at a glance",
+  "senses": [
+    {
+      "senseId": "w:at-a-glance#s1",
+      "pos": "短语",
+      "glossZh": "一眼就能看出；一目了然",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:glance#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-a-glance#e-71793c2b3ae59bd1",
+          "text": "The expert can spot and name species at a glance, while the beginner struggles to tell one songbird from another.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 48
+          },
+          "parts": [
+            [
+              37,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-glance#e-21bd7d11bedf9fa4",
+          "text": "Your Schedule at a Glance (Minimum 2-week commitment):",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:at-a-glance#e-700e6efd6023bcd2",
+          "text": "Visitor Guide at a Glance",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 25
+          },
+          "parts": [
+            [
+              14,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              14,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "用在标题中可表示概览。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

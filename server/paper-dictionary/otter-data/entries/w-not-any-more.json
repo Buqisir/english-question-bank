@@ -1,0 +1,114 @@
+{
+  "entryId": "w:not-any-more",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      {
+        "slot": "…"
+      },
+      "any",
+      "more"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        {
+          "slot": "…"
+        },
+        "any",
+        "more"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "not any more",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not … any more",
+  "senses": [
+    {
+      "senseId": "w:not-any-more#s1",
+      "pos": "短语",
+      "glossZh": "不再；再也不",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:any#s3",
+        "w:more#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:not-any-more#e-9d3b4e69d1a7ce24",
+          "text": "The person serving me looked up and said: ‘Oh,we’re not serving any more’.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 72
+          },
+          "parts": [
+            [
+              52,
+              55
+            ],
+            [
+              64,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              55
+            ],
+            [
+              64,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

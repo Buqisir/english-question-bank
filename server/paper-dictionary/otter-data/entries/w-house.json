@@ -84,8 +84,8 @@
     "mock": 371
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 369
+    "gaokao": 11,
+    "mock": 187
   },
   "senses": [
     {
@@ -96,7 +96,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 69,
-        "mock": 0
+        "mock": 160
       },
       "folded": false,
       "examples": [
@@ -167,7 +167,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -219,7 +219,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -259,74 +259,6 @@
           "target": {
             "start": 18,
             "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:house#s4",
-      "pos": "短语",
-      "glossZh": "搬家",
-      "pronunciationId": "w:house#p-main",
-      "note": "move house。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:house#e-d0ffac00999e97db",
-          "text": "She adds: “I’ve moved house many times and I always like to personalise my room and put up pictures.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:house#s5",
-      "pos": "短语",
-      "glossZh": "代人看家",
-      "pronunciationId": "w:house#p-main",
-      "note": "house sitting；house sitter 指代人看家的人。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:house#e-3bf10798dc64f58a",
-          "text": "But house sitting also offers a level of __49__ they can’t find in a hotel.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2022-ii:cloze:3",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 9
           }
         }
       ]
@@ -372,7 +304,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -402,12 +334,12 @@
       "pos": "n.",
       "glossZh": "议院",
       "pronunciationId": "w:house#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -432,7 +364,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -456,6 +388,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:house#s11",
+      "pos": "n.",
+      "glossZh": "公司；商号",
+      "pronunciationId": "w:house#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:house#e-ef815a03c11937a0",
+          "text": "She worked as a bookseller, and then at a publishing house for many years.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 58
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -464,6 +429,16 @@
       "reason": "专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:full-house",
+    "w:house-wine",
+    "w:keep-house",
+    "w:move-house",
+    "w:open-house",
+    "w:the-lady-of-the-house"
+  ]
 }

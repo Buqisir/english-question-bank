@@ -1,0 +1,70 @@
+{
+  "entryId": "w:come-out-of-ones-shell",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "come",
+      "out",
+      "of",
+      {
+        "slot": "one's"
+      },
+      "shell"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "out",
+        "of",
+        {
+          "slot": "one's"
+        },
+        "shell"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come out of one's shell",
+  "senses": [
+    {
+      "senseId": "w:come-out-of-ones-shell#s1",
+      "pos": "短语",
+      "glossZh": "不再那么害羞；开始愿意与人交流",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:shell#s7"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:drag-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "drag",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "drag",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "drag on",
+  "senses": [
+    {
+      "senseId": "w:drag-on#s1",
+      "pos": "短语",
+      "glossZh": "拖得太久；迟迟不结束",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:drag#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:drag-on#e-00b5da9442bfac53",
+          "text": "The same three-hour journey seems to drag on between layovers (中途停留), traffic and rest-stop food.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          },
+          "parts": [
+            [
+              37,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              37,
+              44
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:drag-on#e-96447473c600f58e",
+          "text": "“The process tends to drag on for hours to turn out usable water, unable to meet urgent needs in water-starved regions.”",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          },
+          "parts": [
+            [
+              22,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

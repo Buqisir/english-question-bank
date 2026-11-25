@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 47
+    "mock": 1
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -126,7 +126,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 30
       },
       "folded": false,
       "examples": [
@@ -188,43 +188,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:leisure#s3",
-      "pos": "短语",
-      "glossZh": "在方便时从容地",
-      "pronunciationId": "w:leisure#p-main",
-      "note": "at your leisure。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:leisure#e-3c1d8ae00cb34777",
-          "text": "There are over 700 questions in five categories the StoryBook interviewer can ask you, all about your life and family, at your leisure.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
-            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
-            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 127,
-            "end": 134
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-your-leisure"
+  ]
 }

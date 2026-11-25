@@ -1,0 +1,117 @@
+{
+  "entryId": "w:take-account-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "account",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "account",
+        "of"
+      ],
+      [
+        "taken",
+        "account",
+        "of"
+      ],
+      [
+        "takes",
+        "account",
+        "of"
+      ],
+      [
+        "taking",
+        "account",
+        "of"
+      ],
+      [
+        "took",
+        "account",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "take account of",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take account of sth",
+  "senses": [
+    {
+      "senseId": "w:take-account-of#s1",
+      "pos": "短语",
+      "glossZh": "考虑到；把……算在内",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-account-of#e-f98add6b232e5e6e",
+          "text": "We don’t take account of unexpected costs, either.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 24
+          },
+          "parts": [
+            [
+              9,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              24
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

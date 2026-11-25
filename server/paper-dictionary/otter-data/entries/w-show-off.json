@@ -1,0 +1,216 @@
+{
+  "entryId": "w:show-off",
+  "headword": "show (sth) off",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "showing off",
+    "shows off"
+  ],
+  "pattern": {
+    "tokens": [
+      "show",
+      "off"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "show",
+        "off"
+      ],
+      [
+        "showing",
+        "off"
+      ],
+      [
+        "shows",
+        "off"
+      ],
+      [
+        "showed",
+        "off"
+      ],
+      [
+        "shown",
+        "off"
+      ],
+      [
+        "show",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "showing",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "shows",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "showed",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ],
+      [
+        "shown",
+        {
+          "slot": "sth"
+        },
+        "off"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "show off",
+      "tags": []
+    },
+    {
+      "form": "showed off",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:show-off#s1",
+      "pos": "短语",
+      "glossZh": "炫耀；卖弄；展示（引以为豪的东西）",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 31
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:show-off#e-467bd72dadb296ff",
+          "text": "As social media becomes more common, it’s now routine for many people to “show off” their daily lives online.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 82
+          },
+          "parts": [
+            [
+              74,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-off#e-b563692e664fd1e8",
+          "text": "His inability to show off his worth through effort.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-jiyang-2026-04-joint-exam:26#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:show-off#e-fa32c2b5d3cbf0c4",
+          "text": "In an era when students can show off their recipes via social media, we can also seize the opportunity to introduce technology into our food tech classes.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          },
+          "parts": [
+            [
+              28,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              36
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "mock",
+  "folded": false
+}

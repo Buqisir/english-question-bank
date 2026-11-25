@@ -1,0 +1,152 @@
+{
+  "entryId": "w:worth-it",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "worth",
+      "it"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "worth",
+        "it"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "worth it",
+  "senses": [
+    {
+      "senseId": "w:worth-it#s1",
+      "pos": "短语",
+      "glossZh": "值得做；值得付出",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:worth-it#e-efb826eec48cdd6d",
+          "text": "The reward of a successful late-night search for a delicious sandwich is definitely worth it.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 92
+          },
+          "parts": [
+            [
+              84,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:worth-it#e-80745e0f982311ec",
+          "text": "The rewriting process haunted (萦绕) me, and I often questioned if the effort was worth it.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          },
+          "parts": [
+            [
+              80,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              88
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:worth-it#e-de710f95f9e39818",
+          "text": "Deinfluencers are content creators that try to educate and inform their audience about whether those purchases are really worth it.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 130
+          },
+          "parts": [
+            [
+              122,
+              130
+            ]
+          ],
+          "highlightRanges": [
+            [
+              122,
+              130
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 19
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

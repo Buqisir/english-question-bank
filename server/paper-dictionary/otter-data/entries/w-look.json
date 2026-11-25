@@ -62,8 +62,8 @@
     "mock": 963
   },
   "unassignedCounts": {
-    "gaokao": 10,
-    "mock": 961
+    "gaokao": 47,
+    "mock": 793
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 32,
-        "mock": 0
+        "mock": 47
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 42,
-        "mock": 0
+        "mock": 44
       },
       "folded": false,
       "examples": [
@@ -217,7 +217,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 28,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -289,7 +289,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -322,7 +322,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -393,7 +393,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -464,7 +464,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -516,7 +516,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -587,7 +587,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -613,586 +613,35 @@
       ]
     },
     {
-      "senseId": "w:look#s10",
-      "pos": "短语",
-      "glossZh": "照料",
+      "senseId": "w:look#s21",
+      "pos": "v.",
+      "glossZh": "轻视；看不起（look down upon）",
       "pronunciationId": "w:look#p-main",
-      "note": "look after。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 9,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 1
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:look#e-5720dade7c9966c5",
-          "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
+          "exampleId": "w:look#e-947fbeae9ff55284",
+          "text": "When we look down upon waiting, we risk losing part of our shared humanity.",
           "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:look#e-6b6380d190a823ef",
-          "text": "The elderly residents (居民) in care homes in London are being given hens to look after to stop them feeling lonely.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "reading-c-1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 75,
-            "end": 79
-          }
-        },
-        {
-          "exampleId": "w:look#e-6d2ab803cbd74790",
-          "text": "What’s more, indoor plants are easy to look after and are not very expensive.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 39,
-            "end": 43
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s11",
-      "pos": "短语",
-      "glossZh": "期待",
-      "pronunciationId": "w:look#p-main",
-      "note": "look forward to doing sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-fd8aae7b00e9d48d",
-          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 117,
-            "end": 123
-          }
-        },
-        {
-          "exampleId": "w:look#e-9635af58e38764fc",
-          "text": "We are looking forward to the benefits and fun the project can bring to people here.”",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:reading-c",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "reading-c-7",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 14
-          }
-        },
-        {
-          "exampleId": "w:look#e-27e8f2c32ecc2cf2",
-          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s12",
-      "pos": "短语",
-      "glossZh": "回顾",
-      "pronunciationId": "w:look#p-main",
-      "note": "look back。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-91bf34b004e0b959",
-          "text": "I’m hands-on with them every day at the zoo, and I do look back very fondly on the time that we had them.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-b",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 54,
-            "end": 58
-          }
-        },
-        {
-          "exampleId": "w:look#e-12086dc0afe5dbe0",
-          "text": "You’ll want to look back on your journey to see how far you’ve come.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 22,
-            "end": 26
-          }
-        },
-        {
-          "exampleId": "w:look#e-bee90424896d8640",
-          "text": "Still, looking back on the photos, they are some of my best shots though they could have been so much better if I had been prepared and managed my time wisely.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
-              "sentence": 7
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 14
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s13",
-      "pos": "短语",
-      "glossZh": "浏览",
-      "pronunciationId": "w:look#p-main",
-      "note": "look through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-48d639f495ac25e6",
-          "text": "Spend a few minutes looking through the book.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:seven-choices",
             "locator": {
               "question": 36,
-              "questionId": "question:paper-gaokao-2021-ii:36",
-              "option": "B",
+              "questionId": "question:paper-mock-fujian-putian-2026-05-adaptability-exam:36",
+              "option": "G",
               "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 20,
-            "end": 27
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s14",
-      "pos": "短语",
-      "glossZh": "调查",
-      "pronunciationId": "w:look#p-main",
-      "note": "look into。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-c3c68ef314115bd5",
-          "text": "As scientists look deeper into our genes (基因), they are finding examples of human evolution in just the past few thousand years.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:look#e-cbd0a994cd66f796",
-          "text": "To look into the __44__ , Wang disguised（伪装）himself and __45__ the beggars .",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:look#e-eef094149e57fcb9",
-          "text": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 14,
-            "end": 21
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s15",
-      "pos": "短语",
-      "glossZh": "钦佩",
-      "pronunciationId": "w:look#p-main",
-      "note": "look up to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-370687d33aa6daf4",
-          "text": "They look up to great thinkers.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-a",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
-            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
-            "locator": {
-              "question": 33,
-              "questionId": "question:paper-gaokao-2021-national-a:33",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s16",
-      "pos": "短语",
-      "glossZh": "查阅",
-      "pronunciationId": "w:look#p-main",
-      "note": "look up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-4c3b978f61e4f25f",
-          "text": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better.",
-          "source": {
-            "paperId": "paper-gaokao-2024-i",
-            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2024-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 62,
-            "end": 66
-          }
-        },
-        {
-          "exampleId": "w:look#e-baf07aa6d3a72197",
-          "text": "“Look it up,” I responded.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 1,
-            "end": 5
-          }
-        },
-        {
-          "exampleId": "w:look#e-71a7a9818974926e",
-          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 92,
-            "end": 98
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s17",
-      "pos": "短语",
-      "glossZh": "打算",
-      "pronunciationId": "w:look#p-main",
-      "note": "look to do sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-80705170b8cc585e",
-          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 27,
-            "end": 34
-          }
-        },
-        {
-          "exampleId": "w:look#e-b1df202f211b5d29",
-          "text": "Parrots are prey animals, which means that other predators（捕食者）in the wild, such as hawks or snakes, are looking to make them into a meal.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 105,
-            "end": 112
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s18",
-      "pos": "短语",
-      "glossZh": "留意",
-      "pronunciationId": "w:look#p-main",
-      "note": "look out for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-3fd23361a09c50f6",
-          "text": "They use their noses to assess their environment and look out for any signs of danger.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 53,
-            "end": 57
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s19",
-      "pos": "短语",
-      "glossZh": "展望未来",
-      "pronunciationId": "w:look#p-main",
-      "note": "look ahead。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-218438804d77d90a",
-          "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:look#s20",
-      "pos": "短语",
-      "glossZh": "不必再找",
-      "pronunciationId": "w:look#p-main",
-      "note": "look no further。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:look#e-dc5500bb447e3c36",
-          "text": "If you’re looking for cleanliness and a modern hostel, look no further than Youth Station.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-a",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-a:7",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 55,
-            "end": 59
+            "start": 8,
+            "end": 12
           }
         }
       ]
@@ -1204,6 +653,41 @@
       "reason": "专门用法或本批无明确例证"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:dirty-look",
+    "w:give-sb-a-dirty-look",
+    "w:have-a-look",
+    "w:look-after",
+    "w:look-ahead",
+    "w:look-ahead-to",
+    "w:look-around",
+    "w:look-away",
+    "w:look-back",
+    "w:look-back-on-sth",
+    "w:look-beyond",
+    "w:look-down",
+    "w:look-down-on",
+    "w:look-for",
+    "w:look-forward-to",
+    "w:look-forward-to-doing-sth",
+    "w:look-here",
+    "w:look-into",
+    "w:look-like",
+    "w:look-no-further",
+    "w:look-on",
+    "w:look-on-the-bright-side",
+    "w:look-out",
+    "w:look-out-for",
+    "w:look-over",
+    "w:look-through",
+    "w:look-to",
+    "w:look-to-do",
+    "w:look-up",
+    "w:look-up-to",
+    "w:take-a-look"
+  ]
 }

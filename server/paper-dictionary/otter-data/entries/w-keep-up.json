@@ -1,0 +1,309 @@
+{
+  "entryId": "w:keep-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "keeping up"
+  ],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "up"
+      ],
+      [
+        "keeping",
+        "up"
+      ],
+      [
+        "keeps",
+        "up"
+      ],
+      [
+        "kept",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "kept up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep up",
+  "senses": [
+    {
+      "senseId": "w:keep-up#s1",
+      "pos": "短语",
+      "glossZh": "跟上（速度、进度等）；保持同步",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:keep#s18"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:keep-up#e-efe26462cce39bf5",
+          "text": "“Emma, can you please focus and keep up?” Jake, our dragon head, shouted, his voice sharp with frustration.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          },
+          "parts": [
+            [
+              32,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up#e-e569f0da9c441aa2",
+          "text": "E-scooters have zoomed onto Canadian streets faster than the law can keep up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 76
+          },
+          "parts": [
+            [
+              69,
+              76
+            ]
+          ],
+          "highlightRanges": [
+            [
+              69,
+              76
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up#e-60d78363d31ab91e",
+          "text": "In and among the sharing plates, I found myself on an unending rat race of moving faster and needing to earn more – just to keep up.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 131
+          },
+          "parts": [
+            [
+              124,
+              131
+            ]
+          ],
+          "highlightRanges": [
+            [
+              124,
+              131
+            ]
+          ]
+        }
+      ],
+      "note": "可单用，或接 with。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      }
+    },
+    {
+      "senseId": "w:keep-up#s2",
+      "pos": "短语",
+      "glossZh": "维持（水平、速度等）；持续进行",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-up#e-1c893f7bb167c513",
+          "text": "If exercise seems like a great idea but you can never keep up a routine, it’s worth considering your exercise “mindset”.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          },
+          "parts": [
+            [
+              54,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up#e-2d3ae43d26a9d44c",
+          "text": "He skied two days a week and kept up the hobby all over the world, from France to Italy to Alberta’s Banff National Park.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          },
+          "parts": [
+            [
+              29,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:keep-up#e-cee18b5fa37dd4e2",
+          "text": "She’s kept up a weekly dinner with friends.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 13
+          },
+          "parts": [
+            [
+              6,
+              13
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              13
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:keep-up#s3",
+      "pos": "短语",
+      "glossZh": "及时了解（消息、进展等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "keep up with the news",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:keep-up#s4",
+      "pos": "短语",
+      "glossZh": "让某人一直醒着；使某人不能睡觉",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "keep sb up",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

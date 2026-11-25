@@ -1,0 +1,206 @@
+{
+  "entryId": "w:serve-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "serve",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "serve",
+        "up"
+      ],
+      [
+        "served",
+        "up"
+      ],
+      [
+        "serves",
+        "up"
+      ],
+      [
+        "serving",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "served up",
+      "tags": []
+    },
+    {
+      "form": "serves up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "serve up",
+  "senses": [
+    {
+      "senseId": "w:serve-up#s1",
+      "pos": "短语",
+      "glossZh": "端上；供应（食物或饮料）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:up#s87"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:serve-up#e-46854b4a2a2b7679",
+          "text": "Not only does this cafe serve up drinks, it also serves up smiles.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          },
+          "parts": [
+            [
+              24,
+              32
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              32
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:serve-up#s2",
+      "pos": "短语",
+      "glossZh": "呈现；提供（内容、体验等）；带来",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:serve#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:serve-up#e-6e77ef6348835d26",
+          "text": "Not only does this cafe serve up drinks, it also serves up smiles.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36#option=E",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 58
+          },
+          "parts": [
+            [
+              49,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:serve-up#e-f1a4779324aedba2",
+          "text": "Once we start clicking the social media, we’re going to be served up a lot more of it.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          },
+          "parts": [
+            [
+              59,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              59,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:serve-up#s3",
+      "pos": "短语",
+      "glossZh": "（球类）把球送到便于对手接打的位置",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 12,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

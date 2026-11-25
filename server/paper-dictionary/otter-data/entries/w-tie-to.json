@@ -1,0 +1,174 @@
+{
+  "entryId": "w:tie-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tie",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tie",
+        "to"
+      ],
+      [
+        "tied",
+        "to"
+      ],
+      [
+        "ties",
+        "to"
+      ],
+      [
+        "tying",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "tie to",
+      "tags": []
+    },
+    {
+      "form": "tied to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tie sth to sth",
+  "senses": [
+    {
+      "senseId": "w:tie-to#s1",
+      "pos": "短语",
+      "glossZh": "把……与……联系起来",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:tie-to#e-f028498438e4481d",
+          "text": "Overthinking is often tied to the fear of the unknown or things that feel out of our control.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          },
+          "parts": [
+            [
+              22,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              22,
+              29
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tie-to#e-9f8ab1e8f5e135e1",
+          "text": "Agricultural areas fell somewhere in between, with outcomes seemingly tied to the intensity and type of land use.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 77
+          },
+          "parts": [
+            [
+              70,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              70,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:tie-to#e-97e6465205060272",
+          "text": "These were particularly apparent in areas of the brain tied to attention and memory.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 62
+          },
+          "parts": [
+            [
+              55,
+              62
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              62
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be tied to，表示与……有关或与……挂钩。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 16
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -48,8 +48,8 @@
     "mock": 29
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 27
+    "gaokao": 4,
+    "mock": 23
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -122,43 +122,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:sincerely#s2",
-      "pos": "短语",
-      "glossZh": "谨致问候",
-      "pronunciationId": "w:sincerely#p-main",
-      "note": "Yours sincerely 是英式书信结尾的敬语，通常用于知道收信人姓名时。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:sincerely#e-88590e43212c3b29",
-          "text": "Yours sincerely,",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:writing-application",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "writing-application-8",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 15
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:yours-sincerely"
+  ]
 }

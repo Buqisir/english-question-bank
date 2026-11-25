@@ -1,0 +1,85 @@
+{
+  "entryId": "w:walk-in-ones-footsteps",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "walk in sb’s footsteps"
+  ],
+  "pattern": {
+    "tokens": [
+      "walk",
+      "in",
+      {
+        "slot": "one's"
+      },
+      "footsteps"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "walk",
+        "in",
+        {
+          "slot": "one's"
+        },
+        "footsteps"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "walk in one's footsteps",
+  "senses": [
+    {
+      "senseId": "w:walk-in-ones-footsteps#s1",
+      "pos": "短语",
+      "glossZh": "追随某人的脚步；沿着某人的道路发展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:walk#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:walk-in-ones-footsteps#s2",
+      "pos": "短语",
+      "glossZh": "重走某人走过的路；走访某人到过的地方",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:walk#s8"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

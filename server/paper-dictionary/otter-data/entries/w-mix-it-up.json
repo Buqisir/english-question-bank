@@ -1,0 +1,138 @@
+{
+  "entryId": "w:mix-it-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "mix",
+      "it",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "mix",
+        "it",
+        "up"
+      ],
+      [
+        "mixed",
+        "it",
+        "up"
+      ],
+      [
+        "mixes",
+        "it",
+        "up"
+      ],
+      [
+        "mixing",
+        "it",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "mixing it up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "mix it up",
+  "senses": [
+    {
+      "senseId": "w:mix-it-up#s1",
+      "pos": "短语",
+      "glossZh": "变换做法；把不同内容交替安排",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:mix-it-up#e-e7103bbbfde3ad3c",
+          "text": "On the other hand, the “mixing it up” approach, also referred to as “Interleaved Practice”, could produce dramatic, long-lasting learning benefits.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 36
+          },
+          "parts": [
+            [
+              24,
+              36
+            ]
+          ],
+          "highlightRanges": [
+            [
+              24,
+              36
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:mix-it-up#s2",
+      "pos": "短语",
+      "glossZh": "与人争吵或动手；积极参与较量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:mix-it-up#s3",
+      "pos": "短语",
+      "glossZh": "主动与人交往；融入人群",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

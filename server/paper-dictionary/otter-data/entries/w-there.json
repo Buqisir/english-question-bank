@@ -35,8 +35,8 @@
     "mock": 998
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 998
+    "gaokao": 2,
+    "mock": 799
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 49,
-        "mock": 0
+        "mock": 57
       },
       "folded": false,
       "examples": [
@@ -119,7 +119,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -191,7 +191,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 120,
-        "mock": 0
+        "mock": 128
       },
       "folded": false,
       "examples": [
@@ -262,7 +262,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -324,74 +324,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:there#s5",
-      "pos": "短语",
-      "glossZh": "就这样",
-      "pronunciationId": "w:there#p-main",
-      "note": "there you have it。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:there#e-fc91132093cb9939",
-          "text": "And there you have it.",
-          "source": {
-            "paperId": "paper-gaokao-2021-national-b",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
-            "groupId": "group:paper-gaokao-2021-national-b:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 9
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:there#s6",
-      "pos": "短语",
-      "glossZh": "当场",
-      "pronunciationId": "w:there#p-main",
-      "note": "right then and there。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:there#e-82e7f8889743223e",
-          "text": "Right then and there, this total __49__ examined my engine, explaining as he worked that my spark plugs （火花塞） hadn’t been changed for so long that they were __50__ to function.",
-          "source": {
-            "paperId": "paper-gaokao-2024-nine-provinces-jan",
-            "paperTitle": "2024年1月九省联考英语",
-            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -400,6 +332,21 @@
       "reason": "拼写错误"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:here-and-there",
+    "w:here-or-there",
+    "w:out-there",
+    "w:over-there",
+    "w:right-then-and-there",
+    "w:then-and-there",
+    "w:there-again",
+    "w:there-be",
+    "w:there-exist",
+    "w:there-you-go",
+    "w:there-you-have-it"
+  ]
 }

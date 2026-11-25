@@ -1,0 +1,310 @@
+{
+  "entryId": "w:go-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "goes away",
+    "went away"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "away"
+      ],
+      [
+        "goes",
+        "away"
+      ],
+      [
+        "went",
+        "away"
+      ],
+      [
+        "going",
+        "away"
+      ],
+      [
+        "gone",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "gone away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go away",
+  "senses": [
+    {
+      "senseId": "w:go-away#s1",
+      "pos": "短语",
+      "glossZh": "离开；走开",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-away#e-3943c4c194147757",
+          "text": "Hopefully, the bikers would have gone away by the time the film was over.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          },
+          "parts": [
+            [
+              33,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-away#e-ca69bcdaa8292022",
+          "text": "He smiles thinly and nods a polite “goodbye”, which everyone knows means: “GO AWAY IMMEDIATELY, PLEASE”.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:seven-choices:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 82
+          },
+          "parts": [
+            [
+              75,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-away#e-6eea24c7f4e368c0",
+          "text": "Why did the author shout “Go away!” to Brandy at first?",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-jiuwu-2026-oct-quality:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          },
+          "parts": [
+            [
+              26,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:go-away#s2",
+      "pos": "短语",
+      "glossZh": "（疼痛、问题等）消失；消退",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-away#e-22596a91062bc922",
+          "text": "Fear rarely goes away completely, and that includes the fear of public speaking.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          },
+          "parts": [
+            [
+              12,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              21
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-away#e-d5be1712725afc67",
+          "text": "The gout（痛风）struck all of a sudden, but I took some medicine and it went away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          },
+          "parts": [
+            [
+              68,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              77
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-away#e-533ec403ecaf1eb7",
+          "text": "Fear of public speaking rarely goes away completely.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          },
+          "parts": [
+            [
+              31,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              31,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:go-away#s3",
+      "pos": "短语",
+      "glossZh": "外出旅行或度假",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-away#s4",
+      "pos": "短语",
+      "glossZh": "入狱；去坐牢",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "委婉用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

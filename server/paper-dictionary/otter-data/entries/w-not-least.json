@@ -1,0 +1,61 @@
+{
+  "entryId": "w:not-least",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "not",
+      "least"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "not",
+        "least"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "not least",
+  "senses": [
+    {
+      "senseId": "w:not-least#s1",
+      "pos": "短语",
+      "glossZh": "尤其；特别是",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:least#s6"
+      ],
+      "examples": [],
+      "note": "常用 not least because 突出一个重要原因。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

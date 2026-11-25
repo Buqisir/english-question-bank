@@ -1,0 +1,133 @@
+{
+  "entryId": "w:cant-stand",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "couldn't stand"
+  ],
+  "pattern": {
+    "tokens": [
+      "can't",
+      "stand"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "can't",
+        "stand"
+      ],
+      [
+        "couldn't",
+        "stand"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "can't stand",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "can't stand sb/sth",
+  "senses": [
+    {
+      "senseId": "w:cant-stand#s1",
+      "pos": "短语",
+      "glossZh": "无法忍受；受不了",
+      "note": "可接名词或动名词。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:cant-stand#e-e0c0971ce7921af1",
+          "text": "But he missed that daily walk so badly – he couldn’t stand giving up the only thing that brought him comfort.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 58
+          },
+          "parts": [
+            [
+              44,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:cant-stand#e-8f6bc83b4c76eafa",
+          "text": "You’re just a sore loser who can’t stand defeat!”",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

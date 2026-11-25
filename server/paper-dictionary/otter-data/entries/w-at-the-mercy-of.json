@@ -1,0 +1,96 @@
+{
+  "entryId": "w:at-the-mercy-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "at",
+      "the",
+      "mercy",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "at",
+        "the",
+        "mercy",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "at the mercy of",
+  "senses": [
+    {
+      "senseId": "w:at-the-mercy-of#s1",
+      "pos": "短语",
+      "glossZh": "任由……摆布；完全受制于",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:mercy#s2"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:at-the-mercy-of#e-eb37cefc0a22abf4",
+          "text": "Like many small businesses, I’m at the mercy of a rising cost of living, a harsh economy and consumers who might devote their Saturdays to something else.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 47
+          },
+          "parts": [
+            [
+              32,
+              47
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              47
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

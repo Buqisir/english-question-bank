@@ -1,0 +1,92 @@
+{
+  "entryId": "w:on-call",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "on",
+      "call"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        "call"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "on call",
+  "senses": [
+    {
+      "senseId": "w:on-call#s1",
+      "pos": "短语",
+      "glossZh": "值班待命；随叫随到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:call#s11"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-call#e-2ad3144852f8130c",
+          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 201,
+            "end": 208
+          },
+          "parts": [
+            [
+              201,
+              208
+            ]
+          ],
+          "highlightRanges": [
+            [
+              201,
+              208
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

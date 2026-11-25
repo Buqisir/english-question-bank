@@ -1,0 +1,112 @@
+{
+  "entryId": "w:lay-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lay",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lay",
+        "on"
+      ],
+      [
+        "laid",
+        "on"
+      ],
+      [
+        "laying",
+        "on"
+      ],
+      [
+        "lays",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lay sth on",
+  "senses": [
+    {
+      "senseId": "w:lay-on#s1",
+      "pos": "短语",
+      "glossZh": "提供；安排（餐饮、交通等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于英式英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lay-on#s2",
+      "pos": "短语",
+      "glossZh": "涂上（油漆等）；敷上（一层材料）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lay-on#s3",
+      "pos": "短语",
+      "glossZh": "（恭维、抱怨等）说得过火；表现得太夸张",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 lay it on thick。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:lay-on#s4",
+      "pos": "短语",
+      "glossZh": "把（责任或过错）推给某人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 lay the blame on sb。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

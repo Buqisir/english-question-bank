@@ -1,0 +1,93 @@
+{
+  "entryId": "w:value-for-money",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "value",
+      "for",
+      "money"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "value",
+        "for",
+        "money"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "value for money",
+  "senses": [
+    {
+      "senseId": "w:value-for-money#s1",
+      "pos": "短语",
+      "glossZh": "物有所值；钱花得值",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:value-for-money#e-b27dd90b5404019b",
+          "text": "Why is a Garden Pass great value for money?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 42
+          },
+          "parts": [
+            [
+              27,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              42
+            ]
+          ]
+        }
+      ],
+      "note": "good/great value for money 表示性价比高。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

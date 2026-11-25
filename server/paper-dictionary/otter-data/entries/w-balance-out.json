@@ -1,0 +1,102 @@
+{
+  "entryId": "w:balance-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "balance",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "balance",
+        "out"
+      ],
+      [
+        "balanced",
+        "out"
+      ],
+      [
+        "balances",
+        "out"
+      ],
+      [
+        "balancing",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "balance out",
+  "senses": [
+    {
+      "senseId": "w:balance-out#s1",
+      "pos": "短语",
+      "glossZh": "抵消……的影响；相互抵消而趋于平衡",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:balance-out#e-e05a77a6580969b0",
+          "text": "Daniela Martinez, lead author and engineer of the University of the North in Columbia acknowledges that longer-lasting cement structures “can only partially balance out increased demand for new material,” but Roman manufacturing methods may also hold other environmental benefits.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 168
+          },
+          "parts": [
+            [
+              157,
+              168
+            ]
+          ],
+          "highlightRanges": [
+            [
+              157,
+              168
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,106 @@
+{
+  "entryId": "w:ring-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ring",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ring",
+        "in"
+      ],
+      [
+        "rang",
+        "in"
+      ],
+      [
+        "ringed",
+        "in"
+      ],
+      [
+        "ringing",
+        "in"
+      ],
+      [
+        "rings",
+        "in"
+      ],
+      [
+        "rung",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ring in",
+  "senses": [
+    {
+      "senseId": "w:ring-in#s1",
+      "pos": "短语",
+      "glossZh": "打电话来；打电话告知情况",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "ring in sick 指打电话请病假。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-in#s2",
+      "pos": "短语",
+      "glossZh": "鸣钟或庆祝以迎来（新年等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:ring-in#s3",
+      "pos": "短语",
+      "glossZh": "把……围住；圈起来",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "少见，此义的过去式是 ringed。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

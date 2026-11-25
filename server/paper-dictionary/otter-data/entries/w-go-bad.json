@@ -1,0 +1,211 @@
+{
+  "entryId": "w:go-bad",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gone bad",
+    "went bad"
+  ],
+  "pattern": {
+    "tokens": [
+      "go",
+      "bad"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "bad"
+      ],
+      [
+        "went",
+        "bad"
+      ],
+      [
+        "gone",
+        "bad"
+      ],
+      [
+        "goes",
+        "bad"
+      ],
+      [
+        "going",
+        "bad"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go bad",
+  "senses": [
+    {
+      "senseId": "w:go-bad#s1",
+      "pos": "短语",
+      "glossZh": "（食物等）变质；腐坏",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-bad#e-4a4cd26738a7ba12",
+          "text": "But as days passed, the arugula went bad.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 40
+          },
+          "parts": [
+            [
+              32,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              40
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-bad#e-8f795f8326218e02",
+          "text": "Witnessing global contrasts inspires my resolve: 1.3 billion tons of food go bad annually – enough to feed all the hungry – while 800 million starve.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 80
+          },
+          "parts": [
+            [
+              74,
+              80
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              80
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:go-bad#e-abb42b008b556565",
+          "text": "The food has gone bad.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          },
+          "parts": [
+            [
+              13,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:go-bad#s2",
+      "pos": "短语",
+      "glossZh": "（人或组织）变坏；堕落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-bad#s3",
+      "pos": "短语",
+      "glossZh": "（局势等）恶化；变得危险",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:go-bad#s4",
+      "pos": "短语",
+      "glossZh": "（计划、交易等）出岔子；失控",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,139 @@
+{
+  "entryId": "w:draw-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "draw",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "draw",
+        "back"
+      ],
+      [
+        "drawing",
+        "back"
+      ],
+      [
+        "drawn",
+        "back"
+      ],
+      [
+        "draws",
+        "back"
+      ],
+      [
+        "drew",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "draw back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "draw (sth) back",
+  "senses": [
+    {
+      "senseId": "w:draw-back#s1",
+      "pos": "短语",
+      "glossZh": "向后退；往后缩",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:draw-back#e-2496eb557435746e",
+          "text": "They then engaged a different set of hip and neck muscles to draw back.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 70
+          },
+          "parts": [
+            [
+              61,
+              70
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              70
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:draw-back#s2",
+      "pos": "短语",
+      "glossZh": "退出；撤回承诺",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 from。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:draw-back#s3",
+      "pos": "短语",
+      "glossZh": "把某物向后拉；拉开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 draw back the curtains。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

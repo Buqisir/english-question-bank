@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 92
+    "mock": 9
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 48
       },
       "folded": false,
       "examples": [
@@ -145,7 +145,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -198,7 +198,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -228,12 +228,12 @@
       "pos": "n.",
       "glossZh": "索赔；权利要求",
       "pronunciationId": "w:claim#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 5
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -241,12 +241,12 @@
       "pos": "v.",
       "glossZh": "索赔；依法要求",
       "pronunciationId": "w:claim#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -254,48 +254,13 @@
       "pos": "v.",
       "glossZh": "夺走（生命）",
       "pronunciationId": "w:claim#p-main",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
-    },
-    {
-      "senseId": "w:claim#s7",
-      "pos": "短语",
-      "glossZh": "行李提取处",
-      "pronunciationId": "w:claim#p-main",
-      "note": "baggage claim",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:claim#e-221683461ee5b963",
-          "text": "At the baggage claim.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:listening.short-dialogue",
-            "locator": {
-              "question": 2,
-              "questionId": "question:listening:2",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 15,
-            "end": 20
-          }
-        }
-      ]
+      "examples": []
     }
   ],
   "droppedSenses": [
@@ -304,6 +269,8 @@
       "reason": "特定土地制度用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false
 }

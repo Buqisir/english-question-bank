@@ -66,7 +66,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 99
+    "mock": 8
   },
   "senses": [
     {
@@ -77,7 +77,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 9,
-        "mock": 1
+        "mock": 89
       },
       "folded": false,
       "examples": [
@@ -148,7 +148,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -257,6 +257,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:cup#s5",
+      "pos": "n.",
+      "glossZh": "拔罐疗法（cupping）",
+      "pronunciationId": "w:cup#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cup#e-ada72c95cc8f8dd3",
+          "text": "Spas and bathhouses in China often serve as wellness retreats, with therapies such as gua sha – a traditional Chinese medicine treatment that uses smooth-edged tools to boost circulation, help reduce swelling and release tension – and cupping adding another dimension to the experience.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 235,
+            "end": 242
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -265,6 +298,6 @@
       "reason": "学科或专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

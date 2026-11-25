@@ -1,0 +1,112 @@
+{
+  "entryId": "w:go-all-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "go",
+      "all",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "go",
+        "all",
+        "out"
+      ],
+      [
+        "goes",
+        "all",
+        "out"
+      ],
+      [
+        "going",
+        "all",
+        "out"
+      ],
+      [
+        "gone",
+        "all",
+        "out"
+      ],
+      [
+        "went",
+        "all",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "go all out",
+  "senses": [
+    {
+      "senseId": "w:go-all-out#s1",
+      "pos": "短语",
+      "glossZh": "全力以赴；投入全部精力或资源",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:go-all-out#e-6c14d62355b40daf",
+          "text": "Time to Go All Out!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          },
+          "parts": [
+            [
+              8,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

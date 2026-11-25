@@ -42,8 +42,8 @@
     "mock": 131
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 130
+    "gaokao": 4,
+    "mock": 23
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 108
       },
       "folded": false,
       "examples": [
@@ -97,59 +97,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:advantage#s2",
-      "pos": "短语",
-      "glossZh": "利用（机会、条件）；占……的便宜",
-      "pronunciationId": "w:advantage#p-main",
-      "note": "take advantage of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:advantage#e-7337e895b6a6af8f",
-          "text": "I took advantage of my brief __39__ to dash across the lawn（草坪）-- and hit a large maple tree!",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jan",
-            "paperTitle": "2020 年 1 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 16
-          }
-        },
-        {
-          "exampleId": "w:advantage#e-5f4eba17edb0c543",
-          "text": "By attending the Open House, you can take advantage of the following exclusive offers:",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:2",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 42,
-            "end": 51
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -158,6 +105,11 @@
       "reason": "体育术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-advantage-of"
+  ]
 }

@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 17
+    "mock": 3
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -206,78 +206,6 @@
       ]
     },
     {
-      "senseId": "w:birth#s3",
-      "pos": "短语",
-      "glossZh": "生下；使产生",
-      "pronunciationId": "w:birth#p-main",
-      "note": "give birth to。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:birth#e-95349de0fd29f702",
-          "text": "He, along with Georges Braque, gave birth to cubism – one of the most revolutionary movements in modern art, paving the way for nearly all abstract art that followed.",
-          "source": {
-            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
-            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
-            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 36,
-            "end": 41
-          }
-        },
-        {
-          "exampleId": "w:birth#e-7c5dc04a4eb4511f",
-          "text": "The she-wolf had just given birth to a litter of wolf cubs, and the wolf king ran out to hunt for her, but unfortunately mistakenly fell into the herders’ trap and was eventually killed.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
-            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
-            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b:2",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 28,
-            "end": 33
-          }
-        },
-        {
-          "exampleId": "w:birth#e-9740416cf3d6dee6",
-          "text": "Thus, in the world’s most advanced industries, the delicate cooperation between humans and machines will give birth to products that are safe, reliable and truly world-class, fully demonstrating the enduring power of craftsmanship.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
-            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
-            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:seven-choices",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:seven-choices:3",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 110,
-            "end": 115
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:birth#s4",
       "pos": "adj.",
       "glossZh": "亲生的",
@@ -332,6 +260,12 @@
       "reason": "旧拼法或罕见义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:give-birth",
+    "w:give-birth-to"
+  ]
 }

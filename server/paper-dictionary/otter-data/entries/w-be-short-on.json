@@ -1,0 +1,62 @@
+{
+  "entryId": "w:be-short-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "be",
+      "short",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "be",
+        "short",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "be short on sth",
+  "senses": [
+    {
+      "senseId": "w:be-short-on#s1",
+      "pos": "短语",
+      "glossZh": "缺少；在某方面不足",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:short#s5"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

@@ -1,0 +1,137 @@
+{
+  "entryId": "w:fly-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fly",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fly",
+        "by"
+      ],
+      [
+        "flew",
+        "by"
+      ],
+      [
+        "flies",
+        "by"
+      ],
+      [
+        "flown",
+        "by"
+      ],
+      [
+        "flying",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "flew by",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fly by",
+  "senses": [
+    {
+      "senseId": "w:fly-by#s1",
+      "pos": "短语",
+      "glossZh": "飞过；飞掠经过",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fly-by#e-b00ec64e4f1b7e9d",
+          "text": "It achieved this goal in 2021, when the probe flew by Venus and traveled traveling through the Sun’s outermost atmosphere.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 53
+          },
+          "parts": [
+            [
+              46,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              53
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:fly-by#s2",
+      "pos": "短语",
+      "glossZh": "（人、车辆等）飞快经过",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fly-by#s3",
+      "pos": "短语",
+      "glossZh": "（时间）飞逝；转眼过去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

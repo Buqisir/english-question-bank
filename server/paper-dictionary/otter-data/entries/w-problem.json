@@ -55,7 +55,7 @@
   },
   "unassignedCounts": {
     "gaokao": 9,
-    "mock": 587
+    "mock": 388
   },
   "senses": [
     {
@@ -66,7 +66,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 53,
-        "mock": 0
+        "mock": 169
       },
       "folded": false,
       "examples": [
@@ -137,7 +137,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -205,12 +205,12 @@
       "pos": "n.",
       "glossZh": "待解答的题目",
       "pronunciationId": "w:problem#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 9
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -221,7 +221,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -268,6 +268,9 @@
       "reason": "体育专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:no-problem"
+  ]
 }

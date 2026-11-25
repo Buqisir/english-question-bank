@@ -1,0 +1,169 @@
+{
+  "entryId": "w:catch-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "catch",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "catch",
+        "on"
+      ],
+      [
+        "catches",
+        "on"
+      ],
+      [
+        "catching",
+        "on"
+      ],
+      [
+        "caught",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "catching on",
+      "tags": []
+    },
+    {
+      "form": "caught on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "catch on",
+  "senses": [
+    {
+      "senseId": "w:catch-on#s1",
+      "pos": "短语",
+      "glossZh": "开始流行；逐渐受到欢迎",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:catch-on#e-ad65e36466ce89a2",
+          "text": "When a Spanish netizen posted a photo of herself wearing a pink, silk jacket, it quickly caught on.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 98
+          },
+          "parts": [
+            [
+              89,
+              98
+            ]
+          ],
+          "highlightRanges": [
+            [
+              89,
+              98
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:catch-on#e-abcf50c37a315179",
+          "text": "Why is the Chinese lifestyle catching on with young Westerners?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 40
+          },
+          "parts": [
+            [
+              29,
+              40
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              40
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:catch-on#s2",
+      "pos": "短语",
+      "glossZh": "明白过来；领会",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:catch-on#s3",
+      "pos": "短语",
+      "glossZh": "（食物）粘锅并略微焦黄",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "较少见的地区用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

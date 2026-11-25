@@ -1,0 +1,112 @@
+{
+  "entryId": "w:stand-by",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "standing by",
+    "stands by"
+  ],
+  "pattern": {
+    "tokens": [
+      "stand",
+      "by"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stand",
+        "by"
+      ],
+      [
+        "standing",
+        "by"
+      ],
+      [
+        "stands",
+        "by"
+      ],
+      [
+        "stood",
+        "by"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stand by",
+  "senses": [
+    {
+      "senseId": "w:stand-by#s1",
+      "pos": "短语",
+      "glossZh": "待命；做好随时行动的准备",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-by#s2",
+      "pos": "短语",
+      "glossZh": "支持某人；继续站在某人一边",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-by#s3",
+      "pos": "短语",
+      "glossZh": "坚持原有决定、说法或承诺",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:stand-by#s4",
+      "pos": "短语",
+      "glossZh": "袖手旁观",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

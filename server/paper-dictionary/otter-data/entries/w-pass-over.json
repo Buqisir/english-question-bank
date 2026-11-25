@@ -1,0 +1,138 @@
+{
+  "entryId": "w:pass-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "passing over"
+  ],
+  "pattern": {
+    "tokens": [
+      "pass",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "pass",
+        "over"
+      ],
+      [
+        "passing",
+        "over"
+      ],
+      [
+        "passed",
+        "over"
+      ],
+      [
+        "passes",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "pass over",
+  "senses": [
+    {
+      "senseId": "w:pass-over#s1",
+      "pos": "短语",
+      "glossZh": "跳过；略去（某项内容）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-over#s2",
+      "pos": "短语",
+      "glossZh": "跳过某人而选别人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用于任用、晋升等场合。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-over#s3",
+      "pos": "短语",
+      "glossZh": "从……上方经过；越过",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-over#s4",
+      "pos": "短语",
+      "glossZh": "把某物递过去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-over#s5",
+      "pos": "短语",
+      "glossZh": "不计较；不追究（过错或冒犯）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:pass-over#s6",
+      "pos": "短语",
+      "glossZh": "去世（委婉语）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

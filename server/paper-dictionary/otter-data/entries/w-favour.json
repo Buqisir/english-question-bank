@@ -85,7 +85,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 86
+    "mock": 30
   },
   "senses": [
     {
@@ -97,7 +97,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 2
+        "mock": 20
       },
       "folded": false,
       "examples": [
@@ -169,7 +169,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 29
       },
       "folded": false,
       "examples": [
@@ -242,7 +242,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -313,7 +313,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -360,80 +360,43 @@
       ]
     },
     {
-      "senseId": "w:favour#s5",
-      "pos": "短语",
-      "glossZh": "支持",
+      "senseId": "w:favour#s8",
+      "pos": "n.",
+      "glossZh": "派对小礼物",
       "pronunciationId": "w:favour#p-main",
-      "note": "in favour of。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:favour#e-f2b9fe5041804d0c",
-          "text": "A Word in Favor of Dictionaries",
+          "exampleId": "w:favour#e-09b0eba2fc056bd0",
+          "text": "Mother and I both knew that whenever a kid had a birthday, their mom would bring cupcakes and party favors for the class.",
           "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-d",
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
             "locator": {
-              "question": 35,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-10-third:35",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 10,
-            "end": 15
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:favour#s6",
-      "pos": "短语",
-      "glossZh": "选择……代替",
-      "pronunciationId": "w:favour#p-main",
-      "note": "in favour of。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:favour#e-78a20c6e7501ea7b",
-          "text": "On our final morning, after a night of rain, I skipped the game drive in favor of a coffee on the deck.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:5",
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:4",
               "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 73,
-            "end": 78
+            "start": 100,
+            "end": 106
           }
         }
       ]
     },
     {
-      "senseId": "w:favour#s7",
+      "senseId": "w:favour#s9",
       "pos": "短语",
-      "glossZh": "不再受欢迎",
+      "glossZh": "对某人有利（in one’s favour）",
       "pronunciationId": "w:favour#p-main",
-      "note": "fall out of favour。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -442,22 +405,22 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:favour#e-498de817f000b37c",
-          "text": "Food Technology is a vital subject but has fallen out of favour in recent years, overshadowed by “academic” subjects.",
+          "exampleId": "w:favour#e-0ce23f9d1de22543",
+          "text": "Whether you’re negotiating a salary or asking for a favor, giving the other person space to respond can work in your favor.",
           "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices",
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
             "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:seven-choices:1",
-              "sentence": 1
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices:8",
+              "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 57,
-            "end": 63
+            "start": 117,
+            "end": 122
           }
         }
       ]
@@ -469,6 +432,11 @@
       "reason": "历史专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:fall-out-of-favour"
+  ]
 }

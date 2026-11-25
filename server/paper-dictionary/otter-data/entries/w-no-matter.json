@@ -1,0 +1,170 @@
+{
+  "entryId": "w:no-matter",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "matter"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "matter"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no matter",
+  "senses": [
+    {
+      "senseId": "w:no-matter#s1",
+      "pos": "短语",
+      "glossZh": "无论；不管",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:matter#s4",
+        "w:no#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-matter#e-7c13321be2a31971",
+          "text": "They make me feel valued and respected, no matter my level of artistic ability.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          },
+          "parts": [
+            [
+              40,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-matter#e-f0aa6168a5d39250",
+          "text": "Knowing some tips will help ensure that you have an enjoyable meal with friends or family – no matter where you are in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 101
+          },
+          "parts": [
+            [
+              92,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              92,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-matter#e-38bd6712b2c00125",
+          "text": "Whatever it is, no matter how small it might seem, write it down.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36#option=F",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 25
+          },
+          "parts": [
+            [
+              16,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              25
+            ]
+          ]
+        }
+      ],
+      "note": "后接疑问词引导的结构，也可直接接名词短语。",
+      "counts": {
+        "gaokao": 8,
+        "mock": 18
+      }
+    },
+    {
+      "senseId": "w:no-matter#s2",
+      "pos": "短语",
+      "glossZh": "没关系；无所谓（单独使用）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

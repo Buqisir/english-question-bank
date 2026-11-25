@@ -73,7 +73,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 54
+    "mock": 4
   },
   "senses": [
     {
@@ -84,7 +84,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 1
+        "mock": 52
       },
       "folded": false,
       "examples": [
@@ -225,43 +225,14 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:pen#s5",
-      "pos": "短语",
-      "glossZh": "笔名",
-      "pronunciationId": "w:pen#p-main",
-      "note": "pen name。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:pen#e-1721b67dc6dfb3a2",
-          "text": "• The following are not permitted to enter the contest, neither under their legal names nor pen names: employees of Active Interest Media (AIM); Writer’s Digest Books authors; Grand Prize Winners from the previous three years.",
-          "source": {
-            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
-            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
-            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a",
-            "locator": {
-              "paragraph": 12,
-              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a:12",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 92,
-            "end": 95
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:pen-name"
+  ]
 }

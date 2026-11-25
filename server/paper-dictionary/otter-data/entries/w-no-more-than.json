@@ -1,0 +1,235 @@
+{
+  "entryId": "w:no-more-than",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "no",
+      "more",
+      "than"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "no",
+        "more",
+        "than"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "no more than",
+  "senses": [
+    {
+      "senseId": "w:no-more-than#s1",
+      "pos": "短语",
+      "glossZh": "不超过；至多",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:more#s7",
+        "w:no#s10"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:no-more-than#e-6166e5290d7d2a33",
+          "text": "Experts suggest increasing your running distance by no more than 10% each week",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 64
+          },
+          "parts": [
+            [
+              52,
+              64
+            ]
+          ],
+          "highlightRanges": [
+            [
+              52,
+              64
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-more-than#e-06e4fc2d782bd930",
+          "text": "The monthly housing expenses should be no more than 29% of a family’s income.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 51
+          },
+          "parts": [
+            [
+              39,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-more-than#e-b6cd7cbe6607e0af",
+          "text": "Photo size: At least 2MB, no more than 10MB.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 8
+      }
+    },
+    {
+      "senseId": "w:no-more-than#s2",
+      "pos": "短语",
+      "glossZh": "仅仅；不过是",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:no-more-than#e-7b69934c17bef666",
+          "text": "Since that day, we had exchanged no more than cold nods and uneasy silences.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 45
+          },
+          "parts": [
+            [
+              33,
+              45
+            ]
+          ],
+          "highlightRanges": [
+            [
+              33,
+              45
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:no-more-than#e-19431a34a24475b2",
+          "text": "To them, the setup looked no more than “a giant musical instrument” that only produced useless sounds in the cold coastal wind.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 38
+          },
+          "parts": [
+            [
+              26,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              38
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

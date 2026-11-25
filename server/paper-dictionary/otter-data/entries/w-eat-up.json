@@ -1,0 +1,222 @@
+{
+  "entryId": "w:eat-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "eat",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "eat",
+        "up"
+      ],
+      [
+        "ate",
+        "up"
+      ],
+      [
+        "eaten",
+        "up"
+      ],
+      [
+        "eating",
+        "up"
+      ],
+      [
+        "eats",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "eat up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "eat (sb/sth) up",
+  "senses": [
+    {
+      "senseId": "w:eat-up#s1",
+      "pos": "短语",
+      "glossZh": "吃完；吃光",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:eat#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:eat-up#e-fc7e16bd80a3d7d0",
+          "text": "Eat up what is provided for them.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:26#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s2",
+      "pos": "短语",
+      "glossZh": "耗掉（时间、金钱、资源等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s3",
+      "pos": "短语",
+      "glossZh": "使某人深受（内疚、嫉妒等）折磨",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 be eaten up with sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s4",
+      "pos": "短语",
+      "glossZh": "全盘相信（某种说法）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s5",
+      "pos": "短语",
+      "glossZh": "非常喜欢；热烈追捧",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s6",
+      "pos": "短语",
+      "glossZh": "觉得某人可爱极了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 could eat sb up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s7",
+      "pos": "短语",
+      "glossZh": "飞快地走完（一段路程）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s8",
+      "pos": "短语",
+      "glossZh": "表现极出色；发挥得很漂亮",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，常用 eat it up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:eat-up#s9",
+      "pos": "短语",
+      "glossZh": "彻底压倒对手",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "俚语，可用于口头交锋。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

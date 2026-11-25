@@ -1,0 +1,75 @@
+{
+  "entryId": "w:tell-you-what",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "tell",
+      "you",
+      "what"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "tell",
+        "you",
+        "what"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "tell you what",
+  "senses": [
+    {
+      "senseId": "w:tell-you-what#s1",
+      "pos": "短语",
+      "glossZh": "这样吧；要不这样",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中用于引出建议或安排，也可说 I’ll tell you what。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:tell-you-what#s2",
+      "pos": "短语",
+      "glossZh": "我跟你说；听我说",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于引起注意，强调接下来要说的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

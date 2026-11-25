@@ -59,8 +59,8 @@
     "mock": 15
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 9
+    "gaokao": 3,
+    "mock": 0
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -155,7 +155,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -201,7 +201,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -263,93 +263,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:iron#s6",
-      "pos": "短语",
-      "glossZh": "轮胎扳手",
-      "pronunciationId": "w:iron#p-main",
-      "note": "tire iron。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:iron#e-78f2defbeaa56bf3",
-          "text": "I started taking the wheel off, and then, if you can believe it, I broke his tire iron.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 82,
-            "end": 86
-          }
-        },
-        {
-          "exampleId": "w:iron#e-c8ed0f826a912fac",
-          "text": "No worries: He handed it to his wife, and she was gone in a flash down the road to buy a new tire iron.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 98,
-            "end": 102
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:iron#s7",
-      "pos": "短语",
-      "glossZh": "解决小问题",
-      "pronunciationId": "w:iron#p-main",
-      "note": "iron sth out。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:iron#e-57f19eaf05d84a76",
-          "text": "Such wrinkles will no doubt be ironed out.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 37
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -358,6 +271,11 @@
       "reason": "专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:iron-sth-out"
+  ]
 }

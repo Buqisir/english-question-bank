@@ -1,0 +1,181 @@
+{
+  "entryId": "w:join-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "joined up"
+  ],
+  "pattern": {
+    "tokens": [
+      "join",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "join",
+        "up"
+      ],
+      [
+        "joined",
+        "up"
+      ],
+      [
+        "joining",
+        "up"
+      ],
+      [
+        "joins",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "joining up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "join up",
+  "senses": [
+    {
+      "senseId": "w:join-up#s1",
+      "pos": "短语",
+      "glossZh": "把各部分接起来；连成一体",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:join-up#e-aaa891f30ae1d30b",
+          "text": "We proudly high-fived each other as the pieces joined up and the bench started to look like one.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:join-up#e-d65e9873def8dd25",
+          "text": "Strangely, there’s something so satisfying about finding the right piece for a space, joining up sections, getting closer to finishing a picture.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 96
+          },
+          "parts": [
+            [
+              86,
+              96
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              96
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:join-up#s2",
+      "pos": "短语",
+      "glossZh": "参军；入伍",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:join-up#s3",
+      "pos": "短语",
+      "glossZh": "（字母）连写的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于形容词 joined-up。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:join-up#s4",
+      "pos": "短语",
+      "glossZh": "各部分相互衔接的；协调统一的",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用于形容词 joined-up，可形容思路、政策或各部门的行动。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

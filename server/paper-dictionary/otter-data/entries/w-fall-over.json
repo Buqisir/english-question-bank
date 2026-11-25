@@ -1,0 +1,211 @@
+{
+  "entryId": "w:fall-over",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "falling over",
+    "fell over"
+  ],
+  "pattern": {
+    "tokens": [
+      "fall",
+      "over"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fall",
+        "over"
+      ],
+      [
+        "falling",
+        "over"
+      ],
+      [
+        "fell",
+        "over"
+      ],
+      [
+        "fallen",
+        "over"
+      ],
+      [
+        "falls",
+        "over"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fall over",
+  "senses": [
+    {
+      "senseId": "w:fall-over#s1",
+      "pos": "短语",
+      "glossZh": "摔倒；倾倒",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fall-over#e-a7365ce7b03bbeaf",
+          "text": "If you cut the power, they will likely fall over, potentially causing serious injury to nearby workers.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 48
+          },
+          "parts": [
+            [
+              39,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              39,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-over#e-c471f53f646bedb6",
+          "text": "“I saw your jasmine （茉莉） fell over on the balcony this afternoon.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 34
+          },
+          "parts": [
+            [
+              25,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              34
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:fall-over#e-ef53612bd57be55e",
+          "text": "The CPSC ensures that children’s clothing doesn’t go against flammability (可燃性) standards, toys don’t present choking danger, and furniture isn’t in danger of falling over.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 171
+          },
+          "parts": [
+            [
+              159,
+              171
+            ]
+          ],
+          "highlightRanges": [
+            [
+              159,
+              171
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:fall-over#s2",
+      "pos": "短语",
+      "glossZh": "（论点）站不住脚",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-over#s3",
+      "pos": "短语",
+      "glossZh": "（系统或设备）崩溃；停止运转",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fall-over#s4",
+      "pos": "短语",
+      "glossZh": "反叛；改换效忠对象",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "古旧用法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

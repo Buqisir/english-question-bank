@@ -1,0 +1,122 @@
+{
+  "entryId": "w:dry-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "dry",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "dry",
+        "out"
+      ],
+      [
+        "dried",
+        "out"
+      ],
+      [
+        "dries",
+        "out"
+      ],
+      [
+        "drying",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "dries out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "dry out",
+  "senses": [
+    {
+      "senseId": "w:dry-out#s1",
+      "pos": "短语",
+      "glossZh": "变干；使失去水分而变干",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:dry-out#e-d5b6728cd4bb5bab",
+          "text": "Rather, wind chill increases the moisture (水分) loss from leaves and dries out the plant.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          },
+          "parts": [
+            [
+              68,
+              77
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              77
+            ]
+          ]
+        }
+      ],
+      "note": "可及物或不及物，常指因失水而过干。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:dry-out#s2",
+      "pos": "短语",
+      "glossZh": "戒酒；接受戒酒治疗",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

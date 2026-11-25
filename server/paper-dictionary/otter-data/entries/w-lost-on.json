@@ -1,0 +1,140 @@
+{
+  "entryId": "w:lost-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "lost",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "lost",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "lost on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "lost on sb",
+  "senses": [
+    {
+      "senseId": "w:lost-on#s1",
+      "pos": "短语",
+      "glossZh": "（笑话、言外之意等）未被某人领会",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:lost-on#e-be9f120a2d8a2184",
+          "text": "What does “the irony wasn’t lost on us” in paragraph 1 imply?",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-shandong-2026-04-core-literacy-assessment:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          },
+          "parts": [
+            [
+              28,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:lost-on#e-b899ce5f1f8c12ab",
+          "text": "At the newspaper I worked with, the topic on which my colleagues and I were most frequently asked to write was “information overload” and no, the irony (讽刺) wasn’t lost on us that publishing thousands of words on the problem was hardly going to help.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 164,
+            "end": 171
+          },
+          "parts": [
+            [
+              164,
+              171
+            ]
+          ],
+          "highlightRanges": [
+            [
+              164,
+              171
+            ]
+          ]
+        }
+      ],
+      "note": "not lost on sb 表示某人察觉到了或领会了。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:lost-on#s2",
+      "pos": "短语",
+      "glossZh": "（劝告、教训等）对某人不起作用",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

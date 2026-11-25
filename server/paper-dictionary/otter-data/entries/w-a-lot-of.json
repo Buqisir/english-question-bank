@@ -1,0 +1,157 @@
+{
+  "entryId": "w:a-lot-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "lot",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "lot",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a lot of",
+  "senses": [
+    {
+      "senseId": "w:a-lot-of#s1",
+      "pos": "短语",
+      "glossZh": "大量的；许多",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:lot#s1"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:a-lot-of#e-a1d821251ecd7be5",
+          "text": "Thankfulness has a lot of benefits: Research shows it makes us happier, less stressed and even more optimistic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          },
+          "parts": [
+            [
+              17,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              25
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot-of#e-2cd22407c1bdf797",
+          "text": "“Also, there is a lot of research showing that a positive mood leads to higher levels of productivity and creativity.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          },
+          "parts": [
+            [
+              16,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              16,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:a-lot-of#e-81130c0fd26e5474",
+          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          },
+          "parts": [
+            [
+              51,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              59
+            ]
+          ]
+        }
+      ],
+      "note": "可接复数可数名词或不可数名词。",
+      "counts": {
+        "gaokao": 18,
+        "mock": 82
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 18,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

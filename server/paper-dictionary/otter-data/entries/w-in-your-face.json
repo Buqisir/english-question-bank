@@ -1,0 +1,61 @@
+{
+  "entryId": "w:in-your-face",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "your",
+      "face"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "your",
+        "face"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in your face",
+  "senses": [
+    {
+      "senseId": "w:in-your-face#s1",
+      "pos": "短语",
+      "glossZh": "服了吧！怎么样，输了吧！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用来向对方炫耀胜利或优势，带有挑衅意味。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

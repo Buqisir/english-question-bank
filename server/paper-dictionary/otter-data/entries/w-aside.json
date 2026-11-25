@@ -42,8 +42,8 @@
     "mock": 41
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 37
+    "gaokao": 2,
+    "mock": 25
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -87,7 +87,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -113,59 +113,6 @@
       ]
     },
     {
-      "senseId": "w:aside#s3",
-      "pos": "短语",
-      "glossZh": "除……之外",
-      "pronunciationId": "w:aside#p-main",
-      "note": "aside from。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:aside#e-436b0b3844b16c92",
-          "text": "“Aside from breathing without anyone noticing, moving can be the __41__ aspect of being a living statue.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
-            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:cloze",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:cloze:3",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 1,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:aside#e-0c768683a18b17c5",
-          "text": "Aside from relevancy, this personal contextualization opens the door for engaging with critical questions not usually covered by standards.",
-          "source": {
-            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
-            "paperTitle": "重庆市高2026届高三第一次质量检测",
-            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 0,
-            "end": 5
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:aside#s4",
       "pos": "n.",
       "glossZh": "旁白；低声插话；题外话",
@@ -177,62 +124,19 @@
       },
       "folded": true,
       "examples": []
-    },
-    {
-      "senseId": "w:aside#s5",
-      "pos": "短语",
-      "glossZh": "留出；留作他用",
-      "pronunciationId": "w:aside#p-main",
-      "note": "set aside。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:aside#e-d9b70078734b18c5",
-          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-b",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 133,
-            "end": 138
-          }
-        },
-        {
-          "exampleId": "w:aside#e-12a5527ef9990615",
-          "text": "Simple techniques can help anyone adopt the practice: setting aside dedicated time without devices, reading aloud, taking notes, and pausing to reflect on key points.",
-          "source": {
-            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
-            "paperTitle": "菏泽市2026年高三二模考试英语试题",
-            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 62,
-            "end": 67
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:aside-from",
+    "w:brush-aside",
+    "w:put-aside",
+    "w:set-aside",
+    "w:step-aside",
+    "w:sweep-aside"
+  ]
 }

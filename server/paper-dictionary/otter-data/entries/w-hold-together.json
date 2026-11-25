@@ -1,0 +1,121 @@
+{
+  "entryId": "w:hold-together",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hold",
+      "together"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hold",
+        "together"
+      ],
+      [
+        "held",
+        "together"
+      ],
+      [
+        "holding",
+        "together"
+      ],
+      [
+        "holds",
+        "together"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "held together",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hold (sth) together",
+  "senses": [
+    {
+      "senseId": "w:hold-together#s1",
+      "pos": "短语",
+      "glossZh": "（使）保持为一个整体；（使）不散开",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hold-together#e-8266d0a9de8548ae",
+          "text": "to instruct the children whose shoes were held together with string was a surprise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 55
+          },
+          "parts": [
+            [
+              42,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              55
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hold-together#s2",
+      "pos": "短语",
+      "glossZh": "稳住情绪；在压力下撑住",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常用 hold it together。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

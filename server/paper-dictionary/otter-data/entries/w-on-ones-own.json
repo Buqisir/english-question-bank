@@ -1,0 +1,324 @@
+{
+  "entryId": "w:on-ones-own",
+  "headword": "on one's own",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "on one’s own"
+  ],
+  "pattern": {
+    "tokens": [
+      "on",
+      {
+        "slot": "one's"
+      },
+      "own"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "on",
+        {
+          "slot": "one's"
+        },
+        "own"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "on own",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:on-ones-own#s1",
+      "pos": "短语",
+      "glossZh": "独自；靠自己",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 27
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:on#s10",
+        "w:own#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-own#e-54a92e3a47927190",
+          "text": "Why is Ethan concerned about his parents living on their own?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 60
+          },
+          "parts": [
+            [
+              48,
+              50
+            ],
+            [
+              57,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              50
+            ],
+            [
+              57,
+              60
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-own#e-110e210cfa88a7e3",
+          "text": "Only a little choose to deal with the problems on our own.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              49
+            ],
+            [
+              54,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              49
+            ],
+            [
+              54,
+              57
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-own#e-fc74c2a73321c740",
+          "text": "Then, Angela gets us to try the nine movements on our own.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 57
+          },
+          "parts": [
+            [
+              47,
+              49
+            ],
+            [
+              54,
+              57
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              49
+            ],
+            [
+              54,
+              57
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:on-ones-own#s2",
+      "pos": "短语",
+      "glossZh": "单凭自身；单独来看",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:on-ones-own#e-2d38928b6bb7e32d",
+          "text": "Across two studies, creativity did not reliably predict prosocial behavior on its own.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          },
+          "parts": [
+            [
+              75,
+              77
+            ],
+            [
+              82,
+              85
+            ]
+          ],
+          "highlightRanges": [
+            [
+              75,
+              77
+            ],
+            [
+              82,
+              85
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-own#e-e5905faf2ff2a19b",
+          "text": "Such acuity is striking, though on its own the tracking of these tiny changes would not be enough to track a heartbeat.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          },
+          "parts": [
+            [
+              32,
+              34
+            ],
+            [
+              39,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              34
+            ],
+            [
+              39,
+              42
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:on-ones-own#e-95283e20ba2c8025",
+          "text": "These small yet impactful changes seem insignificant on their own.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:36#option=G",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 65
+          },
+          "parts": [
+            [
+              53,
+              55
+            ],
+            [
+              62,
+              65
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              55
+            ],
+            [
+              62,
+              65
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

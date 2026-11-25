@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 565
+    "mock": 369
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 55,
-        "mock": 0
+        "mock": 177
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 0
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -212,6 +212,9 @@
       "reason": "旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:improve-on"
+  ]
 }

@@ -1,0 +1,108 @@
+{
+  "entryId": "w:a-thing-or-two",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "a",
+      "thing",
+      "or",
+      "two"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "a",
+        "thing",
+        "or",
+        "two"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "a thing or two",
+  "senses": [
+    {
+      "senseId": "w:a-thing-or-two#s1",
+      "pos": "短语",
+      "glossZh": "一些有用的知识或经验",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:a-thing-or-two#e-9b0bd67d5a30eefb",
+          "text": "Fortunately, the ancient Romans might have taught us a thing or two about manufacturing concrete that lasts for thousands of years.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 67
+          },
+          "parts": [
+            [
+              53,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              53,
+              67
+            ]
+          ]
+        }
+      ],
+      "note": "常用于 know、learn 或 teach sb a thing or two about sth，语气常带轻描淡写。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:a-thing-or-two#s2",
+      "pos": "短语",
+      "glossZh": "一两件事；几件小事",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

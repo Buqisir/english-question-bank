@@ -1,0 +1,61 @@
+{
+  "entryId": "w:oil-and-water",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "oil",
+      "and",
+      "water"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "oil",
+        "and",
+        "water"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "oil and water",
+  "senses": [
+    {
+      "senseId": "w:oil-and-water#s1",
+      "pos": "短语",
+      "glossZh": "格格不入；彼此难以相容",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常见于 like oil and water。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

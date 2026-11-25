@@ -62,8 +62,8 @@
     "mock": 192
   },
   "unassignedCounts": {
-    "gaokao": 1,
-    "mock": 185
+    "gaokao": 3,
+    "mock": 23
   },
   "senses": [
     {
@@ -74,7 +74,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 75
       },
       "folded": false,
       "examples": [
@@ -216,7 +216,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 51
       },
       "folded": false,
       "examples": [
@@ -281,74 +281,6 @@
       ]
     },
     {
-      "senseId": "w:push#s4",
-      "pos": "短语",
-      "glossZh": "努力争取",
-      "pronunciationId": "w:push#p-main",
-      "note": "push for sth。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:push#e-6870e9009526a735",
-          "text": "\"We need something on the books that can change people’s behavior,” said Félix W. Ortiz, who pushed for the state’s 2001 ban on hand-held devices by drivers.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 93,
-            "end": 99
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:push#s5",
-      "pos": "短语",
-      "glossZh": "坚持熬过去",
-      "pronunciationId": "w:push#p-main",
-      "note": "push through。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:push#e-3122cee41147a667",
-          "text": "Push through, give it time and put in the effort.",
-          "source": {
-            "paperId": "paper-gaokao-2023-ii",
-            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
-            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 7,
-            "end": 11
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:push#s6",
       "pos": "v.",
       "glossZh": "奋力前进",
@@ -356,7 +288,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 16
       },
       "folded": false,
       "examples": [
@@ -408,7 +340,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -441,7 +373,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 12
       },
       "folded": false,
       "examples": [
@@ -465,6 +397,92 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:push#s9",
+      "pos": "v.",
+      "glossZh": "向用户推送（内容或更新）",
+      "pronunciationId": "w:push#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:push#e-130045b746bc43d3",
+          "text": "When users click on gender-stereotypical images, the algorithm learns their preferences and pushes more similar content.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:push#e-5dd0a2ce818eeefc",
+          "text": "Some mornings, he logs in early to push updates before users wake up.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:push#s10",
+      "pos": "v.",
+      "glossZh": "宣扬（观点或说法）",
+      "pronunciationId": "w:push#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:push#e-787f08d0ef3b447c",
+          "text": "Today, Big Tech is pushing a message of artificial-intelligence craziness and fear.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -477,6 +495,22 @@
       "reason": "赌博术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:push-away",
+    "w:push-back",
+    "w:push-down",
+    "w:push-for-sth",
+    "w:push-forward",
+    "w:push-in",
+    "w:push-it",
+    "w:push-off",
+    "w:push-out",
+    "w:push-past",
+    "w:push-through",
+    "w:push-up"
+  ]
 }

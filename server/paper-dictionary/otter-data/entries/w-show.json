@@ -68,8 +68,8 @@
     "mock": 1163
   },
   "unassignedCounts": {
-    "gaokao": 6,
-    "mock": 1161
+    "gaokao": 11,
+    "mock": 980
   },
   "senses": [
     {
@@ -80,7 +80,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 58,
-        "mock": 0
+        "mock": 90
       },
       "folded": false,
       "examples": [
@@ -151,7 +151,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 14,
-        "mock": 0
+        "mock": 38
       },
       "folded": false,
       "examples": [
@@ -223,7 +223,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -294,7 +294,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -346,7 +346,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -373,131 +373,6 @@
       ]
     },
     {
-      "senseId": "w:show#s6",
-      "pos": "短语",
-      "glossZh": "到场",
-      "pronunciationId": "w:show#p-main",
-      "note": "show up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 4,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:show#e-ccb3100de611733b",
-          "text": "Organizers expected perhaps 50,000 people to show up.",
-          "source": {
-            "paperId": "paper-gaokao-2020-ii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2020-ii:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 45,
-            "end": 49
-          }
-        },
-        {
-          "exampleId": "w:show#e-0c8b90192ee7720b",
-          "text": "One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “__36__” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition.",
-          "source": {
-            "paperId": "paper-gaokao-2022-i",
-            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
-            "groupId": "group:paper-gaokao-2022-i:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "seven-choices-1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 33,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:show#e-777280ce3a85b865",
-          "text": "So, when my brother showed up, I asked him to watch Toby and keep him outside.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 20,
-            "end": 26
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:show#s7",
-      "pos": "短语",
-      "glossZh": "显现",
-      "pronunciationId": "w:show#p-main",
-      "note": "show up。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:show#e-a9b06bbc21fff132",
-          "text": "In most people the first signs show up in their 50s or early 60s.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:show#e-91f3e3161333ce5e",
-          "text": "Researchers say more and more terms for these “neo-emotions” are showing up online, describing new dimensions and aspects of feeling.",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
-            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:1",
-              "sentence": 5
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 65,
-            "end": 72
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:show#s8",
       "pos": "n.",
       "glossZh": "演出",
@@ -505,7 +380,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 18,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -576,7 +451,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 8,
-        "mock": 0
+        "mock": 15
       },
       "folded": false,
       "examples": [
@@ -647,7 +522,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -705,6 +580,39 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:show#s12",
+      "pos": "v.",
+      "glossZh": "炫耀；卖弄（show off）",
+      "pronunciationId": "w:show#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-8dc3fa7723ba74e7",
+          "text": "For example, what you may have come to think of as humor may be seen as showing off.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -717,6 +625,13 @@
       "reason": "赛事和牌戏用语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:show-off",
+    "w:show-sb-the-ropes",
+    "w:show-up"
+  ]
 }

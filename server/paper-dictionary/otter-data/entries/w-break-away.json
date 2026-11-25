@@ -1,0 +1,103 @@
+{
+  "entryId": "w:break-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "broke away"
+  ],
+  "pattern": {
+    "tokens": [
+      "break",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "break",
+        "away"
+      ],
+      [
+        "broke",
+        "away"
+      ],
+      [
+        "breaking",
+        "away"
+      ],
+      [
+        "breaks",
+        "away"
+      ],
+      [
+        "broken",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "break away",
+  "senses": [
+    {
+      "senseId": "w:break-away#s1",
+      "pos": "短语",
+      "glossZh": "挣脱；挣脱后离开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-away#s2",
+      "pos": "短语",
+      "glossZh": "脱离原有团体或关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "常接 from。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:break-away#s3",
+      "pos": "短语",
+      "glossZh": "断开；从整体上脱落",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

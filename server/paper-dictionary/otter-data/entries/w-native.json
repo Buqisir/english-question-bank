@@ -60,8 +60,8 @@
     "mock": 61
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 53
+    "gaokao": 4,
+    "mock": 9
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 2
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 3,
-        "mock": 1
+        "mock": 34
       },
       "folded": false,
       "examples": [
@@ -214,7 +214,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -259,113 +259,6 @@
       ]
     },
     {
-      "senseId": "w:native#s4",
-      "pos": "短语",
-      "glossZh": "母语者",
-      "pronunciationId": "w:native#p-main",
-      "note": "native speaker。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:native#e-e349be6b30e126b3",
-          "text": "For native speakers",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 4,
-            "end": 10
-          }
-        },
-        {
-          "exampleId": "w:native#e-600e529beaa4cdc6",
-          "text": "It is written by native speakers.",
-          "source": {
-            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
-            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
-            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-a",
-            "locator": {
-              "question": 23,
-              "questionId": "question:paper-mock-henan-zhengzhou-2026-04-second:23",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 17,
-            "end": 23
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:native#s5",
-      "pos": "短语",
-      "glossZh": "美洲原住民",
-      "pronunciationId": "w:native#p-main",
-      "note": "Native American。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:native#e-10dfdfe4271a446b",
-          "text": "Native Americans had taken care of these precious natural resources wisely.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 6
-          }
-        },
-        {
-          "exampleId": "w:native#e-197b06a2ea3daa66",
-          "text": "The western half of the U.S. was full of grizzlies when Europeans came, with a rough number of 50,000 or more living alongside Native Americans.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-a",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 127,
-            "end": 133
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:native#s6",
       "pos": "n.",
       "glossZh": "本地出生的人",
@@ -373,7 +266,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -425,7 +318,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -468,6 +361,91 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:native#s8",
+      "pos": "n.",
+      "glossZh": "从小接触并熟悉某种技术的人",
+      "pronunciationId": "w:native#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:native#e-1eb824c658d713e9",
+          "text": "Young students are often considered “digital natives”, with technology in every aspect of their lives.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:native#e-675016e0d839f3ff",
+          "text": "Born between the mid-1990s and early 2010s, Gen Z is often labelled as “digital natives”.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:native#s9",
+      "pos": "adj.",
+      "glossZh": "体内原有的；天然存在的",
+      "pronunciationId": "w:native#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:native#e-2c127cf4dd63cef7",
+          "text": "The researchers built an algorithm (算法) to create vascular trees similar to native organ blood vessel architectures.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -476,6 +454,11 @@
       "reason": "专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:native-land"
+  ]
 }

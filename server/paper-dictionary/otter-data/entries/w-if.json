@@ -35,8 +35,8 @@
     "mock": 1360
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 1359
+    "gaokao": 19,
+    "mock": 1181
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 223,
-        "mock": 0
+        "mock": 158
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 31,
-        "mock": 0
+        "mock": 21
       },
       "folded": false,
       "examples": [
@@ -180,237 +180,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:if#s3",
-      "pos": "短语",
-      "glossZh": "即使",
-      "pronunciationId": "w:if#p-main",
-      "note": "even if。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 10,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:if#e-53629619c2398361",
-          "text": "Even if there isn’t a registry, a good housewarming gift is something to decorate the new house with, like a piece of art or a plant.",
-          "source": {
-            "paperId": "paper-gaokao-2020-national-iii",
-            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
-            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:2",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        },
-        {
-          "exampleId": "w:if#e-22178d5fd8f76f46",
-          "text": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-d",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:if#e-b5373d1fc9eed1e9",
-          "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:reading-a",
-            "locator": {
-              "paragraph": 10,
-              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 5,
-            "end": 7
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:if#s4",
-      "pos": "短语",
-      "glossZh": "好像；仿佛",
-      "pronunciationId": "w:if#p-main",
-      "note": "as if。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:if#e-030bc931e0bfed3e",
-          "text": "The deep-sea species have been caught as if they were the fast-breeding (快速繁殖) fish like sardine and herring.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 50
-          }
-        },
-        {
-          "exampleId": "w:if#e-978c93d8ee251a45",
-          "text": "Indoor plants might look as if they just sit around not doing much, but in many ways they are the unsung heroes of the home.",
-          "source": {
-            "paperId": "paper-gaokao-2023-national-b",
-            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
-            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 28,
-            "end": 30
-          }
-        },
-        {
-          "exampleId": "w:if#e-a1c7b5a519dba7ea",
-          "text": "Walking into Dryden Theater, I felt as if I had stepped into a time machine – the traditional, old-timey box office, tons of old-style movie posters on the walls.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 39,
-            "end": 41
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:if#s5",
-      "pos": "短语",
-      "glossZh": "要是……怎么办",
-      "pronunciationId": "w:if#p-main",
-      "note": "what if …?",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 2,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:if#e-2a804af1b391439f",
-          "text": "Before starting the __44__, he added, “What if I keep it long?”",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:3",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 44,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:if#e-0be2d667ed1af5f4",
-          "text": "“What if he has told the truth?” he thought to himself.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
-            "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 8
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:if#s6",
-      "pos": "短语",
-      "glossZh": "要是……就好了",
-      "pronunciationId": "w:if#p-main",
-      "note": "if only。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:if#e-867871be50212981",
-          "text": "If only the effort they put into avoiding responsibility could be redirected into, well, actual responsibility.",
-          "source": {
-            "paperId": "paper-gaokao-2026-ii",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 2
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -419,6 +188,20 @@
       "reason": "大写 IF 的不同领域缩写"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:as-if",
+    "w:even-if",
+    "w:if-anything",
+    "w:if-ever",
+    "w:if-i-may",
+    "w:if-not-for",
+    "w:if-only",
+    "w:if-possible",
+    "w:if-you-like",
+    "w:what-if"
+  ]
 }

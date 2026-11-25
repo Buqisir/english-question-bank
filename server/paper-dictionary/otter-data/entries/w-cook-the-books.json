@@ -1,0 +1,90 @@
+{
+  "entryId": "w:cook-the-books",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "cook",
+      "the",
+      "books"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "cook",
+        "the",
+        "books"
+      ],
+      [
+        "cooked",
+        "the",
+        "books"
+      ],
+      [
+        "cooking",
+        "the",
+        "books"
+      ],
+      [
+        "cooks",
+        "the",
+        "books"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "cook the books",
+  "senses": [
+    {
+      "senseId": "w:cook-the-books#s1",
+      "pos": "短语",
+      "glossZh": "做假账；篡改账目",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:cook#s3"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:cook-the-books#s2",
+      "pos": "短语",
+      "glossZh": "（引申）为自身利益歪曲事实",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

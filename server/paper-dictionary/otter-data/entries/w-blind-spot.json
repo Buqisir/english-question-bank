@@ -1,0 +1,168 @@
+{
+  "entryId": "w:blind-spot",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "blind",
+      "spot"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "blind",
+        "spot"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "blind spot",
+  "senses": [
+    {
+      "senseId": "w:blind-spot#s1",
+      "pos": "短语",
+      "glossZh": "认知盲区；意识不到的问题",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:blind#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:blind-spot#e-befed5f0b8bff2ba",
+          "text": "The study in the journal Open Mind reveals a new blind spot in our physical reasoning.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          },
+          "parts": [
+            [
+              49,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:blind-spot#e-9cd76bbc2088edda",
+          "text": "A New Blind Spot in Human Perception Found",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:31#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 16
+          },
+          "parts": [
+            [
+              6,
+              16
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              16
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:blind-spot#e-2d5a6bfc9769ae88",
+          "text": "Croom, who studies intuitive (直觉的) physics, or what people understand about the environment just from looking at it, suspected knots might be a rare blind spot.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 159
+          },
+          "parts": [
+            [
+              149,
+              159
+            ]
+          ],
+          "highlightRanges": [
+            [
+              149,
+              159
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    },
+    {
+      "senseId": "w:blind-spot#s2",
+      "pos": "短语",
+      "glossZh": "视线盲区；看不见的区域",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

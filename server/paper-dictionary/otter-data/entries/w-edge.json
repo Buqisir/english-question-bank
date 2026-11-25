@@ -60,7 +60,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 65
+    "mock": 12
   },
   "senses": [
     {
@@ -71,7 +71,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 7,
-        "mock": 0
+        "mock": 45
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -209,7 +209,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -235,69 +235,119 @@
       ]
     },
     {
-      "senseId": "w:edge#s5",
-      "pos": "短语",
-      "glossZh": "紧张不安",
+      "senseId": "w:edge#s7",
+      "pos": "n.",
+      "glossZh": "（on the edge of one’s seat）紧张或兴奋地等着看接下来会怎样",
       "pronunciationId": "w:edge#p-main",
-      "note": "on edge。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:edge#e-410c7731ce3bd9c7",
-          "text": "Everyone else seemed at ease, while I felt on edge.",
+          "exampleId": "w:edge#e-8f822f94e6d4a672",
+          "text": "Everyone sat on the edge of their seats, waiting for the headmaster, Mr. Lee, to speak.",
           "source": {
-            "paperId": "paper-mock-import-20261026-n085",
-            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
-            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
             "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:3",
-              "sentence": 7
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:4",
+              "sentence": 2
             }
           },
           "tier": "mock",
           "target": {
-            "start": 46,
-            "end": 50
+            "start": 20,
+            "end": 24
           }
-        }
-      ]
-    },
-    {
-      "senseId": "w:edge#s6",
-      "pos": "短语",
-      "glossZh": "在……的边缘；濒临",
-      "pronunciationId": "w:edge#p-main",
-      "note": "on the edge of sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
+        },
         {
-          "exampleId": "w:edge#e-615c5e4679b22535",
-          "text": "Still, this study provides the know-how to avoid the axolotl’s “last nail in the coffin,” showing that even species on the edge of extinction may have a path to recovery.",
+          "exampleId": "w:edge#e-b9feeb0d441f6b0a",
+          "text": "On the contrary, I was often on the edge of my seat, terrified for the danger these little guys faced.",
           "source": {
-            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
-            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
-            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-d",
             "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:5",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-d:3",
               "sentence": 3
             }
           },
           "tier": "mock",
           "target": {
-            "start": 123,
-            "end": 127
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s8",
+      "pos": "v.",
+      "glossZh": "修整……的边缘",
+      "pronunciationId": "w:edge#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-53e98052122bf551",
+          "text": "Her Saturdays followed a cherished routine: she would edge the lawn with precision, nurture her bright rose bushes, and ensure every window box overflowed with colorful blooms.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s9",
+      "pos": "n.",
+      "glossZh": "（计算）网络边缘；靠近数据源的一端",
+      "pronunciationId": "w:edge#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-4de4244156caece9",
+          "text": "It adopts an end-edge-cloud multi-layer architecture: end BMS collects real-time cell data, edge BMS processes time-sensitive tasks locally, and cloud BMS handles complex work.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 96
           }
         }
       ]
@@ -309,6 +359,14 @@
       "reason": "同形专名或专业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:leading-edge",
+    "w:on-edge",
+    "w:on-the-edge-of-sth",
+    "w:take-the-edge-off"
+  ]
 }

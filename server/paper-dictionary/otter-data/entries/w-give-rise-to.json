@@ -1,0 +1,179 @@
+{
+  "entryId": "w:give-rise-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gives rise to",
+    "giving rise to"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "rise",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "give",
+        "rise",
+        "to"
+      ],
+      [
+        "gives",
+        "rise",
+        "to"
+      ],
+      [
+        "giving",
+        "rise",
+        "to"
+      ],
+      [
+        "gave",
+        "rise",
+        "to"
+      ],
+      [
+        "given",
+        "rise",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "give rise to",
+  "senses": [
+    {
+      "senseId": "w:give-rise-to#s1",
+      "pos": "短语",
+      "glossZh": "引起；导致；产生",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:rise#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-rise-to#e-c1b60b98f17d02fe",
+          "text": "Although language does not give rise to thoughts, past research shows that how we speak can heavily influence how we think.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 39
+          },
+          "parts": [
+            [
+              27,
+              39
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              39
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-rise-to#e-cbc0c9ae1d0924b0",
+          "text": "Reduced blinking and sustained near focus can give rise to ocular issues.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 58
+          },
+          "parts": [
+            [
+              46,
+              58
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              58
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-rise-to#e-9e4e8ea1c60320be",
+          "text": "To solve these issues, technologies like cloud computing, IoT (Internet of Things), and digital twin have been integrated, giving rise to Intelligent BMS (IBMS).",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 137
+          },
+          "parts": [
+            [
+              123,
+              137
+            ]
+          ],
+          "highlightRanges": [
+            [
+              123,
+              137
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

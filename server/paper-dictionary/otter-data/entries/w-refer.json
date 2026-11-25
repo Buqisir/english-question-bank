@@ -58,313 +58,21 @@
     "mock": 108
   },
   "unassignedCounts": {
-    "gaokao": 2,
-    "mock": 104
+    "gaokao": 30,
+    "mock": 106
   },
   "senses": [
-    {
-      "senseId": "w:refer#s1",
-      "pos": "短语",
-      "glossZh": "指的是",
-      "pronunciationId": "w:refer#p-main",
-      "note": "refer to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 18,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:refer#e-5a274bdd3fdae2d5",
-          "text": "What does the underlined word “that” in paragraph 2 refer to?",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2020-i:29",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 52,
-            "end": 57
-          }
-        },
-        {
-          "exampleId": "w:refer#e-ebbe16a627571470",
-          "text": "“The footprint” underlined in the last sentence refers to the CO2 produced in __.",
-          "source": {
-            "paperId": "paper-gaokao-2021-eight-provinces-jan",
-            "paperTitle": "2021年1月八省联考英语",
-            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
-            "locator": {
-              "question": 27,
-              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:27",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 48,
-            "end": 54
-          }
-        },
-        {
-          "exampleId": "w:refer#e-ee99a030c1fbf7a1",
-          "text": "The underlined word “go-getter” in paragraph 3 refers to someone Who_______.",
-          "source": {
-            "paperId": "paper-gaokao-2022-zhejiang-jun",
-            "paperTitle": "2022 年 6 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
-            "locator": {
-              "question": 28,
-              "questionId": "question:paper-gaokao-2022-zhejiang-jun:28",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 47,
-            "end": 53
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:refer#s2",
-      "pos": "短语",
-      "glossZh": "提及",
-      "pronunciationId": "w:refer#p-main",
-      "note": "refer to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:refer#e-1a18f5c05dd2bf9d",
-          "text": "By referring to another study.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
-            "locator": {
-              "question": 29,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:29",
-              "option": "C",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:refer#e-4ab1461af8aebd9a",
-          "text": "\"Big change requires big ideas,\" he said in a speech last month, referring broadly to the need to improve road safety.",
-          "source": {
-            "paperId": "paper-gaokao-2022-ii",
-            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
-            "groupId": "group:paper-gaokao-2022-ii:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 65,
-            "end": 74
-          }
-        },
-        {
-          "exampleId": "w:refer#e-38ebb9ac3955df2a",
-          "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
-          "source": {
-            "paperId": "paper-gaokao-2023-zhejiang-jan",
-            "paperTitle": "2023年1月浙江高考英语",
-            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 16,
-            "end": 25
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:refer#s3",
-      "pos": "短语",
-      "glossZh": "称为",
-      "pronunciationId": "w:refer#p-main",
-      "note": "refer to A as B。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:refer#e-9714f80fe4254344",
-          "text": "Referred to as matrix planting, this approach aims for nature to do a lot more of the heavy lifting in the garden, and even some of the designing.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 0,
-            "end": 8
-          }
-        },
-        {
-          "exampleId": "w:refer#e-497165a26f26a8ae",
-          "text": "It’s no wonder researchers refer to this as a fundamental human contradiction: we start out in life as curious explorers, eager as possible to absorb whatever knowledge we can.",
-          "source": {
-            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
-            "paperTitle": "济南市2026届高三第一次模拟考试",
-            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:5",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 27,
-            "end": 32
-          }
-        },
-        {
-          "exampleId": "w:refer#e-931b9a191420c860",
-          "text": "This combination of sounds is referred to as a soundscape",
-          "source": {
-            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
-            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
-            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-chongqing-bashu-2026-10-first:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 38
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:refer#s4",
-      "pos": "短语",
-      "glossZh": "查阅",
-      "pronunciationId": "w:refer#p-main",
-      "note": "refer to。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 6,
-        "mock": 2
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:refer#e-4255f4f6fde7d349",
-          "text": "It will also give them a handy record to refer back to.",
-          "source": {
-            "paperId": "paper-gaokao-2025-zhejiang-jan",
-            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-gaokao-2025-zhejiang-jan:36",
-              "option": "F",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 41,
-            "end": 46
-          }
-        },
-        {
-          "exampleId": "w:refer#e-3987c4b43b14c068",
-          "text": "By referring to routinely collected data.",
-          "source": {
-            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
-            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
-            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d",
-            "locator": {
-              "question": 32,
-              "questionId": "question:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:32",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 3,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:refer#e-fd989467205f4cc5",
-          "text": "“There’s a huge body of literature, but we can’t refer to it because no one’s using the same methods,” explained Eva Bianchi, a Stanford PhD graduate.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-d",
-            "locator": {
-              "paragraph": 2,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-d:2",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 49,
-            "end": 54
-          }
-        }
-      ]
-    },
     {
       "senseId": "w:refer#s5",
       "pos": "v.",
       "glossZh": "转介（病人等）",
       "pronunciationId": "w:refer#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
@@ -372,12 +80,12 @@
       "pos": "v.",
       "glossZh": "提交给（某人或机构）处理",
       "pronunciationId": "w:refer#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     }
   ],
@@ -387,6 +95,12 @@
       "reason": "计算机术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:refer-to",
+    "w:refer-to-a-as-b"
+  ]
 }

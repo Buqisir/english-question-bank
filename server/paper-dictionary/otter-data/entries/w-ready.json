@@ -48,8 +48,8 @@
     "mock": 142
   },
   "unassignedCounts": {
-    "gaokao": 4,
-    "mock": 139
+    "gaokao": 5,
+    "mock": 12
   },
   "senses": [
     {
@@ -60,7 +60,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 13,
-        "mock": 0
+        "mock": 86
       },
       "folded": false,
       "examples": [
@@ -132,7 +132,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 1
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -203,7 +203,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 1
+        "mock": 19
       },
       "folded": false,
       "examples": [
@@ -249,40 +249,6 @@
       ]
     },
     {
-      "senseId": "w:ready#s4",
-      "pos": "短语",
-      "glossZh": "随时可用",
-      "pronunciationId": "w:ready#p-main",
-      "note": "at the ready。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:ready#e-e379bb7204e8f092",
-          "text": "It’s more challenging to eat in moderation if you have unhealthy snacks at the ready, like cookies.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:4",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 79,
-            "end": 84
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:ready#s5",
       "pos": "adj.",
       "glossZh": "很自然地流露的",
@@ -290,7 +256,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -322,6 +288,14 @@
       "reason": "较少见的旧式名词用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:at-the-ready",
+    "w:get-ready",
+    "w:ready-and-waiting",
+    "w:ready-to-roll"
+  ]
 }

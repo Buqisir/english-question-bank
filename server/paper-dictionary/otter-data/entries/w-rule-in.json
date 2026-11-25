@@ -1,0 +1,72 @@
+{
+  "entryId": "w:rule-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "rules in"
+  ],
+  "pattern": {
+    "tokens": [
+      "rule",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "rule",
+        "in"
+      ],
+      [
+        "rules",
+        "in"
+      ],
+      [
+        "ruled",
+        "in"
+      ],
+      [
+        "ruling",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "rule sth in",
+  "senses": [
+    {
+      "senseId": "w:rule-in#s1",
+      "pos": "短语",
+      "glossZh": "将……列为可能的解释或选项",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

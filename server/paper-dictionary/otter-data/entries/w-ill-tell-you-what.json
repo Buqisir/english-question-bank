@@ -1,0 +1,67 @@
+{
+  "entryId": "w:ill-tell-you-what",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "I'll tell you",
+    "I'll tell you what",
+    "i'll tell you"
+  ],
+  "pattern": {
+    "tokens": [
+      "i'll",
+      "tell",
+      "you",
+      "what"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "i'll",
+        "tell",
+        "you",
+        "what"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "i'll tell you what",
+  "senses": [
+    {
+      "senseId": "w:ill-tell-you-what#s1",
+      "pos": "短语",
+      "glossZh": "这样吧；我有个主意",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "口语中用来引出建议。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

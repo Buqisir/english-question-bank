@@ -1,0 +1,97 @@
+{
+  "entryId": "w:ray-of-hope",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "ray",
+      "of",
+      "hope"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "ray",
+        "of",
+        "hope"
+      ],
+      [
+        "rays",
+        "of",
+        "hope"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "ray of hope",
+  "senses": [
+    {
+      "senseId": "w:ray-of-hope#s1",
+      "pos": "短语",
+      "glossZh": "一线希望",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:ray-of-hope#e-42b034d9e9950288",
+          "text": "In 1999, the station rescued 7 injured red-crowned cranes from the wild, which brought a crucial ray of hope for the program.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 108
+          },
+          "parts": [
+            [
+              97,
+              108
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              108
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

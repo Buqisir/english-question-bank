@@ -1,0 +1,171 @@
+{
+  "entryId": "w:get-used-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "get used",
+    "getting used to"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "used",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "used",
+        "to"
+      ],
+      [
+        "getting",
+        "used",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "got used to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get used to",
+  "senses": [
+    {
+      "senseId": "w:get-used-to#s1",
+      "pos": "短语",
+      "glossZh": "逐渐习惯；慢慢适应",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:get#s45",
+        "w:to#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:get-used-to#e-4c0a8f4a986904fb",
+          "text": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 59
+          },
+          "parts": [
+            [
+              48,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-used-to#e-17cd655104decf1e",
+          "text": "It took me nearly a year of practice to get used to holding",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b:13",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 51
+          },
+          "parts": [
+            [
+              40,
+              51
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              51
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-used-to#e-53cff6c194b0f16a",
+          "text": "“In the real world there are all kinds of social cues that kids have to both interpret and get used to and learn how to respond to,” Robb pointed out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 102
+          },
+          "parts": [
+            [
+              91,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              91,
+              102
+            ]
+          ]
+        }
+      ],
+      "note": "to 后接名词、代词或动名词。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

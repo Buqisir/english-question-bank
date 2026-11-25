@@ -1,0 +1,91 @@
+{
+  "entryId": "w:nine-lives",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "nine",
+      "lives"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "nine",
+        "lives"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "nine lives",
+  "senses": [
+    {
+      "senseId": "w:nine-lives#s1",
+      "pos": "短语",
+      "glossZh": "九条命（形容命硬，能多次脱险）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:nine-lives#e-2a2af2109f1707a0",
+          "text": "7 Some say this animal has nine lives",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-application",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-application:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        }
+      ],
+      "note": "源于猫有九条命的说法。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

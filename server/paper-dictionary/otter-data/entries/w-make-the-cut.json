@@ -1,0 +1,77 @@
+{
+  "entryId": "w:make-the-cut",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes the cut"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "the",
+      "cut"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "the",
+        "cut"
+      ],
+      [
+        "makes",
+        "the",
+        "cut"
+      ],
+      [
+        "made",
+        "the",
+        "cut"
+      ],
+      [
+        "making",
+        "the",
+        "cut"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make the cut",
+  "senses": [
+    {
+      "senseId": "w:make-the-cut#s1",
+      "pos": "短语",
+      "glossZh": "达到标准而入选；通过选拔",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

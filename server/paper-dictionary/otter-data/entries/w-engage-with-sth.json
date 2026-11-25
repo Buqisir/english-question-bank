@@ -1,0 +1,280 @@
+{
+  "entryId": "w:engage-with-sth",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "engage",
+      "with",
+      {
+        "slot": "sth"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "engage",
+        "with",
+        {
+          "slot": "sth"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "engage with",
+      "tags": []
+    },
+    {
+      "form": "engaged with",
+      "tags": []
+    },
+    {
+      "form": "engaging with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "engage with sb/sth",
+  "senses": [
+    {
+      "senseId": "w:engage-with-sth#s1",
+      "pos": "短语",
+      "glossZh": "主动接触；认真探究（主题、内容等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:engage#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:engage-with-sth#e-fd3dd1bda43ee469",
+          "text": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 53
+          },
+          "parts": [
+            [
+              40,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-with-sth#e-817f6367d7217705",
+          "text": "Efforts to simply encourage adults to engage with nature are often insufficient for lasting change.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 49
+          },
+          "parts": [
+            [
+              38,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              49
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-with-sth#e-7e7315ffeae836e8",
+          "text": "The more we avoid engaging with any content that causes rage in us, the less it will be presented to us.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 31
+          },
+          "parts": [
+            [
+              18,
+              31
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              31
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 32
+      }
+    },
+    {
+      "senseId": "w:engage-with-sth#s2",
+      "pos": "短语",
+      "glossZh": "与……交流互动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:engage-with-sth#e-8e63155969f170e8",
+          "text": "Great reminder for us all to put those phones down and engage with our kids more,” Tracy Jenkins posted.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 66
+          },
+          "parts": [
+            [
+              55,
+              66
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              66
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-with-sth#e-452612bd1885b59e",
+          "text": "Engage with our knowledgeable guides and explore the National Fruit Collection.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          },
+          "parts": [
+            [
+              0,
+              11
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              11
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:engage-with-sth#e-096252b0bc04bb4e",
+          "text": "Instead, we would engage with their voices as well as instruct them.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          },
+          "parts": [
+            [
+              18,
+              29
+            ]
+          ],
+          "highlightRanges": [
+            [
+              18,
+              29
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

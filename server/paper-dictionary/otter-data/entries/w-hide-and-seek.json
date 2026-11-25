@@ -1,0 +1,95 @@
+{
+  "entryId": "w:hide-and-seek",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "hide",
+      "and",
+      "seek"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hide",
+        "and",
+        "seek"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hide and seek",
+  "senses": [
+    {
+      "senseId": "w:hide-and-seek#s1",
+      "pos": "短语",
+      "glossZh": "捉迷藏",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:hide#s3",
+        "w:seek#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:hide-and-seek#e-6cc42ae27c98723f",
+          "text": "Young children across the globe enjoy playing games of hide and seek.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 68
+          },
+          "parts": [
+            [
+              55,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              55,
+              68
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

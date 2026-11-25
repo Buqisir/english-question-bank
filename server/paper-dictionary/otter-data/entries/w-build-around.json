@@ -1,0 +1,129 @@
+{
+  "entryId": "w:build-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "build",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "build",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "built around",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "build sth around sth",
+  "senses": [
+    {
+      "senseId": "w:build-around#s1",
+      "pos": "短语",
+      "glossZh": "以……为核心来构建或组织",
+      "note": "常见被动形式 be built around sth。",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:build#s3"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:build-around#e-1d4a8fead004f410",
+          "text": "This reveals a deeper loss – commercially dominant, hard-skinned varieties are “more fitting for long-distance transportation,” sacrificing flavor and the community life once built around fresh markets.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 175,
+            "end": 187
+          },
+          "parts": [
+            [
+              175,
+              187
+            ]
+          ],
+          "highlightRanges": [
+            [
+              175,
+              187
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:build-around#e-881004d28c424aad",
+          "text": "Yale Young Global Scholars (YYGS) is one of the most globally diverse, two-week academic summer programs in the world, with its curriculum built around collaboration, exposing participants to innovative topics.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 151
+          },
+          "parts": [
+            [
+              139,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              139,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

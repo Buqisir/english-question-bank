@@ -61,7 +61,7 @@
   },
   "unassignedCounts": {
     "gaokao": 3,
-    "mock": 393
+    "mock": 203
   },
   "senses": [
     {
@@ -73,7 +73,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 52,
-        "mock": 0
+        "mock": 187
       },
       "folded": false,
       "examples": [
@@ -141,27 +141,46 @@
       "pos": "adj.",
       "glossZh": "舒适的；安逸的；随和的",
       "pronunciationId": "w:easy#p-main",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 2
       },
-      "folded": true,
+      "folded": false,
       "examples": []
     },
     {
-      "senseId": "w:easy#s3",
-      "pos": "短语",
-      "glossZh": "放松；别紧张；别太劳累",
+      "senseId": "w:easy#s4",
+      "pos": "interj.",
+      "glossZh": "慢点；别急",
       "pronunciationId": "w:easy#p-main",
-      "note": "take it easy。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:easy#e-4e69b0c1063f49ca",
+          "text": "“Easy there, son,” he said firmly, “The soup deserves your whole heart, so does the moment with all of us.”",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 5
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -170,6 +189,11 @@
       "reason": "同形专名或专门用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:take-it-easy"
+  ]
 }

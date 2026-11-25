@@ -1,0 +1,122 @@
+{
+  "entryId": "w:make-a-statement",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes a statement"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "a",
+      "statement"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "a",
+        "statement"
+      ],
+      [
+        "makes",
+        "a",
+        "statement"
+      ],
+      [
+        "made",
+        "a",
+        "statement"
+      ],
+      [
+        "making",
+        "a",
+        "statement"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make a statement",
+  "senses": [
+    {
+      "senseId": "w:make-a-statement#s1",
+      "pos": "短语",
+      "glossZh": "作出陈述；发表声明",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-a-statement#e-6e573a6df4737f6a",
+          "text": "Someone makes a statement, and you know it is not true.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 25
+          },
+          "parts": [
+            [
+              8,
+              25
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              25
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:make-a-statement#s2",
+      "pos": "短语",
+      "glossZh": "以醒目的选择或举动表现个性或立场",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

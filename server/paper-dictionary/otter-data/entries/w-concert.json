@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 66
+    "mock": 0
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 11,
-        "mock": 0
+        "mock": 66
       },
       "folded": false,
       "examples": [
@@ -116,20 +116,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:concert#s2",
-      "pos": "短语",
-      "glossZh": "一起；协同行动",
-      "pronunciationId": "w:concert#p-main",
-      "note": "in concert (with)。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -138,6 +124,12 @@
       "reason": "不常见的动词用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-concert",
+    "w:in-concert-with"
+  ]
 }

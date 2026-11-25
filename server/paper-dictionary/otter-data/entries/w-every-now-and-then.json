@@ -1,0 +1,127 @@
+{
+  "entryId": "w:every-now-and-then",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "every",
+      "now",
+      "and",
+      "then"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "every",
+        "now",
+        "and",
+        "then"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "every now and then",
+  "senses": [
+    {
+      "senseId": "w:every-now-and-then#s1",
+      "pos": "固定短语",
+      "glossZh": "偶尔；不时",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:every#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:every-now-and-then#e-fa006a71a5dfabe4",
+          "text": "To stay warm, she ran her engine for a few minutes every now and then.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 69
+          },
+          "parts": [
+            [
+              51,
+              69
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              69
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:every-now-and-then#e-4ec2bd8be0a37364",
+          "text": "“Bad weather happens everywhere,” she said, “Every now and then, on Twitter, you’ll see people saying, why do you live there?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 63
+          },
+          "parts": [
+            [
+              45,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              45,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

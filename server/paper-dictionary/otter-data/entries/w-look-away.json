@@ -1,0 +1,185 @@
+{
+  "entryId": "w:look-away",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "looking away"
+  ],
+  "pattern": {
+    "tokens": [
+      "look",
+      "away"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "look",
+        "away"
+      ],
+      [
+        "looking",
+        "away"
+      ],
+      [
+        "looked",
+        "away"
+      ],
+      [
+        "looks",
+        "away"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "looked away",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "look away",
+  "senses": [
+    {
+      "senseId": "w:look-away#s1",
+      "pos": "短语",
+      "glossZh": "移开视线；转过脸去",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:look-away#e-27cef8d3b526960e",
+          "text": "Traditional physical buttons allow drivers to operate controls without looking away from the road.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 83
+          },
+          "parts": [
+            [
+              71,
+              83
+            ]
+          ],
+          "highlightRanges": [
+            [
+              71,
+              83
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-away#e-42954ffe3844cc10",
+          "text": "They also did something rare: they made eye-to-eye, face-to-face contact for almost a full minute without looking away.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-b:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 118
+          },
+          "parts": [
+            [
+              106,
+              118
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              118
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:look-away#e-25519678c6413476",
+          "text": "For your breaks, look away from a screen, move your head, eyes, and stretch.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "可接 from sb/sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    },
+    {
+      "senseId": "w:look-away#s2",
+      "pos": "短语",
+      "glossZh": "对问题视而不见；逃避面对",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

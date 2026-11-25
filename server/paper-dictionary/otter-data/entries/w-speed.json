@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 2,
-    "mock": 235
+    "mock": 41
   },
   "senses": [
     {
@@ -78,7 +78,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 149
       },
       "folded": false,
       "examples": [
@@ -149,7 +149,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 2,
-        "mock": 0
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -196,7 +196,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 12,
-        "mock": 0
+        "mock": 39
       },
       "folded": false,
       "examples": [
@@ -266,6 +266,10 @@
       "reason": "专业用语或俗称"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:pick-up-speed",
+    "w:speed-up"
+  ]
 }

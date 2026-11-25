@@ -1,0 +1,75 @@
+{
+  "entryId": "w:feel-the-burn",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "feel",
+      "the",
+      "burn"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "feel",
+        "the",
+        "burn"
+      ],
+      [
+        "feeling",
+        "the",
+        "burn"
+      ],
+      [
+        "feels",
+        "the",
+        "burn"
+      ],
+      [
+        "felt",
+        "the",
+        "burn"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "feel the burn",
+  "senses": [
+    {
+      "senseId": "w:feel-the-burn#s1",
+      "pos": "短语",
+      "glossZh": "感到运动时肌肉发热、灼痛",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

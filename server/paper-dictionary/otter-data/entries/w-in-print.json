@@ -1,0 +1,168 @@
+{
+  "entryId": "w:in-print",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "print"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "print"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in print",
+  "senses": [
+    {
+      "senseId": "w:in-print#s1",
+      "pos": "短语",
+      "glossZh": "以印刷形式；以纸质版呈现",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:in#s84"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:in-print#e-461e8ba03528fc35",
+          "text": "Digital texts, audio and video all have educational roles, especially when providing resources not available in print.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 117
+          },
+          "parts": [
+            [
+              109,
+              117
+            ]
+          ],
+          "highlightRanges": [
+            [
+              109,
+              117
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-print#e-9a562e6acde899a9",
+          "text": "With such a large and engaged audience, there are very few other places on the web or in print where more people will read your poem over time!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 94
+          },
+          "parts": [
+            [
+              86,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              94
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-print#e-e421d43073ef3b91",
+          "text": "His article was published in print as proposed.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:26#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          },
+          "parts": [
+            [
+              26,
+              34
+            ]
+          ],
+          "highlightRanges": [
+            [
+              26,
+              34
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:in-print#s2",
+      "pos": "短语",
+      "glossZh": "（书籍）仍在发行；仍可买到",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,161 @@
+{
+  "entryId": "w:by-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "by themselves"
+  ],
+  "pattern": {
+    "tokens": [
+      "by",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "by",
+        "oneself"
+      ],
+      [
+        "by",
+        "themselves"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "by oneself",
+  "senses": [
+    {
+      "senseId": "w:by-oneself#s1",
+      "pos": "短语",
+      "glossZh": "独自；自行（不靠帮助或干预）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:by#s9",
+        "w:themselves#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:by-oneself#e-93fb4372692cefe5",
+          "text": "What is a benefit of decorating a house by oneself?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 50
+          },
+          "parts": [
+            [
+              40,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              40,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-oneself#e-1863b3f5d1124505",
+          "text": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 101
+          },
+          "parts": [
+            [
+              88,
+              101
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              101
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:by-oneself#e-3eeabbd385e95be7",
+          "text": "What should volunteers bring by themselves?",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 42
+          },
+          "parts": [
+            [
+              29,
+              42
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              42
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

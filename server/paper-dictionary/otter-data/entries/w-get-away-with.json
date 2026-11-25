@@ -1,0 +1,147 @@
+{
+  "entryId": "w:get-away-with",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "get",
+      "away",
+      "with"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "away",
+        "with"
+      ],
+      [
+        "gets",
+        "away",
+        "with"
+      ],
+      [
+        "getting",
+        "away",
+        "with"
+      ],
+      [
+        "got",
+        "away",
+        "with"
+      ],
+      [
+        "gotten",
+        "away",
+        "with"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "get away with",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get away with sth",
+  "senses": [
+    {
+      "senseId": "w:get-away-with#s2",
+      "pos": "短语",
+      "glossZh": "携带（偷来的东西等）逃走",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-away-with#e-89b722b3cf64ade0",
+          "text": "Thinking that the man might get away with whatever he wanted before the police arrived, Kevin decided to do something.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 41
+          },
+          "parts": [
+            [
+              28,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              28,
+              41
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-away-with#s1",
+      "pos": "短语",
+      "glossZh": "做了错事却逃过惩罚；做了坏事也没被追究",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:away#s11",
+        "w:get#s30",
+        "w:with#s32"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-away-with#s3",
+      "pos": "短语",
+      "glossZh": "用较简便或不够完善的办法应付过去",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,72 @@
+{
+  "entryId": "w:too-bad",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "too",
+      "bad"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "too",
+        "bad"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "too bad",
+  "senses": [
+    {
+      "senseId": "w:too-bad#s1",
+      "pos": "短语",
+      "glossZh": "真遗憾；太可惜了",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "可单独使用，也可用 (it's) too bad (that) 引出令人遗憾的事。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:too-bad#s2",
+      "pos": "短语",
+      "glossZh": "那也没办法；那又怎样（冷淡地回应抱怨）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

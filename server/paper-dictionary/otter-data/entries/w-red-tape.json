@@ -1,0 +1,92 @@
+{
+  "entryId": "w:red-tape",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "red",
+      "tape"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "red",
+        "tape"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "red tape",
+  "senses": [
+    {
+      "senseId": "w:red-tape#s1",
+      "pos": "短语",
+      "glossZh": "繁琐的官僚手续",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:tape#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:red-tape#e-ff189af3e44ce152",
+          "text": "After years of development, protest and regulatory red tape, the first genetically modified (转基因的), non-browning apples under the brand Arctic Apple, will soon go on sale in the United States.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 59
+          },
+          "parts": [
+            [
+              51,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              51,
+              59
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

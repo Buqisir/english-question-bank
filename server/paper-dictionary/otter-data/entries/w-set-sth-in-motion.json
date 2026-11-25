@@ -1,0 +1,113 @@
+{
+  "entryId": "w:set-sth-in-motion",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "set",
+      {
+        "slot": "sth"
+      },
+      "in",
+      "motion"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "set",
+        {
+          "slot": "sth"
+        },
+        "in",
+        "motion"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "set in motion",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "set sth in motion",
+  "senses": [
+    {
+      "senseId": "w:set-sth-in-motion#s1",
+      "pos": "短语",
+      "glossZh": "使开始运转；启动（计划、进程等）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:motion#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:set-sth-in-motion#e-ea2f21ed4fb413fc",
+          "text": "With a heart full of excitement, I set my plan in motion.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 56
+          },
+          "parts": [
+            [
+              35,
+              38
+            ],
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              35,
+              38
+            ],
+            [
+              47,
+              56
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,84 @@
+{
+  "entryId": "w:count-in",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "count",
+      "in"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "count",
+        "in"
+      ],
+      [
+        "counted",
+        "in"
+      ],
+      [
+        "counting",
+        "in"
+      ],
+      [
+        "counts",
+        "in"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "count sb in",
+  "senses": [
+    {
+      "senseId": "w:count-in#s1",
+      "pos": "短语",
+      "glossZh": "把某人算作参加者；让某人也参加",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "Count me in. 表示“算我一个”。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:count-in#s2",
+      "pos": "短语",
+      "glossZh": "数拍子示意演奏者开始",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

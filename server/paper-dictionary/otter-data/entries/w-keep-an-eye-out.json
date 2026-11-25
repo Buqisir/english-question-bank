@@ -1,0 +1,118 @@
+{
+  "entryId": "w:keep-an-eye-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "an",
+      "eye",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "an",
+        "eye",
+        "out"
+      ],
+      [
+        "keeping",
+        "an",
+        "eye",
+        "out"
+      ],
+      [
+        "keeps",
+        "an",
+        "eye",
+        "out"
+      ],
+      [
+        "kept",
+        "an",
+        "eye",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "keep an eye out",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep an eye out (for sb/sth)",
+  "senses": [
+    {
+      "senseId": "w:keep-an-eye-out#s1",
+      "pos": "短语",
+      "glossZh": "留心某人或某物是否出现；留意寻找",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:keep-an-eye-out#e-8320cc64f447656a",
+          "text": "Keep an eye out for them.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:36#option=A",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

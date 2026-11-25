@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 13,
-    "mock": 145
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 23
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 3
       },
       "folded": false,
       "examples": [
@@ -149,6 +149,77 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:saying#s3",
+      "pos": "v.",
+      "glossZh": "说；表达",
+      "pronunciationId": "w:saying#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 120
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:saying#e-23a300ffe0139329",
+          "text": "Saying street names are markers of history attracts two types of criticism.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:saying#e-3b377436d8387177",
+          "text": "It’s like me saying to you, “Please give me $10,000; otherwise, I’m going to go to my car dealer and buy a big, gas-heavy SUV.” It’s just silly.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:saying#e-f5b96f0c78d586ef",
+          "text": "Students, parents, and teachers from Colombo schools joined forces against us, saying they wouldn’t allow the cup to be taken out of Colombo.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 85
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -157,6 +228,9 @@
       "reason": "屈折动词用法归入 say"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "relatedPhrases": [
+    "w:as-the-saying-goes"
+  ]
 }

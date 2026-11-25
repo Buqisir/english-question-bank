@@ -1,0 +1,189 @@
+{
+  "entryId": "w:turn-the-page",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "turning the page"
+  ],
+  "pattern": {
+    "tokens": [
+      "turn",
+      "the",
+      "page"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "turn",
+        "the",
+        "page"
+      ],
+      [
+        "turning",
+        "the",
+        "page"
+      ],
+      [
+        "turned",
+        "the",
+        "page"
+      ],
+      [
+        "turns",
+        "the",
+        "page"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "turned the page",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "turn the page",
+  "senses": [
+    {
+      "senseId": "w:turn-the-page#s1",
+      "pos": "短语",
+      "glossZh": "翻到下一页",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:turn-the-page#e-a51eae8f8afe8d06",
+          "text": "Then I turned the page and continued.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 22
+          },
+          "parts": [
+            [
+              7,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              22
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-the-page#e-3c703e58c8c5f271",
+          "text": "“I was turning the page to get ready for the next page, but the draft wind from the turn caused the spare pages to fall off the stand,” Mr Titterton said, “Luckily I was able to catch them and put them back.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 23
+          },
+          "parts": [
+            [
+              7,
+              23
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              23
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:turn-the-page#e-5ba8720f6a3272d7",
+          "text": "Then I turned the page to where I’d started another list: New Things I Love.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 22
+          },
+          "parts": [
+            [
+              7,
+              22
+            ]
+          ],
+          "highlightRanges": [
+            [
+              7,
+              22
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:turn-the-page#s2",
+      "pos": "短语",
+      "glossZh": "告别过去，进入新阶段",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -42,8 +42,8 @@
     "mock": 92
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 92
+    "gaokao": 6,
+    "mock": 88
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -80,73 +80,34 @@
       ]
     },
     {
-      "senseId": "w:instance#s2",
-      "pos": "短语",
-      "glossZh": "例如",
+      "senseId": "w:instance#s3",
+      "pos": "n.",
+      "glossZh": "（软件的）实例",
       "pronunciationId": "w:instance#p-main",
-      "note": "for instance。",
-      "origin": "gaokao",
+      "origin": "mock",
       "counts": {
-        "gaokao": 6,
-        "mock": 0
+        "gaokao": 0,
+        "mock": 2
       },
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:instance#e-78484212f3d49ad7",
-          "text": "For instance, the average obtained from the estimates of four discussion groups of five was significantly more accurate than the average obtained from 20 independent individuals.",
+          "exampleId": "w:instance#e-b1fa3f41b9759e9e",
+          "text": "To investigate these risks, researchers conducted controlled experiments with six OpenClaw instances, each given email access and maximum system permissions.",
           "source": {
-            "paperId": "paper-gaokao-2023-i",
-            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-c",
             "locator": {
               "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
-              "sentence": 3
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-c:3",
+              "sentence": 1
             }
           },
-          "tier": "gaokao",
+          "tier": "mock",
           "target": {
-            "start": 4,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:instance#e-024676e40c9d0f4e",
-          "text": "My given name Qiuyu（秋雨）, for instance, happened to be a great challenge for many of them.",
-          "source": {
-            "paperId": "paper-gaokao-2025-ii",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 37
-          }
-        },
-        {
-          "exampleId": "w:instance#e-6f4e35402d0a113e",
-          "text": "For instance, interactive exhibits powered by AI can adjust their content and difficulty level based on the user’s preferences and responses.",
-          "source": {
-            "paperId": "paper-gaokao-2026-i",
-            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
-            "groupId": "group:paper-gaokao-2026-i:seven-choices",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
-              "sentence": 2
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 11,
-            "end": 19
+            "start": 91,
+            "end": 100
           }
         }
       ]
@@ -158,6 +119,11 @@
       "reason": "行业术语"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:for-instance"
+  ]
 }

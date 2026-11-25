@@ -1,0 +1,107 @@
+{
+  "entryId": "w:spread-the-word",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "spread",
+      "the",
+      "word"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "spread",
+        "the",
+        "word"
+      ],
+      [
+        "spreading",
+        "the",
+        "word"
+      ],
+      [
+        "spreads",
+        "the",
+        "word"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "spreading the word",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "spread the word",
+  "senses": [
+    {
+      "senseId": "w:spread-the-word#s1",
+      "pos": "短语",
+      "glossZh": "把消息传播开来；让更多人知道",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:spread-the-word#e-7d6b7f650ab8e81f",
+          "text": "By hosting workshops, farm tours, and speaking at events, Saroni is spreading the word and inspiring others to follow in his footsteps, paving the way for a greener, more sustainable future in farming.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 86
+          },
+          "parts": [
+            [
+              68,
+              86
+            ]
+          ],
+          "highlightRanges": [
+            [
+              68,
+              86
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,271 @@
+{
+  "entryId": "w:try-sth-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "try on",
+    "trying on"
+  ],
+  "pattern": {
+    "tokens": [
+      "try",
+      {
+        "slot": "sth"
+      },
+      "on"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "try",
+        {
+          "slot": "sth"
+        },
+        "on"
+      ],
+      [
+        "try",
+        "on"
+      ],
+      [
+        "try",
+        {
+          "slot": "sb/sth"
+        },
+        "on"
+      ],
+      [
+        "trying",
+        "on"
+      ],
+      [
+        "tried",
+        "on"
+      ],
+      [
+        "tries",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "try sth on",
+  "senses": [
+    {
+      "senseId": "w:try-sth-on#s1",
+      "pos": "短语",
+      "glossZh": "试穿（衣服、鞋子等）；试戴（饰品等）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:try#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:try-sth-on#e-46839c3a4e028c30",
+          "text": "Place a few mirrors around your room so people can see how things look when they try them on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 92
+          },
+          "parts": [
+            [
+              81,
+              84
+            ],
+            [
+              90,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              81,
+              84
+            ],
+            [
+              90,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-sth-on#e-f5dfa91859b48ee2",
+          "text": "Try on some dresses.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          },
+          "parts": [
+            [
+              0,
+              6
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-sth-on#e-096b63ca4ed7dabb",
+          "text": "One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 71
+          },
+          "parts": [
+            [
+              65,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              65,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:try-sth-on#s2",
+      "pos": "短语",
+      "glossZh": "试着体验（某种身份或角色）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:try-sth-on#e-13caa751e964606e",
+          "text": "But it’s also true that teenagers are actively trying on and ultimately forming different identities for themselves.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          },
+          "parts": [
+            [
+              47,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:try-sth-on#e-dbbbdce5f36a71b3",
+          "text": "But it’s also true that during adolescence, kids are actively trying on and ultimately forming different identities for themselves.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          },
+          "parts": [
+            [
+              62,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              62,
+              71
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

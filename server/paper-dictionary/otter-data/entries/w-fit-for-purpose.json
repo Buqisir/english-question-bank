@@ -1,0 +1,105 @@
+{
+  "entryId": "w:fit-for-purpose",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fit",
+      "for",
+      "purpose"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fit",
+        "for",
+        "purpose"
+      ],
+      [
+        "more",
+        "fit",
+        "for",
+        "purpose"
+      ],
+      [
+        "most",
+        "fit",
+        "for",
+        "purpose"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fit for purpose",
+  "senses": [
+    {
+      "senseId": "w:fit-for-purpose#s1",
+      "pos": "短语",
+      "glossZh": "符合预定用途；满足实际使用要求",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:fit-for-purpose#e-68a16af6ba09ae2b",
+          "text": "They said the system was not fit for purpose.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:36#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 44
+          },
+          "parts": [
+            [
+              29,
+              44
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              44
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

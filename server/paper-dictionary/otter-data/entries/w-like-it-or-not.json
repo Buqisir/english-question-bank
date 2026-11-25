@@ -1,0 +1,95 @@
+{
+  "entryId": "w:like-it-or-not",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "like",
+      "it",
+      "or",
+      "not"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "like",
+        "it",
+        "or",
+        "not"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "like it or not",
+  "senses": [
+    {
+      "senseId": "w:like-it-or-not#s1",
+      "pos": "短语",
+      "glossZh": "不管愿不愿意；无论是否喜欢",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:like-it-or-not#e-8edbf99ba2e94a12",
+          "text": "They’re showing up on the calendar whether we like it or not.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 60
+          },
+          "parts": [
+            [
+              46,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              60
+            ]
+          ]
+        }
+      ],
+      "note": "可用 whether we/you/they like it or not。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

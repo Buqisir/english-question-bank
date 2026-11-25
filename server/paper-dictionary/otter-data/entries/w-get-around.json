@@ -1,0 +1,288 @@
+{
+  "entryId": "w:get-around",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "getting around",
+    "got around"
+  ],
+  "pattern": {
+    "tokens": [
+      "get",
+      "around"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "get",
+        "around"
+      ],
+      [
+        "getting",
+        "around"
+      ],
+      [
+        "got",
+        "around"
+      ],
+      [
+        "gets",
+        "around"
+      ],
+      [
+        "gotten",
+        "around"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "get around",
+  "senses": [
+    {
+      "senseId": "w:get-around#s1",
+      "pos": "短语",
+      "glossZh": "四处走动；到各处出行",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-around#e-ed53140ce00e968a",
+          "text": "Having a poor sense of direction, Eva found it impossible to get around in such a huge building.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 71
+          },
+          "parts": [
+            [
+              61,
+              71
+            ]
+          ],
+          "highlightRanges": [
+            [
+              61,
+              71
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-around#e-19060c1412718bc1",
+          "text": "Getting around: The best way to get around is by car; there is no public transportation.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 14
+          },
+          "parts": [
+            [
+              0,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              14
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:get-around#e-2e0fc287965c5252",
+          "text": "Although the bridges are already popular on land, Lear says little attention has been paid to the idea of wildlife crossings designed to help ocean animals get around safely.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 166
+          },
+          "parts": [
+            [
+              156,
+              166
+            ]
+          ],
+          "highlightRanges": [
+            [
+              156,
+              166
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      }
+    },
+    {
+      "senseId": "w:get-around#s2",
+      "pos": "短语",
+      "glossZh": "绕过（障碍物）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-around#e-f66cd809220dbd35",
+          "text": "To Lear, this discovery supported a surprising new idea that ocean animals, much like land species, need a helping hand getting around human-built structures.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 134
+          },
+          "parts": [
+            [
+              120,
+              134
+            ]
+          ],
+          "highlightRanges": [
+            [
+              120,
+              134
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:get-around#s3",
+      "pos": "短语",
+      "glossZh": "设法绕开（问题、规定或限制）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:get-around#e-ca74ac28d9e0a979",
+          "text": "One way to get around this problem is to conduct large, randomized controlled trials, which involve randomly assigning participants to different groups to control variables.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          },
+          "parts": [
+            [
+              11,
+              21
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              21
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:get-around#s4",
+      "pos": "短语",
+      "glossZh": "（消息）传开",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:get-around#s5",
+      "pos": "短语",
+      "glossZh": "与多人发生性关系",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "非正式用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

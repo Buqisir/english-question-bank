@@ -1,0 +1,61 @@
+{
+  "entryId": "w:brush-aside",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "brush",
+      "aside"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "brush",
+        "aside"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "brush sb/sth aside",
+  "senses": [
+    {
+      "senseId": "w:brush-aside#s1",
+      "pos": "动词短语",
+      "glossZh": "不理会；对……置之不理",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:brush#s4"
+      ],
+      "examples": [],
+      "note": "常指不理会异议、批评或顾虑。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

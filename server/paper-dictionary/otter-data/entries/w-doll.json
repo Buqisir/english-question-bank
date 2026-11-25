@@ -48,7 +48,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 34
+    "mock": 2
   },
   "senses": [
     {
@@ -59,7 +59,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 35
       },
       "folded": false,
       "examples": [
@@ -121,20 +121,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:doll#s2",
-      "pos": "短语",
-      "glossZh": "把某人打扮得漂漂亮亮",
-      "pronunciationId": "w:doll#p-main",
-      "note": "doll sb up，常用 be/get dolled up。",
-      "origin": "dictionary",
-      "counts": {
-        "gaokao": 0,
-        "mock": 0
-      },
-      "folded": true,
-      "examples": []
     }
   ],
   "droppedSenses": [
@@ -143,6 +129,11 @@
       "reason": "同形专名、俚语或行业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "mock",
+  "folded": false,
+  "relatedPhrases": [
+    "w:doll-sb-up"
+  ]
 }

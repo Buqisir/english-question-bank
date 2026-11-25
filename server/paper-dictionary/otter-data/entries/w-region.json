@@ -43,7 +43,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 117
+    "mock": 2
   },
   "senses": [
     {
@@ -54,7 +54,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 6,
-        "mock": 0
+        "mock": 84
       },
       "folded": false,
       "examples": [
@@ -125,7 +125,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 32
       },
       "folded": false,
       "examples": [
@@ -170,18 +170,37 @@
       ]
     },
     {
-      "senseId": "w:region#s3",
-      "pos": "短语",
-      "glossZh": "大约",
+      "senseId": "w:region#s4",
+      "pos": "n.",
+      "glossZh": "（基因组等结构的）区段",
       "pronunciationId": "w:region#p-main",
-      "note": "in the region of。",
-      "origin": "dictionary",
+      "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 0
+        "mock": 1
       },
-      "folded": true,
-      "examples": []
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:region#e-6debb1011a7bb7b6",
+          "text": "The second group, meanwhile, contributed around 20% of the genes, many of which are located far away from the functional regions of the genome.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -190,6 +209,11 @@
       "reason": "旧式天文学专业用法"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:in-the-region-of"
+  ]
 }

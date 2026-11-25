@@ -1,0 +1,157 @@
+{
+  "entryId": "w:in-the-hope-of",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "in",
+      "the",
+      "hope",
+      "of"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "in",
+        "the",
+        "hope",
+        "of"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "in the hope of",
+  "senses": [
+    {
+      "senseId": "w:in-the-hope-of#s1",
+      "pos": "短语",
+      "glossZh": "希望能……；抱着……的希望",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:in-the-hope-of#e-99d1dfe98c9aec90",
+          "text": "Deep in the jungle, a lone female sings each morning, in the hope of winning a life-long partner.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 68
+          },
+          "parts": [
+            [
+              54,
+              68
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              68
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-hope-of#e-4fc98ddb70311a3c",
+          "text": "He has already taken the initiative to educate local fire stations on safe bee removal, in the hope of saving local hives.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 102
+          },
+          "parts": [
+            [
+              88,
+              102
+            ]
+          ],
+          "highlightRanges": [
+            [
+              88,
+              102
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:in-the-hope-of#e-49d5e7f8a419037a",
+          "text": "Secretly, a seed was planted in her heart and she stretched out her hands in the hope of keeping the coin and creating her little magic.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 88
+          },
+          "parts": [
+            [
+              74,
+              88
+            ]
+          ],
+          "highlightRanges": [
+            [
+              74,
+              88
+            ]
+          ]
+        }
+      ],
+      "note": "常接动名词，说明行动的目的。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

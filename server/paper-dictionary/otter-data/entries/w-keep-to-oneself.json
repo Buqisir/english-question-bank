@@ -1,0 +1,62 @@
+{
+  "entryId": "w:keep-to-oneself",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "keep",
+      "to",
+      "oneself"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "keep",
+        "to",
+        "oneself"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "keep to oneself",
+  "senses": [
+    {
+      "senseId": "w:keep-to-oneself#s1",
+      "pos": "短语",
+      "glossZh": "独来独往；很少与人交往",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:keep#s17"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

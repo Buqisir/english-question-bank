@@ -1,0 +1,336 @@
+{
+  "entryId": "w:give-up",
+  "headword": "give (sth) up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "gave up",
+    "give it up",
+    "gives up",
+    "giving up"
+  ],
+  "pattern": {
+    "tokens": [
+      "give",
+      "up"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "give",
+        "up"
+      ],
+      [
+        "give",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "gave",
+        "up"
+      ],
+      [
+        "gives",
+        "up"
+      ],
+      [
+        "giving",
+        "up"
+      ],
+      [
+        "given",
+        "up"
+      ],
+      [
+        "gave",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "gives",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "giving",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ],
+      [
+        "given",
+        {
+          "slot": "sth"
+        },
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "give up",
+      "tags": []
+    },
+    {
+      "form": "given up",
+      "tags": []
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 70
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:give-up#s1",
+      "pos": "短语",
+      "glossZh": "放弃；不再尝试",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 34
+      },
+      "folded": false,
+      "legacySenseIds": [
+        "w:give#s10",
+        "w:up#s9"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:give-up#e-d99ee767adec9242",
+          "text": "A study recently published by Science found that as young as age six, girls are less likely than boys to say that members of their gender(性别)are “really, really smart.” Even worse, the study found that girls act on that belief: Around age six they start to avoid activities said to be for children who are “really, really smart.” Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 402,
+            "end": 409
+          },
+          "parts": [
+            [
+              402,
+              409
+            ]
+          ],
+          "highlightRanges": [
+            [
+              402,
+              409
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-up#e-c7431f8811bab000",
+          "text": "After quickly scanning the labels, I told him I couldn’t find them, expecting him to give up.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          },
+          "parts": [
+            [
+              85,
+              92
+            ]
+          ],
+          "highlightRanges": [
+            [
+              85,
+              92
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-up#e-dbe0934bb6bde79d",
+          "text": "The balloons are slightly deflated (泄气的) to show how hard it was but that she never gave up.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-b:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 91
+          },
+          "parts": [
+            [
+              84,
+              91
+            ]
+          ],
+          "highlightRanges": [
+            [
+              84,
+              91
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "senseId": "w:give-up#s2",
+      "pos": "短语",
+      "glossZh": "停止（习惯、活动）；舍弃",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 36
+      },
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:give-up#e-a56939a6bd9e5572",
+          "text": "Jennifer sacrificed（牺牲）to achieve her goal, giving up many nights with her kids and missing important events to study.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          },
+          "parts": [
+            [
+              44,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              44,
+              53
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-up#e-4e88ee94252167dc",
+          "text": "Within a couple of years, I’d given it up.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 41
+          },
+          "parts": [
+            [
+              30,
+              35
+            ],
+            [
+              39,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              35
+            ],
+            [
+              39,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:give-up#e-7421e40a7f5d34a2",
+          "text": "He gave up his hobby.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-national-a:28#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24",
+  "origin": "gaokao",
+  "folded": false
+}

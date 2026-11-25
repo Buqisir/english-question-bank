@@ -72,7 +72,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 31
+    "mock": 16
   },
   "senses": [
     {
@@ -83,7 +83,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 11
       },
       "folded": false,
       "examples": [
@@ -154,7 +154,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 2
+        "mock": 5
       },
       "folded": false,
       "examples": [
@@ -206,7 +206,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -227,74 +227,6 @@
           "target": {
             "start": 84,
             "end": 90
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shadow#s4",
-      "pos": "短语",
-      "glossZh": "在……的光环下",
-      "pronunciationId": "w:shadow#p-main",
-      "note": "in sb's shadow。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shadow#e-739c5474710a886e",
-          "text": "But he was tired of living in his brother’s shadow.",
-          "source": {
-            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
-            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
-            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:writing-continuation",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:writing-continuation:5",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 44,
-            "end": 50
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:shadow#s5",
-      "pos": "短语",
-      "glossZh": "丝毫",
-      "pronunciationId": "w:shadow#p-main",
-      "note": "a shadow of doubt。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:shadow#e-0431813f40b7fb62",
-          "text": "“The most difficult subjects,” novelist Leo Tolstoy once wrote, “can be explained to the most slow witted (智力的) man if he has not formed any idea of them already; but the simplest thing cannot be made clear to the most intelligent man if he is firmly persuaded that he knows already, without a shadow of doubt, what is laid before him.” __36__ Fortunately, a new paper offers some grounds for optimism, which has uncovered many techniques to open our minds.",
-          "source": {
-            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
-            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
-            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:seven-choices",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:seven-choices:1",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 294,
-            "end": 300
           }
         }
       ]
@@ -370,6 +302,72 @@
       },
       "folded": true,
       "examples": []
+    },
+    {
+      "senseId": "w:shadow#s10",
+      "pos": "v.",
+      "glossZh": "给……蒙上阴影",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-0162c0e4f02443d0",
+          "text": "“When numbers begin to shadow our days, the watch on our wrist can make us forget the body’s gentler signals,” says Dr. Zachary Walston.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s11",
+      "pos": "adj.",
+      "glossZh": "徒有其形的",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-9ed01bb97939b2ac",
+          "text": "Alma always wanted to be a writer, but ended up with a shadow life instead, living and working around books and literature.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -378,6 +376,12 @@
       "reason": "计算机专门义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:a-shadow-of-doubt",
+    "w:in-ones-shadow"
+  ]
 }

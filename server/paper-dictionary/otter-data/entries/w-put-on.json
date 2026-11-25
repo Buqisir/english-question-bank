@@ -1,0 +1,381 @@
+{
+  "entryId": "w:put-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "puts on",
+    "putting on"
+  ],
+  "pattern": {
+    "tokens": [
+      "put",
+      "on"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "put",
+        "on"
+      ],
+      [
+        "put",
+        {
+          "slot": "sb/sth"
+        },
+        "on"
+      ],
+      [
+        "puts",
+        "on"
+      ],
+      [
+        "putting",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "put on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "put (sth) on",
+  "senses": [
+    {
+      "senseId": "w:put-on#s1",
+      "pos": "短语",
+      "glossZh": "露出（笑容等）；做出（某种表情）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-on#e-567801981975849c",
+          "text": "As they came in my direction, I put on my brightest and happiest smile.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          },
+          "parts": [
+            [
+              32,
+              38
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              38
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-on#e-d2a12bef74d2c591",
+          "text": "Instead of feeling comforted, they may feel forced to put on a brave face, which is mentally exhausting.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 60
+          },
+          "parts": [
+            [
+              54,
+              60
+            ]
+          ],
+          "highlightRanges": [
+            [
+              54,
+              60
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:put-on#s2",
+      "pos": "短语",
+      "glossZh": "穿上；戴上",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s13"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-on#e-f3716cec2682d37b",
+          "text": "She put on her scuba gear（水下呼吸器）and jumped into the tank for her usual, underwater sweep.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          },
+          "parts": [
+            [
+              4,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              4,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-on#e-096b63ca4ed7dabb",
+          "text": "One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 157
+          },
+          "parts": [
+            [
+              146,
+              149
+            ],
+            [
+              155,
+              157
+            ]
+          ],
+          "highlightRanges": [
+            [
+              146,
+              149
+            ],
+            [
+              155,
+              157
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-on#e-24f76f6ae5aa6a97",
+          "text": "I put on my headphones and listen to a podcast (播客) or take out a book while I’m on the train.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 8
+          },
+          "parts": [
+            [
+              2,
+              8
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              8
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 13
+      }
+    },
+    {
+      "senseId": "w:put-on#s3",
+      "pos": "短语",
+      "glossZh": "上演；组织演出",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:put#s15"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:put-on#e-198e998bdc9f52c0",
+          "text": "It puts on a play every day.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-national-a:23#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          },
+          "parts": [
+            [
+              3,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              3,
+              10
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:put-on#e-824462c4ed3cf195",
+          "text": "Whenever he put on one of his little performances, Mrs. Carter, the lady next door, would lean over the fence, watching the naughty dog and shaking her head.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          },
+          "parts": [
+            [
+              12,
+              18
+            ]
+          ],
+          "highlightRanges": [
+            [
+              12,
+              18
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:put-on#s4",
+      "pos": "短语",
+      "glossZh": "播放（音乐、影片或节目）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-on#s5",
+      "pos": "短语",
+      "glossZh": "增加（体重）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:put-on#s6",
+      "pos": "短语",
+      "glossZh": "增设（服务）；加开（班车等）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

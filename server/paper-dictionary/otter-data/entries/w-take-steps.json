@@ -1,0 +1,175 @@
+{
+  "entryId": "w:take-steps",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "take",
+      "steps"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "steps"
+      ],
+      [
+        "taken",
+        "steps"
+      ],
+      [
+        "takes",
+        "steps"
+      ],
+      [
+        "taking",
+        "steps"
+      ],
+      [
+        "took",
+        "steps"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taking steps",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take steps",
+  "senses": [
+    {
+      "senseId": "w:take-steps#s1",
+      "pos": "短语",
+      "glossZh": "采取措施；着手行动",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:take-steps#e-fa961a66696469c9",
+          "text": "Governments of areas affected are taking steps to prevent their spread mostly by privately-owned boats.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 46
+          },
+          "parts": [
+            [
+              34,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              46
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-steps#e-235ef28ebec5a761",
+          "text": "It’s about picturing the life we want and then taking steps to make it a reality.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 59
+          },
+          "parts": [
+            [
+              47,
+              59
+            ]
+          ],
+          "highlightRanges": [
+            [
+              47,
+              59
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-steps#e-0e3133d3c3193348",
+          "text": "Take steps to prevent diseases.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          },
+          "parts": [
+            [
+              0,
+              10
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              10
+            ]
+          ]
+        }
+      ],
+      "note": "常用 take steps to do sth。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

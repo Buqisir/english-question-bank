@@ -42,8 +42,8 @@
     "mock": 28
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 27
+    "gaokao": 3,
+    "mock": 15
   },
   "senses": [
     {
@@ -55,7 +55,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -118,78 +118,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:basis#s2",
-      "pos": "短语",
-      "glossZh": "以某种方式；按某个频率",
-      "pronunciationId": "w:basis#p-main",
-      "note": "on a … basis。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 3,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:basis#e-901ad959af106229",
-          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
-          "source": {
-            "paperId": "paper-gaokao-2020-i",
-            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2020-i:seven-choices",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
-              "sentence": 3
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 77,
-            "end": 82
-          }
-        },
-        {
-          "exampleId": "w:basis#e-5435c9da83e3d5c4",
-          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
-          "source": {
-            "paperId": "paper-gaokao-2021-ii",
-            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
-            "groupId": "group:paper-gaokao-2021-ii:reading-a",
-            "locator": {
-              "paragraph": 17,
-              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 115,
-            "end": 120
-          }
-        },
-        {
-          "exampleId": "w:basis#e-3837d7f28abc29e5",
-          "text": "Spaces for these free trial lessons are limited and available on a first-come-first-served basis.",
-          "source": {
-            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
-            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
-            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
-            "locator": {
-              "paragraph": 8,
-              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:8",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 91,
-            "end": 96
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -198,6 +126,12 @@
       "reason": "专业用法。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:on-a-basis",
+    "w:on-the-basis-of"
+  ]
 }

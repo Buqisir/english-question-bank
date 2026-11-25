@@ -1,0 +1,314 @@
+{
+  "entryId": "w:take-on",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "taking on",
+    "took on"
+  ],
+  "pattern": {
+    "tokens": [
+      "take",
+      "on"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "take",
+        "on"
+      ],
+      [
+        "taking",
+        "on"
+      ],
+      [
+        "took",
+        "on"
+      ],
+      [
+        "taken",
+        "on"
+      ],
+      [
+        "takes",
+        "on"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "taken on",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "take on",
+  "senses": [
+    {
+      "senseId": "w:take-on#s1",
+      "pos": "短语",
+      "glossZh": "承担；接手（任务、责任或角色）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s40",
+        "w:take#s41"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-on#e-dd632e55b7f1711a",
+          "text": "Our daughters and I took turns in feeding “Squirt.” Kaytlin took on the most responsibility.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 67
+          },
+          "parts": [
+            [
+              60,
+              67
+            ]
+          ],
+          "highlightRanges": [
+            [
+              60,
+              67
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-on#e-03e4430547ca1937",
+          "text": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          },
+          "parts": [
+            [
+              13,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              13,
+              20
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-on#e-7f96945d4fa28b62",
+          "text": "Over the years, John has taken on many big jobs.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          },
+          "parts": [
+            [
+              25,
+              33
+            ]
+          ],
+          "highlightRanges": [
+            [
+              25,
+              33
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 6,
+        "mock": 21
+      }
+    },
+    {
+      "senseId": "w:take-on#s2",
+      "pos": "短语",
+      "glossZh": "呈现出（新特征）；获得（新含义）",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:take#s41"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:take-on#e-96892cce727ec2ab",
+          "text": "As I grew older and became a mother, the library took on a new place and an added meaning in my life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          },
+          "parts": [
+            [
+              49,
+              56
+            ]
+          ],
+          "highlightRanges": [
+            [
+              49,
+              56
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-on#e-1ed15f1ccd2ee074",
+          "text": "As new technologies take on increasingly humanlike qualities, there’s been a push to make them genderless.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          },
+          "parts": [
+            [
+              20,
+              27
+            ]
+          ],
+          "highlightRanges": [
+            [
+              20,
+              27
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:take-on#e-877c7567fb994626",
+          "text": "After Harry’s highly skilled repairs, the donated bikes took on new looks and functioned very well.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 63
+          },
+          "parts": [
+            [
+              56,
+              63
+            ]
+          ],
+          "highlightRanges": [
+            [
+              56,
+              63
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    },
+    {
+      "senseId": "w:take-on#s3",
+      "pos": "短语",
+      "glossZh": "迎战；与……较量",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:take-on#s4",
+      "pos": "短语",
+      "glossZh": "装载（货物）；搭载（乘客）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

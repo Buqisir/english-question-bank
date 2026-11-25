@@ -1,0 +1,124 @@
+{
+  "entryId": "w:touch-down",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "touch",
+      "down"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "touch",
+        "down"
+      ],
+      [
+        "touched",
+        "down"
+      ],
+      [
+        "touches",
+        "down"
+      ],
+      [
+        "touching",
+        "down"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "touched down",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "touch down",
+  "senses": [
+    {
+      "senseId": "w:touch-down#s1",
+      "pos": "动词短语",
+      "glossZh": "着陆；降落",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:down#s12",
+        "w:touch#s6"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:touch-down#e-7bad0761276b0741",
+          "text": "I touched down in Vienna just 30 minutes before the departure of the last bus to Prague.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 14
+          },
+          "parts": [
+            [
+              2,
+              14
+            ]
+          ],
+          "highlightRanges": [
+            [
+              2,
+              14
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:touch-down#s2",
+      "pos": "动词短语",
+      "glossZh": "（橄榄球）达阵得分",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "英式橄榄球要求在得分区内将球触地。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,94 @@
+{
+  "entryId": "w:fast-forward-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fast",
+      "forward",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fast",
+        "forward",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fast forward to",
+  "senses": [
+    {
+      "senseId": "w:fast-forward-to#s1",
+      "pos": "短语",
+      "glossZh": "（叙述中）跳到后来某个时间点",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:fast#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:fast-forward-to#e-664b7ea4b9d662d1",
+          "text": "Fast forward to my first year of college.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 15
+          },
+          "parts": [
+            [
+              0,
+              15
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              15
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

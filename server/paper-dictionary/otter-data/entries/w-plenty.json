@@ -35,8 +35,8 @@
     "mock": 44
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 44
+    "gaokao": 13,
+    "mock": 31
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 0
+        "mock": 13
       },
       "folded": false,
       "examples": [
@@ -71,82 +71,14 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:plenty#s2",
-      "pos": "短语",
-      "glossZh": "许多；充足的",
-      "pronunciationId": "w:plenty#p-main",
-      "note": "plenty of。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 13,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:plenty#e-27a789adfeea63a3",
-          "text": "Being a page turner requires plenty of practice.",
-          "source": {
-            "paperId": "paper-gaokao-2021-i",
-            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
-            "groupId": "group:paper-gaokao-2021-i:reading-b",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 29,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:plenty#e-00cb82325e9ff345",
-          "text": "Drink plenty of water.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
-            "locator": {
-              "question": 7,
-              "questionId": "question:listening:7",
-              "option": "B",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 6,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:plenty#e-1ad00d66b8438361",
-          "text": "There was plenty of space for the kids to run and play.",
-          "source": {
-            "paperId": "paper-gaokao-2025-i",
-            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
-            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 10,
-            "end": 16
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:plenty-of"
+  ]
 }

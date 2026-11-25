@@ -1,0 +1,101 @@
+{
+  "entryId": "w:such-that",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "such",
+      "that"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "such",
+        "that"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "such that",
+  "senses": [
+    {
+      "senseId": "w:such-that#s1",
+      "pos": "短语",
+      "glossZh": "使得……；以致……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:such#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:such-that#e-70a93441c9819245",
+          "text": "Then I can spare some time to learn it again, such that we can practice together on every day.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 55
+          },
+          "parts": [
+            [
+              46,
+              55
+            ]
+          ],
+          "highlightRanges": [
+            [
+              46,
+              55
+            ]
+          ]
+        }
+      ],
+      "note": "常引出结果或说明需满足的条件。",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [
+    {
+      "legacySenseIds": [
+        "w:that#s7"
+      ],
+      "glossZh": "以便",
+      "reason": "命中位于短文改错处，此处表目的应使用 so that。"
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

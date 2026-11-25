@@ -1,0 +1,352 @@
+{
+  "entryId": "w:meant-to",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "meant",
+      "to"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "meant",
+        "to"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "meant to",
+  "senses": [
+    {
+      "senseId": "w:meant-to#s1",
+      "pos": "短语",
+      "glossZh": "旨在；原本是为了",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:meant-to#e-b13fc99bb9c5b160",
+          "text": "Since magic performance is meant to trick people, the use of psychology is important.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          },
+          "parts": [
+            [
+              27,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              35
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meant-to#e-f3e95f8bb44a0b62",
+          "text": "You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 50
+          },
+          "parts": [
+            [
+              42,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              42,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meant-to#e-8e079af7a06a5996",
+          "text": "For instance, if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          },
+          "parts": [
+            [
+              38,
+              46
+            ]
+          ],
+          "highlightRanges": [
+            [
+              38,
+              46
+            ]
+          ]
+        }
+      ],
+      "note": "常用 be meant to do，也可作后置修饰语。",
+      "counts": {
+        "gaokao": 3,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:meant-to#s2",
+      "pos": "短语",
+      "glossZh": "本来打算做……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:meant-to#e-f04d96bec144cd8e",
+          "text": "While clearing the garage full of unused things, David finds broken deckchairs his mother always meant to repair.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          },
+          "parts": [
+            [
+              97,
+              105
+            ]
+          ],
+          "highlightRanges": [
+            [
+              97,
+              105
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meant-to#e-c401e129f1f114a6",
+          "text": "I’m really sorry.” He looked from the letter to the pile of pizza boxes in the corner, which he’d meant to throw out for days, then to Andy’s spotless desk.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:writing-continuation:9",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 106
+          },
+          "parts": [
+            [
+              98,
+              106
+            ]
+          ],
+          "highlightRanges": [
+            [
+              98,
+              106
+            ]
+          ]
+        }
+      ],
+      "note": "mean to do 的过去式。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:meant-to#s3",
+      "pos": "短语",
+      "glossZh": "注定要……",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:meant-to#e-ece9dce48ae1c09d",
+          "text": "Those highs and lows taught me an important lesson: Not every friendship is meant to last, and that's okay.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 84
+          },
+          "parts": [
+            [
+              76,
+              84
+            ]
+          ],
+          "highlightRanges": [
+            [
+              76,
+              84
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meant-to#e-ce5028eb86a613d7",
+          "text": "Others are meant to stand – physical spaces ground memory in ways that images alone cannot, grounding us in a past that continues to shape who we are.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 19
+          },
+          "parts": [
+            [
+              11,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              11,
+              19
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:meant-to#e-045f17e58ebe4d42",
+          "text": "Gitanjali Trevorrow-Seymour, a professional coach, explains that humans are naturally meant to experience a wide range of emotions, from joy and gratitude to sadness and disappointment.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 94
+          },
+          "parts": [
+            [
+              86,
+              94
+            ]
+          ],
+          "highlightRanges": [
+            [
+              86,
+              94
+            ]
+          ]
+        }
+      ],
+      "note": "be meant to do",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      }
+    },
+    {
+      "senseId": "w:meant-to#s4",
+      "pos": "短语",
+      "glossZh": "按规定或约定应该做……",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "be meant to do",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

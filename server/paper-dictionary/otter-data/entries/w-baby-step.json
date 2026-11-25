@@ -1,0 +1,131 @@
+{
+  "entryId": "w:baby-step",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "baby steps"
+  ],
+  "pattern": {
+    "tokens": [
+      "baby",
+      "step"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "baby",
+        "step"
+      ],
+      [
+        "baby",
+        "steps"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "baby step",
+  "senses": [
+    {
+      "senseId": "w:baby-step#s1",
+      "pos": "短语",
+      "glossZh": "迈向目标的一小步；循序渐进中的小步骤",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:baby#s5"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:baby-step#e-9bd3f4b144389728",
+          "text": "By doing so, you're taking baby steps toward the process of submitting the demanding college essays.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          },
+          "parts": [
+            [
+              27,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              27,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:baby-step#e-9aaced1388ee8be9",
+          "text": "A reliable dog recall needs to be built in baby steps.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:36#option=D",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 53
+          },
+          "parts": [
+            [
+              43,
+              53
+            ]
+          ],
+          "highlightRanges": [
+            [
+              43,
+              53
+            ]
+          ]
+        }
+      ],
+      "note": "常用复数，如 take baby steps 或 in baby steps。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

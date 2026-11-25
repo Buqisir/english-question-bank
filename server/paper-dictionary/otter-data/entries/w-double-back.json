@@ -1,0 +1,141 @@
+{
+  "entryId": "w:double-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "double",
+      "back"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "double",
+        "back"
+      ],
+      [
+        "doubled",
+        "back"
+      ],
+      [
+        "doubles",
+        "back"
+      ],
+      [
+        "doubling",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "doubling back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "double back",
+  "senses": [
+    {
+      "senseId": "w:double-back#s1",
+      "pos": "短语",
+      "glossZh": "沿原路折返",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [
+        "w:double#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:double-back#e-9c0c00f77d867ef0",
+          "text": "The author found the trail markers easily after doubling back.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-08-first:24#option=B",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 61
+          },
+          "parts": [
+            [
+              48,
+              61
+            ]
+          ],
+          "highlightRanges": [
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:double-back#e-9bf40cd58ce26cec",
+          "text": "Wearily, I pushed myself upright, remounted my bike and started to double back in the hope of spotting clear trail markers, but this only made things worse: the trees seemed to press in around me as I desperately scanned for landmarks – and the cicadas (蝉) had erupted into a deafening chorus.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 78
+          },
+          "parts": [
+            [
+              67,
+              78
+            ]
+          ],
+          "highlightRanges": [
+            [
+              67,
+              78
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

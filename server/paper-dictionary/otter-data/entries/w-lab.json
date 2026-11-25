@@ -63,7 +63,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 134
+    "mock": 0
   },
   "senses": [
     {
@@ -75,7 +75,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 15,
-        "mock": 0
+        "mock": 124
       },
       "folded": false,
       "examples": [
@@ -147,7 +147,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 9
       },
       "folded": false,
       "examples": [
@@ -171,6 +171,39 @@
           }
         }
       ]
+    },
+    {
+      "senseId": "w:lab#s3",
+      "pos": "n.",
+      "glossZh": "实验课；课堂实验",
+      "pronunciationId": "w:lab#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lab#e-eded95c3d02b5eb4",
+          "text": "The unforgiving demands of the IB program became my reality on the third day of school with an overwhelming physics lab.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 119
+          }
+        }
+      ]
     }
   ],
   "droppedSenses": [
@@ -179,6 +212,6 @@
       "reason": "同形缩写或专名"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 2,
+  "updatedAt": "2026-11-25"
 }

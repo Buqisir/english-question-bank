@@ -1,0 +1,240 @@
+{
+  "entryId": "w:call-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "call",
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "call",
+        "back"
+      ],
+      [
+        "call",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "called",
+        "back"
+      ],
+      [
+        "calling",
+        "back"
+      ],
+      [
+        "calls",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "call back",
+      "tags": []
+    },
+    {
+      "form": "called back",
+      "tags": []
+    },
+    {
+      "form": "calling back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "call (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:call-back#s1",
+      "pos": "短语",
+      "glossZh": "把……叫回来；召回",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-back#e-d097615aafd11e13",
+          "text": "Try to get into the habit of calling your dog back to you whenever you see another walker approaching.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 50
+          },
+          "parts": [
+            [
+              29,
+              36
+            ],
+            [
+              46,
+              50
+            ]
+          ],
+          "highlightRanges": [
+            [
+              29,
+              36
+            ],
+            [
+              46,
+              50
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:call-back#e-0a56602af981b460",
+          "text": "He walked on, each step heavy with a desperate, unspoken hope that someone would finally see him and call him back.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 114
+          },
+          "parts": [
+            [
+              101,
+              105
+            ],
+            [
+              110,
+              114
+            ]
+          ],
+          "highlightRanges": [
+            [
+              101,
+              105
+            ],
+            [
+              110,
+              114
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:call-back#s2",
+      "pos": "短语",
+      "glossZh": "大声回话",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:call-back#e-03ea46b2f9548d55",
+          "text": "One day, someone called out from the sidewalk, “What do you do on that bench?” Quick-thinking Donna called back, “It’s our ‘Thinking Bench’!",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 111
+          },
+          "parts": [
+            [
+              100,
+              111
+            ]
+          ],
+          "highlightRanges": [
+            [
+              100,
+              111
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:call-back#s3",
+      "pos": "短语",
+      "glossZh": "回电话；再打电话",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:call-back#s4",
+      "pos": "短语",
+      "glossZh": "（英式英语）稍后再来拜访",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

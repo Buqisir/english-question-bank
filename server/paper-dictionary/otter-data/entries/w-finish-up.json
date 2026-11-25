@@ -1,0 +1,120 @@
+{
+  "entryId": "w:finish-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "finish",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "finish",
+        "up"
+      ],
+      [
+        "finished",
+        "up"
+      ],
+      [
+        "finishes",
+        "up"
+      ],
+      [
+        "finishing",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "finished up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "finish (sth) up",
+  "senses": [
+    {
+      "senseId": "w:finish-up#s1",
+      "pos": "短语",
+      "glossZh": "做完；收尾",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:finish-up#e-fa2a3a1f892286ac",
+          "text": "I’d just finished up a week of thorough spring cleaning that included washing all the windows, both inside and out, shampooing the carpet, scrubbing the kitchen floor and polishing the furniture.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 20
+          },
+          "parts": [
+            [
+              9,
+              20
+            ]
+          ],
+          "highlightRanges": [
+            [
+              9,
+              20
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:finish-up#s2",
+      "pos": "短语",
+      "glossZh": "吃完或用完剩下的东西",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

@@ -1,0 +1,283 @@
+{
+  "entryId": "w:make-sure",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "makes sure",
+    "making sure"
+  ],
+  "pattern": {
+    "tokens": [
+      "make",
+      "sure"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "make",
+        "sure"
+      ],
+      [
+        "makes",
+        "sure"
+      ],
+      [
+        "making",
+        "sure"
+      ],
+      [
+        "made",
+        "sure"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "made sure",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "make sure",
+  "senses": [
+    {
+      "senseId": "w:make-sure#s1",
+      "pos": "短语",
+      "glossZh": "确保；务必做到",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:make#s9",
+        "w:sure#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:make-sure#e-9bc7e9b99d3f33ee",
+          "text": "Make sure that the tourism provides positive experiences for both the visitors and the hosts.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          },
+          "parts": [
+            [
+              0,
+              9
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              9
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sure#e-7ca4937b0fcd2ed3",
+          "text": "To speed up the process, please make sure the information you submit through the ILL Request Form is accurate.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          },
+          "parts": [
+            [
+              32,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              32,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sure#e-0696699992a4b166",
+          "text": "He said he would make sure that the company cut its use of plastic straws in half.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:grammar-fill:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          },
+          "parts": [
+            [
+              17,
+              26
+            ]
+          ],
+          "highlightRanges": [
+            [
+              17,
+              26
+            ]
+          ]
+        }
+      ],
+      "note": "常用 make sure to do sth 或 make sure (that) …。",
+      "counts": {
+        "gaokao": 22,
+        "mock": 58
+      }
+    },
+    {
+      "senseId": "w:make-sure#s2",
+      "pos": "短语",
+      "glossZh": "确认；核实",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:make-sure#e-756224f2fdc8cef5",
+          "text": "After making sure that David could run if he wanted, I turned to find him coming towards me, his small body rocking from side to side as he swung his feet forward.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 17
+          },
+          "parts": [
+            [
+              6,
+              17
+            ]
+          ],
+          "highlightRanges": [
+            [
+              6,
+              17
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sure#e-2c2b72aea4b8c491",
+          "text": "As with fake news, doing a bit of research is a good idea if you want to make sure you’re using an accurate quote.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 82
+          },
+          "parts": [
+            [
+              73,
+              82
+            ]
+          ],
+          "highlightRanges": [
+            [
+              73,
+              82
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:make-sure#e-07c9fc7c6ef3333b",
+          "text": "Here’s why this happens: When you tell yourself something is bad enough to avoid, your brain checks in to make sure you’re succeeding with this task, bringing to mind the thoughts you were trying to push away.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 115
+          },
+          "parts": [
+            [
+              106,
+              115
+            ]
+          ],
+          "highlightRanges": [
+            [
+              106,
+              115
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 24,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

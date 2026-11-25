@@ -59,8 +59,8 @@
     "mock": 203
   },
   "unassignedCounts": {
-    "gaokao": 3,
-    "mock": 200
+    "gaokao": 4,
+    "mock": 3
   },
   "senses": [
     {
@@ -72,7 +72,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 22,
-        "mock": 0
+        "mock": 190
       },
       "folded": false,
       "examples": [
@@ -143,7 +143,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 1
+        "mock": 8
       },
       "folded": false,
       "examples": [
@@ -207,60 +207,6 @@
       ]
     },
     {
-      "senseId": "w:listen#s3",
-      "pos": "短语",
-      "glossZh": "留心听某种声音",
-      "pronunciationId": "w:listen#p-main",
-      "note": "listen for。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 1,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:listen#e-9de9654e9edb668d",
-          "text": "By listening for sounds.",
-          "source": {
-            "paperId": "paper-gaokao-2024-national-a",
-            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
-            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
-            "locator": {
-              "question": 25,
-              "questionId": "question:paper-gaokao-2024-national-a:25",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 3,
-            "end": 12
-          }
-        },
-        {
-          "exampleId": "w:listen#e-49a97c3ec395bd51",
-          "text": "Carrying safety ropes and tools, the team inspects the bridge section by section, listening for odd sounds that might signal hidden problems.",
-          "source": {
-            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
-            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
-            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b",
-            "locator": {
-              "paragraph": 3,
-              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b:3",
-              "sentence": 6
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 82,
-            "end": 91
-          }
-        }
-      ]
-    },
-    {
       "senseId": "w:listen#s4",
       "pos": "n.",
       "glossZh": "听一次",
@@ -269,7 +215,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -296,6 +242,13 @@
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:listen-for",
+    "w:listen-in",
+    "w:listen-to"
+  ]
 }

@@ -1,0 +1,244 @@
+{
+  "entryId": "w:hot-dog",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "hot dogs"
+  ],
+  "pattern": {
+    "tokens": [
+      "hot",
+      "dog"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "hot",
+        "dog"
+      ],
+      [
+        "hot",
+        "dogs"
+      ],
+      [
+        "hot",
+        "dogged"
+      ],
+      [
+        "hot",
+        "dogging"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "hot dog",
+  "senses": [
+    {
+      "senseId": "w:hot-dog#s1",
+      "pos": "短语",
+      "glossZh": "热狗（夹香肠的长面包）",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:hot-dog#e-1ed9263cd3420e02",
+          "text": "She sat at her laptop, deleted every word of the AI text, and typed: “My heroes leave at 4 am, so the city can eat at 7 am.” She wrote about the worn-out gloves and the smell of steaming hot dogs.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 187,
+            "end": 195
+          },
+          "parts": [
+            [
+              187,
+              195
+            ]
+          ],
+          "highlightRanges": [
+            [
+              187,
+              195
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:hot-dog#e-e99b0d21ad71de8d",
+          "text": "The festival showcases the diversity of Chicago’s culinary scene, offering everything from the city’s famous deep-dish pizza and Chicago-style hot dogs to high-end international cuisine, suitable for all ages.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "cell:m171:chicago",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 151
+          },
+          "parts": [
+            [
+              143,
+              151
+            ]
+          ],
+          "highlightRanges": [
+            [
+              143,
+              151
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s2",
+      "pos": "短语",
+      "glossZh": "热狗香肠",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s3",
+      "pos": "短语",
+      "glossZh": "太棒了！",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "感叹语，也可反讽。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s4",
+      "pos": "短语",
+      "glossZh": "爱炫技、逞强的人",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s5",
+      "pos": "短语",
+      "glossZh": "炫技；卖弄高难度动作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s6",
+      "pos": "短语",
+      "glossZh": "裹面糊油炸的串香肠",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "新西兰英语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s7",
+      "pos": "短语",
+      "glossZh": "纸张纵向对折形成的长条形",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "美国课堂用语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s8",
+      "pos": "短语",
+      "glossZh": "阴茎",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:hot-dog#s9",
+      "pos": "短语",
+      "glossZh": "带性暗示的扭胯动作",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "粗俗俚语。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

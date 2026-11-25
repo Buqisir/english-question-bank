@@ -1,0 +1,179 @@
+{
+  "entryId": "w:come-to-an-end",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "came to an end",
+    "comes to an end"
+  ],
+  "pattern": {
+    "tokens": [
+      "come",
+      "to",
+      "an",
+      "end"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "come",
+        "to",
+        "an",
+        "end"
+      ],
+      [
+        "came",
+        "to",
+        "an",
+        "end"
+      ],
+      [
+        "comes",
+        "to",
+        "an",
+        "end"
+      ],
+      [
+        "coming",
+        "to",
+        "an",
+        "end"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "come to an end",
+  "senses": [
+    {
+      "senseId": "w:come-to-an-end#s1",
+      "pos": "短语",
+      "glossZh": "结束；告终",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:come#s14"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:come-to-an-end#e-4994d59789cf1d55",
+          "text": "Terri, who now rents a house with friends in Wandsworth, South West London, says DIY also saves her from losing any deposit when a tenancy (租期) comes to an end.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 144,
+            "end": 159
+          },
+          "parts": [
+            [
+              144,
+              159
+            ]
+          ],
+          "highlightRanges": [
+            [
+              144,
+              159
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-an-end#e-cc289d0d4cb1411f",
+          "text": "As summer came to an end, Michael felt a deep sense of loneliness.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 24
+          },
+          "parts": [
+            [
+              10,
+              24
+            ]
+          ],
+          "highlightRanges": [
+            [
+              10,
+              24
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:come-to-an-end#e-e63b006319d8605b",
+          "text": "We tend to assign to the elderly the vague (模糊的) and often fading quality of wisdom, thus suggesting that their own creative and intellectual (智力的) growth has come to an end, and that their only role left is to give advice to others.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 173
+          },
+          "parts": [
+            [
+              159,
+              173
+            ]
+          ],
+          "highlightRanges": [
+            [
+              159,
+              173
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

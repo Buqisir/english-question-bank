@@ -67,7 +67,7 @@
   },
   "unassignedCounts": {
     "gaokao": 0,
-    "mock": 19
+    "mock": 4
   },
   "senses": [
     {
@@ -79,7 +79,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 3
+        "mock": 10
       },
       "folded": false,
       "examples": [
@@ -150,7 +150,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 1,
-        "mock": 2
+        "mock": 6
       },
       "folded": false,
       "examples": [
@@ -273,7 +273,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -373,7 +373,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -399,11 +399,10 @@
       ]
     },
     {
-      "senseId": "w:bite#s8",
+      "senseId": "w:bite#s9",
       "pos": "短语",
-      "glossZh": "消耗；占去一大部分",
+      "glossZh": "简短的音频片段（sound bite）",
       "pronunciationId": "w:bite#p-main",
-      "note": "take a bite out of sth。",
       "origin": "mock",
       "counts": {
         "gaokao": 0,
@@ -412,22 +411,88 @@
       "folded": false,
       "examples": [
         {
-          "exampleId": "w:bite#e-4cc1349557582b7b",
-          "text": "● Do your own cooking: sit-down restaurants can take a bite out of your savings.",
+          "exampleId": "w:bite#e-424dc4e5ab5bfc4a",
+          "text": "Earlier, films were played with live accompaniment, contained intertitles to add context, and some added sound bites.",
           "source": {
-            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
-            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
-            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
             "locator": {
-              "paragraph": 7,
-              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:7",
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:3",
               "sentence": 1
             }
           },
           "tier": "mock",
           "target": {
-            "start": 55,
-            "end": 59
+            "start": 111,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bite#s10",
+      "pos": "短语",
+      "glossZh": "揽下超出能力的事（bite off more than one can chew）",
+      "pronunciationId": "w:bite#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bite#e-c84281ba8354b714",
+          "text": "By 2 a. m., sitting on a cold rock with sweat freezing beneath my clothes, I felt I had bitten off more than I could chew – this mountain was too much for me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bite#s11",
+      "pos": "n.",
+      "glossZh": "（食物的）嚼劲",
+      "pronunciationId": "w:bite#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bite#e-8183a894ce140664",
+          "text": "“In Lanzhou, the most popular choice is erxi (二细) for its perfect balance of texture and bite,” he added.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 93
           }
         }
       ]
@@ -439,6 +504,13 @@
       "reason": "俚语或专业义。"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:bite-back",
+    "w:bite-off-more-than-one-can-chew",
+    "w:take-a-bite-out-of-sth"
+  ]
 }

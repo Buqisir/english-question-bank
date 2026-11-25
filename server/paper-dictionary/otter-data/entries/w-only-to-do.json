@@ -1,0 +1,166 @@
+{
+  "entryId": "w:only-to-do",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "only",
+      "to",
+      {
+        "slot": "do"
+      }
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "only",
+        "to",
+        {
+          "slot": "do"
+        }
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "only to",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "only to do",
+  "senses": [
+    {
+      "senseId": "w:only-to-do#s1",
+      "pos": "短语",
+      "glossZh": "结果却……；不料竟……",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:only#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:only-to-do#e-ac753d0aea58b3ce",
+          "text": "Paragraph 1: I hurried into the theater, only to find there were even more bikers inside.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          },
+          "parts": [
+            [
+              41,
+              48
+            ]
+          ],
+          "highlightRanges": [
+            [
+              41,
+              48
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:only-to-do#e-1250d3b4aadfabf3",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 87
+          },
+          "parts": [
+            [
+              80,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              87
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:only-to-do#e-a8fb9ff2a63cdafd",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message: “Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-ii:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 87
+          },
+          "parts": [
+            [
+              80,
+              87
+            ]
+          ],
+          "highlightRanges": [
+            [
+              80,
+              87
+            ]
+          ]
+        }
+      ],
+      "note": "引出意外的结果，常见于 only to find 或 only to realize。",
+      "counts": {
+        "gaokao": 4,
+        "mock": 37
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

@@ -1,0 +1,175 @@
+{
+  "entryId": "w:throw-back",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "throw it back"
+  ],
+  "pattern": {
+    "tokens": [
+      "throw",
+      "back"
+    ],
+    "separable": true,
+    "alternatives": [
+      [
+        "throw",
+        "back"
+      ],
+      [
+        "throw",
+        {
+          "slot": "sb/sth"
+        },
+        "back"
+      ],
+      [
+        "threw",
+        "back"
+      ],
+      [
+        "throwing",
+        "back"
+      ],
+      [
+        "thrown",
+        "back"
+      ],
+      [
+        "throws",
+        "back"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "thrown back",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "throw (sb/sth) back",
+  "senses": [
+    {
+      "senseId": "w:throw-back#s1",
+      "pos": "短语",
+      "glossZh": "使倒退；使退回到较早阶段",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:throw-back#e-95653222d6b7eea7",
+          "text": "We'd be thrown back into the 19th century, as Dennett says.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 19
+          },
+          "parts": [
+            [
+              8,
+              19
+            ]
+          ],
+          "highlightRanges": [
+            [
+              8,
+              19
+            ]
+          ]
+        }
+      ],
+      "note": "可指使进展受阻，也可接 into 表示退回到先前的状态。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    },
+    {
+      "senseId": "w:throw-back#s2",
+      "pos": "短语",
+      "glossZh": "反驳；尖锐地回敬",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-back#s3",
+      "pos": "短语",
+      "glossZh": "一口喝下；猛灌（尤指酒）",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-back#s4",
+      "pos": "短语",
+      "glossZh": "猛地向后仰或甩",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "如 throw one's head back。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:throw-back#s5",
+      "pos": "短语",
+      "glossZh": "（跳舞时）向后挺臀",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "note": "用变体 throw it back。",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

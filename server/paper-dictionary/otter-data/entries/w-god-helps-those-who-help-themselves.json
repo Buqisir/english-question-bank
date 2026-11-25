@@ -1,0 +1,101 @@
+{
+  "entryId": "w:god-helps-those-who-help-themselves",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "God helps those who help themselves"
+  ],
+  "pattern": {
+    "tokens": [
+      "god",
+      "helps",
+      "those",
+      "who",
+      "help",
+      "themselves"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "god",
+        "helps",
+        "those",
+        "who",
+        "help",
+        "themselves"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "god helps those who help themselves",
+  "senses": [
+    {
+      "senseId": "w:god-helps-those-who-help-themselves#s1",
+      "pos": "短语",
+      "glossZh": "天助自助者；先靠自己努力，才有望得到帮助",
+      "origin": "mock",
+      "folded": false,
+      "legacySenseIds": [],
+      "examples": [
+        {
+          "exampleId": "w:god-helps-those-who-help-themselves#e-8079384707a8ec7e",
+          "text": "God helps those who help themselves.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:27#option=C",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 35
+          },
+          "parts": [
+            [
+              0,
+              35
+            ]
+          ],
+          "highlightRanges": [
+            [
+              0,
+              35
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "mock",
+  "folded": false
+}

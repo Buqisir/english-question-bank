@@ -35,8 +35,8 @@
     "mock": 381
   },
   "unassignedCounts": {
-    "gaokao": 0,
-    "mock": 381
+    "gaokao": 7,
+    "mock": 182
   },
   "senses": [
     {
@@ -47,7 +47,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 75,
-        "mock": 0
+        "mock": 195
       },
       "folded": false,
       "examples": [
@@ -118,7 +118,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 4,
-        "mock": 0
+        "mock": 4
       },
       "folded": false,
       "examples": [
@@ -180,63 +180,24 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:any#s3",
-      "pos": "短语",
-      "glossZh": "再也（不）；不再",
-      "pronunciationId": "w:any#p-main",
-      "note": "not … any longer 或 not … any more。",
-      "origin": "gaokao",
-      "counts": {
-        "gaokao": 7,
-        "mock": 0
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:any#e-20f3e30947687b43",
-          "text": "I wasn't alone any longer.",
-          "source": {
-            "paperId": "paper-gaokao-2020-zhejiang-jul",
-            "paperTitle": "2020 年 7 月浙江高考英语",
-            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
-            "locator": {
-              "question": 31,
-              "questionId": "question:paper-gaokao-2020-zhejiang-jul:31",
-              "option": "A",
-              "sentence": 1
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 15,
-            "end": 18
-          }
-        },
-        {
-          "exampleId": "w:any#e-a93c4902b1d36b68",
-          "text": "You scolded (训斥) him too often, so he didn’t try any more.",
-          "source": {
-            "paperId": "paper-gaokao-2023-four-provinces-feb",
-            "paperTitle": "2023年2月四省联考英语",
-            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
-            "locator": {
-              "paragraph": 5,
-              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:5",
-              "sentence": 4
-            }
-          },
-          "tier": "gaokao",
-          "target": {
-            "start": 49,
-            "end": 52
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:any-and-all",
+    "w:any-day",
+    "w:any-day-of-the-week",
+    "w:any-good",
+    "w:any-longer",
+    "w:any-more",
+    "w:any-number-of",
+    "w:any-old",
+    "w:at-any-rate",
+    "w:not-any-longer",
+    "w:not-any-more"
+  ]
 }

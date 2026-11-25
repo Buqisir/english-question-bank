@@ -1,0 +1,85 @@
+{
+  "entryId": "w:fan-out",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [],
+  "pattern": {
+    "tokens": [
+      "fan",
+      "out"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "fan",
+        "out"
+      ],
+      [
+        "fanned",
+        "out"
+      ],
+      [
+        "fanning",
+        "out"
+      ],
+      [
+        "fans",
+        "out"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "fan out",
+  "senses": [
+    {
+      "senseId": "w:fan-out#s1",
+      "pos": "短语",
+      "glossZh": "呈扇形散开或伸展",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [
+        "w:fan#s6"
+      ],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    },
+    {
+      "senseId": "w:fan-out#s2",
+      "pos": "短语",
+      "glossZh": "（俚语）表现出粉丝般的狂热",
+      "origin": "dictionary",
+      "folded": true,
+      "legacySenseIds": [],
+      "examples": [],
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "dictionary",
+  "folded": true
+}

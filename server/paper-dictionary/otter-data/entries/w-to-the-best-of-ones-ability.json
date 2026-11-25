@@ -1,0 +1,119 @@
+{
+  "entryId": "w:to-the-best-of-ones-ability",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "to the best of one’s ability"
+  ],
+  "pattern": {
+    "tokens": [
+      "to",
+      "the",
+      "best",
+      "of",
+      {
+        "slot": "one's"
+      },
+      "ability"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "to",
+        "the",
+        "best",
+        "of",
+        {
+          "slot": "one's"
+        },
+        "ability"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "to the best of ability",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "to the best of one's ability",
+  "senses": [
+    {
+      "senseId": "w:to-the-best-of-ones-ability#s1",
+      "pos": "固定短语",
+      "glossZh": "尽自己所能；尽力而为",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:best#s4"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:to-the-best-of-ones-ability#e-93941ec03f90a25a",
+          "text": "He always participated to the best of his ability in whatever they were doing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 49
+          },
+          "parts": [
+            [
+              23,
+              37
+            ],
+            [
+              42,
+              49
+            ]
+          ],
+          "highlightRanges": [
+            [
+              23,
+              37
+            ],
+            [
+              42,
+              49
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}

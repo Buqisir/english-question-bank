@@ -59,7 +59,7 @@
   },
   "unassignedCounts": {
     "gaokao": 1,
-    "mock": 18
+    "mock": 15
   },
   "senses": [
     {
@@ -70,7 +70,7 @@
       "origin": "gaokao",
       "counts": {
         "gaokao": 5,
-        "mock": 1
+        "mock": 7
       },
       "folded": false,
       "examples": [
@@ -142,7 +142,7 @@
       "origin": "mock",
       "counts": {
         "gaokao": 0,
-        "mock": 1
+        "mock": 2
       },
       "folded": false,
       "examples": [
@@ -166,113 +166,6 @@
           }
         }
       ]
-    },
-    {
-      "senseId": "w:lend#s3",
-      "pos": "短语",
-      "glossZh": "帮忙",
-      "pronunciationId": "w:lend#p-main",
-      "note": "lend a hand。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 3
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lend#e-9797b7136d0c12cb",
-          "text": "It felt like stepping into a local neighborhood where everyone was __43__ to lend a hand.",
-          "source": {
-            "paperId": "paper-mock-fj-2026-m1-v2",
-            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
-            "groupId": "group:paper-mock-fj-2026-m1-v2:cloze",
-            "locator": {
-              "paragraph": 1,
-              "paragraphId": "block:paper-mock-fj-2026-m1-v2:cloze:1",
-              "sentence": 4
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 77,
-            "end": 81
-          }
-        },
-        {
-          "exampleId": "w:lend#e-9ad36794150a2b5b",
-          "text": "“We hope to motivate people to lend a hand and spread __55__ throughout the city,” Daniel said.",
-          "source": {
-            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
-            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
-            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:cloze",
-            "locator": {
-              "paragraph": 4,
-              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:cloze:4",
-              "sentence": 2
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 31,
-            "end": 35
-          }
-        },
-        {
-          "exampleId": "w:lend#e-00175e49ea82eec4",
-          "text": "A couple hiking that day also lent a hand.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
-            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
-            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:seven-choices",
-            "locator": {
-              "question": 36,
-              "questionId": "question:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:36",
-              "option": "D",
-              "sentence": 1
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 30,
-            "end": 34
-          }
-        }
-      ]
-    },
-    {
-      "senseId": "w:lend#s4",
-      "pos": "短语",
-      "glossZh": "适合",
-      "pronunciationId": "w:lend#p-main",
-      "note": "lend itself to sth。",
-      "origin": "mock",
-      "counts": {
-        "gaokao": 0,
-        "mock": 1
-      },
-      "folded": false,
-      "examples": [
-        {
-          "exampleId": "w:lend#e-514b3b67eef97e63",
-          "text": "This work also hints at the possibility that the individuality that comes with pessimism lends itself to more diverse approaches to problems, with a greater chance that one will succeed than the optimists who all try the same thing.",
-          "source": {
-            "paperId": "paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam",
-            "paperTitle": "2025-2026学年第一学期江浙皖高中(县中)发展共同体高三年级10月联考英语学科试题",
-            "groupId": "group:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-d",
-            "locator": {
-              "paragraph": 6,
-              "paragraphId": "block:paper-mock-zhejiang-jx-county-consortium-2025-10-senior-three-joint-exam:reading-d:6",
-              "sentence": 3
-            }
-          },
-          "tier": "mock",
-          "target": {
-            "start": 89,
-            "end": 94
-          }
-        }
-      ]
     }
   ],
   "droppedSenses": [
@@ -281,6 +174,12 @@
       "reason": "同形旧义"
     }
   ],
-  "version": 1,
-  "updatedAt": "2026-11-24"
+  "version": 3,
+  "updatedAt": "2026-11-25",
+  "origin": "gaokao",
+  "folded": false,
+  "relatedPhrases": [
+    "w:lend-a-hand",
+    "w:lend-itself-to-sth"
+  ]
 }

@@ -1,0 +1,174 @@
+{
+  "entryId": "w:stay-up",
+  "kind": "phrase",
+  "lists": [],
+  "variants": [
+    "staying up"
+  ],
+  "pattern": {
+    "tokens": [
+      "stay",
+      "up"
+    ],
+    "separable": false,
+    "alternatives": [
+      [
+        "stay",
+        "up"
+      ],
+      [
+        "staying",
+        "up"
+      ],
+      [
+        "stayed",
+        "up"
+      ],
+      [
+        "stays",
+        "up"
+      ]
+    ]
+  },
+  "ipa": {
+    "uk": null,
+    "us": null
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [],
+  "forms": [
+    {
+      "form": "stayed up",
+      "tags": []
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-25",
+  "headword": "stay up",
+  "senses": [
+    {
+      "senseId": "w:stay-up#s1",
+      "pos": "短语",
+      "glossZh": "熬夜；到该睡的时候仍不睡",
+      "origin": "gaokao",
+      "folded": false,
+      "legacySenseIds": [
+        "w:stay#s6",
+        "w:up#s96"
+      ],
+      "examples": [
+        {
+          "exampleId": "w:stay-up#e-8ac8fad5ca64d51e",
+          "text": "I still loved the night and would stay up until unruly hours for no apparent reason, chatting online and watching videos.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          },
+          "parts": [
+            [
+              34,
+              41
+            ]
+          ],
+          "highlightRanges": [
+            [
+              34,
+              41
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-up#e-a12f5558c7a6a146",
+          "text": "Even in middle school I would stay up very late.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          },
+          "parts": [
+            [
+              30,
+              37
+            ]
+          ],
+          "highlightRanges": [
+            [
+              30,
+              37
+            ]
+          ]
+        },
+        {
+          "exampleId": "w:stay-up#e-cd55a045b0822bff",
+          "text": "The night before the first class day, while my family slept, I stayed up late checking my notes.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 72
+          },
+          "parts": [
+            [
+              63,
+              72
+            ]
+          ],
+          "highlightRanges": [
+            [
+              63,
+              72
+            ]
+          ]
+        }
+      ],
+      "counts": {
+        "gaokao": 2,
+        "mock": 10
+      }
+    }
+  ],
+  "droppedSenses": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "origin": "gaokao",
+  "folded": false
+}
